@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Dashboard.cshtml";
 }
 
-<form enctype="multipart/form-data" asp-action="Edit" asp-route-id="@Model.ProductId" asp-controller="Product" class="form-horizontal">
+<form asp-action="Edit" asp-route-id="@Model.ProductId" asp-controller="Product" class="form-horizontal" method="post" enctype="multipart/form-data">
     @Html.HiddenFor(h=>Model.ProductId)
 
     @Html.Partial("_FormProduct")

@@ -1,8 +1,6 @@
 ﻿@model IEnumerable<partner_aluro.Models.Product>
-@using X.PagedList.Mvc.Core; 
-@using X.PagedList;
-
-
+@using X.PagedList
+@using X.PagedList.Mvc.Core
 
     @foreach (var produkt in ViewBag.OnePageOfProducts)
     {    
@@ -37,6 +35,5 @@
         </div>
     }
 
-    <!-- output a paging control that lets the user navigation to the previous page, next page, etc -->
-@Html.PagedListPager( (IPagedList)ViewBag.OnePageOfProducts, page => Url.Action("Lista", "Category", new { page = page, szukanaNazwa=ViewData["szukanaNazwa"] } ) )
+@Html.PagedListPager( (IPagedList)ViewBag.OnePageOfProducts, page => Url.Action("Lista", "Category", new { page = page, szukanaNazwa=ViewData["szukanaNazwa"] } ))
 

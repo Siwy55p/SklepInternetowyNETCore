@@ -48,7 +48,8 @@ namespace partner_aluro.Models
 
         [Display(Name="Obrazek główny")]
         [NotMapped]
-        public IFormFile? FrontImage { get; set; }
+        ImageModel product_Image { get; set; }
+        //public IFormFile? FrontImage { get; set; }
 
         [ForeignKey(nameof(CategoryId))]
         [Display(Name="Kategoria")]

@@ -1,9 +1,9 @@
 ﻿@model Product
 
 <div class="form-group">
-    <label asp-for="@Model.FrontImage" class="control-label"></label>
+    <label asp-for="@Model.ImageUrl" class="control-label"></label>
     <div class="custom-file">
-        <input asp-for="@Model.FrontImage" class="custom-file-input" id="FLFrontImage"
+        <input asp-for="@Model.ImageUrl" class="custom-file-input" id="FLFrontImage"
                onchange="document.getElementById('FrontImagePrv').src = window.URL.createObjectURL(this.files[0])" />
         <label class="custom-file-label" for="FLFrontImage">Wybierz plik</label>
     </div>

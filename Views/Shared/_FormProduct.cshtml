@@ -38,15 +38,15 @@
     </div>
 
 <div class="form-group">
-    <label asp-for="@Model.FrontImage" class="control-label"></label>
+    <label asp-for="@Model.ImageUrl" class="control-label"></label>
     <div class="custom-file">
-        <input asp-for="@Model.FrontImage" name="@Model.FrontImage" class="custom-file-input" id="FLFrontImage" 
+        <input type="file" asp-for="@Model.ImageUrl" name="@Model.ImageUrl" class="custom-file-input" id="FLFrontImage"
                onchange="document.getElementById('FrontImagePrv').src = window.URL.createObjectURL(this.files[0])" />
         <label class="custom-file-label" for="FLFrontImage"></label>
     </div>
     <img id="FrontImagePrv" src="~/images/produkty/@Model.Symbol/@Model.ImageUrl" alt="Logo image" width="150" height="150" style="border:1px; margin-top:20px; margin-left:120px" />
 </div>
-OBRAZKI
+
 @if(Model.product_Images != null)
 {
     @foreach (var image in Model.product_Images)

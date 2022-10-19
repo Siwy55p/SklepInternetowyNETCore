@@ -16,7 +16,6 @@ namespace partner_aluro.Controllers
     {
         private readonly ApplicationDbContext _context;
 
-
         private readonly IUnitOfWorkProduct _unitOfWorkProduct;
         private readonly IProductService _ProductService;
 
@@ -51,6 +50,10 @@ namespace partner_aluro.Controllers
             {
                 return NotFound();
             }
+
+            string uniqueFileName = UploadFile(product);
+            product.ImageUrl = uniqueFileName;
+            UploadFile2(product);
 
             if (ModelState.IsValid)
             {
@@ -180,30 +183,30 @@ namespace partner_aluro.Controllers
         {
             string uniqueFileName = null;
 
-            if (product.FrontImage != null)
-            {
-                ModelState.Remove("CategoryNavigation");
-                ModelState.Remove("product_Images");
+            var files = HttpContext.Request.Form.Files;
 
-                if (ModelState.IsValid)
+            if (files.Count > 0)
+            {
+                if (HttpContext.Request.Form.Files[0] != null)
                 {
+                    var file = HttpContext.Request.Form.Files[0];
+
                     string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images\\produkty\\" + product.Symbol);
 
                     if (!Directory.Exists(uploadsFolder))
                     {
                         Directory.CreateDirectory(uploadsFolder);
-                }
-                //uniqueFileName = "Front" + DateTime.Now.ToString("yymmssfff") + "_" + product.FrontImage.FileName;
+                    }
+                    //uniqueFileName = "Front" + DateTime.Now.ToString("yymmssfff") + "_" + product.FrontImage.FileName;
 
+                    var extension = Path.GetExtension(files[0].FileName);
 
-                uniqueFileName = "Front" + DateTime.Now.ToString("yymmssfff");
+                    uniqueFileName = "Front_" + product.Symbol + extension;
                     string filePath = Path.Combine(uploadsFolder, uniqueFileName);
                     using (var fileStream = new FileStream(filePath, FileMode.Create))
                     {
-                        product.FrontImage.CopyTo(fileStream);
+                        file.CopyTo(fileStream);
                     }
-
-
                 }
             }
 

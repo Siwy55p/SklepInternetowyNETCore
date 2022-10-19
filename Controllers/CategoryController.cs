@@ -6,7 +6,9 @@ using partner_aluro.Data;
 using partner_aluro.Models;
 using partner_aluro.Services.Interfaces;
 using SmartBreadcrumbs.Nodes;
+
 using X.PagedList;
+using X.PagedList.Mvc.Core;
 
 namespace partner_aluro.Controllers
 {
@@ -114,7 +116,6 @@ namespace partner_aluro.Controllers
             ViewData["Title"] = szukanaNazwa;
             ViewData["szukanaNazwa"] = szukanaNazwa;
 
-
             //jesli jest cos w karcie przekaz do zmiennej, pokaz wartosc karty true
             if (products.Count > 0)
             {
@@ -126,7 +127,7 @@ namespace partner_aluro.Controllers
                 szukanaNazwa = "";
                 List<Product> produktyAll = await _context.Products.ToListAsync();
                 var pageNumber = page ?? 1; // if no page was specified in the querystring, default to the first page (1)
-                var onePageOfProducts = produktyAll.ToPagedList(pageNumber, 3); // will only contain 25 products max because of the pageSize
+                var onePageOfProducts = produktyAll.ToPagedList(pageNumber, 9); // will only contain 25 products max because of the pageSize
 
                 ViewBag.OnePageOfProducts = onePageOfProducts;
 
@@ -136,7 +137,7 @@ namespace partner_aluro.Controllers
             {
                 List<Product> produkty2 = await _context.Products.Where(x => x.CategoryNavigation.Name == szukanaNazwa).ToListAsync();
                 var pageNumber = page ?? 1; // if no page was specified in the querystring, default to the first page (1)
-                var onePageOfProducts = produkty2.ToPagedList(pageNumber, 3); // will only contain 25 products max because of the pageSize
+                var onePageOfProducts = produkty2.ToPagedList(pageNumber, 9); // will only contain 25 products max because of the pageSize
 
                 ViewBag.OnePageOfProducts = onePageOfProducts;
 
