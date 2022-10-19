@@ -23,10 +23,34 @@
         <div class="container">
             
 
-            <div class="offcanvas offcanvas-end w-10 @ViewData["Pokaz"]" tabindex="-1" id="offcanvas" data-bs-scroll="true" data-bs-keyboard="false" data-bs-backdrop="false">
+            <div class="offcanvas offcanvas-end w-5 @ViewData["Pokaz"]" tabindex="-1" id="offcanvas" data-bs-scroll="true" data-bs-keyboard="false" data-bs-backdrop="false">
                 <div class="offcanvas-header">
-                    
+
                     <h6 class="offcanvas-title d-none d-sm-block" id="offcanvas">Twoje zamówienie</h6>
+                    <script>
+                     $.get("/Home/SaveEmployeeRecord",null, function (data) {
+                    alert(data);
+                    });
+                    </script>
+
+                    @*TO EST POKAZANIE PRODUKTU WYWOLANIE AKCJI CARTK*@
+                    <script>
+                    $.post("/Home/SaveEmployeeRecord",null, function (data) {  
+                       alert(data);  
+                    });
+                    </script>
+                    @*TO EST POKAZANIE PRODUKTU WYWOLANIE AKCJI CARTK*@
+
+                      @*TO EST POKAZANIE PRODUKTU WYWOLANIE AKCJI CART222222*@
+                            <script>
+                    $.post("/Home/SaveEmployeeRecord", {id:'67',name:'Deepak'}, function (data) {
+                    alert(data.id);
+                    alert(data.name);
+                        });
+                    </script>
+                    @*TO EST POKAZANIE PRODUKTU WYWOLANIE AKCJI CART222222*@
+
+
                     <button type="button" class="btn-close btn btn-success text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body px-0">
@@ -72,6 +96,27 @@
             });
         });
     </script>
+
+    <script>
+        $(document).ready(function () {
+            $('#submitButton').click(
+                function () {
+                    $.ajax({
+                            // edit to add steve's suggestion.
+                            //url: "/ControllerName/ActionName",
+                            url: '<%= Url.Action("Index", "Cart") %>',
+                        alert('Witaj3')
+                            success: function(data) {
+                                 alert('witaj2');
+                            }
+                        });
+
+                    alert('Witaj')
+
+                })
+        })
+    </script>
+
 
     @*BOOTSTRAP*@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
