@@ -1,0 +1,11 @@
+﻿@page
+@model AccessDeniedModel
+@{
+    ViewData["Title"] = "Brak dostępu";
+}
+
+<header>
+    <h1 class="text-danger">@ViewData["Title"]</h1>
+    <p class="text-danger">Nie masz dostępu do strony, skontaktuj się z Administratorem witryny.</p>
+    <p class="text-danger"><partial name="_LoginPartial" /></p>
+</header>

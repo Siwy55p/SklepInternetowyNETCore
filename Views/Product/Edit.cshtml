@@ -1,0 +1,14 @@
+﻿@model partner_aluro.Models.Product
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+<form enctype="multipart/form-data" asp-action="Edit" asp-route-id="@Model.ProductId" asp-controller="Product" class="form-horizontal">
+    @Html.HiddenFor(h=>Model.ProductId)
+
+    @Html.Partial("_FormProduct")
+
+
+    <button type="submit">Zapisz</button>
+</form>

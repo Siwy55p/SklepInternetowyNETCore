@@ -1,0 +1,88 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using partner_aluro.Areas.Identity;
+@using partner_aluro.Data;
+@using partner_aluro.Core;
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@inject Cart cart
+
+<div class="navbar navbar-custom sticky-top navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid bg-dark">
+        <div class="container">
+
+            <div class="header row justify-content-md-center">
+                @*Lewa strona*@
+                <div class="col">
+                @if (User.IsInRole("Administrator") || User.IsInRole("Manager"))
+                {
+                    <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse navbar-dark bg-dark" id="navbarNavDarkDropdown">
+                        <ul class="navbar-nav z-index-2">
+                            <li class="nav-item dropdown navbar-dark">
+                                <a class="nav-link dropdown-toggle" href="@Url.Action("Index","Dashboard")" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" alt="panel użytkownika">
+                                    Panel sterowania
+                                </a>
+                                <ul class="dropdown-menu navbar-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                                    <li><a class="dropdown-item" href="@Url.Action("Index","Dashboard")">Kokpit</a></li>
+                                </ul>
+                            </li>
+                    </div>
+                    }
+                </div>
+                <div class="col">
+                    <ul class="navbar-nav z-index-2">
+                        <li class="nav-item dropdown navbar-dark"><a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="pl-POL" class="nav-link"><i class="ui-icon-flag flag-icon-en"></i>Polski</a></li>
+                            <li class ="nav-item dropdown navbar-dark"><a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="en-US" class="nav-link"><i class="ui-icon-flag flag-icon-en"></i>English</a></li>
+                        <li class="nav-item dropdown navbar-dark"><a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="de-DE" class="nav-link"><i class="ui-icon-flag flag-icon-en"></i>Niemiecki</a></li>
+                    </ul>
+                </div>
+                @*Srodek strona*@
+                <div class="col-sm-4">
+                    @await Component.InvokeAsync("UserStatus")
+                </div>
+                @*Srodek strona*@
+
+                @*PRAWA STRONA START*@
+                <div class="col">
+                    <nav class="navbar navbar-fixed-top navbar-dark bg-inverse">
+                        @*PRAWA STRONA START*@
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown2" aria-controls="navbarNavDarkDropdown2" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse bg-dark" id="navbarNavDarkDropdown2">
+                                <ul class="navbar-nav z-index-2">
+                                    <li>
+                                    <a class="nav-link" asp-controller="Order" asp-action="ListaZamowienZalogowanegoUzytkownika">Zamówienia</a>
+                                    </li>
+                                    <li>
+                                    @await Component.InvokeAsync("CartHeader")
+                                    @*<a class="nav-link" asp-area="" asp-controller="Cart" asp-action="ZlozZamowienie"><i class="fa-solid fa-cart-shopping">@cart.CartItems.Count</i></a>*@
+                                    </li>
+                                    <li>
+                                        <partial name="_LoginPartial" />
+                                    </li>
+                                </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        @*KONIEC PRAWA STRONA*@
+        </div>
+    </div>
+</div>
+<div class="sticky-top row float-end text-right">
+
+    <a class="btn-open" data-bs-toggle="offcanvas" href="#offcanvas" role="button" aria-controls="offcanvas">
+      @*<i class="fa-solid fa-arrows-left-right-to-line"></i>*@
+        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+
+    </a>
+
+
+</div>
+<header>
+    @Html.Partial("_Header2")
+</header>

@@ -1,0 +1,68 @@
+﻿@model partner_aluro.ViewModels.CartStatusModel
+
+@using Microsoft.AspNetCore.Identity
+@using partner_aluro.ViewComponents;
+@using partner_aluro.Models
+
+@inject Cart _cart
+
+@if(Model.Cart.CartItems.Count > 0)
+{
+    <div class="row">
+        <div class="col">
+            Obrazek
+        </div>
+        <div class="col">
+            Produkt
+        </div>
+        <div class="col">
+            Ilość
+        </div>
+        <div class="col">
+            Usuń
+        </div>
+    </div>
+    @foreach (var item in Model.Cart.CartItems)
+    {
+    <div class="row">
+        @{
+                var CenaJednostkowa = item.Product.CenaProduktu * (1 - (partner_aluro.Core.Constants.Rabat / 100));
+
+                var ProductTotal = CenaJednostkowa * item.Quantity;
+        }
+        <div class="col">
+            <img src="~/images/produkty/@item.Product.Symbol/@item.Product.ImageUrl" style="height: 4em">
+        </div>
+        <div class="col">
+            @item.Product.Symbol <br>
+            <a class="text-black" asp-controller="Product" asp-action="Details" asp-route-id="@item.Product.ProductId">@item.Product.Name</a><br>
+                @CenaJednostkowa.ToString("C")
+        </div>
+        <div class="col">
+            <a asp-controller="Cart" asp-action="ReduceQuantity" asp-route-id="@item.Product.ProductId"><i class="fa-solid fa-minus"></i></a>
+            @item.Quantity
+            <a asp-controller="Cart" asp-action="IncreaseQuantity" asp-route-id="@item.Product.ProductId"><i class="fa-solid fa-plus"></i></a>   
+        </div>
+        <div class="col">
+            <a asp-controller="Cart" asp-action="RemoveFromCart" asp-route-id="@item.Product.ProductId" class="text-danger"><i class="fa-solid fa-xmark"></i></a>
+        </div>
+    </div>
+    }
+    <div class="row">
+        <div class="col">
+            Suma: <strong>@Model.Cart.GetCartTotal().ToString("C")</strong>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col text-center">
+
+        <a class="btn btn-success" asp-controller="Cart" asp-action="ZlozZamowienie">Złóż zamówienie</a>
+
+        </div>
+    </div>
+
+
+ }else
+{
+    <h3 class="text-center">Koszyk jest pusty</h3>
+}

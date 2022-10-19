@@ -1,0 +1,33 @@
+﻿@model partner_aluro.Models.Product
+<!-- Product section-->
+<section class="py-2">
+    <div class="container px-2 px-lg-3 my-3">
+        <div class="row gx-4 gx-lg-5 align-items-center">
+            <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="~/images/produkty/@Model.Symbol/@Model.ImageUrl" alt="@Model.Name" /></div>
+            <div class="col-md-6">
+                <div class="small mb-1">Symbol: @Model.Symbol</div>
+                    <h1 class="display-5 fw-bolder">@Model.Name</h1>
+                <div class="fs-5 mb-5">
+                    <span class="text-decoration-line-through">Cena detaliczna: @Model.CenaProduktuDetal</span>
+                    <span>Cena produktu: @Model.CenaProduktu</span>
+                </div>
+                <p class="lead">@Model.Description</p>
+                <p class="lead">Wymiary: @Model.SzerokoscProduktu Wys: @Model.SzerokoscProduktu, Glebokosc:@Model.GlebokoscProduktu </p>
+                <div class="d-flex">
+                    Ilość: <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
+                    <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@Model.ProductId" class="btn btnalert-primary">Dodaj do zamowienia</a>
+                    @*<button asp-action="DodajDoKoszyka" asp-controller="Koszyk" asp-route-id="@Model.ProductId" class="btn btn-outline-dark flex-shrink-0" type="button">
+                        <i class="bi-cart-fill me-1"></i>
+                        Dodaj do zamówienia
+                    </button>*@
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            @foreach(var image in Model.product_Images)
+            {
+                <img class="card-img-top mb-5 mb-md-0" src="~/images/produkty/@Model.Symbol/@image.ImageName" alt="@Model.Name" />
+            }
+        </div>
+    </div>
+</section>

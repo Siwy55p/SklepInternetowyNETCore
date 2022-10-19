@@ -1,0 +1,35 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using partner_aluro.Areas.Identity;
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Aluro </title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/ASP.NETCoreIdentityCustom.styles.css" asp-append-version="true" />
+</head>
+<body >
+    <div class="d-flex flex-column min-vh-100 justify-content-center align-items-center">
+
+        <div class="col-8 logoLoginReg p-3  ">
+            <div class="col-12 p-5 d-flex justify-content-center align-items-center">
+                <img class="registerLogo" src="~/images/logo/aluro_logo-x-300_2.png" width="300" />
+            </div>
+        </div>
+
+         @RenderBody()
+
+</div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,89 @@
+﻿@model IEnumerable<partner_aluro.Models.Category>
+@{
+    ViewData["Title"] = "Lista kategori";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+    <a asp-controller="Category" asp-action="Add" class="list-group-item list-group-item-action list-group-item-success">Dodaj Kategorie</a>
+
+    @if (@Model != null && @Model.Any())
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nazwa</th>
+                    <th scope="col">Opis</th>
+                    <th scope="col">Edit</th>
+                    <th scope="col">Usuń</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+
+        <div class="row">
+            <div class="col-md-12 mb-3">
+                <div class="card">
+                    <div class="card-header">
+                        <span><i class="bi bi-table me-2"></i></span> Data Table
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="example"
+                               class="table table-striped data-table"
+                               style="width: 100%">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Nazwa</th>
+                                        <th>Opis</th>
+                                        <th>Edit</th>
+                                        <th>Usuń</th>
+                                        <th>Ilość Produktów w kategorii</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var cat in Model)
+                                    {
+                                        <tr>
+                                            <td>@cat.CategoryId</td>
+                                            <td>@cat.Name</td>
+                                            <td>@cat.Description</td>
+                                            <td>
+                                                <a asp-controller="Category" asp-action="Edit" asp-route-id="@cat.CategoryId">Edit</a>
+                                            </td>
+                                            <td>
+                                                <a asp-controller="Category" asp-action="Delete" asp-route-id="@cat.CategoryId">Usuń</a>
+                                            </td>
+
+                                            <td>
+                                                @if (cat.Produkty != null)
+                                                {
+                                                    @cat.Produkty.Count
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Nazwa</th>
+                                        <th>Opis</th>
+                                        <th>Edit</th>
+                                        <th>Usuń</th>
+                                        <th>Ilość Produktów w kategorii</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@

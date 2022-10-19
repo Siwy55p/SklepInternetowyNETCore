@@ -1,0 +1,80 @@
+﻿
+@{
+    ViewData["Title"] = "CheckoutComplete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model partner_aluro.Models.Order
+
+
+<h1>Dziękujemy za założenie zamówienia.</h1>
+
+Potwierdzenie zamówienia
+
+Twoje zamówienie zostało przyjęte.
+
+Po skompletowaniu Twojego zamówienia otrzymasz email z kosztem dostawy i łączną sumą do zapłaty.
+
+W razie pytań lub wątpliwości, prosimy o kontakt z naszą obsługą klienta.
+
+
+@*
+<h5 class="mt-5">Order Id: @Model.Id</h5>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Obrazek</th>
+            <th>Nazwa produktu</th>
+            <th>Symbol</th>
+            <th>Cena jednostkowa</th>
+            <th>Ilość</th>
+            <th>Razem</th>
+            <th>Usuń</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.CartItems)
+        {
+            var ProductTotal = item.Product.CenaProduktu * item.Quantity;
+            <tr>
+                <td>
+                    <img src="~/images/produkty/@item.Product.ImageUrl" style="height: 4em">
+                </td>
+                <td>
+                    @item.Product.Name
+                </td>
+                <td>
+                    @item.Product.Symbol
+                </td>
+                <td>
+                    @item.Product.CenaProduktu.ToString("C")
+                </td>
+                <td>
+                    <a asp-controller="Cart" asp-action="ReduceQuantity" asp-route-id="@item.Product.ProductId"><i class="fa-solid fa-minus"></i></a>
+                    @item.Quantity
+                    <a asp-controller="Cart" asp-action="IncreaseQuantity" asp-route-id="@item.Product.ProductId"><i class="fa-solid fa-plus"></i></a>
+                </td>
+                <td>
+                    @ProductTotal.ToString("C")
+                </td>
+                <td>
+                    <a asp-controller="Cart" asp-action="RemoveFromCart" asp-route-id="@item.Product.ProductId" class="text-danger"><i class="fa-solid fa-xmark"></i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+    <tfoot>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td class="text"><strong>Total: </strong></td>
+    <td>
+        <strong>@Model.Carts.GetCartTotal().ToString("C")</strong>
+    </td>
+    <td></td>
+    </tfoot>
+</table>
+*@
+

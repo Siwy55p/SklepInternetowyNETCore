@@ -1,0 +1,16 @@
+﻿@model partner_aluro.Models.Product
+
+@{
+    ViewData["Title"] = "Dodaj produkt";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+
+<form enctype="multipart/form-data" asp-action="Add" asp-controller="Product" class="form-horizontal">
+
+    @Html.HiddenFor(h=>Model.ProductId)
+    @*@Html.ValidationSummary()*@
+    @Html.Partial("_FormProduct")
+    <button type="submit">Dodaj produkt</button>
+
+</form>

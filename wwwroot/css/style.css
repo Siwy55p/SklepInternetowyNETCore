@@ -1,0 +1,133 @@
+﻿
+
+
+
+/*image PRODUCKT*/
+#formdiv {
+    text-align: center;
+}
+
+#file {
+    color: green;
+    padding: 5px;
+    border: 1px dashed #123456;
+    background-color: #f9ffe5;
+}
+
+#img {
+    width: 17px;
+    border: none;
+    height: 17px;
+    margin-left: -20px;
+    margin-bottom: 191px;
+}
+
+.upload {
+    width: 100%;
+    height: 30px;
+}
+
+.previewBox {
+    text-align: center;
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin-right: 10px;
+    margin-bottom: 20px;
+    float: left;
+}
+
+    .previewBox img {
+        height: 150px;
+        width: 150px;
+        padding: 5px;
+        border: 1px solid rgb(232, 222, 189);
+    }
+
+.delete {
+    color: red;
+    font-weight: bold;
+    position: absolute;
+    top: 0;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #ccc;
+}
+/*image PRODUCKT*/
+
+
+
+.field-validation-error {
+    color: red;
+    font-size: smaller;
+}
+
+/*SLIDER NAJLEPIEJ SPRZEDACY INDEX HMTL STRONA GLOWNA*/
+
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, .5);
+    box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+}
+
+.product-item {
+    border: 1px solid rgb(219, 219, 219);
+}
+
+.product-img {
+    position: relative;
+}
+
+.btns {
+    left: 0;
+    font-weight: 300;
+}
+
+    .btns button {
+        border: none;
+        background-color: rgb(39, 39, 39);
+    }
+
+        .btns button:hover {
+            color: #fcb941;
+        }
+
+.product-img:hover .btns {
+    bottom: 0;
+}
+
+.heart-icon {
+    position: absolute;
+    top: 16px;
+    right: 15px;
+    font-size: 18px;
+}
+
+.product-type {
+    font-size: 13px;
+    opacity: 0.8;
+}
+
+.product-name {
+    transition: all 0.3s ease-in-out;
+}
+
+    .product-name:hover {
+        color: #fcb941 !important;
+    }
+
+.product-price {
+    color: #fcb941;
+}
+
+.rating {
+    font-size: 13px;
+}
+
+.product-item {
+    width: 300px;
+}
+/* KONIEC SLIDER NAJLEPIEJ SPRZEDACY INDEX HMTL STRONA GLOWNA*/
+

@@ -1,0 +1,23 @@
+﻿@model partner_aluro.Models.Category
+
+<div class="row g-3">
+    <div class="col-sm-6">
+        <label asp-for="@Model.Name" class="form-label">Nazwa katalogu</label>
+        <input asp-for="@Model.Name" class="form-control" aria-required="true" placeholder="Nazwa kategori" />
+        <span asp-validation-for="@Model.Name" class="text-danger">
+        </span>
+    </div>
+</div>
+<div class="row g-3">
+    <div class="col-sm-6">
+        <label asp-for="@Model.Description" class="form-label">Opis kategorii</label>
+        <textarea asp-for="@Model.Description" class="form-control" rows="3" placeholder="Opis kategori."></textarea>
+        <span asp-validation-for="@Model.Description" class="text-danger">
+        </span>
+    </div>
+</div>
+
+
+@*    <span>Nazwa kategori:</span> @Html.TextBoxFor(x=>x.Name)
+    <span>Opis kategori: </span>@Html.TextBoxFor(x=>x.Description)
+*@

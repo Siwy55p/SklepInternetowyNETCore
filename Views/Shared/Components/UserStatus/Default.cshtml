@@ -1,0 +1,27 @@
+﻿@model partner_aluro.ViewModels.UserStatusModel
+
+@using Microsoft.AspNetCore.Identity
+@using partner_aluro.ViewComponents;
+@using partner_aluro.Models
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <ul class="navbar-nav">onUs
+        <li class="nav-item nav-link"><span class="text-white">Witaj</span> <span class="text-warning">@Model.User.Imie @Model.User.Nazwisko</span><br /><span class="text-white">Aktualnie posiadasz rabat o wartości:
+                @if(Model.User.ProfilDzialalnosci != null && Model.User.ProfilDzialalnosci.Rabat != 0)
+                {@Model.User.ProfilDzialalnosci.Rabat}
+                else{
+                    ;
+                }
+                %
+            </span>
+        </li>
+    </ul>
+}
+else
+{
+    <p> Nie jestes zalogowany </p>
+}

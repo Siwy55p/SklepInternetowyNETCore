@@ -1,0 +1,9 @@
+﻿@model partner_aluro.ViewModels.CartStatusModel
+
+@using Microsoft.AspNetCore.Identity
+@using partner_aluro.ViewComponents;
+@using partner_aluro.Models
+
+@inject Cart _cart
+
+<a class="nav-link" asp-area="" asp-controller="Cart" asp-action="ZlozZamowienie"> <i class="fa-solid fa-cart-shopping"></i><span class='badge badge-warning' id='lblCartCount'> @Model.Cart.CartItems.Count </span></a>

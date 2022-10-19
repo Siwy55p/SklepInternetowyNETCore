@@ -1,0 +1,43 @@
+﻿@model IEnumerable<partner_aluro.Models.Product>
+
+@*@using partner_aluro.Infrastructure*@
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="row">
+                @foreach (var produkt in Model)
+                {
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="card">
+
+                                <img class="card-img-top" src="~/images/produkty/produkt1.jpg" alt="Card image cap">
+                                <div class="card-body">
+                                    <h4 class="card-title"><a href="@Url.Action("Details","Productiwarehause", new {id = produkt.ProductId})" title="Pokaż produkt">@produkt.Name</a></h4>
+                                    <p class="card-text">Opis produktu.</p>
+                                    @if(produkt.Bestseller)
+                                    {
+                                    <div class="bestsellerFlag"></div>
+                                    }else
+                                    {
+                                    <div class="newFlag"></div>
+                                    }
+                                    <div class="row">
+                                        <div class="col">
+                                            <p class="btn btn-danger btn-block">@produkt.CenaProduktu - @produkt.CenaProduktuDetal</p>
+                                        </div>
+                                        <div class="col">
+                                            <a href="@Url.Action("DodajDoKoszyka","Koszyk", new {id = produkt.ProductId} )" class="btn btn-success btn-block">Dodaj do koszyka</a>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+    </div>
+</div>

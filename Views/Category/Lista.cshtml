@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewData["Title"] = "Kategoria";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@*MENU LEFA STRONA LEFT KATEGORIE*@
+<div class="row">
+    <div class="col-12 col-md-4 col-lg-3">
+        <div class="row custom-kategory-menu sticky-top">
+            <div class="card bg-light">
+                        @await Component.InvokeAsync("MenuCategory")
+                    </div>
+            </div>
+    </div>
+    @*CONTENT PRAWA STRONA*@
+    <div class="col-12 col-md-8 col-lg-9"> 
+        @*HEADER*@
+        <div class="row align-items-center mb-7">
+            <div class="col-12 col-md">
+                <!-- Breadcrumb -->
+                <breadcrumb></breadcrumb>
+            </div>
+            <div class="col-12 col-md-auto">
+                <!-- Select -->
+                <select class="form-select form-select-xs">
+                    <option selected="">Najbardziej popularne</option>
+                </select>
+            </div>
+        </div>
+        @*PRODKUCTS*@
+        <div class="row" id="SekcjaListaKategori">
+            @Html.Partial("_ProductList")
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+}

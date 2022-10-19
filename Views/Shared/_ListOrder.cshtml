@@ -1,0 +1,74 @@
+﻿@model ICollection<partner_aluro.Models.Order>
+
+<div class="text-center">
+    <h1 class="display-4">Zamówienia</h1>
+    @if (@Model != null)
+    {
+        <div class="row">
+            <div class="col-md-12 mb-3">
+                <div class="card">
+                    <div class="card-header">
+                        <span><i class="bi bi-table me-2"></i></span> Data Table
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="example"
+                               class="table table-striped data-table"
+                               style="width: 100%">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Wartość zamówienia</th>
+                                        <th>Data zamówienia</th>
+                                        @if (User.IsInRole("Administrator") || User.IsInRole("Manager"))
+                                        {
+                                            <th>Imie Nazwisko, nazwa(User)</th>
+                                        }
+                                        <th>Stan zamówienia</th>
+                                        <th>Podgląd</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var order in Model)
+
+                                    {
+                                        <tr>
+                                            <td>@order.Id</td>
+                                            <td>@order.OrderTotal.ToString("C")</td>
+                                            <td>@order.OrderPlaced</td>
+                                            @if (User.IsInRole("Administrator") || User.IsInRole("Manager"))
+                                            {
+                                                <td>@order.User.UserName ,@order.User.Email</td>
+                                            }
+
+
+                                            <td>@order.StanZamowienia</td>
+                                            <td>
+                                                <a asp-controller="Order" asp-action="Detail" asp-route-id="@order.Id">Podgląd</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Wartość zamówienia</th>
+                                        <th>Data</th>
+                                        @if (User.IsInRole("Administrator") || User.IsInRole("Manager"))
+                                        {
+                                            <th>Imie Nazwisko, nazwa(User)</th>
+                                        }
+                                        <th>Stan zamówienia</th>
+                                        <th>Podgląd</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+
+</div>

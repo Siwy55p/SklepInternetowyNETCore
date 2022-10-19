@@ -1,0 +1,13 @@
+﻿@model Product
+
+<div class="form-group">
+    <label asp-for="@Model.FrontImage" class="control-label"></label>
+    <div class="custom-file">
+        <input asp-for="@Model.FrontImage" class="custom-file-input" id="FLFrontImage"
+               onchange="document.getElementById('FrontImagePrv').src = window.URL.createObjectURL(this.files[0])" />
+        <label class="custom-file-label" for="FLFrontImage">Wybierz plik</label>
+    </div>
+    @*<span asp-validation-for="@Model" class="text-danger"></span>*@
+
+    <img id="FrontImagePrv" src="" alt="Logo image" width="150" height="150" style="border:1px; margin-top:20px; margin-left:120px" />
+</div>

@@ -1,0 +1,89 @@
+﻿p.test {
+    font-size: 22px;
+}
+
+
+.field-validation-error {
+    color: red;
+    font-size: smaller;
+}
+
+/*SLIDER NAJLEPIEJ SPRZEDACY INDEX HMTL STRONA GLOWNA*/
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 7px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, .5);
+    box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+}
+
+.product-item {
+    border: 1px solid rgb(219, 219, 219);
+}
+
+.product-img {
+    position: relative;
+}
+
+.btns {
+    left: 0;
+    font-weight: 300;
+}
+
+    .btns button {
+        border: none;
+        background-color: rgb(39, 39, 39);
+    }
+
+        .btns button:hover {
+            color: #fcb941;
+        }
+
+.product-img:hover .btns {
+    bottom: 0;
+}
+
+.heart-icon {
+    position: absolute;
+    top: 16px;
+    right: 15px;
+    font-size: 18px;
+}
+
+.product-type {
+    font-size: 13px;
+    opacity: 0.8;
+}
+
+.product-name {
+    transition: all 0.3s ease-in-out;
+}
+
+    .product-name:hover {
+        color: #fcb941 !important;
+    }
+
+.product-price {
+    color: #fcb941;
+}
+
+.rating {
+    font-size: 13px;
+}
+
+.product-item {
+    width: 300px;
+}
+/* KONIEC SLIDER NAJLEPIEJ SPRZEDACY INDEX HMTL STRONA GLOWNA*/
+

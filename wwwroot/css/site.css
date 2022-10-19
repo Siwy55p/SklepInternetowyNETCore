@@ -1,0 +1,191 @@
+
+/*PRZYCISK OTWIERAJACY menu TWOJE ZAMOWIENIE PRAWA STRONA*/
+.btn-open {
+    position: relative;
+    width: 58px;
+    font-size: 20px;
+    top: 23px;
+    color: black;
+}
+
+/*menu LEWE menu CATEGORY*/
+.row.custom-kategory-menu.sticky-top {
+    top: 53px;
+    z-index: 1;
+}
+
+
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body {
+    overflow-y: scroll;
+}
+
+.img-thumbnail {
+}
+.thumbnail {
+    display: flex;
+    justify-content: center;
+    height: 250px;
+    height: 192px;
+}
+
+/*Koszyj header*/
+.badge {
+    padding-left: 9px;
+    padding-right: 9px;
+    -webkit-border-radius: 9px;
+    -moz-border-radius: 9px;
+    border-radius: 9px;
+}
+
+.label-warning[href],
+.badge-warning[href] {
+    background-color: #c67605;
+}
+
+#lblCartCount {
+    font-size: 12px;
+    background: #ff0000;
+    color: #fff;
+    padding: 0 5px;
+    vertical-align: top;
+    margin-left: -6px;
+    margin-top: -5px;
+}
+/*Koszyj header*/
+
+/*POPRAWKI bdo BOOTSTRP STYLE*/
+.offcanvas-end {
+    top: 52px;
+}
+
+.product-name {
+    clear: both;
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 250px;
+}
+
+.mainmenu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* START STYLE
+** Style Simple Ecommerce Theme for Bootstrap 4 https://bootsnipp.com/snippets/yNWWa
+** Created by T-PHP https://t-php.fr/43-theme-ecommerce-bootstrap-4.html
+*/
+
+.language
+{
+    margin-top: 20px;
+}
+
+.bloc_left_price {
+    color: #c01508;
+    text-align: center;
+    font-weight: bold;
+    font-size: 150%;
+}
+
+.navbar-custom {
+    height: 40px;
+}
+
+.header2-custom {
+    padding-top: 25px;
+}
+
+.logoLoginReg
+{
+    min-height: 400px;
+}
+
+
+.category_block li:hover {
+    background-color: #007bff;
+}
+
+    .category_block li:hover a {
+        color: #ffffff;
+    }
+
+.category_block li a {
+    color: #343a40;
+}
+
+.add_to_cart_block .price {
+    color: #c01508;
+    text-align: center;
+    font-weight: bold;
+    font-size: 200%;
+    margin-bottom: 0;
+}
+
+.add_to_cart_block .price_discounted {
+    color: #343a40;
+    text-align: center;
+    text-decoration: line-through;
+    font-size: 140%;
+}
+
+.product_rassurance {
+    padding: 10px;
+    margin-top: 15px;
+    background: #ffffff;
+    border: 1px solid #6c757d;
+    color: #6c757d;
+}
+
+    .product_rassurance .list-inline {
+        margin-bottom: 0;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+        .product_rassurance .list-inline li:hover {
+            color: #343a40;
+        }
+
+.reviews_product .fa-star {
+    color: gold;
+}
+
+.pagination {
+    margin-top: 20px;
+}
+
+footer {
+    background: #343a40;
+    padding: 40px;
+}
+
+    footer a {
+        color: #f8f9fa !important
+    }
+/*
+** END Style Simple Ecommerce Theme for Bootstrap 4 https://bootsnipp.com/snippets/yNWWa
+** Created by T-PHP https://t-php.fr/43-theme-ecommerce-bootstrap-4.html
+*/
+.search{
+    z-index: 20;
+}
+/*STYL main menu*/
+.menumain {
+    color: white;
+}
+.custom-item {
+    height: 100px;
+    width: 100px;
+    margin: 2px;
+    background-color: black;
+}

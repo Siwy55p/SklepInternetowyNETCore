@@ -1,0 +1,89 @@
+﻿
+@{
+    ViewData["Title"] = "Users Page";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+@model ICollection<partner_aluro.Models.ApplicationUser>
+
+<div class="text-center">
+    <h1 class="display-4">Użytkownicy</h1>
+
+
+    @if(@Model != null && @Model.Any())
+    { 
+@*        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Imię</th>
+                    <th scope="col">Nazwisko</th>
+                    <th scope="col">Dostęp</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Edit</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>*@
+
+        <div class="row">
+            <div class="col-md-12 mb-3">
+                <div class="card">
+                    <div class="card-header">
+                        <span><i class="bi bi-table me-2"></i></span> Data Table
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="example"
+                               class="table table-striped data-table"
+                               style="width: 100%">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Data założenia</th>
+                                        <th>Imię Nazwisko</th>
+                                        <th>Firma</th>
+                                        <th>Email</th>
+                                        <th>Edit</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        int i = 0;
+                                    }
+                                    @foreach (var user in Model)
+                                    {
+                                        <tr>
+                                            <td>@i</td>
+                                            @{i++;}
+                                            <td>@user.DataZałożenia</td>
+                                            <td>@user.Imie @user.Nazwisko</td>
+                                            <td>@user.NazwaFirmy</td>
+                                            <td>@user.Email</td>
+                                            <td>
+                                                <a asp-controller="User" asp-action="Edit" asp-route-id="@user.Id">Edit</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Data założenia</th>
+                                        <th>Imię Nazwisko</th>
+                                        <th>Firma</th>
+                                        <th>Email</th>
+                                        <th>Edit</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    }
+
+</div>

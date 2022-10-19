@@ -1,0 +1,15 @@
+﻿@model partner_aluro.Models.WeatherResponse
+
+@*aby pokazac z jakiego leyautu ma korzystac *@
+@{
+    //Layout = "~/Views/Shared/_Leyout.cshtml";
+
+
+    Layout = "_Layout";
+}
+
+<h1> API Weather </h1>
+
+<span> Pogoda w Londynie : @Model.main.temp </span>
+<span> Maksymalna temp w Londynie : @Model.main.temp_max </span>
+<span> Minimalna temp w Londynie : @Model.main.temp_min </span>

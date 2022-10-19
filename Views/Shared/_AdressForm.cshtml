@@ -1,0 +1,136 @@
+﻿@model partner_aluro.ViewModels.CartOrderViewModel
+
+<div class="row">
+    <div class="form-outline">
+        <label asp-for="@Model.Orders.Komentarz" class="form-label">Wiadomość do zamówienia.</label>
+        <textarea asp-for="@Model.Orders.Komentarz" class="form-control" rows="3"></textarea>
+        <span asp-validation-for="@Model.Orders.Komentarz" class="text-danger"></span>
+    </div>
+
+<h4 class="d-flex justify-content-between align-items-center mb-3">2. Adresy</h4>
+
+        <hr class="mb-4">
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="same-address">
+            <label class="custom-control-label" for="same-address">Adress dostawy inny niż Adres rozliczeniowy</label>
+        </div>
+        <hr class="mb-4">
+        <div class="col-md-6 order-md-2 mb-4">
+
+            <h4 class="mb-3">Adres rozliczeniowy</h4>
+            <div class="row">
+
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="@Model.Orders.User.Imie">Imię</label>
+                    @Html.TextBoxFor(m => m.Orders.User.Imie, new {@class="form-control", Value=String.Format("{0:d}", Model.Orders.User.Imie)  })
+                <span asp-validation-for="@Model.Orders.User.Imie" class="text-danger">
+                    </span>
+                </div>
+                <div class="col-md-6 mb-3">
+                <label asp-for="@Model.Orders.User.Nazwisko">Nazwisko</label>
+                    @Html.TextBoxFor(m => m.Orders.User.Nazwisko, new {@class="form-control", Value=String.Format("{0:d}", Model.Orders.User.Nazwisko)  })
+                <span asp-validation-for="@Model.Orders.User.Nazwisko" class="text-danger">
+                    </span>
+                </div>
+            </div>
+            <div class="mb-3">
+            <label asp-for="@Model.Orders.User.Email">Email</label>
+                @Html.TextBoxFor(m => m.Orders.User.Email, new {@class="form-control", Value=String.Format("{0:d}", Model.Orders.User.Email)  })
+            <span asp-validation-for="@Model.Orders.User.Email" class="text-danger">
+                </span>
+            </div>
+
+            <div class="mb-3">
+            <label asp-for="@Model.Orders.User.Adres1.Ulica">Ulica</label>
+                @Html.TextBoxFor(m => m.Orders.User.Adres1.Ulica, new {@class="form-control", Value=String.Format("{0:d}", Model.Orders.User.Adres1.Ulica)  })
+            <span asp-validation-for="@Model.Orders.User.Adres1.Ulica" class="text-danger"></span>
+            </div>
+            <div class="row">
+                <div class="col-md-5 mb-3">
+                <label asp-for="@Model.Orders.User.Adres1.Kraj">Kraj</label>
+                    @Html.TextBoxFor(m => m.Orders.User.Adres1.Kraj, new {@class="form-control", Value=String.Format("{0:d}", Model.Orders.User.Adres1.Kraj)  })
+                <span asp-validation-for="@Model.Orders.User.Adres1.Kraj" class="text-danger"></span>
+            </div>
+                <div class="col-md-4 mb-3">
+                <label asp-for="@Model.Orders.User.Adres1.Miasto">Miasto</label>
+                    <input class="form-control" i asp-for="Orders.User.Adres1.Miasto" value="@Model.Orders.User.Adres1.Miasto" />
+                <span asp-validation-for="@Model.Orders.User.Adres1.Miasto" class="text-danger"></span>
+                </div>
+                <div class="col-md-3 mb-3">
+                <label asp-for="@Model.Orders.User.Adres1.KodPocztowy">Kod pocztowy/Zip</label>
+                    @Html.TextBoxFor(m => m.Orders.User.Adres1.KodPocztowy, new {@class="form-control", Value=String.Format("{0:d}", Model.Orders.User.Adres1.KodPocztowy)  })
+                <span asp-validation-for="@Model.Orders.User.Adres1.KodPocztowy" class="text-danger"></span>
+            </div>
+            </div>
+            <div class="mb-3">
+            <label asp-for="@Model.Orders.User.Adres1.Telefon">Telefon</label>
+                @Html.TextBoxFor(m => m.Orders.User.Adres1.Telefon, new {@class="form-control", Value=String.Format("{0:d}", Model.Orders.User.Adres1.Telefon)  })
+            <span asp-validation-for="@Model.Orders.User.Adres1.Telefon" class="text-danger"></span>
+            </div>
+
+
+        </div>
+        <div class="col-md-6 order-md-1">
+            <h4 class="mb-3">Adres dostawy</h4>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                <label asp-for="@Model.Orders.User.Adres2.Imie">Imię</label>
+                    @Html.TextBoxFor(m => m.Orders.User.Adres2.Imie, new {@class="form-control", Value=String.Format("{0:d}", Model.Orders.User.Adres2.Imie)  })
+                <span asp-validation-for="@Model.Orders.User.Adres2.Imie" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                <label asp-for="@Model.Orders.User.Adres2.Nazwisko">Nazwisko</label>
+                    @Html.TextBoxFor(m => m.Orders.User.Adres2.Nazwisko, new {@class="form-control", Value=String.Format("{0:d}", Model.Orders.User.Adres2.Nazwisko)  })
+                <span asp-validation-for="@Model.Orders.User.Adres2.Nazwisko" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="mb-3">
+            <label asp-for="@Model.Orders.User.Adres2.Email">Email</label>
+                @Html.TextBoxFor(m => m.Orders.User.Adres2.Email, new {@class="form-control", Value=String.Format("{0:d}", Model.Orders.User.Adres2.Email)  })
+            <span asp-validation-for="@Model.Orders.User.Adres2.Email" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+            <label asp-for="@Model.Orders.User.Adres2">Ulica</label>
+                @Html.TextBoxFor(m => m.Orders.User.Adres2.Ulica, new {@class="form-control", Value=String.Format("{0:d}", Model.Orders.User.Adres2.Ulica)  })
+            <span asp-validation-for="@Model.Orders.User.Adres2" class="text-danger"></span>
+            </div>
+            <div class="row">
+                <div class="col-md-5 mb-3">
+                <label asp-for="@Model.Orders.User.Adres2.Kraj">Kraj</label>
+                    @Html.TextBoxFor(m => m.Orders.User.Adres2.Kraj, new {@class="form-control", Value=String.Format("{0:d}", Model.Orders.User.Adres2.Kraj)  })
+                <span asp-validation-for="@Model.Orders.User.Adres2.Kraj" class="text-danger"></span>
+                </div>
+                <div class="col-md-4 mb-3">
+                <label asp-for="@Model.Orders.User.Adres2.Miasto">Miasto</label>
+                    @Html.TextBoxFor(m => m.Orders.User.Adres2.Miasto, new {@class="form-control", Value=String.Format("{0:d}", Model.Orders.User.Adres2.Miasto)  })
+                <span asp-validation-for="@Model.Orders.User.Adres2.Miasto" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-3 mb-3">
+                <label asp-for="@Model.Orders.User.Adres2.KodPocztowy">Kod pocztowy/Zip</label>
+                    @Html.TextBoxFor(m => m.Orders.User.Adres2.KodPocztowy, new {@class="form-control", Value=String.Format("{0:d}", Model.Orders.User.Adres2.KodPocztowy)  })
+                <span asp-validation-for="@Model.Orders.User.Adres2.KodPocztowy" class="text-danger"></span>
+                </div>
+            </div>
+            <hr class="mb-4">
+            <h4 class="mb-4">3. Płatność</h4>
+            <div class="d-block my-3">
+                <div class="custom-control custom-radio">
+                    <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked="" required="">
+                    <label class="custom-control-label" for="credit">Karta kredytowa</label>
+                </div>
+                <div class="custom-control custom-radio">
+                    <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required="">
+                    <label class="custom-control-label" for="debit">Przelew</label>
+                </div>
+                <div class="custom-control custom-radio">
+                    <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required="">
+                    <label class="custom-control-label" for="paypal">Gotówka odbiór w Bogucinie ul. Gnieźnieńska 159</label>
+                </div>
+            </div>
+            <hr class="mb-4">
+        </div>
+    </div>

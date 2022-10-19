@@ -1,0 +1,13 @@
+﻿@model partner_aluro.Models.Category
+
+@{
+    ViewData["Title"] = "Edytój kategorię";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+@using (Html.BeginForm("Edit", "Category", FormMethod.Post))
+{
+    @Html.Partial("_AddCategoryForm")
+
+    <button type="submit">Zapisz zmiany</button>
+}
