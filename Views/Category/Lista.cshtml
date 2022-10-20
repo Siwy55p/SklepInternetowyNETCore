@@ -24,7 +24,14 @@
             </div>
             <div class="col-12 col-md-auto">
                 <!-- Select -->
+                @Html.ActionLink("SortBy1", "Lista", "Category", new { page = 1, szukanaNazwa=ViewData["szukanaNazwa"], sort=1 } ))
+                @Html.ActionLink("SortBy2", "Lista", "Category", new { page = 1, szukanaNazwa=ViewData["szukanaNazwa"], sort=2 } ))
+
+                <a class="nav-link px-3" asp-controller="Category" asp-action="Lista" asp-route-sort="1">Sortuj po nazwie</a>
                 <select class="form-select form-select-xs">
+                    <option selected="">
+                        <a asp-controller="Category" asp-action="SortBy">Product Name</a>
+                    </option>
                     <option selected="">Najbardziej popularne</option>
                 </select>
             </div>

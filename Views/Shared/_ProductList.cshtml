@@ -12,19 +12,15 @@
                 }
                 <div class="thumbnail"><img src="~/images/produkty/@produkt.Symbol/@produkt.ImageUrl" alt="@produkt.Name" style="width:260px;"></div>
                 <div class="card-body">
+                    <div class="row">
+                    <div class="col-4">
+                        <input type="number" id="quantity" name="quantity" value="@produkt.ProductId" class="form-control" aria-required="true" placeholder="Ilość" value="1" min="1" max="20" />
+                    </div>
+                    <div class="col">
+                        <button onclick="AddToCart(@produkt.ProductId)" @*data-bs-toggle="offcanvas"*@ data-bs-target="#offcanvas" role="button">Dodaj do zamowienia</button>
+                    </div>
+                    </div>
 
-                    @*<form asp-controller="Cart" asp-action="AddToCart" asp-route-id="@produkt.ProductId" asp-route-quantity="quantity" method="POST">*@
-                            <div class="row">
-                                <div class="col-4">
-                                <input type="number" id="quantity" name="quantity" class="form-control" aria-required="true" placeholder="Ilość" value="1" min="1" max="20" />
-
-                            </div>
-                            <div class="col">
-                            <button class="btn btn-success" id="submitButton" data-bs-toggle="offcanvas" value="quantity" data-bs-target="#offcanvas" role="button">Dodaj do zamowienia</button>
-                            </div>
-
-                            </div>
-                    @*</form>*@
                     <p class="card-text"><b>@produkt.Symbol</b></p>
                     <p class="card-text"><a class="product-name link-dark" asp-controller="Product" asp-action="Details" asp-route-id="@produkt.ProductId">@produkt.Name</a></p>
                     <p class="text-right">Cena: @produkt.CenaProduktu.ToString("C") </p>

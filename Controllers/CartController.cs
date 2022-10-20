@@ -102,8 +102,28 @@ namespace partner_aluro.Controllers
 
             return View(vm);
         }
+        public async Task<IActionResult> AddToCart3(int ProductId)
+        {
+            var selectedProduct = await GetProductId(ProductId);
 
+            if (selectedProduct != null)
+            {
+                _cart.AddToCart(selectedProduct, 1);
+            }
 
+            return RedirectToAction("Index");
+        }
+        public async Task<IActionResult> AddToCart2(int id, int quantity)
+        {
+            var selectedProduct = await GetProductId(id);
+
+            if (selectedProduct != null)
+            {
+                _cart.AddToCart(selectedProduct, quantity);
+            }
+
+            return RedirectToAction("Index");
+        }
         public async Task<IActionResult> AddToCart(int id, int quantity)
         {
             var selectedProduct = await GetProductId(id);
