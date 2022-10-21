@@ -93,7 +93,11 @@
         }
     </script>
 
-
+    <script>
+        document.body.addEventListener('click', function (e) {
+            e.stopPropagation()
+        })
+    </script>
 
     @*BOOTSTRAP*@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

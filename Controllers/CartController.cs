@@ -113,9 +113,9 @@ namespace partner_aluro.Controllers
 
             return RedirectToAction("Index");
         }
-        public async Task<IActionResult> AddToCart2(int id, int quantity)
+        public async Task<IActionResult> AddToCart2(int ProductId, int quantity)
         {
-            var selectedProduct = await GetProductId(id);
+            var selectedProduct = await GetProductId(ProductId);
 
             if (selectedProduct != null)
             {
