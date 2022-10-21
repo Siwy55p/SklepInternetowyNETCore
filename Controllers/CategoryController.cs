@@ -236,26 +236,40 @@ namespace partner_aluro.Controllers
             return View();
         }
 
+
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public async Task<List<Product>>? szukanie(string szukanaNazwa)   // to jest wynik wyszukiwarki 
+        public async Task<List<Product>>? szukanie(string szukanaNazwa)   // to jest wynik wyszukiwarki (zwraca produkty ktore zawieraja w nazwie szukana nazwe)
         {
             List<Product> WszystkieProdukty = await _context.Products.ToListAsync();
 
-            List<string> WyszukaneNazwyProdukow = await _context.Products.Select(p=> p.Name.ToLower()).ToListAsync(); // tworze liste nazw (puste)
+            //List<string> WyszukaneNazwyProdukow = await _context.Products.Select(p=> p.Name.ToLower()).ToListAsync(); // tworze liste nazw (puste)
+
+            List<string> WyszukaneNazwyProdukow = await _context.Products.Select(p => p.Name.ToLower()).ToListAsync(); // tworze liste nazw (puste)
+
+            List<string> WyszukaneSymbolowProdukow = await _context.Products.Select(p => p.Symbol.ToLower()).ToListAsync(); // tworze liste nazw Symbolów wszystkie tylko symbole
+
+            
+            WyszukaneNazwyProdukow.AddRange(WyszukaneSymbolowProdukow);
 
             if (szukanaNazwa != null && szukanaNazwa.Length >= 1)
             {
                 szukanaNazwa = szukanaNazwa.ToLower();
 
                 //WyszukaneNazwyProdukow zawiera wszystkie nazwy wszystkich produków
+                // oraz produkty ktore zawieraja ten symbol
+
+
+
                 List<Product> WyszukaneProduktyLowerName = new List<Product>();
 
                 foreach (string NazwaProduktu in WyszukaneNazwyProdukow)
                 {
                     if (NazwaProduktu.Contains(szukanaNazwa)) // jesli jakas nazwa jest w liscie 
                     {
-                        WyszukaneProduktyLowerName.Add(WszystkieProdukty.Find(x => x.Name.ToLower() == NazwaProduktu));
+                        WyszukaneProduktyLowerName.Add(WszystkieProdukty.Find(x => x.Name.ToLower() == NazwaProduktu || x.Symbol.ToLower() == NazwaProduktu));
                     }
+
                 }
 
                 return WyszukaneProduktyLowerName;
