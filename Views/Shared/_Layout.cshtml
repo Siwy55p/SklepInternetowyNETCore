@@ -77,10 +77,11 @@
 
     <script>
         function AddToCart(ProductId) {
+            var quantity = document.getElementById(ProductId).value;
             $.ajax({
                 type: "POST",
-                url: '@Url.Action("AddToCart3", "Cart")',
-            data: { ProductId: ProductId },
+                url: '@Url.Action("AddToCart2", "Cart")',
+                data: { ProductId: ProductId, quantity: quantity },
                 success: function (result) {
                     $("#mydiv").load(location.href + " #mydiv");
                 },
@@ -92,13 +93,6 @@
         }
     </script>
 
-
-    <script>
-        $('#sort').on('change', function () {
-            alert(this.value);
-            $.get('@Url.Action("Lista", "Category")', { page: 1, sort:1 });
-        });
-    </script>
 
 
     @*BOOTSTRAP*@

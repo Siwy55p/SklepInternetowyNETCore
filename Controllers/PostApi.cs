@@ -18,7 +18,7 @@ namespace partner_aluro.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         [Produces("application/json")]
         [HttpGet("search")]
-        public async Task<IActionResult> Serach()
+        public async Task<IActionResult> Search()
         {
             string term = HttpContext.Request.Query["term"].ToString();
             var szukanaNazwa = _db.Products.Where(p => p.Name.Contains(term))
