@@ -16,24 +16,6 @@
 
     @RenderSection("LinkStyleHead", required: false)
 
-    <script>
-        function addToCart(productId) {
-            $.ajax({
-                type: "POST",
-                url: '@Url.Action("AddToCart2", "Cart")',
-                data: { id: id, quantity: quantity },
-                success: function (result) {
-                    $("#mydiv").load(location.href + " #mydiv");
-                },
-
-                error: function (abc) {
-                    alert(abc.statusText);
-                },
-            });
-        })
-    </script>
-
-
 </head>
 <body>
     @Html.Partial("_Header") @*To musi tak zostać te linijki nie ruszaj jest dobrze*@
@@ -109,6 +91,15 @@
             });
         }
     </script>
+
+
+    <script>
+        $('#sort').on('change', function () {
+            alert(this.value);
+            $.get('@Url.Action("Lista", "Category")', { page: 1, sort:1 });
+        });
+    </script>
+
 
     @*BOOTSTRAP*@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
