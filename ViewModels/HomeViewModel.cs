@@ -1,4 +1,6 @@
-﻿using partner_aluro.Models;
+﻿using partner_aluro.Data;
+using partner_aluro.Enums;
+using partner_aluro.Models;
 
 namespace partner_aluro.ViewModels
 {
@@ -7,6 +9,8 @@ namespace partner_aluro.ViewModels
         public IEnumerable<Category> Kategorie { get; set; }
         public IEnumerable<Product> Nowosci { get; set; }
         public IEnumerable<Product> Bestsellery { get; set; }
+
+        public CompanyModel _model {get; set;}
 
     }
 }

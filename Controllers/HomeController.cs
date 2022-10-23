@@ -7,11 +7,13 @@ using partner_aluro.Models;
 using partner_aluro.Services.Interfaces;
 using partner_aluro.ViewModels;
 using SmartBreadcrumbs.Attributes;
+using System;
 using System.Data;
 using System.Diagnostics;
 using System.Security.Claims;
 
 using ServiceReference1;
+using partner_aluro.Enums;
 
 namespace partner_aluro.Controllers
 {
@@ -22,47 +24,42 @@ namespace partner_aluro.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly ILogger<HomeController> _logger;
-        IBIRSearchService _birSearchService; //Servis widoczny przez referencje
+
+        private readonly  RegonService RegonService;
 
         //Kontrolery odzoruwuja widoki , sluza do generowania róznych treści
-        public HomeController(ApplicationDbContext context,ILogger<HomeController> logger, IBIRSearchService bIRSearchService)
+        public HomeController(ApplicationDbContext context,ILogger<HomeController> logger, RegonService regonService)
         {
             _logger = logger;
             _context = context;
-            _birSearchService = bIRSearchService;
+            RegonService = regonService;
         }
 
-
+        [HttpGet]
         public IActionResult Index()
         {
+
             //logika zalogowania
             if (User.Identity.IsAuthenticated)
             {
-                UslugaBIRzewnPublClient client = new UslugaBIRzewnPublClient();
-
-                ZalogujRequest request = new ZalogujRequest();
-                request.pKluczUzytkownika = "abcde12345abcde12345";
-
-                var end = client.Endpoint;
-
-
-
+                //Potrzebne do REGON
+                CompanyModel _model = new CompanyModel();
 
                 //zawsze trzeba pobrac dane i wrzucic do widoku
                 var kategorie = _context.Category.ToList();
 
-                    //pobieramu produkty
-                    var nowosci = _context.Products.Where(a => !a.Ukryty).OrderByDescending(a => a.DataDodania).Take(3).ToList();
+                //pobieramu produkty
+                var nowosci = _context.Products.Where(a => !a.Ukryty).OrderByDescending(a => a.DataDodania).Take(3).ToList();
 
-                    var bestseller = _context.Products.Where(a => !a.Ukryty).OrderBy(a => Guid.NewGuid()).Take(3).ToList();
-                    //Category category = new Category { Name = "Kategoria1", Description = "Opis kategoria", NazwaPlikuIkony = "ikona.png" };
-                    //_context.Add(category);
-                    //_context.SaveChanges();
+                var bestseller = _context.Products.Where(a => !a.Ukryty).OrderBy(a => Guid.NewGuid()).Take(3).ToList();
+                //Category category = new Category { Name = "Kategoria1", Description = "Opis kategoria", NazwaPlikuIkony = "ikona.png" };
+                //_context.Add(category);
+                //_context.SaveChanges();
 
-                    //zainicjuj view model
-                    var vm = new HomeViewModel() { Kategorie = kategorie, Nowosci = nowosci, Bestsellery = bestseller };
+                //zainicjuj view model
+                var vm = new HomeViewModel() { Kategorie = kategorie, Nowosci = nowosci, Bestsellery = bestseller, _model = _model };
 
-                    return View(vm); //zapewnia renderowania widoków 
+                return View(vm); //zapewnia renderowania widoków 
             }
             else
             {
@@ -101,6 +98,21 @@ namespace partner_aluro.Controllers
         public IActionResult Product(string name)
         {
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Index(HomeViewModel vm)
+        {
+            vm._model = await RegonService.GetCompanyDataByRegonAsync(vm._model.Regon);
+
+            //zawsze trzeba pobrac dane i wrzucic do widoku
+            var kategorie = _context.Category.ToList();
+            var nowosci = _context.Products.Where(a => !a.Ukryty).OrderByDescending(a => a.DataDodania).Take(3).ToList();
+            var bestseller = _context.Products.Where(a => !a.Ukryty).OrderBy(a => Guid.NewGuid()).Take(3).ToList();
+
+            var vm2 = new HomeViewModel() { Kategorie = kategorie, Nowosci = nowosci, Bestsellery = bestseller, _model = vm._model };
+
+            return View(vm2);
         }
 
     }

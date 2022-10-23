@@ -3,6 +3,9 @@
 @{
     ViewBag.Title = "Aluro - Strona główna";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+
 }
 @inject LanguageService language
 
@@ -13,6 +16,59 @@
     <link href="~/owl_carousel/owl.carousel.css" rel="stylesheet" />
     }
 @*<div class="container">*@
+
+
+    @*DOŁACZNIE SZUKAJ PO REGON*@
+    <div class="row">
+        <div class="col-lg-10 col-xl-9 mx-auto">
+            <div class="card flex-row my-5 border-0 shadow rounded-3 overflow-hidden">
+                <div class="card-img-left d-none d-md-flex">
+                </div>
+                <div class="card-body p-4 p-sm-5">
+
+                    <form asp-action="Index" asp-controller="Home" class="form-horizontal" method="post">
+
+                        <DataAnnotationsValidator />
+                        <div class="input-group mb-3">
+                            <div class="form-floating flex-grow-1">
+                                
+                                <input asp-for="@Model._model.Vat" class="form-control" id="floatingInputVAT" placeholder="Nr NIP" value="@Model._model.Vat" />
+                                <label for="floatingInputVat">Nr NIP</label>
+                               @* <span asp-validation-for="@Model._model.Vat" class="text-danger"></span>*@
+                            </div>
+
+@*
+                            @Html.ActionLink("Szukaj","OnSearchCompanyNIP","Home"/*,new { Regon = @Model._model.Vat }*/)*@
+
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="form-floating flex-grow-1">
+                                <input asp-for="@Model._model.Regon" class="form-control" id="floatingInputVAT" placeholder="Nr Regon" value="@Model._model.Regon"  />
+                                <label for="floatingInputVat">Nr Regon</label>
+                                @*<span asp-validation-for="@Model._model.Regon" class="text-danger"></span>*@
+                            </div>
+
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input asp-for="@Model._model.Name" class="form-control text-capitalize" id="floatingName" placeholder="Nazwa firmy" value="@Model._model.Name" />
+                            <label for="floatingName">Nazwa firmy</label>
+                           @* <span asp-validation-for="@Model._model.Name" class="text-danger"></span>*@
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input asp-for="@Model._model.Address" class="form-control" id="floatingInputAddress" placeholder="Adres" value="@Model._model.Address" />
+                            <label for="floatingInputAddress">Adres</label>
+                           @* <span asp-validation-for="@Model._model.Address" class="text-danger"></span>*@
+                        </div>
+
+                        <button type="submit">Szukaj</button>
+                        <hr>
+                    </Form>
+                </div>
+            </div>
+        </div>
+    </div>
+        @*DOŁACZNIE SZUKAJ PO REGON*@
+
 
     @*SLIDER*@
     <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
