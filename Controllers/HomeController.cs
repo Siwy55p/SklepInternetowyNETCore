@@ -25,10 +25,11 @@ namespace partner_aluro.Controllers
         IBIRSearchService _birSearchService; //Servis widoczny przez referencje
 
         //Kontrolery odzoruwuja widoki , sluza do generowania róznych treści
-        public HomeController(ApplicationDbContext context,ILogger<HomeController> logger)
+        public HomeController(ApplicationDbContext context,ILogger<HomeController> logger, IBIRSearchService bIRSearchService)
         {
             _logger = logger;
             _context = context;
+            _birSearchService = bIRSearchService;
         }
 
 
