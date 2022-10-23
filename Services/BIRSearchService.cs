@@ -1,5 +1,5 @@
 ﻿using partner_aluro.Models;
-using BIRServiceReference;
+using ServiceReference;
 using System.Collections;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
