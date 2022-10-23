@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace BIRService.Models
+namespace partner_aluro.Models
 {
     /// <summary>
     /// Model podmiotu zwracany z bazy Regon
