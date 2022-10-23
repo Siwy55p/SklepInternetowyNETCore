@@ -15,9 +15,13 @@ using System.Globalization;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Options;
 using ServiceReference1;
+using partner_aluro;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DbTestPracaContextConnection");
+
+
+var birKey = builder.Configuration.GetSection("BIRService").Value; //Dodanie klucza produktyjnego do uslugi Sprawdz regon
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -208,6 +212,7 @@ void AddScoped()
 
     builder.Services.AddScoped<IProfildzialalnosciService, ProfildzialalnosciService>();
 
+    //builder.Services.AddScoped<IBIRSearchService, BIRSearchService>();   zalaczenie tego powoduje blad
 
 }
 

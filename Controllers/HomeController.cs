@@ -22,6 +22,7 @@ namespace partner_aluro.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly ILogger<HomeController> _logger;
+        IBIRSearchService _birSearchService; //Servis widoczny przez referencje
 
         //Kontrolery odzoruwuja widoki , sluza do generowania róznych treści
         public HomeController(ApplicationDbContext context,ILogger<HomeController> logger)
