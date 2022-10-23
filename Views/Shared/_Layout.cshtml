@@ -77,6 +77,10 @@
 
     <script>
         function AddToCart(ProductId) {
+              var myOffcanvas = document.getElementById('offcanvas');
+              var bsOffcanvas = new bootstrap.Offcanvas(myOffcanvas);
+              bsOffcanvas.show();
+
             var quantity = document.getElementById(ProductId).value;
             $.ajax({
                 type: "POST",
