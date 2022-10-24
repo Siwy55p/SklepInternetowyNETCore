@@ -42,8 +42,8 @@ namespace partner_aluro.Controllers
             //logika zalogowania
             if (User.Identity.IsAuthenticated)
             {
-                //Potrzebne do REGON
-                CompanyModel _model = new CompanyModel();
+                ////Potrzebne do REGON
+                //CompanyModel _model = new CompanyModel();
 
                 //zawsze trzeba pobrac dane i wrzucic do widoku
                 var kategorie = _context.Category.ToList();
@@ -57,7 +57,7 @@ namespace partner_aluro.Controllers
                 //_context.SaveChanges();
 
                 //zainicjuj view model
-                var vm = new HomeViewModel() { Kategorie = kategorie, Nowosci = nowosci, Bestsellery = bestseller, _model = _model };
+                var vm = new HomeViewModel() { Kategorie = kategorie, Nowosci = nowosci, Bestsellery = bestseller};
 
                 return View(vm); //zapewnia renderowania widoków 
             }
@@ -103,14 +103,12 @@ namespace partner_aluro.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(HomeViewModel vm)
         {
-            vm._model = await RegonService.GetCompanyDataByNipAsync(vm._model.Vat);
-
             //zawsze trzeba pobrac dane i wrzucic do widoku
             var kategorie = _context.Category.ToList();
             var nowosci = _context.Products.Where(a => !a.Ukryty).OrderByDescending(a => a.DataDodania).Take(3).ToList();
             var bestseller = _context.Products.Where(a => !a.Ukryty).OrderBy(a => Guid.NewGuid()).Take(3).ToList();
 
-            var vm2 = new HomeViewModel() { Kategorie = kategorie, Nowosci = nowosci, Bestsellery = bestseller, _model = vm._model };
+            var vm2 = new HomeViewModel() { Kategorie = kategorie, Nowosci = nowosci, Bestsellery = bestseller};
 
             return View(vm2);
         }

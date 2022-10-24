@@ -10,7 +10,7 @@ namespace partner_aluro.ViewModels
         public IEnumerable<Product> Nowosci { get; set; }
         public IEnumerable<Product> Bestsellery { get; set; }
 
-        public CompanyModel _model {get; set;}
+        //public CompanyModel _model {get; set;}
 
     }
 }

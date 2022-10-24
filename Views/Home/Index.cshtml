@@ -26,7 +26,7 @@
                 </div>
                 <div class="card-body p-4 p-sm-5">
 
-                    <form asp-action="Index" asp-controller="Home" class="form-horizontal" method="post">
+                 @*   <form asp-action="Index" asp-controller="Home" class="form-horizontal" method="post">
 
 
                         <div class="input-group mb-3">
@@ -34,34 +34,34 @@
                                 
                                 <input asp-for="@Model._model.Vat" class="form-control" id="floatingInputVAT" placeholder="Nr NIP" value="@Model._model.Vat" />
                                 <label for="floatingInputVat">Nr NIP</label>
-                               @* <span asp-validation-for="@Model._model.Vat" class="text-danger"></span>*@
+                                <span asp-validation-for="@Model._model.Vat" class="text-danger"></span>
                             </div>
 
-@*@Html.ActionLink("Szukaj","OnSearchCompanyNIP","Home"/*,new { Regon = @Model._model.Vat }*/)*@
+@Html.ActionLink("Szukaj","OnSearchCompanyNIP","Home"/*,new { Regon = @Model._model.Vat }*/)
 
                         </div>
                         <div class="input-group mb-3">
                             <div class="form-floating flex-grow-1">
                                 <input asp-for="@Model._model.Regon" class="form-control" id="floatingInputVAT" placeholder="Nr Regon" value="@Model._model.Regon"  />
                                 <label for="floatingInputVat">Nr Regon</label>
-                                @*<span asp-validation-for="@Model._model.Regon" class="text-danger"></span>*@
+                                <span asp-validation-for="@Model._model.Regon" class="text-danger"></span>
                             </div>
 
                         </div>
                         <div class="form-floating mb-3">
                             <input asp-for="@Model._model.Name" class="form-control text-capitalize" id="floatingName" placeholder="Nazwa firmy" value="@Model._model.Name" />
                             <label for="floatingName">Nazwa firmy</label>
-                           @* <span asp-validation-for="@Model._model.Name" class="text-danger"></span>*@
+                            <span asp-validation-for="@Model._model.Name" class="text-danger"></span>
                         </div>
                         <div class="form-floating mb-3">
                             <input asp-for="@Model._model.Address" class="form-control" id="floatingInputAddress" placeholder="Adres" value="@Model._model.Address" />
                             <label for="floatingInputAddress">Adres</label>
-                           @* <span asp-validation-for="@Model._model.Address" class="text-danger"></span>*@
+                           <span asp-validation-for="@Model._model.Address" class="text-danger"></span>
                         </div>
 
                         <button type="submit">Szukaj</button>
                         <hr>
-                    </Form>
+                    </Form>*@
                 </div>
             </div>
         </div>

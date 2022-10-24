@@ -23,6 +23,13 @@ namespace partner_aluro.Models
         [Required(ErrorMessage = "Pole Ulica jest wymagane")]
         public string Ulica { get; set; }
 
+        [Display(Name = "Nr Nieruchomości")]
+        public string? NrNieruchomosci { get; set; }
+
+        [Display(Name = "Nr Lokalu")]
+        public string? NrLokalu { get; set; }
+
+
         [Required(ErrorMessage = "Pole KodPocztowy jest wymagane")]
         [StringLength(7)]
         public string? KodPocztowy { get; set; }
@@ -31,6 +38,26 @@ namespace partner_aluro.Models
         [StringLength(9)]
         public string Telefon { get; set; }
 
+        [Display(Name = "Nr Nip")]
+        public string Vat { get; set; }
+
+        [Display(Name = "Wojewodztwo")]
+        public string Wojewodztwo { get; set; }
+
+        [Display(Name = "Powiat")]
+        public string Powiat { get; set; }
+
+        [Display(Name = "Gmina")]
+        public string Gmina { get; set; }
+
+        [Display(Name = "StatusNip")]
+        public string StatusNip { get; set; }
+
+        [Display(Name = "DataZakonczeniaDzialalnosci")]
+        public string DataZakonczeniaDzialalnosci { get; set; }
+
+        [Display(Name = "Nr Regon")]
+        public string Regon { get; set; }
 
         [ForeignKey("ApplicationUser")]
         public string? UserID { get; set; }

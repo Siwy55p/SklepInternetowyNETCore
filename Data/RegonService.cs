@@ -6,7 +6,6 @@ namespace partner_aluro.Data
     public class RegonService
     {
         IBIRSearchService _birSearchService;
-
         public RegonService(IBIRSearchService birSearchService)
         {
             _birSearchService = birSearchService;
@@ -23,7 +22,17 @@ namespace partner_aluro.Data
                 Name = search.Nazwa,
                 Vat = search.Nip,
                 Address = $"{search.Ulica} {search.NrNieruchomosci}{separator}{search.NrLokalu} {search.KodPocztowy} {search.Miejscowosc}",
+                Ulica = $"{search.Ulica} {search.NrNieruchomosci}{separator}{search.NrLokalu}",
+                NrNieruchomosci = search.NrNieruchomosci,
+                NrLokalu = search.NrLokalu,
+                KodPocztowy = search.KodPocztowy,
+                Miejscowosc = search.Miejscowosc,
                 Regon = search.Regon,
+                Wojewodztwo = search.Wojewodztwo,
+                Powiat = search.Powiat,
+                Gmina = search.Gmina,
+                StatusNip = search.StatusNip,
+                DataZakonczeniaDzialalnosci = search.DataZakonczeniaDzialalnosci,
                 Errors = search.Errors,
             };
             return model;
@@ -40,7 +49,17 @@ namespace partner_aluro.Data
                 Name = search.Nazwa,
                 Vat = search.Nip,
                 Address = $"{search.Ulica} {search.NrNieruchomosci}{separator}{search.NrLokalu} {search.KodPocztowy} {search.Miejscowosc}",
+                Ulica = $"{search.Ulica} {search.NrNieruchomosci}{separator}{search.NrLokalu}",
+                NrNieruchomosci = search.NrNieruchomosci,
+                NrLokalu = search.NrLokalu,
+                KodPocztowy = search.KodPocztowy,
+                Miejscowosc = search.Miejscowosc,
                 Regon = search.Regon,
+                Wojewodztwo = search.Wojewodztwo,
+                Powiat = search.Powiat,
+                Gmina = search.Gmina,
+                StatusNip = search.StatusNip,
+                DataZakonczeniaDzialalnosci = search.DataZakonczeniaDzialalnosci,
                 Errors = search.Errors,
             };
             return model;

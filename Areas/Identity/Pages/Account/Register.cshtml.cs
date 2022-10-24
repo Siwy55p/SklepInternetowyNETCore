@@ -162,43 +162,73 @@ namespace partner_aluro.Areas.Identity.Pages.Account
             public string NIP { get; set; }
         }
 
-
-        public async Task OnGetAsync(string returnUrl = null)
+        [HttpGet]
+        public async Task OnGetAsync(string pass, string email, string returnUrl = null)
         {
             //TUTAJ
             ViewData["Profile"] = GetProfiles();
+
+            ViewData["email"] = email;
+            ViewData["pass"] = pass;
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
         }
 
-        public async Task<IActionResult> OnPostAsync(string returnUrl = null)
+        [HttpPost]
+        public async Task<IActionResult> OnPostAsync( string returnUrl = null)
         {
+            ViewData["Profile"] = GetProfiles();
+
             _model.Vat = Input.NIP;
             _model = await RegonService.GetCompanyDataByNipAsync(_model.Vat);
+            if (_model.Errors.Count > 0)
+            {
+                string komunikat = _model.Errors[0].ErrorMessagePl;
+            }
+            else
+            {
+                Input.NazwaFirmy = _model.Name;
+                Input.Miasto = _model.Miejscowosc;
+                Input.Ulica = _model.Ulica;
+                Input.KodPocztowy1 = _model.KodPocztowy;
+
+            }
+
+
 
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-
                 var user = CreateUser();
 
                 user.Imie = Input.Imie;
                 user.Nazwisko = Input.Nazwisko;
-
-                user.NazwaFirmy = Input.NazwaFirmy;
 
                 Adress1rozliczeniowy adres1 = new Adress1rozliczeniowy();
                 Adress2dostawy adres2 = new Adress2dostawy();
                 user.Adres1 = adres1;
                 user.Adres2 = adres2;
 
-                user.Adres1.Miasto = Input.Miasto;
-                user.Adres1.Ulica = Input.Ulica;
-                user.Adres1.KodPocztowy = Input.KodPocztowy1;
+                Input.NazwaFirmy = _model.Name;
+                user.NazwaFirmy = _model.Name;
+                Input.Miasto = _model.Miejscowosc;
+                Input.Ulica = _model.Ulica;
+                Input.KodPocztowy1 = _model.KodPocztowy;
+                user.Adres1.NrNieruchomosci = _model.NrNieruchomosci;
+                user.Adres1.NrLokalu = _model.NrLokalu;
+                user.Adres1.Vat = _model.Vat;
+                user.Adres1.Wojewodztwo = _model.Wojewodztwo;
+                user.Adres1.Powiat = _model.Powiat;
+                user.Adres1.StatusNip = _model.StatusNip;
+                user.Adres1.DataZakonczeniaDzialalnosci = _model.DataZakonczeniaDzialalnosci;
+                user.Adres1.Regon = _model.Regon;
+
+
                 user.Adres1.Telefon = Input.Telefon1;
                 user.Adres1.Kraj = Input.Kraj;
+
 
                 user.Adres2.Miasto = user.Adres1.Miasto;
                 user.Adres2.Ulica = user.Adres1.Ulica;
@@ -207,7 +237,6 @@ namespace partner_aluro.Areas.Identity.Pages.Account
                 user.Adres2.Kraj = user.Adres1.Kraj;
 
                 user.DataZałożenia = DateTime.Now;
-
                 user.IdProfilDzialalnosci = Input.IdProfildzialalnosci;
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
