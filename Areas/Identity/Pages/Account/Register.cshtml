@@ -43,14 +43,17 @@
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
         <h5>DANE ROZLICZENIOWE FIRMY</h5>
+        <div class="input-group mb-3">
+        <div class="form-floating flex-grow-1">
+
         <div class="form-floating">
-            <input asp-for="Input.NazwaFirmy" class="form-control" autocomplete="NazwaFirmy" aria-required="true" />
+                    <input asp-for="Input.NazwaFirmy" class="form-control" autocomplete="NazwaFirmy" aria-required="true" value="@Model._model.Name" />
             <label asp-for="Input.NazwaFirmy"></label>
             <span asp-validation-for="Input.NazwaFirmy" class="text-danger"></span>
         </div>
 
             <div class="form-floating">
-                <input asp-for="Input.Kraj" class="form-control" autocomplete="kraj" aria-required="true" />
+                <input asp-for="Input.Kraj" class="form-control" autocomplete="kraj" aria-required="true" value="@Model._model.Address" />
                 <label asp-for="Input.Kraj"></label>
                 <span asp-validation-for="Input.Kraj" class="text-danger"></span>
             </div>
@@ -78,10 +81,26 @@
                 <label asp-for="Input.Telefon1"></label>
                 <span asp-validation-for="Input.Telefon1" class="text-danger"></span>
             </div>
+
             <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
         </form>
-    
 </div>
+
+
+        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+        <div class="form-floating">
+                <input asp-for="Input.NIP" class="form-control" id="floatingInputVAT" placeholder="Nr NIP" value="@Model._model.Vat" />
+                <label asp-for="Input.NIP">Nr NIP</label>
+                <span asp-validation-for="Input.NIP" class="text-danger"></span>
+        </div>
+                <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Szukaj po NIP</button>
+
+        <div class="form-floating">
+                    <input asp-for="Input.NazwaFirmy" class="form-control" autocomplete="NazwaFirmy" aria-required="true" value="@Model._model.Name" />
+            <label asp-for="Input.NazwaFirmy"></label>
+            <span asp-validation-for="Input.NazwaFirmy" class="text-danger"></span>
+        </div>
+        </form>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

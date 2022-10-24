@@ -19,12 +19,10 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using partner_aluro.Data;
 using partner_aluro.Models;
 using partner_aluro.Services;
 using partner_aluro.Services.Interfaces;
-
-
-
 
 namespace partner_aluro.Areas.Identity.Pages.Account
 {
@@ -37,6 +35,7 @@ namespace partner_aluro.Areas.Identity.Pages.Account
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
         private readonly IProfildzialalnosciService _profildzialalnosciService;
+        private readonly RegonService RegonService;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
@@ -44,7 +43,9 @@ namespace partner_aluro.Areas.Identity.Pages.Account
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
-            IProfildzialalnosciService profildzialalnosciService)
+            IProfildzialalnosciService profildzialalnosciService,
+            RegonService regonService
+            )
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -53,7 +54,11 @@ namespace partner_aluro.Areas.Identity.Pages.Account
             _logger = logger;
             _emailSender = emailSender;
             _profildzialalnosciService = profildzialalnosciService;
+            RegonService = regonService;
         }
+
+
+        public CompanyModel _model { get; set; } = new CompanyModel();
 
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -150,6 +155,11 @@ namespace partner_aluro.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+
+            [Required]
+            [StringLength(10, ErrorMessage = "Proszę wprowadzic poprawy nr NIP", MinimumLength = 10)]
+            public string NIP { get; set; }
         }
 
 
@@ -159,14 +169,19 @@ namespace partner_aluro.Areas.Identity.Pages.Account
             ViewData["Profile"] = GetProfiles();
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
+            _model.Vat = Input.NIP;
+            _model = await RegonService.GetCompanyDataByNipAsync(_model.Vat);
+
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
+
                 var user = CreateUser();
 
                 user.Imie = Input.Imie;

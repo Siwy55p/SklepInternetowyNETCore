@@ -141,6 +141,7 @@ namespace partner_aluro.Areas.Identity.Pages.Account
                 var result = await _signInManager.CheckPasswordSignInAsync(user, Input.Password, false);
                 if(result.Succeeded)
                 {
+
                     var claims = new List<Claim>
                     {
                         new Claim("arm","pwd"),
@@ -159,14 +160,16 @@ namespace partner_aluro.Areas.Identity.Pages.Account
 
                     await _signInManager.SignInWithClaimsAsync(user, Input.RememberMe, claims );
 
+                    Core.Constants.UserId = user.Id; //Pobierz uzytkownika
+                    Core.Constants.Rabat = _profildzialalnosciService.GetRabat(Core.Constants.UserId);
+
                     _logger.LogInformation("ApplicationUser zalogował się");
                     return LocalRedirect(returnUrl);
                 }
 
                 if (result.Succeeded)
                 {
-
-                    Core.Constants.UserId = this.User.FindFirstValue(ClaimTypes.NameIdentifier); //Pobierz uzytkownika
+                    Core.Constants.UserId = user.Id; //Pobierz uzytkownika
                     Core.Constants.Rabat = _profildzialalnosciService.GetRabat(Core.Constants.UserId);
 
                     _logger.LogInformation("ApplicationUser logged in.");
@@ -174,10 +177,14 @@ namespace partner_aluro.Areas.Identity.Pages.Account
                 }
                 if (result.RequiresTwoFactor)
                 {
+                    Core.Constants.UserId = user.Id; //Pobierz uzytkownika
+                    Core.Constants.Rabat = _profildzialalnosciService.GetRabat(Core.Constants.UserId);
+
                     return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
                 }
                 if (result.IsLockedOut)
                 {
+
                     _logger.LogWarning("ApplicationUser account locked out.");
                     return RedirectToPage("./Lockout");
                 }

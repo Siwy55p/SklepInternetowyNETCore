@@ -103,7 +103,7 @@ namespace partner_aluro.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(HomeViewModel vm)
         {
-            vm._model = await RegonService.GetCompanyDataByRegonAsync(vm._model.Regon);
+            vm._model = await RegonService.GetCompanyDataByNipAsync(vm._model.Vat);
 
             //zawsze trzeba pobrac dane i wrzucic do widoku
             var kategorie = _context.Category.ToList();

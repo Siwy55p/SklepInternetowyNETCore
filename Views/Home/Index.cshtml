@@ -18,7 +18,7 @@
 @*<div class="container">*@
 
 
-    @*DOŁACZNIE SZUKAJ PO REGON*@
+    @*DOŁACZNIE SZUKAJ PO NIP*@
     <div class="row">
         <div class="col-lg-10 col-xl-9 mx-auto">
             <div class="card flex-row my-5 border-0 shadow rounded-3 overflow-hidden">
@@ -28,7 +28,7 @@
 
                     <form asp-action="Index" asp-controller="Home" class="form-horizontal" method="post">
 
-                        <DataAnnotationsValidator />
+
                         <div class="input-group mb-3">
                             <div class="form-floating flex-grow-1">
                                 
@@ -37,8 +37,7 @@
                                @* <span asp-validation-for="@Model._model.Vat" class="text-danger"></span>*@
                             </div>
 
-@*
-                            @Html.ActionLink("Szukaj","OnSearchCompanyNIP","Home"/*,new { Regon = @Model._model.Vat }*/)*@
+@*@Html.ActionLink("Szukaj","OnSearchCompanyNIP","Home"/*,new { Regon = @Model._model.Vat }*/)*@
 
                         </div>
                         <div class="input-group mb-3">
