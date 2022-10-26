@@ -1,5 +1,19 @@
 
+.card {
+    background: #f1f1f1;
+    border: 1px solid #BAB5AF;
+}
+.card-bar-action {
+    background: #e7e7e7;
+    padding: 5px;
+    margin: 0px;
+    vertical-align: middle;
+    justify-content: center;
 
+}
+.card-body{
+    padding: 0px
+}
 /*PRZYCISK select SORT*/
 .select-wrapper {
     position: relative;
@@ -105,13 +119,18 @@ body {
     overflow-y: scroll;
 }
 
-.img-thumbnail {
+.thumbnail img {
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
+    justify-content: center;
 }
+
 .thumbnail {
+    height: 250px;
     display: flex;
     justify-content: center;
-    height: 250px;
-    height: 192px;
+    background: white;
 }
 
 /*Koszyj header*/

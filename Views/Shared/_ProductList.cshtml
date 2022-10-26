@@ -10,14 +10,15 @@
                 @{
                     var CenaJednostkowa = produkt.CenaProduktu * (1 - (partner_aluro.Core.Constants.Rabat / 100));
                 }
+
                 <div class="thumbnail"><img src="~/images/produkty/@produkt.Symbol/@produkt.ImageUrl" alt="@produkt.Name" style="width:260px;"></div>
                 <div class="card-body">
-                    <div class="row">
+                    <div class="row card-bar-action">
                         <div class="col-4">
                             <input type="number" id="@produkt.ProductId" name="quantity" value="1" class="form-control" aria-required="true" placeholder="Ilość" min="1" max="20" />
                         </div>
                         <div class="col">
-                        <button value="@produkt.ProductId" onclick="AddToCart(@produkt.ProductId)" data-bs-target="offcanvas" role="button">Dodaj do zamowienia</button>
+                            <button value="@produkt.ProductId" onclick="AddToCart(@produkt.ProductId)" data-bs-target="offcanvas" role="button">Dodaj do zamowienia</button>
                         </div>
                     </div>
 

@@ -82,7 +82,7 @@
                 <span asp-validation-for="Input.Telefon1" class="text-danger"></span>
             </div>
 
-            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
+            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Zarejestruj sie</button>
 
 </div>
 
@@ -91,7 +91,6 @@
                 <label asp-for="Input.NIP">Nr NIP</label>
                 <span asp-validation-for="Input.NIP" class="text-danger"></span>
             </div>
-            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Szukaj po NIP</button>
            @* <div class="form-floating">
                 <input asp-for="@Model._model.Regon" class="form-control" id="floatingInputVAT" placeholder="Nr NIP" value="@Model._model.Regon" />
         <label asp-for="@Model._model.Regon">Nr Regon</label>
@@ -99,8 +98,14 @@
             </div>*@
 
         </form>
-
-
+        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                    <div class="form-floating">
+                <input asp-for="Input.NIP" class="form-control" id="floatingInputVAT" placeholder="Nr NIP" value="@Model._model.Vat" />
+                <label asp-for="Input.NIP">Nr NIP</label>
+                <span asp-validation-for="Input.NIP" class="text-danger"></span>
+            </div>
+            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Szukaj po NIP</button>
+        </form>
 
 
 @section Scripts {
