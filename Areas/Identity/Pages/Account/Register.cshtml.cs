@@ -58,6 +58,8 @@ namespace partner_aluro.Areas.Identity.Pages.Account
         }
 
 
+        public string komunikat { get; set; }
+
         public CompanyModel _model { get; set; } = new CompanyModel();
 
         /// <summary>
@@ -85,16 +87,16 @@ namespace partner_aluro.Areas.Identity.Pages.Account
         /// </summary>
         public class InputModel
         {
-            [Required]
-            [Display(Name = "Profil Dzialalnosci")]
+            [Required(ErrorMessage ="Profil działalności jest wymagany")]
+            [Display(Name = "Wybierz profil działalności.")]
             public int IdProfildzialalnosci { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Imię jest wymagane")]
             [StringLength(255, ErrorMessage ="Twoje imie może mieć maksywalnie 255 znaków.")]
-            [Display(Name ="Imie")]
+            [Display(Name ="Imię")]
             public string Imie { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Twoje Nazwisko jest wymagane")]
             [StringLength(255, ErrorMessage = "Twoje Nazwisko może mieć maksywalnie 255 znaków.")]
             [Display(Name = "Nazwisko")]
             public string Nazwisko { get; set; }
@@ -103,28 +105,29 @@ namespace partner_aluro.Areas.Identity.Pages.Account
             public string NazwaFirmy { get; set; }
 
             [Required]
-            [StringLength(255, ErrorMessage = "Twoja ulica musi być podana.")]
+            [StringLength(255, ErrorMessage = "Ulica musi zostać podana.")]
             [Display(Name = "Adres")]
             public string Ulica { get; set; }
 
-            [Required(ErrorMessage = "Wprowadz Kod Pocztowy")]
+            [Required(ErrorMessage = "Kod pocztowy jest wymagany.")]
             [StringLength(7)]
             [Display(Name = "Kod Pocztowy")]
             public string KodPocztowy1 { get; set; }
             //public Adress1rozliczeniowy Adress { get; set; }
 
-            [Required]
-            [StringLength(255, ErrorMessage = "Twoja miejscowosc musi być podana.")]
+            [Required(ErrorMessage = "Miejscowość jest wymagana.")]
+            [StringLength(255, ErrorMessage = "Miejscowość jest wymagana.")]
             [Display(Name = "Miasto")]
             public string Miasto { get; set; }
 
-            [Required]
+
             [StringLength(255, ErrorMessage = "Podaj Kraj")]
             [Display(Name = "Kraj")]
             public string Kraj { get; set; }
 
 
 
+            [Required(ErrorMessage = "Telefon do kontaktu jest wymagany.")]
             [Display(Name = "Telefon")]
             public string Telefon1 { get; set; }
 
@@ -132,7 +135,7 @@ namespace partner_aluro.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
+            [Required(ErrorMessage = "Twój adres e-mail jest wymagany.")]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
@@ -141,10 +144,10 @@ namespace partner_aluro.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
+            [Required(ErrorMessage = "Pole hasło jest wymagane.")]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "Password")]
+            [Display(Name = "Hasło")]
             public string Password { get; set; }
 
             /// <summary>
@@ -152,7 +155,7 @@ namespace partner_aluro.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
+            [Display(Name = "Powtórz hasło")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
 
@@ -176,28 +179,28 @@ namespace partner_aluro.Areas.Identity.Pages.Account
         }
 
         [HttpPost]
-        public async Task<IActionResult> OnPostAsync( string returnUrl = null)
+        public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             ViewData["Profile"] = GetProfiles();
 
             _model.Vat = Input.NIP;
             _model = await RegonService.GetCompanyDataByNipAsync(_model.Vat);
+
+
             if (_model.Errors.Count > 0)
             {
-                string komunikat = _model.Errors[0].ErrorMessagePl;
-            }
-            else
-            {
-                Input.NazwaFirmy = _model.Name;
-                Input.Miasto = _model.Miejscowosc;
-                Input.Ulica = _model.Ulica;
-                Input.KodPocztowy1 = _model.KodPocztowy;
-
+                komunikat = _model.Errors[0].ErrorMessagePl;
             }
 
+            Input.NazwaFirmy = _model.Name;
+            Input.Miasto = _model.Miejscowosc;
+            Input.Ulica = _model.Ulica;
+            Input.KodPocztowy1 = _model.KodPocztowy;
 
-
+            ModelState.Remove("Input.KodPocztowy1");
             returnUrl ??= Url.Content("~/");
+            ModelState.Remove("Input.Miasto");
+            ModelState.Remove("Input.Ulica");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
@@ -213,28 +216,33 @@ namespace partner_aluro.Areas.Identity.Pages.Account
 
                 Input.NazwaFirmy = _model.Name;
                 user.NazwaFirmy = _model.Name;
+                Input.Kraj = "Polska";
                 Input.Miasto = _model.Miejscowosc;
                 Input.Ulica = _model.Ulica;
                 Input.KodPocztowy1 = _model.KodPocztowy;
                 user.Adres1.NrNieruchomosci = _model.NrNieruchomosci;
                 user.Adres1.NrLokalu = _model.NrLokalu;
                 user.Adres1.Vat = _model.Vat;
+                user.Adres1.Miasto = _model.Miejscowosc;
+                user.Adres1.Ulica = _model.Ulica;
+                user.Adres1.KodPocztowy = _model.KodPocztowy;
                 user.Adres1.Wojewodztwo = _model.Wojewodztwo;
+                user.Adres1.Kraj = "Polska";
                 user.Adres1.Powiat = _model.Powiat;
+                user.Adres1.Gmina = _model.Gmina;
                 user.Adres1.StatusNip = _model.StatusNip;
                 user.Adres1.DataZakonczeniaDzialalnosci = _model.DataZakonczeniaDzialalnosci;
                 user.Adres1.Regon = _model.Regon;
 
-
                 user.Adres1.Telefon = Input.Telefon1;
                 user.Adres1.Kraj = Input.Kraj;
-
 
                 user.Adres2.Miasto = user.Adres1.Miasto;
                 user.Adres2.Ulica = user.Adres1.Ulica;
                 user.Adres2.KodPocztowy = user.Adres1.KodPocztowy;
                 user.Adres2.Telefon = user.Adres1.Telefon;
                 user.Adres2.Kraj = user.Adres1.Kraj;
+
 
                 user.DataZałożenia = DateTime.Now;
                 user.IdProfilDzialalnosci = Input.IdProfildzialalnosci;

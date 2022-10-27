@@ -22,7 +22,11 @@ namespace partner_aluro
 
         public async Task<DanePodmiotu> GetCompanyDataByNipIdAsync(string nipId)
         {
-            if (string.IsNullOrEmpty(nipId)) throw new ArgumentNullException("Parametr wyszukiwania nip nie może być pusty.");
+            if (string.IsNullOrEmpty(nipId))
+            {
+                //throw new ArgumentNullException("Parametr wyszukiwania nip nie może być pusty.");
+
+            }
 
             var searchParameters = new ParametryWyszukiwania
             {
