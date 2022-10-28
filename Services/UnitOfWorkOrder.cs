@@ -4,11 +4,11 @@ namespace partner_aluro.Services
 {
     public class UnitOfWorkOrder : IUnitOfWorkOrder
     {
-        public IOrderService OrderService { get; set; }
+        public IOrderService OrderService { get; }
 
-        public UnitOfWorkOrder(IOrderService OrderService)
+        public UnitOfWorkOrder(IOrderService orderService)
         {
-            OrderService = OrderService;
+            OrderService = orderService;
         }
     }
 }

@@ -20,7 +20,7 @@ namespace partner_aluro.Controllers
     public class OrderController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-
+        private readonly IUnitOfWorkOrder _unitOfWorkOrder;
         private readonly IUnitOfWorkAdress1rozliczeniowy _unitOfWorkAdress1rozliczeniowy;
         private readonly IUnitOfWorkAdress2dostawy _unitOfWorkAdress2dostawy;
 
@@ -30,7 +30,7 @@ namespace partner_aluro.Controllers
         private readonly IOrderService _orderService;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        private readonly IUnitOfWorkOrder _unitOfWorkOrder;
+
 
         public OrderController(IUnitOfWorkOrder unitOfWorkOrder ,ApplicationDbContext context, Cart cart, UserManager<ApplicationUser> userManager, IOrderService orderService, IUnitOfWork unitOfWork, IUnitOfWorkAdress1rozliczeniowy unitOfWorkAdress1rozliczeniowy, IUnitOfWorkAdress2dostawy unitOfWorkAdress2dostawy)
         {
@@ -41,7 +41,6 @@ namespace partner_aluro.Controllers
             _userManager = userManager;
 
             _unitOfWork = unitOfWork;
-
             _unitOfWorkOrder = unitOfWorkOrder;
 
             _unitOfWorkAdress1rozliczeniowy = unitOfWorkAdress1rozliczeniowy;
@@ -51,7 +50,6 @@ namespace partner_aluro.Controllers
         [HttpGet]
         public IActionResult Checkout()
         {
-
             return View();
         }
 
@@ -227,12 +225,13 @@ namespace partner_aluro.Controllers
         public IActionResult ZmienStatus(Order order)
         {
             //Wyslij e mail do klienta
+            int id = order.Id;
 
-            Order orders = _unitOfWorkOrder.OrderService.GetOrder(order.Id);
+            Order orders = _unitOfWorkOrder.OrderService.GetOrder(id);
             orders.StanZamowienia = order.StanZamowienia;
             _unitOfWorkOrder.OrderService.Update(orders);
 
-            return View(orders);
+            return RedirectToAction("Detail", new { id = id });
         }
 
         [HttpGet]

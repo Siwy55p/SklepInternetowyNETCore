@@ -17,17 +17,28 @@
 
         <p> Wiadomosc do zamówienia: @Model.Komentarz @Model.MessageToOrder</p>
 
-            @using (Html.BeginForm("ZapiszNotatke", "Order", FormMethod.Post))
-            {
+        
+
+                @using (Html.BeginForm("ZmienStatus", "Order", FormMethod.Post))
+                {
+
+
+            <input type="hidden"  asp-for="@Model.Id" class="form-control" aria-required="true" />
+
+
+
                 <div class="form-group">
                     <label asp-for="@Model.StanZamowienia" class="control-label"></label>
                     <select asp-for="@Model.StanZamowienia" class="form-control" asp-items="ViewBag.StanyZamowienia">
                         <option>Select one</option>
                     </select>
-
                 </div>
-            }
-            
+
+            <input id="Submit" type="submit" value="Zapisz" />
+                }
+
+
+
     </div>
     <div class="col border">
         Klient @Model.User.Imie @Model.User.Nazwisko ; @Model.User.UserName
@@ -37,7 +48,7 @@
                 Dane adresowe:<br />
                 <b> e-mail:</b> @Model.User.UserName <br />
                 Konto zarejestrowane: @Model.User.DataZałożenia <br />
-                Ilość złożonych zamówień: 
+                Ilość złożonych zamówień:
 
             </div>
             <div class="col border">
@@ -49,15 +60,15 @@
 
                     @Html.HiddenFor(h=>Model.Id)
                     @Html.HiddenFor(h=>Model.User.Id)
-@*
-                    <label asp-for="@Model.Id" class="form-label">Order ID</label>
-                    <input asp-for="@Model.Id" class="form-control" autocomplete="Id" aria-required="true" />
-*@
+                    @*
+                <label asp-for="@Model.Id" class="form-label">Order ID</label>
+                <input asp-for="@Model.Id" class="form-control" autocomplete="Id" aria-required="true" />
+                *@
                     <div class="form-group">
                         <label for="@Model.User.NotatkaOsobista">Notatka osobista</label>
                         <textarea asp-for="@Model.User.NotatkaOsobista" class="form-control" id="NotatkaOsobista" value="@Model.User.NotatkaOsobista" rows="3" placeholder="notatka"></textarea>
                     </div>
-                @* <button asp-controller="Order" asp-action="ZapiszNotatke" value="@Model.User.NotatkaOsobista" class="w-100 btn btn-primary btn-lg" type="submit">Zapisz</button>*@
+                    @* <button asp-controller="Order" asp-action="ZapiszNotatke" value="@Model.User.NotatkaOsobista" class="w-100 btn btn-primary btn-lg" type="submit">Zapisz</button>*@
                     <input id="Submit" type="submit" value="Zapisz" />
                     @*<a asp-controller="Order" asp-action="ZapiszNotatke" asp-route-id="UserID=@Model.User.Id">ZapiszNotatke</a>*@
                 }
@@ -67,32 +78,30 @@
         <div class="row">
 
             <ul class="nav nav-tabs">
-                <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#awysylki">Adres wysyłki</a></li>
-                <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#arozliczeniowy">Adres rozliczeniowy</a></li>
+                <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#awysylki">Adres wysyłki</a></li>
+                <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#arozliczeniowy">Adres rozliczeniowy</a></li>
             </ul>
         </div>
         <div class="tab-content">
-            <div class="tab-pane active" id="arozliczeniowy">
+            <div class="tab-pane active" id="awysylki">
                 <div class="row">
                     <div class="col">
-                        <p>@Model.User.NazwaFirmy<br />
-                            NIP: @Model.adresRozliczeniowy.Vat, Regon:@Model.adresRozliczeniowy.Regon<br />
-                            @Model.adresRozliczeniowy.Ulica<br />
-                            Kod pocztowy: @Model.adresRozliczeniowy.KodPocztowy Miasto: @Model.adresRozliczeniowy.Miasto<br />
-                            @Model.adresRozliczeniowy.Kraj<br />
-                            telefon: @Model.adresRozliczeniowy.Telefon
-                        </p>
+                        <p>@Model.User.NazwaFirmy</p>
+                        <p>@Model.AdressDostawy.Ulica</p>
+                        <p>@Model.AdressDostawy.KodPocztowy @Model.AdressDostawy.Miasto</p>
+                        <p>@Model.AdressDostawy.Kraj</p>
+                        <p>@Model.AdressDostawy.Telefon</p>
                     </div>
                 </div>
             </div>
-            <div class="tab-pane" id="awysylki">
+            <div class="tab-pane" id="arozliczeniowy">
                 <div class="row">
                     <div class="col">
-                        @Model.AdressDostawy.Imie @Model.AdressDostawy.Nazwisko<br />
-                        @Model.AdressDostawy.Ulica<br />
-                        @Model.AdressDostawy.KodPocztowy @Model.AdressDostawy.Miasto<br />
-                        @Model.AdressDostawy.Kraj<br />
-                        @Model.AdressDostawy.Telefon , @Model.AdressDostawy.Telefon</p>
+                        <p>@Model.User.NazwaFirmy</p>
+                        <p>@Model.adresRozliczeniowy.Ulica</p>
+                        <p>@Model.adresRozliczeniowy.KodPocztowy @Model.adresRozliczeniowy.Miasto</p>
+                        <p>@Model.adresRozliczeniowy.Kraj</p>
+                        <p>@Model.adresRozliczeniowy.Telefon</p>
                     </div>
                 </div>
             </div>
@@ -103,8 +112,8 @@
 
 
 
-    @if (Model.OrderItems.Count > 0)
-    {
+@if (Model.OrderItems.Count > 0)
+{
     <div class="row">
         <div class="col-md-12 mb-3">
             <div class="card">
@@ -135,8 +144,7 @@
                                             decimal cenaJednostkowa = item.Product.CenaProduktu * (1 - ((decimal)Model.RabatZamowienia / 100));
                                             decimal cenaJednostkowaIlosc = cenaJednostkowa * @item.Quantity;
                                         }
-
-
+                                        }
                                         <td>@item.Product.ProductId</td>
                                         <td><img class="img-thumbnail" src="~/images/produkty/@item.Product.Symbol/@item.Product.ImageUrl" alt="@item.Product.Name" style="width:75px;height:75px;"></td>
                                         <td>@item.Product.Name</td>
@@ -158,10 +166,13 @@
                                     <th>@Model.OrderTotal.ToString("C")</th>
                                 </tr>
                             </tfoot>
-                            </table>
-                        </div>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
-    }
+    </div>
+
+}
+
+
