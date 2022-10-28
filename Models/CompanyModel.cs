@@ -44,7 +44,7 @@ namespace partner_aluro.Models
         public string StatusNip { get; set; }
 
         [Display(Name = "DataZakonczeniaDzialalnosci")]
-        public string DataZakonczeniaDzialalnosci { get; set; }
+        public string? DataZakonczeniaDzialalnosci { get; set; }
 
         [Display(Name = "Nr Regon")]
         public string Regon { get; set; }

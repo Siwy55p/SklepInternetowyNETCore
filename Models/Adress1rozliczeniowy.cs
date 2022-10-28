@@ -30,7 +30,7 @@ namespace partner_aluro.Models
         public string? NrLokalu { get; set; }
 
 
-        [Required(ErrorMessage = "Pole KodPocztowy jest wymagane")]
+        [Required(ErrorMessage = "Pole kod-pocztowy jest wymagane")]
         [StringLength(7)]
         public string? KodPocztowy { get; set; }
 
@@ -45,16 +45,16 @@ namespace partner_aluro.Models
         public string Wojewodztwo { get; set; }
 
         [Display(Name = "Powiat")]
-        public string Powiat { get; set; }
+        public string? Powiat { get; set; }
 
         [Display(Name = "Gmina")]
-        public string Gmina { get; set; }
+        public string? Gmina { get; set; }
 
         [Display(Name = "StatusNip")]
         public string StatusNip { get; set; }
 
         [Display(Name = "DataZakonczeniaDzialalnosci")]
-        public string DataZakonczeniaDzialalnosci { get; set; }
+        public string? DataZakonczeniaDzialalnosci { get; set; }
 
         [Display(Name = "Nr Regon")]
         public string Regon { get; set; }

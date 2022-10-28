@@ -32,7 +32,6 @@ namespace partner_aluro.Data
                 Powiat = search.Powiat,
                 Gmina = search.Gmina,
                 StatusNip = search.StatusNip,
-                DataZakonczeniaDzialalnosci = search.DataZakonczeniaDzialalnosci,
                 Errors = search.Errors,
             };
             return model;
@@ -59,7 +58,6 @@ namespace partner_aluro.Data
                 Powiat = search.Powiat,
                 Gmina = search.Gmina,
                 StatusNip = search.StatusNip,
-                DataZakonczeniaDzialalnosci = search.DataZakonczeniaDzialalnosci,
                 Errors = search.Errors,
             };
             return model;

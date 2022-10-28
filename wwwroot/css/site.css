@@ -1,4 +1,8 @@
 
+.custom-label {
+    text-align: right;
+}
+
 .card {
     background: #f1f1f1;
     border: 1px solid #BAB5AF;
@@ -147,6 +151,13 @@ body {
     background-color: #c67605;
 }
 
+
+.field-validation-error {
+    color: red;
+    font-size: smaller;
+}
+
+
 #lblCartCount {
     font-size: 12px;
     background: #ff0000;
@@ -204,9 +215,24 @@ body {
     padding-top: 25px;
 }
 
-.logoLoginReg
-{
-    min-height: 400px;
+label.required::before {
+    content: '*';
+    margin-right: 4px;
+    color: red;
+}
+
+#logoLogin {
+    float: right;
+    margin: 0 0 0 15px;
+    position: absolute;
+    left: -10px;
+    bottom: 20px;
+}
+
+.logoLoginReg {
+    position: relative;
+    /*height: 300px;*/
+    max-height: 340px;
 }
 
 

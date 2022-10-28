@@ -2,66 +2,70 @@
 
 @model RegisterModel
 @{
-    ViewData["Title"] = "Zarejestruj się.";
+    ViewData["Title"] = "Załóż konto - zostań naszym partnerem";
 }
+<div class="col-8 logoLoginReg" style="height:160px">
+    <div class="col-12 d-flex justify-content-left align-items-left">
+        <img id="logoLogin" class="  " src="~/images/logo/aluro_logo-x-300_2.png" width="200" />
+    </div>
+</div>
 
-<div class="row">
-    <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <h5 >STWÓRZ KONTO</h5>
-            <hr />
+<div class="row col-8">
+    <form class="needs-validation" id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post" novalidate>
+            <h6>STWÓRZ KONTO</h6>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <hr />
                 <h6 class="text-center">PROFIL DZIAŁALNOŚCI</h6>
-            <hr />
+            <hr/>
         <div class="form-group row">
             <div class="row">
-                <select asp-for="Input.IdProfildzialalnosci" class="form-control" asp-items="(IEnumerable<SelectListItem>)@ViewData["Profile"]"></select>
+                <select asp-for="Input.IdProfildzialalnosci" class="form-control" asp-items="(IEnumerable<SelectListItem>)@ViewData["Profile"]" required></select>
             </div>
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <label class="row" asp-for="Input.IdProfildzialalnosci"></label>
         </div>
 
             <div class="form-group row">
-            <label class="col-sm-4 col-form-label end" asp-for="Input.Imie"></label>
-                <div class="col-sm-8">
-                <input asp-for="Input.Imie" class="form-control" autocomplete="imie" aria-required="true" />
+            <label class="col-sm-4 col-form-label custom-label required" asp-for="Input.Imie"></label>
+                <div class="col-sm-5">
+                <input type="text" id="Input.Imie" asp-for="Input.Imie" class="form-control" autocomplete="imie" aria-required="true" required />
                 <span asp-validation-for="Input.Imie" class="text-danger"></span>
                 </div>
             </div>
 
             <div class="form-group row">
-                <label  class="col-sm-4 col-form-label" asp-for="Input.Nazwisko"></label>
-                <div class="col-sm-8">
-                    <input asp-for="Input.Nazwisko" class="form-control" autocomplete="nazwisko" aria-required="true" />
+            <label class="col-sm-4 col-form-label custom-label required" asp-for="Input.Nazwisko"></label>
+                <div class="col-sm-5">
+                <input asp-for="Input.Nazwisko" class="form-control" autocomplete="nazwisko" aria-required="true" required />
                 <span asp-validation-for="Input.Nazwisko" class="text-danger"></span>
                 </div>
             </div>
             <div class="form-group row">
-            <label  class="col-sm-4 col-form-label" asp-for="Input.Email"></label> 
-            <div class="col-sm-8">
-               <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" value="@ViewData["email"]" />
+            <label class="col-sm-4 col-form-label custom-label required" asp-for="Input.Email"></label>
+                <div class="col-sm-5">
+                    <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" value="@ViewData["email"]" required/>
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
                 </div>
             </div>
         <div class="form-group row">
-            <label class="col-sm-4 col-form-label" asp-for="Input.Password"></label>
-                <div class="col-sm-8">
-                    <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" value="@ViewData["pass"]" />
-                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            <label class="col-sm-4 col-form-label custom-label required" asp-for="Input.Password"></label>
+                <div class="col-sm-5">
+                    <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" value="@ViewData["pass"]" required/>
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
                    </div>
             </div>
         <div class="form-group row">
 
-            <label class="col-sm-4 col-form-label" asp-for="Input.ConfirmPassword"></label>
-            <div class="col-sm-8">
-                         <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" />
-                    
+            <label class="col-sm-4 col-form-label custom-label required" asp-for="Input.ConfirmPassword"></label>
+            <div class="col-sm-5">
+                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" required/>
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-                   </div>
+            </div>
         </div>
 
         <div class="form-group row">
-            <label class="col-sm-4 col-form-label" asp-for="Input.Telefon1"></label>
-            <div class="col-sm-8">
-                <input asp-for="Input.Telefon1" class="form-control" autocomplete="Telefon1" aria-required="true" />
+            <label class="col-sm-4 col-form-label custom-label required" asp-for="Input.Telefon1"></label>
+            <div class="col-sm-5">
+                <input asp-for="Input.Telefon1" class="form-control" autocomplete="Telefon1" aria-required="true" required />
                 <span asp-validation-for="Input.Telefon1" class="text-danger"></span>
             </div>
         </div>
@@ -72,52 +76,49 @@
         
 
         <div class="form-group row">
-                <label class="col-sm-4 col-form-label" asp-for="Input.NIP">Nr NIP</label>
-            <div class="col-sm-8">
-                <input asp-for="Input.NIP" class="form-control" id="floatingInputVAT" placeholder="Nr NIP" value="@Model._model.Vat" />
+                    <span class="text-danger text-center">@Model.komunikat</span>
+                <label class="col-sm-4 col-form-label custom-label required" asp-for="Input.NIP">Nr NIP</label>
+            <div class="col-sm-5">
+                <input asp-for="Input.NIP" class="form-control" id="floatingInputVAT" placeholder="Nr NIP" value="@Model._model.Vat" required />
 
                 <span asp-validation-for="Input.NIP" class="text-danger"></span>
-                <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Szukaj po NIP</button>
+                @*<button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Szukaj po NIP</button>
+            *@
             </div>
         </div>
-            </form>    
-                <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+@*    </form>    
+                <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">*@
 
-
-        <span class="text-danger">@Model.komunikat</span>
 
         <div class="form-floating flex-grow-1">
 
             <div class="form-group row">
-                <label class="col-sm-4 col-form-label" asp-for="Input.NazwaFirmy"></label>
-                <div class="col-sm-8">
-                    <input id="disabledInput" asp-for="Input.NazwaFirmy" class="form-control" autocomplete="NazwaFirmy" aria-required="true" value="@Model._model.Name" />
+                <label class="col-sm-4 col-form-label custom-label required" asp-for="Input.NazwaFirmy"></label>
+                <div class="col-sm-5">
+                    <input disabled id="disabledInput" asp-for="Input.NazwaFirmy" class="form-control" autocomplete="NazwaFirmy" aria-required="true" value="@Model._model.Name" />
                     
                    </div>
             </div>
-            
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label custom-label required" asp-for="Input.Ulica"></label>
+                <div class="col-sm-5">
+                    <input disabled id="disabledInput" asp-for="Input.Ulica" class="form-control" autocomplete="Ulica" aria-required="true" value="@Model._model.Ulica" />
+                </div>
+            </div>
             <div class="form-group row"> 
-                <label class="col-sm-4 col-form-label" asp-for="Input.Miasto"></label>
-                <div class="col-sm-8">
-                    <input id="disabledInput" asp-for="Input.Miasto" class="form-control" autocomplete="miasto" aria-required="true" value="@Model._model.Miejscowosc" />
+                <label class="col-sm-4 col-form-label custom-label required " asp-for="Input.Miasto"></label>
+                <div class="col-sm-5">
+                    <input disabled id="disabledInput" asp-for="Input.Miasto" class="form-control" autocomplete="miasto" aria-required="true" value="@Model._model.Miejscowosc" />
                 </div>
             </div>
-
             <div class="form-group row">
-                <label class="col-sm-4 col-form-label" asp-for="Input.Ulica"></label>
-                <div class="col-sm-8">
-                    <input id="disabledInput" asp-for="Input.Ulica" class="form-control" autocomplete="Ulica" aria-required="true" value="@Model._model.Ulica" />
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label class="col-sm-4 col-form-label" asp-for="Input.KodPocztowy1"></label>
-                <div class="col-sm-8">
-                    <input id="disabledInput" asp-for="Input.KodPocztowy1" class="form-control" autocomplete="KodPocztowy1" aria-required="true" value="@Model._model.KodPocztowy" />
+                <label class="col-sm-4 col-form-label custom-label required" asp-for="Input.KodPocztowy1"></label>
+                <div class="col-sm-5">
+                    <input disabled id="disabledInput" asp-for="Input.KodPocztowy1" class="form-control" autocomplete="KodPocztowy1" aria-required="true" value="@Model._model.KodPocztowy" />
 @*                    <span asp-validation-for="Input.KodPocztowy1" class="text-danger"></span>*@
                 </div>
             </div>
-                <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Zarejestruj sie</button>
+                <button id="registerSubmit" type="submit" class="btn btn-secondary w-20">Zarejestruj sie</button>
 
         </div>
     </form>               
@@ -127,6 +128,28 @@
 
 @section Scripts {
 
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function () {
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.querySelectorAll('.needs-validation')
+
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
+</script>
 
     <partial name="_ValidationScriptsPartial" />
 }
