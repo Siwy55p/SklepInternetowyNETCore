@@ -97,7 +97,7 @@
     }
 /*PRZYCISK select SORT*/
 
-/*PRZYCISK OTWIERAJACY menu TWOJE ZAMOWIENIE PRAWA STRONA*/
+/*PRZYCISK OTWIERAJACY menu TWOJE ZAMOWIENIE PRAWA STRONA STARE*/
 .btn-open {
     position: relative;
     width: 58px;
@@ -105,6 +105,36 @@
     top: 23px;
     color: black;
 }
+/*PRZYCISK OTWIERAJACY menu TWOJE ZAMOWIENIE PRAWA STRONA STARE*/
+
+
+
+
+
+/*PRZYCISK OTWIERAJACY menu TWOJE ZAMOWIENIE PRAWA STRONA NOWE*/
+.offcanvas-btn-box {
+    transition: transform .3s ease-in-out; /* same as what's on the panel */
+}
+
+.offcanvas.show + div .offcanvas-btn-box {
+    transform: translateX(400px);
+    position: relative;
+    z-index: 1100;
+}
+
+
+/* optional junk to toggle the button text */
+.offcanvas-btn-box .btn span:last-child,
+.offcanvas.show + div .offcanvas-btn-box .btn span:first-child {
+    display: none;
+}
+
+.offcanvas.show + div .offcanvas-btn-box .btn span:last-child {
+    display: inline;
+}
+/*PRZYCISK OTWIERAJACY menu TWOJE ZAMOWIENIE PRAWA STRONA NOWE*/
+
+
 
 /*menu LEWE menu CATEGORY*/
 .row.custom-kategory-menu.sticky-top {
@@ -156,6 +186,8 @@ body {
     color: red;
     font-size: smaller;
 }
+
+
 
 
 #lblCartCount {
