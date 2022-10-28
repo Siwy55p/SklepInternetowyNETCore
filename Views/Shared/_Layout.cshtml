@@ -21,20 +21,15 @@
     @Html.Partial("_Header") @*To musi tak zostać te linijki nie ruszaj jest dobrze*@
     <main>
         <div class="container">
-            
+
 
             <div class="offcanvas offcanvas-end w-5 @ViewData["Pokaz"]" tabindex="-1" id="offcanvas" data-bs-scroll="true" data-bs-keyboard="false" data-bs-backdrop="false">
                 <div class="offcanvas-header">
 
                     <h6 class="offcanvas-title d-none d-sm-block" id="offcanvas">Twoje zamówienie</h6>
 
-                        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo">
-                            <span>Open</span><span>Close</span>
-                        </button>
 
-                    @*<button type="button" class="btn-close btn btn-success text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>*@
-
-
+                    <button type="button" class="btn-close btn btn-success text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body px-0" id="mydiv">
                     @await Component.InvokeAsync("CartStatus")
@@ -42,7 +37,7 @@
             </div>
 
             <div class="container-fluid">
-            
+
                 @RenderBody()
             </div>
         </div>
@@ -50,11 +45,10 @@
     </main>
     <!-- Footer -->
     <footer class="text-center text-lg-start bg-light text-muted">
-     @Html.Partial("_Footer")
+        @Html.Partial("_Footer")
 
     </footer>
     <!-- Footer -->
-
     @await RenderSectionAsync("Scripts", required: false)
 
     @* SZUKANIE SCRIPTS*@
@@ -82,9 +76,9 @@
 
     <script>
         function AddToCart(ProductId) {
-              var myOffcanvas = document.getElementById('offcanvas');
-              var bsOffcanvas = new bootstrap.Offcanvas(myOffcanvas);
-              bsOffcanvas.show();
+            var myOffcanvas = document.getElementById('offcanvas');
+            var bsOffcanvas = new bootstrap.Offcanvas(myOffcanvas);
+            bsOffcanvas.show();
 
             var quantity = document.getElementById(ProductId).value;
             $.ajax({

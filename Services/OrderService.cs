@@ -22,7 +22,6 @@ namespace partner_aluro.Services
             _context.Orders.Add(order);
             _context.SaveChanges();
         }
-
         public OrderItem GetItem(int id)
         {
             var orderItem = _context.OrderItems.Find(id);
@@ -125,5 +124,16 @@ namespace partner_aluro.Services
             List<Order> listaZamowienUzytkownika = _context.Orders.Where(u => u.UserID == UserID).Include(user => user.User).ToList();
             return listaZamowienUzytkownika;
         }
+
+
+        public Order Update(Order order)
+        {
+
+            _context.Update(order);
+            _context.SaveChanges();
+
+            return order;
+        }
+
     }
 }

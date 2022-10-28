@@ -23,9 +23,13 @@ namespace partner_aluro.Models
         public string? Telefon { get; set; }
 
 
-        [ForeignKey("ApplicationUser")]
-        public string UserID { get; set; }
-        public ApplicationUser ApplicationUser { get; set; }
+        public string? UserID { get; set; }
+        public string? Adres2UserID { get; set; }
+
+        [ForeignKey("UserID")]
+        public virtual ApplicationUser? ApplicationUser { get; set; }
+
+
 
     }
 }

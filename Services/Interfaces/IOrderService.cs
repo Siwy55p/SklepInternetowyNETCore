@@ -18,5 +18,7 @@ namespace partner_aluro.Services.Interfaces
         Adress1rozliczeniowy GetUserAdress1(string UserID);
         Adress2dostawy GetUserAdress2(string UserID);
 
+        Order Update(Order order);
+
     }
 }

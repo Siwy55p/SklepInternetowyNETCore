@@ -30,7 +30,9 @@ namespace partner_aluro.Controllers
         private readonly IOrderService _orderService;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public OrderController(ApplicationDbContext context, Cart cart, UserManager<ApplicationUser> userManager, IOrderService orderService, IUnitOfWork unitOfWork, IUnitOfWorkAdress1rozliczeniowy unitOfWorkAdress1rozliczeniowy, IUnitOfWorkAdress2dostawy unitOfWorkAdress2dostawy)
+        private readonly IUnitOfWorkOrder _unitOfWorkOrder;
+
+        public OrderController(IUnitOfWorkOrder unitOfWorkOrder ,ApplicationDbContext context, Cart cart, UserManager<ApplicationUser> userManager, IOrderService orderService, IUnitOfWork unitOfWork, IUnitOfWorkAdress1rozliczeniowy unitOfWorkAdress1rozliczeniowy, IUnitOfWorkAdress2dostawy unitOfWorkAdress2dostawy)
         {
             _context = context;
             _cart = cart;
@@ -39,6 +41,8 @@ namespace partner_aluro.Controllers
             _userManager = userManager;
 
             _unitOfWork = unitOfWork;
+
+            _unitOfWorkOrder = unitOfWorkOrder;
 
             _unitOfWorkAdress1rozliczeniowy = unitOfWorkAdress1rozliczeniowy;
             _unitOfWorkAdress2dostawy = unitOfWorkAdress2dostawy;
@@ -61,36 +65,79 @@ namespace partner_aluro.Controllers
             {
                 ModelState.AddModelError("", "Koszyk jest pusty, proszę dodać pierwszy produkt.");
             }
-
             var user = _unitOfWork.User.GetUser(CartOrder.Orders.User.Id);
             if (user == null)
             {
                 return NotFound();
             }
+            user.Imie = CartOrder.Orders.User.Imie;
+            user.Nazwisko = CartOrder.Orders.User.Nazwisko;
+            user.Email = CartOrder.Orders.User.Email;
+
+            _unitOfWork.User.UpdateUser(user); // Zapis 
 
 
-            if (ModelState.IsValid)
-            {
-                user.Imie = CartOrder.Orders.User.Imie;
-                user.Nazwisko = CartOrder.Orders.User.Nazwisko;
-                user.Email = CartOrder.Orders.User.Email;
+            var nowyAdres1rozliczeniowy = _unitOfWorkAdress1rozliczeniowy.adress1Rozliczeniowy.Get(CartOrder.Orders.User.Id);
+            nowyAdres1rozliczeniowy.Ulica = CartOrder.Orders.User.Adress1rozliczeniowy.Ulica;
+            nowyAdres1rozliczeniowy.Kraj = CartOrder.Orders.User.Adress1rozliczeniowy.Kraj;
+            nowyAdres1rozliczeniowy.Miasto = CartOrder.Orders.User.Adress1rozliczeniowy.Miasto;
+            nowyAdres1rozliczeniowy.KodPocztowy = CartOrder.Orders.User.Adress1rozliczeniowy.KodPocztowy;
+            nowyAdres1rozliczeniowy.Telefon = CartOrder.Orders.User.Adress1rozliczeniowy.Telefon;
 
-                _unitOfWork.User.UpdateUser(user); // Zapis 
-            }
 
-            //pobierz adres z formularza
-            Adress1rozliczeniowy nowyAdres1rozliczeniowy = CartOrder.Orders.User.Adres1;
-            nowyAdres1rozliczeniowy.UserID = CartOrder.Orders.User.Id;
-            Adress2dostawy nowyAdres2dostawy = CartOrder.Orders.User.Adres2;
-            nowyAdres2dostawy.UserID = CartOrder.Orders.User.Id;
+
+            //nowyAdres1rozliczeniowy.UserID = CartOrder.Orders.User.Id;
+            var nowyAdres2dostawy = _unitOfWorkAdress2dostawy.adress2dostawy.Get(CartOrder.Orders.User.Id);
+            nowyAdres2dostawy.Ulica = CartOrder.Orders.User.Adress2dostawy.Ulica;
+            nowyAdres2dostawy.Kraj = CartOrder.Orders.User.Adress2dostawy.Kraj;
+            nowyAdres2dostawy.Miasto = CartOrder.Orders.User.Adress2dostawy.Miasto;
+            nowyAdres2dostawy.KodPocztowy = CartOrder.Orders.User.Adress2dostawy.KodPocztowy;
+            nowyAdres2dostawy.Email = CartOrder.Orders.User.Adress2dostawy.Email;
+            nowyAdres2dostawy.Imie = CartOrder.Orders.User.Adress2dostawy.Imie;
+            nowyAdres2dostawy.Nazwisko = CartOrder.Orders.User.Adress2dostawy.Nazwisko;
+            //nowyAdres2dostawy.UserID = CartOrder.Orders.User.Id;
+
+
+            Adress1rozliczeniowy OrderAdres1 = new Adress1rozliczeniowy();
+            OrderAdres1.Ulica = CartOrder.Orders.User.Adress1rozliczeniowy.Ulica;
+            OrderAdres1.Kraj = CartOrder.Orders.User.Adress1rozliczeniowy.Kraj;
+            OrderAdres1.Miasto = CartOrder.Orders.User.Adress1rozliczeniowy.Miasto;
+            OrderAdres1.KodPocztowy = CartOrder.Orders.User.Adress1rozliczeniowy.KodPocztowy;
+            OrderAdres1.Telefon = CartOrder.Orders.User.Adress1rozliczeniowy.Telefon;
+            OrderAdres1.NrNieruchomosci = nowyAdres1rozliczeniowy.NrNieruchomosci;
+            OrderAdres1.NrLokalu = nowyAdres1rozliczeniowy.NrLokalu;
+            OrderAdres1.Vat = nowyAdres1rozliczeniowy.Vat;
+            OrderAdres1.Wojewodztwo = nowyAdres1rozliczeniowy.Wojewodztwo;
+            OrderAdres1.Powiat = nowyAdres1rozliczeniowy.Powiat;
+            OrderAdres1.Gmina = nowyAdres1rozliczeniowy.Gmina;
+            OrderAdres1.Regon = nowyAdres1rozliczeniowy.Regon;
+            OrderAdres1.UserID = user.Id;
+
+            Adress2dostawy OrderAdres2 = new Adress2dostawy();
+            OrderAdres2.Ulica = CartOrder.Orders.User.Adress2dostawy.Ulica;
+            OrderAdres2.Kraj = CartOrder.Orders.User.Adress2dostawy.Kraj;
+            OrderAdres2.Miasto = CartOrder.Orders.User.Adress2dostawy.Miasto;
+            OrderAdres2.KodPocztowy = CartOrder.Orders.User.Adress2dostawy.KodPocztowy;
+            OrderAdres2.Email = CartOrder.Orders.User.Adress2dostawy.Email;
+            OrderAdres2.Imie = CartOrder.Orders.User.Adress2dostawy.Imie;
+            OrderAdres2.Nazwisko = CartOrder.Orders.User.Adress2dostawy.Nazwisko;
 
             ModelState.Remove("Orders.UserID");
             ModelState.Remove("Carts");
-            ModelState.Remove("Orders.User.Adres2.UserID");
+            ModelState.Remove("Orders.User.Adress2dostawy.Adres2UserID");
+            ModelState.Remove("Orders.User.Adress1rozliczeniowy.Adres1UserID");
             ModelState.Remove("Orders.User.Adres2.ApplicationUser");
             ModelState.Remove("Orders.User.ProfilDzialalnosci");
+            ModelState.Remove("Orders.User.Adress1rozliczeniowy.Wojewodztwo");
+ 
 
+            CartOrder.Orders.User.Adress1rozliczeniowy.Wojewodztwo = _context.Adress1rozliczeniowy.FirstOrDefault(x => x.Adres1rozliczeniowyId == user.Adress1rozliczeniowyId).Wojewodztwo;
 
+            CartOrder.Orders.adresRozliczeniowy = OrderAdres1;
+            CartOrder.Orders.AdressDostawy = OrderAdres2;
+
+            ModelState.Remove("Orders.AdressDostawy");
+            ModelState.Remove("Orders.adresRozliczeniowy");
             if (ModelState.IsValid)
             {
                 _unitOfWorkAdress1rozliczeniowy.adress1Rozliczeniowy.Update(nowyAdres1rozliczeniowy);
@@ -99,6 +146,9 @@ namespace partner_aluro.Controllers
                 Order order = new Order();
                 order.Komentarz = CartOrder.Orders.Komentarz;
                 order.MessageToOrder = CartOrder.Orders.MessageToOrder;
+                order.adresRozliczeniowy = OrderAdres1;
+                order.AdressDostawy = OrderAdres2;
+
 
                 CartOrder.Orders = order;
 
@@ -122,6 +172,7 @@ namespace partner_aluro.Controllers
             return View(order);
         }
 
+
         public void CreateOrder(Order order)
         {
             order.OrderPlaced = DateTime.Now;
@@ -143,6 +194,8 @@ namespace partner_aluro.Controllers
                 };
                 
                 order.UserID = _userManager.GetUserId(HttpContext.User);
+
+
 
                 order.RabatZamowienia = Core.Constants.Rabat;
 
@@ -170,6 +223,18 @@ namespace partner_aluro.Controllers
             return View(orders);
         }
 
+        [HttpPost]
+        public IActionResult ZmienStatus(Order order)
+        {
+            //Wyslij e mail do klienta
+
+            Order orders = _unitOfWorkOrder.OrderService.GetOrder(order.Id);
+            orders.StanZamowienia = order.StanZamowienia;
+            _unitOfWorkOrder.OrderService.Update(orders);
+
+            return View(orders);
+        }
+
         [HttpGet]
         public IActionResult Detail(int id)
         {
@@ -187,8 +252,8 @@ namespace partner_aluro.Controllers
 
             var adres1 = _orderService.GetUserAdress1(order.UserID);
             var adres2 = _orderService.GetUserAdress2(order.UserID);
-            order.User.Adres1 = adres1;
-            order.User.Adres2 = adres2;
+            order.User.Adress1rozliczeniowy = adres1;
+            order.User.Adress2dostawy = adres2;
 
             return View(order);
         }

@@ -1,6 +1,7 @@
 ﻿using partner_aluro.Core.Repositories;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace partner_aluro.Models
 {
@@ -22,6 +23,11 @@ namespace partner_aluro.Models
 
         public virtual ApplicationUser User { get; set; }
 
+
+        public Adress1rozliczeniowy adresRozliczeniowy { get; set; }
+
+
+        public Adress2dostawy AdressDostawy { get; set; }
 
 
     }

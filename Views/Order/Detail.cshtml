@@ -17,15 +17,16 @@
 
         <p> Wiadomosc do zamówienia: @Model.Komentarz @Model.MessageToOrder</p>
 
+            @using (Html.BeginForm("ZapiszNotatke", "Order", FormMethod.Post))
+            {
+                <div class="form-group">
+                    <label asp-for="@Model.StanZamowienia" class="control-label"></label>
+                    <select asp-for="@Model.StanZamowienia" class="form-control" asp-items="ViewBag.StanyZamowienia">
+                        <option>Select one</option>
+                    </select>
 
-        <div class="form-group">
-            <label asp-for="@Model.StanZamowienia" class="control-label"></label>
-            <select asp-for="@Model.StanZamowienia" class="form-control" asp-items="ViewBag.StanyZamowienia">
-                <option>Select one</option>
-            </select>
-
-        </div>
-
+                </div>
+            }
 
         
     </div>
@@ -67,30 +68,32 @@
         <div class="row">
 
             <ul class="nav nav-tabs">
-                <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#awysylki">Adres wysyłki</a></li>
-                <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#arozliczeniowy">Adres rozliczeniowy</a></li>
+                <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#awysylki">Adres wysyłki</a></li>
+                <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#arozliczeniowy">Adres rozliczeniowy</a></li>
             </ul>
         </div>
         <div class="tab-content">
-            <div class="tab-pane active" id="awysylki">
+            <div class="tab-pane active" id="arozliczeniowy">
                 <div class="row">
                     <div class="col">
-                        <p>@Model.User.NazwaFirmy</p>
-                        <p>@Model.User.Adres1.Ulica</p>
-                        <p>@Model.User.Adres1.KodPocztowy @Model.User.Adres1.Miasto</p>
-                        <p>@Model.User.Adres1.Kraj</p>
-                        <p>@Model.User.Adres1.Telefon</p>
+                        <p>@Model.User.NazwaFirmy<br />
+                            NIP: @Model.adresRozliczeniowy.Vat, Regon:@Model.adresRozliczeniowy.Regon<br />
+                            @Model.adresRozliczeniowy.Ulica<br />
+                            Kod pocztowy: @Model.adresRozliczeniowy.KodPocztowy Miasto: @Model.adresRozliczeniowy.Miasto<br />
+                            @Model.adresRozliczeniowy.Kraj<br />
+                            telefon: @Model.adresRozliczeniowy.Telefon
+                        </p>
                     </div>
                 </div>
             </div>
-            <div class="tab-pane" id="arozliczeniowy">
+            <div class="tab-pane" id="awysylki">
                 <div class="row">
                     <div class="col">
-                        <p>@Model.User.NazwaFirmy</p>
-                        <p>@Model.User.Adres2.Ulica</p>
-                        <p>@Model.User.Adres2.KodPocztowy @Model.User.Adres2.Miasto</p>
-                        <p>@Model.User.Adres2.Kraj</p>
-                        <p>@Model.User.Adres2.Telefon</p>
+                        @Model.AdressDostawy.Imie @Model.AdressDostawy.Nazwisko<br />
+                        @Model.AdressDostawy.Ulica<br />
+                        @Model.AdressDostawy.KodPocztowy @Model.AdressDostawy.Miasto<br />
+                        @Model.AdressDostawy.Kraj<br />
+                        @Model.AdressDostawy.Telefon , @Model.AdressDostawy.Telefon</p>
                     </div>
                 </div>
             </div>

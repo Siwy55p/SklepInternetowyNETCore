@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using static partner_aluro.Core.Constants;
 using partner_aluro.Core;
 using partner_aluro.Services.Interfaces;
+using partner_aluro.Services;
 
 namespace partner_aluro.Controllers
 {
@@ -15,15 +16,24 @@ namespace partner_aluro.Controllers
     public class UserController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWorkAdress1rozliczeniowy _unitOfWorkAdress1Rozliczeniowy;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IProfildzialalnosciService _profildzialalnosciService;
 
-        public UserController(IUnitOfWork unitOfWork, SignInManager<ApplicationUser> signInManager, IProfildzialalnosciService profildzialalnosciService)
+
+        private readonly IAdress1rozliczeniowyService _adress1RozliczeniowyService;
+        private readonly IAdress2dostawyService _adress2DostawyService;
+
+        public UserController(IUnitOfWorkAdress1rozliczeniowy unitOfWorkAdress1Rozliczeniowy, IAdress2dostawyService adress2DostawyServicee, IAdress1rozliczeniowyService adress1RozliczeniowyService, IUnitOfWork unitOfWork, SignInManager<ApplicationUser> signInManager, IProfildzialalnosciService profildzialalnosciService)
         {
             _unitOfWork = unitOfWork;
             _signInManager = signInManager;
             _profildzialalnosciService = profildzialalnosciService;
-        }
+            _adress1RozliczeniowyService = adress1RozliczeniowyService;
+            _adress2DostawyService = adress2DostawyServicee;
+
+            _unitOfWorkAdress1Rozliczeniowy = unitOfWorkAdress1Rozliczeniowy;
+    }
 
         public IActionResult Index()
         {
@@ -39,6 +49,8 @@ namespace partner_aluro.Controllers
 
             var user = _unitOfWork.User.GetUser(id);
             var roles = _unitOfWork.Role.GetRoles();
+
+            
 
             var userRoles = await _signInManager.UserManager.GetRolesAsync(user);
 
@@ -115,6 +127,14 @@ namespace partner_aluro.Controllers
             user.IdProfilDzialalnosci = data.User.IdProfilDzialalnosci;
             user.NazwaFirmy = data.User.NazwaFirmy;
             _unitOfWork.User.UpdateUser(user);
+
+
+            var Adres1roz = _unitOfWorkAdress1Rozliczeniowy.adress1Rozliczeniowy.Get(data.User.Id);
+
+            //_unitOfWorkAdress1Rozliczeniowy.adress1Rozliczeniowy.Update(data.User.Adress1rozliczeniowy);
+
+            //_adress1RozliczeniowyService.Update(data.User.Adress1rozliczeniowy);
+            //_adress2DostawyService.Update(data.User.Adress2dostawy);
 
             //return RedirectToAction("Update", new { id = user.Adres1rozliczeniowyId });
             return RedirectToAction("Index");

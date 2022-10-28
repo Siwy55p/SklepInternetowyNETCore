@@ -23,8 +23,8 @@ namespace partner_aluro.Services
 
         public Adress2dostawy Get(string UserId)
         {
-            var Adressy2dostawy = _context.Adress2dostawy.ToList();
-            var adress2dostawy = Adressy2dostawy.Find(x => x.UserID == UserId);
+            var Adress2dostawy = _context.Adress2dostawy.ToList();
+            var adress2dostawy = Adress2dostawy.Find(x => x.Adres2UserID == UserId);
             return adress2dostawy;
         }
 
@@ -43,18 +43,27 @@ namespace partner_aluro.Services
 
         public Adress2dostawy Update(Adress2dostawy adress2dostawy)
         {
-            var result = _context.Adress2dostawy.SingleOrDefault(u => u.UserID == adress2dostawy.UserID);
-            if (result != null)
-            {
-                result.Ulica = adress2dostawy.Ulica;
-                result.KodPocztowy = adress2dostawy.KodPocztowy;
-                result.Miasto = adress2dostawy.Miasto;
-                result.Kraj = adress2dostawy.Kraj;
-                result.Telefon = adress2dostawy.Telefon;
-                _context.SaveChanges();
-            }
-            _context.Add(adress2dostawy);
+
+            _context.Update(adress2dostawy);
+            _context.SaveChanges();
+
             return adress2dostawy;
+
+
+
+            //var result = _context.Adress2dostawy.SingleOrDefault(u => u.UserID == adress2dostawy.UserID);
+            //if (result != null)
+            //{
+            //    result.Ulica = adress2dostawy.Ulica;
+            //    result.KodPocztowy = adress2dostawy.KodPocztowy;
+            //    result.Miasto = adress2dostawy.Miasto;
+            //    result.Kraj = adress2dostawy.Kraj;
+            //    result.Telefon = adress2dostawy.Telefon;
+            //    _context.Update(result);
+            //    _context.SaveChanges();
+            //}
+            //_context.Add(adress2dostawy);
+            //return adress2dostawy;
         }
     }
 }

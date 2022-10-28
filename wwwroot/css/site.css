@@ -102,37 +102,13 @@
     position: relative;
     width: 58px;
     font-size: 20px;
-    top: 23px;
     color: black;
+}
+.sticky-top.row.float-end.text-right {
+    top: 60px;
 }
 /*PRZYCISK OTWIERAJACY menu TWOJE ZAMOWIENIE PRAWA STRONA STARE*/
 
-
-
-
-
-/*PRZYCISK OTWIERAJACY menu TWOJE ZAMOWIENIE PRAWA STRONA NOWE*/
-.offcanvas-btn-box {
-    transition: transform .3s ease-in-out; /* same as what's on the panel */
-}
-
-.offcanvas.show + div .offcanvas-btn-box {
-    transform: translateX(400px);
-    position: relative;
-    z-index: 1100;
-}
-
-
-/* optional junk to toggle the button text */
-.offcanvas-btn-box .btn span:last-child,
-.offcanvas.show + div .offcanvas-btn-box .btn span:first-child {
-    display: none;
-}
-
-.offcanvas.show + div .offcanvas-btn-box .btn span:last-child {
-    display: inline;
-}
-/*PRZYCISK OTWIERAJACY menu TWOJE ZAMOWIENIE PRAWA STRONA NOWE*/
 
 
 

@@ -24,7 +24,7 @@ namespace partner_aluro.Services
         public Adress1rozliczeniowy Get(string UserId)
         {
             var Adressy1rozliczeniowy = _context.Adress1rozliczeniowy.ToList();
-            var adress1Rozliczeniowy = Adressy1rozliczeniowy.Find(x => x.UserID == UserId);
+            var adress1Rozliczeniowy = Adressy1rozliczeniowy.Find(x => x.Adres1UserID == UserId);
             return adress1Rozliczeniowy;
         }
 
@@ -43,18 +43,29 @@ namespace partner_aluro.Services
 
         public Adress1rozliczeniowy Update(Adress1rozliczeniowy adress1Rozliczeniowy)
         {
-            var result = _context.Adress1rozliczeniowy.SingleOrDefault(u => u.UserID == adress1Rozliczeniowy.UserID);
-            if (result != null)
-            {
-                result.Ulica = adress1Rozliczeniowy.Ulica;
-                result.KodPocztowy = adress1Rozliczeniowy.KodPocztowy;
-                result.Miasto = adress1Rozliczeniowy.Miasto;
-                result.Kraj = adress1Rozliczeniowy.Kraj;
-                result.Telefon = adress1Rozliczeniowy.Telefon;
+
+
+            //var result = _context.Adress1rozliczeniowy.SingleOrDefault(u => u.Adres1rozliczeniowyId == adress1Rozliczeniowy.Adres1rozliczeniowyId);
+
+                _context.Update(adress1Rozliczeniowy);
                 _context.SaveChanges();
-            }
-            _context.Add(adress1Rozliczeniowy);
-            return adress1Rozliczeniowy;
+
+                return adress1Rozliczeniowy;
+
+
+            //var result = _context.Adress1rozliczeniowy.SingleOrDefault(u => u.UserID == adress1Rozliczeniowy.UserID);
+            //if (result != null)
+            //{
+            //    result.Ulica = adress1Rozliczeniowy.Ulica;
+            //    result.KodPocztowy = adress1Rozliczeniowy.KodPocztowy;
+            //    result.Miasto = adress1Rozliczeniowy.Miasto;
+            //    result.Kraj = adress1Rozliczeniowy.Kraj;
+            //    result.Telefon = adress1Rozliczeniowy.Telefon;
+            //    _context.Update(result);
+            //    _context.SaveChanges();
+            //}
+            //_context.Add(adress1Rozliczeniowy);
+            //return adress1Rozliczeniowy;
         }
     }
 }

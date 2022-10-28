@@ -17,14 +17,17 @@ namespace partner_aluro.Repositories
 
         public ICollection<ApplicationUser> GetUsers()
         {
+
             return _context.Users.ToList();
         }
 
         public ApplicationUser GetUser(string id)
         {
-
+            ApplicationUser user = _context.Users.FirstOrDefault(u => u.Id == id);
+            user.Adress1rozliczeniowy = _context.Adress1rozliczeniowy.FirstOrDefault(x => x.Adres1rozliczeniowyId == user.Adress1rozliczeniowyId);
+            user.Adress2dostawy = _context.Adress2dostawy.FirstOrDefault(x => x.Adres2dostawyId == user.Adress2dostawyId);
             //List<Order> listaZamowienUzytkownika = _context.Users.Where(u => u.Id == id).Include()  .Include(user => user.User).ToList();
-            return _context.Users.FirstOrDefault(u => u.Id == id);
+            return user;
         }
 
         public ApplicationUser UpdateUser(ApplicationUser user)

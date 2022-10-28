@@ -51,7 +51,7 @@ namespace partner_aluro.Models
         public string? Gmina { get; set; }
 
         [Display(Name = "StatusNip")]
-        public string StatusNip { get; set; }
+        public string? StatusNip { get; set; }
 
         [Display(Name = "DataZakonczeniaDzialalnosci")]
         public string? DataZakonczeniaDzialalnosci { get; set; }
@@ -59,9 +59,13 @@ namespace partner_aluro.Models
         [Display(Name = "Nr Regon")]
         public string Regon { get; set; }
 
-        [ForeignKey("ApplicationUser")]
         public string? UserID { get; set; }
+
+        public string? Adres1UserID { get; set; }
+
+        [ForeignKey("UserID")]
         public virtual ApplicationUser? ApplicationUser { get; set; }
+
 
 
 

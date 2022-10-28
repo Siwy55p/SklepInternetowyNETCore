@@ -17,13 +17,19 @@ public class ApplicationUser : IdentityUser
     public string? NazwaFirmy { get; set; }
     public DateTime? DataZałożenia { get; set; }
 
-    public int? Adres1rozliczeniowyId { get; set; }
-    public int? Adres2dostawyId { get; set; }
+    public int? Adress1rozliczeniowyId { get; set; }
+    public int? Adress2dostawyId { get; set; }
 
-    public virtual Adress1rozliczeniowy Adres1 { get; set; }
-    public virtual Adress2dostawy? Adres2 { get; set; }
+    [ForeignKey(nameof(Adress1rozliczeniowyId))]
+    public virtual Adress1rozliczeniowy? Adress1rozliczeniowy { get; set; }
+
+    [ForeignKey(nameof(Adress2dostawyId))]
+    public virtual Adress2dostawy? Adress2dostawy { get; set; }
 
     public string? NotatkaOsobista { get; set; }
+
+
+
 
 
 

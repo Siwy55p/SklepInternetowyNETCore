@@ -74,12 +74,15 @@ namespace partner_aluro.Controllers
             };
 
 
-            Adress1rozliczeniowy adresRozliczeniowy = new Adress1rozliczeniowy();
-            vm.Orders.User.Adres1 = _context.Adress1rozliczeniowy.Where(a => a.UserID == Core.Constants.UserId).FirstOrDefault();
+            vm.Orders.User.Adress1rozliczeniowy = _context.Adress1rozliczeniowy.FirstOrDefault(x => x.Adres1rozliczeniowyId == vm.Orders.User.Adress1rozliczeniowyId);
+            vm.Orders.User.Adress2dostawy = _context.Adress2dostawy.FirstOrDefault(x => x.Adres2dostawyId == vm.Orders.User.Adress2dostawyId);
 
-            if (vm.Orders.User.Adres1 == null)
+            if (vm.Orders.User.Adress1rozliczeniowy == null)
             {
-                vm.Orders.User.Adres1 = new Adress1rozliczeniowy
+                Adress1rozliczeniowy adresRozliczeniowy = new Adress1rozliczeniowy();
+                vm.Orders.User.Adress1rozliczeniowy = _context.Adress1rozliczeniowy.Where(a => a.UserID == Core.Constants.UserId).FirstOrDefault();
+
+                vm.Orders.User.Adress1rozliczeniowy = new Adress1rozliczeniowy
                 {
                     KodPocztowy = "00000",
                     Miasto = "",
@@ -88,15 +91,15 @@ namespace partner_aluro.Controllers
                 };
             }
 
-            vm.Orders.User.Adres2 = _context.Adress2dostawy.Where(a => a.UserID == Core.Constants.UserId).FirstOrDefault();
-            if (vm.Orders.User.Adres2 == null)
+            //vm.Orders.User.Adress2dostawy = _context.Adress2dostawy.Where(a => a.UserID == Core.Constants.UserId).FirstOrDefault();
+            if (vm.Orders.User.Adress2dostawy == null)
             {
-                vm.Orders.User.Adres2 = new Adress2dostawy
+                vm.Orders.User.Adress2dostawy = new Adress2dostawy
                 {
-                    KodPocztowy = vm.Orders.User.Adres1.KodPocztowy,
-                    Miasto = vm.Orders.User.Adres1.Miasto,
-                    Kraj = vm.Orders.User.Adres1.Kraj,
-                    Telefon = vm.Orders.User.Adres1.Telefon
+                    KodPocztowy = vm.Orders.User.Adress2dostawy.KodPocztowy,
+                    Miasto = vm.Orders.User.Adress2dostawy.Miasto,
+                    Kraj = vm.Orders.User.Adress2dostawy.Kraj,
+                    Telefon = vm.Orders.User.Adress2dostawy.Telefon
                 };
             }
 
