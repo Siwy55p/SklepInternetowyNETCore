@@ -9,11 +9,11 @@
                     <a href="@Url.Action("Lista","Category", new {szukanaNazwa = kategorie.Name})" style="width: 100px; height:100px; max-height: 100px;" class="nav-link dropdown-toggle mainmenu text-white bg-black m-1" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         @kategorie.Name
                     </a>
-            <ul class="dropdown-menu navbar-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                 <li>
                     @foreach (var kategorie2 in kategorie.SubCategories)
                     {
-                        <a class="dropdown-item" href="@Url.Action("Lista","Category", new {szukanaNazwa = kategorie.Name})">
+                            <a class="text-white dropdown-item" href="@Url.Action("Lista","Category", new {szukanaNazwa = kategorie.Name})">
                             @kategorie2.Name
                         </a>
                     }
