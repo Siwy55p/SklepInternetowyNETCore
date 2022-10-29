@@ -1,6 +1,29 @@
 ﻿@model IEnumerable<Category>
 
-<nav class="navbar menumain navbar-expand-lg  z-index-10">
+<nav class=" navbar navbar-expand-lg navbar-light">
+    <ul class="navbar-nav z-index-2">
+
+            @foreach (var kategorie in Model)
+            {
+            <li class="nav-item dropdown">
+                    <a href="@Url.Action("Lista","Category", new {szukanaNazwa = kategorie.Name})" style="width: 100px; height:100px; max-height: 100px;" class="nav-link dropdown-toggle mainmenu text-white bg-black m-1" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        @kategorie.Name
+                    </a>
+            <ul class="dropdown-menu navbar-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                <li>
+                    @foreach (var kategorie2 in kategorie.SubCategories)
+                    {
+                        <a class="dropdown-item" href="@Url.Action("Lista","Category", new {szukanaNazwa = kategorie.Name})">
+                            @kategorie2.Name
+                        </a>
+                    }
+                </li>
+                </ul>
+            </li>
+            }
+</nav>
+
+@*<nav class="navbar menumain navbar-expand-lg  z-index-10">
     <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarMainMenu" aria-controls="navbarMainMenu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -16,4 +39,4 @@
             }
         </div>
     </div>
-</nav>
+</nav>*@
