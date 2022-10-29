@@ -26,6 +26,7 @@
                                         }
                                         <th>Stan zamówienia</th>
                                         <th>Podgląd</th>
+                                        <th>PDF</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -46,6 +47,12 @@
                                             <td>
                                                 <a asp-controller="Order" asp-action="Detail" asp-route-id="@order.Id">Podgląd</a>
                                             </td>
+                                            <td>
+                                                <form method="post" asp-controller="Order" asp-route-id="@order.Id" asp-action="PDFOrder">
+                                                    <label> </label>
+                                                    <input type="submit" value="PDF"/>
+                                                </form>
+                                            </td>
                                         </tr>
                                     }
                                 </tbody>
@@ -60,6 +67,7 @@
                                         }
                                         <th>Stan zamówienia</th>
                                         <th>Podgląd</th>
+                                        <th>PDF</th>
                                     </tr>
                                 </tfoot>
                             </table>

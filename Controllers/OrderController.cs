@@ -1,4 +1,5 @@
-﻿
+﻿using iTextSharp.text;
+using iTextSharp.text.pdf;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -7,11 +8,8 @@ using partner_aluro.Core;
 using partner_aluro.Core.Repositories;
 using partner_aluro.Data;
 using partner_aluro.Models;
-using partner_aluro.Services;
 using partner_aluro.Services.Interfaces;
 using partner_aluro.ViewModels;
-using System;
-using static NuGet.Packaging.PackagingConstants;
 using Order = partner_aluro.Models.Order;
 
 namespace partner_aluro.Controllers
@@ -169,7 +167,131 @@ namespace partner_aluro.Controllers
         {
             return View(order);
         }
+        [HttpPost]
+        public IActionResult PDFOrder(int id)
+        {
+            if (id == 0)
+            {
+                return RedirectToAction("ListaZamowien");
+            }
+            var order = _orderService.GetOrder(id);
 
+
+            using (MemoryStream ms = new MemoryStream())
+            {
+                Document document = new Document(PageSize.A4, 25, 25, 30, 30);
+                PdfWriter write = PdfWriter.GetInstance(document, ms);
+                document.Open();
+
+                //Image image = iTextSharp.text.Image.GetInstance("wwwroot/images/logo/AluroLogoPdf_120x60.jpg");
+                //image.SetAbsolutePosition(200, write.GetVerticalPosition(true));
+                //document.Add(image);
+
+                //Image image3 = iTextSharp.text.Image.GetInstance("wwwroot/images/logo/AluroLogoPdf_120x60.jpg");
+                //image3.SetAbsolutePosition(write.GetVerticalPosition(true),200);
+                //document.Add(image3);
+
+
+                Image image2 = Image.GetInstance("wwwroot/images/logo/Aluro_logo-x-300_2.png");
+                image2.ScaleAbsoluteWidth(150);
+                image2.ScaleAbsoluteHeight(75);
+                image2.SetAbsolutePosition(45, 730);
+                document.Add(image2);
+
+
+                string text1 = "Data zamówienia: ";
+                string text2 = order.OrderPlaced.ToString("dd/MM/yyyy");
+                //Paragraph para1 = new Paragraph("Data zamówienia: " + order.OrderPlaced, new Font(Font.FontFamily.HELVETICA, 10, Font.BOLD));
+
+                Font bold = new Font(Font.FontFamily.HELVETICA, 10,Font.BOLD);
+                Font regular = new Font(Font.FontFamily.HELVETICA, 10);
+                Chunk c1 = new Chunk(text1, bold);
+                Chunk c2 = new Chunk(text2, regular);   
+
+                Paragraph para1 = new Paragraph();
+                para1.Add(c1);
+                para1.Add(c2);
+                para1.Alignment = Element.ALIGN_RIGHT;
+                document.Add(para1);
+
+
+                Paragraph para2 = new Paragraph("ID # " + order.Id, new Font(Font.FontFamily.HELVETICA, 20,Font.BOLD));
+                para2.Alignment = Element.ALIGN_RIGHT;
+                para2.SpacingAfter = 40;
+                document.Add(para2);
+
+                Paragraph para3 = new Paragraph("NIP: " + order.adresRozliczeniowy.Vat.ToString(), new Font(Font.FontFamily.HELVETICA, 10));
+                para3.Alignment = Element.ALIGN_CENTER;
+                para3.SpacingAfter = 10;
+                document.Add(para3);
+
+
+                Paragraph para90 = new Paragraph("To jest paragraf3", new Font(Font.FontFamily.HELVETICA, 10));
+                para90.Alignment = Element.ALIGN_CENTER;
+                para90.SpacingAfter = 10;
+                document.Add(para90);
+
+                PdfPTable table = new PdfPTable(4);
+
+                PdfPCell cell1 = new PdfPCell(new Phrase("Data", new Font(Font.FontFamily.HELVETICA, 10)));
+                cell1.BackgroundColor = BaseColor.LIGHT_GRAY;
+                cell1.Border = Rectangle.BOTTOM_BORDER | Rectangle.TOP_BORDER | Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER;
+                cell1.BorderWidth = 1;
+                cell1.HorizontalAlignment = Element.ALIGN_CENTER;
+                cell1.VerticalAlignment = Element.ALIGN_CENTER;
+                table.AddCell(cell1);
+
+                PdfPCell cell2 = new PdfPCell(new Phrase("Kolumna2", new Font(Font.FontFamily.HELVETICA, 10)));
+                cell2.BackgroundColor = BaseColor.LIGHT_GRAY;
+                cell2.Border = Rectangle.BOTTOM_BORDER | Rectangle.TOP_BORDER | Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER;
+                cell2.BorderWidth = 1;
+                cell2.HorizontalAlignment = Element.ALIGN_CENTER;
+                cell2.VerticalAlignment = Element.ALIGN_CENTER;
+                table.AddCell(cell2);
+
+                PdfPCell cell3 = new PdfPCell(new Phrase("Kolumna3", new Font(Font.FontFamily.HELVETICA, 10)));
+                cell3.BackgroundColor = BaseColor.LIGHT_GRAY;
+                cell3.Border = Rectangle.BOTTOM_BORDER | Rectangle.TOP_BORDER | Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER;
+                cell3.BorderWidth = 1;
+                cell3.HorizontalAlignment = Element.ALIGN_CENTER;
+                cell3.VerticalAlignment = Element.ALIGN_CENTER;
+                table.AddCell(cell3);
+
+                PdfPCell cell4 = new PdfPCell(new Phrase("Adres", new Font(Font.FontFamily.HELVETICA, 10)));
+                cell4.BackgroundColor = BaseColor.LIGHT_GRAY;
+                cell4.Border = Rectangle.BOTTOM_BORDER | Rectangle.TOP_BORDER | Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER;
+                cell4.BorderWidth = 1;
+                cell4.HorizontalAlignment = Element.ALIGN_CENTER;
+                cell4.VerticalAlignment = Element.ALIGN_CENTER;
+                table.AddCell(cell4);
+
+                for (int i = 0; i < 20; i++)
+                {
+                    PdfPCell cell_1 = new PdfPCell(new Phrase(i.ToString()));
+                    PdfPCell cell_2 = new PdfPCell(new Phrase((i + 1).ToString()));
+                    PdfPCell cell_3 = new PdfPCell(new Phrase((i + 2).ToString()));
+                    PdfPCell cell_4 = new PdfPCell(new Phrase((i + 3).ToString()));
+
+                    cell_1.HorizontalAlignment = Element.ALIGN_CENTER;
+                    cell_2.HorizontalAlignment = Element.ALIGN_CENTER;
+                    cell_3.HorizontalAlignment = Element.ALIGN_CENTER;
+                    cell_4.HorizontalAlignment = Element.ALIGN_CENTER;
+
+                    table.AddCell(cell_1);
+                    table.AddCell(cell_2);
+                    table.AddCell(cell_3);
+                    table.AddCell(cell_4);
+                }
+                document.Add(table);
+                document.Close();
+                write.Close();
+                var constant = ms.ToArray();
+
+                return File(constant, "application/vnd", "Firstpdf.pdf");
+
+            }
+            return View();
+        }
 
         public void CreateOrder(Order order)
         {
@@ -292,6 +414,99 @@ namespace partner_aluro.Controllers
             }
 
             return lstStanZamowien;
+        }
+
+
+
+
+
+
+        [HttpPost]
+        public IActionResult PDF()
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                Document document = new Document(PageSize.A4, 25, 25, 30, 30);
+                PdfWriter write = PdfWriter.GetInstance(document, ms);
+                document.Open();
+
+                var image = iTextSharp.text.Image.GetInstance("wwwroot/images/logo/Aluro_logo-x-300_2.png");
+                image.Alignment = Element.ALIGN_CENTER;
+                document.Add(image);
+
+                Paragraph para1 = new Paragraph("To jest paragraf1", new Font(Font.FontFamily.HELVETICA, 20));
+                para1.Alignment = Element.ALIGN_CENTER;
+                document.Add(para1);
+
+                Paragraph para2 = new Paragraph("To jest paragraf2", new Font(Font.FontFamily.HELVETICA, 20));
+                para2.Alignment = Element.ALIGN_CENTER;
+                document.Add(para2);
+
+                Paragraph para3 = new Paragraph("To jest paragraf3", new Font(Font.FontFamily.HELVETICA, 20));
+                para3.Alignment = Element.ALIGN_CENTER;
+                para3.SpacingAfter = 10;
+                document.Add(para3);
+
+                PdfPTable table = new PdfPTable(4);
+
+                PdfPCell cell1 = new PdfPCell(new Phrase("Data", new Font(Font.FontFamily.HELVETICA, 10)));
+                cell1.BackgroundColor = BaseColor.LIGHT_GRAY;
+                cell1.Border = Rectangle.BOTTOM_BORDER | Rectangle.TOP_BORDER | Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER;
+                cell1.BorderWidth = 1;
+                cell1.HorizontalAlignment = Element.ALIGN_CENTER;
+                cell1.VerticalAlignment = Element.ALIGN_CENTER;
+                table.AddCell(cell1);
+
+                PdfPCell cell2 = new PdfPCell(new Phrase("Kolumna2", new Font(Font.FontFamily.HELVETICA, 10)));
+                cell2.BackgroundColor = BaseColor.LIGHT_GRAY;
+                cell2.Border = Rectangle.BOTTOM_BORDER | Rectangle.TOP_BORDER | Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER;
+                cell2.BorderWidth = 1;
+                cell2.HorizontalAlignment = Element.ALIGN_CENTER;
+                cell2.VerticalAlignment = Element.ALIGN_CENTER;
+                table.AddCell(cell2);
+
+                PdfPCell cell3 = new PdfPCell(new Phrase("Kolumna3", new Font(Font.FontFamily.HELVETICA, 10)));
+                cell3.BackgroundColor = BaseColor.LIGHT_GRAY;
+                cell3.Border = Rectangle.BOTTOM_BORDER | Rectangle.TOP_BORDER | Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER;
+                cell3.BorderWidth = 1;
+                cell3.HorizontalAlignment = Element.ALIGN_CENTER;
+                cell3.VerticalAlignment = Element.ALIGN_CENTER;
+                table.AddCell(cell3);
+
+                PdfPCell cell4 = new PdfPCell(new Phrase("Adres", new Font(Font.FontFamily.HELVETICA, 10)));
+                cell4.BackgroundColor = BaseColor.LIGHT_GRAY;
+                cell4.Border = Rectangle.BOTTOM_BORDER | Rectangle.TOP_BORDER | Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER;
+                cell4.BorderWidth = 1;
+                cell4.HorizontalAlignment = Element.ALIGN_CENTER;
+                cell4.VerticalAlignment = Element.ALIGN_CENTER;
+                table.AddCell(cell4);
+
+                for (int i = 0; i < 20; i++)
+                {
+                    PdfPCell cell_1 = new PdfPCell(new Phrase(i.ToString()));
+                    PdfPCell cell_2 = new PdfPCell(new Phrase((i + 1).ToString()));
+                    PdfPCell cell_3 = new PdfPCell(new Phrase((i + 2).ToString()));
+                    PdfPCell cell_4 = new PdfPCell(new Phrase((i + 3).ToString()));
+
+                    cell_1.HorizontalAlignment = Element.ALIGN_CENTER;
+                    cell_2.HorizontalAlignment = Element.ALIGN_CENTER;
+                    cell_3.HorizontalAlignment = Element.ALIGN_CENTER;
+                    cell_4.HorizontalAlignment = Element.ALIGN_CENTER;
+
+                    table.AddCell(cell_1);
+                    table.AddCell(cell_2);
+                    table.AddCell(cell_3);
+                    table.AddCell(cell_4);
+                }
+                document.Add(table);
+                document.Close();
+                write.Close();
+                var constant = ms.ToArray();
+
+                return File(constant, "application/vnd", "Firstpdf.pdf");
+
+            }
+            return View();
         }
     }
 }
