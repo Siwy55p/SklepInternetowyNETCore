@@ -44,29 +44,45 @@ namespace partner_aluro.Services
             return id;
         }
 
-        public Category Get(int id)
+        public async Task<Category> GetAsync(int id)
         {
-            var category = _context.Category.Find(id);
+            var category = await _context.Category
+                .Include(p => p.Produkty)
+                .Include(sc => sc.SubCategories)
+                .FirstOrDefaultAsync(x => x.CategoryId == id);
 
             return category;
         }
-        public Category Get(string name)
+        public async Task<Category> GetAsync(string name)
         {
-            var category = _context.Category.Find(name);
+
+            var category = await _context.Category
+                .Include(p => p.Produkty)
+                .Include(sc => sc.SubCategories)
+                .FirstOrDefaultAsync(x => x.Name == name);
 
             return category;
         }
 
-        public List<Category> List()
+        public async Task<List<Category>> List()
         {
-            var category = _context.Category.ToList();
+            var category = await _context.Category
+                .Include(p => p.Produkty)
+                .Include(sc => sc.SubCategories)
+                .ToListAsync();
+
+            return category;
+        }
+        public List<Category> GetList()
+        {
+            List<Category> category = _context.Category.ToList();
 
             return category;
         }
 
-        public List<Category> List(string name)
+        public async Task<List<Category>> List(string name)
         {
-            var category = _context.Category.ToList();
+            var category = await _context.Category.ToListAsync();
             category.Find(a => a.Name == name);
 
             return category;
@@ -99,6 +115,11 @@ namespace partner_aluro.Services
             return category;
         }
 
-
+        public int AddSave(SubCategory category)
+        {
+            _context.SubCategory.Add(category);
+            var id = _context.SaveChanges();
+            return id;
+        }
     }
 }

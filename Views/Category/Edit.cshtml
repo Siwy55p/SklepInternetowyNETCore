@@ -5,9 +5,17 @@
     Layout = "~/Views/Shared/_Dashboard.cshtml";
 }
 
+<form asp-controller="Category" asp-action="Edit" asp-route-id="@Model.CategoryId">
+
+        @Html.Partial("_AddCategoryForm")
+
+    <button type="submit">Zapisz zmiany</button>
+</form>
+@*
 @using (Html.BeginForm("Edit", "Category", FormMethod.Post))
 {
     @Html.Partial("_AddCategoryForm")
 
     <button type="submit">Zapisz zmiany</button>
 }
+*@

@@ -29,11 +29,18 @@ namespace partner_aluro.Services
             return orderItem;
         }
 
-        public Order GetOrder(int id)
+        public async Task<Order> GetOrder(int id)
         {
-            var order = _context.Orders.Find(id);
-            var user = _context.Users.Find(order.UserID);
-            order.User = user;
+            var order = await _context.Orders
+                .Include(u => u.User)
+                .Include(a1=> a1.adresRozliczeniowy)
+                .Include(a2=> a2.AdressDostawy)
+                .FirstOrDefaultAsync(o=> o.Id == id);
+
+            var OrderItems = _context.OrderItems.ToList();
+            order.OrderItems = OrderItems;
+
+
 
             return order;
         }
@@ -76,7 +83,6 @@ namespace partner_aluro.Services
 
         public List<OrderItem> List()
         {
-
             var OrderItems = _context.OrderItems.ToList();
             return OrderItems;
         }

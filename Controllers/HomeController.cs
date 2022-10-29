@@ -46,7 +46,7 @@ namespace partner_aluro.Controllers
                 //CompanyModel _model = new CompanyModel();
 
                 //zawsze trzeba pobrac dane i wrzucic do widoku
-                var kategorie = _context.Category.ToList();
+                //var kategorie = _context.Category.ToList();
 
                 //pobieramu produkty
                 var nowosci = _context.Products.Where(a => !a.Ukryty).OrderByDescending(a => a.DataDodania).Take(3).ToList();
@@ -57,7 +57,7 @@ namespace partner_aluro.Controllers
                 //_context.SaveChanges();
 
                 //zainicjuj view model
-                var vm = new HomeViewModel() { Kategorie = kategorie, Nowosci = nowosci, Bestsellery = bestseller};
+                var vm = new HomeViewModel() { Nowosci = nowosci, Bestsellery = bestseller};
 
                 return View(vm); //zapewnia renderowania widoków 
             }

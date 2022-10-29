@@ -13,7 +13,7 @@ namespace partner_aluro.Services.Interfaces
         List<Order> ListOrdersUser(string UserID);
 
         void Add(Order order);
-        Order GetOrder(int id);
+        Task<Order> GetOrder(int id);
 
         Adress1rozliczeniowy GetUserAdress1(string UserID);
         Adress2dostawy GetUserAdress2(string UserID);

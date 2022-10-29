@@ -6,11 +6,13 @@ namespace partner_aluro.Services.Interfaces
     {
         //AddSave kategoria do bazy
         int AddSave(Category category);
+        int AddSave(SubCategory category);
         Category Update(Category category);
-        List<Category> List();
-        List<Category> List(string name);
-        Category Get(int id);
-        Category Get(string name);
+        Task<List<Category>> List();
+        List<Category> GetList();
+        Task<List<Category>> List(string name);
+        Task<Category> GetAsync(int id);
+        Task<Category> GetAsync(string name);
         int Delete(int id);
         int Delete(string name);
 

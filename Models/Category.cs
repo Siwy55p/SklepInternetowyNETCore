@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace partner_aluro.Models
@@ -8,10 +9,17 @@ namespace partner_aluro.Models
         [Key] //Entity inkrementacja po ID
         public int CategoryId { get; set; }
 
+        public int? ParentId { get; set; }
+
+        public int? ChildId { get; set; }
+        [InverseProperty(nameof(SubCategory.Categories))]
+        public ICollection<SubCategory>? SubCategories { get; set; } = new List<SubCategory>();
+
+
         [Required(ErrorMessage = "Wprowadz nazwę kategorii")]
         public string Name { get; set; }
 
-        public string? Description { get; set;}
+        public string? Description { get; set; }
 
         public int? kolejnosc { get; set; }
 
@@ -21,6 +29,21 @@ namespace partner_aluro.Models
         //Kategoria przechowuje produkty
         public virtual ICollection<Product>? Produkty { get; set; }
 
+    }
+    public class SubCategory
+    {
+        [Key]
+        public int Id { get; set; }
+        public string Name { get; set; }
+
+        // Foreign key 
+        [Display(Name = "Category")]
+        public int CategoryId { get; set; }
+
+        [ForeignKey("CategoryId")]
+        public virtual Category Categories { get; set; }
 
     }
+
+
 }

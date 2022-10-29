@@ -24,17 +24,23 @@
         }
 <div class="row g-3">
     <div class="col-sm-6">
-        <label asp-for="@Model.Name" class="form-label">Nazwa katalogu</label>
+        <label asp-for="@Model.Name" class="form-label">Nazwa Sub kategori</label>
         <input asp-for="@Model.Name" class="form-control" aria-required="true" placeholder="Nazwa kategori" />
         <span asp-validation-for="@Model.Name" class="text-danger">
         </span>
     </div>
 </div>
 
+<div class="form-group">
+    <label asp-for="@Model.CategoryId" class="control-label"></label>
+    <select asp-for="@Model.CategoryId" class="form-control" asp-items="(IEnumerable<SelectListItem>)@ViewData["kategorie"]">
+        <option>Select one</option>
+    </select>
+</div>
 
 <div class="row g-3">
     <div class="col-sm-6">
-        <label asp-for="@Model.Description" class="form-label">Opis kategorii</label>
+        <label asp-for="@Model.Description" class="form-label">Opis pod-kategorii</label>
         <textarea asp-for="@Model.Description" class="form-control" rows="3" placeholder="Opis kategori."></textarea>
         <span asp-validation-for="@Model.Description" class="text-danger">
         </span>

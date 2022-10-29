@@ -12,7 +12,7 @@ namespace partner_aluro.Services.Interfaces
 
         Category GetCategoryId(int id);
 
-        List<Category> GetListCategory();
+        List <Category> GetListCategory();
 
         ICollection<Category> GetCategory();
 

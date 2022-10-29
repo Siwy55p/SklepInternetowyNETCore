@@ -1,10 +1,13 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using partner_aluro.Core;
 using partner_aluro.Data;
 using partner_aluro.Models;
+using partner_aluro.Services;
 using partner_aluro.Services.Interfaces;
 using SmartBreadcrumbs.Nodes;
 
@@ -34,7 +37,8 @@ namespace partner_aluro.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Category.ToListAsync());
+            var Categorys = await _categoryService.List();
+            return View(Categorys);
         }
 
         [HttpGet]
@@ -46,6 +50,7 @@ namespace partner_aluro.Controllers
         [HttpPost]
         public IActionResult Add(Category category)
         {
+            ModelState.Remove("SubCategories");
             if (!ModelState.IsValid)
             {
                 return View(category);
@@ -58,18 +63,42 @@ namespace partner_aluro.Controllers
 
         }
 
+        [HttpGet]
+        public IActionResult AddSubCategory()
+        {
+            ViewData["kategorie"] = GetCategories();
+
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> AddSubCategoryAsync(SubCategory data)
+        {
+            ModelState.Remove("SubCategories");
+            data.Categories = await _categoryService.GetAsync(data.CategoryId);
+
+            ModelState.Remove("Categories");
+            if (!ModelState.IsValid)
+            {
+                return View(data);
+            }
+
+            //logika zapisania kategorii do bazy.
+            var id = _categoryService.AddSave(data);
+
+            return RedirectToAction("List");
+        }
 
         [HttpGet]
-        public IActionResult Edit(int id)
+        public async Task<IActionResult> EditAsync(int id)
         {
-            var kategoria = _categoryService.Get(id);
+            var kategoria = await _categoryService.GetAsync(id);
             return View(kategoria);
         }
 
         [HttpPost]
-        public IActionResult Edit(Category data)
+        public async Task<IActionResult> EditAsync(Category data)
         {
-            var kategoria = _iUnitOfWorkCategory.Category.Get(data.CategoryId);
+            Category kategoria = await _iUnitOfWorkCategory.Category.GetAsync(data.CategoryId);
 
             if (kategoria == null)
             {
@@ -78,6 +107,7 @@ namespace partner_aluro.Controllers
 
             kategoria.Name = data.Name;
             kategoria.Description = data.Description;
+            kategoria.kolejnosc = data.kolejnosc;
 
             _iUnitOfWorkCategory.Category.Update(kategoria);
 
@@ -88,7 +118,7 @@ namespace partner_aluro.Controllers
         [HttpGet]        
         public IActionResult Details(int id)
         {
-            var category = _categoryService.Get(id);
+            var category = _categoryService.GetAsync(id);
             return View(category);
         }
 
@@ -102,7 +132,9 @@ namespace partner_aluro.Controllers
         [HttpGet]
         public async Task<IActionResult> List()
         {
-            return View(await _context.Category.ToListAsync());
+            var Category = await _categoryService.List();
+
+            return View(Category);
         }
 
         //wyswietlane produkty na bierzaca nie zalezne ktora metoda jest uzyta
@@ -280,6 +312,25 @@ namespace partner_aluro.Controllers
             }
         }
 
+        private List<SelectListItem> GetCategories()
+        {
+            var lstCategories = new List<SelectListItem>();
+
+            lstCategories = _categoryService.GetList().Select(ct => new SelectListItem()
+            {
+                Value = ct.CategoryId.ToString(),
+                Text = ct.Name
+            }).ToList();
+
+            var dmyItem = new SelectListItem()
+            {
+                Value = null,
+                Text = "--- Wybierz Kategorie ---"
+            };
+
+            lstCategories.Insert(0, dmyItem);
+            return lstCategories;
+        }
 
     }
 }

@@ -64,30 +64,30 @@
 
 
     @*SLIDER*@
-    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="~/images/sliderhome/slider1.jpg" class="d-block w-100" alt="...">
+            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="~/images/sliderhome/slider1.jpg" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="~/images/sliderhome/slider2.jpg" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="~/images/sliderhome/slider3.jpg" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="~/images/sliderhome/slider4.jpg" class="d-block w-100" alt="...">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
             </div>
-            <div class="carousel-item">
-                <img src="~/images/sliderhome/slider2.jpg" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="~/images/sliderhome/slider3.jpg" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="~/images/sliderhome/slider4.jpg" class="d-block w-100" alt="...">
-            </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div>
     @* KONIEC SLIDER*@
 
 
@@ -105,9 +105,10 @@
     <h1>@language.Getkey("witaj")</h1>
 </div>
 
-    <div class="row g-4 my-5 mx-auto owl-carousel owl-theme">
-               @foreach (var produkt in Model.Nowosci)
-                {
+        @*SLIDER PRODUKTOW NA STRONIE GLOWNEJ KONIEC*@
+@*    <div class="row g-4 my-5 mx-auto owl-carousel owl-theme">
+        @foreach (var produkt in Model.Nowosci)
+        {
         <div class="col product-item mx-auto">
                 <div class="product-img">
                     <img src="~/images/produkty/produkt1.jpg" alt="" class="img-fluid d-block mx-auto">
@@ -123,13 +124,6 @@
                         </button>
                     </div>
                 </div>
-
-            <div class="product-info p-3">
-                    <span class="product-type">@produkt.CategoryNavigation.Name</span>
-                    <a href="#" class="d-block text-dark text-decoration-none py-2 product-name">@produkt.Name</a>
-                    <span class="product-price">@produkt.CenaProduktu</span>
-                    <span class="product-price">@produkt.CenaProduktuDetal</span>
-            </div>
         </div>
 
         }
@@ -176,7 +170,7 @@
         </div>
 
         <p>tekst</p>
-    </div>
+    </div>*@
     @*SLIDER PRODUKTOW NA STRONIE GLOWNEJ KONIEC*@
 </div>
     

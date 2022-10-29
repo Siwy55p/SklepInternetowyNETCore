@@ -6,6 +6,10 @@
 
     <a asp-controller="Category" asp-action="Add" class="list-group-item list-group-item-action list-group-item-success">Dodaj Kategorie</a>
 
+
+<a asp-controller="Category" asp-action="AddSubCategory" class="list-group-item list-group-item-action list-group-item-success">Dodaj Podkategorie</a>
+
+
     @if (@Model != null && @Model.Any())
     {
         <table class="table">
@@ -13,7 +17,7 @@
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Nazwa</th>
-                    <th scope="col">Opis</th>
+                    <th scope="col">Kolejnosc</th>
                     <th scope="col">Edit</th>
                     <th scope="col">Usuń</th>
                 </tr>
@@ -37,7 +41,7 @@
                                     <tr>
                                         <th>Id</th>
                                         <th>Nazwa</th>
-                                        <th>Opis</th>
+                                        <th>Kolejnosc</th>
                                         <th>Edit</th>
                                         <th>Usuń</th>
                                         <th>Ilość Produktów w kategorii</th>
@@ -49,7 +53,7 @@
                                         <tr>
                                             <td>@cat.CategoryId</td>
                                             <td>@cat.Name</td>
-                                            <td>@cat.Description</td>
+                                            <td>@cat.kolejnosc</td>
                                             <td>
                                                 <a asp-controller="Category" asp-action="Edit" asp-route-id="@cat.CategoryId">Edit</a>
                                             </td>
@@ -64,13 +68,34 @@
                                                 }
                                             </td>
                                         </tr>
+                                        @foreach (var item in cat.SubCategories)
+                                        {
+                                            <tr>
+                                                <td>@item.CategoryId</td>
+                                                <td>@item.Name</td>
+                                                <td>kolejnosc</td>
+                                                <td>
+                                                    <a asp-controller="Category" asp-action="Edit" asp-route-id="@cat.CategoryId">Edit</a>
+                                                </td>
+                                                <td>
+                                                    <a asp-controller="Category" asp-action="Delete" asp-route-id="@cat.CategoryId">Usuń</a>
+                                                </td>
+
+                                                <td>
+                                                    @if (cat.Produkty != null)
+                                                    {
+                                                        @cat.Produkty.Count
+                                                    }
+                                                </td>
+                                            </tr>
+                                        }
                                     }
                                 </tbody>
                                 <tfoot>
                                     <tr>
                                         <th>Id</th>
                                         <th>Nazwa</th>
-                                        <th>Opis</th>
+                                        <th>Kolejnosc</th>
                                         <th>Edit</th>
                                         <th>Usuń</th>
                                         <th>Ilość Produktów w kategorii</th>

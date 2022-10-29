@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.Extensions.Logging;
 using partner_aluro.Models;
+using System.Reflection.Emit;
 using static NuGet.Packaging.PackagingConstants;
 //klasa do do polaczenia sie do bazy z EntityFramework https://learn.microsoft.com/en-us/aspnet/web-api/overview/testing-and-debugging/mocking-entity-framework-when-unit-testing-aspnet-web-api-2
 namespace partner_aluro.Data
@@ -21,6 +23,7 @@ namespace partner_aluro.Data
         //Sluzy do tego ktory model odpowiada ktorej encji w bazie danych DbSet 
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Category { get; set; }
+        public DbSet<SubCategory> SubCategory { get; set; }
         public DbSet<CartItem> CartItems { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
@@ -28,6 +31,7 @@ namespace partner_aluro.Data
         public DbSet<Adress2dostawy> Adress2dostawy { get; set; }
         public DbSet<ImageModel> Images { get; set; }
         public DbSet<ProfilDzialalnosci> ProfileDzialalnosci { get; set; }
+
 
 
         //musimy nadpisac OnModelCreating(ModelBuild builder) musimy nadpisac metoda ktora pochodzi DbContext

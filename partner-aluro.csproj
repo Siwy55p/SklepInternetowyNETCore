@@ -16,16 +16,16 @@
     <PackageReference Include="iTextSharp" Version="5.5.13.3" />
     <PackageReference Include="jQuery" Version="3.6.0" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Extensions" Version="2.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.9" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.9" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.9" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.9" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.10" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.Design" Version="1.1.6" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.9">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.10">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.Extensions.ApiDescription.Client" Version="3.0.0">
+    <PackageReference Include="Microsoft.Extensions.ApiDescription.Client" Version="6.0.10">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -34,16 +34,16 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.10" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="NSwag.ApiDescription.Client" Version="13.0.5">
+    <PackageReference Include="NSwag.ApiDescription.Client" Version="13.17.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="SmartBreadcrumbs" Version="3.6.1" />
-    <PackageReference Include="System.ServiceModel.Duplex" Version="4.8.*" />
-    <PackageReference Include="System.ServiceModel.Federation" Version="4.8.*" />
-    <PackageReference Include="System.ServiceModel.Http" Version="4.8.*" />
-    <PackageReference Include="System.ServiceModel.NetTcp" Version="4.8.*" />
-    <PackageReference Include="System.ServiceModel.Security" Version="4.8.*" />
+    <PackageReference Include="System.ServiceModel.Duplex" Version="4.10.0" />
+    <PackageReference Include="System.ServiceModel.Federation" Version="4.10.0" />
+    <PackageReference Include="System.ServiceModel.Http" Version="4.10.0" />
+    <PackageReference Include="System.ServiceModel.NetTcp" Version="4.10.0" />
+    <PackageReference Include="System.ServiceModel.Security" Version="4.10.0" />
     <PackageReference Include="WcfCoreMtomEncoder" Version="0.1.16" />
     <PackageReference Include="X.PagedList.Mvc.Core" Version="8.4.3" />
   </ItemGroup>

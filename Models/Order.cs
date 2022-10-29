@@ -1,6 +1,7 @@
 ﻿using partner_aluro.Core.Repositories;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace partner_aluro.Models
@@ -17,11 +18,18 @@ namespace partner_aluro.Models
         public decimal? RabatZamowienia { get; set; }
 
         public string UserID { get; set; }
+        [ForeignKey(nameof(UserID))]
+        [Display(Name = "User")]
+        [InverseProperty("Orders")]
+        public virtual ApplicationUser? User { get; set; }
+
+
         public StanZamowienia StanZamowienia { get; set; }
 
         public string? Komentarz { get; set; }
 
-        public virtual ApplicationUser User { get; set; }
+        public string? SposobDostawy { get; set; }
+        public string? MetodaPlatnosci { get; set; }
 
 
         public Adress1rozliczeniowy adresRozliczeniowy { get; set; }
