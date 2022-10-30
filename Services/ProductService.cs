@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NuGet.Packaging;
 using partner_aluro.Data;
 using partner_aluro.Models;
 using partner_aluro.Services.Interfaces;
@@ -70,6 +71,8 @@ namespace partner_aluro.Services
         public List<Category> GetListCategory()
         {
             List<Category> listaCategori = _context.Category.ToList();
+
+
             return listaCategori;
         }
 

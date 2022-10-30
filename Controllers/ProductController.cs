@@ -76,6 +76,7 @@ namespace partner_aluro.Controllers
         public IActionResult Add()
         {
             ViewBag.Category = GetCategories();
+            ViewBag.SubCategory = GetSubCategories();
             Product product = new Product();
 
             return View(product);
@@ -85,6 +86,7 @@ namespace partner_aluro.Controllers
         public async Task<IActionResult> Add(Product product)
         {
             ViewBag.Category = GetCategories();
+            ViewBag.SubCategory = GetSubCategories();
 
             product.DataDodania = DateTime.Now;
 
@@ -223,15 +225,46 @@ namespace partner_aluro.Controllers
                 Text = ct.Name
             }).ToList();
 
-            var dmyItem = new SelectListItem()
-            {
-                Value = null,
-                Text = "--- Wybierz Kategorie ---"
-            };
+            //var dmyItem = new List<SelectListItem>();
 
-            lstCategories.Insert(0, dmyItem);
+            //dmyItem = _context.SubCategory.ToList().Select(di => new SelectListItem()
+            //{
+            //    Value = di.CategoryId.ToString(),
+            //    Text = di.Name
+            //}).ToList();
+
+
+            //lstCategories.Insert(0, dmyItem );
+
             return lstCategories;
         }
+
+        private List<SelectListItem> GetSubCategories()
+        {
+            //var lstCategories = new List<SelectListItem>();
+
+            //lstCategories = _ProductService.GetListCategory().Select(ct => new SelectListItem()
+            //{
+            //    Value = ct.CategoryId.ToString(),
+            //    Text = ct.Name
+            //}).ToList();
+
+            //var dmyItem = new List<SelectListItem>();
+
+            var lstCategories = new List<SelectListItem>();
+
+            lstCategories = _context.SubCategory.ToList().Select(di => new SelectListItem()
+            {
+                Value = di.CategoryId.ToString(),
+                Text = di.Name
+            }).ToList();
+
+
+            //lstCategories.Insert(0, dmyItem );
+
+            return lstCategories;
+        }
+
 
     }
 }
