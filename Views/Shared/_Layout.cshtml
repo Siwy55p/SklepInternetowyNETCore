@@ -74,28 +74,6 @@
         });
     </script>
 
-    <script>
-        function AddToCart(ProductId) {
-            var myOffcanvas = document.getElementById('offcanvas');
-            var bsOffcanvas = new bootstrap.Offcanvas(myOffcanvas);
-            bsOffcanvas.show();
-
-            var quantity = document.getElementById(ProductId).value;
-            $.ajax({
-                type: "POST",
-                url: '@Url.Action("AddToCart2", "Cart")',
-                data: { ProductId: ProductId, quantity: quantity },
-                success: function (result) {
-                    $("#mydiv").load(location.href + " #mydiv");
-                },
-
-                error: function (abc) {
-                    alert(abc.statusText);
-                },
-            });
-        }
-    </script>
-
 
     @*BOOTSTRAP*@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

@@ -14,11 +14,31 @@
     margin: 0px;
     vertical-align: middle;
     justify-content: center;
+    display: inline-flex;
 
 }
 .card-body{
     padding: 0px
 }
+
+.breadcrumb a:after {
+    content: "  ";
+    padding: 6px;
+/*    width: 15px;*/
+left: 10px;
+    background-image: url('../images/home.png');
+ /*   font-family: entypo-fontello;*/
+    font-size: 16px;
+    position: absolute;
+    color: #000;
+    visibility: visible;
+}
+
+.breadcrumb a {
+    visibility: hidden;
+    color: #000 !important;
+}
+
 /*PRZYCISK select SORT*/
 .select-wrapper {
     position: relative;
@@ -327,6 +347,7 @@ footer {
 */
 .search{
     z-index: 20;
+    max-width: 615px;
 }
 /*STYL main menu*/
 .menumain {
@@ -338,3 +359,40 @@ footer {
     margin: 2px;
     background-color: black;
 }
+
+.body_product
+{
+    display: flex;
+}
+
+/*Prduct page*/
+.thumbnail_images ul {
+    list-style: none;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    margin-top: 10px
+}
+
+    .thumbnail_images ul li {
+        margin: 5px;
+        padding: 10px;
+        border: 2px solid #eee;
+        cursor: pointer;
+        transition: all 0.5s
+    }
+
+        .thumbnail_images ul li:hover {
+            border: 2px solid #000
+        }
+
+.main_image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    height: 400px;
+    width: 100%;
+    overflow: hidden
+}
+/*Prduct page*/

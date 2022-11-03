@@ -240,8 +240,8 @@ namespace partner_aluro.Controllers
                 document.Add(para3);
 
 
-                string text2_1 = order.adresRozliczeniowy.ApplicationUser.NazwaFirmy + "\n";
-                string text2_2 = order.adresRozliczeniowy.ApplicationUser.Imie + " " + order.adresRozliczeniowy.ApplicationUser.Nazwisko +"\n";
+                string text2_1 = order.User.NazwaFirmy + "\n";
+                string text2_2 = order.User.Imie + " " + order.User.Nazwisko +"\n";
                 string text2_3 = order.adresRozliczeniowy.Ulica + "\n";
                 string text2_4 = order.adresRozliczeniowy.KodPocztowy + " " + order.adresRozliczeniowy.Miasto + "\n";
                 string text2_5 = order.adresRozliczeniowy.Telefon + "\n";
@@ -269,7 +269,7 @@ namespace partner_aluro.Controllers
 
 
                 string text3_1 = order.AdressDostawy.Imie + " " + order.AdressDostawy.Nazwisko + "\n";
-                string text4_2 = order.adresRozliczeniowy.ApplicationUser.Imie + " " + order.adresRozliczeniowy.ApplicationUser.Nazwisko + "\n";
+                string text4_2 = order.User.Imie + " " + order.User.Nazwisko + "\n";
                 string text4_3 = order.AdressDostawy.Ulica + "\n";
                 string text4_4 = order.AdressDostawy.KodPocztowy + " " + order.adresRozliczeniowy.Miasto + "\n";
                 string text4_5 = order.AdressDostawy.Telefon + "\n";
@@ -379,17 +379,14 @@ namespace partner_aluro.Controllers
 
 
                 string text6_1 = order.AdressDostawy.Imie + " " + order.AdressDostawy.Nazwisko + "\n";
-                string text6_2 = order.adresRozliczeniowy.ApplicationUser.Imie + " " + order.adresRozliczeniowy.ApplicationUser.Nazwisko + "\n";
                 string text6_3 = order.AdressDostawy.Ulica + "\n";
                 //Paragraph para1 = new Paragraph("Data zamówienia: " + order.OrderPlaced, bold);
 
                 Chunk c6_1 = new Chunk(text6_1, bold);
-                Chunk c6_2 = new Chunk(text6_2, regular);
                 Chunk c6_3 = new Chunk(text6_3, regular);
 
                 Paragraph para6 = new Paragraph();
                 para6.Add(c6_1);
-                para6.Add(c6_2);
                 para6.Add(c6_3);
                 para6.Alignment = Element.ALIGN_LEFT;
                 para6.SpacingAfter = 15;

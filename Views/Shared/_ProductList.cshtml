@@ -35,7 +35,8 @@
                                 </a>
                             </span>
                         </p>
-                    <p class="float-end text-end">
+
+                        <p class="float-end text-end">
                             Cena hurtowa: @produkt.CenaProduktu.ToString("C") <br>
                             Twoja cena po rabacie: @CenaJednostkowa.ToString("C") <br>
                             Sugerowana cena detaliczna: @produkt.CenaProduktuDetal.ToString("C") <br>
@@ -47,4 +48,3 @@
     }
 
 @Html.PagedListPager( (IPagedList)ViewBag.OnePageOfProducts, page => Url.Action("Lista", "Category", new { page = page, szukanaNazwa=ViewData["szukanaNazwa"] } ))
-
