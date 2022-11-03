@@ -102,6 +102,13 @@
         })
     </script>
 
+
+    <script>
+        $('.dropdown').hover(function () {
+            $('.dropdown-toggle', this).trigger('click');
+        }); 
+    </script>
+
     @*BOOTSTRAP*@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     @*BOOTSTRAP*@

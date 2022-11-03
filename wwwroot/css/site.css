@@ -192,10 +192,25 @@ body {
     max-width: 250px;
 }
 
+.catmenu {
+    display: block;
+    width: 100px;
+    word-wrap: break-word;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0;
+}
+
 .mainmenu {
     display: flex;
+    text-decoration: none;
     justify-content: center;
     align-items: center;
+    text-align: center;
+    flex-direction: column;
+    background-color: black;
     text-align: center;
 }
 

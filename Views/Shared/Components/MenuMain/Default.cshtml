@@ -1,25 +1,32 @@
 ﻿@model IEnumerable<Category>
 
-<nav class=" navbar navbar-expand-lg navbar-light">
-    <ul class="navbar-nav z-index-2">
-
+<nav class="navbar navbar-expand-lg navbar-light">
             @foreach (var kategorie in Model)
             {
-            <li class="nav-item dropdown">
-                    <a href="@Url.Action("Lista","Category", new {szukanaNazwa = kategorie.Name})" style="width: 100px; height:100px; max-height: 100px;" class="nav-link dropdown-toggle mainmenu text-white bg-black m-1" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        @kategorie.Name
+                <div class="dropdown p-1">
+
+                    <a href="@Url.Action("Lista","Category", new {szukanaNazwa = kategorie.Name})" class="mainmenu" style="width: 100px; height:100px; max-height: 100px;" aria-expanded="false">
+                        <span class="catmenu text-white">
+                            @kategorie.Name
+                        </span>
                     </a>
-                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                <li>
-                    @foreach (var kategorie2 in kategorie.SubCategories)
+
+                    @if (kategorie.SubCategories.Count >= 1)
                     {
-                            <a class="text-white dropdown-item" href="@Url.Action("Lista","Category", new {szukanaNazwa = kategorie.Name})">
-                            @kategorie2.Name
-                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                        @foreach (var kategorie2 in kategorie.SubCategories)
+                        {
+                            <li>
+                            <a class="text-white dropdown-item" href="@Url.Action("Lista","Category", new {szukanaNazwa = kategorie2.Name})">
+                                @kategorie2.Name
+                            </a>
+                            </li>
+                        }
+                        </ul>
                     }
-                </li>
-                </ul>
-            </li>
+
+                </div>
+
             }
 </nav>
 
