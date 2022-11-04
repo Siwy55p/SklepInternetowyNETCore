@@ -13,16 +13,16 @@
 
                 <div class="column">
                     <div class="main_image">
-                        <img id=featured src="~/images/produkty/@Model.Symbol/@Model.ImageUrl" id="main_product_image" width="350px">
+                        <img onClick="swipe();" id=featured src="~/images/produkty/@Model.Symbol/@Model.ImageUrl" width="350px">
                     </div>
 
                     <div id="slide-wrapper">
-                        <img id="slideLeft" class="arrow" src="~/images/produktslider/arrow-left.png">
+                        <img  id="slideLeft" class="arrow" src="~/images/produktslider/arrow-left.png">
 
                         <div id="slider">
                             @foreach (var img in Model.product_Images)
                             {
-                                <img  class="thumbnail_product"  src="~/images/produkty/@Model.Symbol/@img.ImageName" alt="@img.Product" width="70">
+                                <img class="thumbnail_product"  src="~/images/produkty/@Model.Symbol/@img.ImageName" alt="@img.Product" width="70">
                             }
                         </div>
 
@@ -41,12 +41,19 @@
                     <div class="mt-2 pr-3">
                         <p>Symbol: <b>@Model.Symbol</b></p>
                     </div>
-                    <div style="width:460px;" class="body_product float-end text-end m-1 p-2">
-                        
-                        Cena hurtowa: @Model.CenaProduktu.ToString("C") <br>
-                        @*Twoja cena po rabacie: @CenaJednostkowa.ToString("C") <br>*@
-                        Cena detaliczna: @Model.CenaProduktuDetal.Value.ToString("C") <br />
-                        
+                    
+                    @*<div @*style="max-width:460px;" class="row body_product float-end text-end m-1 p-2">*@
+                    <div class="row">
+
+                        <div class="col justify-content-end text-end">
+                            Cena hurtowa: <br>
+                            @*Twoja cena po rabacie: @CenaJednostkowa.ToString("C") <br>*@
+                            Cena detaliczna:<br />
+                        </div>
+                        <div class="col">
+                            @Model.CenaProduktu.ToString("C") <br>
+                            @Model.CenaProduktuDetal.Value.ToString("C") <br />
+                        </div>
                     </div>
 
                     <div class="row card-bar-action m-1 p-2">
@@ -78,6 +85,18 @@
 </div>
 
 @section Scripts {
+
+    <script>
+    function swipe() {
+       var largeImage = document.getElementById('featured');
+       largeImage.style.display = 'block';
+       largeImage.style.width=200+"px";
+       largeImage.style.height=200+"px";
+       var url=largeImage.getAttribute('src');
+       window.open(url,'Image','width=largeImage.stylewidth,height=largeImage.style.height,resizable=1');
+    }
+    </script>
+
 
     <script type="text/javascript">
 		let thumbnails = document.getElementsByClassName('thumbnail_product')
