@@ -1,6 +1,5 @@
 ﻿@model partner_aluro.Models.Product
 
-
 <div class="container mt-5 mb-5">	
     <div class="card">	
         <div class="row g-0">
@@ -13,7 +12,7 @@
 
                 <div class="column">
                     <div class="main_image">
-                        <img onClick="swipe();" id=featured src="~/images/produkty/@Model.Symbol/@Model.ImageUrl" width="350px">
+                        <img id=featured src="~/images/produkty/@Model.Symbol/@Model.ImageUrl" id="main_product_image" width="350px">
                     </div>
 
                     <div id="slide-wrapper">
@@ -22,7 +21,7 @@
                         <div id="slider">
                             @foreach (var img in Model.product_Images)
                             {
-                                <img class="thumbnail_product"  src="~/images/produkty/@Model.Symbol/@img.ImageName" alt="@img.Product" width="70">
+                                <img class="thumbnail_product" src="~/images/produkty/@Model.Symbol/@img.ImageName" alt="@img.Product" width="70">
                             }
                         </div>
 
@@ -88,7 +87,7 @@
 
     <script>
     function swipe() {
-       var largeImage = document.getElementById('featured');
+       var largeImage = document.getElementById('largeImage');
        largeImage.style.display = 'block';
        largeImage.style.width=200+"px";
        largeImage.style.height=200+"px";
