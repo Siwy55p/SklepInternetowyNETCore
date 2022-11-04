@@ -1,125 +1,125 @@
 ﻿@model partner_aluro.Models.Product
 
 
+<div class="row g-0">
 
-<div class="form-group row">
-    <label asp-for="@Model.Name" class="col-sm-2 col-form-label">Nazwa produktu</label>
-            <div class="col-sm-5">
-            <input asp-for="@Model.Name" class="form-control" aria-required="true"  placeholder="Nazwa produktu" />
-            <span asp-validation-for="@Model.Name" class="text-danger">
-            </span>
+    <div class="col-md-6 border-end">
+        <div class="form-group row">
+            <label asp-for="@Model.Name" class="col-sm-3 col-form-label">Nazwa produktu</label>
+                <div class="col-sm-6">
+                <input asp-for="@Model.Name" class="form-control" aria-required="true"  placeholder="Nazwa produktu" />
+                <span asp-validation-for="@Model.Name" class="text-danger">
+                </span>
+                </div>
+        </div>
+
+            <div class="form-group row">
+                <label asp-for="@Model.Symbol" class="col-sm-3 col-form-label">Symbol</label>
+                <div class="col-sm-4">
+                <input asp-for="@Model.Symbol" class="form-control" aria-required="true" placeholder="Symbol" />
+                <span asp-validation-for="@Model.Symbol" class="text-danger">
+                </span>
+                </div>
             </div>
-    </div>
 
-<div class="form-group row">
-            <label asp-for="@Model.Symbol" class="col-sm-2 col-form-label">Symbol</label>
-            <div class="col-sm-5">
-            <input asp-for="@Model.Symbol" class="form-control" aria-required="true" placeholder="Symbol" />
-            <span asp-validation-for="@Model.Symbol" class="text-danger">
-            </span>
+        <div class="form-group row">
+                <label asp-for="@Model.CenaProduktu" class="col-sm-3 col-form-label">Cena produktu hurt </label>
+                <div class="col-sm-4">
+                <input asp-for="@Model.CenaProduktu" class="form-control" aria-required="true" placeholder="Cena produktu" />
+                <span asp-validation-for="@Model.CenaProduktu" class="text-danger">
+                </span>
+                </div>
+        </div>
+        <div class="form-group row">
+                <label asp-for="@Model.CenaProduktuDetal" class="col-sm-3 col-form-label">Cena detaliczna: </label>
+                <div class="col-sm-4">
+                <input asp-for="@Model.CenaProduktuDetal" class="form-control" aria-required="true" placeholder="Cena detaliczna produktu" />
+                <span asp-validation-for="@Model.CenaProduktuDetal" class="text-danger">
+                </span>
+                </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.ImageUrl" class="control-label"></label>
+            <div class="custom-file">
+                <input type="file" asp-for="@Model.ImageUrl" name="@Model.ImageUrl" class="custom-file-input" id="FLFrontImage"
+                       onchange="document.getElementById('FrontImagePrv').src = window.URL.createObjectURL(this.files[0])" />
+                <label class="custom-file-label" for="FLFrontImage"></label>
+            </div>
+            <img id="FrontImagePrv" src="~/images/produkty/@Model.Symbol/@Model.ImageUrl" alt="Logo image" width="150" height="150" style="border:1px; margin-top:20px; margin-left:120px" />
+        </div>
+
+        @if(Model.product_Images != null)
+        {
+            @foreach (var image in Model.product_Images)
+            {
+                <img id="FrontImagePrv2" src="~/images/produkty/@Model.Symbol/@image.ImageName" alt="Logo image" width="150" height="150" style="border:1px; margin-top:20px; margin-left:120px" />
+            }
+        }
+
+        <div class="row">
+            <div class="col-md-6">
+                <input type="file" asp-for="@Model.product_Images" class="form-control" id="images" name="images[]" onchange="preview_images();" multiple accept="image/jpeg, image/png, image/jpg" />
+            </div>
+        </div>
+        <div class="col-sm-2"><img class="img_responsive" src=""></div>
+
+
+        <div class="row" id="image_preview">  @*Tutaj wyswietlaja mi sie zdjecia*@
+        </div>  @*Tutaj wyswietlaja mi sie zdjecia*@
+
+        <div class="form-group row">
+            <label asp-for="@Model.Materiał" class="col-sm-2 col-form-label">Materiał: </label>
+            <div class="col-sm-2">
+                <input asp-for="@Model.Materiał" class="form-control" aria-required="true" placeholder="Materiał" />
+                <span asp-validation-for="@Model.Materiał" class="text-danger">
+                </span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.Pakowanie" class="col-sm-2 col-form-label">Pakowanie</label>
+            <div class="col-sm-2">
+                <input asp-for="@Model.Pakowanie" class="form-control" aria-required="true" placeholder="np: 1/2" />
+                <span asp-validation-for="@Model.Pakowanie" class="text-danger">
+                </span>
             </div>
         </div>
 
-    <div class="form-group row">
-            <label asp-for="@Model.CenaProduktu" class="col-sm-2 col-form-label">Cena produktu</label>
-            <div class="col-sm-5">
-            <input asp-for="@Model.CenaProduktu" class="form-control" aria-required="true" placeholder="Cena produktu" />
-            <span asp-validation-for="@Model.CenaProduktu" class="text-danger">
-            </span>
-            </div>
     </div>
-    <div class="form-group row">
-            <label asp-for="@Model.CenaProduktuDetal" class="col-sm-2 col-form-label">Sugerowana cena detaliczna</label>
-            <div class="col-sm-5">
-            <input asp-for="@Model.CenaProduktuDetal" class="form-control" aria-required="true" placeholder="Cena detaliczna produktu" />
-            <span asp-validation-for="@Model.CenaProduktuDetal" class="text-danger">
-            </span>
-            </div>
-    </div>
-
-<div class="form-group">
-    <label asp-for="@Model.ImageUrl" class="control-label"></label>
-    <div class="custom-file">
-        <input type="file" asp-for="@Model.ImageUrl" name="@Model.ImageUrl" class="custom-file-input" id="FLFrontImage"
-               onchange="document.getElementById('FrontImagePrv').src = window.URL.createObjectURL(this.files[0])" />
-        <label class="custom-file-label" for="FLFrontImage"></label>
-    </div>
-    <img id="FrontImagePrv" src="~/images/produkty/@Model.Symbol/@Model.ImageUrl" alt="Logo image" width="150" height="150" style="border:1px; margin-top:20px; margin-left:120px" />
-</div>
-
-@if(Model.product_Images != null)
-{
-    @foreach (var image in Model.product_Images)
-    {
-        <img id="FrontImagePrv2" src="~/images/produkty/@Model.Symbol/@image.ImageName" alt="Logo image" width="150" height="150" style="border:1px; margin-top:20px; margin-left:120px" />
-    }
-}
-
-<div class="row">
     <div class="col-md-6">
-        <input type="file" asp-for="@Model.product_Images" class="form-control" id="images" name="images[]" onchange="preview_images();" multiple accept="image/jpeg, image/png, image/jpg" />
-    </div>
-</div>
-<div class="col-sm-2"><img class="img_responsive" src="">Obrazki</div>
+        <h4 class="mb-2">Wymiary</h4>
+        <div class="input-group">
+            <input asp-for="@Model.SzerokoscProduktu" type="text" class="form-control" aria-label="Szerokość produktu" placeholder="Szerokość produktu">
+            <input asp-for="@Model.WysokoscProduktu" type="text" class="form-control" aria-label="Wysokość produktu" placeholder="Wysokość produktu">
+            <input asp-for="@Model.GlebokoscProduktu" type="text" class="form-control" aria-label="Głębokość produktu" placeholder="Głębokość produktu">
+        </div>
 
+        <hr class="my-4">
+        <h4 class="mb-3">Kategoria Produktu</h4>
 
-<div class="row" id="image_preview">  @*Tutaj wyswietlaja mi sie zdjecia*@
-</div>  @*Tutaj wyswietlaja mi sie zdjecia*@
+        <div class="form-group">
+            <label asp-for="@Model.CategoryId" class="control-label"></label>
+            <select asp-for="@Model.CategoryId" class="form-control" asp-items="ViewBag.Category">
+                <option>Select one</option>
+            </select>
+        </div>
 
-<div class="form-group row">
-    <label asp-for="@Model.Materiał" class="col-sm-2 col-form-label">Symbol</label>
-    <div class="col-sm-5">
-        <input asp-for="@Model.Materiał" class="form-control" aria-required="true" placeholder="Materiał" />
-        <span asp-validation-for="@Model.Materiał" class="text-danger">
-        </span>
-    </div>
-</div>
-<div class="form-group row">
-    <label asp-for="@Model.Pakowanie" class="col-sm-2 col-form-label">Pakowanie</label>
-    <div class="col-sm-5">
-        <input asp-for="@Model.Pakowanie" class="form-control" aria-required="true" placeholder="np: 1/2" />
-        <span asp-validation-for="@Model.Pakowanie" class="text-danger">
-        </span>
-    </div>
-</div>
-
-
-    <h4 class="mb-3">Wymiary</h4>
-    <div class="input-group">
-        <input asp-for="@Model.SzerokoscProduktu" type="text" class="form-control" aria-label="Szerokość produktu" placeholder="Szerokość produktu">
-        <input asp-for="@Model.WysokoscProduktu" type="text" class="form-control" aria-label="Wysokość produktu" placeholder="Wysokość produktu">
-        <input asp-for="@Model.GlebokoscProduktu" type="text" class="form-control" aria-label="Głębokość produktu" placeholder="Głębokość produktu">
-    </div>
-
-    <hr class="my-4">
-    <h4 class="mb-3">Kategoria Produktu</h4>
-
-<div class="form-group">
-    <label asp-for="@Model.CategoryId" class="control-label"></label>
-    <select asp-for="@Model.CategoryId" class="form-control" asp-items="ViewBag.Category">
-        <option>Select one</option>
-    </select>
-</div>
-
-<div class="form-group">
-    <label asp-for="@Model.CategoryId" class="control-label"></label>
-    <select asp-for="@Model.CategoryId" class="form-control" asp-items="ViewBag.SubCategory">
-        <option>Select one</option>
-    </select>
-</div>
-    <div class="form-group row">
+        <div class="form-group">
+            <label asp-for="@Model.CategoryId" class="control-label"></label>
+            <select asp-for="@Model.CategoryId" class="form-control" asp-items="ViewBag.SubCategory">
+            </select>
+        </div>
+        <div class="form-group row">
             <label asp-for="@Model.Description" class="col-sm-2 col-form-label">Opis produktu</label>
             <textarea asp-for="@Model.Description" class="form-control" rows="3"></textarea>
+        </div>
     </div>
-
+</div>
 @section Sctipts {
-
-
-        <script type="text/javascript">
-        $(".custom-file-input").on("change", function () {
-            var fileName = $(this).val().split("\\").pop();
-            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-        }); 
-        </script>
-
+    <script type="text/javascript">
+    $(".custom-file-input").on("change", function () {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    }); 
+    </script>
 }
