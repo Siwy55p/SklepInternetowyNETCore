@@ -9,23 +9,29 @@
             }
 
 
-            <div class="col-md-6 border-end">
-                <div class="d-flex flex-column justify-content-center">
+            <div class="col-md-6 border-end" id="content-wrapper">
+
+                <div class="column">
                     <div class="main_image">
-                        <img src="~/images/produkty/@Model.Symbol/@Model.ImageUrl" id="main_product_image" width="350px">
+                        <img id=featured src="~/images/produkty/@Model.Symbol/@Model.ImageUrl" id="main_product_image" width="350px">
                     </div>
-                    <div class="thumbnail_images">
-                        <ul id="thumbnail">
+
+                    <div id="slide-wrapper">
+                        <img id="slideLeft" class="arrow" src="~/images/produktslider/arrow-left.png">
+
+                        <div id="slider">
                             @foreach (var img in Model.product_Images)
                             {
-                                <li>
-                                    @*<img onclick="changeImage(this)" src="~/images/produkty/@Model.Symbol/@img.ImageName" alt="@img.Product" width="70">*@
-                                    <img onmouseover="changeImage(this)" src="~/images/produkty/@Model.Symbol/@img.ImageName" alt="@img.Product" width="70">
-                                </li>
+                                <img  class="thumbnail_product"  src="~/images/produkty/@Model.Symbol/@img.ImageName" alt="@img.Product" width="70">
                             }
-                        </ul>
-                    </div>	
-                </div>	
+                        </div>
+
+                        <img id="slideRight" class="arrow" src="~/images/produktslider/arrow-right.png">
+                    </div>
+                </div>
+
+
+
             </div>	
             <div class="col-md-6">
                 <div class="p-3">
@@ -72,12 +78,41 @@
 </div>
 
 @section Scripts {
-    <script>
-        function changeImage(element) {
-            var main_prodcut_image = document.getElementById('main_product_image');
-            main_prodcut_image.src = element.src;
-        }
-    </script>
+
+    <script type="text/javascript">
+		let thumbnails = document.getElementsByClassName('thumbnail_product')
+
+		let activeImages = document.getElementsByClassName('active')
+
+		for (var i=0; i < thumbnails.length; i++){
+
+			thumbnails[i].addEventListener('mouseover', function(){
+				console.log(activeImages)
+				
+				if (activeImages.length > 0){
+					activeImages[0].classList.remove('active')
+				}
+				
+
+				this.classList.add('active')
+				document.getElementById('featured').src = this.src
+			})
+		}
+
+
+		let buttonRight = document.getElementById('slideRight');
+		let buttonLeft = document.getElementById('slideLeft');
+
+		buttonLeft.addEventListener('click', function(){
+			document.getElementById('slider').scrollLeft -= 180
+		})
+
+		buttonRight.addEventListener('click', function(){
+			document.getElementById('slider').scrollLeft += 180
+		})
+
+
+	</script>
 
     <script>
         function AddToCart(ProductId) {
