@@ -30,6 +30,7 @@
                                         <th>Kolejnosc</th>
                                         <th>Edit</th>
                                         <th>Usuń</th>
+                                        <th>Wł/Wył</th>
                                         <th>Ilość Produktów w kategorii</th>
                                     </tr>
                                 </thead>
@@ -46,7 +47,7 @@
                                             <td>
                                                 <a asp-controller="Category" asp-action="Delete" asp-route-id="@cat.CategoryId">Usuń</a>
                                             </td>
-
+                                            <td>@cat.Aktywny</td>
                                             <td>
                                                 @if (cat.Produkty != null)
                                                 {
@@ -66,7 +67,7 @@
                                                 <td>
                                                     <a asp-controller="Category" asp-action="Delete" asp-route-id="@cat.CategoryId">Usuń</a>
                                                 </td>
-
+                                                <td>@item.Aktywny</td>
                                                 <td>
                                                     @if (cat.Produkty != null)
                                                     {
@@ -84,6 +85,7 @@
                                         <th>Kolejnosc</th>
                                         <th>Edit</th>
                                         <th>Usuń</th>
+                                        <th>Wł/Wył</th>
                                         <th>Ilość Produktów w kategorii</th>
                                     </tr>
                                 </tfoot>

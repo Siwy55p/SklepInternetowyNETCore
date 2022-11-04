@@ -12,7 +12,7 @@
                 }
                 <div class="thumbnail">
                     <a class="product-name link-dark" asp-controller="Product" asp-action="Details" asp-route-id="@produkt.ProductId">
-                    <img class="card-img-top" src="~/images/produkty/@produkt.Symbol/@produkt.ImageUrl" alt="@produkt.Name" style="width:260px;">
+                        <img class="card-img-top" src="~/images/produkty/@produkt.Symbol/@produkt.ImageUrl" alt="@produkt.Name" style="width:260px;">
                     </a>
                 </div>
                 <div class="card-body p-1">
@@ -36,10 +36,15 @@
                             </span>
                         </p>
 
+                        @{
+                        var Cena_brutto = (decimal)produkt.CenaProduktu * (decimal)partner_aluro.Core.Constants.Vat;
+                        }
+
                         <p class="float-end text-end">
-                            Cena hurtowa: @produkt.CenaProduktu.ToString("C") <br>
-                            Twoja cena po rabacie: @CenaJednostkowa.ToString("C") <br>
-                            Sugerowana cena detaliczna: @produkt.CenaProduktuDetal.ToString("C") <br>
+                            Cena hurtowa: @produkt.CenaProduktu.ToString("C") (netto)<br>
+                         @*   Twoja cena po rabacie: @CenaJednostkowa.ToString("C") <br>*@
+                            @Cena_brutto.ToString("C") (brutto) <br>
+                            Cena detaliczna: @produkt.CenaProduktuDetal.ToString("C") <br>
                         </p>
                     </div>
                 </div>

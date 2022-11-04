@@ -25,6 +25,8 @@ namespace partner_aluro.Models
 
         public string? NazwaPlikuIkony { get; set; }
 
+        public bool? Aktywny { get; set; }
+
 
         //Kategoria przechowuje produkty
         public virtual ICollection<Product>? Produkty { get; set; }
@@ -39,6 +41,9 @@ namespace partner_aluro.Models
         // Foreign key 
         [Display(Name = "Category")]
         public int CategoryId { get; set; }
+
+
+        public bool? Aktywny { get; set; }
 
         [ForeignKey("CategoryId")]
         public virtual Category Categories { get; set; }

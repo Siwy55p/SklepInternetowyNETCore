@@ -1,13 +1,14 @@
 ﻿@model IEnumerable<Category>
 
-
-
 <div class="card-header bg-gray text-uppercase"><i class="fa fa-list"></i>Kategorie</div>
 <ul class="list-group category_block">
     @foreach (var kategorie in Model)
     {
-        <li class="list-group-item">
-            <a href="@Url.Action("Lista","Category", new {szukanaNazwa = kategorie.Name})" class="nav-link active" aria-current="page">@kategorie.Name</a>
-        </li>
+        @if(kategorie.Aktywny == true)
+        {
+            <li class="list-group-item">
+                <a href="@Url.Action("Lista","Category", new {szukanaNazwa = kategorie.Name})" class="nav-link active" aria-current="page">@kategorie.Name</a>
+            </li>
+        }
     }
 </ul>

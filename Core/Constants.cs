@@ -20,6 +20,7 @@ namespace partner_aluro.Core
             public const string RequireManager = "RequireManager";
         }
 
+        public static decimal Vat = (decimal)1.23;
 
         public static string UserId;
 
