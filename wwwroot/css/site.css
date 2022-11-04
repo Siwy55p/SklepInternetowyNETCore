@@ -21,11 +21,6 @@
     padding: 0px
 }
 
-.img-responsive {
-    max-width: 100px;
-    border: 1px solid #000;
-}
-
 .breadcrumb a:before {
     content: " ";
     padding: 10px;
@@ -442,7 +437,6 @@ footer {
 }
 
 #slide-wrapper {
-    max-width: 350px;
     display: flex;
     min-height: 100px;
     align-items: center;
