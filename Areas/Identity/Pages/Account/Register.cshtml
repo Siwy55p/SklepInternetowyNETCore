@@ -76,7 +76,7 @@
         
 
         <div class="form-group row">
-                    <span class="text-danger text-center">@Model.komunikat</span>
+                    <span id="komunikat" class="text-danger text-center">@Model.komunikat</span>
                 <label class="col-sm-4 col-form-label custom-label required" asp-for="Input.NIP">Nr NIP</label>
             <div class="col-sm-5">
                 <input asp-for="Input.NIP" class="form-control" id="floatingInputVAT" placeholder="Nr NIP" value="@Model._model.Vat" required />
@@ -96,26 +96,25 @@
                 <div class="form-group row">
                     <label class="col-sm-4 col-form-label custom-label required" asp-for="Input.NazwaFirmy"></label>
                     <div class="col-sm-5">
-                        <input disabled id="disabledInput" asp-for="Input.NazwaFirmy" class="form-control" autocomplete="NazwaFirmy" aria-required="true" value="@Model._model.Name" />
-                    
-                       </div>
+                        <input id="NazwaFirmy" disabled id="disabledInput" asp-for="Input.NazwaFirmy" class="form-control" autocomplete="NazwaFirmy" aria-required="true" value="@Model._model.Name" />
+                    </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-4 col-form-label custom-label required" asp-for="Input.Ulica"></label>
                     <div class="col-sm-5">
-                        <input disabled id="disabledInput" asp-for="Input.Ulica" class="form-control" autocomplete="Ulica" aria-required="true" value="@Model._model.Ulica" />
+                        <input disabled id="adres" id="disabledInput" asp-for="Input.Ulica" class="form-control" autocomplete="Ulica" aria-required="true" value="@Model._model.Ulica" />
                     </div>
                 </div>
                 <div class="form-group row"> 
                     <label class="col-sm-4 col-form-label custom-label required " asp-for="Input.Miasto"></label>
                     <div class="col-sm-5">
-                        <input disabled id="disabledInput" asp-for="Input.Miasto" class="form-control" autocomplete="miasto" aria-required="true" value="@Model._model.Miejscowosc" />
+                        <input disabled id="miasto" id="disabledInput" asp-for="Input.Miasto" class="form-control" autocomplete="miasto" aria-required="true" value="@Model._model.Miejscowosc" />
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-4 col-form-label custom-label required" asp-for="Input.KodPocztowy1"></label>
                     <div class="col-sm-5">
-                        <input disabled id="disabledInput" asp-for="Input.KodPocztowy1" class="form-control" autocomplete="KodPocztowy1" aria-required="true" value="@Model._model.KodPocztowy" />
+                        <input disabled id="kod_pocztowy" id="disabledInput" asp-for="Input.KodPocztowy1" class="form-control" autocomplete="KodPocztowy1" aria-required="true" value="@Model._model.KodPocztowy" />
                     @* <span asp-validation-for="Input.KodPocztowy1" class="text-danger"></span>*@
                     </div>
                 </div>
@@ -131,30 +130,40 @@
 
 @section Scripts {
 
-@*    <script>
+    <script>
         $(function () {
             $("#floatingInputVAT").keyup(function (e) {
+
                 var Vat = $("#floatingInputVAT").val();
 
-                    //var quantity = document.getElementById(ProductId).value;
+                if(Vat.length > 9)
+                {
+                    //alert(Vat.length);
 
                     $.ajax({
                         type: "POST",
-                        url: '@Url.Action("SprawdzNIP")',
+                        url: '@Url.Action("SprawdzNIP","Register")',
                         data: { Vat: Vat },
                         success: function (result) {
 
-                            alert(result);
-                            $("#dane_firmy").load(location.href + " #dane_firmy");
+                            document.getElementById("komunikat").value = result[0];
+                            document.getElementById("NazwaFirmy").value = result[1];
+                            document.getElementById("adres").value = result[2];
+                            document.getElementById("miasto").value = result[3];
+                            document.getElementById("kod_pocztowy").value = result[4];
+                            //$("#dane_firmy").load(location.href + " #dane_firmy");
                         },
 
                         error: function (abc) {
                             alert(abc.statusText);
                         },
+
+                        
                     });
+                }
             });
         });
-    </script>*@
+    </script>
 
 <script>
     // Example starter JavaScript for disabling form submissions if there are invalid fields

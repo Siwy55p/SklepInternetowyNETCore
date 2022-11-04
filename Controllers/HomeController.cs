@@ -17,8 +17,9 @@ using partner_aluro.Enums;
 
 namespace partner_aluro.Controllers
 {
+    [Authorize]
     [DefaultBreadcrumb("Home")]
-    //[Authorize(Roles = $"{Constants.Roles.Administrator},{Constants.Roles.Manager},{Constants.Roles.User}")]
+    [Authorize(Roles = $"{Constants.Roles.Administrator},{Constants.Roles.Manager},{Constants.Roles.User}")]
     public class HomeController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -34,7 +35,6 @@ namespace partner_aluro.Controllers
             RegonService = regonService;
         }
 
-        [Authorize]
         [HttpGet]
         public IActionResult Index()
         {
@@ -67,7 +67,7 @@ namespace partner_aluro.Controllers
             }
 
         }
-        [Authorize]
+
         public IActionResult ChangeLanguage(string culture)
         {
             Response.Cookies.Append(CookieRequestCultureProvider.DefaultCookieName,
@@ -75,37 +75,6 @@ namespace partner_aluro.Controllers
                 new CookieOptions() { Expires = DateTimeOffset.UtcNow.AddYears(1)});
 
             return Redirect(Request.Headers["Referer"].ToString());
-        }
-
-        [HttpPost]
-        public async Task<List<string>> SprawdzNIPAsync(string Vat = null)
-        {
-
-        CompanyModel _model = new CompanyModel();
-
-        //ViewData["Profile"] = GetProfiles();
-        var a = 0;
-            _model.Vat = Vat;
-            _model = await RegonService.GetCompanyDataByNipAsync(_model.Vat);
-
-            var komunikat = "Brak danych";
-
-            if (_model.Errors.Count > 0)
-            {
-                komunikat = _model.Errors[0].ErrorMessagePl;
-
-            }
-            else
-            {
-                komunikat = _model.Name;
-            }
-
-            List<string> list = new List<string>();
-
-            list.Add(komunikat);
-
-
-            return list;
         }
 
         [Route("polityka-prywatnosci")]

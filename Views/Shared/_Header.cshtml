@@ -13,9 +13,9 @@
 
             <div class="header row justify-content-md-center">
                 @*Lewa strona*@
-                <div class="col">
                 @if (User.IsInRole("Administrator") || User.IsInRole("Manager"))
                 {
+                <div class="col">
                     <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -30,8 +30,8 @@
                                 </ul>
                             </li>
                     </div>
-                    }
                 </div>
+                }
                 <div class="col">
                     <ul class="navbar-nav z-index-2">
                         <li class="nav-item dropdown navbar-dark"><a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="pl-POL" class="nav-link"><i class="ui-icon-flag flag-icon-en"></i>Polski</a></li>

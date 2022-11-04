@@ -238,6 +238,9 @@ namespace partner_aluro.Areas.Identity.Pages.Account
                 adres1.Adres1UserID = user.Id;
 
                 Adress2dostawy adres2 = new Adress2dostawy();
+                adres2.Imie = Input.Imie;
+                adres2.Nazwisko = Input.Nazwisko;
+                adres2.Email = Input.Email;
                 adres2.Miasto = _model.Miejscowosc;
                 adres2.Ulica = _model.Ulica;
                 adres2.KodPocztowy = _model.KodPocztowy;
