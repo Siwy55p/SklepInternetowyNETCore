@@ -442,7 +442,7 @@ footer {
 }
 
 #slide-wrapper {
-    max-width: 500px;
+    max-width: 350px;
     display: flex;
     min-height: 100px;
     align-items: center;
@@ -450,14 +450,15 @@ footer {
 }
 
 #slider {
-    max-width: 350px;
+    max-width: 300px;
     display: flex;
     flex-wrap: nowrap;
     overflow-x: auto;
     overflow: hidden; /* Hide scrollbars */
+    justify-content: center;
 }
 
-    #slider::-webkit-scrollbar {
+/*    #slider::-webkit-scrollbar {
         width: 8px;
     }
 
@@ -469,7 +470,7 @@ footer {
         background-color: #dede2e;
         outline: 1px solid slategrey;
         border-radius: 100px;
-    }
+    }*/
 
         #slider::-webkit-scrollbar-thumb:hover {
             background-color: #18b5ce;
