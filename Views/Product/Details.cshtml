@@ -1,87 +1,138 @@
 ﻿@model partner_aluro.Models.Product
-<!-- Product section-->
-<section class="py-2">
-    <div class="container px-2 px-lg-3 my-3">
-        <div class="row gx-4 gx-lg-5 align-items-center">
+
+
+<div class="container mt-5 mb-5">	
+    <div class="card">	
+        <div class="row g-0">
+            @{
+                var CenaJednostkowa = Model.CenaProduktu * (1 - (partner_aluro.Core.Constants.Rabat / 100));
+            }
+
+
+            <div class="col-md-6 border-end" id="content-wrapper">
+
+                <div class="column">
+                    <div class="main_image">
+                        <img id=featured src="~/images/produkty/@Model.Symbol/@Model.ImageUrl" id="main_product_image" width="350px">
+                    </div>
+
+                    <div id="slide-wrapper">
+                        <img id="slideLeft" class="arrow" src="~/images/produktslider/arrow-left.png">
+
+                        <div id="slider">
+                            @foreach (var img in Model.product_Images)
+                            {
+                                <img  class="thumbnail_product"  src="~/images/produkty/@Model.Symbol/@img.ImageName" alt="@img.Product" width="70">
+                            }
+                        </div>
+
+                        <img id="slideRight" class="arrow" src="~/images/produktslider/arrow-right.png">
+                    </div>
+                </div>
+
+
+
+            </div>	
             <div class="col-md-6">
-                
-                
-                @*<img class="card-img-top mb-5 mb-md-0" src="~/images/produkty/@Model.Symbol/@Model.ImageUrl" alt="@Model.Name" />*@
-
-                @*SLIDER PRODUKT*@
-
-                <!-- Carousel wrapper -->
-                <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-mdb-ride="carousel">
-                    <!-- Slides -->
-                    <div class="carousel-inner mb-5">
-                        <div class="carousel-item active">
-                            <img src="~/images/produkty/@Model.Symbol/@Model.ImageUrl" class="d-block w-100" alt="..." />
+                <div class="p-3">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h4>@Model.Name</h4>
                         </div>
-                        <div class="carousel-item">
-                            <img src="~/images/produkty/@Model.Symbol/@Model.ImageUrl" class="d-block w-100" alt="..." />
+                    <div class="mt-2 pr-3">
+                        <p>Symbol: <b>@Model.Symbol</b></p>
+                    </div>
+                    <div style="width:460px;" class="body_product float-end text-end m-1 p-2">
+                        
+                        Cena hurtowa: @Model.CenaProduktu.ToString("C") <br>
+                        @*Twoja cena po rabacie: @CenaJednostkowa.ToString("C") <br>*@
+                        Cena detaliczna: @Model.CenaProduktuDetal.Value.ToString("C") <br />
+                        
+                    </div>
+
+                    <div class="row card-bar-action m-1 p-2">
+                        <div class="col-4">
+                            <input type="number" id="@Model.ProductId" name="quantity" value="1" class="form-control" aria-required="true" placeholder="Ilość" min="1" max="20" />
                         </div>
-                        <div class="carousel-item">
-                            <img src="~/images/produkty/@Model.Symbol/@Model.ImageUrl" class="d-block w-100" alt="..." />
+                        <div class="col">
+                            <button value="@Model.ProductId" onclick="AddToCart(@Model.ProductId)" data-bs-target="offcanvas" role="button">Dodaj do zamowienia</button>
                         </div>
                     </div>
-                    <!-- Slides -->
-                    <!-- Controls -->
-                    <button class="carousel-control-prev" type="button" data-mdb-target="#carouselExampleIndicators"
-                            data-mdb-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-mdb-target="#carouselExampleIndicators"
-                            data-mdb-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
-                    <!-- Controls -->
-                    <!-- Thumbnails -->
-                    <div class="carousel-indicators" style="margin-bottom: -20px;">
-                        <button type="button" data-mdb-target="#carouselExampleIndicators" data-mdb-slide-to="0" class="active"
-                                aria-current="true" aria-label="Slide 1" style="width: 100px;">
-                            <img class="d-block w-100"
-                                 src="https://mdbcdn.b-cdn.net/img/Photos/Others/Carousel-thumbs/img%20(88).webp" class="img-fluid" />
-                        </button>
-                        <button type="button" data-mdb-target="#carouselExampleIndicators" data-mdb-slide-to="1"
-                                aria-label="Slide 2" style="width: 100px;">
-                            <img class="d-block w-100"
-                                 src="https://mdbcdn.b-cdn.net/img/Photos/Others/Carousel-thumbs/img%20(121).webp" class="img-fluid" />
-                        </button>
-                        <button type="button" data-mdb-target="#carouselExampleIndicators" data-mdb-slide-to="2"
-                                aria-label="Slide 3" style="width: 100px;">
-                            <img class="d-block w-100"
-                                 src="https://mdbcdn.b-cdn.net/img/Photos/Others/Carousel-thumbs/img%20(31).webp" class="img-fluid" />
-                        </button>
-                    </div>
-                    <!-- Thumbnails -->
-                </div>
-                <!-- Carousel wrapper -->
-            
-            
-            </div>
-            <div class="col-md-6">
-                <div class="small mb-1">Symbol: @Model.Symbol</div>
-                    <h1 class="display-5 fw-bolder">@Model.Name</h1>
-                <div class="fs-5 mb-5">
-                    <span class="text-decoration-line-through">Cena detaliczna: @Model.CenaProduktuDetal</span>
-                    <span>Cena produktu: @Model.CenaProduktu</span>
-                </div>
-                <p class="lead">@Model.Description</p>
-                <p class="lead">Wymiary: @Model.SzerokoscProduktu Wys: @Model.SzerokoscProduktu, Glebokosc:@Model.GlebokoscProduktu </p>
-                <div class="d-flex">
-                    Ilość: <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
-                    <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@Model.ProductId" class="btn btnalert-primary">Dodaj do zamowienia</a>
-                    @*<button asp-action="DodajDoKoszyka" asp-controller="Koszyk" asp-route-id="@Model.ProductId" class="btn btn-outline-dark flex-shrink-0" type="button">
-                        <i class="bi-cart-fill me-1"></i>
-                        Dodaj do zamówienia
-                    </button>*@
-                </div>
-            </div>
-        </div>
-        <div class="row">
 
-        </div>
+
+                    <div class="">
+
+                        Specyfikacja produktu: <br>
+                        Pakowanie: @Model.Pakowanie <br>
+                        Wymiar wewnętrzny: <br />
+                        Materiał: @Model.Materiał <br />
+
+                    </div>
+
+                    @*<div class="buttons d-flex flex-row mt-5 gap-3">
+                        <button class="btn btn-outline-dark">Dodaj do zamówienia</button>
+                    </div>*@
+                </div>	
+            </div>	
+        </div> 
     </div>
-</section>
+</div>
+
+@section Scripts {
+
+    <script type="text/javascript">
+		let thumbnails = document.getElementsByClassName('thumbnail_product')
+
+		let activeImages = document.getElementsByClassName('active')
+
+		for (var i=0; i < thumbnails.length; i++){
+
+			thumbnails[i].addEventListener('mouseover', function(){
+				console.log(activeImages)
+				
+				if (activeImages.length > 0){
+					activeImages[0].classList.remove('active')
+				}
+				
+
+				this.classList.add('active')
+				document.getElementById('featured').src = this.src
+			})
+		}
+
+
+		let buttonRight = document.getElementById('slideRight');
+		let buttonLeft = document.getElementById('slideLeft');
+
+		buttonLeft.addEventListener('click', function(){
+			document.getElementById('slider').scrollLeft -= 180
+		})
+
+		buttonRight.addEventListener('click', function(){
+			document.getElementById('slider').scrollLeft += 180
+		})
+
+
+	</script>
+
+    <script>
+        function AddToCart(ProductId) {
+            var myOffcanvas = document.getElementById('offcanvas');
+            var bsOffcanvas = new bootstrap.Offcanvas(myOffcanvas);
+            bsOffcanvas.show();
+
+            var quantity = document.getElementById(ProductId).value;
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("AddToCart2", "Cart")',
+                data: { ProductId: ProductId, quantity: quantity },
+                success: function (result) {
+                    $("#mydiv").load(location.href + " #mydiv");
+                },
+
+                error: function (abc) {
+                    alert(abc.statusText);
+                },
+            });
+        }
+    </script>
+}

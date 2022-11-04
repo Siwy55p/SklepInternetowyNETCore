@@ -60,7 +60,11 @@
         <input type="file" asp-for="@Model.product_Images" class="form-control" id="images" name="images[]" onchange="preview_images();" multiple accept="image/jpeg, image/png, image/jpg" />
     </div>
 </div>
-<div class="row" id="image_preview"></div>
+<div class="col-sm-2"><img class="img_responsive" src="">Obrazki</div>
+
+
+<div class="row" id="image_preview">  @*Tutaj wyswietlaja mi sie zdjecia*@
+</div>  @*Tutaj wyswietlaja mi sie zdjecia*@
 
 <div class="form-group row">
     <label asp-for="@Model.Materiał" class="col-sm-2 col-form-label">Symbol</label>

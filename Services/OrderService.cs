@@ -37,7 +37,7 @@ namespace partner_aluro.Services
                 .Include(a2=> a2.AdressDostawy)
                 .FirstOrDefaultAsync(o=> o.Id == id);
 
-            var OrderItems = _context.OrderItems.ToList();
+            var OrderItems = await _context.OrderItems.Where(o => o.OrderId == id).ToListAsync();
             order.OrderItems = OrderItems;
 
 

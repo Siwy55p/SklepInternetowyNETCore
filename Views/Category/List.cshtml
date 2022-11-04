@@ -4,28 +4,14 @@
     Layout = "~/Views/Shared/_Dashboard.cshtml";
 }
 
-    <a asp-controller="Category" asp-action="Add" class="list-group-item list-group-item-action list-group-item-success">Dodaj Kategorie</a>
+<a type="button" class="btn btn-success" asp-controller="Category" asp-action="Add" >Dodaj Kategorie</a>
 
 
-<a asp-controller="Category" asp-action="AddSubCategory" class="list-group-item list-group-item-action list-group-item-success">Dodaj Podkategorie</a>
+<a type="button" class="btn btn-success" asp-controller="Category" asp-action="AddSubCategory">Dodaj Podkategorie</a>
 
 
     @if (@Model != null && @Model.Any())
     {
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Nazwa</th>
-                    <th scope="col">Kolejnosc</th>
-                    <th scope="col">Edit</th>
-                    <th scope="col">Usuń</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
-
         <div class="row">
             <div class="col-md-12 mb-3">
                 <div class="card">
@@ -44,6 +30,7 @@
                                         <th>Kolejnosc</th>
                                         <th>Edit</th>
                                         <th>Usuń</th>
+                                        <th>Wł/Wył</th>
                                         <th>Ilość Produktów w kategorii</th>
                                     </tr>
                                 </thead>
@@ -60,7 +47,7 @@
                                             <td>
                                                 <a asp-controller="Category" asp-action="Delete" asp-route-id="@cat.CategoryId">Usuń</a>
                                             </td>
-
+                                            <td>@cat.Aktywny</td>
                                             <td>
                                                 @if (cat.Produkty != null)
                                                 {
@@ -73,14 +60,14 @@
                                             <tr>
                                                 <td>@item.CategoryId</td>
                                                 <td>@item.Name</td>
-                                                <td>kolejnosc</td>
+                                                <td>podkategoria</td>
                                                 <td>
                                                     <a asp-controller="Category" asp-action="Edit" asp-route-id="@cat.CategoryId">Edit</a>
                                                 </td>
                                                 <td>
                                                     <a asp-controller="Category" asp-action="Delete" asp-route-id="@cat.CategoryId">Usuń</a>
                                                 </td>
-
+                                                <td>@item.Aktywny</td>
                                                 <td>
                                                     @if (cat.Produkty != null)
                                                     {
@@ -98,6 +85,7 @@
                                         <th>Kolejnosc</th>
                                         <th>Edit</th>
                                         <th>Usuń</th>
+                                        <th>Wł/Wył</th>
                                         <th>Ilość Produktów w kategorii</th>
                                     </tr>
                                 </tfoot>

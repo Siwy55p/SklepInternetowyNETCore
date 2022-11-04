@@ -5,14 +5,17 @@
     @foreach (var produkt in ViewBag.OnePageOfProducts)
     {    
         @*@Html.HiddenFor(h=>produkt.ProductId)*@
-        <div class="col-12 col-md-6 col-lg-4" id="SekcjaListaKategori">
-            <div class="card my-2">
+        <div class="card-deck col-12 col-md-6 col-lg-4" id="SekcjaListaKategori">
+            <div class="card m-1">
                 @{
                     var CenaJednostkowa = produkt.CenaProduktu * (1 - (partner_aluro.Core.Constants.Rabat / 100));
                 }
-
-                <div class="thumbnail"><img src="~/images/produkty/@produkt.Symbol/@produkt.ImageUrl" alt="@produkt.Name" style="width:260px;"></div>
-                <div class="card-body">
+                <div class="thumbnail">
+                    <a class="product-name link-dark" asp-controller="Product" asp-action="Details" asp-route-id="@produkt.ProductId">
+                        <img class="card-img-top" src="~/images/produkty/@produkt.Symbol/@produkt.ImageUrl" alt="@produkt.Name" style="width:260px;">
+                    </a>
+                </div>
+                <div class="card-body p-1">
                     <div class="row card-bar-action">
                         <div class="col-4">
                             <input type="number" id="@produkt.ProductId" name="quantity" value="1" class="form-control" aria-required="true" placeholder="Ilość" min="1" max="20" />
@@ -21,16 +24,32 @@
                             <button value="@produkt.ProductId" onclick="AddToCart(@produkt.ProductId)" data-bs-target="offcanvas" role="button">Dodaj do zamowienia</button>
                         </div>
                     </div>
+                    <div>
+                        <p>
+                            <span class="card-text">
+                                <b>@produkt.Symbol</b><br>
+                            </span>
+                            <span class="card-text">
+                                <a class="product-name link-dark" asp-controller="Product" asp-action="Details" asp-route-id="@produkt.ProductId">
+                                    @produkt.Name <br>
+                                </a>
+                            </span>
+                        </p>
 
-                    <p class="card-text"><b>@produkt.Symbol</b></p>
-                    <p class="card-text"><a class="product-name link-dark" asp-controller="Product" asp-action="Details" asp-route-id="@produkt.ProductId">@produkt.Name</a></p>
-                    <p class="text-right">Cena: @produkt.CenaProduktu.ToString("C") </p>
-                    <p class="text-xl-right">Twoja cena: @CenaJednostkowa.ToString("C") </p>
-                    
+                        @{
+                        var Cena_brutto = (decimal)produkt.CenaProduktu * (decimal)partner_aluro.Core.Constants.Vat;
+                        }
+
+                        <p class="float-end text-end">
+                            Cena hurtowa: @produkt.CenaProduktu.ToString("C") (netto)<br>
+                         @*   Twoja cena po rabacie: @CenaJednostkowa.ToString("C") <br>*@
+                            @Cena_brutto.ToString("C") (brutto) <br>
+                            Cena detaliczna: @produkt.CenaProduktuDetal.ToString("C") <br>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
     }
 
 @Html.PagedListPager( (IPagedList)ViewBag.OnePageOfProducts, page => Url.Action("Lista", "Category", new { page = page, szukanaNazwa=ViewData["szukanaNazwa"] } ))
-

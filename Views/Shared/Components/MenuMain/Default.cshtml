@@ -1,42 +1,32 @@
 ﻿@model IEnumerable<Category>
 
-<nav class=" navbar navbar-expand-lg navbar-light">
-    <ul class="navbar-nav z-index-2">
+<nav class="navbar navbar-expand-lg navbar-light">
+    @foreach (var kategorie in Model)
+    {
+        @if (kategorie.Aktywny == true)
+        {
+            <div class="dropdown p-1">
 
-            @foreach (var kategorie in Model)
-            {
-            <li class="nav-item dropdown">
-                    <a href="@Url.Action("Lista","Category", new {szukanaNazwa = kategorie.Name})" style="width: 100px; height:100px; max-height: 100px;" class="nav-link dropdown-toggle mainmenu text-white bg-black m-1" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a href="@Url.Action("Lista","Category", new {szukanaNazwa = kategorie.Name})" class="mainmenu"  aria-expanded="false">
+                    <span class="catmenu text-white">
                         @kategorie.Name
-                    </a>
-                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                <li>
+                    </span>
+                </a>
+
+                @if (kategorie.SubCategories.Count >= 1)
+                {
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                     @foreach (var kategorie2 in kategorie.SubCategories)
                     {
-                            <a class="text-white dropdown-item" href="@Url.Action("Lista","Category", new {szukanaNazwa = kategorie.Name})">
-                            @kategorie2.Name
-                        </a>
+                        <li>
+                            <a class="text-white dropdown-item" href="@Url.Action("Lista","Category", new {szukanaNazwa = kategorie2.Name})">
+                                @kategorie2.Name
+                            </a>
+                        </li>
                     }
-                </li>
-                </ul>
-            </li>
-            }
-</nav>
-
-@*<nav class="navbar menumain navbar-expand-lg  z-index-10">
-    <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarMainMenu" aria-controls="navbarMainMenu" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse navbar-dark" id="navbarMainMenu">
-        <div class="navbar-nav">
-            @foreach (var kategorie in Model)
-            {
-            <div class="nav-item justify-content-end ">
-                <a href="@Url.Action("Lista","Category", new {szukanaNazwa = kategorie.Name})" style="width: 100px; height:100px; max-height: 100px;" class="mainmenu text-white  max-wi nav-link bg-black m-1 ">
-                    @kategorie.Name
-                </a>
+                    </ul>
+                }
             </div>
-            }
-        </div>
-    </div>
-</nav>*@
+        }
+    }
+</nav>

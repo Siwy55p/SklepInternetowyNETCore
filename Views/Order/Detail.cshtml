@@ -19,23 +19,17 @@
 
         
 
-                @using (Html.BeginForm("ZmienStatus", "Order", FormMethod.Post))
-                {
+        @using (Html.BeginForm("ZmienStatus", "Order", FormMethod.Post))
+        {
+        <input type="hidden"  asp-for="@Model.Id" class="form-control" aria-required="true" />
+            <div class="form-group">
+                <label asp-for="@Model.StanZamowienia" class="control-label"></label>
+                <select asp-for="@Model.StanZamowienia" class="form-control" asp-items="ViewBag.StanyZamowienia">
+                </select>
+            </div>
 
-
-            <input type="hidden"  asp-for="@Model.Id" class="form-control" aria-required="true" />
-
-
-
-                <div class="form-group">
-                    <label asp-for="@Model.StanZamowienia" class="control-label"></label>
-                    <select asp-for="@Model.StanZamowienia" class="form-control" asp-items="ViewBag.StanyZamowienia">
-                        <option>Select one</option>
-                    </select>
-                </div>
-
-            <input id="Submit" type="submit" value="Zapisz" />
-                }
+        <input id="Submit" type="submit" value="Zapisz" />
+        }
 
 
 

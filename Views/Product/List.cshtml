@@ -9,7 +9,7 @@
 @*
 @model partner_aluro.ViewModels.AddProductFormModel
 *@
-<h1>Lista produktów</h1>
+
 <div class="text-center">
     <h1 class="display-4">Lista produktów</h1>
     
@@ -36,7 +36,6 @@
                                         <th>Nazwa produktu</th>
                                         <th>Cena produktu</th>
                                         <th>Cena sprzedazy</th>
-                                        <th>Opis produktu</th>
                                         <th>Kategoria</th>
                                         <th>Edit</th>
                                         <th>Usuń</th>
@@ -52,7 +51,6 @@
                                             <td>@productFormModel.Name</td>
                                             <td>@productFormModel.CenaProduktu.ToString("C")</td>
                                             <td>@productFormModel.CenaProduktuDetal</td>
-                                            <td>@productFormModel.Description</td>
                                             <td>@productFormModel.CategoryNavigation.Name</td>
                                             <td>
                                                 <a asp-controller="Product" asp-action="Edit" asp-route-id="@productFormModel.ProductId">Edit</a>
@@ -71,7 +69,6 @@
                                         <th scope="col">Nazwa produktu</th>
                                         <th scope="col">Cena produktu</th>
                                         <th scope="col">Cena sprzedazy</th>
-                                        <th scope="col">Opis</th>
                                         <th scope="col">Kategoria</th>
                                         <th scope="col">Edytuj</th>
                                         <th scope="col">Usuń</th>

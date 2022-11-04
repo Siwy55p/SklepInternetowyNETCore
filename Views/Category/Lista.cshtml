@@ -10,8 +10,8 @@
     <div class="col-12 col-md-4 col-lg-3">
         <div class="row custom-kategory-menu sticky-top">
             <div class="card bg-light">
-                        @await Component.InvokeAsync("MenuCategory")
-                    </div>
+                    @await Component.InvokeAsync("MenuCategory")
+                </div>
             </div>
     </div>
     @*CONTENT PRAWA STRONA*@
@@ -48,7 +48,25 @@
 </div>
 
 @section Scripts{
+    <script>
+        function AddToCart(ProductId) {
+            var myOffcanvas = document.getElementById('offcanvas');
+            var bsOffcanvas = new bootstrap.Offcanvas(myOffcanvas);
+            bsOffcanvas.show();
 
+            var quantity = document.getElementById(ProductId).value;
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("AddToCart2", "Cart")',
+                data: { ProductId: ProductId, quantity: quantity },
+                success: function (result) {
+                    $("#mydiv").load(location.href + " #mydiv");
+                },
 
-
+                error: function (abc) {
+                    alert(abc.statusText);
+                },
+            });
+        }
+    </script>
 }

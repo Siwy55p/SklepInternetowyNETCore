@@ -25,7 +25,10 @@
                                             <th>Imie Nazwisko, nazwa(User)</th>
                                         }
                                         <th>Stan zamówienia</th>
-                                        <th>Podgląd</th>
+                                        @if (User.IsInRole("Administrator") || User.IsInRole("Manager"))
+                                        {
+                                            <th>Podgląd</th>
+                                        }
                                         <th>PDF</th>
                                     </tr>
                                 </thead>
@@ -37,16 +40,33 @@
                                             <td>@order.Id</td>
                                             <td>@order.OrderTotal.ToString("C")</td>
                                             <td>@order.OrderPlaced</td>
+
                                             @if (User.IsInRole("Administrator") || User.IsInRole("Manager"))
                                             {
                                                 <td>@order.User.UserName ,@order.User.Email</td>
                                             }
+                                            
+                                            @if (order.StanZamowienia == StanZamowienia.Nowe)
+                                            {
+                                                <td style="background: green">@order.StanZamowienia</td>
+                                            }else if (order.StanZamowienia == StanZamowienia.Wrealizacji)
+                                            {
+                                                <td style="background: DarkOrange">@order.StanZamowienia</td>
+                                            }else if (order.StanZamowienia == StanZamowienia.Zrealizowane)
+                                            {
+                                                <td style="background: BlueViolet">@order.StanZamowienia</td>
+                                            }else
+                                            {
+                                                <td>@order.StanZamowienia</td>
+                                            }
 
-
-                                            <td>@order.StanZamowienia</td>
-                                            <td>
+                                            @if (User.IsInRole("Administrator") || User.IsInRole("Manager"))
+                                            {
+                                                <td>
                                                 <a asp-controller="Order" asp-action="Detail" asp-route-id="@order.Id">Podgląd</a>
-                                            </td>
+                                                </td>
+                                            }
+
                                             <td>
                                                 <form method="post" asp-controller="Order" asp-route-id="@order.Id" asp-action="PDFOrder">
                                                     <label> </label>
@@ -66,7 +86,10 @@
                                             <th>Imie Nazwisko, nazwa(User)</th>
                                         }
                                         <th>Stan zamówienia</th>
-                                        <th>Podgląd</th>
+                                        @if (User.IsInRole("Administrator") || User.IsInRole("Manager"))
+                                        {
+                                             <th>Podgląd</th>
+                                        }
                                         <th>PDF</th>
                                     </tr>
                                 </tfoot>

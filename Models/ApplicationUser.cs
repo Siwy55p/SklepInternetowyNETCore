@@ -11,7 +11,7 @@ public class ApplicationUser : IdentityUser
     public string Nazwisko { get; set; }
     public string? NazwaFirmy { get; set; }
     public DateTime? DataZałożenia { get; set; }
-
+    public bool? Aktywny { get; set; }
     public int? Adress1rozliczeniowyId { get; set; }
     public int? Adress2dostawyId { get; set; }
 

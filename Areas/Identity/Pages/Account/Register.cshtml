@@ -90,35 +90,38 @@
                 <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">*@
 
 
-        <div class="form-floating flex-grow-1">
+        <div id="dane_firmy">
+            <div class="form-floating flex-grow-1">
 
-            <div class="form-group row">
-                <label class="col-sm-4 col-form-label custom-label required" asp-for="Input.NazwaFirmy"></label>
-                <div class="col-sm-5">
-                    <input disabled id="disabledInput" asp-for="Input.NazwaFirmy" class="form-control" autocomplete="NazwaFirmy" aria-required="true" value="@Model._model.Name" />
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label custom-label required" asp-for="Input.NazwaFirmy"></label>
+                    <div class="col-sm-5">
+                        <input disabled id="disabledInput" asp-for="Input.NazwaFirmy" class="form-control" autocomplete="NazwaFirmy" aria-required="true" value="@Model._model.Name" />
                     
-                   </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-4 col-form-label custom-label required" asp-for="Input.Ulica"></label>
-                <div class="col-sm-5">
-                    <input disabled id="disabledInput" asp-for="Input.Ulica" class="form-control" autocomplete="Ulica" aria-required="true" value="@Model._model.Ulica" />
+                       </div>
                 </div>
-            </div>
-            <div class="form-group row"> 
-                <label class="col-sm-4 col-form-label custom-label required " asp-for="Input.Miasto"></label>
-                <div class="col-sm-5">
-                    <input disabled id="disabledInput" asp-for="Input.Miasto" class="form-control" autocomplete="miasto" aria-required="true" value="@Model._model.Miejscowosc" />
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label custom-label required" asp-for="Input.Ulica"></label>
+                    <div class="col-sm-5">
+                        <input disabled id="disabledInput" asp-for="Input.Ulica" class="form-control" autocomplete="Ulica" aria-required="true" value="@Model._model.Ulica" />
+                    </div>
                 </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-4 col-form-label custom-label required" asp-for="Input.KodPocztowy1"></label>
-                <div class="col-sm-5">
-                    <input disabled id="disabledInput" asp-for="Input.KodPocztowy1" class="form-control" autocomplete="KodPocztowy1" aria-required="true" value="@Model._model.KodPocztowy" />
-@*                    <span asp-validation-for="Input.KodPocztowy1" class="text-danger"></span>*@
+                <div class="form-group row"> 
+                    <label class="col-sm-4 col-form-label custom-label required " asp-for="Input.Miasto"></label>
+                    <div class="col-sm-5">
+                        <input disabled id="disabledInput" asp-for="Input.Miasto" class="form-control" autocomplete="miasto" aria-required="true" value="@Model._model.Miejscowosc" />
+                    </div>
                 </div>
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label custom-label required" asp-for="Input.KodPocztowy1"></label>
+                    <div class="col-sm-5">
+                        <input disabled id="disabledInput" asp-for="Input.KodPocztowy1" class="form-control" autocomplete="KodPocztowy1" aria-required="true" value="@Model._model.KodPocztowy" />
+                    @* <span asp-validation-for="Input.KodPocztowy1" class="text-danger"></span>*@
+                    </div>
+                </div>
+                    <button id="registerSubmit" type="submit" class="btn btn-secondary w-20">Zarejestruj sie</button>
+
             </div>
-                <button id="registerSubmit" type="submit" class="btn btn-secondary w-20">Zarejestruj sie</button>
 
         </div>
     </form>               
@@ -128,27 +131,52 @@
 
 @section Scripts {
 
-    <script>
-        // Example starter JavaScript for disabling form submissions if there are invalid fields
-        (function () {
-            'use strict'
+@*    <script>
+        $(function () {
+            $("#floatingInputVAT").keyup(function (e) {
+                var Vat = $("#floatingInputVAT").val();
 
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            var forms = document.querySelectorAll('.needs-validation')
+                    //var quantity = document.getElementById(ProductId).value;
 
-            // Loop over them and prevent submission
-            Array.prototype.slice.call(forms)
-                .forEach(function (form) {
-                    form.addEventListener('submit', function (event) {
-                        if (!form.checkValidity()) {
-                            event.preventDefault()
-                            event.stopPropagation()
-                        }
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("SprawdzNIP")',
+                        data: { Vat: Vat },
+                        success: function (result) {
 
-                        form.classList.add('was-validated')
-                    }, false)
-                })
-        })()
+                            alert(result);
+                            $("#dane_firmy").load(location.href + " #dane_firmy");
+                        },
+
+                        error: function (abc) {
+                            alert(abc.statusText);
+                        },
+                    });
+            });
+        });
+    </script>*@
+
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function () {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
 </script>
 
     <partial name="_ValidationScriptsPartial" />

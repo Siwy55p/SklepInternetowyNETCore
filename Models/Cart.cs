@@ -132,7 +132,20 @@ namespace partner_aluro.Models
                     .ToList());
         }
 
-        public int GetCartTotal()
+        public int GetCartTotalBrutto()
+        {
+            int CartTotal = (int)_context.CartItems
+                .Where(ci => ci.CartId == Id)
+                .Select(ci => ci.Product.CenaProduktu * ci.Quantity)
+                .Sum();
+
+            CartTotal = (int)(CartTotal * (1 - (Core.Constants.Rabat / 100)));
+
+            CartTotal = (int)(CartTotal * Core.Constants.Vat);
+
+            return CartTotal;
+        }
+        public int GetCartTotalNetto()
         {
             int CartTotal = (int)_context.CartItems
                 .Where(ci => ci.CartId == Id)

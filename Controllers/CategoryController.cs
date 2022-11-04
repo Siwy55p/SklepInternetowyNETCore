@@ -100,6 +100,8 @@ namespace partner_aluro.Controllers
         {
             Category kategoria = await _iUnitOfWorkCategory.Category.GetAsync(data.CategoryId);
 
+
+
             if (kategoria == null)
             {
                 return NotFound();
@@ -108,6 +110,7 @@ namespace partner_aluro.Controllers
             kategoria.Name = data.Name;
             kategoria.Description = data.Description;
             kategoria.kolejnosc = data.kolejnosc;
+            kategoria.Aktywny = data.Aktywny;
 
             _iUnitOfWorkCategory.Category.Update(kategoria);
 
