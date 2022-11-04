@@ -40,7 +40,7 @@
                     </ul>
                 </div>
                 @*Srodek strona*@
-                <div class="col-sm-4">
+                <div class="col">
                     @await Component.InvokeAsync("UserStatus")
                 </div>
                 @*Srodek strona*@
@@ -49,22 +49,19 @@
                 <div class="col">
                     <nav class="navbar navbar-fixed-top navbar-dark bg-inverse">
                         @*PRAWA STRONA START*@
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown2" aria-controls="navbarNavDarkDropdown2" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse bg-dark" id="navbarNavDarkDropdown2">
-                                <ul class="navbar-nav z-index-2">
-                                    <li>
-                                    <a class="nav-link" asp-controller="Order" asp-action="ListaZamowienZalogowanegoUzytkownika">Zamówienia</a>
-                                    </li>
-                                    <li>
-                                    @await Component.InvokeAsync("CartHeader")
-                                    @*<a class="nav-link" asp-area="" asp-controller="Cart" asp-action="ZlozZamowienie"><i class="fa-solid fa-cart-shopping">@cart.CartItems.Count</i></a>*@
-                                    </li>
-                                    <li>
-                                        <partial name="_LoginPartial" />
-                                    </li>
-                                </ul>
+                        <div class=" bg-dark" id="navbarNavDarkDropdown2">
+                            <ul class="navbar-nav z-index-2">
+                                <li>
+                                <a class="nav-link" asp-controller="Order" asp-action="ListaZamowienZalogowanegoUzytkownika">Zamówienia</a>
+                                </li>
+                                <li>
+                                @await Component.InvokeAsync("CartHeader")
+                                @*<a class="nav-link" asp-area="" asp-controller="Cart" asp-action="ZlozZamowienie"><i class="fa-solid fa-cart-shopping">@cart.CartItems.Count</i></a>*@
+                                </li>
+                                <li>
+                                    <partial name="_LoginPartial" />
+                                </li>
+                            </ul>
                         </div>
                     </nav>
                 </div>
