@@ -25,11 +25,9 @@ namespace partner_aluro.Controllers
 
         private readonly ApplicationDbContext _context;
 
-        private readonly Cart _cart;
 
-        public CategoryController(Cart cart, ICategoryService categoryDB, IUnitOfWorkCategory iUnitOfWorkCategory, ApplicationDbContext context)
+        public CategoryController(ICategoryService categoryDB, IUnitOfWorkCategory iUnitOfWorkCategory, ApplicationDbContext context)
         {
-            _cart = cart;
             _categoryService = categoryDB;
             _iUnitOfWorkCategory = iUnitOfWorkCategory;
             _context = context; 
@@ -147,7 +145,7 @@ namespace partner_aluro.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public async Task<IActionResult> Lista(int? page, string? szukanaNazwa, int? Sort) //Link do wyswietlania po wyborze kategorii
         {
-            var products = _cart.GetAllCartItems();
+            //var products = _cart.GetAllCartItems();
 
             var categoryPage = new MvcBreadcrumbNode("Kategoria", "Home", szukanaNazwa);
             ViewData["BreadcrumbNode"] = categoryPage;
@@ -157,10 +155,10 @@ namespace partner_aluro.Controllers
             ViewData["Sort"] = Sort;
 
             //jesli jest cos w karcie przekaz do zmiennej, pokaz wartosc karty true
-            if (products.Count > 0)
-            {
-                ViewData["Pokaz"] = "show";
-            }
+            //if (products.Count > 0)
+            //{
+            //    ViewData["Pokaz"] = "show";
+            //}
 
             if (szukanaNazwa == null || szukanaNazwa == "")
             {
@@ -191,7 +189,7 @@ namespace partner_aluro.Controllers
             else
             {
 
-                List<Product> produkty2 = await _context.Products.Where(x => x.CategoryNavigation.Name == szukanaNazwa).ToListAsync();
+                List<Product> produkty2 = await _context.Products.Where(x => x.CategoryNavigation.Name == szukanaNazwa || x.CategorySubNavigation.Name == szukanaNazwa).ToListAsync();
                 
 
                 if (szukanaNazwa != null && szukanaNazwa.Length >= 1)
@@ -239,7 +237,7 @@ namespace partner_aluro.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public async Task<IActionResult> Lista2(int? page, string? szukanaNazwa, int? Sort) //Link do wyswietlania po wyborze kategorii TO JEST TYLKO KONTENER
         {
-            var products = _cart.GetAllCartItems();
+            //var products = _cart.GetAllCartItems();
 
             var categoryPage = new MvcBreadcrumbNode("Kategoria", "Home", szukanaNazwa);
             ViewData["BreadcrumbNode"] = categoryPage;
