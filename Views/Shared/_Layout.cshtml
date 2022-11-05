@@ -67,9 +67,11 @@
         $(function () {
             $("#szukanaNazwa").keyup(function (e) {
                 var n = $("#szukanaNazwa").val();
+                var page = 2;
                 $.get("/Category/Lista2?szukanaNazwa=" + n, function (r) {
                     $("#SekcjaListaKategori").html(r);
                 });
+
             });
         });
     </script>

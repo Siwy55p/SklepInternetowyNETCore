@@ -47,9 +47,9 @@ namespace partner_aluro.Models
 
         public string? ImageUrl { get; set; }
 
-        [Display(Name="Obrazek główny")]
+        [Display(Name = "Obrazek główny")]
         [NotMapped]
-        ImageModel product_Image { get; set; }
+        ImageModel? product_Image { get; set; } = new ImageModel();
         //public IFormFile? FrontImage { get; set; }
 
         [ForeignKey(nameof(CategoryId))]

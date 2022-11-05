@@ -5,3 +5,18 @@
 }
 
 @Html.Partial("_ListOrder")
+
+
+
+@section Scripts {
+
+    <script>
+$(document).ready(function () {
+  $(".data-table2").each(function (_, table) {
+      $(table).DataTable({
+          order: [[0, 'desc'], [2, 'asc']]
+      });
+  });
+});
+    </script>
+}

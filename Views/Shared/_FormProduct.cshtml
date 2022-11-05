@@ -58,7 +58,13 @@
             <img id="FrontImagePrv" src="~/images/produkty/@Model.Symbol/@Model.ImageUrl" alt="Logo image" width="150" height="150" style="border:1px; margin-top:20px; margin-left:120px" />
         </div>
 
-        @if(Model.product_Images != null)
+        <div class="row">
+            <div class="col-md-6">
+                <input type="file" asp-for="@Model.product_Images" class="form-control" id="images" name="images[]" onchange="preview_images();" multiple accept="image/jpeg, image/png, image/jpg" />
+            </div>
+        </div>
+
+        @if (Model.product_Images != null)
         {
             @foreach (var image in Model.product_Images)
             {
@@ -66,20 +72,14 @@
             }
         }
 
-        <div class="row">
-            <div class="col-md-6">
-                <input type="file" asp-for="@Model.product_Images" class="form-control" id="images" name="images[]" onchange="preview_images();" multiple accept="image/jpeg, image/png, image/jpg" />
-            </div>
-        </div>
-        <div class="col-sm-2"><img class="img_responsive" src=""></div>
-
-
-        <div class="row" id="image_preview">  @*Tutaj wyswietlaja mi sie zdjecia*@
+        <div class="row" id="image_preview">
+            @*Tutaj wyswietlaja mi sie zdjecia*@
         </div>  @*Tutaj wyswietlaja mi sie zdjecia*@
+
 
         <div class="form-group row">
             <label asp-for="@Model.Materiał" class="col-sm-2 col-form-label">Materiał: </label>
-            <div class="col-sm-2">
+            <div class="col-sm-4">
                 <input asp-for="@Model.Materiał" class="form-control" aria-required="true" placeholder="Materiał" />
                 <span asp-validation-for="@Model.Materiał" class="text-danger">
                 </span>
@@ -124,11 +124,3 @@
         </div>
     </div>
 </div>
-@section Sctipts {
-    <script type="text/javascript">
-    $(".custom-file-input").on("change", function () {
-        var fileName = $(this).val().split("\\").pop();
-        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-    }); 
-    </script>
-}

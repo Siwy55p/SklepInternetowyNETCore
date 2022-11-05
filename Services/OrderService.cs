@@ -81,9 +81,9 @@ namespace partner_aluro.Services
             return adress2;
         }
 
-        public List<OrderItem> List()
+        public async Task<List<OrderItem>> ListAsync()
         {
-            var OrderItems = _context.OrderItems.ToList();
+            var OrderItems = await _context.OrderItems.OrderBy(x=>x.Id).ToListAsync();
             return OrderItems;
         }
 
@@ -117,10 +117,15 @@ namespace partner_aluro.Services
             return OrderId;
         }
 
-        public List<Order> ListOrdersAll()
+        public async Task<List<Order>> ListOrdersAll()
         {
-            List<Order> listaZamowien = _context.Orders
-                .Include(user => user.User).ToList();
+            List<Order> listaZamowien = await _context.Orders
+                .Include(a1 => a1.adresRozliczeniowy)
+                .Include(a2 => a2.AdressDostawy)
+                .Include(user => user.User)
+                .OrderBy(d => d.OrderPlaced)
+                .ToListAsync();
+
 
             return listaZamowien;
         }

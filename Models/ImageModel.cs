@@ -9,7 +9,9 @@ namespace partner_aluro.Models
         [Key]
         public int ImageId { get; set; }
 
+        public string? path { get; set; }
 
+        public int? kolejnosc { get; set; }
         public int? ProductId { get; set; }
 
         [Column(TypeName ="nvarchar(50)")]

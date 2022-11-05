@@ -35,6 +35,7 @@ namespace partner_aluro.Controllers
         }
 
 
+
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
         [HttpGet]
         public async Task <IActionResult> Edit(int id)
@@ -50,7 +51,7 @@ namespace partner_aluro.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Product product)
         {
-
+            ViewBag.Category = GetCategories();
             if (id != product.ProductId)
             {
                 return NotFound();
@@ -84,6 +85,7 @@ namespace partner_aluro.Controllers
             ViewBag.Category = GetCategories();
             ViewBag.SubCategory = GetSubCategories();
             Product product = new Product();
+
 
             return View(product);
         }
@@ -182,6 +184,7 @@ namespace partner_aluro.Controllers
                     //add product Image for new product
                     product.product_Images.Add(new ImageModel
                     {
+                        path = uploads,
                         Tytul = product.Name,
                         ImageName = dynamicFileName,
                         ProductId = product.ProductId

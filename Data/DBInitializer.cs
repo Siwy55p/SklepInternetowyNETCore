@@ -17,7 +17,6 @@ namespace partner_aluro.Data
             _context = context;
         }
 
-
         public void SeedProduktData(ApplicationDbContext context)
         {
             var category = new List<Category>

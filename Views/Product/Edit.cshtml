@@ -4,11 +4,36 @@
     Layout = "~/Views/Shared/_Dashboard.cshtml";
 }
 
-<form asp-action="Edit" asp-route-id="@Model.ProductId" asp-controller="Product" class="form-horizontal" method="post" enctype="multipart/form-data">
+<form class="needs-validation" asp-action="Edit" asp-route-id="@Model.ProductId" asp-controller="Product" class="form-horizontal" method="post" enctype="multipart/form-data">
+    
+    
     @Html.HiddenFor(h=>Model.ProductId)
+
+    @Html.ValidationSummary()
 
     @Html.Partial("_FormProduct")
 
 
     <button type="submit">Zapisz</button>
 </form>
+
+
+
+@section Scripts {
+    <script>
+        function preview_images() {
+            var total_file = document.getElementById("images").files.length;
+            for (var i = 0; i < total_file; i++) {
+                $('#image_preview').append("<div class='col-sm-2'><img  style='width: 110px;' src='" + URL.createObjectURL(event.target.files[i]) + "'></div>");
+            }
+        }
+    </script>
+
+    <script type="text/javascript">
+        $(".custom-file-input").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
+
+}

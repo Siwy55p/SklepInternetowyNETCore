@@ -5,10 +5,10 @@ namespace partner_aluro.Services.Interfaces
     public interface IOrderService
     {
         List<OrderItem> List(int id);
-        List<OrderItem> List();
+        Task<List<OrderItem>> ListAsync();
         OrderItem GetItem(int id);
 
-        List<Order> ListOrdersAll();
+        Task<List<Order>> ListOrdersAll();
 
         List<Order> ListOrdersUser(string UserID);
 

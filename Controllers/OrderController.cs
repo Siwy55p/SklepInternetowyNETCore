@@ -629,9 +629,9 @@ namespace partner_aluro.Controllers
         }
 
         [Authorize(Roles = $"{Constants.Roles.Administrator},{Constants.Roles.Manager}")]
-        public IActionResult ListaZamowien() // To jest widok listy zamowien w panelu dashoboards
+        public async Task<IActionResult> ListaZamowienAsync() // To jest widok listy zamowien w panelu dashoboards
         {
-            List<Order> orders = _orderService.ListOrdersAll();
+            List<Order> orders = await _orderService.ListOrdersAll();
 
             return View(orders);
         }

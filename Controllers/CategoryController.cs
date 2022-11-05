@@ -245,6 +245,13 @@ namespace partner_aluro.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public async Task<IActionResult> Lista2(int? page, string? szukanaNazwa, int? Sort) //Link do wyswietlania po wyborze kategorii TO JEST TYLKO KONTENER
         {
+            var products = _cart.GetAllCartItems();
+
+            var categoryPage = new MvcBreadcrumbNode("Kategoria", "Home", szukanaNazwa);
+            ViewData["BreadcrumbNode"] = categoryPage;
+            ViewData["Title"] = szukanaNazwa;
+            ViewData["szukanaNazwa"] = szukanaNazwa;
+
             List <Product> produkty = await szukanie(szukanaNazwa);
             var pageNumber = page ?? 1; // if no page was specified in the querystring, default to the first page (1)
             var onePageOfProducts = produkty.ToPagedList(pageNumber, 9); // will only contain 25 products max because of the pageSize

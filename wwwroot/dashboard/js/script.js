@@ -129,6 +129,16 @@ charts.forEach(function (chart) {
 
 $(document).ready(function () {
   $(".data-table").each(function (_, table) {
-    $(table).DataTable();
+      $(table).DataTable({
+          order: [[1, 'desc'], [2, 'asc']]
+      });
   });
+});
+
+$(document).ready(function () {
+    $(".data-table2").each(function (_, table) {
+        $(table).DataTable({
+            order: [[1, 'desc'], [0, 'asc']]
+        });
+    });
 });
