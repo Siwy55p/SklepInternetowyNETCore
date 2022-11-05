@@ -1,5 +1,3 @@
-
-
 .custom-label {
     text-align: right;
 }
@@ -40,85 +38,6 @@
     color: #000 !important;
 }
 
-/*PRZYCISK select SORT*/
-.select-wrapper {
-    position: relative;
-    user-select: none;
-    width: 100%;
-}
-
-.select {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    border-width: 0 2px 0 2px;
-    border-style: solid;
-    border-color: #394a6d;
-}
-
-.select__trigger {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 22px;
-    font-size: 20px;
-    font-weight: 300;
-    color: #3b3b3b;
-    height: 60px;
-    line-height: 60px;
-    background: #ffffff;
-    cursor: pointer;
-    border-width: 2px 0 2px 0;
-    border-style: solid;
-    border-color: #394a6d;
-}
-
-.custom-options {
-    position: absolute;
-    display: block;
-    top: 100%;
-    left: 0;
-    right: 0;
-    border: 2px solid #394a6d;
-    border-top: 0;
-    background: #fff;
-    transition: all 0.5s;
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    z-index: 2;
-}
-
-.select.open .custom-options {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: all;
-}
-
-.custom-option {
-    position: relative;
-    display: block;
-    padding: 0 22px 0 22px;
-    font-size: 22px;
-    font-weight: 300;
-    color: #3b3b3b;
-    line-height: 60px;
-    cursor: pointer;
-    transition: all 0.5s;
-}
-
-    .custom-option:hover {
-        cursor: pointer;
-        background-color: #b2b2b2;
-    }
-
-    .custom-option.selected {
-        color: #ffffff;
-        background-color: #305c91;
-    }
-/*PRZYCISK select SORT*/
-
 /*PRZYCISK OTWIERAJACY menu TWOJE ZAMOWIENIE PRAWA STRONA STARE*/
 .btn-open {
     position: relative;
@@ -132,14 +51,11 @@
 /*PRZYCISK OTWIERAJACY menu TWOJE ZAMOWIENIE PRAWA STRONA STARE*/
 
 
-
-
 /*menu LEWE menu CATEGORY*/
 .row.custom-kategory-menu.sticky-top {
     top: 53px;
     z-index: 1;
 }
-
 
 .header {
     display: flex;
@@ -179,14 +95,10 @@ body {
     background-color: #c67605;
 }
 
-
 .field-validation-error {
     color: red;
     font-size: smaller;
 }
-
-
-
 
 #lblCartCount {
     font-size: 12px;
@@ -235,117 +147,6 @@ body {
     text-align: center;
 }
 
-/* START STYLE
-** Style Simple Ecommerce Theme for Bootstrap 4 https://bootsnipp.com/snippets/yNWWa
-** Created by T-PHP https://t-php.fr/43-theme-ecommerce-bootstrap-4.html
-*/
-
-.language
-{
-    margin-top: 20px;
-}
-
-.bloc_left_price {
-    color: #c01508;
-    text-align: center;
-    font-weight: bold;
-    font-size: 150%;
-}
-
-.navbar-custom {
-    height: 40px;
-}
-
-.header2-custom {
-    padding-top: 25px;
-}
-
-label.required::before {
-    content: '*';
-    margin-right: 4px;
-    color: red;
-}
-
-#logoLogin {
-    float: right;
-    margin: 0 0 0 15px;
-    position: absolute;
-    left: -10px;
-    bottom: 20px;
-}
-
-.logoLoginReg {
-    position: relative;
-    /*height: 300px;*/
-    max-height: 340px;
-}
-
-
-.category_block li:hover {
-    background-color: #007bff;
-}
-
-    .category_block li:hover a {
-        color: #ffffff;
-    }
-
-.category_block li a {
-    color: #343a40;
-}
-
-.add_to_cart_block .price {
-    color: #c01508;
-    text-align: center;
-    font-weight: bold;
-    font-size: 200%;
-    margin-bottom: 0;
-}
-
-.add_to_cart_block .price_discounted {
-    color: #343a40;
-    text-align: center;
-    text-decoration: line-through;
-    font-size: 140%;
-}
-
-.product_rassurance {
-    padding: 10px;
-    margin-top: 15px;
-    background: #ffffff;
-    border: 1px solid #6c757d;
-    color: #6c757d;
-}
-
-    .product_rassurance .list-inline {
-        margin-bottom: 0;
-        text-transform: uppercase;
-        text-align: center;
-    }
-
-        .product_rassurance .list-inline li:hover {
-            color: #343a40;
-        }
-
-.reviews_product .fa-star {
-    color: gold;
-}
-
-.pagination {
-    margin-top: 20px;
-}
-
-footer {
-    background: #343a40;
-    padding: 40px;
-}
-
-    footer a {
-        color: #f8f9fa !important
-    }
-/*
-** END Style Simple Ecommerce Theme for Bootstrap 4 https://bootsnipp.com/snippets/yNWWa
-** Created by T-PHP https://t-php.fr/43-theme-ecommerce-bootstrap-4.html
-*/
 .search{
     z-index: 20;
     max-width: 615px;
