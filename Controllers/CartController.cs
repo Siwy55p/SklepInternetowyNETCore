@@ -105,28 +105,7 @@ namespace partner_aluro.Controllers
 
             return View(vm);
         }
-        public async Task<IActionResult> AddToCart3(int ProductId)
-        {
-            var selectedProduct = await GetProductId(ProductId);
 
-            if (selectedProduct != null)
-            {
-                _cart.AddToCart(selectedProduct, 1);
-            }
-
-            return RedirectToAction("Index");
-        }
-        public async Task<IActionResult> AddToCart2(int ProductId, int quantity)
-        {
-            var selectedProduct = await GetProductId(ProductId);
-
-            if (selectedProduct != null)
-            {
-                _cart.AddToCart(selectedProduct, quantity);
-            }
-
-            return RedirectToAction("Index");
-        }
         public async Task<IActionResult> AddToCart(int id, int quantity)
         {
             var selectedProduct = await GetProductId(id);
@@ -137,6 +116,16 @@ namespace partner_aluro.Controllers
             }
 
             return RedirectToAction("Index");
+        }
+        public async Task AddToCart2(int ProductId, int quantity)
+        {
+            var selectedProduct = await GetProductId(ProductId);
+
+            if (selectedProduct != null)
+            {
+                _cart.AddToCart(selectedProduct, quantity);
+            }
+
         }
         public async Task<IActionResult> RemoveFromCart(int id)
         {
@@ -149,6 +138,17 @@ namespace partner_aluro.Controllers
 
             return RedirectToAction("Index");
         }
+        public async Task RemoveFromCart2(int id)
+        {
+            var selectedProduct = await GetProductId(id);
+
+            if (selectedProduct != null)
+            {
+                _cart.RemoveFromCart(selectedProduct);
+            }
+
+        }
+
         public async Task<IActionResult> ReduceQuantity(int id)
         {
             var selectedProduct = await GetProductId(id);
@@ -160,6 +160,17 @@ namespace partner_aluro.Controllers
 
             return RedirectToAction("Index");
         }
+        public async Task ReduceQuantity2(int id)
+        {
+            var selectedProduct = await GetProductId(id);
+
+            if (selectedProduct != null)
+            {
+                _cart.ReduceQuantity(selectedProduct);
+            }
+
+        }
+
         public async Task<IActionResult> IncreaseQuantity(int id)
         {
             var selectedProduct = await GetProductId(id);
@@ -171,7 +182,16 @@ namespace partner_aluro.Controllers
 
             return RedirectToAction("Index");
         }
+        public async Task IncreaseQuantity2(int id)
+        {
+            var selectedProduct = await GetProductId(id);
 
+            if (selectedProduct != null)
+            {
+                _cart.IncreaseQuantity(selectedProduct);
+            }
+
+        }
         public async Task<IActionResult> ClearCart()
         {
             _cart.ClearCart();

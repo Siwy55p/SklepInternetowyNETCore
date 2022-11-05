@@ -39,12 +39,16 @@
                 @CenaJednostkowa.ToString("C")
         </div>
         <div class="col">
-            <a asp-controller="Cart" asp-action="ReduceQuantity" asp-route-id="@item.Product.ProductId"><i class="fa-solid fa-minus"></i></a>
+
+                <a onclick="ReduceQuantity(@item.Product.ProductId)"><i class="fa-solid fa-minus"></i></a>
+                
             @item.Quantity
-            <a asp-controller="Cart" asp-action="IncreaseQuantity" asp-route-id="@item.Product.ProductId"><i class="fa-solid fa-plus"></i></a>   
-        </div>
+
+                <a onclick="IncreaseQuantity(@item.Product.ProductId)"><i class="fa-solid fa-plus"></i></a>
+            </div>
         <div class="col">
-            <a asp-controller="Cart" asp-action="RemoveFromCart" asp-route-id="@item.Product.ProductId" class="text-danger"><i class="fa-solid fa-xmark"></i></a>
+
+                <a onclick="RemoveFromCart(@item.Product.ProductId)" class="text-danger"><i class="fa-solid fa-xmark"></i></a>
         </div>
     </div>
     }
