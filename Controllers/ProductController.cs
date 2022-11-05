@@ -71,7 +71,7 @@ namespace partner_aluro.Controllers
             return View(product);
         }
 
-
+        [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
         [HttpGet]
         public IActionResult Add()
         {
@@ -82,6 +82,7 @@ namespace partner_aluro.Controllers
             return View(product);
         }
 
+        [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
         [HttpPost]
         public async Task<IActionResult> Add(Product product)
         {

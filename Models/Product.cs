@@ -35,6 +35,7 @@ namespace partner_aluro.Models
         public string? Pakowanie { get; set; }
 
         public string? Materiał { get; set; }
+        public int? Ilosc { get; set; }
 
         public decimal? CenaProduktuDetal { get; set; }
         public decimal? WagaProduktu { get; set; }

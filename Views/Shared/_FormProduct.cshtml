@@ -23,7 +23,7 @@
             </div>
 
         <div class="form-group row">
-                <label asp-for="@Model.CenaProduktu" class="col-sm-3 col-form-label">Cena produktu hurt </label>
+                <label asp-for="@Model.CenaProduktu" class="col-sm-3 col-form-label">Cena produktu hurt (netto) </label>
                 <div class="col-sm-4">
                 <input asp-for="@Model.CenaProduktu" class="form-control" aria-required="true" placeholder="Cena produktu" />
                 <span asp-validation-for="@Model.CenaProduktu" class="text-danger">
@@ -34,6 +34,15 @@
                 <label asp-for="@Model.CenaProduktuDetal" class="col-sm-3 col-form-label">Cena detaliczna: </label>
                 <div class="col-sm-4">
                 <input asp-for="@Model.CenaProduktuDetal" class="form-control" aria-required="true" placeholder="Cena detaliczna produktu" />
+                <span asp-validation-for="@Model.CenaProduktuDetal" class="text-danger">
+                </span>
+                </div>
+        </div>
+
+        <div class="form-group row">
+                <label asp-for="@Model.CenaProduktuDetal" class="col-sm-3 col-form-label">Ilość: </label>
+                <div class="col-sm-4">
+                <input asp-for="@Model.CenaProduktuDetal" class="form-control" aria-required="true"/>
                 <span asp-validation-for="@Model.CenaProduktuDetal" class="text-danger">
                 </span>
                 </div>

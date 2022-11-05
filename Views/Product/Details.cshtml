@@ -2,6 +2,12 @@
 
 @*https://mansfeld.pl/programowanie/galeria-lightbox-bez-jquery/*@
 
+@section LinkStyleHead
+    {
+    <link href="~/css/glightbox.css" rel="stylesheet" />
+    <link href="~/css/glightbox.min.css" rel="stylesheet" />
+    }
+
 <div class="container mt-5 mb-5">	
     <div class="card">	
         <div class="row g-0">
@@ -14,7 +20,10 @@
 
                 <div class="column">
                     <div class="main_image">
-                        <img id=featured src="~/images/produkty/@Model.Symbol/@Model.ImageUrl" id="main_product_image" width="350px">
+                        <a id="myLink" href="~/images/produkty/@Model.Symbol/@Model.ImageUrl" class="glightbox">
+                            <img id=featured src="~/images/produkty/@Model.Symbol/@Model.ImageUrl" max-width="350px">
+                        </a>
+
                     </div>
 
                     <div id="slide-wrapper">
@@ -23,7 +32,9 @@
                         <div id="slider">
                             @foreach (var img in Model.product_Images)
                             {
-                                <img class="thumbnail_product" src="~/images/produkty/@Model.Symbol/@img.ImageName" alt="@img.Product" width="70">
+                                <a href="~/images/produkty/@Model.Symbol/@img.ImageName" class="glightbox" data-gallery="gallery">
+                                    <img class="thumbnail_product" src="~/images/produkty/@Model.Symbol/@img.ImageName" alt="@img.Product" width="70px">
+                                </a>
                             }
                         </div>
 
@@ -59,7 +70,7 @@
 
                     <div class="row card-bar-action m-1 p-2">
                         <div class="col-4">
-                            <input type="number" id="@Model.ProductId" name="quantity" value="1" class="form-control" aria-required="true" placeholder="Ilość" min="1" max="20" />
+                            <input type="number" id="@Model.ProductId" name="quantity" value="1" class="form-control" aria-required="true" placeholder="Ilość" min="1" max="@Model.Ilosc" />
                         </div>
                         <div class="col">
                             <button value="@Model.ProductId" onclick="AddToCart(@Model.ProductId)" data-bs-target="offcanvas" role="button">Dodaj do zamowienia</button>
@@ -87,7 +98,18 @@
 
 @section Scripts {
 
+    <script src="~/js/glightbox.js"></script>
+    <script src="~/js/glightbox.min.js"></script>
+
     <script>
+        const lightbox = GLightbox({
+            touchNavigation: true,
+            loop: false,
+            autoplayVideos: true
+        });
+    </script>
+
+@*    <script>
     function swipe() {
        var largeImage = document.getElementById('largeImage');
        largeImage.style.display = 'block';
@@ -97,7 +119,7 @@
        window.open(url,'Image','width=largeImage.stylewidth,height=largeImage.style.height,resizable=1');
     }
     </script>
-
+*@
 
     <script type="text/javascript">
 		let thumbnails = document.getElementsByClassName('thumbnail_product')
@@ -116,7 +138,11 @@
 
 				this.classList.add('active')
 				document.getElementById('featured').src = this.src
-			})
+
+
+                document.getElementById('myLink').href = this.src
+
+            })
 		}
 
 
