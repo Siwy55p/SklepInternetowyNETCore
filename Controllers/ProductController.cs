@@ -11,6 +11,9 @@ using partner_aluro.Services;
 
 namespace partner_aluro.Controllers
 {
+
+    [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
+
     [Authorize]
     public class ProductController : Controller
     {
@@ -108,6 +111,7 @@ namespace partner_aluro.Controllers
             product.ImageUrl = uniqueFileName;
 
             ModelState.Remove("CategoryNavigation");
+            ModelState.Remove("CategorySubNavigation");
             ModelState.Remove("product_Images");
 
             if (!ModelState.IsValid)

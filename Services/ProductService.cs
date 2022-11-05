@@ -30,6 +30,7 @@ namespace partner_aluro.Services
         {
             var product = await _context.Products
                 .Include(p => p.CategoryNavigation)
+                .Include(p => p.CategorySubNavigation)
                 .Include(p => p.product_Images)
                 .FirstOrDefaultAsync(m => m.ProductId == id);
 

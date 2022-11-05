@@ -24,6 +24,7 @@ namespace partner_aluro.Data
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Category { get; set; }
         public DbSet<SubCategory> SubCategory { get; set; }
+
         public DbSet<CartItem> CartItems { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
@@ -41,8 +42,14 @@ namespace partner_aluro.Data
             // Customize the ASP.NET Identity model and override the defaults if needed.
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
-
+            
             builder.ApplyConfiguration(new ApplicationUserEntityConfiguration());
+
+            //builder.Entity<Category>()
+            //    .ToTable("Category")
+            //    .HasDiscriminator<int>("CategoryId")
+            //    .HasValue<SubCat>(1);
+
 
         }
     }

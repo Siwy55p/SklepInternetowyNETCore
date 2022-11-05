@@ -74,7 +74,7 @@ namespace partner_aluro.Controllers
         public async Task<IActionResult> AddSubCategoryAsync(SubCategory data)
         {
             ModelState.Remove("SubCategories");
-            data.Categories = await _categoryService.GetAsync(data.CategoryId);
+            data.Category = await _categoryService.GetAsync(data.CategoryId);
 
             ModelState.Remove("Categories");
             if (!ModelState.IsValid)

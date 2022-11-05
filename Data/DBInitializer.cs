@@ -19,16 +19,16 @@ namespace partner_aluro.Data
 
         public void SeedProduktData(ApplicationDbContext context)
         {
-            var category = new List<Category>
-            {
-                new Category(){CategoryId=1,Name="Meble", Description="Donice", NazwaPlikuIkony="donice.jpg" },
-                new Category(){CategoryId=2,Name="Oświetlenie", Description="Donice", NazwaPlikuIkony="donice.jpg" },
-                new Category(){CategoryId=3,Name="Donice i Osłonki", Description="Donice", NazwaPlikuIkony="donice.jpg" },
-                new Category(){CategoryId=4,Name="Dodatki do Wnętrz", Description="Donice", NazwaPlikuIkony="donice.jpg" },
-                new Category(){CategoryId=5,Name="New Collection", Description="Donice", NazwaPlikuIkony="donice.jpg" },
-            };
+            //var category = new List<Category>
+            //{
+            //    new Category(){CategoryId=1,Name="Meble", Description="Donice", NazwaPlikuIkony="donice.jpg" },
+            //    new Category(){CategoryId=2,Name="Oświetlenie", Description="Donice", NazwaPlikuIkony="donice.jpg" },
+            //    new Category(){CategoryId=3,Name="Donice i Osłonki", Description="Donice", NazwaPlikuIkony="donice.jpg" },
+            //    new Category(){CategoryId=4,Name="Dodatki do Wnętrz", Description="Donice", NazwaPlikuIkony="donice.jpg" },
+            //    new Category(){CategoryId=5,Name="New Collection", Description="Donice", NazwaPlikuIkony="donice.jpg" },
+            //};
 
-            category.ForEach(k => context.Category.Add(k));
+            //category.ForEach(k => context.Category.Add(k));
             context.SaveChanges();
 
             var produkty = new List<Product>

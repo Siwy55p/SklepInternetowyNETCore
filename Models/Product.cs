@@ -11,6 +11,7 @@ namespace partner_aluro.Models
         [Key]
         public int ProductId { get; set; }
         public int CategoryId { get; set; }
+        public int? SubCategoryId { get; set; }
         public int ProductImagesId { get; set; }
 
         [Required(ErrorMessage = "Pole Nazwa musi być wypełnione")]
@@ -56,6 +57,11 @@ namespace partner_aluro.Models
         [Display(Name="Kategoria")]
         [InverseProperty("Produkty")]
         public virtual Category? CategoryNavigation { get; set; }
+
+        [ForeignKey(nameof(SubCategoryId))]
+        [Display(Name = "SubKategoria")]
+        [InverseProperty("Produkty")]
+        public virtual SubCategory? CategorySubNavigation { get; set; }
 
         [ForeignKey(nameof(ProductImagesId))]
         public virtual ICollection<ImageModel>? product_Images { get; set; }

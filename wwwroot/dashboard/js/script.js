@@ -129,16 +129,15 @@ charts.forEach(function (chart) {
 
 $(document).ready(function () {
   $(".data-table").each(function (_, table) {
-      $(table).DataTable({
-          order: [[1, 'desc'], [2, 'asc']]
-      });
+      $(table).DataTable();
   });
 });
 
+//ZAMÓWIENIA Tabelka w dashboard
 $(document).ready(function () {
     $(".data-table2").each(function (_, table) {
         $(table).DataTable({
-            order: [[1, 'desc'], [0, 'asc']]
+            order: [[2, 'asc']]
         });
     });
 });
