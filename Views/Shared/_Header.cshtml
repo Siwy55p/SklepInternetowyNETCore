@@ -7,10 +7,8 @@
 @inject UserManager<ApplicationUser> UserManager
 @inject Cart cart
 
-<div class="navbar navbar-custom sticky-top navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid bg-dark">
-        <div class="container">
-
+<div class="sticky-top navbar-expand-lg navbar-dark bg-dark">
+    <div class="container navbar-custom ">
             <div class="header row justify-content-md-center">
                 @*Lewa strona*@
                 @if (User.IsInRole("Administrator") || User.IsInRole("Manager"))
@@ -19,7 +17,7 @@
                     <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    <div class="collapse navbar-collapse navbar-dark bg-dark" id="navbarNavDarkDropdown">
+                    <div class="collapse navbar-collapse navbar-dark" id="navbarNavDarkDropdown">
                         <ul class="navbar-nav z-index-2">
                             <li class="nav-item dropdown navbar-dark">
                                 <a class="nav-link dropdown-toggle" href="@Url.Action("Index","Dashboard")" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" alt="panel użytkownika">
@@ -49,7 +47,7 @@
                 <div class="col">
                     <nav class="navbar navbar-fixed-top navbar-dark bg-inverse">
                         @*PRAWA STRONA START*@
-                        <div class=" bg-dark" id="navbarNavDarkDropdown2">
+                        <div id="navbarNavDarkDropdown2">
                             <ul class="navbar-nav z-index-2">
                                 <li>
                                 <a class="nav-link" asp-controller="Order" asp-action="ListaZamowienZalogowanegoUzytkownika">Zamówienia</a>
@@ -67,7 +65,6 @@
                 </div>
             </div>
         @*KONIEC PRAWA STRONA*@
-        </div>
     </div>
 </div>
 <div class="sticky-top row float-end text-right">
