@@ -172,16 +172,13 @@ namespace partner_aluro.Controllers
                 if (Sort == 1)
                 {
                     onePageOfProducts = produkty.OrderBy(p => p.Name).ToPagedList(pageNumber, 9); // will only contain 25 products max because of the pageSize
-                }
-                if (Sort == 2)
+                }else if (Sort == 2)
                 {
                     onePageOfProducts = produkty.OrderByDescending(p => p.Name).ToPagedList(pageNumber, 9); // will only contain 25 products max because of the pageSize
-                }
-                if (Sort == 3)
+                }else if (Sort == 3)
                 {
                     onePageOfProducts = produkty.OrderBy(p => p.Symbol).ToPagedList(pageNumber, 9); // will only contain 25 products max because of the pageSize
-                }
-                if (Sort == 4)
+                }else if (Sort == 4)
                 {
                     onePageOfProducts = produkty.OrderByDescending(p => p.Symbol).ToPagedList(pageNumber, 9); // will only contain 25 products max because of the pageSize
                 }
@@ -213,16 +210,13 @@ namespace partner_aluro.Controllers
                     if (Sort == 1)
                     {
                         onePageOfProducts = produkty.OrderBy(p => p.Name).ToPagedList(pageNumber, 9); // will only contain 25 products max because of the pageSize
-                    }
-                    if (Sort == 2)
+                    }else if (Sort == 2)
                     {
                         onePageOfProducts = produkty.OrderByDescending(p => p.Name).ToPagedList(pageNumber, 9); // will only contain 25 products max because of the pageSize
-                    }
-                    if (Sort == 3)
+                    }else if (Sort == 3)
                     {
                         onePageOfProducts = produkty.OrderBy(p => p.Symbol).ToPagedList(pageNumber, 9); // will only contain 25 products max because of the pageSize
-                    }
-                    if (Sort == 4)
+                    }else if (Sort == 4)
                     {
                         onePageOfProducts = produkty.OrderByDescending(p => p.Symbol).ToPagedList(pageNumber, 9); // will only contain 25 products max because of the pageSize
                     }
@@ -259,16 +253,13 @@ namespace partner_aluro.Controllers
             if (Sort == 1)
             {
                 onePageOfProducts = produkty.OrderBy(p => p.Name).ToPagedList(pageNumber, 9); // will only contain 25 products max because of the pageSize
-            }
-            if (Sort == 2)
+            }else if(Sort == 2)
             {
                 onePageOfProducts = produkty.OrderByDescending(p => p.Name).ToPagedList(pageNumber, 9); // will only contain 25 products max because of the pageSize
-            }
-            if (Sort == 3)
+            }else if(Sort == 3)
             {
                 onePageOfProducts = produkty.OrderBy(p => p.Symbol).ToPagedList(pageNumber, 9); // will only contain 25 products max because of the pageSize
-            }
-            if (Sort == 4)
+            }else if(Sort == 4)
             {
                 onePageOfProducts = produkty.OrderByDescending(p => p.Symbol).ToPagedList(pageNumber, 9); // will only contain 25 products max because of the pageSize
             }

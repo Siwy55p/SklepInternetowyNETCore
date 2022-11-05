@@ -28,12 +28,16 @@ namespace partner_aluro.Models
         public bool? Aktywny { get; set; }
 
 
+
+
         //Kategoria przechowuje produkty
         public virtual ICollection<Product>? Produkty { get; set; }
 
     }
-    public class SubCategory
+    public class SubCategory : Category
     {
+
+        [NotMapped]
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
@@ -46,7 +50,12 @@ namespace partner_aluro.Models
         public bool? Aktywny { get; set; }
 
         [ForeignKey("CategoryId")]
+        public int CatID { get; set; }
+
         public virtual Category Categories { get; set; }
+
+        public virtual ICollection<Product>? Produkty { get; set; }
+
 
     }
 
