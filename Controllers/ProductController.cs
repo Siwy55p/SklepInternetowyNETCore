@@ -34,13 +34,18 @@ namespace partner_aluro.Controllers
             return View(await _ProductService.GetProductList());
         }
 
+
+        [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
         [HttpGet]
         public async Task <IActionResult> Edit(int id)
         {
             ViewBag.Category = GetCategories();
-            return View(await _ProductService.GetProductId(id));
+            Product produkt = await _ProductService.GetProductId(id);
+            return View(produkt);
         }
 
+
+        [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Product product)
@@ -53,6 +58,7 @@ namespace partner_aluro.Controllers
 
             string uniqueFileName = UploadFile(product);
             product.ImageUrl = uniqueFileName;
+
             UploadFile2(product);
 
             if (ModelState.IsValid)
@@ -141,6 +147,8 @@ namespace partner_aluro.Controllers
             _ProductService.DeleteProductId(id);
             return RedirectToAction("List");
         }
+
+        [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
         private void UploadFile2(Product product)
         {
 
@@ -182,6 +190,8 @@ namespace partner_aluro.Controllers
             }
 
         }
+
+        [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
         private string UploadFile(Product product)
         {
             string uniqueFileName = null;
@@ -213,7 +223,17 @@ namespace partner_aluro.Controllers
                 }
             }
 
-            return uniqueFileName;
+            if (uniqueFileName != null)
+            {
+                return uniqueFileName;
+            }
+            else
+            {
+
+                return uniqueFileName = "Front_" + product.Symbol +".jpg";
+
+            }
+
         }
 
         private List<SelectListItem> GetCategories()
