@@ -283,7 +283,7 @@ namespace partner_aluro.Controllers
 
             lstCategories = _context.SubCategory.ToList().Select(di => new SelectListItem()
             {
-                Value = di.CategoryId.ToString(),
+                Value = di.SubCategoryId.ToString(),
                 Text = di.Name
             }).ToList();
 

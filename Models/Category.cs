@@ -40,7 +40,7 @@ namespace partner_aluro.Models
     {
 
         [Key]
-        public int Id { get; set; }
+        public int SubCategoryId { get; set; }
         public string Name { get; set; }
 
         public bool? Aktywny { get; set; }
@@ -49,8 +49,8 @@ namespace partner_aluro.Models
 
         // Foreign key 
         [Display(Name = "Category")]
-        public int CategoryId { get; set; }
-        [ForeignKey("CategoryId")]
+        public int SubCatId { get; set; }
+        [ForeignKey("SubCatId")]
         public virtual Category Category { get; set; }
 
         public virtual ICollection<Product>? Produkty { get; set; }
