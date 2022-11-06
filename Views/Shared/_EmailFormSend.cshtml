@@ -1,0 +1,24 @@
+﻿@model partner_aluro.Models.EmailDto
+
+<div class="text-center">
+    <h1 class="display-4">Email</h1>
+    <form asp-controller="Email" asp-action="SendEmail">
+        <div class="row">
+            <label asp-for="@Model.Subject">Tytuł</label>
+            <input type="text" asp-for="@Model.Subject" />
+        </div>
+        <div class="row">
+            <label asp-for="@Model.Subject">Treść</label>
+            <textarea cols="20" rows="3" asp-for="@Model.Body" >
+            </textarea>
+        </div>
+        <div class="row">
+            <label asp-for="@Model.Subject">Email</label>
+            <input type="text" asp-for="@Model.To" />
+        </div>
+        <div class="row">
+            <input type="submit" value="Send" />
+        </div>
+    </form>
+
+</div>

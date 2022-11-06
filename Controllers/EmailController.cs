@@ -1,6 +1,7 @@
 ﻿using MailKit.Net.Smtp;
 using MailKit.Security;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using MimeKit;
 using MimeKit.Text;
 using partner_aluro.Models;
@@ -8,11 +9,9 @@ using partner_aluro.Services.Interfaces;
 
 namespace partner_aluro.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class EmailController : ControllerBase
+    public class EmailController : Controller
     {
-        private IEmailService _emailService;
+        private readonly IEmailService _emailService;
         public EmailController(IEmailService emailService)
         {
             _emailService = emailService;
@@ -24,7 +23,12 @@ namespace partner_aluro.Controllers
             _emailService.SendEmail(request);
 
             return Ok();
-
         }
+
+        public IActionResult Index()
+        {
+            return View();
+        }
+
     }
 }
