@@ -67,7 +67,7 @@ namespace partner_aluro.Controllers
 
             ApplicationUser applicationUser = await _userManager.GetUserAsync(User);
 
-            CartOrderViewModel vm = new CartOrderViewModel
+            CartOrderViewModel vm = new()
             {
                 Carts = _cart,
                 Orders = new Order() { User = applicationUser },
@@ -79,7 +79,7 @@ namespace partner_aluro.Controllers
 
             if (vm.Orders.User.Adress1rozliczeniowy == null)
             {
-                Adress1rozliczeniowy adresRozliczeniowy = new Adress1rozliczeniowy();
+
                 vm.Orders.User.Adress1rozliczeniowy = _context.Adress1rozliczeniowy.Where(a => a.UserID == Core.Constants.UserId).FirstOrDefault();
 
                 vm.Orders.User.Adress1rozliczeniowy = new Adress1rozliczeniowy

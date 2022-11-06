@@ -99,7 +99,7 @@ namespace partner_aluro.Controllers
             //nowyAdres2dostawy.UserID = CartOrder.Orders.User.Id;
 
 
-            Adress1rozliczeniowy OrderAdres1 = new Adress1rozliczeniowy();
+            Adress1rozliczeniowy OrderAdres1 = new();
             OrderAdres1.Ulica = CartOrder.Orders.User.Adress1rozliczeniowy.Ulica;
             OrderAdres1.Kraj = CartOrder.Orders.User.Adress1rozliczeniowy.Kraj;
             OrderAdres1.Miasto = CartOrder.Orders.User.Adress1rozliczeniowy.Miasto;
@@ -114,7 +114,7 @@ namespace partner_aluro.Controllers
             OrderAdres1.Regon = nowyAdres1rozliczeniowy.Regon;
             OrderAdres1.UserID = user.Id;
 
-            Adress2dostawy OrderAdres2 = new Adress2dostawy();
+            Adress2dostawy OrderAdres2 = new ();
             OrderAdres2.Ulica = CartOrder.Orders.User.Adress2dostawy.Ulica;
             OrderAdres2.Kraj = CartOrder.Orders.User.Adress2dostawy.Kraj;
             OrderAdres2.Miasto = CartOrder.Orders.User.Adress2dostawy.Miasto;
@@ -144,7 +144,7 @@ namespace partner_aluro.Controllers
                 _unitOfWorkAdress1rozliczeniowy.adress1Rozliczeniowy.Update(nowyAdres1rozliczeniowy);
                 _unitOfWorkAdress2dostawy.adress2dostawy.Update(nowyAdres2dostawy);
 
-                Order order = new Order();
+                Order order = new ();
                 order.Komentarz = CartOrder.Orders.Komentarz;
                 order.MessageToOrder = CartOrder.Orders.MessageToOrder;
                 order.adresRozliczeniowy = OrderAdres1;
@@ -163,8 +163,8 @@ namespace partner_aluro.Controllers
                 var items = _cart.GetAllCartItems();
                 _cart.CartItems = items;
                 CartOrder.Carts = _cart;
-                return View(CartOrder);
 
+                return View(CartOrder);
             }
         }
 
@@ -185,16 +185,16 @@ namespace partner_aluro.Controllers
             order.OrderItems = orderItems;
 
 
-            using (MemoryStream ms = new MemoryStream())
+            using (MemoryStream ms = new())
             {
 
-                Font bold = new Font(BaseFont.CreateFont(@"wwwroot\css\font\arial.ttf", BaseFont.CP1250, true), 10, Font.BOLD);
-                Font regular = new Font(BaseFont.CreateFont(@"wwwroot\css\font\arial.ttf", BaseFont.CP1250, true), 10);
+                Font bold = new(BaseFont.CreateFont(@"wwwroot\css\font\arial.ttf", BaseFont.CP1250, true), 10, Font.BOLD);
+                Font regular = new(BaseFont.CreateFont(@"wwwroot\css\font\arial.ttf", BaseFont.CP1250, true), 10);
 
 
 
 
-                Document document = new Document(PageSize.A4, 25, 25, 30, 30);
+                Document document = new(PageSize.A4, 25, 25, 30, 30);
                 PdfWriter write = PdfWriter.GetInstance(document, ms);
                 write.PageEvent = new PageHeaderFooter();
                 document.Open();
@@ -219,22 +219,22 @@ namespace partner_aluro.Controllers
                 string text2 = order.OrderPlaced.ToString("dd/MM/yyyy");
                 //Paragraph para1 = new Paragraph("Data zamówienia: " + order.OrderPlaced, bold);
 
-                Chunk c1 = new Chunk(text1, bold);
-                Chunk c2 = new Chunk(text2, regular);   
+                Chunk c1 = new(text1, bold);
+                Chunk c2 = new(text2, regular);   
 
-                Paragraph para1 = new Paragraph();
+                Paragraph para1 = new();
                 para1.Add(c1);
                 para1.Add(c2);
                 para1.Alignment = Element.ALIGN_RIGHT;
                 document.Add(para1);
 
 
-                Paragraph para2 = new Paragraph("ID # " + order.Id, new Font(Font.FontFamily.HELVETICA, 20,Font.BOLD));
+                Paragraph para2 = new("ID # " + order.Id, new Font(Font.FontFamily.HELVETICA, 20,Font.BOLD));
                 para2.Alignment = Element.ALIGN_RIGHT;
                 para2.SpacingAfter = 40;
                 document.Add(para2);
 
-                Paragraph para3 = new Paragraph("NIP: " + order.adresRozliczeniowy.Vat, bold);
+                Paragraph para3 = new("NIP: " + order.adresRozliczeniowy.Vat, bold);
                 para3.Alignment = Element.ALIGN_RIGHT;
                 para3.SpacingAfter = 10;
                 document.Add(para3);
@@ -249,15 +249,15 @@ namespace partner_aluro.Controllers
                 string text2_7 = order.User.Email + "\n";
                 //Paragraph para1 = new Paragraph("Data zamówienia: " + order.OrderPlaced, bold);
 
-                Chunk c2_1 = new Chunk(text2_1, bold);
-                Chunk c2_2 = new Chunk(text2_2, regular);
-                Chunk c2_3 = new Chunk(text2_3, regular);
-                Chunk c2_4 = new Chunk(text2_4, regular);
-                Chunk c2_5 = new Chunk(text2_5, regular);
-                Chunk c2_6 = new Chunk(text2_6, bold);
-                Chunk c2_7 = new Chunk(text2_7, regular);
+                Chunk c2_1 = new(text2_1, bold);
+                Chunk c2_2 = new(text2_2, regular);
+                Chunk c2_3 = new(text2_3, regular);
+                Chunk c2_4 = new(text2_4, regular);
+                Chunk c2_5 = new(text2_5, regular);
+                Chunk c2_6 = new(text2_6, bold);
+                Chunk c2_7 = new(text2_7, regular);
 
-                Paragraph para4 = new Paragraph();
+                Paragraph para4 = new();
                 para4.Add(c2_1);
                 para4.Add(c2_2);
                 para4.Add(c2_3);
@@ -277,13 +277,13 @@ namespace partner_aluro.Controllers
                 string text4_7 = order.User.Email + "\n";
                 //Paragraph para1 = new Paragraph("Data zamówienia: " + order.OrderPlaced, bold);
 
-                Chunk c4_1 = new Chunk(text2_1, bold);
-                Chunk c4_2 = new Chunk(text2_2, regular);
-                Chunk c4_3 = new Chunk(text2_3, regular);
-                Chunk c4_4 = new Chunk(text2_4, regular);
-                Chunk c4_5 = new Chunk(text2_5, regular);
-                Chunk c4_6 = new Chunk(text2_6, bold);
-                Chunk c4_7 = new Chunk(text2_7, regular);
+                Chunk c4_1 = new(text2_1, bold);
+                Chunk c4_2 = new(text2_2, regular);
+                Chunk c4_3 = new(text2_3, regular);
+                Chunk c4_4 = new(text2_4, regular);
+                Chunk c4_5 = new(text2_5, regular);
+                Chunk c4_6 = new(text2_6, bold);
+                Chunk c4_7 = new(text2_7, regular);
 
                 Paragraph para5 = new Paragraph();
                 para5.Add(c4_1);
@@ -297,7 +297,7 @@ namespace partner_aluro.Controllers
 
 
 
-                PdfPTable table1 = new PdfPTable(5);
+                PdfPTable table1 = new(5);
 
                 table1.TotalWidth = 500f;
                 table1.LockedWidth = true;
@@ -479,13 +479,13 @@ namespace partner_aluro.Controllers
                     Image image = Image.GetInstance("wwwroot/images/produkty/"+@item.Product.Symbol+"/"+@item.Product.ImageUrl);
                     image.ScaleAbsoluteWidth(50);
                     image.ScaleAbsoluteHeight(45);
-                    PdfPCell cell_2 = new PdfPCell(image);
-                    PdfPCell cell_3 = new PdfPCell(new Phrase(item.Product.Name,regular));
-                    PdfPCell cell_4 = new PdfPCell(new Phrase(item.Product.Symbol, regular));
-                    PdfPCell cell_5 = new PdfPCell(new Phrase(item.Quantity.ToString(), regular));
-                    PdfPCell cell_6 = new PdfPCell(new Phrase(order.RabatZamowienia.ToString(), regular));
-                    PdfPCell cell_7 = new PdfPCell(new Phrase(cenaJednostkowa.ToString("C"), regular));
-                    PdfPCell cell_8 = new PdfPCell(new Phrase(cenaJednostkowaIlosc.ToString("C"), regular));
+                    PdfPCell cell_2 = new(image);
+                    PdfPCell cell_3 = new(new Phrase(item.Product.Name,regular));
+                    PdfPCell cell_4 = new(new Phrase(item.Product.Symbol, regular));
+                    PdfPCell cell_5 = new(new Phrase(item.Quantity.ToString(), regular));
+                    PdfPCell cell_6 = new(new Phrase(order.RabatZamowienia.ToString(), regular));
+                    PdfPCell cell_7 = new(new Phrase(cenaJednostkowa.ToString("C"), regular));
+                    PdfPCell cell_8 = new(new Phrase(cenaJednostkowaIlosc.ToString("C"), regular));
 
                     cell_1.HorizontalAlignment = Element.ALIGN_CENTER;
                     cell_1.VerticalAlignment = Element.ALIGN_CENTER;
@@ -518,7 +518,7 @@ namespace partner_aluro.Controllers
 
 
 
-                PdfPTable table3 = new PdfPTable(2);
+                PdfPTable table3 = new(2);
 
                 table3.SpacingBefore = 30;
 
@@ -528,14 +528,14 @@ namespace partner_aluro.Controllers
                 table3.SetWidths(widths3);
 
 
-                PdfPCell cell1_tab3 = new PdfPCell(new Phrase(""));
+                PdfPCell cell1_tab3 = new(new Phrase(""));
                 cell1_tab3.Border = Rectangle.BOTTOM_BORDER | Rectangle.TOP_BORDER | Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER;
                 cell1_tab3.BorderWidth = 0;
                 cell1_tab3.HorizontalAlignment = Element.ALIGN_LEFT;
                 cell1_tab3.VerticalAlignment = Element.ALIGN_LEFT;
                 table3.AddCell(cell1_tab3);
 
-                PdfPCell cell2_tab3 = new PdfPCell(new Phrase(""));
+                PdfPCell cell2_tab3 = new(new Phrase(""));
                 cell2_tab3.Border = Rectangle.BOTTOM_BORDER | Rectangle.TOP_BORDER | Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER;
                 cell2_tab3.BorderWidth = 0;
                 cell2_tab3.HorizontalAlignment = Element.ALIGN_LEFT;
@@ -545,11 +545,11 @@ namespace partner_aluro.Controllers
 
                 for (int i = 0; i < 1; i++)
                 {
-                    PdfPCell cell_1 = new PdfPCell(new Phrase());
+                    PdfPCell cell_1 = new(new Phrase());
                     cell_1.Border = Rectangle.BOTTOM_BORDER | Rectangle.TOP_BORDER | Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER;
                     cell_1.BorderWidth = 0;
 
-                    PdfPCell cell_2 = new PdfPCell(new Phrase("Do zapłaty: " + order.OrderTotal.ToString("C"),bold)); //odstep
+                    PdfPCell cell_2 = new(new Phrase("Do zapłaty: " + order.OrderTotal.ToString("C"),bold)); //odstep
                     cell_2.Border = Rectangle.BOTTOM_BORDER | Rectangle.TOP_BORDER | Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER;
                     cell_2.BorderWidth = 1;
 
@@ -591,7 +591,6 @@ namespace partner_aluro.Controllers
                 return File(constant, "application/vnd", "Firstpdf.pdf");
 
             }
-            return View();
         }
 
 

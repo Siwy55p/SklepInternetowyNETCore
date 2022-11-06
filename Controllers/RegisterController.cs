@@ -26,8 +26,6 @@ namespace partner_aluro.Controllers
 
             CompanyModel _model = new CompanyModel();
 
-            //ViewData["Profile"] = GetProfiles();
-            var a = 0;
             _model.Vat = Vat;
             _model = await RegonService.GetCompanyDataByNipAsync(_model.Vat);
 
