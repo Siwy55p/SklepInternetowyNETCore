@@ -18,6 +18,8 @@ namespace partner_aluro.Services.Interfaces
 
         Task <List<Product>> ListProductCategoryAll();
 
+        string GetName(int id);
+
         List<Product> ListProductInCategory(string CategoryName);
     }
 }

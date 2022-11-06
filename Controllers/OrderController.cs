@@ -189,10 +189,10 @@ namespace partner_aluro.Controllers
             {
                 return RedirectToAction("ListaZamowien");
             }
-            var orderItems = _orderService.List(id);
+            var orderItems = await _orderService.ListAsync(id);
             Order order = await _orderService.GetOrder(id);
 
-            order.OrderItems = orderItems;
+            order.OrderItems =  orderItems;
 
 
             using (MemoryStream ms = new())
@@ -695,7 +695,7 @@ namespace partner_aluro.Controllers
             {
                 return RedirectToAction("ListaZamowien");
             }
-            var orderItems = _orderService.List(id);
+            var orderItems = await _orderService.ListAsync(id);
             Order order = await _orderService.GetOrder(id);
             
             order.OrderItems = orderItems;

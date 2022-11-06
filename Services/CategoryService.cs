@@ -121,5 +121,12 @@ namespace partner_aluro.Services
             var id = _context.SaveChanges();
             return id;
         }
+
+        public string GetName(int id)
+        {
+            List<Category> list = _context.Category.ToList();
+            string name =list.Find(x => x.CategoryId == id).Name;
+            return name;
+        }
     }
 }

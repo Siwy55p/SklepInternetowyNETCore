@@ -7,28 +7,33 @@
 <h5>Zamówianie id: @Model.Id z @Model.User.Imie @Model.User.Nazwisko</h5>
 
 <div class="">
-    Data: <b>@Model.OrderPlaced</b> Razem: <b>@Model.OrderTotal</b>  Produktów: <b>@Model.OrderItems.Count</b>
+    Data: <b>@Model.OrderPlaced</b> Razem: <b>@Model.OrderTotal</b>  Produktów: <b>@Model.OrderItems.Count</b> , Status zamówienia: @Model.StanZamowienia
 </div>
 
 <div class="row">
     <div class="col border">
-        <p>ZAMÓWIENIE</p>
-        <p>Stan zamówienia: @Model.StanZamowienia</p>
 
-        <p> Wiadomosc do zamówienia: @Model.Komentarz @Model.MessageToOrder</p>
+        <div class="row"><p>ZAMÓWIENIE Id:<b>@Model.Id</b></p></div>
+
+        <div class="border"><p> Wiadomosc do zamówienia: @Model.Komentarz @Model.MessageToOrder</p></div>
 
         
 
         @using (Html.BeginForm("ZmienStatus", "Order", FormMethod.Post))
         {
-        <input type="hidden"  asp-for="@Model.Id" class="form-control" aria-required="true" />
-            <div class="form-group">
-                <label asp-for="@Model.StanZamowienia" class="control-label"></label>
+        <div class="row align-items-center">
+        <input type="hidden" asp-for="@Model.Id" class="form-control" aria-required="true" />
+            <div class="col">
+                <label asp-for="@Model.StanZamowienia" class="control-label text-end">Status zamówienia:</label>
+            </div>
+            <div class="col">
                 <select asp-for="@Model.StanZamowienia" class="form-control" asp-items="ViewBag.StanyZamowienia">
                 </select>
             </div>
-
-        <input id="Submit" type="submit" value="Zapisz" />
+            <div class="col">
+                <input id="Submit" type="submit" value="Aktualizuj status" />
+            </div>
+        </div>
         }
 
 
@@ -80,7 +85,8 @@
             <div class="tab-pane active" id="awysylki">
                 <div class="row">
                     <div class="col">
-                        <p>@Model.User.NazwaFirmy</p>
+                        @*<p>@Model.User.NazwaFirmy</p>*@
+                        <p>@Model.AdressDostawy.Imie @Model.AdressDostawy.Nazwisko</p>
                         <p>@Model.AdressDostawy.Ulica</p>
                         <p>@Model.AdressDostawy.KodPocztowy @Model.AdressDostawy.Miasto</p>
                         <p>@Model.AdressDostawy.Kraj</p>
@@ -137,7 +143,6 @@
                                         @{
                                             decimal cenaJednostkowa = item.Product.CenaProduktu * (1 - ((decimal)Model.RabatZamowienia / 100));
                                             decimal cenaJednostkowaIlosc = cenaJednostkowa * @item.Quantity;
-                                        }
                                         }
                                         <td>@item.Product.ProductId</td>
                                         <td><img class="img-thumbnail" src="~/images/produkty/@item.Product.Symbol/@item.Product.ImageUrl" alt="@item.Product.Name" style="width:75px;height:75px;"></td>

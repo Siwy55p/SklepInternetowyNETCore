@@ -87,34 +87,35 @@ namespace partner_aluro.Services
             return OrderItems;
         }
 
-        public List<OrderItem> List(int id)
+        public async Task<List<OrderItem>> ListAsync(int id)
         {
-            var OrderItem = _context.OrderItems.ToList();
+            List<OrderItem> OrderItem = await _context.OrderItems.Where(x=> x.OrderId ==id).Include(x => x.Product)
+                .ToListAsync();
 
-            List<OrderItem> OrderId = new List<OrderItem>();
+            //List<OrderItem> OrderId = new List<OrderItem>();
 
-            foreach(var item in OrderItem)
-            {
-                if(item.OrderId == id)
-                {
-                    OrderId.Add(item);
-                }
-            }
+            //foreach (var item in OrderItem)
+            //{
+            //    if (item.OrderId == id)
+            //    {
+            //        OrderId.Add(item);
+            //    }
+            //}
 
-            var ListaProduktow = _context.Products.ToList();
+            //var ListaProduktow = _context.Products.ToList();
 
-            foreach (var itemOrd in OrderItem)
-            {
-                foreach (var produkt in ListaProduktow)
-                {
-                    if (itemOrd.ProductId == produkt.ProductId)
-                    {
-                        itemOrd.Product = produkt;
-                    }
-                }
-            }
+            //foreach (var itemOrd in OrderItem)
+            //{
+            //    foreach (var produkt in ListaProduktow)
+            //    {
+            //        if (itemOrd.ProductId == produkt.ProductId)
+            //        {
+            //            itemOrd.Product = produkt;
+            //        }
+            //    }
+            //}
 
-            return OrderId;
+            return OrderItem;
         }
 
         public async Task<List<Order>> ListOrdersAll()

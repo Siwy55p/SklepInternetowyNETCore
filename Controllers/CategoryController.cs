@@ -138,11 +138,63 @@ namespace partner_aluro.Controllers
             return View(Category);
         }
 
-        //wyswietlane produkty na bierzaca nie zalezne ktora metoda jest uzyta
-
-
-        //TUTAJ WYSWIETLAM STRONE PODSTAWOWĄ DLA WYSWIETLENIA PRODUKTOW Z ID KATEGORIA szukanaNazwa
+        //TUTAJ WYSWIETLAM STRONE PODSTAWOWĄ DLA WYSWIETLENIA PRODUKTOW Z ID KATEGORIA
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public async Task<IActionResult> Lista1(int KategoriaId, int? page, string? szukanaNazwa, int? Sort) //Link do wyswietlania po wyborze kategorii
+        {
+            //var products = _cart.GetAllCartItems();
+
+            List<Product> produkty = await _context.Products.Where(x => x.Ukryty == false).Where(x => x.CategoryId == KategoriaId).ToListAsync();
+
+            szukanaNazwa = _categoryService.GetName(KategoriaId);
+            var categoryPage = new MvcBreadcrumbNode("Kategoria", "Home", szukanaNazwa);
+            ViewData["BreadcrumbNode"] = categoryPage;
+            ViewData["Title"] = szukanaNazwa;
+            ViewData["szukanaNazwa"] = szukanaNazwa;
+
+            ViewData["Sort"] = Sort;
+
+            //jesli jest cos w karcie przekaz do zmiennej, pokaz wartosc karty true
+            //if (products.Count > 0)
+            //{
+            //    ViewData["Pokaz"] = "show";
+            //}
+
+            var pageNumber = page ?? 1; // if no page was specified in the querystring, default to the first page (1)
+            var onePageOfProducts = produkty.ToPagedList(pageNumber, 9); // will only contain 25 products max because of the pageSize
+
+            if (Sort == 1)
+            {
+                onePageOfProducts = produkty.OrderBy(p => p.Name).ToPagedList(pageNumber, 9); // will only contain 25 products max because of the pageSize
+            }
+            else if (Sort == 2)
+            {
+                onePageOfProducts = produkty.OrderByDescending(p => p.Name).ToPagedList(pageNumber, 9); // will only contain 25 products max because of the pageSize
+            }
+            else if (Sort == 3)
+            {
+                onePageOfProducts = produkty.OrderBy(p => p.Symbol).ToPagedList(pageNumber, 9); // will only contain 25 products max because of the pageSize
+            }
+            else if (Sort == 4)
+            {
+                onePageOfProducts = produkty.OrderByDescending(p => p.Symbol).ToPagedList(pageNumber, 9); // will only contain 25 products max because of the pageSize
+            }
+
+
+            ViewBag.OnePageOfProducts = onePageOfProducts;
+
+            return View(produkty);
+
+
+        }
+
+
+
+    //wyswietlane produkty na bierzaca nie zalezne ktora metoda jest uzyta
+
+
+    //TUTAJ WYSWIETLAM STRONE PODSTAWOWĄ DLA WYSWIETLENIA PRODUKTOW Z ID KATEGORIA szukanaNazwa
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public async Task<IActionResult> Lista(int? page, string? szukanaNazwa, int? Sort) //Link do wyswietlania po wyborze kategorii
         {
             //var products = _cart.GetAllCartItems();

@@ -7,7 +7,7 @@
         @if(kategorie.Aktywny == true)
         {
             <li class="list-group-item">
-                <a href="@Url.Action("Lista","Category", new {szukanaNazwa = kategorie.Name})" class="nav-link active" aria-current="page">@kategorie.Name</a>
+                <a href="@Url.Action("Lista1","Category", new {KategoriaId = kategorie.CategoryId})" class="nav-link active" aria-current="page">@kategorie.Name</a>
             </li>
 
 
@@ -16,7 +16,7 @@
                 @foreach (var kategorie2 in kategorie.SubCategories)
                 {
                     <li>
-                        <a class="nav-link" href="@Url.Action("Lista","Category", new {szukanaNazwa = kategorie2.Name})">
+                        <a class="nav-link" href="@Url.Action("Lista1","Category", new {KategoriaId = kategorie2.SubCategoryId})">
                             @kategorie2.Name
                         </a>
                     </li>

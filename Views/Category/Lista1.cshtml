@@ -1,6 +1,4 @@
-﻿
-
-@{
+﻿@{
     ViewData["Title"] = "Kategoria";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -11,12 +9,12 @@
     <div class="col-12 col-md-4 col-lg-3">
         <div class="row custom-kategory-menu sticky-top">
             <div class="card bg-light">
-                    @await Component.InvokeAsync("MenuCategory")
-                </div>
+                @await Component.InvokeAsync("MenuCategory")
             </div>
+        </div>
     </div>
     @*CONTENT PRAWA STRONA*@
-    <div class="col-12 col-md-8 col-lg-9"> 
+    <div class="col-12 col-md-8 col-lg-9">
         @*HEADER*@
         <div class="row align-items-center mb-7">
             <div class="col-12 col-md">
