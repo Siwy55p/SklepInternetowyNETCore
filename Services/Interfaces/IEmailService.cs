@@ -4,6 +4,6 @@ namespace partner_aluro.Services.Interfaces
 {
     public interface IEmailService
     {
-        void SendEmail(EmailDto request);
+        Task SendEmailAsync(EmailDto request);
     }
 }

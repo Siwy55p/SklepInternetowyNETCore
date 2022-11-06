@@ -14,7 +14,7 @@ namespace partner_aluro.Services
         {
             _config = config;
         }
-        public void SendEmail(EmailDto request)
+        public async Task SendEmailAsync(EmailDto request)
         {
             var email = new MimeMessage();
             email.From.Add(MailboxAddress.Parse(_config.GetSection("EmailUsername").Value));
@@ -25,8 +25,8 @@ namespace partner_aluro.Services
             using var smtp = new SmtpClient();
             smtp.Connect(_config.GetSection("EmailHost").Value, 587, SecureSocketOptions.None);  //smtp.gmail.com
             smtp.Authenticate(_config.GetSection("EmailUsername").Value, _config.GetSection("EmailPassword").Value);
-            smtp.Send(email);
-            smtp.Dispose();  //To moze jest nie potrzebne
+            await smtp.SendAsync(email);
+           /* smtp.Dispose();*/  //To moze jest nie potrzebne
             smtp.Disconnect(true);
 
         }

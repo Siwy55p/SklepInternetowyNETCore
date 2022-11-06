@@ -20,9 +20,9 @@ namespace partner_aluro.Controllers
         [HttpPost]
         public IActionResult SendEmail(EmailDto request)
         {
-            _emailService.SendEmail(request);
+            _emailService.SendEmailAsync(request);
 
-            return Ok();
+            return View();
         }
 
         public IActionResult Index()
