@@ -258,9 +258,11 @@ label.required::before {
 .logoLoginReg {
     position: relative;
 }
+.pozycja {
+    line-height: 60px;
+}
 
-
-.search{
+.search {
     z-index: 20;
     max-width: 615px;
 }
