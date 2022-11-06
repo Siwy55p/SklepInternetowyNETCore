@@ -59,9 +59,9 @@ namespace partner_aluro.Controllers
         }
 
         [HttpPost]
-        public IActionResult Checkout(CartOrderViewModel CartOrder) //ZAPIS BARDZO WAZNA FUNKCJA
+        public async Task<IActionResult> CheckoutAsync(CartOrderViewModel CartOrder) //ZAPIS BARDZO WAZNA FUNKCJA
         {
-            var cartItems = _cart.GetAllCartItems();
+            var cartItems = await _cart.GetAllCartItemsAsync();
             _cart.CartItems = cartItems;
 
             if (_cart.CartItems.Count == 0 && _cart != null)
@@ -170,8 +170,7 @@ namespace partner_aluro.Controllers
             }
             else
             {
-                var items = _cart.GetAllCartItems();
-                _cart.CartItems = items;
+                _cart.CartItems = await _cart.GetAllCartItemsAsync();
                 CartOrder.Carts = _cart;
 
                 return View(CartOrder);

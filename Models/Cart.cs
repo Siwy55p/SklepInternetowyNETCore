@@ -124,12 +124,12 @@ namespace partner_aluro.Models
             _context.SaveChanges();
         }
 
-        public List<CartItem> GetAllCartItems()
+        public async Task<List<CartItem>> GetAllCartItemsAsync()
         {
             return CartItems ??
-                (CartItems = _context.CartItems.Where(ci => ci.CartId == Id)
+                (CartItems = await _context.CartItems.Where(ci => ci.CartId == Id)
                     .Include(ci => ci.Product)
-                    .ToList());
+                    .ToListAsync());
         }
 
         public int GetCartTotalBrutto()

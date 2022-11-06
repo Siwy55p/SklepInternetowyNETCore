@@ -1,3 +1,18 @@
 ﻿@model partner_aluro.ViewModels.CartOrderViewModel
 
 @Html.Partial("_Checkout")
+
+@section Scripts{
+    <script>
+    function toggleCheckbox(element) {
+        const div = document.getElementById('box2');
+        if (document.getElementById('xxx').checked) {
+            div.innerHTML = `Adres rozliczeniowy`;
+            document.getElementById('box1').style.display = '';
+        } else {
+            div.innerHTML = `Adres rozliczeniowy i dostawy`;
+            document.getElementById('box1').style.display = 'none';
+        }
+    }
+</script>
+}

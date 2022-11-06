@@ -30,10 +30,7 @@ namespace partner_aluro.ViewComponents
         {
             CartStatusModel model = new CartStatusModel();
 
-
-            var products = _cart.GetAllCartItems();
-            _cart.CartItems = products;
-
+            _cart.CartItems = await _cart.GetAllCartItemsAsync();
 
             model.Cart = _cart;
 

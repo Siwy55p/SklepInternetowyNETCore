@@ -40,8 +40,7 @@ namespace partner_aluro.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var products = _cart.GetAllCartItems();
-            _cart.CartItems = products;
+            _cart.CartItems = await _cart.GetAllCartItemsAsync();
 
             var returnUrl = Request.Headers["Referer"].ToString();
 
@@ -56,13 +55,13 @@ namespace partner_aluro.Controllers
             ViewBag.returnUrl = Request.Headers["Referer"].ToString();
             var returnUrl = Request.Headers["Referer"].ToString();
 
-            var products = _cart.GetAllCartItems();
-            _cart.CartItems = products;
+            var products = await _cart.GetAllCartItemsAsync();
+            //_cart.CartItems = products;
 
-            foreach (var product in products)
-            {
-                product.Product.CenaProduktuDlaUzytkownika = product.Product.CenaProduktu * (1 - (Core.Constants.Rabat / 100));
-            }
+            //foreach (var product in products)
+            //{
+            //    product.Product.CenaProduktuDlaUzytkownika = product.Product.CenaProduktu * (1 - (Core.Constants.Rabat / 100));
+            //}
 
 
             ApplicationUser applicationUser = await _userManager.GetUserAsync(User);
