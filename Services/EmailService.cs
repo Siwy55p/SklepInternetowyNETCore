@@ -23,7 +23,7 @@ namespace partner_aluro.Services
             email.Body = new TextPart(TextFormat.Html) { Text = request.Body };
 
             using var smtp = new SmtpClient();
-            smtp.Connect(_config.GetSection("EmailHost").Value, 465, SecureSocketOptions.StartTls);  //smtp.gmail.com
+            smtp.Connect(_config.GetSection("EmailHost").Value, 587, SecureSocketOptions.None);  //smtp.gmail.com
             smtp.Authenticate(_config.GetSection("EmailUsername").Value, _config.GetSection("EmailPassword").Value);
             smtp.Send(email);
             smtp.Dispose();  //To moze jest nie potrzebne
