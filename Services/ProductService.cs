@@ -87,6 +87,14 @@ namespace partner_aluro.Services
             return _context.Category.Find(name).CategoryId;
         }
 
+        public void ZmiejszIloscProductIdAsync(int ProductId, int ile)
+        {
+            Product product = _context.Products.FirstOrDefault(x => x.ProductId == ProductId);
+            product.Ilosc = product.Ilosc - ile;
 
+            //_context.Attach(product);
+            //_context.Entry(product).State = Microsoft.EntityFrameworkCore.EntityState.Added;
+            _context.SaveChanges();
+        }
     }
 }

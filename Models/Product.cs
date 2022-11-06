@@ -44,7 +44,7 @@ namespace partner_aluro.Models
         public decimal? WysokoscProduktu { get; set; }
         public decimal? GlebokoscProduktu { get; set; }
         public bool Bestseller { get; set; }
-        public bool Ukryty { get; set; }
+        public bool Ukryty { get; set; } = false;
 
         public string? ImageUrl { get; set; }
 

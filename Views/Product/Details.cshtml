@@ -72,15 +72,22 @@
                     </div>
 
                     <div class="row card-bar-action m-1 p-2 align-items-center" >
-                        <div class="col-2">
-                            Ilość:
+                            @if(Model.Ilosc <= 0)
+                            {
+                                <div>Produkt jest już niedostępny.</div>
+                            }
+                            else
+                            {
+                                <div class="col-2">
+                                Ilość:
                             </div>
-                        <div class="col-3">
-                            <input type="number" id="@Model.ProductId" name="quantity" value="1" class="form-control" aria-required="true" placeholder="Ilość" min="1" max="@Model.Ilosc" />
-                        </div>
-                        <div class="col">
-                            <button value="@Model.ProductId" onclick="AddToCart(@Model.ProductId)" data-bs-target="offcanvas" role="button">Dodaj do zamowienia</button>
-                        </div>
+                            <div class="col-3">
+                                <input type="number" id="@Model.ProductId" name="quantity" value="1" class="form-control" aria-required="true" placeholder="Ilość" min="1" max="@Model.Ilosc" />
+                            </div>
+                            <div class="col">
+                                <button value="@Model.ProductId" onclick="AddToCart(@Model.ProductId)" data-bs-target="offcanvas" role="button">Dodaj do zamowienia</button>
+                            </div>
+                            }
                     </div>
 
 
@@ -102,7 +109,6 @@
                                 <div class="col">Waga: @Model.WagaProduktu</div>
                             </div>
                         }
-                        <hr />
 
                         <div class="row">Pakowanie: @Model.Pakowanie </div>
                         <div class="row">Materiał: @Model.Materiał </div>

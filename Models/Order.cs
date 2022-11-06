@@ -43,6 +43,7 @@ namespace partner_aluro.Models
 
     public enum StanZamowienia
     {
+        Anulowane,
         Nowe,
         Wrealizacji,
         Zrealizowane

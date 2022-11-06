@@ -129,7 +129,9 @@ charts.forEach(function (chart) {
 
 $(document).ready(function () {
   $(".data-table").each(function (_, table) {
-      $(table).DataTable();
+      $(table).DataTable({
+          order: [[0, 'asc']]
+      });
   });
 });
 
@@ -137,7 +139,7 @@ $(document).ready(function () {
 $(document).ready(function () {
     $(".data-table2").each(function (_, table) {
         $(table).DataTable({
-            order: [[2, 'asc']]
+            order: [[0, 'asc']]
         });
     });
 });

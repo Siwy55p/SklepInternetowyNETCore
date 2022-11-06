@@ -17,14 +17,19 @@
                 </div>
                 <div class="card-body p-1">
                     <div class="row card-bar-action">
-                        <div class="col-4">
-                        <input type="number" id="@produkt.ProductId" name="quantity" value="1" class="form-control" aria-required="true" placeholder="Ilość" min="1" max="@produkt.Ilosc" />
-                        </div>
 
-                        
+                        @if (produkt.Ilosc <= 0)
+                       {
+                           <div>Produkt jest niedostępny</div>
+                       }else
+                        {
+                        <div class="col-4">
+                            <input type="number" id="@produkt.ProductId" name="quantity" value="1" class="form-control" aria-required="true" placeholder="Ilość" min="1" max="@produkt.Ilosc" />
+                        </div>
                         <div class="col">
                             <button value="@produkt.ProductId" onclick="AddToCart(@produkt.ProductId)" data-bs-target="offcanvas" role="button">Dodaj do zamowienia</button>
                         </div>
+                       }
                     </div>
                     <div>
                         <p>

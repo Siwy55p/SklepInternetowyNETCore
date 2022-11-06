@@ -4,12 +4,11 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using partner_aluro.Core;
 using partner_aluro.Core.Repositories;
 using partner_aluro.Data;
 using partner_aluro.Models;
+using partner_aluro.Services;
 using partner_aluro.Services.Interfaces;
 using partner_aluro.ViewModels;
 using System;
@@ -33,9 +32,10 @@ namespace partner_aluro.Controllers
         private readonly IOrderService _orderService;
         private readonly UserManager<ApplicationUser> _userManager;
 
+        private readonly IProductService _productService;
 
 
-        public OrderController(IUnitOfWorkOrder unitOfWorkOrder ,ApplicationDbContext context, Cart cart, UserManager<ApplicationUser> userManager, IOrderService orderService, IUnitOfWork unitOfWork, IUnitOfWorkAdress1rozliczeniowy unitOfWorkAdress1rozliczeniowy, IUnitOfWorkAdress2dostawy unitOfWorkAdress2dostawy)
+        public OrderController(IProductService productService, IUnitOfWorkOrder unitOfWorkOrder ,ApplicationDbContext context, Cart cart, UserManager<ApplicationUser> userManager, IOrderService orderService, IUnitOfWork unitOfWork, IUnitOfWorkAdress1rozliczeniowy unitOfWorkAdress1rozliczeniowy, IUnitOfWorkAdress2dostawy unitOfWorkAdress2dostawy)
         {
             _context = context;
             _cart = cart;
@@ -48,6 +48,8 @@ namespace partner_aluro.Controllers
 
             _unitOfWorkAdress1rozliczeniowy = unitOfWorkAdress1rozliczeniowy;
             _unitOfWorkAdress2dostawy = unitOfWorkAdress2dostawy;
+
+            _productService = productService;
         }
 
         [HttpGet]
@@ -99,29 +101,33 @@ namespace partner_aluro.Controllers
             //nowyAdres2dostawy.UserID = CartOrder.Orders.User.Id;
 
 
-            Adress1rozliczeniowy OrderAdres1 = new();
-            OrderAdres1.Ulica = CartOrder.Orders.User.Adress1rozliczeniowy.Ulica;
-            OrderAdres1.Kraj = CartOrder.Orders.User.Adress1rozliczeniowy.Kraj;
-            OrderAdres1.Miasto = CartOrder.Orders.User.Adress1rozliczeniowy.Miasto;
-            OrderAdres1.KodPocztowy = CartOrder.Orders.User.Adress1rozliczeniowy.KodPocztowy;
-            OrderAdres1.Telefon = CartOrder.Orders.User.Adress1rozliczeniowy.Telefon;
-            OrderAdres1.NrNieruchomosci = nowyAdres1rozliczeniowy.NrNieruchomosci;
-            OrderAdres1.NrLokalu = nowyAdres1rozliczeniowy.NrLokalu;
-            OrderAdres1.Vat = nowyAdres1rozliczeniowy.Vat;
-            OrderAdres1.Wojewodztwo = nowyAdres1rozliczeniowy.Wojewodztwo;
-            OrderAdres1.Powiat = nowyAdres1rozliczeniowy.Powiat;
-            OrderAdres1.Gmina = nowyAdres1rozliczeniowy.Gmina;
-            OrderAdres1.Regon = nowyAdres1rozliczeniowy.Regon;
-            OrderAdres1.UserID = user.Id;
+            Adress1rozliczeniowy OrderAdres1 = new()
+            {
+                Ulica = CartOrder.Orders.User.Adress1rozliczeniowy.Ulica,
+                Kraj = CartOrder.Orders.User.Adress1rozliczeniowy.Kraj,
+                Miasto = CartOrder.Orders.User.Adress1rozliczeniowy.Miasto,
+                KodPocztowy = CartOrder.Orders.User.Adress1rozliczeniowy.KodPocztowy,
+                Telefon = CartOrder.Orders.User.Adress1rozliczeniowy.Telefon,
+                NrNieruchomosci = nowyAdres1rozliczeniowy.NrNieruchomosci,
+                NrLokalu = nowyAdres1rozliczeniowy.NrLokalu,
+                Vat = nowyAdres1rozliczeniowy.Vat,
+                Wojewodztwo = nowyAdres1rozliczeniowy.Wojewodztwo,
+                Powiat = nowyAdres1rozliczeniowy.Powiat,
+                Gmina = nowyAdres1rozliczeniowy.Gmina,
+                Regon = nowyAdres1rozliczeniowy.Regon,
+                UserID = user.Id
+            };
 
-            Adress2dostawy OrderAdres2 = new ();
-            OrderAdres2.Ulica = CartOrder.Orders.User.Adress2dostawy.Ulica;
-            OrderAdres2.Kraj = CartOrder.Orders.User.Adress2dostawy.Kraj;
-            OrderAdres2.Miasto = CartOrder.Orders.User.Adress2dostawy.Miasto;
-            OrderAdres2.KodPocztowy = CartOrder.Orders.User.Adress2dostawy.KodPocztowy;
-            OrderAdres2.Email = CartOrder.Orders.User.Adress2dostawy.Email;
-            OrderAdres2.Imie = CartOrder.Orders.User.Adress2dostawy.Imie;
-            OrderAdres2.Nazwisko = CartOrder.Orders.User.Adress2dostawy.Nazwisko;
+            Adress2dostawy OrderAdres2 = new()
+            {
+                Ulica = CartOrder.Orders.User.Adress2dostawy.Ulica,
+                Kraj = CartOrder.Orders.User.Adress2dostawy.Kraj,
+                Miasto = CartOrder.Orders.User.Adress2dostawy.Miasto,
+                KodPocztowy = CartOrder.Orders.User.Adress2dostawy.KodPocztowy,
+                Email = CartOrder.Orders.User.Adress2dostawy.Email,
+                Imie = CartOrder.Orders.User.Adress2dostawy.Imie,
+                Nazwisko = CartOrder.Orders.User.Adress2dostawy.Nazwisko
+            };
 
             ModelState.Remove("Orders.UserID");
             ModelState.Remove("Carts");
@@ -144,17 +150,21 @@ namespace partner_aluro.Controllers
                 _unitOfWorkAdress1rozliczeniowy.adress1Rozliczeniowy.Update(nowyAdres1rozliczeniowy);
                 _unitOfWorkAdress2dostawy.adress2dostawy.Update(nowyAdres2dostawy);
 
-                Order order = new ();
-                order.Komentarz = CartOrder.Orders.Komentarz;
-                order.MessageToOrder = CartOrder.Orders.MessageToOrder;
-                order.adresRozliczeniowy = OrderAdres1;
-                order.AdressDostawy = OrderAdres2;
+                Order order = new()
+                {
+                    Komentarz = CartOrder.Orders.Komentarz,
+                    MessageToOrder = CartOrder.Orders.MessageToOrder,
+                    adresRozliczeniowy = OrderAdres1,
+                    AdressDostawy = OrderAdres2
+                };
 
 
                 CartOrder.Orders = order;
 
                 CreateOrder(CartOrder.Orders);
                 _cart.ClearCart();
+
+
 
                 return View("CheckoutComplete", CartOrder.Orders);
             }
@@ -229,14 +239,18 @@ namespace partner_aluro.Controllers
                 document.Add(para1);
 
 
-                Paragraph para2 = new("ID # " + order.Id, new Font(Font.FontFamily.HELVETICA, 20,Font.BOLD));
-                para2.Alignment = Element.ALIGN_RIGHT;
-                para2.SpacingAfter = 40;
+                Paragraph para2 = new("ID # " + order.Id, new Font(Font.FontFamily.HELVETICA, 20, Font.BOLD))
+                {
+                    Alignment = Element.ALIGN_RIGHT,
+                    SpacingAfter = 40
+                };
                 document.Add(para2);
 
-                Paragraph para3 = new("NIP: " + order.adresRozliczeniowy.Vat, bold);
-                para3.Alignment = Element.ALIGN_RIGHT;
-                para3.SpacingAfter = 10;
+                Paragraph para3 = new("NIP: " + order.adresRozliczeniowy.Vat, bold)
+                {
+                    Alignment = Element.ALIGN_RIGHT,
+                    SpacingAfter = 10
+                };
                 document.Add(para3);
 
 
@@ -257,12 +271,14 @@ namespace partner_aluro.Controllers
                 Chunk c2_6 = new(text2_6, bold);
                 Chunk c2_7 = new(text2_7, regular);
 
-                Paragraph para4 = new();
-                para4.Add(c2_1);
-                para4.Add(c2_2);
-                para4.Add(c2_3);
-                para4.Add(c2_4);
-                para4.Add(c2_5);
+                Paragraph para4 = new()
+                {
+                    c2_1,
+                    c2_2,
+                    c2_3,
+                    c2_4,
+                    c2_5
+                };
                 para4.Alignment = Element.ALIGN_LEFT;
                 //document.Add(para4);
                 
@@ -285,17 +301,16 @@ namespace partner_aluro.Controllers
                 Chunk c4_6 = new(text2_6, bold);
                 Chunk c4_7 = new(text2_7, regular);
 
-                Paragraph para5 = new Paragraph();
-                para5.Add(c4_1);
-                para5.Add(c4_2);
-                para5.Add(c4_3);
-                para5.Add(c4_4);
-                para5.Add(c4_5);
+                Paragraph para5 = new Paragraph
+                {
+                    c4_1,
+                    c4_2,
+                    c4_3,
+                    c4_4,
+                    c4_5
+                };
                 para5.Alignment = Element.ALIGN_LEFT;
                 //document.Add(para4);
-
-
-
 
                 PdfPTable table1 = new(5);
 
@@ -305,7 +320,7 @@ namespace partner_aluro.Controllers
                 table1.SetWidths(widths);
 
 
-                PdfPCell cell1_tab1 = new PdfPCell(new Phrase("Faktura dla", bold));
+                PdfPCell cell1_tab1 = new(new Phrase("Faktura dla", bold));
                 cell1_tab1.Border = Rectangle.BOTTOM_BORDER | Rectangle.TOP_BORDER | Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER;
                 cell1_tab1.BorderWidth = 0;
                 cell1_tab1.HorizontalAlignment = Element.ALIGN_LEFT;
@@ -313,54 +328,60 @@ namespace partner_aluro.Controllers
                 table1.AddCell(cell1_tab1);
 
 
-                PdfPCell cell2_tab1 = new PdfPCell(new Phrase("", regular));
+                PdfPCell cell2_tab1 = new(new Phrase("", regular));
                 cell2_tab1.Border = Rectangle.BOTTOM_BORDER | Rectangle.TOP_BORDER | Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER;
                 cell2_tab1.BorderWidth = 0;
                 cell2_tab1.HorizontalAlignment = Element.ALIGN_LEFT;
                 cell2_tab1.VerticalAlignment = Element.ALIGN_LEFT;
                 table1.AddCell(cell2_tab1);
 
-                PdfPCell cell3_tab1 = new PdfPCell(new Phrase("Dostawa do", bold));
-                cell3_tab1.Border = Rectangle.BOTTOM_BORDER | Rectangle.TOP_BORDER | Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER;
-                cell3_tab1.BorderWidth = 0;
-                cell3_tab1.HorizontalAlignment = Element.ALIGN_LEFT;
-                cell3_tab1.VerticalAlignment = Element.ALIGN_LEFT;
+                PdfPCell cell3_tab1 = new(new Phrase("Dostawa do", bold))
+                {
+                    Border = Rectangle.BOTTOM_BORDER | Rectangle.TOP_BORDER | Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER,
+                    BorderWidth = 0,
+                    HorizontalAlignment = Element.ALIGN_LEFT,
+                    VerticalAlignment = Element.ALIGN_LEFT
+                };
                 table1.AddCell(cell3_tab1);
 
-                PdfPCell cell4_tab1 = new PdfPCell(new Phrase("", regular));
-                cell4_tab1.Border = Rectangle.BOTTOM_BORDER | Rectangle.TOP_BORDER | Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER;
-                cell4_tab1.BorderWidth = 0;
-                cell4_tab1.HorizontalAlignment = Element.ALIGN_LEFT;
-                cell4_tab1.VerticalAlignment = Element.ALIGN_LEFT;
+                PdfPCell cell4_tab1 = new(new Phrase("", regular))
+                {
+                    Border = Rectangle.BOTTOM_BORDER | Rectangle.TOP_BORDER | Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER,
+                    BorderWidth = 0,
+                    HorizontalAlignment = Element.ALIGN_LEFT,
+                    VerticalAlignment = Element.ALIGN_LEFT
+                };
                 table1.AddCell(cell4_tab1);
 
-                PdfPCell cell5_tab1 = new PdfPCell(new Phrase("", regular));
-                //cell5_tab1.BackgroundColor = BaseColor.LIGHT_GRAY;
-                cell5_tab1.Border = Rectangle.BOTTOM_BORDER | Rectangle.TOP_BORDER | Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER;
-                cell5_tab1.BorderWidth = 0;
-                cell5_tab1.HorizontalAlignment = Element.ALIGN_LEFT;
-                cell5_tab1.VerticalAlignment = Element.ALIGN_LEFT;
+                PdfPCell cell5_tab1 = new(new Phrase("", regular))
+                {
+                    //cell5_tab1.BackgroundColor = BaseColor.LIGHT_GRAY;
+                    Border = Rectangle.BOTTOM_BORDER | Rectangle.TOP_BORDER | Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER,
+                    BorderWidth = 0,
+                    HorizontalAlignment = Element.ALIGN_LEFT,
+                    VerticalAlignment = Element.ALIGN_LEFT
+                };
 
                 table1.AddCell(cell5_tab1);
 
 
                 for (int i = 0; i < 1; i++)
                 {
-                    PdfPCell cell_1 = new PdfPCell(new Phrase(para4));
+                    PdfPCell cell_1 = new(new Phrase(para4));
                     cell_1.Border = Rectangle.BOTTOM_BORDER | Rectangle.TOP_BORDER | Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER;
                     cell_1.BorderWidth = 0;
 
-                    PdfPCell cell_2 = new PdfPCell(); //odstep
+                    PdfPCell cell_2 = new(); //odstep
                     cell_2.Border = Rectangle.BOTTOM_BORDER | Rectangle.TOP_BORDER | Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER;
                     cell_2.BorderWidth = 0;
 
-                    PdfPCell cell_3 = new PdfPCell(new Phrase(para5));
+                    PdfPCell cell_3 = new(new Phrase(para5));
 
-                    PdfPCell cell_4 = new PdfPCell();//odstep
+                    PdfPCell cell_4 = new();//odstep
                     cell_4.Border = Rectangle.BOTTOM_BORDER | Rectangle.TOP_BORDER | Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER;
                     cell_4.BorderWidth = 0;
 
-                    PdfPCell cell_5 = new PdfPCell(new Phrase("Pakowal"));
+                    PdfPCell cell_5 = new(new Phrase("Pakowal"));
 
                     cell_1.HorizontalAlignment = Element.ALIGN_LEFT;
                     cell_2.HorizontalAlignment = Element.ALIGN_LEFT;
@@ -382,10 +403,10 @@ namespace partner_aluro.Controllers
                 string text6_3 = order.AdressDostawy.Ulica + "\n";
                 //Paragraph para1 = new Paragraph("Data zamówienia: " + order.OrderPlaced, bold);
 
-                Chunk c6_1 = new Chunk(text6_1, bold);
-                Chunk c6_3 = new Chunk(text6_3, regular);
+                Chunk c6_1 = new(text6_1, bold);
+                Chunk c6_3 = new(text6_3, regular);
 
-                Paragraph para6 = new Paragraph();
+                Paragraph para6 = new();
                 para6.Add(c6_1);
                 para6.Add(c6_3);
                 para6.Alignment = Element.ALIGN_LEFT;
@@ -397,14 +418,14 @@ namespace partner_aluro.Controllers
                 //para90.SpacingAfter = 10;
                 //document.Add(para90);
 
-                PdfPTable table2 = new PdfPTable(8);
+                PdfPTable table2 = new(8);
 
                 table2.TotalWidth = 500f;
                 table2.LockedWidth = true;
                 float[] widths2 = new float[] { 10f, 55f, 200f, 50f, 40f, 40f,40f, 40f };
                 table2.SetWidths(widths2);
 
-                PdfPCell cell1_tab2 = new PdfPCell(new Phrase("#", regular));
+                PdfPCell cell1_tab2 = new(new Phrase("#", regular));
                 cell1_tab2.BackgroundColor = BaseColor.LIGHT_GRAY;
                 cell1_tab2.Border = Rectangle.BOTTOM_BORDER | Rectangle.TOP_BORDER | Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER;
                 cell1_tab2.BorderWidth = 1;
@@ -412,7 +433,7 @@ namespace partner_aluro.Controllers
                 cell1_tab2.VerticalAlignment = Element.ALIGN_CENTER;
                 table2.AddCell(cell1_tab2);
 
-                PdfPCell cell2_tab2 = new PdfPCell(new Phrase("Obrazek", regular));
+                PdfPCell cell2_tab2 = new(new Phrase("Obrazek", regular));
                 cell2_tab2.BackgroundColor = BaseColor.LIGHT_GRAY;
                 cell2_tab2.Border = Rectangle.BOTTOM_BORDER | Rectangle.TOP_BORDER | Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER;
                 cell2_tab2.BorderWidth = 1;
@@ -420,7 +441,7 @@ namespace partner_aluro.Controllers
                 cell2_tab2.VerticalAlignment = Element.ALIGN_CENTER;
                 table2.AddCell(cell2_tab2);
 
-                PdfPCell cell3_tab2 = new PdfPCell(new Phrase("Nazwa / Kod kreskowy", regular));
+                PdfPCell cell3_tab2 = new(new Phrase("Nazwa / Kod kreskowy", regular));
                 cell3_tab2.BackgroundColor = BaseColor.LIGHT_GRAY;
                 cell3_tab2.Border = Rectangle.BOTTOM_BORDER | Rectangle.TOP_BORDER | Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER;
                 cell3_tab2.BorderWidth = 1;
@@ -428,44 +449,54 @@ namespace partner_aluro.Controllers
                 cell3_tab2.VerticalAlignment = Element.ALIGN_CENTER;
                 table2.AddCell(cell3_tab2);
 
-                PdfPCell cell4_tab2 = new PdfPCell(new Phrase("Symbol", regular));
-                cell4_tab2.BackgroundColor = BaseColor.LIGHT_GRAY;
-                cell4_tab2.Border = Rectangle.BOTTOM_BORDER | Rectangle.TOP_BORDER | Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER;
-                cell4_tab2.BorderWidth = 1;
-                cell4_tab2.HorizontalAlignment = Element.ALIGN_CENTER;
-                cell4_tab2.VerticalAlignment = Element.ALIGN_CENTER;
+                PdfPCell cell4_tab2 = new(new Phrase("Symbol", regular))
+                {
+                    BackgroundColor = BaseColor.LIGHT_GRAY,
+                    Border = Rectangle.BOTTOM_BORDER | Rectangle.TOP_BORDER | Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER,
+                    BorderWidth = 1,
+                    HorizontalAlignment = Element.ALIGN_CENTER,
+                    VerticalAlignment = Element.ALIGN_CENTER
+                };
                 table2.AddCell(cell4_tab2);
 
-                PdfPCell cell5_tab2 = new PdfPCell(new Phrase("Ilość", regular));
-                cell5_tab2.BackgroundColor = BaseColor.LIGHT_GRAY;
-                cell5_tab2.Border = Rectangle.BOTTOM_BORDER | Rectangle.TOP_BORDER | Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER;
-                cell5_tab2.BorderWidth = 1;
-                cell5_tab2.HorizontalAlignment = Element.ALIGN_CENTER;
-                cell5_tab2.VerticalAlignment = Element.ALIGN_CENTER;
+                PdfPCell cell5_tab2 = new(new Phrase("Ilość", regular))
+                {
+                    BackgroundColor = BaseColor.LIGHT_GRAY,
+                    Border = Rectangle.BOTTOM_BORDER | Rectangle.TOP_BORDER | Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER,
+                    BorderWidth = 1,
+                    HorizontalAlignment = Element.ALIGN_CENTER,
+                    VerticalAlignment = Element.ALIGN_CENTER
+                };
                 table2.AddCell(cell5_tab2);
 
-                PdfPCell cell6_tab2 = new PdfPCell(new Phrase("Rabat", regular));
-                cell6_tab2.BackgroundColor = BaseColor.LIGHT_GRAY;
-                cell6_tab2.Border = Rectangle.BOTTOM_BORDER | Rectangle.TOP_BORDER | Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER;
-                cell6_tab2.BorderWidth = 1;
-                cell6_tab2.HorizontalAlignment = Element.ALIGN_CENTER;
-                cell6_tab2.VerticalAlignment = Element.ALIGN_CENTER;
+                PdfPCell cell6_tab2 = new(new Phrase("Rabat", regular))
+                {
+                    BackgroundColor = BaseColor.LIGHT_GRAY,
+                    Border = Rectangle.BOTTOM_BORDER | Rectangle.TOP_BORDER | Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER,
+                    BorderWidth = 1,
+                    HorizontalAlignment = Element.ALIGN_CENTER,
+                    VerticalAlignment = Element.ALIGN_CENTER
+                };
                 table2.AddCell(cell6_tab2);
 
-                PdfPCell cell7_tab2 = new PdfPCell(new Phrase("Cena (brutto)", regular));
-                cell7_tab2.BackgroundColor = BaseColor.LIGHT_GRAY;
-                cell7_tab2.Border = Rectangle.BOTTOM_BORDER | Rectangle.TOP_BORDER | Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER;
-                cell7_tab2.BorderWidth = 1;
-                cell7_tab2.HorizontalAlignment = Element.ALIGN_CENTER;
-                cell7_tab2.VerticalAlignment = Element.ALIGN_CENTER;
+                PdfPCell cell7_tab2 = new(new Phrase("Cena (brutto)", regular))
+                {
+                    BackgroundColor = BaseColor.LIGHT_GRAY,
+                    Border = Rectangle.BOTTOM_BORDER | Rectangle.TOP_BORDER | Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER,
+                    BorderWidth = 1,
+                    HorizontalAlignment = Element.ALIGN_CENTER,
+                    VerticalAlignment = Element.ALIGN_CENTER
+                };
                 table2.AddCell(cell7_tab2);
 
-                PdfPCell cell8_tab2 = new PdfPCell(new Phrase("Wartość (brutto)", regular));
-                cell8_tab2.BackgroundColor = BaseColor.LIGHT_GRAY;
-                cell8_tab2.Border = Rectangle.BOTTOM_BORDER | Rectangle.TOP_BORDER | Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER;
-                cell8_tab2.BorderWidth = 1;
-                cell8_tab2.HorizontalAlignment = Element.ALIGN_CENTER;
-                cell8_tab2.VerticalAlignment = Element.ALIGN_CENTER;
+                PdfPCell cell8_tab2 = new(new Phrase("Wartość (brutto)", regular))
+                {
+                    BackgroundColor = BaseColor.LIGHT_GRAY,
+                    Border = Rectangle.BOTTOM_BORDER | Rectangle.TOP_BORDER | Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER,
+                    BorderWidth = 1,
+                    HorizontalAlignment = Element.ALIGN_CENTER,
+                    VerticalAlignment = Element.ALIGN_CENTER
+                };
                 table2.AddCell(cell8_tab2);
 
 
@@ -474,7 +505,7 @@ namespace partner_aluro.Controllers
                     decimal cenaJednostkowa = item.Product.CenaProduktu * (1 - ((decimal)order.RabatZamowienia / 100));
                     decimal cenaJednostkowaIlosc = cenaJednostkowa * @item.Quantity;
 
-                    PdfPCell cell_1 = new PdfPCell(new Phrase(item.Id));
+                    PdfPCell cell_1 = new(new Phrase(item.Id));
 
                     Image image = Image.GetInstance("wwwroot/images/produkty/"+@item.Product.Symbol+"/"+@item.Product.ImageUrl);
                     image.ScaleAbsoluteWidth(50);
@@ -563,7 +594,7 @@ namespace partner_aluro.Controllers
 
 
 
-                PdfPTable table4 = new PdfPTable(1);
+                PdfPTable table4 = new(1);
 
                 table4.SpacingBefore = 30;
 
@@ -572,7 +603,7 @@ namespace partner_aluro.Controllers
 
 
 
-                PdfPCell cell1_tab4 = new PdfPCell(new Phrase("Wiadomość: " + order.Komentarz, bold));
+                PdfPCell cell1_tab4 = new(new Phrase("Wiadomość: " + order.Komentarz, bold));
                 cell1_tab4.Border = Rectangle.BOTTOM_BORDER | Rectangle.TOP_BORDER ;
                 cell1_tab4.BorderWidth = 1;
                 cell1_tab4.PaddingTop = 10;
@@ -594,14 +625,16 @@ namespace partner_aluro.Controllers
         }
 
 
-        public void CreateOrder(Order order)
+        public async void CreateOrder(Order order)
         {
             order.OrderPlaced = DateTime.Now;
 
             var cartItems = _cart.CartItems;
 
+
             foreach (var item in cartItems)
             {
+                _productService.ZmiejszIloscProductIdAsync(item.Product.ProductId, item.Quantity);
 
                 item.Product.CenaProduktuDlaUzytkownika = item.Product.CenaProduktu * (1 - (Core.Constants.Rabat / 100));
 
@@ -613,17 +646,15 @@ namespace partner_aluro.Controllers
                     Cena = (int)(item.Product.CenaProduktuDlaUzytkownika * item.Quantity)
                     //Cena = (int)(item.Product.CenaProduktu * item.Quantity)
                 };
-                
-                order.UserID = _userManager.GetUserId(HttpContext.User);
-
-
-
-                order.RabatZamowienia = Core.Constants.Rabat;
 
                 order.OrderItems.Add(orderItem);
                 order.OrderTotal += orderItem.Cena;
-                order.StanZamowienia = StanZamowienia.Nowe;
             }
+            order.UserID = _userManager.GetUserId(HttpContext.User);
+
+            order.RabatZamowienia = Core.Constants.Rabat;
+            order.StanZamowienia = StanZamowienia.Nowe;
+
             _orderService.Add(order);
         }
 
@@ -696,7 +727,7 @@ namespace partner_aluro.Controllers
             return RedirectToAction("Detail", new {id = id});
         }
 
-        private List<SelectListItem> GetStanyZamowienia()
+        private static List<SelectListItem> GetStanyZamowienia()
         {
             var lstStanZamowien = new List<SelectListItem>();
 

@@ -163,7 +163,7 @@ namespace partner_aluro.Controllers
             if (szukanaNazwa == null || szukanaNazwa == "")
             {
                 szukanaNazwa = "";
-                List<Product> produkty = await _context.Products.ToListAsync();
+                List<Product> produkty = await _context.Products.Where(x=>x.Ukryty == false).ToListAsync();
                 var pageNumber = page ?? 1; // if no page was specified in the querystring, default to the first page (1)
                 var onePageOfProducts = produkty.ToPagedList(pageNumber, 9); // will only contain 25 products max because of the pageSize
 
@@ -189,7 +189,7 @@ namespace partner_aluro.Controllers
             else
             {
 
-                List<Product> produkty2 = await _context.Products.Where(x => x.CategoryNavigation.Name == szukanaNazwa || x.CategorySubNavigation.Name == szukanaNazwa).ToListAsync();
+                List<Product> produkty2 = await _context.Products.Where(x => x.Ukryty == false).Where(x => x.CategoryNavigation.Name == szukanaNazwa || x.CategorySubNavigation.Name == szukanaNazwa).ToListAsync();
                 
 
                 if (szukanaNazwa != null && szukanaNazwa.Length >= 1)
@@ -272,13 +272,11 @@ namespace partner_aluro.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public async Task<List<Product>>? szukanie(string szukanaNazwa)   // to jest wynik wyszukiwarki (zwraca produkty ktore zawieraja w nazwie szukana nazwe)
         {
-            List<Product> WszystkieProdukty = await _context.Products.ToListAsync();
+            List<Product> WszystkieProdukty = await _context.Products.Where(x => x.Ukryty == false).ToListAsync();
 
-            //List<string> WyszukaneNazwyProdukow = await _context.Products.Select(p=> p.Name.ToLower()).ToListAsync(); // tworze liste nazw (puste)
+            List<string> WyszukaneNazwyProdukow = await _context.Products.Where(x => x.Ukryty== false).Select(p => p.Name.ToLower()).ToListAsync(); // tworze liste nazw (puste)
 
-            List<string> WyszukaneNazwyProdukow = await _context.Products.Select(p => p.Name.ToLower()).ToListAsync(); // tworze liste nazw (puste)
-
-            List<string> WyszukaneSymbolowProdukow = await _context.Products.Select(p => p.Symbol.ToLower()).ToListAsync(); // tworze liste nazw Symbolów wszystkie tylko symbole
+            List<string> WyszukaneSymbolowProdukow = await _context.Products.Where(x => x.Ukryty == false).Select(p => p.Symbol.ToLower()).ToListAsync(); // tworze liste nazw Symbolów wszystkie tylko symbole
 
             
             WyszukaneNazwyProdukow.AddRange(WyszukaneSymbolowProdukow);
@@ -298,6 +296,7 @@ namespace partner_aluro.Controllers
                 {
                     if (NazwaProduktu.Contains(szukanaNazwa)) // jesli jakas nazwa jest w liscie 
                     {
+                        
                         WyszukaneProduktyLowerName.Add(WszystkieProdukty.Find(x => x.Name.ToLower() == NazwaProduktu || x.Symbol.ToLower() == NazwaProduktu));
                     }
 

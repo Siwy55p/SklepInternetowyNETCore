@@ -102,7 +102,7 @@ namespace partner_aluro.Controllers
 
             product.DataDodania = DateTime.Now;
 
-            product.Ukryty = false;
+
             product.Bestseller = true;
             product.ImageUrl = "";
 

@@ -54,6 +54,9 @@
                                             }else if (order.StanZamowienia == StanZamowienia.Zrealizowane)
                                             {
                                                 <td style="background: BlueViolet">@order.StanZamowienia</td>
+                                            }else if (order.StanZamowienia == StanZamowienia.Anulowane)
+                                            {
+                                                <td style="background: red">@order.StanZamowienia</td>
                                             }else
                                             {
                                                 <td>@order.StanZamowienia</td>
