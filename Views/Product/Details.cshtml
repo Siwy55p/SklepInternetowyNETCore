@@ -81,12 +81,26 @@
                     </div>
 
 
-                    <div class="">
+                    <div class="row">
 
-                        Specyfikacja produktu: <br>
-                        Pakowanie: @Model.Pakowanie <br>
-                        Wymiar wewnętrzny: <br />
-                        Materiał: @Model.Materiał <br />
+                        <div class="row">Specyfikacja produktu: </div>
+                        <div class="row">Pakowanie: @Model.Pakowanie </div>
+                     @if (Model.WysokoscProduktu != null)
+                        {
+                        <div class="row">
+                            <div class="col">Szerokość: @Model.SzerokoscProduktu</div>
+                            <div class="col">Wysokość: @Model.WysokoscProduktu</div>
+                            <div class="col">Głębokość: @Model.GlebokoscProduktu</div>
+                        </div>
+
+                        }
+                        @if(Model.WagaProduktu != null)
+                        {
+                            <div class="row">
+                                <div class="col">Waga: @Model.WagaProduktu</div>
+                            </div>
+                        }
+                        <div class="row">Materiał: @Model.Materiał </div>
 
                     </div>
 
