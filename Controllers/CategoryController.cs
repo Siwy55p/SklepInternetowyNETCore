@@ -65,19 +65,19 @@ namespace partner_aluro.Controllers
         public IActionResult AddSubCategory()
         {
             ViewData["kategorie"] = GetCategories();
-
-            return View();
+            SubCategory subCategory = new SubCategory();
+            return View(subCategory);
         }
         [HttpPost]
         public async Task<IActionResult> AddSubCategoryAsync(SubCategory data)
         {
-            ModelState.Remove("SubCategories");
             data.Category = await _categoryService.GetAsync(data.SubCategoryId);
 
-            ModelState.Remove("Categories");
+            ModelState.Remove("SubCategories");
+            ModelState.Remove("Category");
             if (!ModelState.IsValid)
             {
-                return View(data);
+                return View();
             }
 
             //logika zapisania kategorii do bazy.

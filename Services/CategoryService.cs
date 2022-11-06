@@ -19,11 +19,10 @@ namespace partner_aluro.Services
             _context = context;
         }
 
-        public int AddSave(Category category)
+        public async Task AddSave(Category category)
         {
-            _context.Category.Add(category);
-            var id = _context.SaveChanges();
-            return id;
+            await _context.Category.AddAsync(category);
+            await _context.SaveChangesAsync();
         }
 
         public int Delete(int id)
@@ -101,7 +100,7 @@ namespace partner_aluro.Services
 
         public int Save(Category category)
         {
-            var cat = _context.Update(category);
+            _context.Update(category);
             _context.SaveChanges();
 
             return category.CategoryId;
@@ -115,11 +114,10 @@ namespace partner_aluro.Services
             return category;
         }
 
-        public int AddSave(SubCategory category)
+        public async Task AddSave(SubCategory category)
         {
-            _context.SubCategory.Add(category);
-            var id = _context.SaveChanges();
-            return id;
+            _context.SubCategory.AddAsync(category);
+            _context.SaveChangesAsync();
         }
 
         public string GetName(int id)

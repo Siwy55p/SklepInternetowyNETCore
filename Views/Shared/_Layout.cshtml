@@ -4,40 +4,29 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - partner_aluro</title>
-
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-
     <!-- Fonts (includes Bootstrap)-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!--jQuery Search and enather-->
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
-
     @RenderSection("LinkStyleHead", required: false)
-
 </head>
 <body>
-    @Html.Partial("_Header") @*To musi tak zostać te linijki nie ruszaj jest dobrze*@
+    @await Html.PartialAsync("_Header")
     <main>
         <div class="container">
-
-
             <div class="offcanvas offcanvas-end w-5 @ViewData["Pokaz"]" tabindex="-1" id="offcanvas" data-bs-scroll="true" data-bs-keyboard="false" data-bs-backdrop="false">
                 <div class="offcanvas-header">
-
                     <h6 class="offcanvas-title d-none d-sm-block" id="offcanvas">Twoje zamówienie</h6>
-
-
                     <button type="button" class="btn-close btn btn-success text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body px-0" id="mydiv">
                     @await Component.InvokeAsync("CartStatus")
                 </div>
             </div>
-
             <div class="container-fluid">
-
                 @RenderBody()
             </div>
         </div>
@@ -45,8 +34,11 @@
     </main>
     <!-- Footer -->
     <footer class="text-center text-lg-start bg-light text-muted">
-        @Html.Partial("_Footer")
 
+        @await Html.PartialAsync("_Footer")
+@*
+        @Html.Partial("_Footer")
+*@
     </footer>
     <!-- Footer -->
     @await RenderSectionAsync("Scripts", required: false)
@@ -67,43 +59,12 @@
         $(function () {
             $("#szukanaNazwa").keyup(function (e) {
                 var n = $("#szukanaNazwa").val();
-                var page = 2;
                 $.get("/Category/Lista2?szukanaNazwa=" + n, function (r) {
                     $("#SekcjaListaKategori").html(r);
                 });
-
             });
         });
     </script>
-@*
-    <script>
-
-        //if (document.getElementById('xxx').checked) {
-        //    //I am checked
-        function toggleCheckbox(element) {
-            const div = document.getElementById('box2');
-
-            if (document.getElementById('xxx').checked)
-            {
-                div.innerHTML = `Adres rozliczeniowy`;
-
-                document.getElementById('box1').style.display = '';
-            }else
-            {
-                //div.insertAdjacentText('beforeend', ' appended text');
-
-                div.innerHTML = `Adres rozliczeniowy i dostawy`;
-
-                document.getElementById('box1').style.display = 'none';
-
-            }
-        }
-
-        //document.getElementById('box').style.display = 'none';
-
-        //    alert("test");
-        //}
-    </script>*@
 
     @*BOOTSTRAP*@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

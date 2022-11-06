@@ -5,8 +5,8 @@ namespace partner_aluro.Services.Interfaces
     public interface ICategoryService
     {
         //AddSave kategoria do bazy
-        int AddSave(Category category);
-        int AddSave(SubCategory category);
+        Task AddSave(Category category);
+        Task AddSave(SubCategory category);
         Category Update(Category category);
         Task<List<Category>> List();
         List<Category> GetList();
