@@ -4,22 +4,18 @@ using partner_aluro.Data;
 using partner_aluro.Models;
 using partner_aluro.Services;
 using partner_aluro.Services.Interfaces;
-using System.Security.Policy;
 using partner_aluro.Core;
 using partner_aluro.Core.Repositories;
 using partner_aluro.Repositories;
-using Microsoft.Extensions.DependencyInjection;
 using SmartBreadcrumbs.Extensions;
 using System.Reflection;
-using System.Globalization;
-using Microsoft.AspNetCore.Localization;
-using Microsoft.Extensions.Options;
-using ServiceReference1;
 using partner_aluro;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DbContextProductionConnection");
 
+
+//global using partner_aluro.Services.EmailService;
 
 var birKey = builder.Configuration.GetSection("BIRService").Value; //Dodanie klucza produktyjnego do uslugi Sprawdz regon
 
@@ -217,5 +213,7 @@ void AddScoped()
 
 
     builder.Services.AddScoped<IProfildzialalnosciService, ProfildzialalnosciService>();
+
+    builder.Services.AddScoped<IEmailService, EmailService>();
 
 }
