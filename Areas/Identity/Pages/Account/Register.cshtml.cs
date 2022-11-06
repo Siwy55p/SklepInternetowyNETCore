@@ -38,6 +38,7 @@ namespace partner_aluro.Areas.Identity.Pages.Account
         private readonly IEmailSender _emailSender;
         private readonly IProfildzialalnosciService _profildzialalnosciService;
         private readonly RegonService RegonService;
+        private readonly IEmailService _emailService;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
@@ -46,7 +47,8 @@ namespace partner_aluro.Areas.Identity.Pages.Account
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
             IProfildzialalnosciService profildzialalnosciService,
-            RegonService regonService
+            RegonService regonService,
+            IEmailService emailService
             )
         {
             _userManager = userManager;
@@ -57,6 +59,7 @@ namespace partner_aluro.Areas.Identity.Pages.Account
             _emailSender = emailSender;
             _profildzialalnosciService = profildzialalnosciService;
             RegonService = regonService;
+            _emailService = emailService;
         }
 
 
@@ -276,7 +279,14 @@ namespace partner_aluro.Areas.Identity.Pages.Account
                     user.Adress1rozliczeniowy.UserID = userId;
                     user.Adress2dostawy.UserID = userId;
 
+                    EmailDto newClint = new EmailDto()
+                    {
+                        Subject = "Dziękujemy za rejestracje w Aluro",
+                        To = Input.Email,
+                        Body = "Twoje konto czeka za akceptacją. Czekaj na kolejną wiadomość o aktywowaniu konto. Pozdrawiamy Zespół Aluro.",
+                    };
 
+                    _emailService.SendEmailAsync(newClint);
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
