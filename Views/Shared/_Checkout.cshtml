@@ -7,21 +7,21 @@
 
 @if (Model.Carts.CartItems.Count > 0)
 {
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Obrazek</th>
-                <th>Nazwa produktu</th>
-                <th>Symbol</th>
-                <th>Cena jednostkowa</th>
-                <th>Ilość</th>
-                <th>Razem</th>
-                <th>Usuń</th>
-            </tr>
-        </thead>
-        <tbody>
-                @foreach (var item in Model.Carts.CartItems)
-                {
+    <div class="container">
+        <div class="row bg-light">
+            <div class="col border text-center fw-bold" style="max-width: 75px; width:75px"></div>
+            <div class="col border text-center fw-bold text-wrap">Nazwa produktu</div>
+            <div class="col border text-center fw-bold d-none d-sm-none d-md-none d-lg-block">Symbol</div>
+            <div class="col border text-center fw-bold d-none d-sm-none d-md-none d-lg-block">Cena jednostkowa</div>
+            <div class="col border text-center fw-bold">Ilość</div>
+            <div class="col border text-center fw-bold">Razem</div>
+            <div class="col border text-center fw-bold" style="max-width: 60px">Usuń</div>
+        </div>
+        @foreach (var item in Model.Carts.CartItems)
+        {
+            <div class="row " >
+
+                @{
                     var Cena_brutto = (decimal)item.Product.CenaProduktu * (decimal)partner_aluro.Core.Constants.Vat;
 
 
@@ -29,57 +29,55 @@
                     var CenaJednostkowa_brutto = (decimal)item.Product.CenaProduktu * (decimal)partner_aluro.Core.Constants.Vat;
 
                     var ProductTotal = CenaJednostkowa_brutto * item.Quantity;
-                    <tr>
-                        <td>
-                            <img src="~/images/produkty/@item.Product.Symbol/@item.Product.ImageUrl"  style="height: 4em">
-                        </td>
-                        <td>
-                            <a class="text-black" asp-controller="Product" asp-action="Details" asp-route-id="@item.Product.ProductId">@item.Product.Name</a>
-                        </td>
-                        <td>
-                            @item.Product.Symbol
-                        </td>
-                        <td>
+
+
+                    }
+
+                <div class="col border border-top-0" style="max-width: 75px; width:75px">
+                    <img src="~/images/produkty/@item.Product.Symbol/@item.Product.ImageUrl"  style="height: 4em">
+                </div>
+                <div class="col border border-top-0 text-center text-wrap text-break" style="width: 10%">
+                    <a class="text-black" asp-controller="Product" asp-action="Details" asp-route-id="@item.Product.ProductId">@item.Product.Name</a>
+                        </div>
+                <div class="col border border-top-0 d-none d-sm-none d-md-none d-lg-block text-center">
+                    <spam style="vertical-align: middle;">@item.Product.Symbol </spam>
+                        </div>
+                <div class="col border border-top-0 d-none d-sm-none d-md-none d-lg-block text-center" style="display: inline-flex; vertical-align:middle">
                             @CenaJednostkowa_brutto.ToString("C")
-                        </td>
-                        <td>
+                        </div>
+                <div class="col border border-top-0 text-center">
                             <a asp-controller="Cart" asp-action="ReduceQuantity" asp-route-id="@item.Product.ProductId"><i class="fa-solid fa-minus"></i></a>
                             @item.Quantity
                             <a asp-controller="Cart" asp-action="IncreaseQuantity" asp-route-id="@item.Product.ProductId"><i class="fa-solid fa-plus"></i></a>
-                        </td>
-                        <td>
-                            @ProductTotal.ToString("C")
-                        </td>
-                        <td>
-                            <a asp-controller="Cart" asp-action="RemoveFromCart" asp-route-id="@item.Product.ProductId" class="text-danger"><i class="fa-solid fa-xmark"></i></a>
-                        </td>
-                    </tr>
-                }
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td class="text">Wartość (brutto):</td>
-                <td>
-                    <strong>@Model.Carts.GetCartTotalBrutto().ToString("C")</strong>
-                </td>
-                <td></td>
-            </tr>
-        </tbody>
+                        </div>
+                <div class="col border border-top-0 text-center">
+                    @ProductTotal.ToString("C")
+                </div>
+                <div class="col border border-top-0 text-center" style="max-width: 60px">
+                    <a asp-controller="Cart" asp-action="RemoveFromCart" asp-route-id="@item.Product.ProductId" class="text-danger"><i class="fa-solid fa-xmark"></i></a>
+                </div>
+            </div>
+        }
 
-        <tfoot>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td class="text">Razem (netto):</td>
-            <td>
-                <strong>@Model.Carts.GetCartTotalNetto().ToString("C")</strong>
-            </td>
-            <td></td>
-        </tfoot>
-    </table>
+        <div class="row">
+            <div class="col-8 d-none d-sm-none d-md-none d-lg-block"></div>
+            <div class="text text-end" style="width:150px">Wartość (brutto):</div>
+            <div class="" style="width:150px">
+                            <strong>@Model.Carts.GetCartTotalBrutto().ToString("C")</strong>
+                </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-8 d-none d-sm-none d-md-none d-lg-block"></div>
+            <div class="text text-end" style="width:150px">Razem (netto):</div>
+            <div class="" style="width:150px">
+                    <strong>@Model.Carts.GetCartTotalNetto().ToString("C")</strong>
+            </div>
+        </div>
+
+    </div>
+
      @*   <form asp-action="Return" asp-controller="Cart" method="POST" >
             <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
             <button class="btn btn-success float-right mr-5" type="submit" name="returnUrl" value="@ViewBag.returnUrl"><i class="fa-solid fa-angles-right"></i>Powrót</button>
