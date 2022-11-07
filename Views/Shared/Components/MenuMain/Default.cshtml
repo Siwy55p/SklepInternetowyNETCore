@@ -1,16 +1,26 @@
 ﻿@model IEnumerable<Category>
 
 <nav class="navbar navbar-expand-lg navbar-light">
+
+
     @foreach (var kategorie in Model)
     {
+        var active = "";
+
+        var active2 = "";
+
+        if (@kategorie.CategoryId == ViewBag.KategoriaId)
+        {
+            active = "active";
+        }
+
         @if (kategorie.Aktywny == true)
         {
+
             <div class="dropdown p-1">
 
-                <a href="@Url.Action("Lista1","Category", new {KategoriaId = kategorie.CategoryId})" class="mainmenu" style="border-radius:20px; width: 100px; height:100px; max-height: 100px;" aria-expanded="false">
-                    <span class="catmenu text-white">
+                <a href="@Url.Action("Lista1","Category", new {KategoriaId = kategorie.CategoryId})" class="@active catmenu text-white mainmenu" style="border-radius:20px; width: 100px; height:100px; max-height: 100px;" aria-expanded="false">
                         @kategorie.Name
-                    </span>
                 </a>
 
                 @if (kategorie.SubCategories.Count >= 1)
@@ -18,8 +28,16 @@
                     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                     @foreach (var kategorie2 in kategorie.SubCategories)
                     {
+                        if (@kategorie2.SubCategoryId == ViewBag.KategoriaId2)
+                        {
+                            active2 = "active";
+                        }
+                        else
+                        {
+                            active2 = "";
+                        }
                         <li>
-                            <a class="text-white dropdown-item" href="@Url.Action("Lista","Category", new {szukanaNazwa = kategorie2.Name})">
+                                <a class="@active2 text-white dropdown-item" href="@Url.Action("Lista1Sub","Category", new {KategoriaId = kategorie2.SubCategoryId})">
                                 @kategorie2.Name
                             </a>
                         </li>

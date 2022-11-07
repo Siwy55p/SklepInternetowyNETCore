@@ -34,16 +34,20 @@
                         zmienna = "";
                     }
 
+
                     var Cena_brutto = (decimal)item.Product.CenaProduktu * (decimal)partner_aluro.Core.Constants.Vat;
+                    var CenaJednostkowa_netto = item.Product.CenaProduktu;
+                    var CenaJednostkowa_brutto = (decimal)Cena_brutto;
 
-
-                    var CenaJednostkowa_netto = item.Product.CenaProduktu * (1 - (partner_aluro.Core.Constants.Rabat / 100));
-                    var CenaJednostkowa_brutto = (decimal)item.Product.CenaProduktu * (decimal)partner_aluro.Core.Constants.Vat;
-
+                    if (partner_aluro.Core.Constants.Rabat >= 0 && partner_aluro.Core.Constants.Rabat != null)
+                    {
+                        CenaJednostkowa_netto = item.Product.CenaProduktu * (1 - (partner_aluro.Core.Constants.Rabat / 100));
+                        CenaJednostkowa_brutto = (decimal)Cena_brutto * (1 - (partner_aluro.Core.Constants.Rabat / 100));
+                    }
+                    
                     var ProductTotal = CenaJednostkowa_brutto * item.Quantity;
 
-
-                        }
+                    }
 
                     <div class="col border border-top-0" style="max-width: 75px; width:75px">
                         <img src="~/images/produkty/@item.Product.Symbol/@item.Product.ImageUrl"  style="height: 4em">

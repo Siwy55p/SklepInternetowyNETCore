@@ -141,16 +141,30 @@
                                 {
                                     <tr>
                                         @{
-                                            decimal cenaJednostkowa = item.Product.CenaProduktu * (1 - ((decimal)Model.RabatZamowienia / 100));
-                                            decimal cenaJednostkowaIlosc = cenaJednostkowa * @item.Quantity;
+
+                                            var Cena_brutto = (decimal)item.Product.CenaProduktu * (decimal)partner_aluro.Core.Constants.Vat;
+                                            var CenaJednostkowa_netto = item.Product.CenaProduktu;
+                                            var CenaJednostkowa_brutto = (decimal)Cena_brutto;
+
+
+                                            if (partner_aluro.Core.Constants.Rabat >= 0 && partner_aluro.Core.Constants.Rabat != null)
+                                            {
+                                                CenaJednostkowa_netto = item.Product.CenaProduktu * (1 - (partner_aluro.Core.Constants.Rabat / 100));
+                                                CenaJednostkowa_brutto = (decimal)Cena_brutto * (1 - (partner_aluro.Core.Constants.Rabat / 100));
+                                            }
+
+                                            var ProductTotal = CenaJednostkowa_brutto * item.Quantity;
+
+                                            //decimal cenaJednostkowa = item.Product.CenaProduktu * (1 - ((decimal)Model.RabatZamowienia / 100));
+                                            //decimal cenaJednostkowaIlosc = cenaJednostkowa * @item.Quantity;
                                         }
                                         <td>@item.Product.ProductId</td>
                                         <td><img class="img-thumbnail" src="~/images/produkty/@item.Product.Symbol/@item.Product.ImageUrl" alt="@item.Product.Name" style="width:75px;height:75px;"></td>
                                         <td>@item.Product.Name</td>
                                         <td>@item.Product.Symbol</td>
-                                        <td>@cenaJednostkowa.ToString("C")</td>
+                                        <td>@CenaJednostkowa_brutto.ToString("C")</td>
                                         <td>@item.Quantity</td>
-                                        <td>@cenaJednostkowaIlosc.ToString("C")</td>
+                                        <td>@ProductTotal.ToString("C")</td>
                                     </tr>
                                 }
                             </tbody>

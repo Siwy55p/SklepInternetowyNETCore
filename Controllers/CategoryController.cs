@@ -180,8 +180,71 @@ namespace partner_aluro.Controllers
 
         //TUTAJ WYSWIETLAM STRONE PODSTAWOWĄ DLA WYSWIETLENIA PRODUKTOW Z ID KATEGORIA
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public async Task<IActionResult> Lista1Sub(int KategoriaId, int? page, string? szukanaNazwa, int? Sort) //Link do wyswietlania po wyborze kategorii
+        {
+
+            //KategoriaId = 3;
+
+
+            //var products = _cart.GetAllCartItems();
+
+            List<Product> produkty = await _context.Products.Where(x => x.Ukryty == false).Where(x => x.SubCategoryId == KategoriaId).ToListAsync();
+
+            szukanaNazwa = _categoryService.GetNameSub(KategoriaId);
+            var categoryPage = new MvcBreadcrumbNode("Kategoria", "Home", szukanaNazwa);
+            ViewData["BreadcrumbNode"] = categoryPage;
+            ViewData["Title"] = szukanaNazwa;
+            ViewData["szukanaNazwa"] = szukanaNazwa;
+
+            ViewData["Sort"] = Sort;
+
+            //jesli jest cos w karcie przekaz do zmiennej, pokaz wartosc karty true
+            //if (products.Count > 0)
+            //{
+            //    ViewData["Pokaz"] = "show";
+            //}
+
+            var pageNumber = page ?? 1; // if no page was specified in the querystring, default to the first page (1)
+            var onePageOfProducts = produkty.ToPagedList(pageNumber, 9); // will only contain 25 products max because of the pageSize
+
+            if (Sort == 1)
+            {
+                onePageOfProducts = produkty.OrderBy(p => p.Name).ToPagedList(pageNumber, 9); // will only contain 25 products max because of the pageSize
+            }
+            else if (Sort == 2)
+            {
+                onePageOfProducts = produkty.OrderByDescending(p => p.Name).ToPagedList(pageNumber, 9); // will only contain 25 products max because of the pageSize
+            }
+            else if (Sort == 3)
+            {
+                onePageOfProducts = produkty.OrderBy(p => p.Symbol).ToPagedList(pageNumber, 9); // will only contain 25 products max because of the pageSize
+            }
+            else if (Sort == 4)
+            {
+                onePageOfProducts = produkty.OrderByDescending(p => p.Symbol).ToPagedList(pageNumber, 9); // will only contain 25 products max because of the pageSize
+            }
+
+
+            ViewBag.OnePageOfProducts = onePageOfProducts;
+
+
+            ViewBag.KategoriaId = 99999;
+            ViewBag.KategoriaId2 = KategoriaId;
+
+            return View(produkty);
+
+
+        }
+
+
+        //TUTAJ WYSWIETLAM STRONE PODSTAWOWĄ DLA WYSWIETLENIA PRODUKTOW Z ID KATEGORIA
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public async Task<IActionResult> Lista1(int KategoriaId, int? page, string? szukanaNazwa, int? Sort) //Link do wyswietlania po wyborze kategorii
         {
+
+            //KategoriaId = 3;
+
+
             //var products = _cart.GetAllCartItems();
 
             List<Product> produkty = await _context.Products.Where(x => x.Ukryty == false).Where(x => x.CategoryId == KategoriaId).ToListAsync();
@@ -222,6 +285,10 @@ namespace partner_aluro.Controllers
 
 
             ViewBag.OnePageOfProducts = onePageOfProducts;
+
+
+            ViewBag.KategoriaId = KategoriaId;
+            ViewBag.KategoriaId2 = 99999999;
 
             return View(produkty);
 
@@ -276,6 +343,10 @@ namespace partner_aluro.Controllers
 
                 ViewBag.OnePageOfProducts = onePageOfProducts;
 
+
+                ViewBag.KategoriaId = 99999999;
+                ViewBag.KategoriaId2 = 99999999;
+
                 return View();
             }
             else
@@ -313,10 +384,14 @@ namespace partner_aluro.Controllers
 
                     ViewBag.OnePageOfProducts = onePageOfProducts;
 
+                    ViewBag.KategoriaId = 99999999;
+                    ViewBag.KategoriaId2 = 99999999;
                     return View(produkty);
                 }
                 else
                 {
+                    ViewBag.KategoriaId = 99999999;
+                    ViewBag.KategoriaId2 = 99999999;
                     return View(produkty2);
                 }
 

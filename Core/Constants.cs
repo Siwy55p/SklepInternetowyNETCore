@@ -1,9 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
-
-namespace partner_aluro.Core
+﻿namespace partner_aluro.Core
 {
-
     public static class Constants
     {
 
@@ -25,6 +21,7 @@ namespace partner_aluro.Core
         public static string UserId;
 
         public static decimal Rabat;
+
 
     }
 }

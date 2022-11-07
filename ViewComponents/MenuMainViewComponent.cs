@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using partner_aluro.Data;
-using partner_aluro.Services.Interfaces;
 
 namespace partner_aluro.ViewComponents
 {
@@ -21,5 +20,7 @@ namespace partner_aluro.ViewComponents
             .ToListAsync();
             return View(resul);
         }
+
+
     }
 }

@@ -10,9 +10,7 @@
 <div class="row">
     <div class="col-12 col-md-4 col-lg-3">
         <div class="row custom-kategory-menu sticky-top">
-            <div class="card bg-light">
                     @await Component.InvokeAsync("MenuCategory")
-                </div>
             </div>
     </div>
     @*CONTENT PRAWA STRONA*@
@@ -43,7 +41,7 @@
         </div>
         @*PRODKUCTS*@
         <div class="row" id="SekcjaListaKategori">
-            @Html.Partial("_ProductList")
+            @await Html.PartialAsync("_ProductList")
         </div>
     </div>
 </div>

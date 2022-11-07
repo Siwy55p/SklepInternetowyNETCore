@@ -637,12 +637,22 @@ namespace partner_aluro.Controllers
 
                 item.Product.CenaProduktuDlaUzytkownika = item.Product.CenaProduktu * (1 - (Core.Constants.Rabat / 100));
 
+
+                var Cena_brutto = (decimal)item.Product.CenaProduktu * (decimal)partner_aluro.Core.Constants.Vat;
+
+                var CenaJednostkowa = Cena_brutto * (1 - (partner_aluro.Core.Constants.Rabat / 100));
+
+                var ProductTotal = CenaJednostkowa * item.Quantity;
+
+
+
                 var orderItem = new OrderItem()
                 {
                     Quantity = item.Quantity,
                     ProductId = item.Product.ProductId,
                     OrderId = order.Id,
-                    Cena = (int)(item.Product.CenaProduktuDlaUzytkownika * item.Quantity)
+                    //Cena = (int)(item.Product.CenaProduktuDlaUzytkownika * item.Quantity)
+                    Cena = (int)ProductTotal
                     //Cena = (int)(item.Product.CenaProduktu * item.Quantity)
                 };
 

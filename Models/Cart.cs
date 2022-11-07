@@ -126,33 +126,32 @@ namespace partner_aluro.Models
 
         public async Task<List<CartItem>> GetAllCartItemsAsync()
         {
-            return CartItems ??
-                (CartItems = await _context.CartItems.Where(ci => ci.CartId == Id)
+            return CartItems ??= await _context.CartItems.Where(ci => ci.CartId == Id)
                     .Include(ci => ci.Product)
-                    .ToListAsync());
+                    .ToListAsync();
         }
 
-        public int GetCartTotalBrutto()
+        public decimal GetCartTotalBrutto()
         {
-            int CartTotal = (int)_context.CartItems
+            decimal CartTotal = _context.CartItems
                 .Where(ci => ci.CartId == Id)
                 .Select(ci => ci.Product.CenaProduktu * ci.Quantity)
                 .Sum();
 
-            CartTotal = (int)(CartTotal * (1 - (Core.Constants.Rabat / 100)));
+            CartTotal *= (1 - (Core.Constants.Rabat / 100));
 
-            CartTotal = (int)(CartTotal * Core.Constants.Vat);
+            CartTotal *= Core.Constants.Vat;
 
             return CartTotal;
         }
-        public int GetCartTotalNetto()
+        public decimal GetCartTotalNetto()
         {
-            int CartTotal = (int)_context.CartItems
+            decimal CartTotal = _context.CartItems
                 .Where(ci => ci.CartId == Id)
                 .Select(ci => ci.Product.CenaProduktu * ci.Quantity)
                 .Sum();
 
-            CartTotal = (int)(CartTotal * (1 - (Core.Constants.Rabat / 100)));
+            CartTotal *= (1 - (Core.Constants.Rabat / 100));
 
             return CartTotal;
         }

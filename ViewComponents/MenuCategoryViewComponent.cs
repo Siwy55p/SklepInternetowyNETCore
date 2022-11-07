@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using partner_aluro.Data;
-using partner_aluro.Services.Interfaces;
-using partner_aluro.ViewModels;
 
 namespace partner_aluro.ViewComponents
 {
@@ -26,5 +24,6 @@ namespace partner_aluro.ViewComponents
             //cat.SubCategory = await _context.SubCategory.ToListAsync();
             return View(resul);
         }
+
     }
 }

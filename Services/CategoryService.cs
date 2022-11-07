@@ -139,5 +139,12 @@ namespace partner_aluro.Services
             string name =list.Find(x => x.CategoryId == id).Name;
             return name;
         }
+
+        public string GetNameSub(int id)
+        {
+            List<SubCategory> list = _context.SubCategory.ToList();
+            string name = list.Find(x => x.SubCategoryId == id).Name;
+            return name;
+        }
     }
 }
