@@ -624,7 +624,7 @@ namespace partner_aluro.Controllers
         }
 
 
-        public async void CreateOrder(Order order)
+        public void CreateOrder(Order order)
         {
             order.OrderPlaced = DateTime.Now;
 

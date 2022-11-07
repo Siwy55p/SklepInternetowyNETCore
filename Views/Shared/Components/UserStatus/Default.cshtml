@@ -7,7 +7,7 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
-@if (SignInManager.IsSignedIn(User))
+@if (SignInManager.IsSignedIn(User) && @Model.User != null)
 {
     <ul class="navbar-nav">
         <li class="nav-item nav-link"><span class="text-white">Witaj</span> <span class="text-warning">@Model.User.Imie @Model.User.Nazwisko</span>

@@ -36,6 +36,15 @@ namespace partner_aluro.Services
             _context.SaveChanges();
             return id;
         }
+        public int DeleteSubCategory(int id)
+        {
+            SubCategory subCategory = _context.SubCategory.FirstOrDefault(x => x.SubCategoryId == id);
+
+            _context.SubCategory.Remove(subCategory);
+
+            _context.SaveChanges();
+            return id;
+        }
         public int Delete(string name)
         {
             Category category = _context.Category.Include(x => x.SubCategories).FirstOrDefault(x => x.Name == name);

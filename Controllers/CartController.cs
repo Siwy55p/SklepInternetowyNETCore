@@ -78,7 +78,6 @@ namespace partner_aluro.Controllers
 
             if (vm.Orders.User.Adress1rozliczeniowy == null)
             {
-
                 vm.Orders.User.Adress1rozliczeniowy = _context.Adress1rozliczeniowy.Where(a => a.UserID == Core.Constants.UserId).FirstOrDefault();
 
                 vm.Orders.User.Adress1rozliczeniowy = new Adress1rozliczeniowy
@@ -93,13 +92,16 @@ namespace partner_aluro.Controllers
             //vm.Orders.User.Adress2dostawy = _context.Adress2dostawy.Where(a => a.UserID == Core.Constants.UserId).FirstOrDefault();
             if (vm.Orders.User.Adress2dostawy == null)
             {
-                vm.Orders.User.Adress2dostawy = new Adress2dostawy
-                {
-                    KodPocztowy = vm.Orders.User.Adress2dostawy.KodPocztowy,
-                    Miasto = vm.Orders.User.Adress2dostawy.Miasto,
-                    Kraj = vm.Orders.User.Adress2dostawy.Kraj,
-                    Telefon = vm.Orders.User.Adress2dostawy.Telefon
+                Adress2dostawy adres2 = new Adress2dostawy()
+                { 
+                    KodPocztowy = "00000",
+                    Miasto = "",
+                    Kraj = "",
+                    Telefon = ""
                 };
+
+                vm.Orders.User.Adress2dostawy = adres2;
+
             }
 
             return View(vm);
@@ -191,7 +193,7 @@ namespace partner_aluro.Controllers
             }
 
         }
-        public async Task<IActionResult> ClearCart()
+        public IActionResult ClearCart()
         {
             _cart.ClearCart();
 

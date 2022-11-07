@@ -13,7 +13,7 @@ namespace partner_aluro.Services
             string url = string.Format("http://api.openweathermap.org/data/2.5/weather?q={0}&appid={1}", city, API_KEY);
 
             //var web = new WebClient();
-            var web = new WebClient();
+            WebClient web = new WebClient();
             var response = web.DownloadString(url);
 
             var myDeserializedClass = JsonConvert.DeserializeObject<WeatherResponse>(response); // json2csharp

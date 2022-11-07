@@ -5,7 +5,30 @@
 }
 
 <header>
-    <h1 class="text-danger">@ViewData["Title"]</h1>
-    <p class="text-danger">Nie masz dostępu do strony, skontaktuj się z Administratorem witryny.</p>
+
+
+    <div class="d-flex flex-column min-vh-100 justify-content-center align-items-center">
+        <div class="row">
+            <div class="col-8 text-center">
+                <img src="~/images/logo/aluro_logo-x-300_2.png" width="200" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-8 text-center  text-dark">
+                Dziękujemy za rejestrację nowego konta w systemie platformy hurtowej B2B
+                marki ALURO.<br />
+                <br />
+                Po weryfikacji danych, otrzymają Państwo dostęp do platformy hurtowej
+                z możliwością zakupów w cenach hurtowych.<br />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-8 text-center text-dark">
+                Zazwyczaj proces weryfikacji trwa od 1 do 12 godzin,<br />
+                    dziękujemy za cierpliwość.
+            </div>
+        </div>
+    </div>
+
     <p class="text-danger"><partial name="_LoginPartial" /></p>
 </header>

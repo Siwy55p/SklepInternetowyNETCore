@@ -52,7 +52,7 @@
                                             {
                                                 <div>Przenies produkty</div>
                                             }
-                                            else if ( cat.CategoryId == 0)
+                                            else if (cat.CategoryId == 0)
                                             {
                                                 
                                                 <div>Nie można usuwać</div>
@@ -77,10 +77,21 @@
                                                 <td>podkategoria</td>
                                                 <td>@cat.kolejnosc</td>
                                                 <td>
-                                                <a asp-controller="Category" asp-action="EditSubCategory" asp-route-id="@item.SubCategoryId">Edit</a>
+                                                <a asp-controller="Category" asp-action="EditSubCategory" asp-route-SubId="@item.SubCategoryId">Edit</a>
                                                 </td>
                                                 <td>
-                                                    <a asp-controller="Category" asp-action="DeleteSubCategory" asp-route-id="@item.SubCategoryId">Usuń</a>
+                                                    @if (@item.Produkty.Count >= 1)
+                                                    {
+                                                        <div>Przenies produkty</div>
+                                                    }
+                                                    else if (item.SubCategoryId == 0)
+                                                    {
+                                                        <div>Nie można usuwać</div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <a asp-controller="Category" asp-action="DeleteSubCategory" asp-route-SubId="@item.SubCategoryId">Usuń</a>
+                                                    }
                                                 </td>
                                                 <td>@item.Aktywny</td>
                                                 <td>

@@ -14,6 +14,7 @@ namespace partner_aluro.Services.Interfaces
         Task<Category> GetAsync(int id);
         Task<Category> GetAsync(string name);
         int Delete(int id);
+        int DeleteSubCategory(int id);
         int Delete(string name);
 
         Task <List<Product>> ListProductCategoryAll();

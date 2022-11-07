@@ -116,6 +116,7 @@ namespace partner_aluro.Controllers
         [HttpGet]
         public async Task<IActionResult> EditSubCategory(int SubId)
         {
+            ViewData["kategorie"] = GetCategories();
             SubCategory subCategory = await _context.SubCategory.FirstOrDefaultAsync(x => x.SubCategoryId == SubId);
 
             if (subCategory == null)
@@ -128,6 +129,7 @@ namespace partner_aluro.Controllers
         [HttpPost]
         public async Task<IActionResult> EditSubCategory(SubCategory data)
         {
+            ViewData["kategorie"] = GetCategories();
             Category kategoria = await _iUnitOfWorkCategory.Category.GetAsync(data.SubCategoryId);
 
             if (kategoria == null)
@@ -161,11 +163,9 @@ namespace partner_aluro.Controllers
         }
 
 
-
-        [HttpGet]
-        public IActionResult DeleteSubCategory(int id)
+        public IActionResult DeleteSubCategory(int SubId)
         {
-            _categoryService.Delete(id);
+            _categoryService.DeleteSubCategory(SubId);
             return RedirectToAction("List");
         }
 

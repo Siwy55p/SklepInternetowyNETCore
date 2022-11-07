@@ -1,7 +1,9 @@
 ﻿@model partner_aluro.Models.Product
 
 
+<div class="row g-0">
 
+    <div class="col-md-6 border-end">
         <div class="form-group row">
             <label asp-for="@Model.Name" class="col-sm-3 col-form-label text-end">Nazwa produktu</label>
                 <div class="col-sm-6">
@@ -11,14 +13,14 @@
                 </div>
         </div>
 
-        <div class="form-group row">
-        <label asp-for="@Model.Symbol" class="col-sm-3 col-form-label text-end">Symbol</label>
-            <div class="col-sm-4">
-            <input asp-for="@Model.Symbol" class="form-control" aria-required="true" placeholder="Symbol" />
-            <span asp-validation-for="@Model.Symbol" class="text-danger">
-            </span>
+            <div class="form-group row">
+            <label asp-for="@Model.Symbol" class="col-sm-3 col-form-label text-end">Symbol</label>
+                <div class="col-sm-4">
+                <input asp-for="@Model.Symbol" class="form-control" aria-required="true" placeholder="Symbol" />
+                <span asp-validation-for="@Model.Symbol" class="text-danger">
+                </span>
+                </div>
             </div>
-        </div>
 
         <div class="form-group row">
             <label asp-for="@Model.CenaProduktu" class="col-sm-3 col-form-label text-end">Cena produktu hurt (netto) </label>
@@ -102,8 +104,11 @@
             </label>
         </div>
 
-@*
+    </div>
+
     <div class="col-md-6">
+        
+
         <div class="form-group border">
             <label asp-for="@Model.ImageUrl" class="control-label">Obrazek prezentujacy (front)</label>
             <div class="custom-file">
@@ -129,10 +134,10 @@
         }
 
         <div class="row" id="image_preview">
-            Tutaj wyswietlaja mi sie zdjecia
-        </div>  Tutaj wyswietlaja mi sie zdjecia
+            @*Tutaj wyswietlaja mi sie zdjecia*@
+        </div>  @*Tutaj wyswietlaja mi sie zdjecia*@
 
-            *@
+
 
 @*
         <div class="form-group">
@@ -146,7 +151,6 @@
                 <label asp-for="@Model.Ukryty" class="form-check-label">Wyłączony</label>
             </div>
         </div>*@
-@*
+
     </div>
 </div>
-*@
