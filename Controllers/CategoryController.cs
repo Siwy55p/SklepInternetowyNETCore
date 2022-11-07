@@ -367,19 +367,19 @@ namespace partner_aluro.Controllers
         {
             var lstCategories = new List<SelectListItem>();
 
-            lstCategories = _categoryService.GetList().Select(ct => new SelectListItem()
+            lstCategories = _categoryService.GetList().OrderBy(x => x.CategoryId).Select(ct => new SelectListItem()
             {
                 Value = ct.CategoryId.ToString(),
                 Text = ct.Name
             }).ToList();
 
-            var dmyItem = new SelectListItem()
-            {
-                Value = null,
-                Text = "--- Wybierz Kategorie ---"
-            };
+            //var dmyItem = new SelectListItem()
+            //{
+            //    Value = null,
+            //    Text = "--- Wybierz Kategorie ---"
+            //};
 
-            lstCategories.Insert(0, dmyItem);
+            //lstCategories.Insert(0, dmyItem);
             return lstCategories;
         }
 
