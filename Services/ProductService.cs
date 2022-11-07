@@ -71,7 +71,7 @@ namespace partner_aluro.Services
 
         public List<Category> GetListCategory()
         {
-            List<Category> listaCategori = _context.Category.ToList();
+            List<Category> listaCategori = _context.Category.OrderBy(x=>x.CategoryId).ToList();
 
 
             return listaCategori;

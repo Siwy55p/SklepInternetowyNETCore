@@ -33,11 +33,11 @@ namespace partner_aluro.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index()
-        {
-            var Categorys = await _categoryService.List();
-            return View(Categorys);
-        }
+        //public async Task<IActionResult> Index()
+        //{
+        //    var Categorys = await _categoryService.List();
+        //    return View(Categorys);
+        //}
 
         [HttpGet]
         public IActionResult Add()
@@ -98,8 +98,6 @@ namespace partner_aluro.Controllers
         {
             Category kategoria = await _iUnitOfWorkCategory.Category.GetAsync(data.CategoryId);
 
-
-
             if (kategoria == null)
             {
                 return NotFound();
@@ -108,6 +106,26 @@ namespace partner_aluro.Controllers
             kategoria.Name = data.Name;
             kategoria.Description = data.Description;
             kategoria.kolejnosc = data.kolejnosc;
+            kategoria.Aktywny = data.Aktywny;
+
+            _iUnitOfWorkCategory.Category.Update(kategoria);
+
+            return RedirectToAction("List");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditSubCategory(SubCategory data)
+        {
+            Category kategoria = await _iUnitOfWorkCategory.Category.GetAsync(data.SubCategoryId);
+
+            if (kategoria == null)
+            {
+                return NotFound();
+            }
+
+            kategoria.Name = data.Name;
+            //kategoria.Description = data.Description;
+            //kategoria.kolejnosc = data.kolejnosc;
             kategoria.Aktywny = data.Aktywny;
 
             _iUnitOfWorkCategory.Category.Update(kategoria);
@@ -129,6 +147,16 @@ namespace partner_aluro.Controllers
             _categoryService.Delete(id);
             return RedirectToAction("List");
         }
+
+
+
+        [HttpGet]
+        public IActionResult DeleteSubCategory(int id)
+        {
+            _categoryService.Delete(id);
+            return RedirectToAction("List");
+        }
+
 
         [HttpGet]
         public async Task<IActionResult> List()

@@ -27,11 +27,12 @@
                                     <tr>
                                         <th>Id</th>
                                         <th>Nazwa</th>
+                                        <th>Opis</th>
                                         <th>Kolejnosc</th>
                                         <th>Edit</th>
                                         <th>Usuń</th>
                                         <th>Wł/Wył</th>
-                                        <th>Ilość Produktów w kategorii</th>
+                                        <th>Ilość Produktów</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -40,12 +41,20 @@
                                         <tr>
                                             <td>@cat.CategoryId</td>
                                             <td>@cat.Name</td>
+                                            <th>@cat.Description</th>
                                             <td>@cat.kolejnosc</td>
                                             <td>
                                                 <a asp-controller="Category" asp-action="Edit" asp-route-id="@cat.CategoryId">Edit</a>
                                             </td>
                                             <td>
+                                                
+                                            @if (@cat.Produkty.Count >= 1)
+                                            {
+                                                <div>Przenies produkty</div>
+                                            }else
+                                            {
                                                 <a asp-controller="Category" asp-action="Delete" asp-route-id="@cat.CategoryId">Usuń</a>
+                                            }
                                             </td>
                                             <td>@cat.Aktywny</td>
                                             <td>
@@ -62,10 +71,10 @@
                                                 <td>@item.Name</td>
                                                 <td>podkategoria</td>
                                                 <td>
-                                                    <a asp-controller="Category" asp-action="Edit" asp-route-id="@cat.CategoryId">Edit</a>
+                                                <a asp-controller="Category" asp-action="EditSubCategory" asp-route-id="@item.SubCategoryId">Edit</a>
                                                 </td>
                                                 <td>
-                                                    <a asp-controller="Category" asp-action="Delete" asp-route-id="@cat.CategoryId">Usuń</a>
+                                                    <a asp-controller="Category" asp-action="DeleteSubCategory" asp-route-id="@item.SubCategoryId">Usuń</a>
                                                 </td>
                                                 <td>@item.Aktywny</td>
                                                 <td>
@@ -82,11 +91,12 @@
                                     <tr>
                                         <th>Id</th>
                                         <th>Nazwa</th>
+                                        <th>Opis</th>
                                         <th>Kolejnosc</th>
                                         <th>Edit</th>
                                         <th>Usuń</th>
                                         <th>Wł/Wył</th>
-                                        <th>Ilość Produktów w kategorii</th>
+                                        <th>Ilość Produktów</th>
                                     </tr>
                                 </tfoot>
                             </table>

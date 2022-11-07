@@ -286,7 +286,7 @@ namespace partner_aluro.Areas.Identity.Pages.Account
                         Body = "Twoje konto czeka za akceptacją. Czekaj na kolejną wiadomość o aktywowaniu konto. Pozdrawiamy Zespół Aluro.",
                     };
 
-                    _emailService.SendEmailAsync(newClint);
+                    _emailService.SendEmailAsync(newClint); //Bardzo specjalnie tak jest jak jest zrobione. Musi tak zostać.
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));

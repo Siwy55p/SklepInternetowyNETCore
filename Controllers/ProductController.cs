@@ -247,7 +247,8 @@ namespace partner_aluro.Controllers
         {
             var lstCategories = new List<SelectListItem>();
 
-            lstCategories = _ProductService.GetListCategory().OrderBy(x=>x.CategoryId).Select(ct => new SelectListItem()
+
+            lstCategories = _ProductService.GetListCategory().Select(ct => new SelectListItem()
             {
                 Value = ct.CategoryId.ToString(),
                 Text = ct.Name
@@ -281,7 +282,7 @@ namespace partner_aluro.Controllers
 
             var lstCategories = new List<SelectListItem>();
 
-            lstCategories = _context.SubCategory.ToList().Select(di => new SelectListItem()
+            lstCategories = _context.SubCategory.ToList().OrderBy(x=> x.SubCategoryId).Select(di => new SelectListItem()
             {
                 Value = di.SubCategoryId.ToString(),
                 Text = di.Name
