@@ -48,7 +48,7 @@
                                             </td>
                                             <td>
                                                 
-                                            @if (@cat.Produkty.Count >= 1)
+                                            @if (@cat.Produkty.Count >= 1 || cat.CategoryId==0)
                                             {
                                                 <div>Przenies produkty</div>
                                             }else
@@ -70,6 +70,7 @@
                                                 <td>@item.SubCategoryId</td>
                                                 <td>@item.Name</td>
                                                 <td>podkategoria</td>
+                                                <td>@cat.kolejnosc</td>
                                                 <td>
                                                 <a asp-controller="Category" asp-action="EditSubCategory" asp-route-id="@item.SubCategoryId">Edit</a>
                                                 </td>

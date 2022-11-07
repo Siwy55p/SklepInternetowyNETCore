@@ -46,9 +46,9 @@ namespace partner_aluro.Models
         public bool? Aktywny { get; set; }
 
 
-        //public string? Description { get; set; }
+        public string? Description { get; set; }
 
-        //public int? kolejnosc { get; set; }
+        public int? kolejnosc { get; set; }
 
         public int CatID { get; set; }
 

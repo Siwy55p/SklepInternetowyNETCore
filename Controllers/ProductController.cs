@@ -44,6 +44,7 @@ namespace partner_aluro.Controllers
         public async Task <IActionResult> Edit(int id)
         {
             ViewBag.Category = GetCategories();
+            ViewBag.SubCategory = GetSubCategories();
             Product produkt = await _ProductService.GetProductId(id);
             return View(produkt);
         }
@@ -55,6 +56,7 @@ namespace partner_aluro.Controllers
         public async Task<IActionResult> Edit(int id, Product product)
         {
             ViewBag.Category = GetCategories();
+            ViewBag.SubCategory = GetSubCategories();
             if (id != product.ProductId)
             {
                 return NotFound();

@@ -37,7 +37,7 @@
         <option>Select one</option>
     </select>
 </div>
-@*
+
 <div class="row g-3">
     <div class="col-sm-6">
         <label asp-for="@Model." class="form-label">Opis</label>
@@ -46,7 +46,15 @@
         </span>
     </div>
 </div>
-*@
+
+<div class="row g-3">
+    <div class="col-sm-6">
+        <label asp-for="@Model." class="form-label">Opis</label>
+        <textarea asp-for="@Model.kolejnosc" class="form-control" rows="3" placeholder="Kolejnosc (narazie nie działa)"></textarea>
+        <span asp-validation-for="@Model.kolejnosc" class="text-danger">
+        </span>
+    </div>
+</div>
 
 @*    <span>Nazwa kategori:</span> @Html.TextBoxFor(x=>x.Name)
     <span>Opis kategori: </span>@Html.TextBoxFor(x=>x.Description)
