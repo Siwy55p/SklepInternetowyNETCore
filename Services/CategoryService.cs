@@ -27,7 +27,10 @@ namespace partner_aluro.Services
 
         public int Delete(int id)
         {
-            var category = _context.Category.Find(id);
+            Category category = _context.Category
+                .Include(x => x.SubCategories).FirstOrDefault(x => x.CategoryId == id);
+
+
             _context.Category.Remove(category);
 
             _context.SaveChanges();
@@ -35,8 +38,9 @@ namespace partner_aluro.Services
         }
         public int Delete(string name)
         {
-            var category = _context.Category.Find(name);
+            Category category = _context.Category.Include(x => x.SubCategories).FirstOrDefault(x => x.Name == name);
             int id = category.CategoryId;
+
             _context.Category.Remove(category);
 
             _context.SaveChanges();

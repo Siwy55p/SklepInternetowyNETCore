@@ -48,9 +48,14 @@
                                             </td>
                                             <td>
                                                 
-                                            @if (@cat.Produkty.Count >= 1 || cat.CategoryId==0)
+                                            @if (@cat.Produkty.Count >= 1)
                                             {
                                                 <div>Przenies produkty</div>
+                                            }
+                                            else if ( cat.CategoryId == 0)
+                                            {
+                                                
+                                                <div>Nie można usuwać</div>
                                             }else
                                             {
                                                 <a asp-controller="Category" asp-action="Delete" asp-route-id="@cat.CategoryId">Usuń</a>

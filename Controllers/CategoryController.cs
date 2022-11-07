@@ -113,6 +113,18 @@ namespace partner_aluro.Controllers
             return RedirectToAction("List");
         }
 
+        [HttpGet]
+        public async Task<IActionResult> EditSubCategory(int SubId)
+        {
+            SubCategory subCategory = await _context.SubCategory.FirstOrDefaultAsync(x => x.SubCategoryId == SubId);
+
+            if (subCategory == null)
+            {
+                return NotFound();
+            }
+
+            return View(subCategory);
+        }
         [HttpPost]
         public async Task<IActionResult> EditSubCategory(SubCategory data)
         {

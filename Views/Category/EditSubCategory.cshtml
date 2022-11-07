@@ -1,0 +1,12 @@
+﻿@model partner_aluro.Models.SubCategory
+
+@{
+    ViewData["Title"] = "Dodaj kategorie";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+@using (Html.BeginForm("EditSubCategory", "Category", FormMethod.Post))
+{
+    @Html.Partial("_SubCategoryForm", Model)
+    <button type="submit">Dodaj Podkategorie</button>
+}
