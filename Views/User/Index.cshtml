@@ -12,6 +12,9 @@
 
     @if(@Model != null && @Model.Any())
     { 
+
+        
+
 @*        <table class="table">
             <thead>
                 <tr>
@@ -46,6 +49,7 @@
                                         <th>Firma</th>
                                         <th>Email</th>
                                         <th>Edit</th>
+                                        <th>Usuń</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -64,6 +68,15 @@
                                             <td>
                                                 <a asp-controller="User" asp-action="Edit" asp-route-id="@user.Id">Edit</a>
                                             </td>
+                                            <td>
+                                                @Html.HiddenFor(h=>user.Id);  @*potrzebne do funkcji usuniecia user*@
+                                                @*<a asp-controller="User" asp-action="Delete" asp-route-id="@user.Id">Usun</a>*@
+                                                <form asp-controller="User" asp-action="Delete" asp-route-id="@user.Id" method="post">
+                                                    <button type="submit" class="btn btn-sm btn-danger">
+                                                        Delete
+                                                    </button>
+                                                </form>
+                                            </td>
                                         </tr>
                                     }
                                 </tbody>
@@ -75,6 +88,7 @@
                                         <th>Firma</th>
                                         <th>Email</th>
                                         <th>Edit</th>
+                                        <th>Usuń</th>
                                     </tr>
                                 </tfoot>
                             </table>

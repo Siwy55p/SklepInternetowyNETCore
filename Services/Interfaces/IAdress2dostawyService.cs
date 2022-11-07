@@ -10,6 +10,7 @@ namespace partner_aluro.Services.Interfaces
 
         int Delete(int id);
 
+        void DeleteUserId(string UserId);
         Adress2dostawy Get(string UserId);
 
         int Save(Adress2dostawy adress2dostawy);

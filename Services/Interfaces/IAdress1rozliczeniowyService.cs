@@ -10,8 +10,12 @@ namespace partner_aluro.Services.Interfaces
 
         int Delete(int id);
 
+
+        void DeleteUserId(string UserId);
+
         Adress1rozliczeniowy Get(string UserId);
 
         int Save(Adress1rozliczeniowy adress1Rozliczeniowy);
+
     }
 }

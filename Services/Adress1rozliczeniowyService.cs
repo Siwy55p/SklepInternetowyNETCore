@@ -21,6 +21,14 @@ namespace partner_aluro.Services
             return id;
         }
 
+        public void DeleteUserId(string UserId)
+        {
+            var adres1rozliczeniowy = _context.Adress1rozliczeniowy.Find(UserId);
+            _context.Adress1rozliczeniowy.Remove(adres1rozliczeniowy);
+
+            _context.SaveChanges();
+
+        }
         public Adress1rozliczeniowy Get(string UserId)
         {
             var Adressy1rozliczeniowy = _context.Adress1rozliczeniowy.ToList();

@@ -33,7 +33,7 @@ namespace partner_aluro.Controllers
             _adress2DostawyService = adress2DostawyServicee;
 
             _unitOfWorkAdress1Rozliczeniowy = unitOfWorkAdress1Rozliczeniowy;
-    }
+        }
 
         public IActionResult Index()
         {
@@ -69,6 +69,24 @@ namespace partner_aluro.Controllers
             return View(vm);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Delete(string id)
+        {
+            ApplicationUser user = await _signInManager.UserManager.FindByIdAsync(id);
+            if (user != null)
+            {
+                //_adress1RozliczeniowyService.Delete(user.Adress1rozliczeniowyId);
+                //_adress2DostawyService.DeleteUserId(user.Id);
+                IdentityResult result = await _signInManager.UserManager.DeleteAsync(user);
+                    if (result.Succeeded)
+                    return RedirectToAction("Index");
+                else
+                    Errors(result);
+            }
+            else
+                ModelState.AddModelError("", "User Not Found");
+            return View("Index");
+        }
         [HttpPost]
         public async Task<IActionResult> OnPostAsync(EditUserViewModel data) //Zapis uzytkownika do bazy
         {
@@ -153,5 +171,11 @@ namespace partner_aluro.Controllers
 
             return lstProfiles;
         }
+        private void Errors(IdentityResult result)
+        {
+            foreach (IdentityError error in result.Errors)
+                ModelState.AddModelError("", error.Description);
+        }
     }
+
 }
