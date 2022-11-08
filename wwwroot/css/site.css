@@ -7,6 +7,12 @@ a.active {
 .custom-label {
     text-align: right;
 }
+.custom-nav .nav-link {
+    color: #c1c1c1;
+}
+.custom-nav .nav-link:hover {
+    color: #a9a9a9;
+}
 
 .card {
     background: #f1f1f1;
