@@ -70,7 +70,7 @@ namespace partner_aluro.Controllers
                 //_imageService.Edit()
             }
 
-
+            product.ImageUrl = await _imageService.CreateImageAddAsync(product);
 
             UploadFile2Async(product);
 
@@ -133,6 +133,8 @@ namespace partner_aluro.Controllers
             var id = _ProductService.AddProduct(product);//wazne aby przypisac
 
             product.ImageUrl = await _imageService.CreateImageAddAsync(product);
+
+            product.ProductImagesId = product.product_Image.ImageId;
 
             UploadFile2Async(product);
 

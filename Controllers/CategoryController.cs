@@ -81,7 +81,7 @@ namespace partner_aluro.Controllers
             }
 
             //logika zapisania kategorii do bazy.
-            _categoryService.AddSave(data);
+            _categoryService.AddSave(data); //speclajnie nie ma await 
 
             return RedirectToAction("List");
         }
