@@ -279,11 +279,15 @@ namespace partner_aluro.Areas.Identity.Pages.Account
                     user.Adress1rozliczeniowy.UserID = userId;
                     user.Adress2dostawy.UserID = userId;
 
+                    string text = "Dziękujemy za rejestrację nowego konta w systemie platformy hurtowej B2B\r\nmarki ALURO.\r\nPo weryfikacji danych,\r\n otrzymają Państwo dostęp do platformy hurtowej\r\nz możliwością zakupów w cenach hurtowych.\r\n\r\nZazwyczaj proces weryfikacji trwa od 1 do 12 godzin, \r\ndziękujemy za cierpliwość.";
+
+                    //text = text.Replace("@", "@" + System.Environment.NewLine);
+
                     EmailDto newClint = new EmailDto()
                     {
-                        Subject = "Dziękujemy za rejestracje w Aluro",
+                    Subject = "Dziękujemy za rejestracje w Aluro",
                         To = Input.Email,
-                        Body = "Twoje konto czeka za akceptacją. Czekaj na kolejną wiadomość o aktywowaniu konto. Pozdrawiamy Zespół Aluro.",
+                        Body = text,
                     };
 
                     _emailService.SendEmailAsync(newClint); //Bardzo specjalnie tak jest jak jest zrobione. Musi tak zostać.
