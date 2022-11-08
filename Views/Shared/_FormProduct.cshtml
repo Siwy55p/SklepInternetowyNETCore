@@ -94,6 +94,12 @@
             <textarea asp-for="@Model.Description" class="form-control" rows="3"></textarea>
         </div>
 
+        <div class="form-group">
+            <input hidden asp-for="@Model.ImageUrl" class="form-control" />
+            </span>
+        </div>
+
+
         <h4 class="mb-2">Widoczność</h4>
         <div class="form-group row border">
             <label class="radio-inline">
@@ -103,7 +109,6 @@
                 @Html.RadioButtonFor(model => model.Ukryty , false)Włączone
             </label>
         </div>
-
 @*
     <div class="col-md-6">
         <div class="form-group border">

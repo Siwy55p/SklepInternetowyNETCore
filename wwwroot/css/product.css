@@ -82,12 +82,12 @@
 }
 
 #slider {
-    max-width: 300px;
+    max-width: 400px;
     display: flex;
     flex-wrap: nowrap;
     overflow-x: auto;
     overflow: hidden; /* Hide scrollbars */
-    justify-content: center;
+    justify-content: left;
 }
 
 /*    #slider::-webkit-scrollbar {

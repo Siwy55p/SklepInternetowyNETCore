@@ -13,5 +13,7 @@ namespace partner_aluro.Services.Interfaces
 
         Task Edit(int id, ImageModel imageModel);
 
+        Task<string> DeleteFrontImage(Product product);
+
     }
 }

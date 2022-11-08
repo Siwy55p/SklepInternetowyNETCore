@@ -138,9 +138,9 @@ namespace partner_aluro.Models
                 .Select(ci => ci.Product.CenaProduktu * ci.Quantity)
                 .Sum();
 
-            CartTotal *= (1 - (Core.Constants.Rabat / 100));
+            CartTotal = CartTotal * (1 - (Core.Constants.Rabat / 100));
 
-            CartTotal *= Core.Constants.Vat;
+            CartTotal = CartTotal * Core.Constants.Vat;
 
             return CartTotal;
         }
@@ -151,7 +151,7 @@ namespace partner_aluro.Models
                 .Select(ci => ci.Product.CenaProduktu * ci.Quantity)
                 .Sum();
 
-            CartTotal *= (1 - (Core.Constants.Rabat / 100));
+            CartTotal = CartTotal * (1 - (Core.Constants.Rabat / 100));
 
             return CartTotal;
         }

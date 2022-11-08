@@ -192,7 +192,7 @@ namespace partner_aluro.Controllers
             var imageModel = await _context.Images.FindAsync(id);
 
             //delete image from wwwroot/images
-            var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "images", imageModel.ImageName);
+            var imagePath = Path.Combine(_hostEnvironment.WebRootPath, imageModel.path, imageModel.ImageName);
             if (System.IO.File.Exists(imagePath))
                 System.IO.File.Delete(imagePath);
             //delete tge record

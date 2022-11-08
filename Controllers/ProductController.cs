@@ -67,10 +67,10 @@ namespace partner_aluro.Controllers
 
             if(product.product_Image.ImageFile != null)
             {
-                //_imageService.Edit()
-            }
+                product.ImageUrl = await _imageService.DeleteFrontImage(product);
 
-            product.ImageUrl = await _imageService.CreateImageAddAsync(product);
+                product.ImageUrl = await _imageService.CreateImageAddAsync(product);
+            }
 
             UploadFile2Async(product);
 
@@ -114,12 +114,6 @@ namespace partner_aluro.Controllers
 
             product.Bestseller = true;
             product.ImageUrl = "";
-
-
-            //product.ImageUrl = await _imageService.CreateImageAddAsync(product.product_Image);
-
-            //string uniqueFileName = UploadFile(product);
-            //product.ImageUrl = uniqueFileName;
 
             ModelState.Remove("CategoryNavigation");
             ModelState.Remove("CategorySubNavigation");
@@ -174,93 +168,87 @@ namespace partner_aluro.Controllers
         {
             var files = HttpContext.Request.Form.Files;
 
-            if (product.ImageUrl != "" && files.Count > 1)
+            if (product.ImageUrl != "" && files.Count > 1) //To oznacza ze frontowy obrazek został dodany
             {
-                if (HttpContext.Request.Form.Files[1] != null)
+                string webRootPath = _webHostEnvironment.WebRootPath;
+
+                for (int i = 1; i <= files.Count; i++)
                 {
+                    //Save image to wwwroot/image
+                    string path0 = "images\\produkty\\";
+                    var uploadsFolder = Path.Combine(webRootPath, "images\\produkty\\" + product.Symbol);
 
-                    string webRootPath = _webHostEnvironment.WebRootPath;
-
-                    for(int i = 1; i <= files.Count; i++)
+                    if (!Directory.Exists(uploadsFolder))
                     {
-                        string path0 = "\\images\\produkty\\";
-                        var uploads = Path.Combine(webRootPath, "images\\produkty\\" + product.Symbol);
+                        Directory.CreateDirectory(uploadsFolder);
+                    }
+
+                    var extension = Path.GetExtension(files[i].FileName);
+                    var dynamicFileName = product.Symbol + "_"+ i + "_" + extension;
+
+                    using (var filesStream = new FileStream(Path.Combine(uploadsFolder, dynamicFileName), FileMode.Create))
+                    {
+                        files[i].CopyTo(filesStream);
+                    }
+
+                    //add product Image for new product
+                    ImageModel imgModel = new()
+                    {
+                        path = path0 + product.Symbol,
+                        kolejnosc = i,
+                        Tytul = product.Name,
+                        ImageName = dynamicFileName,
+                        ProductId = product.ProductId
+                    };
+
+                    product.Product_Images.Add(imgModel);
+
+                    _imageService.Add(imgModel);
+
+                }
+            }
+            else if (files.Count > 0 && product.ImageUrl == "") //Fronyowy obrazek nie został dodany zacznij dodawac od 0
+            {
+
+                string webRootPath = _webHostEnvironment.WebRootPath;
+
+                for (int i = 0; i <= files.Count; i++)
+                {
+                    string path0 = "images\\produkty\\";
+
+                    var uploads = Path.Combine(webRootPath, path0 + product.Symbol);
 
                         if (!Directory.Exists(uploads))
                         {
                             Directory.CreateDirectory(uploads);
                         }
 
-                        var extension = Path.GetExtension(files[i].FileName);
-                        var dynamicFileName = product.Symbol + "_"+ i + "_" + extension;
+                    var extension = Path.GetExtension(files[i].FileName);
+                    var dynamicFileName = product.Symbol + "_" + i + "_" + extension;
+                    //var dynamicFileName = DateTime.Now.ToString("yymmssfff") + "_" + extension;
 
                         using (var filesStream = new FileStream(Path.Combine(uploads, dynamicFileName), FileMode.Create))
                         {
                             files[i].CopyTo(filesStream);
                         }
 
-                        //add product Image for new product
-                        ImageModel imgModel = new()
-                        {
-                            path = path0 + product.Symbol,
-                            kolejnosc = i,
-                            Tytul = product.Name,
-                            ImageName = dynamicFileName,
-                            ProductId = product.ProductId
-                        };
 
-                        product.Product_Images.Add(imgModel);
-
-                        _imageService.Add(imgModel);
-
-                    }
-                }
-            }
-            else if (files.Count > 0 && product.ImageUrl == "")
-            {
-                    if (HttpContext.Request.Form.Files[0] != null)
+                    //add product Image for new product
+                    ImageModel imgModel = new()
                     {
+                        path = path0 + product.Symbol,
+                        kolejnosc = i,
+                        Tytul = product.Name,
+                        ImageName = dynamicFileName,
+                        ProductId = product.ProductId
+                    };
 
-                        string webRootPath = _webHostEnvironment.WebRootPath;
-
-                    for (int i = 0; i <= files.Count; i++)
-                    {
-                        string path0 = "\\images\\produkty\\";
-
-                        var uploads = Path.Combine(webRootPath, path0 + product.Symbol);
-
-                            if (!Directory.Exists(uploads))
-                            {
-                                Directory.CreateDirectory(uploads);
-                            }
-
-                        var extension = Path.GetExtension(files[i].FileName);
-                        var dynamicFileName = product.Symbol + "_" + i + "_" + extension;
-                        //var dynamicFileName = DateTime.Now.ToString("yymmssfff") + "_" + extension;
-
-                            using (var filesStream = new FileStream(Path.Combine(uploads, dynamicFileName), FileMode.Create))
-                            {
-                                files[i].CopyTo(filesStream);
-                            }
+                    product.Product_Images.Add(imgModel);
 
 
-                        //add product Image for new product
-                        ImageModel imgModel = new()
-                        {
-                            path = path0 + product.Symbol,
-                            kolejnosc = i,
-                            Tytul = product.Name,
-                            ImageName = dynamicFileName,
-                            ProductId = product.ProductId
-                        };
-
-                        product.Product_Images.Add(imgModel);
+                    _imageService.Add(imgModel);
 
 
-                        _imageService.Add(imgModel);
-
-
-                    }
                 }
             }
         }
