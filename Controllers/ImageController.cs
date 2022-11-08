@@ -59,6 +59,8 @@ namespace partner_aluro.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ImageId,Tytul,ImageFile")] ImageModel imageModel)
         {
+            ModelState.Remove("Product");
+
             if (ModelState.IsValid)
             {
                 //Sabe image to wwwroot/image

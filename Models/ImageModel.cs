@@ -21,10 +21,12 @@ namespace partner_aluro.Models
         [DisplayName("Image Name")]
         public string? ImageName { get; set; }
 
+        public int? ProductImagesId { get; set; } //dodatkowy id produktu
+
         [NotMapped]
         [DisplayName("Upload File")]
-        public IFormFile ImageFile { get; set; }
+        public IFormFile ImageFile { get; set; }  //pojedynczy plik
 
-        public virtual Product Product { get; set; }
+        public virtual Product? Product { get; set; }
     }
 }

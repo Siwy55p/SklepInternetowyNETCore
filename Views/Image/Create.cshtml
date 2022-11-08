@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
 }
 
 <h1>Create</h1>
@@ -20,7 +20,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="ImageFile" class="control-label"></label>
-                <input asp-for="ImageFile" accept="images/*" /> @*/image/png,image/jpg*@
+                <input asp-for="ImageFile" accept="images/png,images/jpg,images/jpeg" /> @*/image/png,image/jpg*@
                 <span asp-validation-for="ImageFile" class="text-danger"></span>
             </div>
             <div class="form-group">
