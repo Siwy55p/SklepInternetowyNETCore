@@ -15,7 +15,7 @@ namespace partner_aluro.Models
         public int? ProductId { get; set; }
 
         [Column(TypeName ="nvarchar(50)")]
-        public string Tytul { get; set; }
+        public string? Tytul { get; set; }
 
         [Column(TypeName = "nvarchar(100)")]
         [DisplayName("Image Name")]
@@ -25,7 +25,7 @@ namespace partner_aluro.Models
 
         [NotMapped]
         [DisplayName("Upload File")]
-        public IFormFile ImageFile { get; set; }  //pojedynczy plik
+        public IFormFile? ImageFile { get; set; }  //pojedynczy plik
 
         public virtual Product? Product { get; set; }
     }

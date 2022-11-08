@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "Delete";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
 }
 
 <h1>Delete</h1>
@@ -29,6 +29,9 @@
         </dd>
         <dd class="col-sm-10">
             <img src="@("~/images/"+Model.ImageName)" asp-append-version="true" width="250px" height="250px" />
+        </dd>
+        <dd class="col-sm-10">
+            <img src="@("~/"+Model.path+"/"+Model.ImageName)" asp-append-version="true" width="250px" height="250px" />
         </dd>
 
     </dl>

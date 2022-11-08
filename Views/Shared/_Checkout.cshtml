@@ -39,7 +39,7 @@
                     var CenaJednostkowa_netto = item.Product.CenaProduktu;
                     var CenaJednostkowa_brutto = (decimal)Cena_brutto;
 
-                    if (partner_aluro.Core.Constants.Rabat >= 0 && partner_aluro.Core.Constants.Rabat != null)
+                    if (partner_aluro.Core.Constants.Rabat >= 0)
                     {
                         CenaJednostkowa_netto = item.Product.CenaProduktu * (1 - (partner_aluro.Core.Constants.Rabat / 100));
                         CenaJednostkowa_brutto = (decimal)Cena_brutto * (1 - (partner_aluro.Core.Constants.Rabat / 100));

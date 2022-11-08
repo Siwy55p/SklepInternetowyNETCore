@@ -74,12 +74,45 @@ namespace partner_aluro.Controllers
                     await imageModel.ImageFile.CopyToAsync(fileStream);
                 }
                 //insert record
-
+                imageModel.path = "\\Images\\" + fileName;
                 _context.Add(imageModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(imageModel);
+        }
+
+        // POST: Product/CreateImageProductFront
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task <IActionResult> CreateImageProductFront(Product product)
+        {
+            ModelState.Remove("Product");
+
+            if (ModelState.IsValid)
+            {
+                //Sabe image to wwwroot/image
+                string wwwRootPath = _hostEnvironment.WebRootPath;
+                string fileName = Path.GetFileNameWithoutExtension(product.product_Image.ImageFile.FileName);
+                string extension = Path.GetExtension(product.product_Image.ImageFile.FileName);
+                product.product_Image.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                string path = Path.Combine(wwwRootPath + "/Images/produkty", fileName);
+                using (var fileStream = new FileStream(path, FileMode.Create))
+                {
+                    await product.product_Image.ImageFile.CopyToAsync(fileStream);
+                }
+                //insert record
+
+                _context.Add(product.product_Image);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction("Add", "Product", new { Product = product });
+                //return RedirectToAction(nameof(Index));
+            }
+            return RedirectToAction("Add", "Product", new { Product = product });
+            //return View(product.product_Image);
         }
 
         // GET: Image/Edit/5
@@ -103,7 +136,7 @@ namespace partner_aluro.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ImageId,Tytul,ImageName")] ImageModel imageModel)
+        public async Task<IActionResult> Edit(int id, ImageModel imageModel)
         {
             if (id != imageModel.ImageId)
             {
@@ -158,7 +191,7 @@ namespace partner_aluro.Controllers
         {
             var imageModel = await _context.Images.FindAsync(id);
 
-            //delete image from wwwroot/image
+            //delete image from wwwroot/images
             var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "images", imageModel.ImageName);
             if (System.IO.File.Exists(imagePath))
                 System.IO.File.Delete(imagePath);

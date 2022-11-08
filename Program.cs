@@ -216,4 +216,6 @@ void AddScoped()
 
     builder.Services.AddScoped<IEmailService, EmailService>();
 
+    builder.Services.AddScoped<IImageService, ImageService>();
+
 }

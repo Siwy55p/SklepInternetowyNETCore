@@ -73,6 +73,7 @@ namespace partner_aluro.Services
                 .Include(sc => sc.SubCategories)
                 .FirstOrDefaultAsync(x => x.Name == name);
 
+
             return category;
         }
 
@@ -82,6 +83,13 @@ namespace partner_aluro.Services
                 .Include(p => p.Produkty)
                 .Include(sc => sc.SubCategories)
                 .ToListAsync();
+
+
+            //List<SubCategory> SubCategory = _context.SubCategory
+            //    .Include(sp => sp.Produkty)
+            //    .Where(x => x.SubCatId == category.CategoryId).ToList();
+
+            //category.s = SubCategory;
 
             return category;
         }
@@ -129,8 +137,8 @@ namespace partner_aluro.Services
 
         public async Task AddSave(SubCategory category)
         {
-            _context.SubCategory.AddAsync(category);
-            _context.SaveChangesAsync();
+            await _context.SubCategory.AddAsync(category);
+            await _context.SaveChangesAsync();
         }
 
         public string GetName(int id)

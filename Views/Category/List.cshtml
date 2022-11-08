@@ -75,29 +75,29 @@
                                                 <td>@item.SubCategoryId</td>
                                                 <td>@item.Name</td>
                                                 <td>podkategoria</td>
-                                                <td>@cat.kolejnosc</td>
+                                            <td>@item.kolejnosc</td>
                                                 <td>
                                                 <a asp-controller="Category" asp-action="EditSubCategory" asp-route-SubId="@item.SubCategoryId">Edit</a>
                                                 </td>
                                                 <td>
-                                                    @if (@item.Produkty.Count >= 1)
+                                                    @*@if (@item.Produkty.Count >= 1 && item.Produkty != null)
                                                     {
                                                         <div>Przenies produkty</div>
                                                     }
-                                                    else if (item.SubCategoryId == 0)
-                                                    {
+                                                else if (item.SubCategoryId == 0 && item.Produkty != null)
+                                                            {
                                                         <div>Nie można usuwać</div>
                                                     }
                                                     else
                                                     {
                                                         <a asp-controller="Category" asp-action="DeleteSubCategory" asp-route-SubId="@item.SubCategoryId">Usuń</a>
-                                                    }
+                                                    }*@
                                                 </td>
                                                 <td>@item.Aktywny</td>
                                                 <td>
-                                                    @if (cat.Produkty != null)
+                                                    @if (item.Produkty != null)
                                                     {
-                                                        @cat.Produkty.Count
+                                                        @item.Produkty.Count
                                                     }
                                                 </td>
                                             </tr>

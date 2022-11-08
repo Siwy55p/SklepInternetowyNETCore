@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using partner_aluro.Data;
 //szukanaNazwa PostApi
 namespace partner_aluro.Controllers
@@ -21,7 +22,7 @@ namespace partner_aluro.Controllers
         {
             string term = HttpContext.Request.Query["term"].ToString();
             var szukanaNazwa = _db.Products.Where(x=> x.Ukryty==false).Where(p => p.Name.Contains(term))
-                                            .Select(p => p.Name).ToList();
+                                            .Select(p => p.Name).ToListAsync();
             return Ok(szukanaNazwa);
         }
     }

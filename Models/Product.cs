@@ -50,7 +50,7 @@ namespace partner_aluro.Models
 
         [Display(Name = "Obrazek główny")]
         [NotMapped]
-        ImageModel? product_Image { get; set; } = new ImageModel();
+        public virtual ImageModel? product_Image { get; set; } = new ImageModel();
         //public IFormFile? FrontImage { get; set; }
 
         [ForeignKey(nameof(CategoryId))]
@@ -64,6 +64,6 @@ namespace partner_aluro.Models
         public virtual SubCategory? CategorySubNavigation { get; set; }
 
         [ForeignKey(nameof(ProductImagesId))]
-        public virtual ICollection<ImageModel>? product_Images { get; set; }
+        public virtual List<ImageModel>? product_Images { get; set; } = new List<ImageModel>();
     }
 }

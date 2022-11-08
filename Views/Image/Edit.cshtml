@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "Edit";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
 }
 
 <h1>Edit</h1>
@@ -25,14 +25,34 @@
                 <span asp-validation-for="ImageName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <label asp-for="kolejnosc" class="control-label"></label>
+                <input asp-for="kolejnosc" class="form-control" />
+                <span asp-validation-for="kolejnosc" class="text-danger"></span>
+            </div>
+            <fieldset disabled>
+                <div class="form-group">
+                    <label asp-for="path" class="control-label"></label>
+                    <input type="text" id="disabledTextInput" asp-for="path" class="form-control" />
+                    <span asp-validation-for="path" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ProductId" class="control-label"></label>
+                    <input type="text" id="disabledTextInput" asp-for="ProductId" class="form-control" />
+                    <span asp-validation-for="ProductId" class="text-danger"></span>
+                </div>
+            </fieldset>
+            <div class="form-group">
+                <img src="@path\@ImageName" asp-append-version="true" width="250px" height="250px">
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Zapisz" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Wróc do listy</a>
 </div>
 
 @section Scripts {

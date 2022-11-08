@@ -4,26 +4,19 @@
     Layout = "~/Views/Shared/_Dashboard.cshtml";
 }
 
-<div class="row g-0">
-    <div class="col-md-6 border-end">
-        <form class="needs-validation" asp-action="Edit" asp-route-id="@Model.ProductId" asp-controller="Product" class="form-horizontal" method="post">
-            @Html.HiddenFor(h=>Model.ProductId)
-            @Html.ValidationSummary()
-            @Html.Partial("_FormProduct")
-            <button type="submit">Zapisz</button>
-        </form>
-    </div>
-
-    <div class="col-md-6">
-        <form class="needs-validation" asp-action="AddImage" asp-route-id="@Model.ProductId" asp-controller="Product" class="form-horizontal" method="post" enctype="multipart/form-data">
-            @Html.HiddenFor(h=>Model.ProductId)
-            @Html.ValidationSummary()
-            @Html.Partial("_FormProductImage")
-            <button type="submit">Dodaj Obrazy</button>
-        </form>
-    </div>
-
-</div>
+<form class="needs-validation" asp-action="Edit" asp-route-id="@Model.ProductId" asp-controller="Product" class="form-horizontal" method="post" enctype="multipart/form-data">
+        <div class="row g-0">
+            <div class="col-md-6 border-end">
+                @Html.HiddenFor(h=>Model.ProductId)
+                @Html.ValidationSummary()
+                @Html.Partial("_FormProduct")
+            </div>
+            <div class="col-md-6">
+                @Html.Partial("_FormProductImage")
+                <button type="submit">Dodaj produkt</button>
+            </div>
+        </div>
+    </form>
 
 @section Scripts {
     <script>

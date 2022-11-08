@@ -93,9 +93,9 @@
 
                     <div class="row">
 
-                        <div class="row">Specyfikacja produktu: </div>
                      @if (Model.WysokoscProduktu != null)
                         {
+                        <div class="row">Specyfikacja produktu: </div>
                         <div class="row">
                             <div class="col">Szerokość: @Model.SzerokoscProduktu cm</div>
                             <div class="col">Wysokość: @Model.WysokoscProduktu cm</div>
@@ -110,8 +110,16 @@
                             </div>
                         }
 
+                        @if(Model.Pakowanie != null)
+                        {
                         <div class="row">Pakowanie: @Model.Pakowanie </div>
-                        <div class="row">Materiał: @Model.Materiał </div>
+                        }
+
+                        @if (Model.Materiał != null)
+                        {
+                            <div class="row">Materiał: @Model.Materiał </div>
+                        }
+
 
                         <div class="row">@Model.Description</div>
 
