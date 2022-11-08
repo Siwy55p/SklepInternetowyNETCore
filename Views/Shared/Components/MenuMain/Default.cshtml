@@ -25,7 +25,7 @@
 
                 @if (kategorie.SubCategories.Count >= 1)
                 {
-                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                    <ul class="dropdown-menu dropdown-menu-dark p-1" aria-labelledby="navbarDarkDropdownMenuLink">
                     @foreach (var kategorie2 in kategorie.SubCategories)
                     {
                         if (@kategorie2.SubCategoryId == ViewBag.KategoriaId2)
@@ -37,7 +37,7 @@
                             active2 = "";
                         }
                         <li>
-                                <a class="@active2 text-white dropdown-item" href="@Url.Action("Lista1Sub","Category", new {KategoriaId = kategorie2.SubCategoryId})">
+                            <a class="@active2 text-white text-decoration-none" href="@Url.Action("Lista1Sub","Category", new {KategoriaId = kategorie2.SubCategoryId})">
                                 @kategorie2.Name
                             </a>
                         </li>
