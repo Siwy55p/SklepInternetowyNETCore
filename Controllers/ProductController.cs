@@ -96,7 +96,7 @@ namespace partner_aluro.Controllers
         {
             ViewBag.Category = GetCategories();
             ViewBag.SubCategory = GetSubCategories();
-            Product product = new Product();
+            Product product = new();
 
 
             return View(product);
@@ -200,7 +200,7 @@ namespace partner_aluro.Controllers
                         }
 
                         //add product Image for new product
-                        ImageModel imgModel = new ImageModel
+                        ImageModel imgModel = new()
                         {
                             path = path0 + product.Symbol,
                             kolejnosc = i,
@@ -209,7 +209,7 @@ namespace partner_aluro.Controllers
                             ProductId = product.ProductId
                         };
 
-                        product.product_Images.Add(imgModel);
+                        product.Product_Images.Add(imgModel);
 
                         _imageService.Add(imgModel);
 
@@ -245,7 +245,7 @@ namespace partner_aluro.Controllers
 
 
                         //add product Image for new product
-                        ImageModel imgModel = new ImageModel
+                        ImageModel imgModel = new()
                         {
                             path = path0 + product.Symbol,
                             kolejnosc = i,
@@ -254,7 +254,7 @@ namespace partner_aluro.Controllers
                             ProductId = product.ProductId
                         };
 
-                        product.product_Images.Add(imgModel);
+                        product.Product_Images.Add(imgModel);
 
 
                         _imageService.Add(imgModel);
@@ -265,50 +265,50 @@ namespace partner_aluro.Controllers
             }
         }
 
-        [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
-        private string UploadFile(Product product)
-        {
-            string uniqueFileName = null;
+        //[ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
+        //private string UploadFile(Product product)
+        //{
+        //    string uniqueFileName = null;
 
-            var files = HttpContext.Request.Form.Files;
+        //    var files = HttpContext.Request.Form.Files;
 
-            if (files.Count > 0)
-            {
-                if (HttpContext.Request.Form.Files[0] != null)
-                {
-                    var file = HttpContext.Request.Form.Files[0];
+        //    if (files.Count > 0)
+        //    {
+        //        if (HttpContext.Request.Form.Files[0] != null)
+        //        {
+        //            var file = HttpContext.Request.Form.Files[0];
 
-                    string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images\\produkty\\" + product.Symbol);
+        //            string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images\\produkty\\" + product.Symbol);
 
-                    if (!Directory.Exists(uploadsFolder))
-                    {
-                        Directory.CreateDirectory(uploadsFolder);
-                    }
-                    //uniqueFileName = "Front" + DateTime.Now.ToString("yymmssfff") + "_" + product.FrontImage.FileName;
+        //            if (!Directory.Exists(uploadsFolder))
+        //            {
+        //                Directory.CreateDirectory(uploadsFolder);
+        //            }
+        //            //uniqueFileName = "Front" + DateTime.Now.ToString("yymmssfff") + "_" + product.FrontImage.FileName;
 
-                    var extension = Path.GetExtension(files[0].FileName);
+        //            var extension = Path.GetExtension(files[0].FileName);
 
-                    uniqueFileName = "Front_" + product.Symbol + extension;
-                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                    using (var fileStream = new FileStream(filePath, FileMode.Create))
-                    {
-                        file.CopyTo(fileStream);
-                    }
-                }
-            }
+        //            uniqueFileName = "Front_" + product.Symbol + extension;
+        //            string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+        //            using (var fileStream = new FileStream(filePath, FileMode.Create))
+        //            {
+        //                file.CopyTo(fileStream);
+        //            }
+        //        }
+        //    }
 
-            if (uniqueFileName != null)
-            {
-                return uniqueFileName;
-            }
-            else
-            {
+        //    if (uniqueFileName != null)
+        //    {
+        //        return uniqueFileName;
+        //    }
+        //    else
+        //    {
 
-                return uniqueFileName = "Front_" + product.Symbol +".jpg";
+        //        return uniqueFileName = "Front_" + product.Symbol +".jpg";
 
-            }
+        //    }
 
-        }
+        //}
 
         private List<SelectListItem> GetCategories()
         {

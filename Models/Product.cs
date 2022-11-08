@@ -64,6 +64,6 @@ namespace partner_aluro.Models
         public virtual SubCategory? CategorySubNavigation { get; set; }
 
         [ForeignKey(nameof(ProductImagesId))]
-        public virtual List<ImageModel>? product_Images { get; set; } = new List<ImageModel>();
+        public virtual List<ImageModel>? Product_Images { get; set; } = new List<ImageModel>();
     }
 }

@@ -31,7 +31,7 @@ namespace partner_aluro.Services
             var product = await _context.Products
                 .Include(p => p.CategoryNavigation)
                 .Include(p => p.CategorySubNavigation)
-                .Include(p => p.product_Images)
+                .Include(p => p.Product_Images)
                 .FirstOrDefaultAsync(m => m.ProductId == id);
 
             return product;
@@ -90,7 +90,7 @@ namespace partner_aluro.Services
         public void ZmiejszIloscProductIdAsync(int ProductId, int ile)
         {
             Product product = _context.Products.FirstOrDefault(x => x.ProductId == ProductId);
-            product.Ilosc = product.Ilosc - ile;
+            product.Ilosc -= ile;
 
             //_context.Attach(product);
             //_context.Entry(product).State = Microsoft.EntityFrameworkCore.EntityState.Added;
