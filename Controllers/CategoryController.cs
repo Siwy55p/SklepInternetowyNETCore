@@ -281,6 +281,9 @@ namespace partner_aluro.Controllers
             else if (Sort == 4)
             {
                 onePageOfProducts = produkty.OrderByDescending(p => p.Symbol).ToPagedList(pageNumber, 9); // will only contain 25 products max because of the pageSize
+            }else
+            {
+                onePageOfProducts = produkty.OrderByDescending(p => p.Symbol).ToPagedList(pageNumber, 9);
             }
 
 
