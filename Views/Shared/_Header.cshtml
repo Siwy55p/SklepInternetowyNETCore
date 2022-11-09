@@ -44,29 +44,49 @@
                 @*Srodek strona*@
 
                 @*PRAWA STRONA START*@
-                <div class="col">
+                <div class="col-3">
                     <nav class="navbar navbar-fixed-top navbar-dark bg-inverse">
                         @*PRAWA STRONA START*@
-                        <div id="navbarNavDarkDropdown2">
-                            <ul class="navbar-nav z-index-2">
+                        <div id="navbarNavDarkDropdown2 ">
+                        <ul class="nav z-index-2 custom-nav">
+                                
+
                                 <li>
-                                <a class="nav-link" asp-controller="Order" asp-action="ListaZamowienZalogowanegoUzytkownika">Zamówienia</a>
+                                    <a class="nav-link" asp-controller="Order" asp-action="ListaZamowienZalogowanegoUzytkownika"><i class="bi bi-clipboard-data"></i></a>
                                 </li>
                                 <li>
-                                @await Component.InvokeAsync("CartHeader")
-                                @*<a class="nav-link" asp-area="" asp-controller="Cart" asp-action="ZlozZamowienie"><i class="fa-solid fa-cart-shopping">@cart.CartItems.Count</i></a>*@
+                                    @await Component.InvokeAsync("CartHeader")
+                                    @*<a class="nav-link" asp-area="" asp-controller="Cart" asp-action="ZlozZamowienie"><i class="fa-solid fa-cart-shopping">@cart.CartItems.Count</i></a>*@
                                 </li>
-                                <li>
-                                    <partial name="_LoginPartial" />
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle"
+                                       href="#"
+                                       role="button"
+                                       data-bs-toggle="dropdown"
+                                       aria-expanded="false">
+                                    <i class="bi bi-person-fill"></i>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-end">
+                                        <li><a class="dropdown-item" href="@Url.Action("Index","Home")">Moje konto</a></li>
+                                        <li>
+                                            <form id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                                <button id="logout" type="submit" class="dropdown-item">Wyloguj</button>
+                                            </form>
+                                        </li>
+                                    </ul>
                                 </li>
                             </ul>
                         </div>
                     </nav>
                 </div>
             </div>
+
+
         @*KONIEC PRAWA STRONA*@
     </div>
+
 </div>
+
 <div class="sticky-top row float-end text-right">
 
     <a class="btn-open" data-bs-toggle="offcanvas" href="#offcanvas" role="button" aria-controls="offcanvas">

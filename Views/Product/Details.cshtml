@@ -33,7 +33,7 @@
                         <img  id="slideLeft" class="arrow" src="~/images/produktslider/arrow-left.png">
 
                         <div id="slider">
-                            @foreach (var img in Model.product_Images)
+                            @foreach (var img in Model.Product_Images.OrderBy(i=>i.kolejnosc) )
                             {
                                 <a href="~/images/produkty/@Model.Symbol/@img.ImageName" class="glightbox" data-gallery="gallery">
                                     <img class="thumbnail_product" src="~/images/produkty/@Model.Symbol/@img.ImageName" alt="@img.Product" width="70px">
