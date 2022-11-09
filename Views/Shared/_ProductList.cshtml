@@ -65,5 +65,13 @@
             </div>
         </div>
     }
+    
+@Html.PagedListPager( (IPagedList)ViewBag.OnePageOfProducts, page => Url.Action("Lista", "Category", new { page = page, szukanaNazwa=ViewData["szukanaNazwa"] } )
+,
+new X.PagedList.Web.Common.PagedListRenderOptions{
+    DisplayEllipsesWhenNotShowingAllPageNumbers = false,
+    LiElementClasses = new string[] { "page-item" },
+    PageClasses = new string[] { "page-link" }
+}
 
-@Html.PagedListPager( (IPagedList)ViewBag.OnePageOfProducts, page => Url.Action("Lista", "Category", new { page = page, szukanaNazwa=ViewData["szukanaNazwa"] } ))
+)

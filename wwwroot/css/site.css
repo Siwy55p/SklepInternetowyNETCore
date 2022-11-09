@@ -80,10 +80,6 @@ a.active {
     align-items: center;
 }
 
-body {
-    overflow-y: scroll;
-}
-
 .thumbnail img {
     max-width: 100%;
     height: auto;
@@ -172,6 +168,12 @@ body {
 .header2-custom {
     padding-top: 25px;
 }
+
+body {
+    background-color: #eceff1;
+    overflow-y: scroll;
+}
+
 
 label.required::before {
     content: '*';
