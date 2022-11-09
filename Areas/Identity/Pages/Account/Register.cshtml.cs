@@ -279,7 +279,7 @@ namespace partner_aluro.Areas.Identity.Pages.Account
                     user.Adress1rozliczeniowy.UserID = userId;
                     user.Adress2dostawy.UserID = userId;
 
-                    string text = "Dziękujemy za rejestrację nowego konta w systemie platformy hurtowej B2B\r\nmarki ALURO.\r\nPo weryfikacji danych,\r\n otrzymają Państwo dostęp do platformy hurtowej\r\nz możliwością zakupów w cenach hurtowych.\r\n\r\nZazwyczaj proces weryfikacji trwa od 1 do 12 godzin, \r\ndziękujemy za cierpliwość.";
+                    string text = $"Dziękujemy za rejestrację nowego konta w systemie platformy hurtowej B2B\r\nmarki ALURO.\r\nPo weryfikacji danych,\r\n otrzymają Państwo dostęp do platformy hurtowej\r\nz możliwością zakupów w cenach hurtowych.\r\n\r\nZazwyczaj proces weryfikacji trwa od 1 do 12 godzin, \r\ndziękujemy za cierpliwość.";
 
                     //text = text.Replace("@", "@" + System.Environment.NewLine);
 
@@ -300,8 +300,8 @@ namespace partner_aluro.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    await _emailSender.SendEmailAsync(Input.Email, "Ustaw swoj e-mail",
+                        $"Ustaw swój e-mail: <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>kliknij tutaj</a>.");
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {

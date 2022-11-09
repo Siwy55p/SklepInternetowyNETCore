@@ -25,15 +25,15 @@
         </div>
 
             <div class="form-group row">
-            <label class="col-sm-4 col-form-label custom-label required" asp-for="Input.Imie"></label>
+                <label class="col-sm-4 col-form-label custom-label required" asp-for="Input.Imie"></label>
                 <div class="col-sm-5">
-                <input type="text" id="Input.Imie" asp-for="Input.Imie" class="form-control" autocomplete="imie" aria-required="true" required />
+                <input asp-for="Input.Imie" class="form-control" autocomplete="nazwisko" aria-required="true" required />
                 <span asp-validation-for="Input.Imie" class="text-danger"></span>
                 </div>
             </div>
 
             <div class="form-group row">
-            <label class="col-sm-4 col-form-label custom-label required" asp-for="Input.Nazwisko"></label>
+                <label class="col-sm-4 col-form-label custom-label required" asp-for="Input.Nazwisko"></label>
                 <div class="col-sm-5">
                 <input asp-for="Input.Nazwisko" class="form-control" autocomplete="nazwisko" aria-required="true" required />
                 <span asp-validation-for="Input.Nazwisko" class="text-danger"></span>
@@ -118,7 +118,7 @@
                     @* <span asp-validation-for="Input.KodPocztowy1" class="text-danger"></span>*@
                     </div>
                 </div>
-                    <button id="registerSubmit" type="submit" class="btn btn-secondary w-20">Zarejestruj sie</button>
+                    <button id="registerSubmit" type="submit" class="btn btn-secondary w-20">Zarejestruj się</button>
 
             </div>
 

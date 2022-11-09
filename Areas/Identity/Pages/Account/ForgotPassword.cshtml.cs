@@ -14,18 +14,21 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using partner_aluro.Models;
+using partner_aluro.Services.Interfaces;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace partner_aluro.Areas.Identity.Pages.Account
 {
     public class ForgotPasswordModel : PageModel
     {
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly IEmailSender _emailSender;
+        //private readonly IEmailSender _emailSender;
+        private readonly IEmailService _emailService;
 
-        public ForgotPasswordModel(UserManager<ApplicationUser> userManager, IEmailSender emailSender)
+        public ForgotPasswordModel(UserManager<ApplicationUser> userManager, IEmailSender emailSender, IEmailService emailService)
         {
             _userManager = userManager;
-            _emailSender = emailSender;
+            _emailService = emailService;
         }
 
         /// <summary>
@@ -71,10 +74,21 @@ namespace partner_aluro.Areas.Identity.Pages.Account
                     values: new { area = "Identity", code },
                     protocol: Request.Scheme);
 
-                await _emailSender.SendEmailAsync(
-                    Input.Email,
-                    "Reset Password",
-                    $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+
+
+                EmailDto newClint = new EmailDto()
+                {
+                    Subject = "Reset hasła",
+                    To = Input.Email,
+                    Body = $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>."
+                };
+
+                _emailService.SendEmailAsync(newClint); //Bardzo specjalnie tak jest jak jest zrobione. Musi tak zostać.
+
+                //await _emailSender.SendEmailAsync(
+                //    Input.Email,
+                //    "Reset Password",
+                //    $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                 return RedirectToPage("./ForgotPasswordConfirmation");
             }

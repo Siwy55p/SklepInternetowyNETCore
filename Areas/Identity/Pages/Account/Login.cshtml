@@ -8,14 +8,12 @@
 
 <div class="logoLoginReg">
     <div class="justify-content-center align-items-center" style="height:300px">
-        <img id="logoLogin" src="~/images/logo/aluro_logo-x-300_2.png" width="300" />
+        <img id="logoLogin" src="~/images/logo/aluro_logo-x-300_2.png" width="300px" />
     </div>
 </div>
-<div class="row-lg-8 justify-content-center align-items-center">
-    <section class="p-3 border w-100 ">
+<div class="col-md-4 justify-content-center align-items-center">
+    <section class="p-3 border">
         <form id="account" method="post" >
-            <h2>Zaloguj się</h2>
-            <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-floating">
                 <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
@@ -39,8 +37,9 @@
                 <div class="col-6">
                     <button id="login-submit" type="submit" class="w-100 btn btn-md btn-primary">Zaloguj się</button>
                 </div>
+      
                 <div class="col-6">
-                    <a class="w-100 btn btn-md btn-primary" asp-page="./Register" asp-route-pass="@Model.pass2" asp-route-email="@Model.email2" asp-route-returnUrl="@Model.ReturnUrl">Zarejestruj się</a>
+                    <a class="w-100 btn btn-md btn-success" asp-page="./Register" asp-route-pass="@Model.pass2" asp-route-email="@Model.email2" asp-route-returnUrl="@Model.ReturnUrl">Utwórz nowe konto</a>
                 </div>
             </div>
             <div>
