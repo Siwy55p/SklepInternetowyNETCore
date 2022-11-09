@@ -180,15 +180,16 @@ label.required::before {
 }
 
 #logoLogin {
-    float: right;
-    margin: 0 0 0 15px;
+    float: left;
+    margin: 0 0 0 0px;
     position: absolute;
-    left: -10px;
+    left: -150px;
     bottom: 20px;
 }
 
 .logoLoginReg {
     position: relative;
+
 }
 .pozycja {
     line-height: 60px;
