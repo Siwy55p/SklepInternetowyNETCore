@@ -9,6 +9,9 @@ using static partner_aluro.Core.Constants;
 using partner_aluro.Core;
 using partner_aluro.Services.Interfaces;
 using partner_aluro.Services;
+using Microsoft.AspNetCore.WebUtilities;
+using System.Text;
+using System.Text.Encodings.Web;
 
 namespace partner_aluro.Controllers
 {
@@ -24,7 +27,9 @@ namespace partner_aluro.Controllers
         private readonly IAdress1rozliczeniowyService _adress1RozliczeniowyService;
         private readonly IAdress2dostawyService _adress2DostawyService;
 
-        public UserController(IUnitOfWorkAdress1rozliczeniowy unitOfWorkAdress1Rozliczeniowy, IAdress2dostawyService adress2DostawyServicee, IAdress1rozliczeniowyService adress1RozliczeniowyService, IUnitOfWork unitOfWork, SignInManager<ApplicationUser> signInManager, IProfildzialalnosciService profildzialalnosciService)
+        private readonly IEmailService _emailService;
+
+        public UserController(IEmailService emailService, IUnitOfWorkAdress1rozliczeniowy unitOfWorkAdress1Rozliczeniowy, IAdress2dostawyService adress2DostawyServicee, IAdress1rozliczeniowyService adress1RozliczeniowyService, IUnitOfWork unitOfWork, SignInManager<ApplicationUser> signInManager, IProfildzialalnosciService profildzialalnosciService)
         {
             _unitOfWork = unitOfWork;
             _signInManager = signInManager;
@@ -33,6 +38,8 @@ namespace partner_aluro.Controllers
             _adress2DostawyService = adress2DostawyServicee;
 
             _unitOfWorkAdress1Rozliczeniowy = unitOfWorkAdress1Rozliczeniowy;
+
+            _emailService = emailService;
         }
 
         public IActionResult Index()
@@ -160,7 +167,12 @@ namespace partner_aluro.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Add(EditUserViewModel data) //Zapis uzytkownika do bazy
+        {
 
+            return View();
+        }
         private List<SelectListItem> GetProfiles() //Pobierz profile dzialalnbosci rabaty w zaleznosci jakiprofil dzialalnosci (sklep internetowy, stacjonarny)
         {
             var lstProfiles = new List<SelectListItem>();
@@ -178,6 +190,45 @@ namespace partner_aluro.Controllers
             foreach (IdentityError error in result.Errors)
                 ModelState.AddModelError("", error.Description);
         }
+
+        public async Task<IActionResult> ResetPasswordUser(string email)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _signInManager.UserManager.FindByEmailAsync(email);
+                if (user == null)
+                {
+
+                }
+
+                // For more information on how to enable account confirmation and password reset please
+                // visit https://go.microsoft.com/fwlink/?LinkID=532713
+                var code = await _signInManager.UserManager.GeneratePasswordResetTokenAsync(user);
+                code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                var callbackUrl = Url.Page(
+                    "/Account/ResetPassword",
+                    pageHandler: null,
+                    values: new { area = "Identity", code },
+                    protocol: Request.Scheme);
+
+                EmailDto newClint = new EmailDto()
+                {
+                    Subject = "Reset hasła",
+                    To = email,
+                    Body = $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>."
+                };
+
+                _emailService.SendEmailAsync(newClint); //Bardzo specjalnie tak jest jak jest zrobione. Musi tak zostać.
+
+                //await _emailSender.SendEmailAsync(
+                //    Input.Email,
+                //    "Reset Password",
+                //    $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                return RedirectToAction("Edit", new { id = user.Id });
+            }
+            return RedirectToAction("Index");
+        }
+
     }
 
 }

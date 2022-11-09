@@ -1,4 +1,6 @@
-﻿namespace partner_aluro.Core
+﻿using System.Text.Encodings.Web;
+
+namespace partner_aluro.Core
 {
     public static class Constants
     {
@@ -22,6 +24,7 @@
 
         public static decimal Rabat;
 
+        public static string ResetMessageEmail = $"Wiadomosc.";
 
     }
 }

@@ -7,15 +7,21 @@
 <h5>Zamówianie id: @Model.Id z @Model.User.Imie @Model.User.Nazwisko</h5>
 
 <div class="">
-    Data: <b>@Model.OrderPlaced</b> Razem: <b>@Model.OrderTotal</b>  Produktów: <b>@Model.OrderItems.Count</b> , Status zamówienia: @Model.StanZamowienia
+    Data: <b>@Model.OrderPlaced</b> Razem: <b>@Model.OrderTotal</b>  Produktów: <b>@Model.OrderItems.Count</b> , Status zamówienia: @Model.StanZamowienia 
+    <form method="post" asp-controller="Order" asp-route-id="@Model.Id" asp-action="PDFOrder">
+                                                    <label> </label>
+                                                    <input type="submit" value="PDF"/>
+                                                </form>
 </div>
 
 <div class="row">
     <div class="col border">
 
-        <div class="row"><p>ZAMÓWIENIE Id:<b>@Model.Id</b></p></div>
 
-        <div class="border"><p> Wiadomosc do zamówienia: @Model.Komentarz @Model.MessageToOrder</p></div>
+
+        <div class="row"><p>ZAMÓWIENIE Id:<b>@Model.Id</b></p> </div>
+
+        <div class="border"><p> Wiadomosc od Klienta do zamówienia: @Model.Komentarz @Model.MessageToOrder</p></div>
 
         
 
@@ -40,7 +46,7 @@
 
     </div>
     <div class="col border">
-        Klient @Model.User.Imie @Model.User.Nazwisko ; @Model.User.UserName
+        Klient @Model.User.Imie @Model.User.Nazwisko ; @Model.User.UserName tel: @Model.AdressDostawy.Telefon , @Model.adresRozliczeniowy.Telefon
 
         <div class="row">
             <div class="col border">
@@ -184,6 +190,8 @@
                 </div>
             </div>
         </div>
+        <a class="nav-link px-3" asp-area="" asp-controller="Order" asp-action="ListaZamowien"> Wróc do listy</a>
+
     </div>
 
 }

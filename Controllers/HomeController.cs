@@ -77,6 +77,19 @@ namespace partner_aluro.Controllers
             return Redirect(Request.Headers["Referer"].ToString());
         }
 
+        [Route("Ogolne-warunki-sprzedazy")]
+        [HttpGet]
+        public IActionResult WarunkiSprzedazy()
+        {
+            return View();
+        }
+
+        [Route("Platnosc-i-dostawa")]
+        [HttpGet]
+        public IActionResult PlatnoscDostawa()
+        {
+            return View();
+        }
         [Route("polityka-prywatnosci")]
         public IActionResult Privacy()
         {
