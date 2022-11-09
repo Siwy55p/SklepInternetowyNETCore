@@ -35,6 +35,8 @@
     <script>
         function preview_images() {
             var total_file = document.getElementById("images").files.length;
+            $('#image_preview').append("");
+
             for (var i = 0; i < total_file; i++) {
                 $('#image_preview').append("<div class='col-sm-2'><img  style='width: 110px;' src='" + URL.createObjectURL(event.target.files[i]) + "'></div>");
             }

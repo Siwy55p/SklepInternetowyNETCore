@@ -14,6 +14,11 @@
 <div class="container mt-5 mb-5">	
     <div class="card">	
         <div class="row g-0">
+                @if (User.IsInRole("Administrator") || User.IsInRole("Manager"))
+                {
+                    <a asp-controller="Product" asp-action="Edit" asp-route-id="@Model.ProductId" class="text-end">Edytuj</a>
+                }
+
             @{
                 var CenaJednostkowa = Model.CenaProduktu * (1 - (partner_aluro.Core.Constants.Rabat / 100));
             }

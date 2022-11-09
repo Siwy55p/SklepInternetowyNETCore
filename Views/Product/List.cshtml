@@ -39,8 +39,7 @@
                                         <th>Kategoria</th>
                                         <th>Ilość</th>
                                         <th>Ukryte</th>
-                                        <th>Edit</th>
-                                        <th>Usuń</th>
+                                        <th>Akcje</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -67,9 +66,7 @@
 
                                             </th>
                                             <td>
-                                                <a asp-controller="Product" asp-action="Edit" asp-route-id="@productFormModel.ProductId">Edytuj</a>
-                                            </td>
-                                            <td>
+                                                <a asp-controller="Product" asp-action="Edit" asp-route-id="@productFormModel.ProductId">Edytuj</a> |
                                                 <a asp-controller="Product" asp-action="Delete" asp-route-id="@productFormModel.ProductId">Usuń</a>
                                             </td>
                                         </tr>
@@ -86,8 +83,7 @@
                                         <th scope="col">Kategoria</th>
                                         <th scope="col">Ilość</th>
                                         <th scope="col">Ukryte</th>
-                                        <th scope="col">Edytuj</th>
-                                        <th scope="col">Usuń</th>
+                                        <th scope="col">Akcje</th>
                                     </tr>
                                 </tfoot>
                             </table>

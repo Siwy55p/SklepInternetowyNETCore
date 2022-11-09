@@ -10,13 +10,19 @@
                 @Html.HiddenFor(h=>Model.ProductId)
                 @Html.ValidationSummary()
             @Html.Partial("_FormProduct")
+            </hr>
+
             <button type="submit" class="btn btn-success">Zapisz zmiany</button>
+            <hr />
         </div>
             <div class="col-md-6">
                 @Html.Partial("_FormProductImage")
             </div>
         </div>
     </form>
+
+
+<a class="btn btn-primary" asp-controller="Product" asp-action="Details" asp-route-id="@Model.ProductId">Podgląd </a>
 
 @section Scripts {
     <script>
