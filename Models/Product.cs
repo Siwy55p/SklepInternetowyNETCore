@@ -42,6 +42,11 @@ namespace partner_aluro.Models
         public decimal? SzerokoscProduktu { get; set; }
         public decimal? WysokoscProduktu { get; set; }
         public decimal? GlebokoscProduktu { get; set; }
+
+        public decimal? SzerokoscWewnetrznaProduktu { get; set; }
+        public decimal? WysokoscWewnetrznaProduktu { get; set; }
+        public decimal? GlebokoscWewnetrznaProduktu { get; set; }
+
         public bool Bestseller { get; set; }
         public bool Ukryty { get; set; } = false;
 
