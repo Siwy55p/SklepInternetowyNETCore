@@ -37,6 +37,8 @@
                                         <th>Cena produktu</th>
                                         <th>Cena sprzedazy</th>
                                         <th>Kategoria</th>
+                                        <th>Ilość</th>
+                                        <th>Ukryte</th>
                                         <th>Edit</th>
                                         <th>Usuń</th>
                                     </tr>
@@ -48,10 +50,22 @@
                                             <td>@productFormModel.ProductId</td>
                                             <td><img class="img-thumbnail" src="~/images/produkty/@productFormModel.Symbol/@productFormModel.ImageUrl" alt="@productFormModel.Name" style="width:75px;height:75px;"></td>
                                             <td>@productFormModel.Symbol</td>
-                                            <td>@productFormModel.Name</td>
+
+                                            <td><a asp-controller="Product" asp-action="Edit" asp-route-id="@productFormModel.ProductId">@productFormModel.Name</a></td>
                                             <td>@productFormModel.CenaProduktu.ToString("C")</td>
                                             <td>@productFormModel.CenaProduktuDetal</td>
                                             <td>@productFormModel.CategoryNavigation.Name</td>
+                                            <th>@productFormModel.Ilosc</th>
+                                            <th>
+                                                @if (productFormModel.Ukryty == true)
+                                                {
+                                                    <input type="checkbox" data-toggle="toggle" checked disabled>
+                                                }else
+                                                {
+                                                    <input type="checkbox" data-toggle="toggle" unchecked disabled>
+                                                }
+
+                                            </th>
                                             <td>
                                                 <a asp-controller="Product" asp-action="Edit" asp-route-id="@productFormModel.ProductId">Edytuj</a>
                                             </td>
@@ -70,6 +84,8 @@
                                         <th scope="col">Cena produktu</th>
                                         <th scope="col">Cena sprzedazy</th>
                                         <th scope="col">Kategoria</th>
+                                        <th scope="col">Ilość</th>
+                                        <th scope="col">Ukryte</th>
                                         <th scope="col">Edytuj</th>
                                         <th scope="col">Usuń</th>
                                     </tr>

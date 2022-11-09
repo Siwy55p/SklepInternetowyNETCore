@@ -27,7 +27,6 @@ namespace partner_aluro.Models
         public string? NazwaPlikuObrazka { get; set; }
 
         [Required(ErrorMessage = "Cena Produktu jest wymagana")]
-        [Range(0,99999)]
         public decimal CenaProduktu { get; set; }
 
         [NotMapped]

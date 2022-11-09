@@ -32,26 +32,48 @@
 
         @if (Model.Product_Images != null)
         {
-            @foreach (var image in Model.Product_Images)
-            {
-                <div class="row"> 
-                    <div class="col border">Obrazek</div>
-                    <div class="col border">Kolejnosc</div>
-                    <div class="col border">Akcja</div>
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table id="example"
+                                       class="table table-striped data-table"
+                                       style="width: 100%">
+                                        <thead>
+                                            <tr>
+                                                <th>Obrazek</th>
+                                                <th>Kolejnosc</th>
+                                                <th>Akcje</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                @foreach (var image in Model.Product_Images)
+                                                {
+                                                <tr>
+                                                    <td>
+                                                            <img src="~/images/produkty/@Model.Symbol/@image.ImageName" alt="Logo image" width="100" height="100" style="border:1px; margin-top:20px;" />
+                                                    </td>
+                                                        <td>@image.kolejnosc</td>
+
+
+                                                    <td>
+                                                        <a asp-action="Edit" asp-controller="Image" asp-route-id="@image.ImageId">Edit</a> |
+                                                        <a asp-action="Details" asp-controller="Image" asp-route-id="@image.ImageId">Details</a> |
+                                                        <a asp-action="Delete" asp-controller="Image" asp-route-id="@image.ImageId">Delete</a>
+                                                    </td>
+
+
+                                                </tr>
+                                                }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <diV class="row">
-                    <div class="col border"> 
-                        <img id="FrontImagePrv2" src="~/images/produkty/@Model.Symbol/@image.ImageName" alt="Logo image" width="150" height="150" style="border:1px; margin-top:20px; margin-left:120px" />
-                    </div>
-                    <div class="col border">
-                        @image.kolejnosc
-                    </div>
-                    <div class="col border">
-                        <a asp-controller="Image" asp-action="Delete" asp-route-id="@image.ImageId">Delete</a>|
-                        <a asp-controller="Image" asp-action="Edit" asp-route-id="@image.ImageId">Edit</a>
-                    </div>
-                </diV>
-            }
+            
         }
 
         <div class="row" id="image_preview">

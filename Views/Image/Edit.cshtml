@@ -7,13 +7,15 @@
 
 <h1>Edit</h1>
 
-<h4>ImageModel</h4>
+<h4>ImageModel </h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Edit" enctype="multipart/form-data" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="ImageId" />
+            <div class="form-group">
+                <input asp-for="ImageId" class="form-control" readonly="readonly" />
+            </div>
             <div class="form-group">
                 <label asp-for="Tytul" class="control-label"></label>
                 <input asp-for="Tytul" class="form-control" />
@@ -21,7 +23,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="ImageName" class="control-label"></label>
-                <input asp-for="ImageName" class="form-control" />
+                <input asp-for="ImageName" class="form-control" readonly="readonly" />
                 <span asp-validation-for="ImageName" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -30,32 +32,30 @@
                 <span asp-validation-for="kolejnosc" class="text-danger"></span>
             </div>
 
-            <div class="form-group">Nie modyfikuj, ani nie zmieniaj poniższych pól!</div>
-
                 <div class="form-group">
                     <label asp-for="path" class="control-label"></label>
-                    <input type="text" id="disabledTextInput" asp-for="path" class="form-control" />
+                <input type="text" id="disabledTextInput" asp-for="path" class="form-control" readonly="readonly" />
                     <span asp-validation-for="path" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="ProductId" class="control-label"></label>
-                    <input type="text" id="disabledTextInput" asp-for="ProductId" class="form-control" />
+                <input type="text" id="disabledTextInput" asp-for="ProductId" class="form-control" readonly="readonly" />
                     <span asp-validation-for="ProductId" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="ProductImagesId" class="control-label"></label>
-                    <input type="text" id="disabledTextInput" asp-for="ProductImagesId" class="form-control" />
+                <input type="text" id="disabledTextInput" asp-for="ProductImagesId" class="form-control" readonly="readonly" />
                     <span asp-validation-for="ProductImagesId" class="text-danger"></span>
                 </div>
 
                 <div class="form-group">
                     <label asp-for="ImageFile" class="control-label"></label>
-                    <input asp-for="ImageFile" accept="images/png,images/jpg,images/jpeg" /> @*/image/png,image/jpg*@
+                    <input type="file" asp-for="ImageFile" accept="images/png,images/jpg,images/jpeg" /> @*/image/png,image/jpg*@
                     <span asp-validation-for="ImageFile" class="text-danger"></span>
                 </div>
 
             <div class="form-group">
-                <img src="@Model.path\@Model.ImageName" asp-append-version="true" width="250px" height="250px">
+                <img src="\@Model.path\@Model.ImageName" asp-append-version="true" width="250px" height="250px">
             </div>
             <div class="form-group">
                 <input type="submit" value="Zapisz" class="btn btn-primary" />

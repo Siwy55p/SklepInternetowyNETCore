@@ -115,6 +115,7 @@ namespace partner_aluro.Controllers
             //return View(product.product_Image);
         }
 
+        [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
         // GET: Image/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -131,11 +132,13 @@ namespace partner_aluro.Controllers
             return View(imageModel);
         }
 
+
         // POST: Image/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
         public async Task<IActionResult> Edit(int id, ImageModel imageModel)
         {
             if (id != imageModel.ImageId)
@@ -167,6 +170,7 @@ namespace partner_aluro.Controllers
         }
 
         // GET: Image/Delete/5
+        [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Images == null)
@@ -187,6 +191,7 @@ namespace partner_aluro.Controllers
         // POST: Image/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var imageModel = await _context.Images.FindAsync(id);

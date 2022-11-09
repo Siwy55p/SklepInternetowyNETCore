@@ -15,9 +15,15 @@
         <label asp-for="@Model.Symbol" class="col-sm-3 col-form-label text-end">Symbol</label>
             <div class="col-sm-4">
 
-                   <input asp-for="@Model.Symbol" class="form-control" aria-required="true" placeholder="Symbol" />
+        @if (@Model.Symbol == null)
+        {
+        <input asp-for="@Model.Symbol" class="form-control" aria-required="true" placeholder="Symbol"/>
+        }else
+        {
+            <input asp-for="@Model.Symbol" class="form-control" aria-required="true" placeholder="Symbol" readonly="readonly" />
+        }
 
-            <span asp-validation-for="@Model.Symbol" class="text-danger">Nie zmieniaj Symbolu</span>
+            <span asp-validation-for="@Model.Symbol" class="text-danger"></span>
             </div>
         </div>
 

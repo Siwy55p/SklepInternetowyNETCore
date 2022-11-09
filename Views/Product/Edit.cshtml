@@ -9,11 +9,11 @@
             <div class="col-md-6 border-end">
                 @Html.HiddenFor(h=>Model.ProductId)
                 @Html.ValidationSummary()
-                @Html.Partial("_FormProduct")
-            </div>
+            @Html.Partial("_FormProduct")
+            <button type="submit" class="btn btn-success">Zapisz zmiany</button>
+        </div>
             <div class="col-md-6">
                 @Html.Partial("_FormProductImage")
-                <button type="submit">Zapisz zmiany</button>
             </div>
         </div>
     </form>
