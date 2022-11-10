@@ -66,8 +66,8 @@
                                 }
                                 else
                                 {
-                                    <div class="col-4">
-                                        <input type="number" id="@produkt.ProductId" name="quantity" value="1" class="form-control" aria-required="true" placeholder="Ilość" min="1" max="@produkt.Ilosc" />
+                                    <div class="col-4 d-none d-sm-none d-md-none d-lg-block text-wrap text-break">
+                                        <input type="number" id="@produkt.ProductId" name="quantity" value="1" class="form-control " aria-required="true" placeholder="Ilość" min="1" max="@produkt.Ilosc" />
                                     </div>
                                     <div class="col">
                                         <button value="@produkt.ProductId" onclick="AddToCart(@produkt.ProductId)" data-bs-target="offcanvas" role="button">Dodaj do zamowienia</button>
@@ -140,7 +140,7 @@
                                         }
                                         else
                                         {
-                                            <div class="col-4">
+                                            <div class="col-4 d-none d-sm-none d-md-none d-lg-block text-wrap text-break">
                                                 <input type="number" id="@produkt.ProductId" name="quantity" value="1" class="form-control" aria-required="true" placeholder="Ilość" min="1" max="@produkt.Ilosc" />
                                             </div>
                                             <div class="col">
