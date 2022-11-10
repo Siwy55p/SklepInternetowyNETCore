@@ -189,10 +189,8 @@ label.required::before {
     bottom: 20px;
 }
 #logoLogin2 {
-    float: left;
-    margin: 0 0 0 0px;
     position: absolute;
-    left: 0px;
+    left: -250px;
     bottom: 20px;
 }
 .logoLoginReg {

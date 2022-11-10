@@ -4,24 +4,34 @@
 @{
     ViewData["Title"] = "Załóż konto - zostań naszym partnerem";
 }
-<div class="col-8 logoLoginReg" style="height:160px">
+@*<div class="col-8 logoLoginReg" style="height:160px">
     <div class="col-12 d-flex justify-content-left align-items-left">
-        <img id="logoLogin2" class="  " src="~/images/logo/aluro_logo-x-300_2.png" width="200" />
+        <img id="logoLogin2" class="  " src="~/images/logo/aluro_logo-x-300_2.png" width="200px" />
+    </div>
+</div>*@
+
+<div class="logoLoginReg">
+    <div class="justify-content-center align-items-center" style="height:300px">
+        <img id="logoLogin2" src="~/images/logo/aluro_logo-x-300_2.png" width="300px" />
     </div>
 </div>
-
-<div class="row col-8">
+<div class="row col-12">
     <form class="needs-validation" id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post" novalidate>
+        <div class="form-group row align-content-center justify-content-center">
+            <div class="col" style="max-width:500px">
             <h6>STWÓRZ KONTO</h6>
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <hr />
-                <h6 class="text-center">PROFIL DZIAŁALNOŚCI</h6>
-            <hr/>
-        <div class="form-group row">
-            <div class="row">
-                <select asp-for="Input.IdProfildzialalnosci" class="form-control" asp-items="(IEnumerable<SelectListItem>)@ViewData["Profile"]" required></select>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             </div>
+        </div>
+        <hr />
+        <h6 class="text-center">PROFIL DZIAŁALNOŚCI</h6>
+        <hr />
+
+        <div class="form-group row align-content-center justify-content-center">
+            <div class="col" style="max-width:500px">
+                <select asp-for="Input.IdProfildzialalnosci" class="form-control" asp-items="(IEnumerable<SelectListItem>)@ViewData["Profile"]" required></select>
             <label class="row" asp-for="Input.IdProfildzialalnosci"></label>
+        </div>
         </div>
 
             <div class="form-group row align-content-center justify-content-center">
