@@ -4,6 +4,10 @@ a.active {
     font-weight: bold;
 }
 
+.owl-one.owl-carousel .owl-stage {
+        height: 90px;
+}
+
 .custom-label {
     text-align: right;
 }

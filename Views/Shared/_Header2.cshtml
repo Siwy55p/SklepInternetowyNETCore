@@ -8,13 +8,18 @@
             </a>
         </div>
         <div class="col"> 
-            @await Component.InvokeAsync("MenuMain")
+
+                @await Component.InvokeAsync("MenuMain")
 
             <form asp-controller="Category" asp-action="Lista"  method="get">
                 <div class="search input-group mb-3 ">
                     <input type="text" name="szukanaNazwa" id="szukanaNazwa" class="form-control mr-sm-2" placeholder="Szukaj produktu" />
                 </div>
             </form>
+
+
+
+
         </div>
     </div>
 </div>

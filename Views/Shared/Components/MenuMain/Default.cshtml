@@ -1,50 +1,52 @@
 ﻿@model IEnumerable<Category>
 
-<nav class="navbar custom-mainmenu navbar-expand-lg navbar-light">
-
-
-    @foreach (var kategorie in Model)
-    {
-        var active = "";
-
-        var active2 = "";
-
-        if (@kategorie.CategoryId == ViewBag.KategoriaId)
+    <div class="owl-one owl-carousel" style="max-width:900px">
+        @foreach (var kategorie in Model)
         {
-            active = "active";
-        }
+            var active = "";
+            var active2 = "";
 
-        @if (kategorie.Aktywny == true)
-        {
+            if (@kategorie.CategoryId == ViewBag.KategoriaId)
+            {
+                active = "active";
+            }
 
-            <div class="dropdown p-1">
+            @if (kategorie.Aktywny == true)
+            {
 
-                <a href="@Url.Action("Lista1","Category", new {KategoriaId = kategorie.CategoryId})" class="@active catmenu text-white mainmenu" style="border-radius:20px; width: 100px; height:100px; max-height: 100px;" aria-expanded="false">
-                        @kategorie.Name
-                </a>
+                <div class="dropdown p-1">
 
-                @if (kategorie.SubCategories.Count >= 1)
-                {
-                    <ul class="dropdown-menu dropdown-menu-dark p-1" aria-labelledby="navbarDarkDropdownMenuLink">
-                    @foreach (var kategorie2 in kategorie.SubCategories)
+                    <a href="@Url.Action("Lista1","Category", new {KategoriaId = kategorie.CategoryId})" class="@active catmenu text-white mainmenu" style="border-radius:20px; width: 100px; height:100px; max-height: 100px;" aria-expanded="false">
+                            @kategorie.Name
+                    </a>
+
+                    @if (kategorie.SubCategories.Count >= 1)
                     {
-                        if (@kategorie2.SubCategoryId == ViewBag.KategoriaId2)
+
+                    <a href="#" role="button" id="dropdownMenu1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Rozwiń <i class="fas fa-ellipsis-h"></i></a>
+                        <ul class="dropdown-menu dropdown-menu-dark p-1" aria-labelledby="navbarDarkDropdownMenuLink">
+                        @foreach (var kategorie2 in kategorie.SubCategories)
                         {
-                            active2 = "active";
+                            if (@kategorie2.SubCategoryId == ViewBag.KategoriaId2)
+                            {
+                                active2 = "active";
+                            }
+                            else
+                            {
+                                active2 = "";
+                            }
+                            <li>
+                                <a class="@active2 text-white text-decoration-none" href="@Url.Action("Lista1Sub","Category", new {KategoriaId = kategorie2.SubCategoryId})">
+                                    @kategorie2.Name
+                                </a>
+                            </li>
                         }
-                        else
-                        {
-                            active2 = "";
-                        }
-                        <li>
-                            <a class="@active2 text-white text-decoration-none" href="@Url.Action("Lista1Sub","Category", new {KategoriaId = kategorie2.SubCategoryId})">
-                                @kategorie2.Name
-                            </a>
-                        </li>
+                        </ul>
+
                     }
-                    </ul>
-                }
-            </div>
+                </div>
+            }
         }
-    }
-</nav>
+    </div>
+
+
