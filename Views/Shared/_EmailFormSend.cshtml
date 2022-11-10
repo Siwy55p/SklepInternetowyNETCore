@@ -1,23 +1,24 @@
-﻿@model partner_aluro.Models.EmailDto
+﻿@model partner_aluro.ViewModels.EmailViewModel
 
 <div class="text-center">
-    <h1 class="display-4">Email</h1>
-    <form asp-controller="Email" asp-action="SendEmail">
+    <h1 class="display-4">Wyślij email</h1>
+    <form asp-controller="Email" asp-action="SendEmailFromConf">
         <div class="row">
-            <label asp-for="@Model.Subject">Tytuł</label>
-            <input type="text" asp-for="@Model.Subject" />
+
+            <label class="form-label" asp-for="@Model.Send.Subject">Tytuł wiadomości</label>
+            <input class="input-group" type="text" asp-for="@Model.Send.Subject" />
         </div>
         <div class="row">
-            <label asp-for="@Model.Subject">Treść</label>
-            <textarea cols="20" rows="3" asp-for="@Model.Body" >
+            <label class="form-label" asp-for="@Model.Send.Body">Wiadomość</label>
+            <textarea cols="20" rows="3" asp-for="@Model.Send.Body">
             </textarea>
         </div>
         <div class="row">
-            <label asp-for="@Model.Subject">Email</label>
-            <input type="text" asp-for="@Model.To" />
+            <label class ="form-label" asp-for="@Model.Send.To">Do</label>
+            <input type="text" asp-for="@Model.Send.To" />
         </div>
         <div class="row">
-            <input type="submit" value="Send" />
+            <input class="btn btn-success" type="submit" value="Send" />
         </div>
     </form>
 

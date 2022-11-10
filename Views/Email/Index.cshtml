@@ -1,11 +1,20 @@
-﻿@model ICollection<partner_aluro.Models.EmailDto>
+﻿@model partner_aluro.ViewModels.EmailViewModel
 @{
     ViewData["Title"] = "Users Page";
     Layout = "~/Views/Shared/_Dashboard.cshtml";
 }
 
-@Html.Partial("_EmailFormSend")
 
+<div class="row">
+    <div class="col-md-8">
+        @Html.Partial("_EmailFormSendRegisterNewAccoutMessageEmail")
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-8">
+        @Html.Partial("_EmailFormSend")
+    </div>
+</div>
 
 
 @section Scripts {

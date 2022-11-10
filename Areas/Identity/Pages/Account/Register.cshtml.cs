@@ -279,7 +279,7 @@ namespace partner_aluro.Areas.Identity.Pages.Account
                     user.Adress1rozliczeniowy.UserID = userId;
                     user.Adress2dostawy.UserID = userId;
 
-                    string text = $"Dziękujemy za rejestrację nowego konta w systemie platformy hurtowej B2B nmarki ALURO.<br><br>Po weryfikacji danych, otrzymają Państwo dostęp do platformy hurtowej<br><br>z możliwością zakupów w cenach hurtowych.<br><br><br>Zazwyczaj proces weryfikacji trwa od 1 do 12 godzin, <br>dziękujemy za cierpliwość.";
+                    string text = $"Dziękujemy za rejestrację nowego konta w systemie platformy hurtowej B2B marki ALURO.<br><br>Po weryfikacji danych, otrzymają Państwo dostęp do platformy hurtowej<br>z możliwością zakupów w cenach hurtowych.<br><br>Zazwyczaj proces weryfikacji trwa od 1 do 12 godzin, <br>dziękujemy za cierpliwość.";
 
                     //text = text.Replace("@", "@" + System.Environment.NewLine);
 

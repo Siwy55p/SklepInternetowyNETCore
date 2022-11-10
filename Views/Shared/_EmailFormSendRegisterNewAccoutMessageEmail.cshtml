@@ -1,0 +1,31 @@
+﻿@model partner_aluro.ViewModels.EmailViewModel
+@using partner_aluro.Core;
+
+<div class="text-center border">
+    <h4 >Email który jest wysyłany przy Rejestracji nowego uzytkownika</h4>
+
+
+    @{
+
+    }
+    <form id="usrform" asp-controller="Email" asp-action="SaveChangeMessageToRegister">
+        <div class="row">
+            <div class="col-8">
+            <label class="form-label" asp-for="@Model">Tytuł</label>
+                <input class="input-group" type="text" asp-for="@Model.Register.Subject" value="@Constants.RegisterNewAccoutMessageEmailSubject" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <label asp-for="@Model.Register.Body">Example textarea</label>
+                <textarea class="form-control" asp-for="@Model.Register.Body" rows="3"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div col="col-8">
+            <input class="btn btn-success" type="submit" value="Zapisz" />
+            </div>
+        </div>
+    </form>
+
+</div>

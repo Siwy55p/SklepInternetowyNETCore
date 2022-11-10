@@ -26,5 +26,10 @@ namespace partner_aluro.Core
 
         public static string ResetMessageEmail = $"Wiadomosc.";
 
+        public static string RegisterNewAccoutMessageEmailSubject = $"Dziękujemy za rejestrację.";
+        public static string RegisterNewAccoutMessageEmail = $"Dziękujemy za rejestrację nowego konta w systemie platformy hurtowej B2B marki ALURO.<br><br>Po weryfikacji danych, otrzymają Państwo dostęp do platformy hurtowej<br>z możliwością zakupów w cenach hurtowych.<br><br>Zazwyczaj proces weryfikacji trwa od 1 do 12 godzin, <br>dziękujemy za cierpliwość.";
+
+        public static string ActiveNewAccoutMessageEmail = $"Dziękujemy za cierpliwość. <br>Twoje konto zostało aktywowane, możesz korzystać z naszych usług.<b>Możesz zalogować się do platwormy, lub <a href='#'>resetuj hasło</a> jeśli zapomniałeś hasła.<br>";
+
     }
 }

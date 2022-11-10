@@ -6,6 +6,9 @@ using MimeKit;
 using MimeKit.Text;
 using partner_aluro.Models;
 using partner_aluro.Services.Interfaces;
+using System.Reflection.Metadata;
+using partner_aluro.Core;
+using partner_aluro.ViewModels;
 
 namespace partner_aluro.Controllers
 {
@@ -18,16 +21,26 @@ namespace partner_aluro.Controllers
         }
 
         [HttpPost]
-        public IActionResult SendEmail(EmailDto request)
+        public IActionResult SendEmailFromConf(EmailViewModel send)
         {
-            _emailService.SendEmailAsync(request);
-
+            _emailService.SendEmailAsync(send.Send);
             return View();
         }
 
+        [HttpPost]
+        public IActionResult SaveChangeMessageToRegister(EmailViewModel MessageToRegister)
+        {
+            Constants.RegisterNewAccoutMessageEmailSubject = MessageToRegister.Register.Subject;
+            Constants.RegisterNewAccoutMessageEmail = MessageToRegister.Register.Body;
+            return RedirectToAction("Index");
+        }
+        [HttpGet]
         public IActionResult Index()
         {
-            return View();
+
+            EmailViewModel emailViewModel = new EmailViewModel();
+
+            return View(emailViewModel);
         }
 
     }
