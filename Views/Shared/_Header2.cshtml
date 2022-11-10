@@ -1,13 +1,13 @@
 ﻿
 
 <div class="container header2-custom">
-    <div class="row">
+    <div class="row" style="min-height:180px;">
         <div class="col-3 d-none d-sm-none d-md-none d-lg-block">
             <a href="@Url.Action("Index","Home")">
                 <img src="~/images/logo/aluro_logo-1024x509.png" />
             </a>
         </div>
-        <div class="col"> 
+        <div class="col">
             @await Component.InvokeAsync("MenuMain")
 
             <form asp-controller="Category" asp-action="Lista"  method="get">
