@@ -194,35 +194,14 @@
             </div>
 </div>
     
-
-<script type="text/javascript">
-    $('.owl-carousel').owlCarousel({
-      loop: true,
-      margin:10,
-      nav:true,
-      responsive:{
-          0:{
-              items:1
-          },
-          600:{
-              items:3
-          },
-          1000:{
-              items:3
-          }
-      }
-        
-    })
-</script>
-
 @section Scripts{
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/owl_carousel/owl.carousel.js"></script>
 
             <script type="text/javascript">
                 $('.owl-carousel').owlCarousel({
-                    loop: true,
-                    margin: 10,
+                    loop: false,
+                    margin: 5,
                     nav: true,
                     responsive: {
                         0: {
@@ -241,6 +220,81 @@
 
                 })
             </script>
+            <script>
+                function AddToCart(ProductId) {
+                    var myOffcanvas = document.getElementById('offcanvas');
+                    var bsOffcanvas = new bootstrap.Offcanvas(myOffcanvas);
+                    bsOffcanvas.show();
 
+                    var quantity = document.getElementById(ProductId).value;
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("AddToCart2", "Cart")',
+                        data: { ProductId: ProductId, quantity: quantity },
+                        success: function (result) {
+                            $("#mydiv").load(location.href + " #mydiv");
+                        },
+
+                        error: function (abc) {
+                            alert(abc.statusText);
+                        },
+                    });
+                }
+            </script>
+
+            <script>
+                function ReduceQuantity(ProductId) {
+
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("ReduceQuantity2", "Cart")',
+                        data: { id: ProductId },
+                        success: function (result) {
+                            $("#mydiv").load(location.href + " #mydiv");
+                        },
+
+                        error: function (abc) {
+                            alert(abc.statusText);
+                        },
+                    });
+                }
+            </script>
+
+            <script>
+                function IncreaseQuantity(ProductId) {
+
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("IncreaseQuantity2", "Cart")',
+                        data: { id: ProductId },
+                        success: function (result) {
+                            $("#mydiv").load(location.href + " #mydiv");
+                        },
+
+                        error: function (abc) {
+                            alert(abc.statusText);
+                        },
+                    });
+                }
+            </script>
+
+
+            <script>
+                function RemoveFromCart(ProductId) {
+
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("RemoveFromCart2", "Cart")',
+                        data: { id: ProductId },
+                        success: function (result) {
+                            $("#mydiv").load(location.href + " #mydiv");
+                        },
+
+                        error: function (abc) {
+                            alert(abc.statusText);
+                        },
+                    });
+                }
+            </script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 }
