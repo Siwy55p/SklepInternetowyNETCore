@@ -13,7 +13,7 @@
         <div class="row g-3">
             <div class="col-sm-6">
                 <label asp-for="@Model.User.Imie" class="form-label">Imię</label>
-                <input asp-for="@Model.User.Imie" class="form-control" autocomplete="username" aria-required="true" />
+                <input asp-for="@Model.User.Imie" id="Imie" name="Imie" class="form-control" autocomplete="username" aria-required="true" />
                 <span asp-validation-for="@Model.User.Imie" class="text-danger">
                 </span>
             </div>
@@ -21,29 +21,31 @@
 
         <div class="col-sm-6">
             <label asp-for="@Model.User.Nazwisko" class="form-label">Nazwisko</label>
-            <input asp-for="@Model.User.Nazwisko" class="form-control" autocomplete="username" aria-required="true" />
+            <input asp-for="@Model.User.Nazwisko" id="Nazwisko" name="Nazwisko" class="form-control" autocomplete="Nazwisko" aria-required="true" />
             <span asp-validation-for="@Model.User.Nazwisko" class="text-danger">
             </span>
         </div>
         <div class="col-sm-6">
             <label asp-for="@Model.User.NazwaFirmy" class="form-label">Nazwa firmy</label>
-    <input asp-for="@Model.User.NazwaFirmy" id="NazwaFirmy" name="NazwaFirmy" class="form-control" autocomplete="NazwaFirmy" aria-required="true" />
+            <input asp-for="@Model.User.NazwaFirmy" id="NazwaFirmy" name="NazwaFirmy" class="form-control" autocomplete="NazwaFirmy" aria-required="true" />
             <span asp-validation-for="@Model.User.NazwaFirmy" class="text-danger">
-            </span>
-        </div>
-        <div class="col-6">
-            <label asp-for="@Model.User.UserName" class="form-label">Nazwa użytkownika</label>
-            <input asp-for="@Model.User.UserName" class="form-control" autocomplete="UserName" aria-required="true" />
-            <span asp-validation-for="@Model.User.UserName" class="text-danger">
             </span>
         </div>
 
         <div class="col-6">
-            <label asp-for="@Model.User.Email" class="form-label">Email <span class="text-muted">(Optional)</span></label>
-            <input asp-for="@Model.User.Email" class="form-control" id="email" name="email" placeholder="you@example.com">
+            <label asp-for="@Model.User.Email" class="form-label">Email</label>
+            <input asp-for="@Model.User.Email" id="Email" name="Email" class="form-control" id="email" name="email" placeholder="you@example.com">
             <div class="invalid-feedback">
-                Please enter a valid email address for shipping updates.
-            </div>
+                Wprowadz prawidlowy adres e-mail.
+        </div>
+
+        <div class="col-6">
+            <label asp-for="@Model.User.UserName" class="form-label">Nazwa użytkownika</label>
+        <input asp-for="@Model.User.UserName" id="UserName" name="UserName" class="form-control" autocomplete="UserName" aria-required="true" readonly />
+            <span asp-validation-for="@Model.User.UserName" class="text-danger">
+            </span>
+        </div>
+
         </div>
         <hr />
         <div class="form-group col-6">
@@ -63,33 +65,27 @@
                     @Html.HiddenFor(h => Model.Roles[i].Text)
                 </div>
             }
-            @*
-        @foreach(var role in Model.Roles)
-        {
-        <div class="form-check">
-        <input id="@role.Value" name="paymentMethod" type="checkbox" class="form-check-input" checked="@role.Selected" required="">
-        <label class="form-check-label" asp-for="@role.Value">@role.Text</label>
         </div>
-        }*@
-        </div>
-        <hr class="my-4">
+    <hr class="my-4">
 
-        <div class="form-group">
-            <label for="@Model.User.NotatkaOsobista">Notatka osobista</label>
-            <textarea asp-for="@Model.User.NotatkaOsobista" class="form-control" id="NotatkaOsobista" rows="3" value="@Model.User.NotatkaOsobista"></textarea>
-        </div>
+    <div class="mb-3">
+        <label asp-for="@Model.User.Adress1rozliczeniowy.Telefon">Telefon</label>
+        @Html.TextBoxFor(m => m.User.Adress1rozliczeniowy.Telefon, new {@class="form-control", Value=String.Format("{0:d}", Model.User.Adress1rozliczeniowy.Telefon)  })
+        <span asp-validation-for="@Model.User.Adress1rozliczeniowy.Telefon" class="text-danger"></span>
+    </div>
 
 
-        <button class="w-100 btn btn-success" type="submit">Zapisz</button>
+    <div class="form-group">
+        <label for="@Model.User.NotatkaOsobista">Notatka osobista</label>
+        <textarea asp-for="@Model.User.NotatkaOsobista" class="form-control" id="NotatkaOsobista" rows="3" value="@Model.User.NotatkaOsobista"></textarea>
+    </div>
 
-        <hr class="my-4">
-        <h4 class="d-flex justify-content-between align-items-center mb-3">2. Adresy</h4>
+
+    <button class="w-100 btn btn-success" type="submit">Zapisz</button>
+
+    <hr class="my-4">
+    <h4 class="d-flex justify-content-between align-items-center mb-3">2. Adresy</h4>
         <div class="row">
-            <hr class="mb-4">
-            <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="same-address">
-                <label class="custom-control-label" for="same-address">Adress dostawy inny niż Adres rozliczeniowy</label>
-            </div>
             <hr class="mb-4">
             <div class="col-md-6 order-md-2 mb-4">
 
@@ -117,14 +113,25 @@
                    @* @Html.TextBoxFor(m => m.User.Adress1rozliczeniowy.Powiat, new {@class="form-control", Value=String.Format("{0:d}", Model.User.Adress1rozliczeniowy.Powiat)  })*@
                     <span asp-validation-for="@Model.User.Adress1rozliczeniowy.Powiat" class="text-danger"></span>
                 </div>
-
+@*
+                <div class="mb-3">
+                    <div class="col-sm-5">
+                    <input disabled id="Ulica1" name="Ulica1" id="disabledInput" asp-for="@Model.User.Adress1rozliczeniowy.Ulica" class="form-control" autocomplete="Ulica" aria-required="true" value="@Model.User.Adress1rozliczeniowy.Ulica" />
+                    </div>
+                </div>*@
+        <div class="col-md-6 mb-3">
+            <label asp-for="@Model.User.Adress1rozliczeniowy.Ulica">Ulica</label>
+            <input class="form-control" asp-for="@Model.User.Adress1rozliczeniowy.Ulica" id="Ulica" name="Ulica" id="disabledInput" class="form-control" value="@Model.User.Adress1rozliczeniowy.Ulica" />
+            <span asp-validation-for="@Model.User.Adress1rozliczeniowy.Ulica" class="text-danger"></span>
+        </div>
+@*
                 <div class="mb-3">
                     <label asp-for="@Model.User.Adress1rozliczeniowy.Ulica">Ulica</label>
                     <input asp-for="@Model.User.Adress1rozliczeniowy.Ulica" id="Ulica1" name="Ulica1" class="form-control" placeholder="Ulica" value="@Model.User.Adress1rozliczeniowy.Ulica" required />
                
-                   @* @Html.TextBoxFor(m => m.User.Adress1rozliczeniowy.Ulica, new {@class="form-control", Value=String.Format("{0:d}", Model.User.Adress1rozliczeniowy.Ulica)  })*@
+                    @Html.TextBoxFor(m => m.User.Adress1rozliczeniowy.Ulica, new {@class="form-control", Value=String.Format("{0:d}", Model.User.Adress1rozliczeniowy.Ulica)  })
                     <span asp-validation-for="@Model.User.Adress1rozliczeniowy.Ulica" class="text-danger"></span>
-                </div>
+                </div>*@
 
                 <div class="row">
                     <div class="col-md-5 mb-3">
@@ -154,13 +161,6 @@
                     <span asp-validation-for="@Model.User.Adress1rozliczeniowy.StatusNip" class="text-danger"></span>
                 </div>
 
-                <div class="mb-3">
-                    <label asp-for="@Model.User.Adress1rozliczeniowy.Telefon">Telefon</label>
-                    @Html.TextBoxFor(m => m.User.Adress1rozliczeniowy.Telefon, new {@class="form-control", Value=String.Format("{0:d}", Model.User.Adress1rozliczeniowy.Telefon)  })
-                    <span asp-validation-for="@Model.User.Adress1rozliczeniowy.Telefon" class="text-danger"></span>
-                </div>
-
-
 
 
 
@@ -169,57 +169,47 @@
                 <h4 class="mb-3">Adres dostawy</h4>
 
                 <div class="row">
+
                     <div class="col-md-6 mb-3">
                         <label asp-for="@Model.User.Adress2dostawy.Imie">Imię</label>
-                        @Html.TextBoxFor(m => m.User.Adress2dostawy.Imie, new {@class="form-control", Value=String.Format("{0:d}", Model.User.Adress2dostawy.Imie)  })
+                        <input class="form-control" asp-for="@Model.User.Adress2dostawy.Imie" id="Imie2" name="Imie2" class="form-control" value="@Model.User.Adress2dostawy.Imie" />
                         <span asp-validation-for="@Model.User.Adress2dostawy.Imie" class="text-danger"></span>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label asp-for="@Model.User.Adress2dostawy.Nazwisko">Nazwisko</label>
-                        @Html.TextBoxFor(m => m.User.Adress2dostawy.Nazwisko, new {@class="form-control", Value=String.Format("{0:d}", Model.User.Adress2dostawy.Nazwisko)  })
+                        <input class="form-control" asp-for="@Model.User.Adress2dostawy.Nazwisko" id="Nazwisko2" name="Nazwisko2" class="form-control" value="@Model.User.Adress2dostawy.Nazwisko" />
                         <span asp-validation-for="@Model.User.Adress2dostawy.Nazwisko" class="text-danger"></span>
                     </div>
-                </div>
-                <div class="mb-3">
-                    <label asp-for="@Model.User.Adress2dostawy.Email">Email</label>
-                    @Html.TextBoxFor(m => m.User.Adress2dostawy.Email, new {@class="form-control", Value=String.Format("{0:d}", Model.User.Adress2dostawy.Email)  })
-                    <span asp-validation-for="@Model.User.Adress2dostawy.Email" class="text-danger"></span>
-                </div>
-                    <input class="form-control" id="komunikat" class="form-control"/>
+                
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="@Model.User.Adress2dostawy.Email">Email</label>
+                        <input class="form-control" asp-for="@Model.User.Adress2dostawy.Email" id="Email2" name="Email2" class="form-control" value="@Model.User.Adress2dostawy.Email" />
+                        <span asp-validation-for="@Model.User.Adress2dostawy.Email" class="text-danger"></span>
+                    </div>
 
-                </div>
+                    <input hidden class="form-control" id="komunikat" class="form-control"/>
 
-
-                <div class="mb-3">
-                    <label asp-for="@Model.User.Adress2dostawy">Ulica</label>
-                    <input class="form-control" asp-for="@Model.User.Adress2dostawy.Ulica" id="Ulica2" class="form-control" value="@Model.User.Adress2dostawy.Ulica" />
-            @*@Html.TextBoxFor(m => m.User.Adress2dostawy.Ulica, new {@class="form-control", Value=String.Format("{0:d}", Model.User.Adress2dostawy.Ulica)  })*@
-                    <span asp-validation-for="@Model.User.Adress2dostawy" class="text-danger"></span>
-                </div>
-                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="@Model.User.Adress2dostawy">Ulica</label>
+                        <input class="form-control" asp-for="@Model.User.Adress2dostawy.Ulica" id="Ulica2" class="form-control" value="@Model.User.Adress2dostawy.Ulica" />
+                        <span asp-validation-for="@Model.User.Adress2dostawy" class="text-danger"></span>
+                    </div>
                     <div class="col-md-5 mb-3">
                         <label asp-for="@Model.User.Adress2dostawy.Kraj">Kraj</label>
                         <input class="form-control" asp-for="@Model.User.Adress2dostawy.Kraj" id="Kraj2" class="form-control" value="@Model.User.Adress2dostawy.Kraj" />
-                        @*@Html.TextBoxFor(m => m.User.Adress2dostawy.Kraj, new {@class="form-control", Value=String.Format("{0:d}", Model.User.Adress2dostawy.Kraj)  })
-                        *@
                         <span asp-validation-for="@Model.User.Adress2dostawy.Kraj" class="text-danger"></span>
                     </div>
-                    <div class="col-md-4 mb-3">
+                    <div class="col-md-6 mb-3">
                         <label asp-for="@Model.User.Adress2dostawy.Miasto">Miasto</label>
-                <input class="form-control" asp-for="@Model.User.Adress2dostawy.Miasto" id="Miasto2" class="form-control" value="@Model.User.Adress2dostawy.Miasto" />
-
-                <span asp-validation-for="@Model.User.Adress2dostawy.Miasto" class="text-danger"></span>
+                        <input class="form-control" asp-for="@Model.User.Adress2dostawy.Miasto" id="Miasto2" class="form-control" value="@Model.User.Adress2dostawy.Miasto" />
+                        <span asp-validation-for="@Model.User.Adress2dostawy.Miasto" class="text-danger"></span>
                     </div>
-
-                    <div class="col-md-3 mb-3">
+                    <div class="col-md-6 mb-3">
                         <label asp-for="@Model.User.Adress2dostawy.KodPocztowy">Kod pocztowy/Zip</label>
-                <input class="form-control" asp-for="@Model.User.Adress2dostawy.KodPocztowy" id="KodPocztowy2" class="form-control" value="@Model.User.Adress2dostawy.KodPocztowy" />
-@*
-                        @Html.TextBoxFor(m => m.User.Adress2dostawy.KodPocztowy, new {@class="form-control", Value=String.Format("{0:d}", Model.User.Adress2dostawy.KodPocztowy)  })
-*@
+                        <input class="form-control" asp-for="@Model.User.Adress2dostawy.KodPocztowy" id="KodPocztowy2" class="form-control" value="@Model.User.Adress2dostawy.KodPocztowy" />
                         <span asp-validation-for="@Model.User.Adress2dostawy.KodPocztowy" class="text-danger"></span>
                     </div>
                 </div>
-                <hr class="mb-4">
             </div>
-        </div>
+        <hr class="mb-4">
+    </div>

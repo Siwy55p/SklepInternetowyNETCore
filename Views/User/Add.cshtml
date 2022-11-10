@@ -16,10 +16,6 @@
         @await Html.PartialAsync("_FormUser")
     }
 
-    <form method="post" asp-controller="User" asp-action="ResetPasswordUser" asp-route-email="@Model.User.Email">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <button type="submit" class="w-100 btn btn-primary">Wyslij do użytkownika link do ustawienia nowego hasła. (email)</button>
-    </form>
 </div>
 
 
@@ -68,6 +64,52 @@
 
                         
                     });
+                }
+            });
+        });
+    </script>
+
+    <script>
+        $(function () {
+            $("#Email").keyup(function (e) {
+
+                var Email = $("#Email").val();
+
+                if (Email.length > 3) {
+                    //alert(Vat.length);
+                    document.getElementById("UserName").value = document.getElementById("Email").value;
+                    document.getElementById("Email2").value = document.getElementById("Email").value;
+
+                    
+                }
+            });
+        });
+    </script>
+
+    <script>
+        $(function () {
+            $("#Imie").keyup(function (e) {
+
+                var Imie = $("#Imie").val();
+
+                if (Imie.length > 3) {
+                    //alert(Vat.length);
+                    document.getElementById("Imie2").value = document.getElementById("Imie").value;
+
+                }
+            });
+        });
+    </script>
+    <script>
+        $(function () {
+            $("#Nazwisko").keyup(function (e) {
+
+                var Nazwisko = $("#Nazwisko").val();
+
+                if (Nazwisko.length > 3) {
+                    //alert(Vat.length);
+                    document.getElementById("#Nazwisko2").value = document.getElementById("Nazwisko").value;
+
                 }
             });
         });
