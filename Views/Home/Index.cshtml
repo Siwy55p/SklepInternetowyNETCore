@@ -7,13 +7,16 @@
 
 @section LinkStyleHead
     {
-    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
-    <link href="~/owl_carousel/owl.theme.default.css" rel="stylesheet" />
-    <link href="~/owl_carousel/owl.carousel.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     }
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+
     @*SLIDER*@
-            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+            @*<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <img src="~/images/sliderhome/slider1.jpg" class="d-block w-100" alt="...">
@@ -36,90 +39,208 @@
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
                 </button>
-            </div>
+            </div>*@
     @* KONIEC SLIDER*@
 
 
 <div class="container">
-
-<div class="text-black">
-
-</div>
-
+    <div class="row ">
+            <div class="row bg-light">
+                <hr />
+                    <h4>Nowości</h4>
+                <hr />
+            </div>
         @*SLIDER PRODUKTOW NA STRONIE GLOWNEJ KONIEC*@
-@*    <div class="row g-4 my-5 mx-auto owl-carousel owl-theme">
-        @foreach (var produkt in Model.Nowosci)
-        {
-        <div class="col product-item mx-auto">
-                <div class="product-img">
-                    <img src="~/images/produkty/produkt1.jpg" alt="" class="img-fluid d-block mx-auto">
-                    <span class="heart-icon">
-                        <i class="far fa-heart"></i>
-                    </span>
-                    <div class="row btns w-100 mx-auto text-center">
-                        <button type="button" class="col-6 py-2">
-                            <i class="fa fa-cart-plus"></i> Dodaj do Koszyka
-                        </button>
-                        <button type="button" class="col-6 py-2">
-                            <i class="fa fa-binoculars"></i> Pokaż
-                        </button>
+            <div class="owl-carousel owl-theme">
+            @foreach (var produkt in Model.Nowosci)
+            {
+                <div class="col product-item mx-auto">
+                    <div class="card m-1 col" >
+                        <div class="thumbnail">
+                            <a class="product-name link-dark" asp-controller="Product" asp-action="Details" asp-route-id="@produkt.ProductId">
+                                <img class="card-img-top" src="~/images/produkty/@produkt.Symbol/@produkt.ImageUrl" alt="@produkt.Name">
+                            </a>
+                        </div>
+                        <div>
+                            <div class="row card-bar-action justify-content-center align-items-center">
+
+                                @if (produkt.Ilosc <= 0)
+                                {
+                                    <div class="col" align="center">Produkt jest już niedostępny</div>
+
+                                }
+                                else
+                                {
+                                    <div class="col-4">
+                                        <input type="number" id="@produkt.ProductId" name="quantity" value="1" class="form-control" aria-required="true" placeholder="Ilość" min="1" max="@produkt.Ilosc" />
+                                    </div>
+                                    <div class="col">
+                                        <button value="@produkt.ProductId" onclick="AddToCart(@produkt.ProductId)" data-bs-target="offcanvas" role="button">Dodaj do zamowienia</button>
+                                    </div>
+                                }
+                            </div>
+                            <div class="row p-1">
+                                <p>
+                                    <span>
+                                        <b>@produkt.Symbol</b><br>
+                                    </span>
+                                    <span>
+                                        <a class="text-decoration-none link-dark" asp-controller="Product" asp-action="Details" asp-route-id="@produkt.ProductId">
+                                            @produkt.Name <br>
+                                        </a>
+                                    </span>
+                                </p>
+
+                                @{
+                                    var Cena_brutto = (decimal)produkt.CenaProduktu * (decimal)partner_aluro.Core.Constants.Vat;
+
+
+                                    var CenaJednostkowa = Cena_brutto * (1 - (partner_aluro.Core.Constants.Rabat / 100));
+                                }
+
+                                <div class="float-end text-end">
+                                    Cena hurtowa: @produkt.CenaProduktu.ToString("C") (netto)
+                                </div>
+                                @*   Twoja cena po rabacie: @CenaJednostkowa.ToString("C") <br>*@
+                                <div class="float-end text-end">
+                                    @Cena_brutto.ToString("C") <span class="brutto">(brutto)</span>
+                                </div>
+
+                                @if (partner_aluro.Core.Constants.Rabat != 0 && partner_aluro.Core.Constants.Rabat >= 0)
+                                {
+                                    <div class="float-end text-end">Twoja cena po rabacie: @CenaJednostkowa.ToString("C") </div>
+                                }
+
+                            </div>
+                        </div>
                     </div>
                 </div>
-        </div>
-
-        }
-
-        <div class="col product-item mx-auto">
-            <div class="product-img">
-                <img src="~/images/produkty/produkt3.jpg" alt="" class="img-fluid d-block mx-auto">
-                <span class="heart-icon">
-                    <i class="far fa-heart"></i>
-                </span>
-                <div class="row btns w-100 mx-auto text-center">
-                    <button type="button" class="col-6 py-2">
-                        <i class="fa fa-cart-plus"></i> Add to Cart
-                    </button>
-                    <button type="button" class="col-6 py-2">
-                        <i class="fa fa-binoculars"></i> View
-                    </button>
-                </div>
+            }
+    </div>
+        <div class="row ">
+            <div class="row bg-light">
+                <hr />
+                <h4>Popularne</h4>
+                <hr />
             </div>
+            @*SLIDER PRODUKTOW NA STRONIE GLOWNEJ KONIEC*@
+            <div class="owl-carousel owl-theme">
+                @foreach (var produkt in Model.Nowosci)
+                    {
+                <div class="item">
+                        <div class="col product-item mx-auto">
+                            <div class="card m-1">
+                                <div class="thumbnail">
+                                    <a class="product-name link-dark" asp-controller="Product" asp-action="Details" asp-route-id="@produkt.ProductId">
+                                        <img class="card-img-top" src="~/images/produkty/@produkt.Symbol/@produkt.ImageUrl" alt="@produkt.Name" style="width:260px;">
+                                    </a>
+                                </div>
+                                <div>
+                                    <div class="row card-bar-action justify-content-center align-items-center">
 
-            <div class="product-info p-3">
-                <span class="product-type">Electronics & Accessories</span>
-                <a href="#" class="d-block text-dark text-decoration-none py-2 product-name">Apple - Apple Watch Series 3 White Sports Band</a>
-                <span class="product-price">$ 100.50</span>
-                <div class="rating d-flex mt-1">
-                    <span>
-                        <i class="fa fa-star"></i>
-                    </span>
-                    <span>
-                        <i class="fa fa-star"></i>
-                    </span>
-                    <span>
-                        <i class="fa fa-star"></i>
-                    </span>
-                    <span>
-                        <i class="fa fa-star"></i>
-                    </span>
-                    <span>
-                        <i class="fa fa-star"></i>
-                    </span>
-                    <span>(25 reviews)</span>
+                                        @if (produkt.Ilosc <= 0)
+                                        {
+                                            <div class="col" align="center">Produkt jest już niedostępny</div>
+
+                                        }
+                                        else
+                                        {
+                                            <div class="col-4">
+                                                <input type="number" id="@produkt.ProductId" name="quantity" value="1" class="form-control" aria-required="true" placeholder="Ilość" min="1" max="@produkt.Ilosc" />
+                                            </div>
+                                            <div class="col">
+                                                <button value="@produkt.ProductId" onclick="AddToCart(@produkt.ProductId)" data-bs-target="offcanvas" role="button">Dodaj do zamowienia</button>
+                                            </div>
+                                        }
+                                    </div>
+                                    <div class="row p-1">
+                                        <p>
+                                            <span>
+                                                <b>@produkt.Symbol</b><br>
+                                            </span>
+                                            <span>
+                                                <a class="text-decoration-none link-dark" asp-controller="Product" asp-action="Details" asp-route-id="@produkt.ProductId">
+                                                    @produkt.Name <br>
+                                                </a>
+                                            </span>
+                                        </p>
+
+                                        @{
+                                            var Cena_brutto = (decimal)produkt.CenaProduktu * (decimal)partner_aluro.Core.Constants.Vat;
+
+
+                                            var CenaJednostkowa = Cena_brutto * (1 - (partner_aluro.Core.Constants.Rabat / 100));
+                                        }
+
+                                        <div class="float-end text-end">
+                                            Cena hurtowa: @produkt.CenaProduktu.ToString("C") (netto)
+                                        </div>
+                                        @*   Twoja cena po rabacie: @CenaJednostkowa.ToString("C") <br>*@
+                                        <div class="float-end text-end">
+                                            @Cena_brutto.ToString("C") <span class="brutto">(brutto)</span>
+                                        </div>
+
+                                        @if (partner_aluro.Core.Constants.Rabat != 0 && partner_aluro.Core.Constants.Rabat >= 0)
+                                        {
+                                            <div class="float-end text-end">Twoja cena po rabacie: @CenaJednostkowa.ToString("C") </div>
+                                        }
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                 </div>
+                    }
             </div>
-        </div>
-
-        <p>tekst</p>
-    </div>*@
-    @*SLIDER PRODUKTOW NA STRONIE GLOWNEJ KONIEC*@
 </div>
     
+
+<script type="text/javascript">
+    $('.owl-carousel').owlCarousel({
+      loop: true,
+      margin:10,
+      nav:true,
+      responsive:{
+          0:{
+              items:1
+          },
+          600:{
+              items:3
+          },
+          1000:{
+              items:3
+          }
+      }
+        
+    })
+</script>
 
 @section Scripts{
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/owl_carousel/owl.carousel.js"></script>
-    <script src="~/js/scriptsliderhome.js"></script>
+
+            <script type="text/javascript">
+                $('.owl-carousel').owlCarousel({
+                    loop: true,
+                    margin: 10,
+                    nav: true,
+                    responsive: {
+                        0: {
+                            items: 1
+                        },
+                        300: {
+                            items: 2
+                        },
+                        800: {
+                            items: 3
+                        },
+                        1000: {
+                            items: 4
+                        }
+                    }
+
+                })
+            </script>
 
     <script src="~/js/site.js" asp-append-version="true"></script>
 }

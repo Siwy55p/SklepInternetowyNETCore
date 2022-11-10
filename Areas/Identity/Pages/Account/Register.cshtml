@@ -131,15 +131,13 @@
                 
                     <hr />
                     <div class="form-group row align-content-center justify-content-center" >
-                        <div class="col-6 text-start">
-                            <button id="registerSubmit" type="submit" class="btn btn-success w-20">Zarejestruj się</button>
+                    <div class="col-6 text-start">
+                        <a class="btn btn-md btn-primary w-20" asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl">Powrót</a>
                         </div>
                         <div class="col-6 text-end">
-                            <a class="btn btn-md btn-primary w-20" asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl">Powrót</a>
-
+                            <button id="registerSubmit" type="submit" class="btn btn-success w-20">Zarejestruj się</button>
                         </div>
                     </div>
-
                 <hr />
             </div>
 
