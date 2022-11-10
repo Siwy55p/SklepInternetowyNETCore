@@ -7,13 +7,8 @@
 
 @section LinkStyleHead
     {
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
     }
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-
 
     @*SLIDER*@
             @*<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
@@ -195,13 +190,11 @@
 </div>
     
 @section Scripts{
-    
             <script>
                 function AddToCart(ProductId) {
                     var myOffcanvas = document.getElementById('offcanvas');
                     var bsOffcanvas = new bootstrap.Offcanvas(myOffcanvas);
                     bsOffcanvas.show();
-
                     var quantity = document.getElementById(ProductId).value;
                     $.ajax({
                         type: "POST",
@@ -210,17 +203,14 @@
                         success: function (result) {
                             $("#mydiv").load(location.href + " #mydiv");
                         },
-
                         error: function (abc) {
                             alert(abc.statusText);
                         },
                     });
                 }
             </script>
-
             <script>
                 function ReduceQuantity(ProductId) {
-
                     $.ajax({
                         type: "POST",
                         url: '@Url.Action("ReduceQuantity2", "Cart")',
@@ -235,10 +225,8 @@
                     });
                 }
             </script>
-
             <script>
                 function IncreaseQuantity(ProductId) {
-
                     $.ajax({
                         type: "POST",
                         url: '@Url.Action("IncreaseQuantity2", "Cart")',
@@ -253,11 +241,8 @@
                     });
                 }
             </script>
-
-
             <script>
                 function RemoveFromCart(ProductId) {
-
                     $.ajax({
                         type: "POST",
                         url: '@Url.Action("RemoveFromCart2", "Cart")',
@@ -265,12 +250,11 @@
                         success: function (result) {
                             $("#mydiv").load(location.href + " #mydiv");
                         },
-
                         error: function (abc) {
                             alert(abc.statusText);
                         },
                     });
                 }
             </script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+
 }
