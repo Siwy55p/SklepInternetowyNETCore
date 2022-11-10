@@ -168,11 +168,104 @@ namespace partner_aluro.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> Add() //Zapis uzytkownika do bazy
+        {
+            ViewData["Profile"] = GetProfiles();
+
+            var user = CreateUser();
+
+
+            Adress1rozliczeniowy adres1 = new Adress1rozliczeniowy();
+
+            Adress2dostawy adres2 = new Adress2dostawy();
+
+            user.Adress1rozliczeniowy = adres1;
+            user.Adress2dostawy = adres2;
+
+            var roles = _unitOfWork.Role.GetRoles();
+
+            var userRoles = await _signInManager.UserManager.GetRolesAsync(user);
+
+            var roleItems = roles.Select(role =>
+                new SelectListItem(
+                    role.Name,
+                    role.Id,
+                    userRoles.Any(ur => ur.Contains(role.Name)))).ToList();
+
+
+            var vm = new EditUserViewModel
+            {
+                User = user,
+                Roles = roleItems
+            };
+
+            return View(vm);
+        }
+
+        [HttpPost]
         public async Task<IActionResult> Add(EditUserViewModel data) //Zapis uzytkownika do bazy
         {
+            //utworz uzytkownika i zapisz do bazy na podstawie zmiennej data
+
+            ViewData["Profile"] = GetProfiles();
+
+
+            var user = data.User;
+            if (user == null)
+            {
+                return View(data);
+                //return NotFound();
+            }
+
+            var userRolesInDb = await _signInManager.UserManager.GetRolesAsync(user);
+
+
+            if (!ModelState.IsValid == true)
+            {
+                return View(data);
+            }
+
+            var rolesToAdd = new List<string>();
+            var rolesToDelete = new List<string>();
+
+            foreach (var role in data.Roles)
+            {
+                var assignedInDb = userRolesInDb.FirstOrDefault(ur => ur == role.Text);
+                if (role.Selected)
+                {
+                    //Add role
+                    if (assignedInDb == null)
+                    {
+                        rolesToAdd.Add(role.Text);
+                    }
+                }
+                else
+                {
+                    //Remove Role
+                    if (assignedInDb != null)
+                    {
+                        rolesToDelete.Add(role.Text);
+                    }
+                }
+            }
+
+            if (rolesToAdd.Any())
+            {
+                await _signInManager.UserManager.AddToRolesAsync(user, rolesToAdd);
+            }
+
+            if (rolesToDelete.Any())
+            {
+                await _signInManager.UserManager.RemoveFromRolesAsync(user, rolesToDelete);
+            }
+
+
+
+
 
             return View();
         }
+
         private List<SelectListItem> GetProfiles() //Pobierz profile dzialalnbosci rabaty w zaleznosci jakiprofil dzialalnosci (sklep internetowy, stacjonarny)
         {
             var lstProfiles = new List<SelectListItem>();
@@ -228,7 +321,19 @@ namespace partner_aluro.Controllers
             }
             return RedirectToAction("Index");
         }
-
+        private ApplicationUser CreateUser()
+        {
+            try
+            {
+                return Activator.CreateInstance<ApplicationUser>();
+            }
+            catch
+            {
+                throw new InvalidOperationException($"Can't create an instance of '{nameof(ApplicationUser)}'. " +
+                    $"Ensure that '{nameof(ApplicationUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
+                    $"override the register page in /Areas/Identity/Pages/Account/Register.cshtml");
+            }
+        }
     }
 
 }

@@ -114,5 +114,65 @@ namespace partner_aluro.Controllers
 
             return list;
         }
+        [HttpPost]
+        public async Task<List<string>> SprawdzNIPAdminAddUser(string Vat = null)
+        {
+
+            CompanyModel _model = new CompanyModel();
+
+            _model.Vat = Vat;
+            _model = await RegonService.GetCompanyDataByNipAsync(_model.Vat);
+
+            var komunikat = "Brak danych";
+            var NazwaFirmy = "Nie znaleziono takiej firmy";
+
+            var Regon = "";
+            var Wojewodztwo1 = "";
+            var Powiat1 = "";
+            var Ulica1 = "";
+            var Kraj1 = "";
+            var Miasto1 = "";
+            var KodPocztowy1 = "";
+
+            var Ulica2 = "";
+            var Kraj2 = "";
+            var Miasto2 = "";
+            var KodPocztowy2 = "";
+
+            if (_model.Errors.Count > 0)
+            {
+                komunikat = _model.Errors[0].ErrorMessagePl;
+
+            }
+            else
+            {
+                Regon = _model.Regon;
+                Wojewodztwo1 = _model.Wojewodztwo;
+
+                NazwaFirmy = _model.Name;
+                Regon = _model.Regon;
+                Wojewodztwo1 = _model.Wojewodztwo;
+                Powiat1 = _model.Powiat;
+                Ulica1 = _model.Ulica;
+
+                Miasto1 = _model.Miejscowosc;
+                KodPocztowy1 = _model.KodPocztowy;
+            }
+
+            List<string> list = new List<string>();
+
+            list.Add(komunikat);
+            list.Add(NazwaFirmy);
+            list.Add(Regon);
+            list.Add(Wojewodztwo1);
+            list.Add(Powiat1);
+            list.Add(Ulica1);
+            list.Add(Kraj1);
+            list.Add(Miasto1);
+            list.Add(KodPocztowy1);
+
+
+            return list;
+        }
     }
 }
