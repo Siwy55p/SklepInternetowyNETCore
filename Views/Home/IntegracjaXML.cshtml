@@ -1,0 +1,74 @@
+﻿@{
+    ViewBag.Title = "Aluro - Strona główna";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-8">
+            <p>
+                Informacja dotycząca integracji XML dla sklepów internetowych
+
+            Autoryzowane, partnerskie sklepy internetowe mają możliwość integracji bazy produktów marki ALURO przez pliki XML.</p>
+
+            <p>Dla każdego Klienta przydzielony jest indywidualny plik integracyjny XML zabezpieczony tokenem, ograniczający do niego dostęp osobom niepowołanym. Udostępnianie pliku osobom trzecim i nieautoryzowany dostęp będzie skutkował jego zablokowaniem.</p>
+
+
+            <p>Adres Państwa indywidualnego pliku XML:</p>
+
+            <p>
+                http://www.partner.aluro.pl/modules/nvn_export_products/download/aluro_products_export_ldWd8HWmUY.xml
+            </p>
+
+
+            <p>Budowa plik XML (kodowanie UTF8)</p>
+            <p>
+                 <export_products>
+
+                <product>
+
+                    <symbol>
+                        <![CDATA[ A00001 ]]>
+                    </symbol>
+
+                    <product_name>
+                        <![CDATA[ Regał-pomocnik LAMALI 42x30.5x94cm - Aluro ]]>
+                    </product_name>
+
+                    <images>
+                        <![CDATA[ http://www.partner.aluro.pl/img/p/2/8/28.jpg, http://www.partner.aluro.pl/img/p/8/4/84.jpg ]]>
+                    </images>
+
+                    <stock>
+                        <![CDATA[ 44 ]]>
+                    </stock>
+
+                    <cena_detaliczna>
+                        <![CDATA[ 648.000000 ]]>
+                    </cena_detaliczna>
+
+                    <EAN13>
+                        <![CDATA[ 5907608330865 ]]>
+                    </EAN13>
+
+                    <opis>
+                        <![CDATA[ Opis produktu. ]]>
+                    </opis>
+
+                    <cechy>
+                        <![CDATA[ Wymiary¦³¦42x30.5x94cm, Materiał¦³¦metal ]]>
+                    </cechy>
+
+                </product>
+
+                <product>
+                    (...)
+                </product>
+
+            </export_products>
+
+            </p>
+
+        </div>
+    </div>
+</div>

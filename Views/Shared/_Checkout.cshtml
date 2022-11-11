@@ -1,127 +1,133 @@
 ﻿@model partner_aluro.ViewModels.CartOrderViewModel
+@{
+    int i = 0;
+    var zmienna = "bg-white";
+}
 
-<h4 class="mb-4">Zamówienie</h4>
-<hr class="mb-4">
-
-@if (Model.Carts.CartItems.Count > 0)
-{
-    <div class="container">
-        <div class="row bg-light">
-            <div class="col border text-center fw-bold" style="max-width: 75px; width:75px"></div>
-            <div class="col border text-center fw-bold d-none d-sm-none d-md-none d-lg-block text-wrap text-break">Nazwa produktu</div>
-            <div class="col border text-center fw-bold d-none d-sm-none d-md-none d-lg-block">Symbol</div>
-            <div class="col border text-center fw-bold d-none d-sm-none d-md-none d-lg-block">Cena jednostkowa</div>
-            <div class="col border text-center fw-bold">Ilość</div>
-            <div class="col border text-center fw-bold">Razem</div>
-            <div class="col border text-center fw-bold" style="max-width: 60px">Usuń</div>
-        </div>
-        @{
-            int i = 0;
-            var zmienna = "bg-white";
-        }
-
-        @foreach (var item in Model.Carts.CartItems)
-        {
-            <div class="row @zmienna" >
+<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-8">
+            <h4 class="mb-4">Zamówienie</h4>
+            <hr class="mb-4">
+            @if (Model.Carts.CartItems.Count > 0)
+            {
             
-                    @{
-                    i++;
-                    if(i%2 != 0)
-                    {
-                        zmienna = "bg-light";
-                    }else
-                    {
-                        zmienna = "bg-white";
-                    }
+
+                    <div class="row bg-dark">
+                        <div class="col border text-center fw-bold" style="max-width: 75px; width:75px"></div>
+                        <div class="col border text-center fw-bold d-none d-sm-none d-md-none d-lg-block text-wrap text-break">Nazwa produktu</div>
+                        <div class="col border text-center fw-bold d-none d-sm-none d-md-none d-lg-block">Symbol</div>
+                        <div class="col border text-center fw-bold d-none d-sm-none d-md-none d-lg-block">Cena jednostkowa</div>
+                        <div class="col border text-center fw-bold">Ilość</div>
+                        <div class="col border text-center fw-bold">Razem</div>
+                        <div class="col border text-center fw-bold" style="max-width: 60px">Usuń</div>
+                    </div>
 
 
-                    var Cena_brutto = (decimal)item.Product.CenaProduktu * (decimal)partner_aluro.Core.Constants.Vat;
-                    var CenaJednostkowa_netto = item.Product.CenaProduktu;
-                    var CenaJednostkowa_brutto = (decimal)Cena_brutto;
-
-                    if (partner_aluro.Core.Constants.Rabat >= 0)
+                    @foreach (var item in Model.Carts.CartItems)
                     {
-                        CenaJednostkowa_netto = item.Product.CenaProduktu * (1 - (partner_aluro.Core.Constants.Rabat / 100));
-                        CenaJednostkowa_brutto = (decimal)Cena_brutto * (1 - (partner_aluro.Core.Constants.Rabat / 100));
-                    }
+                        <div class="row @zmienna" >
+            
+                                @{
+                                i++;
+                                if(i%2 != 0)
+                                {
+                                    zmienna = "bg-light";
+                                }else
+                                {
+                                    zmienna = "bg-white";
+                                }
+
+
+                                var Cena_brutto = (decimal)item.Product.CenaProduktu * (decimal)partner_aluro.Core.Constants.Vat;
+                                var CenaJednostkowa_netto = item.Product.CenaProduktu;
+                                var CenaJednostkowa_brutto = (decimal)Cena_brutto;
+
+                                if (partner_aluro.Core.Constants.Rabat >= 0)
+                                {
+                                    CenaJednostkowa_netto = item.Product.CenaProduktu * (1 - (partner_aluro.Core.Constants.Rabat / 100));
+                                    CenaJednostkowa_brutto = (decimal)Cena_brutto * (1 - (partner_aluro.Core.Constants.Rabat / 100));
+                                }
                     
-                    var ProductTotal = CenaJednostkowa_brutto * item.Quantity;
+                                var ProductTotal = CenaJednostkowa_brutto * item.Quantity;
 
-                    }
+                                }
 
-                    <div class="col border border-top-0" style="max-width: 75px; width:75px">
-                        <img src="~/images/produkty/@item.Product.Symbol/@item.Product.ImageUrl"  style="height: 4em">
-                    </div>
-                <div class="col border border-top-0 text-center d-none d-sm-none d-md-none d-lg-block text-wrap text-break" style="width: 10%">
-                        <a class="text-black" asp-controller="Product" asp-action="Details" asp-route-id="@item.Product.ProductId">@item.Product.Name</a>
+                                <div class="col border border-top-0" style="max-width: 75px; width:75px">
+                                    <img src="~/images/produkty/@item.Product.Symbol/@item.Product.ImageUrl"  style="height: 4em">
+                                </div>
+                            <div class="col border border-top-0 text-center d-none d-sm-none d-md-none d-lg-block text-wrap text-break" style="width: 10%">
+                                    <a class="text-black" asp-controller="Product" asp-action="Details" asp-route-id="@item.Product.ProductId">@item.Product.Name</a>
+                                        </div>
+                                <div class="col border border-top-0 d-none d-sm-none d-md-none d-lg-block text-center">
+                                            <span class="pozycja">@item.Product.Symbol </span>
+                                        </div>
+                                <div class="col border border-top-0 d-none d-sm-none d-md-none d-lg-block text-center" style="display: inline-flex; vertical-align:middle">
+                                        <span class="pozycja">@CenaJednostkowa_brutto.ToString("C")</span>
+                                        </div>
+                                <div class="col border border-top-0 text-center">
+                                            <a asp-controller="Cart" asp-action="ReduceQuantity" asp-route-id="@item.Product.ProductId"><i class="fa-solid fa-minus"></i></a>
+                                <span class="pozycja">
+                                    @item.Quantity</span>
+                                            <a asp-controller="Cart" asp-action="IncreaseQuantity" asp-route-id="@item.Product.ProductId"><i class="fa-solid fa-plus"></i></a>
+                                        </div>
+                                <div class="col border border-top-0 text-center">
+                                <span class="pozycja">@ProductTotal.ToString("C")</span>
+                                </div>
+                                <div class="col border border-top-0 text-center" style="max-width: 60px">
+                                <span class="pozycja">
+                                    <a asp-controller="Cart" asp-action="RemoveFromCart" asp-route-id="@item.Product.ProductId" class="text-danger"><i class="fa-solid fa-xmark"></i></a>
+                                </span>
+                                </div>
                             </div>
-                    <div class="col border border-top-0 d-none d-sm-none d-md-none d-lg-block text-center">
-                                <span class="pozycja">@item.Product.Symbol </span>
+                        }
+                    <hr class="my-4">
+
+
+                        <div class="row">
+                            <div class="col-8 d-none d-sm-none d-md-none d-lg-block"></div>
+                            <div class="border bg-light text text-end" style="width:150px">Wartość (brutto):</div>
+                            <div class="border bg-light" style="width:150px">
+                                            <strong>@Model.Carts.GetCartTotalBrutto().ToString("C")</strong>
+                                </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-8 d-none d-sm-none d-md-none d-lg-block"></div>
+                            <div class="border bg-light text text-end" style="width:150px">Razem (netto):</div>
+                            <div class="border bg-light" style="width:150px">
+                                    <strong>@Model.Carts.GetCartTotalNetto().ToString("C")</strong>
                             </div>
-                    <div class="col border border-top-0 d-none d-sm-none d-md-none d-lg-block text-center" style="display: inline-flex; vertical-align:middle">
-                            <span class="pozycja">@CenaJednostkowa_brutto.ToString("C")</span>
-                            </div>
-                    <div class="col border border-top-0 text-center">
-                                <a asp-controller="Cart" asp-action="ReduceQuantity" asp-route-id="@item.Product.ProductId"><i class="fa-solid fa-minus"></i></a>
-                    <span class="pozycja">
-                        @item.Quantity</span>
-                                <a asp-controller="Cart" asp-action="IncreaseQuantity" asp-route-id="@item.Product.ProductId"><i class="fa-solid fa-plus"></i></a>
-                            </div>
-                    <div class="col border border-top-0 text-center">
-                    <span class="pozycja">@ProductTotal.ToString("C")</span>
-                    </div>
-                    <div class="col border border-top-0 text-center" style="max-width: 60px">
-                    <span class="pozycja">
-                        <a asp-controller="Cart" asp-action="RemoveFromCart" asp-route-id="@item.Product.ProductId" class="text-danger"><i class="fa-solid fa-xmark"></i></a>
-                    </span>
-                    </div>
-                </div>
+                        </div>
+
+
+                     @*   <form asp-action="Return" asp-controller="Cart" method="POST" >
+                        <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
+                        <button class="btn btn-success float-right mr-5" type="submit" name="returnUrl" value="@ViewBag.returnUrl"><i class="fa-solid fa-angles-right"></i>Powrót</button>
+                    </form>*@
+                   <a class="a-cleanup" asp-controller="Cart" asp-action="ClearCart"><div class="btn btn-danger float-right mr-5"><i class="fa-solid fa-trash-can"></i>Wyczyść zamówienie</div></a>
             }
-        <hr class="my-4">
+            else
+            {
+                    <h3 class="text-center">Koszyk jest pusty</h3>
+            }
 
 
-            <div class="row">
-                <div class="col-8 d-none d-sm-none d-md-none d-lg-block"></div>
-                <div class="border bg-light text text-end" style="width:150px">Wartość (brutto):</div>
-                <div class="border bg-light" style="width:150px">
-                                <strong>@Model.Carts.GetCartTotalBrutto().ToString("C")</strong>
-                    </div>
-            </div>
+            @if (Model != null)
+            {
+                    @*Powrót do sklepu*@
+                    <form asp-action="Checkout" asp-controller="Order" method="POST" class="needs-validation" novalidate>
+                    @*@Html.ValidationSummary()*@
 
+                        @Html.HiddenFor(h=>Model.Orders.User.Id)
 
-            <div class="row">
-                <div class="col-8 d-none d-sm-none d-md-none d-lg-block"></div>
-                <div class="border bg-light text text-end" style="width:150px">Razem (netto):</div>
-                <div class="border bg-light" style="width:150px">
-                        <strong>@Model.Carts.GetCartTotalNetto().ToString("C")</strong>
-                </div>
-            </div>
+                        @Html.Partial("_AdressForm")
+
+                        <button class="btn btn-primary btn-lg btn-block" type="submit">Złóż zamówienie</button>
+                    </form>
+            }
 
         </div>
-
-         @*   <form asp-action="Return" asp-controller="Cart" method="POST" >
-            <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
-            <button class="btn btn-success float-right mr-5" type="submit" name="returnUrl" value="@ViewBag.returnUrl"><i class="fa-solid fa-angles-right"></i>Powrót</button>
-        </form>*@
-       <a class="a-cleanup" asp-controller="Cart" asp-action="ClearCart"><div class="btn btn-danger float-right mr-5"><i class="fa-solid fa-trash-can"></i>Wyczyść zamówienie</div></a>
-}
-else
-{
-        <h3 class="text-center">Koszyk jest pusty</h3>
-}
-
-
-
-@if (Model != null)
-{
-        @*Powrót do sklepu*@
-        <form asp-action="Checkout" asp-controller="Order" method="POST" class="needs-validation" novalidate>
-        @*@Html.ValidationSummary()*@
-
-            @Html.HiddenFor(h=>Model.Orders.User.Id)
-
-            @Html.Partial("_AdressForm")
-
-            <button class="btn btn-primary btn-lg btn-block" type="submit">Złóż zamówienie</button>
-        </form>
-}
+    </div>
+</div>

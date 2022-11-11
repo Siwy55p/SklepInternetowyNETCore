@@ -286,6 +286,7 @@ namespace partner_aluro.Controllers
                 onePageOfProducts = produkty.OrderByDescending(p => p.Symbol).ToPagedList(pageNumber, 9);
             }
 
+            //ViewData["OnePageOfProducts"] = onePageOfProducts;
 
             ViewBag.OnePageOfProducts = onePageOfProducts;
 
@@ -432,8 +433,9 @@ namespace partner_aluro.Controllers
                 onePageOfProducts = produkty.OrderByDescending(p => p.Symbol).ToPagedList(pageNumber, 9); // will only contain 25 products max because of the pageSize
             }
 
-            ViewBag.OnePageOfProducts = onePageOfProducts;
+            //ViewBag.OnePageOfProducts = onePageOfProducts;
 
+            ViewData["OnePageOfProducts"] = onePageOfProducts;
             return View();
         }
 

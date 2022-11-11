@@ -106,6 +106,11 @@ namespace partner_aluro.Controllers
             return RedirectToAction("Privacy");
         }
 
+        public IActionResult IntegracjaXML()
+        {
+            return View();
+        }
+
         [Route("testowy-route/{name}")]
         public IActionResult Product(string name)
         {

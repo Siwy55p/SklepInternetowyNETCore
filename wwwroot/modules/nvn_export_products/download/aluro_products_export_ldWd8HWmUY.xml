@@ -677,6 +677,20 @@ Lampion jest celowo postarzany, możliwe przetarcia na metalu i odpryski farby.]
     <waga_z_opakowaniem><![CDATA[0.000000]]></waga_z_opakowaniem>
   </product>
   <product>
+    <symbol><![CDATA[A01498]]></symbol>
+    <product_name><![CDATA[Lampion-świecznik LAKIN-loft_Aluro]]></product_name>
+    <images><![CDATA[]]></images>
+    <stock><![CDATA[10]]></stock>
+    <cena_detaliczna><![CDATA[390.000000]]></cena_detaliczna>
+    <EAN13><![CDATA[]]></EAN13>
+    <opis><![CDATA[]]></opis>
+    <kategoria_domyslna><![CDATA[New Collection 2022]]></kategoria_domyslna>
+    <szerokosc><![CDATA[33.000000]]></szerokosc>
+    <wysokosc><![CDATA[117.500000]]></wysokosc>
+    <glebokosc><![CDATA[33.000000]]></glebokosc>
+    <waga_z_opakowaniem><![CDATA[0.000000]]></waga_z_opakowaniem>
+  </product>
+  <product>
     <symbol><![CDATA[A01499]]></symbol>
     <product_name><![CDATA[Świecznik- lampion BAXTER_Aluro L]]></product_name>
     <images><![CDATA[]]></images>
@@ -897,6 +911,20 @@ Lampion jest celowo postarzany, możliwe przetarcia na metalu i odpryski farby.]
     <waga_z_opakowaniem><![CDATA[0.000000]]></waga_z_opakowaniem>
   </product>
   <product>
+    <symbol><![CDATA[A01536]]></symbol>
+    <product_name><![CDATA[Lampion metalowy MANON_Aluro L]]></product_name>
+    <images><![CDATA[]]></images>
+    <stock><![CDATA[]]></stock>
+    <cena_detaliczna><![CDATA[95.000000]]></cena_detaliczna>
+    <EAN13><![CDATA[]]></EAN13>
+    <opis><![CDATA[]]></opis>
+    <kategoria_domyslna><![CDATA[New Collection 2022]]></kategoria_domyslna>
+    <szerokosc><![CDATA[13.000000]]></szerokosc>
+    <wysokosc><![CDATA[48.000000]]></wysokosc>
+    <glebokosc><![CDATA[13.000000]]></glebokosc>
+    <waga_z_opakowaniem><![CDATA[0.000000]]></waga_z_opakowaniem>
+  </product>
+  <product>
     <symbol><![CDATA[A01540]]></symbol>
     <product_name><![CDATA[Doniczka,osłonka CARMINO - XL_Aluro]]></product_name>
     <images><![CDATA[]]></images>
@@ -1009,6 +1037,20 @@ Lampion jest celowo postarzany, możliwe przetarcia na metalu i odpryski farby.]
     <waga_z_opakowaniem><![CDATA[0.000000]]></waga_z_opakowaniem>
   </product>
   <product>
+    <symbol><![CDATA[A01554]]></symbol>
+    <product_name><![CDATA[Ptak drewniany- hand made from recycling_Aluro]]></product_name>
+    <images><![CDATA[]]></images>
+    <stock><![CDATA[10]]></stock>
+    <cena_detaliczna><![CDATA[320.000000]]></cena_detaliczna>
+    <EAN13><![CDATA[]]></EAN13>
+    <opis><![CDATA[]]></opis>
+    <kategoria_domyslna><![CDATA[New Collection 2022]]></kategoria_domyslna>
+    <szerokosc><![CDATA[50.000000]]></szerokosc>
+    <wysokosc><![CDATA[36.000000]]></wysokosc>
+    <glebokosc><![CDATA[17.000000]]></glebokosc>
+    <waga_z_opakowaniem><![CDATA[0.000000]]></waga_z_opakowaniem>
+  </product>
+  <product>
     <symbol><![CDATA[A01557]]></symbol>
     <product_name><![CDATA[Wazon kremowy VINCE_Aluro]]></product_name>
     <images><![CDATA[]]></images>
@@ -1077,6 +1119,34 @@ Lampion jest celowo postarzany, możliwe przetarcia na metalu i odpryski farby.]
     <wysokosc><![CDATA[32.000000]]></wysokosc>
     <glebokosc><![CDATA[14.000000]]></glebokosc>
     <waga_z_opakowaniem><![CDATA[10.000000]]></waga_z_opakowaniem>
+  </product>
+  <product>
+    <symbol><![CDATA[A01564]]></symbol>
+    <product_name><![CDATA[Wazon ANKLE_Aluro L]]></product_name>
+    <images><![CDATA[]]></images>
+    <stock><![CDATA[10]]></stock>
+    <cena_detaliczna><![CDATA[69.500000]]></cena_detaliczna>
+    <EAN13><![CDATA[]]></EAN13>
+    <opis><![CDATA[]]></opis>
+    <kategoria_domyslna><![CDATA[New Collection 2022]]></kategoria_domyslna>
+    <szerokosc><![CDATA[12.000000]]></szerokosc>
+    <wysokosc><![CDATA[25.000000]]></wysokosc>
+    <glebokosc><![CDATA[12.000000]]></glebokosc>
+    <waga_z_opakowaniem><![CDATA[0.000000]]></waga_z_opakowaniem>
+  </product>
+  <product>
+    <symbol><![CDATA[A01566]]></symbol>
+    <product_name><![CDATA[Wazon ANKLE_Aluro M]]></product_name>
+    <images><![CDATA[]]></images>
+    <stock><![CDATA[10]]></stock>
+    <cena_detaliczna><![CDATA[42.000000]]></cena_detaliczna>
+    <EAN13><![CDATA[]]></EAN13>
+    <opis><![CDATA[]]></opis>
+    <kategoria_domyslna><![CDATA[New Collection 2022]]></kategoria_domyslna>
+    <szerokosc><![CDATA[14.500000]]></szerokosc>
+    <wysokosc><![CDATA[17.000000]]></wysokosc>
+    <glebokosc><![CDATA[15.500000]]></glebokosc>
+    <waga_z_opakowaniem><![CDATA[0.000000]]></waga_z_opakowaniem>
   </product>
   <product>
     <symbol><![CDATA[A01567]]></symbol>
@@ -1188,6 +1258,20 @@ Lampion jest celowo postarzany, możliwe przetarcia na metalu i odpryski farby.]
     <szerokosc><![CDATA[19.000000]]></szerokosc>
     <wysokosc><![CDATA[10.500000]]></wysokosc>
     <glebokosc><![CDATA[19.000000]]></glebokosc>
+    <waga_z_opakowaniem><![CDATA[0.000000]]></waga_z_opakowaniem>
+  </product>
+  <product>
+    <symbol><![CDATA[A01578]]></symbol>
+    <product_name><![CDATA[Lustro industrialne JEROLD_Aluro]]></product_name>
+    <images><![CDATA[]]></images>
+    <stock><![CDATA[10]]></stock>
+    <cena_detaliczna><![CDATA[850.000000]]></cena_detaliczna>
+    <EAN13><![CDATA[]]></EAN13>
+    <opis><![CDATA[]]></opis>
+    <kategoria_domyslna><![CDATA[New Collection 2022]]></kategoria_domyslna>
+    <szerokosc><![CDATA[70.000000]]></szerokosc>
+    <wysokosc><![CDATA[110.000000]]></wysokosc>
+    <glebokosc><![CDATA[6.000000]]></glebokosc>
     <waga_z_opakowaniem><![CDATA[0.000000]]></waga_z_opakowaniem>
   </product>
   <product>

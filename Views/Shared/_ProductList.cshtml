@@ -5,7 +5,7 @@
     @foreach (var produkt in ViewBag.OnePageOfProducts)
     {    
         @*@Html.HiddenFor(h=>produkt.ProductId)*@
-        <div class="card-deck col-12 col-md-6 col-lg-4" id="SekcjaListaKategori">
+        <div class="card-deck col-6 col-md-6 col-lg-4" id="SekcjaListaKategori">
             <div class="card m-1">
                 <div class="thumbnail">
                     <a class="product-name link-dark" asp-controller="Product" asp-action="Details" asp-route-id="@produkt.ProductId">
@@ -65,7 +65,7 @@
             </div>
         </div>
     }
-    
+
 @Html.PagedListPager( (IPagedList)ViewBag.OnePageOfProducts, page => Url.Action("Lista", "Category", new { page = page, szukanaNazwa=ViewData["szukanaNazwa"] } )
 ,
 new X.PagedList.Web.Common.PagedListRenderOptions{

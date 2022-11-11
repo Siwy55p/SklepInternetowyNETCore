@@ -1,90 +1,95 @@
 ﻿@model ICollection<partner_aluro.Models.Order>
 
-<div class="text-center">
-    <h1 class="display-4">Zamówienia</h1>
-    @if (@Model != null)
-    {
-        <div class="row">
-            <div class="col-md-12 mb-3">
-                <div class="card">
-                    <div class="card-header">
-                        <span><i class="bi bi-table me-2"></i></span> Data Table
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table
-                               class="table table-striped data-table2"
-                               style="width: 100%">
-                                <thead>
-                                    <tr>
-                                        <th>Id</th>
-                                        <th>Wartość zamówienia</th>
-                                        <th>Data zamówienia</th>
-                                        @if (User.IsInRole("Administrator") || User.IsInRole("Manager"))
-                                        {
-                                            <th>Imie Nazwisko, Firma</th>
-                                        }
-                                        <th>Stan zamówienia</th>
-                                        @if (User.IsInRole("Administrator") || User.IsInRole("Manager"))
-                                        {
-                                            <th>Podgląd</th>
-                                        }
-                                        <th>PDF</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var order in Model)
-                                    {
-                                        <tr>
-                                            <td>@order.Id</td>
-                                            <td>@order.OrderTotal.ToString("C")</td>
-                                            <td>@order.OrderPlaced</td>
+<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-8">
 
-                                            @if (User.IsInRole("Administrator") || User.IsInRole("Manager"))
+            <h4>HISTORIA ZAMÓWIEŃ</h4>
+                Poniżej wyświetlone są wszystkie Twoje zamówienia, złożone przez Ciebie od momentu utworzenia konta.
+            @if (@Model != null)
+            {
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <div class="card">
+                            <div class="card-header">
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table
+                                       class="table table-striped data-table2"
+                                       style="width: 100%">
+                                        <thead>
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>Wartość zamówienia</th>
+                                                <th>Data zamówienia</th>
+                                                @if (User.IsInRole("Administrator") || User.IsInRole("Manager"))
+                                                {
+                                                    <th>Imie Nazwisko, Firma</th>
+                                                }
+                                                <th>Stan zamówienia</th>
+                                                @if (User.IsInRole("Administrator") || User.IsInRole("Manager"))
+                                                {
+                                                    <th>Podgląd</th>
+                                                }
+                                                <th>PDF</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var order in Model)
                                             {
-                                                <td>@order.User.Imie @order.User.Nazwisko<br>@order.User.NazwaFirmy</td>
-                                            }
+                                                <tr>
+                                                    <td>@order.Id</td>
+                                                    <td>@order.OrderTotal.ToString("C")</td>
+                                                    <td>@order.OrderPlaced</td>
+
+                                                    @if (User.IsInRole("Administrator") || User.IsInRole("Manager"))
+                                                    {
+                                                        <td>@order.User.Imie @order.User.Nazwisko<br>@order.User.NazwaFirmy</td>
+                                                    }
                                             
-                                            @if (order.StanZamowienia == StanZamowienia.Nowe)
-                                            {
-                                                <td style="background: green">@order.StanZamowienia</td>
-                                            }else if (order.StanZamowienia == StanZamowienia.Wrealizacji)
-                                            {
-                                                <td style="background: DarkOrange">@order.StanZamowienia</td>
-                                            }else if (order.StanZamowienia == StanZamowienia.Zrealizowane)
-                                            {
-                                                <td style="background: BlueViolet">@order.StanZamowienia</td>
-                                            }else if (order.StanZamowienia == StanZamowienia.Anulowane)
-                                            {
-                                                <td style="background: red">@order.StanZamowienia</td>
-                                            }else
-                                            {
-                                                <td>@order.StanZamowienia</td>
-                                            }
+                                                    @if (order.StanZamowienia == StanZamowienia.Nowe)
+                                                    {
+                                                        <td style="background: green">@order.StanZamowienia</td>
+                                                    }else if (order.StanZamowienia == StanZamowienia.Wrealizacji)
+                                                    {
+                                                        <td style="background: DarkOrange">@order.StanZamowienia</td>
+                                                    }else if (order.StanZamowienia == StanZamowienia.Zrealizowane)
+                                                    {
+                                                        <td style="background: BlueViolet">@order.StanZamowienia</td>
+                                                    }else if (order.StanZamowienia == StanZamowienia.Anulowane)
+                                                    {
+                                                        <td style="background: red">@order.StanZamowienia</td>
+                                                    }else
+                                                    {
+                                                        <td>@order.StanZamowienia</td>
+                                                    }
 
-                                            @if (User.IsInRole("Administrator") || User.IsInRole("Manager"))
-                                            {
-                                                <td>
-                                                <a asp-controller="Order" asp-action="Detail" asp-route-id="@order.Id">Podgląd</a>
-                                                </td>
-                                            }
+                                                    @if (User.IsInRole("Administrator") || User.IsInRole("Manager"))
+                                                    {
+                                                        <td>
+                                                        <a asp-controller="Order" asp-action="Detail" asp-route-id="@order.Id">Podgląd</a>
+                                                        </td>
+                                                    }
 
-                                            <td>
-                                                <form method="post" asp-controller="Order" asp-route-id="@order.Id" asp-action="PDFOrder">
-                                                    <label> </label>
-                                                    <input type="submit" value="PDF"/>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    }
-                                </tbody>
-                            </table>
+                                                    <td>
+                                                        <form method="post" asp-controller="Order" asp-route-id="@order.Id" asp-action="PDFOrder">
+                                                            <label> </label>
+                                                            <input type="submit" value="PDF"/>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+
+            }
         </div>
 
-    }
-
+    </div>
 </div>
