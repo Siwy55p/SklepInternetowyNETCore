@@ -26,7 +26,14 @@
             <span asp-validation-for="@Model.Symbol" class="text-danger"></span>
             </div>
         </div>
-
+        <div class="form-group row">
+            <label asp-for="@Model.EAN13" class="col-sm-3 col-form-label text-end">EAN13 </label>
+            <div class="col-sm-4">
+        <input asp-for="@Model.EAN13" class="form-control" aria-required="true" placeholder="EAN13" />
+                <span asp-validation-for="@Model.EAN13" class="text-danger">
+                </span>
+            </div>
+        </div>
         <div class="form-group row">
             <label asp-for="@Model.CenaProduktu" class="col-sm-3 col-form-label text-end">Cena produktu hurt (netto) </label>
                 <div class="col-sm-4">
@@ -69,6 +76,7 @@
                 </span>
             </div>
         </div>
+
         <h4 class="mb-2">Wymiary</h4>
         <div class="input-group">
             Wymiary zewnętrzne:
@@ -80,16 +88,26 @@
             <input asp-for="@Model.WysokoscProduktu" type="text" class="form-control" aria-label="Wysokość produktu" placeholder="Wysokość produktu">
             
         </div>
-<div class="input-group">
-    Wymiary wewnętrzne:
-    <label asp-for="@Model.SzerokoscWewnetrznaProduktu" class="col-sm-2 col-form-label text-end">Szerokość:</label>
-    <input asp-for="@Model.SzerokoscWewnetrznaProduktu" type="text" class="form-control" aria-label="Szerokość produktu" placeholder="Szerokość wew. produktu">
-    <label asp-for="@Model.GlebokoscWewnetrznaProduktu" class="col-sm-2 col-form-label text-end">Głębokość:</label>
-    <input asp-for="@Model.GlebokoscWewnetrznaProduktu" type="text" class="form-control" aria-label="Głębokość produktu" placeholder="Głębokość wew. produktu">
-    <label asp-for="@Model.WysokoscWewnetrznaProduktu" class="col-sm-2 col-form-label text-end">Wysokość:</label>
-    <input asp-for="@Model.WysokoscWewnetrznaProduktu" type="text" class="form-control" aria-label="Wysokość produktu" placeholder="Wysokość wew. produktu">
+        <div class="input-group">
+            Wymiary wewnętrzne:
+            <label asp-for="@Model.SzerokoscWewnetrznaProduktu" class="col-sm-2 col-form-label text-end">Szerokość:</label>
+            <input asp-for="@Model.SzerokoscWewnetrznaProduktu" type="text" class="form-control" aria-label="Szerokość produktu" placeholder="Szerokość wew. produktu">
+            <label asp-for="@Model.GlebokoscWewnetrznaProduktu" class="col-sm-2 col-form-label text-end">Głębokość:</label>
+            <input asp-for="@Model.GlebokoscWewnetrznaProduktu" type="text" class="form-control" aria-label="Głębokość produktu" placeholder="Głębokość wew. produktu">
+            <label asp-for="@Model.WysokoscWewnetrznaProduktu" class="col-sm-2 col-form-label text-end">Wysokość:</label>
+            <input asp-for="@Model.WysokoscWewnetrznaProduktu" type="text" class="form-control" aria-label="Wysokość produktu" placeholder="Wysokość wew. produktu">
 
-</div>
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="@Model.WagaProduktu:" class="col-sm-3 col-form-label text-end">Waga Produktu:</label>
+            <div class="col-sm-2">
+        <input asp-for="@Model.WagaProduktu" class="form-control" aria-required="true" placeholder="Waga produktu" />
+                <span asp-validation-for="@Model.WagaProduktu" class="text-danger">
+                </span>
+            </div>
+        </div>
+
         <hr class="my-4">
         <h4 class="mb-3">Kategoria Produktu</h4>
 

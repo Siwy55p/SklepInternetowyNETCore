@@ -10,6 +10,9 @@ using partner_aluro.Repositories;
 using SmartBreadcrumbs.Extensions;
 using System.Reflection;
 using partner_aluro;
+using Quartz.Spi;
+using Quartz;
+using Quartz.Impl;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DbContextProductionConnection");
@@ -21,6 +24,12 @@ var birKey = builder.Configuration.GetSection("BIRService").Value; //Dodanie klu
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddHostedService<QuartzHostedService>();
+builder.Services.AddSingleton<IJobFactory, SingletonJobFactory>();
+builder.Services.AddSingleton<ISchedulerFactory, StdSchedulerFactory>();
+
+builder.Services.AddSingleton<JobReminders>();
+builder.Services.AddSingleton(new MyJob(type: typeof(JobReminders), expression: "0/50 0/1 * 1/1 * ? *")); //Every 50 sec
 
 
 //builder.Services.AddSingleton<LanguageService>();
