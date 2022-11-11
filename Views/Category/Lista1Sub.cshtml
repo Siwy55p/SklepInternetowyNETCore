@@ -3,47 +3,49 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-@*MENU LEFA STRONA LEFT KATEGORIE*@
-<div class="row">
-    <div class="col-12 col-md-4 col-lg-3 d-none d-sm-none d-md-none d-lg-block">
-        <div class="row custom-kategory-menu sticky-top">
-            @await Component.InvokeAsync("MenuCategory")
-        </div>
-    </div>
-    @*CONTENT PRAWA STRONA*@
-    <div class="col-12 col-md-8 col-lg-9">
-        @*HEADER*@
-        <div class="row align-items-center mb-7">
-            <div class="col-12 col-md">
-                <!-- Breadcrumb -->
-                <breadcrumb></breadcrumb>
-            </div>
-            <div class="col-12 col-md-auto">
-                <!-- Select -->
-
-                <div class="dropdown">
-                    <button class="sortuj dropdown-toggle" type="button" id="dropdownMenuButtonSort" data-bs-toggle="dropdown" aria-expanded="false">
-                        Sortuj
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonSort">
-                        <li class="dropdown-item link-dark">@Html.ActionLink("Alfabetycznie od A do Z", "Lista", "Category", new { page = 1, szukanaNazwa=ViewData["szukanaNazwa"], sort=1 } )</li>
-                        <li class="dropdown-item link-dark">@Html.ActionLink("Alfabetycznie od Z do A", "Lista", "Category", new { page = 1, szukanaNazwa=ViewData["szukanaNazwa"], sort=2 } )</li>
-                        <li class="dropdown-item link-dark">@Html.ActionLink("Symbol od najmniejszej do największej", "Lista", "Category", new { page = 1, szukanaNazwa=ViewData["szukanaNazwa"], sort=3 } )</li>
-                        <li class="dropdown-item link-dark">@Html.ActionLink("Symbol od największej do najmniejszej", "Lista", "Category", new { page = 1, szukanaNazwa=ViewData["szukanaNazwa"], sort=4 } )</li>
-                    </ul>
+<div class="row justify-content-center align-items-center">
+    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-8">
+        @*MENU LEFA STRONA LEFT KATEGORIE*@
+        <div class="row">
+            <div class="col d-none d-sm-none d-md-none d-lg-block" style="max-width:300px; width:300px;">
+                <div class="row custom-kategory-menu sticky-top">
+                    @await Component.InvokeAsync("MenuCategory")
                 </div>
-
-
             </div>
-        </div>
-        @*PRODKUCTS*@
-        <div class="row" id="SekcjaListaKategori">
-            @await Html.PartialAsync("_ProductList")
+            @*CONTENT PRAWA STRONA*@
+            <div class="col-12 col-md-8 col-lg-9">
+                @*HEADER*@
+                <div class="row align-items-center mb-7">
+                    <div class="col-12 col-md">
+                        <!-- Breadcrumb -->
+                        <breadcrumb></breadcrumb>
+                    </div>
+                    <div class="col-12 col-md-auto">
+                        <!-- Select -->
+
+                        <div class="dropdown">
+                            <button class="sortuj dropdown-toggle" type="button" id="dropdownMenuButtonSort" data-bs-toggle="dropdown" aria-expanded="false">
+                                Sortuj
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonSort">
+                                <li class="dropdown-item link-dark">@Html.ActionLink("Alfabetycznie od A do Z", "Lista", "Category", new { page = 1, szukanaNazwa=ViewData["szukanaNazwa"], sort=1 } )</li>
+                                <li class="dropdown-item link-dark">@Html.ActionLink("Alfabetycznie od Z do A", "Lista", "Category", new { page = 1, szukanaNazwa=ViewData["szukanaNazwa"], sort=2 } )</li>
+                                <li class="dropdown-item link-dark">@Html.ActionLink("Symbol od najmniejszej do największej", "Lista", "Category", new { page = 1, szukanaNazwa=ViewData["szukanaNazwa"], sort=3 } )</li>
+                                <li class="dropdown-item link-dark">@Html.ActionLink("Symbol od największej do najmniejszej", "Lista", "Category", new { page = 1, szukanaNazwa=ViewData["szukanaNazwa"], sort=4 } )</li>
+                            </ul>
+                        </div>
+
+
+                    </div>
+                </div>
+                @*PRODKUCTS*@
+                <div class="row" id="SekcjaListaKategori">
+                    @await Html.PartialAsync("_ProductList")
+                </div>
+            </div>
         </div>
     </div>
 </div>
-
 @section Scripts{
     <script>
         function AddToCart(ProductId) {
