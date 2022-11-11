@@ -13,7 +13,7 @@
             {
             
 
-                    <div class="row bg-dark">
+                    <div class="row bg-light">
                         <div class="col border text-center fw-bold" style="max-width: 75px; width:75px"></div>
                         <div class="col border text-center fw-bold d-none d-sm-none d-md-none d-lg-block text-wrap text-break">Nazwa produktu</div>
                         <div class="col border text-center fw-bold d-none d-sm-none d-md-none d-lg-block">Symbol</div>
@@ -56,9 +56,9 @@
                                 <div class="col border border-top-0" style="max-width: 75px; width:75px">
                                     <img src="~/images/produkty/@item.Product.Symbol/@item.Product.ImageUrl"  style="height: 4em">
                                 </div>
-                            <div class="col border border-top-0 text-center d-none d-sm-none d-md-none d-lg-block text-wrap text-break" style="width: 10%">
+                                <div class="col border border-top-0 text-center d-none d-sm-none d-md-none d-lg-block text-wrap text-break" style="width: 10%">
                                     <a class="text-black" asp-controller="Product" asp-action="Details" asp-route-id="@item.Product.ProductId">@item.Product.Name</a>
-                                        </div>
+                                </div>
                                 <div class="col border border-top-0 d-none d-sm-none d-md-none d-lg-block text-center">
                                             <span class="pozycja">@item.Product.Symbol </span>
                                         </div>

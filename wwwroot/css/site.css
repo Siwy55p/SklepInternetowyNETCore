@@ -24,6 +24,21 @@ a.active {
     margin: 0px;
     min-height: 50px;
 }
+
+/*CartStatus prawe menu zamowienia poczatek*/
+.wrapper {
+    padding: 0px;
+    margin: 0px auto;
+}
+.text-max {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 400px;
+}
+/*CartStatus prawe menu zamowienia koniec*/
+
+
+
 .brutto {
     font-size: 14px;
 }
