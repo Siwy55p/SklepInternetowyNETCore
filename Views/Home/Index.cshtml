@@ -37,97 +37,106 @@
             </div>*@
     @* KONIEC SLIDER*@
 
+    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 bg-light">
 
-<div class="container">
-    <div class="row ">
-            <div class="row bg-light">
-                <hr />
-                    <h4>Nowości</h4>
-                <hr />
-            </div>
-        @*SLIDER PRODUKTOW NA STRONIE GLOWNEJ KONIEC*@
-            <div class="owl-carousel owl-theme">
-            @foreach (var produkt in Model.Nowosci)
-            {
-                <div class="col product-item mx-auto">
-                    <div class="card m-1 col" >
-                        <div class="thumbnail">
-                            <a class="product-name link-dark" asp-controller="Product" asp-action="Details" asp-route-id="@produkt.ProductId">
-                                <img class="card-img-top" src="~/images/produkty/@produkt.Symbol/@produkt.ImageUrl" alt="@produkt.Name">
-                            </a>
-                        </div>
-                        <div>
-                            <div class="row card-bar-action justify-content-center align-items-center">
-
-                                @if (produkt.Ilosc <= 0)
-                                {
-                                    <div class="col" align="center">Produkt jest już niedostępny</div>
-
-                                }
-                                else
-                                {
-                                    <div class="col-4 d-none d-sm-none d-md-none d-lg-block text-wrap text-break">
-                                        <input type="number" id="@produkt.ProductId" name="quantity" value="1" class="form-control " aria-required="true" placeholder="Ilość" min="1" max="@produkt.Ilosc" />
-                                    </div>
-                                    <div class="col">
-                                        <button value="@produkt.ProductId" onclick="AddToCart(@produkt.ProductId)" data-bs-target="offcanvas" role="button">Dodaj do zamowienia</button>
-                                    </div>
-                                }
-                            </div>
-                            <div class="row p-1">
-                                <p>
-                                    <span>
-                                        <b>@produkt.Symbol</b><br>
-                                    </span>
-                                    <span>
-                                        <a class="text-decoration-none link-dark" asp-controller="Product" asp-action="Details" asp-route-id="@produkt.ProductId">
-                                            @produkt.Name <br>
+        
+        <div class="row justify-content-center align-items-center">
+            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-8">
+                    <div class="row">
+                        <hr />
+                        <h4>Nowości</h4>
+                        <hr />
+                    </div>
+                    @*SLIDER PRODUKTOW NA STRONIE GLOWNEJ KONIEC*@
+                        <div class="owl-carousel owl-theme">
+                        @foreach (var produkt in Model.Nowosci)
+                        {
+                            <div class="col product-item mx-auto">
+                                <div class="card m-1 col" >
+                                    <div class="thumbnail">
+                                        <a class="product-name link-dark" asp-controller="Product" asp-action="Details" asp-route-id="@produkt.ProductId">
+                                            <img class="card-img-top" src="~/images/produkty/@produkt.Symbol/@produkt.ImageUrl" alt="@produkt.Name">
                                         </a>
-                                    </span>
-                                </p>
+                                    </div>
+                                    <div>
+                                        <div class="row card-bar-action justify-content-center align-items-center">
 
-                                @{
-                                    var Cena_brutto = (decimal)produkt.CenaProduktu * (decimal)partner_aluro.Core.Constants.Vat;
+                                            @if (produkt.Ilosc <= 0)
+                                            {
+                                                <div class="col" align="center">Produkt jest już niedostępny</div>
+
+                                            }
+                                            else
+                                            {
+                                                <div class="col-4 d-none d-sm-none d-md-none d-lg-block text-wrap text-break">
+                                                    <input type="number" id="@produkt.ProductId" name="quantity" value="1" class="form-control " aria-required="true" placeholder="Ilość" min="1" max="@produkt.Ilosc" />
+                                                </div>
+                                                <div class="col">
+                                                    <button value="@produkt.ProductId" onclick="AddToCart(@produkt.ProductId)" data-bs-target="offcanvas" role="button">Dodaj do zamowienia</button>
+                                                </div>
+                                            }
+                                        </div>
+                                        <div class="row p-1">
+                                            <p>
+                                                <span>
+                                                    <b>@produkt.Symbol</b><br>
+                                                </span>
+                                                <span>
+                                                    <a class="text-decoration-none link-dark" asp-controller="Product" asp-action="Details" asp-route-id="@produkt.ProductId">
+                                                        @produkt.Name <br>
+                                                    </a>
+                                                </span>
+                                            </p>
+
+                                            @{
+                                                var Cena_brutto = (decimal)produkt.CenaProduktu * (decimal)partner_aluro.Core.Constants.Vat;
 
 
-                                    var CenaJednostkowa = Cena_brutto * (1 - (partner_aluro.Core.Constants.Rabat / 100));
-                                }
+                                                var CenaJednostkowa = Cena_brutto * (1 - (partner_aluro.Core.Constants.Rabat / 100));
+                                            }
 
-                                <div class="float-end text-end">
-                                    Cena hurtowa: @produkt.CenaProduktu.ToString("C") (netto)
+                                            <div class="float-end text-end">
+                                                Cena hurtowa: @produkt.CenaProduktu.ToString("C") (netto)
+                                            </div>
+                                            @*   Twoja cena po rabacie: @CenaJednostkowa.ToString("C") <br>*@
+                                            <div class="float-end text-end">
+                                                @Cena_brutto.ToString("C") <span class="brutto">(brutto)</span>
+                                            </div>
+
+                                            @if (partner_aluro.Core.Constants.Rabat != 0 && partner_aluro.Core.Constants.Rabat >= 0)
+                                            {
+                                                <div class="float-end text-end">Twoja cena po rabacie: @CenaJednostkowa.ToString("C") </div>
+                                            }
+
+                                        </div>
+                                    </div>
                                 </div>
-                                @*   Twoja cena po rabacie: @CenaJednostkowa.ToString("C") <br>*@
-                                <div class="float-end text-end">
-                                    @Cena_brutto.ToString("C") <span class="brutto">(brutto)</span>
-                                </div>
-
-                                @if (partner_aluro.Core.Constants.Rabat != 0 && partner_aluro.Core.Constants.Rabat >= 0)
-                                {
-                                    <div class="float-end text-end">Twoja cena po rabacie: @CenaJednostkowa.ToString("C") </div>
-                                }
-
                             </div>
-                        </div>
+                        }
                     </div>
                 </div>
-            }
-    </div>
-        <div class="row ">
-            <div class="row bg-light">
-                <hr />
-                <h4>Popularne</h4>
-                <hr />
             </div>
-            @*SLIDER PRODUKTOW NA STRONIE GLOWNEJ KONIEC*@
-            <div class="owl-carousel owl-theme">
-                @foreach (var produkt in Model.Nowosci)
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+
+
+        <div class="row justify-content-center align-items-center">
+            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-8">
+                <div class="row">
+                    <hr />
+                    <h4>Najbardziej popularne</h4>
+                    <hr />
+                </div>
+                @*SLIDER PRODUKTOW NA STRONIE GLOWNEJ KONIEC*@
+                <div class="owl-carousel owl-theme">
+                    @foreach (var produkt in Model.Nowosci)
                     {
-                <div class="item">
                         <div class="col product-item mx-auto">
-                            <div class="card m-1">
+                            <div class="card m-1 col">
                                 <div class="thumbnail">
                                     <a class="product-name link-dark" asp-controller="Product" asp-action="Details" asp-route-id="@produkt.ProductId">
-                                        <img class="card-img-top" src="~/images/produkty/@produkt.Symbol/@produkt.ImageUrl" alt="@produkt.Name" style="width:260px;">
+                                        <img class="card-img-top" src="~/images/produkty/@produkt.Symbol/@produkt.ImageUrl" alt="@produkt.Name">
                                     </a>
                                 </div>
                                 <div>
@@ -141,7 +150,7 @@
                                         else
                                         {
                                             <div class="col-4 d-none d-sm-none d-md-none d-lg-block text-wrap text-break">
-                                                <input type="number" id="@produkt.ProductId" name="quantity" value="1" class="form-control" aria-required="true" placeholder="Ilość" min="1" max="@produkt.Ilosc" />
+                                                <input type="number" id="@produkt.ProductId" name="quantity" value="1" class="form-control " aria-required="true" placeholder="Ilość" min="1" max="@produkt.Ilosc" />
                                             </div>
                                             <div class="col">
                                                 <button value="@produkt.ProductId" onclick="AddToCart(@produkt.ProductId)" data-bs-target="offcanvas" role="button">Dodaj do zamowienia</button>
@@ -184,13 +193,11 @@
                                 </div>
                             </div>
                         </div>
+                    }
                 </div>
-                }
-            </div>
             </div>
         </div>
-</div>
-    
+    </div>
 @section Scripts{
     
             <script>
