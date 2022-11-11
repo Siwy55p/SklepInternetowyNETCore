@@ -57,6 +57,7 @@
     <Folder Include="wwwroot\images\produkty\" />
     <Folder Include="wwwroot\images\SliderHome\" />
     <Folder Include="wwwroot\lib\Nowy folder\" />
+    <Folder Include="wwwroot\modules\nvn_export_products\download\" />
   </ItemGroup>
 
   <ItemGroup>

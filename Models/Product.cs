@@ -14,6 +14,8 @@ namespace partner_aluro.Models
         public int? SubCategoryId { get; set; }
         public int ProductImagesId { get; set; }
 
+        public string EAN13 { get; set; }
+
         [Required(ErrorMessage = "Pole Nazwa musi być wypełnione")]
         [StringLength(100)]
         public string Name { get; set; }

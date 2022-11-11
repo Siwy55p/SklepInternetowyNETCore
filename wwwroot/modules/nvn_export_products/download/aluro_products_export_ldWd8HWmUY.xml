@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ProduktName xmlns:xsi="http://www.abc.com" d1p1:schemaLocation="http://abc.com aaa.xsd" xmlns="http:www.abc.com" xmlns:d1p1="http://www.abc.com/XML">
+  <Header>
+    <ContentDate>2021-07-15</ContentDate>
+  </Header>
+  <StudentRecords>
+    <productRecord>
+      <productName>ProduktName2</productName>
+      <productGroup>ProduktName2</productGroup>
+      <StartDate>2021-11-11</StartDate>
+    </productRecord>
+  </StudentRecords>
+</ProduktName>
