@@ -16,6 +16,8 @@ namespace partner_aluro.Models
 
         public string EAN13 { get; set; }
 
+        public string Wymiar_wewnetrzny { get; set; }
+
         [Required(ErrorMessage = "Pole Nazwa musi być wypełnione")]
         [StringLength(100)]
         public string Name { get; set; }

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 using System.Text;
 using partner_aluro.Data;
 using partner_aluro.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace partner_aluro.Controllers
 {
@@ -22,8 +23,14 @@ namespace partner_aluro.Controllers
             _content = content;
         }   
 
-        public IActionResult Index()
+        public async Task<IActionResult> IndexAsync()
         {
+
+            var produkty = await _content.Products.Include(x => x.CategoryId).ToListAsync();
+            produkty.OrderBy(x => x.Symbol);
+
+
+
             XmlDocument doc = new XmlDocument();
             XmlNode docNode = doc.CreateXmlDeclaration("1.0", "UTF-8", null);
             doc.AppendChild(docNode);
@@ -43,35 +50,98 @@ namespace partner_aluro.Controllers
 
             //headerNode.AppendChild(contentDateNode);
 
-            XmlNode export_productsNode = doc.CreateElement("export_products");
-            doc.DocumentElement.AppendChild(export_productsNode);
+            //XmlNode export_productsNode = doc.CreateElement("export_products");
+            //doc.DocumentElement.AppendChild(export_productsNode);
 
             XmlNode productNode = doc.CreateElement("product");
-            export_productsNode.AppendChild(productNode);
+            produkt.AppendChild(productNode);
 
-            //Name
-            XmlNode productNameNode = doc.CreateElement("productName");
-            productNameNode.AppendChild(doc.CreateTextNode("ProduktName2"));
+            //symbol
+            XmlNode productNameNode = doc.CreateElement("symbol");
+            productNameNode.AppendChild(doc.CreateTextNode("<![CDATA[+" + produkty[0].Symbol + " ]]>"));
             productNode.AppendChild(productNameNode);
 
-            //Gropup
-            XmlNode productGroupNode = doc.CreateElement("productGroup");
-            productGroupNode.AppendChild(doc.CreateTextNode("ProduktName2"));
-            productNode.AppendChild(productGroupNode);
+            //product_name
+            XmlNode product_nameNode = doc.CreateElement("productGroup");
+            product_nameNode.AppendChild(doc.CreateTextNode("<![CDATA[+" + produkty[0].Name + " ]]>"));
+            productNode.AppendChild(product_nameNode);
 
-            //Adress
-            XmlNode startDateNode = doc.CreateElement("StartDate");
-            startDateNode.AppendChild(doc.CreateTextNode("2021-11-11"));
-            productNode.AppendChild(startDateNode);
+            //images
+            string imagePath = "";
+            foreach (var image in produkty[0].Product_Images)
+            {
+                imagePath += image.path + image.ImageName + ",";
+            }
+            //images
+            XmlNode imagesNode = doc.CreateElement("images");
+            imagesNode.AppendChild(doc.CreateTextNode("<![CDATA[+" + imagePath + " ]]>"));
+            productNode.AppendChild(imagesNode);
 
-            //var basePath = Path.Combine(Environment.CurrentDirectory, @"XMLFiles\");
+            //stock
+            XmlNode stockNode = doc.CreateElement("stock");
+            stockNode.AppendChild(doc.CreateTextNode("<![CDATA[+" + produkty[0].Ilosc + " ]]>"));
+            productNode.AppendChild(stockNode);
 
-            ////Save image to wwwroot/image
-            //var basePath = Path.Combine(webRootPath, "images\\produkty\\" + product.Symbol);
+            //cenadetaliczna
+            XmlNode cena_detalicznaNode = doc.CreateElement("cena_detaliczna");
+            cena_detalicznaNode.AppendChild(doc.CreateTextNode("<![CDATA[+" + produkty[0].CenaProduktuDetal + " ]]>"));
+            productNode.AppendChild(cena_detalicznaNode);
+
+            //EAN13
+            XmlNode EAN13Node = doc.CreateElement("EAN13");
+            EAN13Node.AppendChild(doc.CreateTextNode("<![CDATA[+" + produkty[0].EAN13 + " ]]>"));
+            productNode.AppendChild(EAN13Node);
+
+            //EAN13
+            XmlNode OpisNode = doc.CreateElement("Opis");
+            OpisNode.AppendChild(doc.CreateTextNode("<![CDATA[+" + produkty[0].Description + " ]]>"));
+            productNode.AppendChild(OpisNode);
+
+            //kategoria_domyslna
+            XmlNode kategoria_domyslnaNode = doc.CreateElement("kategoria_domyslna");
+            kategoria_domyslnaNode.AppendChild(doc.CreateTextNode("<![CDATA[+" + produkty[0].CategoryNavigation.Name + " ]]>"));
+            productNode.AppendChild(kategoria_domyslnaNode);
+
+            //szerokosc
+            XmlNode szerokoscNode = doc.CreateElement("szerokosc");
+            szerokoscNode.AppendChild(doc.CreateTextNode("<![CDATA[+" + produkty[0].SzerokoscProduktu + " ]]>"));
+            productNode.AppendChild(szerokoscNode);
+
+            //wysokosc
+            XmlNode wysokoscNode = doc.CreateElement("wysokosc");
+            wysokoscNode.AppendChild(doc.CreateTextNode("<![CDATA[+" + produkty[0].WysokoscProduktu + " ]]>"));
+            productNode.AppendChild(wysokoscNode);
+
+            //glebokosc
+            XmlNode glebokoscNode = doc.CreateElement("glebokosc");
+            glebokoscNode.AppendChild(doc.CreateTextNode("<![CDATA[+" + produkty[0].GlebokoscProduktu + " ]]>"));
+            productNode.AppendChild(glebokoscNode);
+
+            //waga_z_opakowaniem
+            XmlNode waga_z_opakowaniemNode = doc.CreateElement("waga_z_opakowaniem");
+            waga_z_opakowaniemNode.AppendChild(doc.CreateTextNode("<![CDATA[+" + produkty[0].WagaProduktu + " ]]>"));
+            productNode.AppendChild(waga_z_opakowaniemNode);
 
 
+            string cechy = "";
+
+            string Wymiar_wewnętrzny = "Wymiar_wewnętrzny: ";
+
+            if(produkty[0].Materiał != "")
+            {
+                cechy += "Materiał: " + produkty[0].Materiał + "";
+            }
+            //cechy
+            XmlNode cechyNode = doc.CreateElement("cechy");
+            cechyNode.AppendChild(doc.CreateTextNode("<![CDATA[+" + cechy + " ]]>"));
+            productNode.AppendChild(waga_z_opakowaniemNode);
+
+
+
+
+
+            //patch root www
             string webRootPath = _webHostEnvironment.WebRootPath;
-
 
             var basePath = Path.Combine(webRootPath, "\\modules\\nvn_export_products\\download\\");
 
