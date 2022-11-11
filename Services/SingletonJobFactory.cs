@@ -16,7 +16,7 @@ namespace partner_aluro.Services
 
         public IJob NewJob(TriggerFiredBundle bundle, IScheduler scheduler)
         {
-            Common.Logs($"NewJob at " + DateTime.Now.ToString("dd-mm-yyyy hh:mm:ss"), "NewJob" + DateTime.Now.ToString("hhmmss"));
+        //    Common.Logs($"NewJob at " + DateTime.Now.ToString("dd-mm-yyyy hh:mm:ss"), "NewJob" + DateTime.Now.ToString("hhmmss"));
 
             return _serviceProvider.GetRequiredService(bundle.JobDetail.JobType) as IJob;
         }
