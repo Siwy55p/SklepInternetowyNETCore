@@ -68,16 +68,18 @@
                                 Account management
                                 </h6>
                                 <p>
-                                    <a href="#!" class="text-reset">Moje konto</a>
+                                <a href="#!" class="dropdown-item">Moje konto</a>
                                 </p>
                                 <p>
-                                    <a class="text-reset" asp-controller="Order" asp-action="ListaZamowienZalogowanegoUzytkownika">Historia zamówień</a>
+                                <a class="dropdown-item" asp-controller="Order" asp-action="ListaZamowienZalogowanegoUzytkownika">Historia zamówień</a>
                                 </p>
                                 <p>
-                                <a href="#!" class="text-reset">Moje informacje osobiste</a>
+                                <a href="#!" class="dropdown-item">Moje informacje osobiste</a>
                                 </p>
                                 <p>
-                                <a href="#!" class="text-reset">Wyloguj się</a>
+                                <form id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                    <button id="logout" type="submit" class="dropdown-item">Wyloguj</button>
+                                </form>
                                 </p>
                             </div>
                             <!-- Grid column -->
@@ -88,10 +90,10 @@
                                 Information
                                 </h6>
                                 <p>
-                                    <a class="text-reset" asp-controller="Home" asp-action="IntegracjaXML">Integracja XML</a>
+                                <a class="dropdown-item" asp-controller="Home" asp-action="IntegracjaXML">Integracja XML</a>
                                 </p>
                                 <p>
-                                <a href="https://onedrive.live.com/?cid=e3384b60395d8a69&id=E3384B60395D8A69%21492&ithint=folder,png&authkey=!AKD8Z89gR9FPQ9w" target="_blank" class="text-reset">Baza zdjęć produktów aluro</a>
+                                <a href="https://onedrive.live.com/?cid=e3384b60395d8a69&id=E3384B60395D8A69%21492&ithint=folder,png&authkey=!AKD8Z89gR9FPQ9w" target="_blank" class="dropdown-item">Baza zdjęć produktów aluro</a>
                                 </p>
                             </div>
                             <!-- Grid column -->
@@ -100,10 +102,10 @@
                                 <!-- Links -->
                             <h6 class="text-uppercase fw-bold mb-4">Important information</h6>
                                 <p>
-                                <a asp-action="WarunkiSprzedazy" asp-controller="Home" class="text-reset">Ogólne warunki sprzedaży</a>
+                                <a asp-action="WarunkiSprzedazy" asp-controller="Home" class="dropdown-item">Ogólne warunki sprzedaży</a>
                                 </p>
                                 <p>
-                                <a asp-action="PlatnoscDostawa" asp-controller="Home" class="text-reset">Płatność i dostawa</a>
+                                <a asp-action="PlatnoscDostawa" asp-controller="Home" class="dropdown-item">Płatność i dostawa</a>
                                 </p>
                             </div>
                             <!-- Grid column -->
