@@ -9,10 +9,10 @@
 @if(Model.Cart.CartItems.Count > 0)
 {
     <div class="row bg-light">
-        <div class="col border text-center fw-bold" style="max-width: 75px; width:75px"></div>
+        <div class="col border text-center fw-bold" style="max-width: 75px;"></div>
         <div class="col border text-center fw-bold  text-wrap text-break">Produkt</div>
-        <div class="col border text-center fw-bold" style="max-width: 75px; width:75px">Ilość</div>
-        <div class="col border text-center fw-bold" style="max-width: 60px">Usuń</div>
+        <div class="col border text-center fw-bold" style="max-width: 75px;">Ilość</div>
+        <div class="col border text-center fw-bold" style="max-width: 60px;">Usuń</div>
     </div>
     @foreach (var item in Model.Cart.CartItems)
     {

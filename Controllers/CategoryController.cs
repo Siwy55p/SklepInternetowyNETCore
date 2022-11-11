@@ -71,7 +71,8 @@ namespace partner_aluro.Controllers
         [HttpPost]
         public async Task<IActionResult> AddSubCategoryAsync(SubCategory data)
         {
-            data.Category = await _categoryService.GetAsync(data.SubCategoryId);
+            data.Category = await _categoryService.GetAsync(data.SubCatId);
+            //data.Category = await _categoryService.GetAsync(data.SubCategoryId);
 
             ModelState.Remove("SubCategories");
             ModelState.Remove("Category");
