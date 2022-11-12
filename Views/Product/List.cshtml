@@ -31,6 +31,7 @@
                                 <thead>
                                     <tr>
                                         <th>Id</th>
+                                        <th>Zaz</th>
                                         <th>Obrazek</th>
                                         <th>Symbol</th>
                                         <th>Nazwa produktu</th>
@@ -47,6 +48,7 @@
                                     {
                                         <tr>
                                             <td>@productFormModel.ProductId</td>
+                                            <td><input id="takenBefore" type="checkbox" value="@productFormModel.ProductId" data-toggle="toggle"></td>
                                             <td><img class="img-thumbnail" src="~/images/produkty/@productFormModel.Symbol/@productFormModel.ImageUrl" alt="@productFormModel.Name" style="width:75px;height:75px;"></td>
                                             <td>@productFormModel.Symbol</td>
 
@@ -77,6 +79,7 @@
                                 <tfoot>
                                     <tr>
                                         <th scope="col">Id</th>
+                                        <th scope="col">Zaz</th>
                                         <th scope="col">Obrazek</th>
                                         <th scope="col">Symbol</th>
                                         <th scope="col">Nazwa produktu</th>
@@ -98,6 +101,16 @@
     }
 
 </div>
+
+@section Scripts{
+    <script>
+        checkBox = document.getElementById('takenBefore').addEventListener('click', event => {
+            if (event.target.checked) {
+                alert("Checkbox checked!");
+            }
+        });
+    </script>
+}
 
 @*
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
