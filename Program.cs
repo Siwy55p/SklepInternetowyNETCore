@@ -15,7 +15,7 @@ using Quartz;
 using Quartz.Impl;
 
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+var connectionString = builder.Configuration.GetConnectionString("DbContextProductionConnection");
 
 
 //global using partner_aluro.Services.EmailService;
@@ -87,8 +87,8 @@ builder.Services.AddBreadcrumbs(Assembly.GetExecutingAssembly(), options =>
 
 builder.Services.AddDbContext<ApplicationDbContext>(builder =>
 {
-    //builder.UseSqlServer(@"Data Source=mssql4.webio.pl,2401;Database=siwy55p_siwy55p;Uid=siwy55p_siwy55p;Password=Siiwy1a2!3!4!5!;TrustServerCertificate=True"); //connection string
-    builder.UseSqlServer(connectionString); //connection string localbase
+    builder.UseSqlServer(@"Data Source=mssql4.webio.pl,2401;Database=siwy55p_siwy55p;Uid=siwy55p_siwy55p;Password=Siiwy1a2!3!4!5!;TrustServerCertificate=True"); //connection string
+    //builder.UseSqlServer(connectionString); //connection string localbase
 
 });
 
@@ -228,5 +228,7 @@ void AddScoped()
     builder.Services.AddScoped<IEmailService, EmailService>();
 
     builder.Services.AddScoped<IImageService, ImageService>();
+
+    builder.Services.AddScoped<IProductCategoryService, ProductCategoryService>();
 
 }

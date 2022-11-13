@@ -61,6 +61,8 @@ namespace partner_aluro.Models
         public virtual ImageModel? product_Image { get; set; } = new ImageModel();
         //public IFormFile? FrontImage { get; set; }
 
+        public List<ProductCategory> Kategorie { get; set; } = new List<ProductCategory>();
+
         [ForeignKey(nameof(CategoryId))]
         [Display(Name="Kategoria")]
         [InverseProperty("Produkty")]
@@ -73,5 +75,7 @@ namespace partner_aluro.Models
 
         [ForeignKey(nameof(ProductImagesId))]
         public virtual List<ImageModel>? Product_Images { get; set; } = new List<ImageModel>();
+
+
     }
 }

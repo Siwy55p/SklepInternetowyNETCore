@@ -1,0 +1,16 @@
+﻿@model IEnumerable<partner_aluro.Models.ProductCategory>
+
+@{
+    ViewData["Title"] = "Lista produktów wybranej Kategorii";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+@foreach (var item in Model)
+{
+    <div class="row">
+
+        <div class="col"> ProductID : @item.ProductID </div>
+        <div class="col"> CategoryId : @item.CategoryID </div>
+
+    </div>
+}

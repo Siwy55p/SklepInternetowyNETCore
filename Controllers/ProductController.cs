@@ -26,13 +26,17 @@ namespace partner_aluro.Controllers
 
         private readonly IImageService _imageService;
 
-        public ProductController(ApplicationDbContext applicationDbContext, IProductService productService, IUnitOfWorkProduct unitOfWorkProduct, IWebHostEnvironment webHostEnvironment, IImageService imageService)
+        private readonly IProductCategoryService _productCategoryService;
+
+        public ProductController(IProductCategoryService productCategoryService, ApplicationDbContext applicationDbContext, IProductService productService, IUnitOfWorkProduct unitOfWorkProduct, IWebHostEnvironment webHostEnvironment, IImageService imageService)
         {
             _ProductService = productService;
             _unitOfWorkProduct = unitOfWorkProduct;
             _webHostEnvironment = webHostEnvironment;
             _context = applicationDbContext;
             _imageService = imageService;
+
+            _productCategoryService = productCategoryService;
         }
 
         public async Task<IActionResult> Index()
@@ -96,11 +100,21 @@ namespace partner_aluro.Controllers
         {
             ViewBag.Category = GetCategories();
             ViewBag.SubCategory = GetSubCategories();
+
+
+
             Product product = new();
+
 
 
             return View(product);
         }
+
+        //public void AddToKategoria(int KategoriaID)
+        //{
+        //    //dodaj kategorie Lista
+
+        //}
 
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
         [HttpPost]
@@ -137,6 +151,14 @@ namespace partner_aluro.Controllers
             //produkt.ProductImagesId = product.ProductId;
 
             await _context.SaveChangesAsync();
+
+            ProductCategory productCategory = new ProductCategory()
+            {
+                ProductID = product.ProductId,
+                CategoryID = product.CategoryId
+            };
+            _productCategoryService.AddProductCategoryMultiple(productCategory);
+
 
             return RedirectToAction(nameof(List));
 

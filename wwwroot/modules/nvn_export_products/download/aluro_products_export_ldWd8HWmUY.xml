@@ -1437,7 +1437,7 @@ Lampion jest celowo postarzany, możliwe przetarcia na metalu i odpryski farby.]
     <cena_detaliczna><![CDATA[79.000000]]></cena_detaliczna>
     <EAN13><![CDATA[]]></EAN13>
     <opis><![CDATA[Donice są celowo postarzane poprzez liczne bruzdy, imitujące stare uszkodzenia oraz odpryski farby.]]></opis>
-    <kategoria_domyslna><![CDATA[Christmas Collection 2022]]></kategoria_domyslna>
+    <kategoria_domyslna><![CDATA[Donice i Osłonki]]></kategoria_domyslna>
     <szerokosc><![CDATA[16.000000]]></szerokosc>
     <wysokosc><![CDATA[26.000000]]></wysokosc>
     <glebokosc><![CDATA[16.000000]]></glebokosc>
@@ -1623,6 +1623,20 @@ Lampion jest celowo postarzany, możliwe przetarcia na metalu i odpryski farby.]
     <szerokosc><![CDATA[0.000000]]></szerokosc>
     <wysokosc><![CDATA[185.000000]]></wysokosc>
     <glebokosc><![CDATA[0.000000]]></glebokosc>
+    <waga_z_opakowaniem><![CDATA[0.000000]]></waga_z_opakowaniem>
+  </product>
+  <product>
+    <symbol><![CDATA[A01620]]></symbol>
+    <product_name><![CDATA[Osłonka, donica GOLDI - XL_Aluro]]></product_name>
+    <images><![CDATA[]]></images>
+    <stock><![CDATA[10]]></stock>
+    <cena_detaliczna><![CDATA[230.000000]]></cena_detaliczna>
+    <EAN13><![CDATA[]]></EAN13>
+    <opis><![CDATA[]]></opis>
+    <kategoria_domyslna><![CDATA[Christmas Collection 2022]]></kategoria_domyslna>
+    <szerokosc><![CDATA[22.000000]]></szerokosc>
+    <wysokosc><![CDATA[30.000000]]></wysokosc>
+    <glebokosc><![CDATA[22.000000]]></glebokosc>
     <waga_z_opakowaniem><![CDATA[0.000000]]></waga_z_opakowaniem>
   </product>
 </export_products>

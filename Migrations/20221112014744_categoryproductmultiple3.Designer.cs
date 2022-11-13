@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using partner_aluro.Data;
 
@@ -11,9 +12,10 @@ using partner_aluro.Data;
 namespace partner_aluro.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221112014744_categoryproductmultiple3")]
+    partial class categoryproductmultiple3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -623,6 +625,9 @@ namespace partner_aluro.Migrations
                     b.Property<string>("Pakowanie")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("ProductCategoryID")
+                        .HasColumnType("int");
+
                     b.Property<int>("ProductImagesId")
                         .HasColumnType("int");
 
@@ -659,6 +664,10 @@ namespace partner_aluro.Migrations
 
                     b.HasIndex("CategoryId");
 
+                    b.HasIndex("ProductCategoryID")
+                        .IsUnique()
+                        .HasFilter("[ProductCategoryID] IS NOT NULL");
+
                     b.HasIndex("SubCategoryId");
 
                     b.ToTable("Products");
@@ -681,8 +690,6 @@ namespace partner_aluro.Migrations
                     b.HasKey("ProductCategoryId");
 
                     b.HasIndex("CategoryID");
-
-                    b.HasIndex("ProductID");
 
                     b.ToTable("ProductCategory");
                 });
@@ -912,6 +919,10 @@ namespace partner_aluro.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("partner_aluro.Models.ProductCategory", "IdProductCategory")
+                        .WithOne("Product")
+                        .HasForeignKey("partner_aluro.Models.Product", "ProductCategoryID");
+
                     b.HasOne("partner_aluro.Models.SubCategory", "CategorySubNavigation")
                         .WithMany("Produkty")
                         .HasForeignKey("SubCategoryId");
@@ -919,6 +930,8 @@ namespace partner_aluro.Migrations
                     b.Navigation("CategoryNavigation");
 
                     b.Navigation("CategorySubNavigation");
+
+                    b.Navigation("IdProductCategory");
                 });
 
             modelBuilder.Entity("partner_aluro.Models.ProductCategory", b =>
@@ -927,13 +940,7 @@ namespace partner_aluro.Migrations
                         .WithMany()
                         .HasForeignKey("CategoryID");
 
-                    b.HasOne("partner_aluro.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductID");
-
                     b.Navigation("Category");
-
-                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("partner_aluro.Models.SubCategory", b =>
@@ -967,6 +974,12 @@ namespace partner_aluro.Migrations
             modelBuilder.Entity("partner_aluro.Models.Product", b =>
                 {
                     b.Navigation("Product_Images");
+                });
+
+            modelBuilder.Entity("partner_aluro.Models.ProductCategory", b =>
+                {
+                    b.Navigation("Product")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("partner_aluro.Models.ProfilDzialalnosci", b =>

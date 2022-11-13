@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NuGet.Protocol;
 using System.Xml;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Hosting;
 using System.Text;
 using partner_aluro.Data;
@@ -52,7 +51,7 @@ namespace partner_aluro.Controllers
 
             var produkty = _content.Products.Where(p => p.Ukryty == false).Where(p => p.CategoryNavigation.Aktywny == true).Include(p => p.CategoryNavigation).OrderBy(p=>p.Symbol).ToList();
 
-            XmlDocument doc = new XmlDocument();
+            XmlDocument doc = new();
             XmlNode docNode = doc.CreateXmlDeclaration("1.0", "UTF-8", null);
             doc.AppendChild(docNode);
 
