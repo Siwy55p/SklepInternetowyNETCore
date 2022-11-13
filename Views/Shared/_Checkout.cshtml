@@ -28,27 +28,51 @@
                     {
                         <div class="row @zmienna" >
             
-                                @{
-                                i++;
-                                if(i%2 != 0)
-                                {
-                                    zmienna = "bg-light";
-                                }else
-                                {
-                                    zmienna = "bg-white";
-                                }
+                        @{
+                            i++;
+                            if(i%2 != 0)
+                            {
+                                zmienna = "bg-light";
+                            }else
+                            {
+                                zmienna = "bg-white";
+                            }
+
+                            var Cena_brutto = (decimal)item.Product.CenaProduktu * (decimal)partner_aluro.Core.Constants.Vat;
+                            @if (item.Product.Promocja == true && item.Product.CenaPromocyja != null)
+                            {
+
+                                Cena_brutto = (decimal)item.Product.CenaPromocyja * (decimal)partner_aluro.Core.Constants.Vat;
+
+                            }
 
 
-                                var Cena_brutto = (decimal)item.Product.CenaProduktu * (decimal)partner_aluro.Core.Constants.Vat;
-                                var CenaJednostkowa_netto = item.Product.CenaProduktu;
-                                var CenaJednostkowa_brutto = (decimal)Cena_brutto;
 
-                                if (partner_aluro.Core.Constants.Rabat >= 0)
-                                {
+                            var CenaJednostkowa_netto = item.Product.CenaProduktu;
+                            @if (item.Product.Promocja == true && item.Product.CenaPromocyja != null)
+                            {
+
+                                CenaJednostkowa_netto = (decimal)item.Product.CenaPromocyja;
+
+                            }
+
+
+
+
+                            var CenaJednostkowa_brutto = (decimal)Cena_brutto;
+
+                            if (partner_aluro.Core.Constants.Rabat >= 0)
+                            {
                                     CenaJednostkowa_netto = item.Product.CenaProduktu * (1 - (partner_aluro.Core.Constants.Rabat / 100));
                                     CenaJednostkowa_brutto = (decimal)Cena_brutto * (1 - (partner_aluro.Core.Constants.Rabat / 100));
-                                }
-                    
+                            }
+                            else if (item.Product.Promocja == true && item.Product.CenaPromocyja != null)
+                            {
+                                CenaJednostkowa_netto = (decimal)((decimal)item.Product.CenaPromocyja * (1 - (partner_aluro.Core.Constants.Rabat / 100)));
+                                CenaJednostkowa_brutto = (decimal)Cena_brutto * (1 - (partner_aluro.Core.Constants.Rabat / 100));
+
+                            }
+
                                 var ProductTotal = CenaJednostkowa_brutto * item.Quantity;
 
                                 }

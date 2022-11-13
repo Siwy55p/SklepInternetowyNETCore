@@ -40,6 +40,9 @@ namespace partner_aluro.Models
         [NotMapped]
         public decimal CenaProduktuDlaUzytkownika { get; set; }
 
+        public decimal? CenaPromocyja { get; set; } //Cena promocyjna
+        public bool? Promocja { get; set; } = false;
+
         public string? Pakowanie { get; set; }
 
         public string? Materiał { get; set; }

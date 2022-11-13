@@ -1,6 +1,50 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <export_products>
   <product>
+    <symbol><![CDATA[A00582]]></symbol>
+    <product_name><![CDATA[Komoda FENDI_Aluro]]></product_name>
+    <images><![CDATA[]]></images>
+    <stock><![CDATA[10]]></stock>
+    <cena_detaliczna><![CDATA[2700.000000]]></cena_detaliczna>
+    <EAN13><![CDATA[]]></EAN13>
+    <opis><![CDATA[Kolor: ciemne drewno, złoty mosiądz
+
+Komoda jest wykonana z drewna z recyklingu. Możliwe przetarcia i rysy. ]]></opis>
+    <kategoria_domyslna><![CDATA[Meble]]></kategoria_domyslna>
+    <szerokosc><![CDATA[80.000000]]></szerokosc>
+    <wysokosc><![CDATA[75.000000]]></wysokosc>
+    <glebokosc><![CDATA[45.000000]]></glebokosc>
+    <waga_z_opakowaniem><![CDATA[0.000000]]></waga_z_opakowaniem>
+  </product>
+  <product>
+    <symbol><![CDATA[A00991]]></symbol>
+    <product_name><![CDATA[Roślina sztuczna -róża miedziana Aluro]]></product_name>
+    <images><![CDATA[]]></images>
+    <stock><![CDATA[10]]></stock>
+    <cena_detaliczna><![CDATA[8.000000]]></cena_detaliczna>
+    <EAN13><![CDATA[]]></EAN13>
+    <opis><![CDATA[]]></opis>
+    <kategoria_domyslna><![CDATA[Christmas Collection 2022]]></kategoria_domyslna>
+    <szerokosc><![CDATA[17.000000]]></szerokosc>
+    <wysokosc><![CDATA[72.000000]]></wysokosc>
+    <glebokosc><![CDATA[10.000000]]></glebokosc>
+    <waga_z_opakowaniem><![CDATA[0.000000]]></waga_z_opakowaniem>
+  </product>
+  <product>
+    <symbol><![CDATA[A01026]]></symbol>
+    <product_name><![CDATA[Witryna loft HATTIE_Aluro]]></product_name>
+    <images><![CDATA[]]></images>
+    <stock><![CDATA[3]]></stock>
+    <cena_detaliczna><![CDATA[3400.000000]]></cena_detaliczna>
+    <EAN13><![CDATA[]]></EAN13>
+    <opis><![CDATA[]]></opis>
+    <kategoria_domyslna><![CDATA[Meble]]></kategoria_domyslna>
+    <szerokosc><![CDATA[46.000000]]></szerokosc>
+    <wysokosc><![CDATA[196.000000]]></wysokosc>
+    <glebokosc><![CDATA[39.000000]]></glebokosc>
+    <waga_z_opakowaniem><![CDATA[0.000000]]></waga_z_opakowaniem>
+  </product>
+  <product>
     <symbol><![CDATA[A01036]]></symbol>
     <product_name><![CDATA[Bombki szklane RICA 3 sztuki- multikolor_Aluro]]></product_name>
     <images><![CDATA[]]></images>
@@ -68,6 +112,46 @@
     <szerokosc><![CDATA[22.000000]]></szerokosc>
     <wysokosc><![CDATA[64.000000]]></wysokosc>
     <glebokosc><![CDATA[10.000000]]></glebokosc>
+    <waga_z_opakowaniem><![CDATA[0.000000]]></waga_z_opakowaniem>
+  </product>
+  <product>
+    <symbol><![CDATA[A01150]]></symbol>
+    <product_name><![CDATA[Konsola, pomocnik HODIE_Aluro]]></product_name>
+    <images><![CDATA[]]></images>
+    <stock><![CDATA[10]]></stock>
+    <cena_detaliczna><![CDATA[690.000000]]></cena_detaliczna>
+    <EAN13><![CDATA[]]></EAN13>
+    <opis><![CDATA[Konsola została wykonana z drewna ( akacja indyjska).
+
+Mogą występować sęki, naturalne pęknięcia drewna, oraz nieregularne kształty. ]]></opis>
+    <kategoria_domyslna><![CDATA[Meble]]></kategoria_domyslna>
+    <szerokosc><![CDATA[50.000000]]></szerokosc>
+    <wysokosc><![CDATA[70.000000]]></wysokosc>
+    <glebokosc><![CDATA[30.000000]]></glebokosc>
+    <waga_z_opakowaniem><![CDATA[0.000000]]></waga_z_opakowaniem>
+  </product>
+  <product>
+    <symbol><![CDATA[A01177]]></symbol>
+    <product_name><![CDATA[Krzesło tapicerowane PICADO blue_Aluro]]></product_name>
+    <images><![CDATA[]]></images>
+    <stock><![CDATA[10]]></stock>
+    <cena_detaliczna><![CDATA[780.000000]]></cena_detaliczna>
+    <EAN13><![CDATA[]]></EAN13>
+    <opis><![CDATA[Dodatkowe wymiary:
+
+-wymiary wewnętrzne siedziska : szerokość 41 cm, głębokość 46 cm.
+
+-wysokość podłokietnika 19 cm.
+
+-wysokość oparcia 36 cm.
+
+-wysokość nóg 40 cm.
+
+-wysokość od podłogi do siedziska 46 cm.]]></opis>
+    <kategoria_domyslna><![CDATA[Meble]]></kategoria_domyslna>
+    <szerokosc><![CDATA[0.000000]]></szerokosc>
+    <wysokosc><![CDATA[78.000000]]></wysokosc>
+    <glebokosc><![CDATA[60.000000]]></glebokosc>
     <waga_z_opakowaniem><![CDATA[0.000000]]></waga_z_opakowaniem>
   </product>
   <product>
@@ -226,6 +310,20 @@ Lampion jest celowo postarzany, możliwe przetarcia na metalu i odpryski farby.]
     <szerokosc><![CDATA[24.000000]]></szerokosc>
     <wysokosc><![CDATA[24.000000]]></wysokosc>
     <glebokosc><![CDATA[24.000000]]></glebokosc>
+    <waga_z_opakowaniem><![CDATA[0.000000]]></waga_z_opakowaniem>
+  </product>
+  <product>
+    <symbol><![CDATA[A01314]]></symbol>
+    <product_name><![CDATA[Konsola meblowa TABER]]></product_name>
+    <images><![CDATA[]]></images>
+    <stock><![CDATA[10]]></stock>
+    <cena_detaliczna><![CDATA[1250.000000]]></cena_detaliczna>
+    <EAN13><![CDATA[]]></EAN13>
+    <opis><![CDATA[]]></opis>
+    <kategoria_domyslna><![CDATA[Meble]]></kategoria_domyslna>
+    <szerokosc><![CDATA[121.000000]]></szerokosc>
+    <wysokosc><![CDATA[76.000000]]></wysokosc>
+    <glebokosc><![CDATA[41.000000]]></glebokosc>
     <waga_z_opakowaniem><![CDATA[0.000000]]></waga_z_opakowaniem>
   </product>
   <product>
@@ -674,6 +772,47 @@ Lampion jest celowo postarzany, możliwe przetarcia na metalu i odpryski farby.]
     <szerokosc><![CDATA[27.000000]]></szerokosc>
     <wysokosc><![CDATA[36.000000]]></wysokosc>
     <glebokosc><![CDATA[27.000000]]></glebokosc>
+    <waga_z_opakowaniem><![CDATA[0.000000]]></waga_z_opakowaniem>
+  </product>
+  <product>
+    <symbol><![CDATA[A01495]]></symbol>
+    <product_name><![CDATA[Stolik-pomocnik kpl-3szt ORSINO_Aluro]]></product_name>
+    <images><![CDATA[]]></images>
+    <stock><![CDATA[10]]></stock>
+    <cena_detaliczna><![CDATA[950.000000]]></cena_detaliczna>
+    <EAN13><![CDATA[]]></EAN13>
+    <opis><![CDATA[Stolik XxL
+Szerokość:34 cm.
+Głębokość:34cm.
+Wysokość: 75 cm.
+
+Stolik XL
+Szerokość:25 cm.
+Głębokość:25 cm.
+Wysokość: 63 cm.
+
+Stolik L
+Szerokość:20 cm.
+Głębokość:20 cm.
+Wysokość: 52 cm.]]></opis>
+    <kategoria_domyslna><![CDATA[Meble]]></kategoria_domyslna>
+    <szerokosc><![CDATA[0.000000]]></szerokosc>
+    <wysokosc><![CDATA[0.000000]]></wysokosc>
+    <glebokosc><![CDATA[0.000000]]></glebokosc>
+    <waga_z_opakowaniem><![CDATA[0.000000]]></waga_z_opakowaniem>
+  </product>
+  <product>
+    <symbol><![CDATA[A01497]]></symbol>
+    <product_name><![CDATA[Stolik-pomocnik KINOX_Aluro]]></product_name>
+    <images><![CDATA[]]></images>
+    <stock><![CDATA[10]]></stock>
+    <cena_detaliczna><![CDATA[590.000000]]></cena_detaliczna>
+    <EAN13><![CDATA[]]></EAN13>
+    <opis><![CDATA[Stolik jest celowo postarzany, ubytki w drewnie, przebarwienia są efektem zamierzonym.]]></opis>
+    <kategoria_domyslna><![CDATA[Meble]]></kategoria_domyslna>
+    <szerokosc><![CDATA[0.000000]]></szerokosc>
+    <wysokosc><![CDATA[0.000000]]></wysokosc>
+    <glebokosc><![CDATA[0.000000]]></glebokosc>
     <waga_z_opakowaniem><![CDATA[0.000000]]></waga_z_opakowaniem>
   </product>
   <product>
@@ -1503,20 +1642,6 @@ Lampion jest celowo postarzany, możliwe przetarcia na metalu i odpryski farby.]
     <symbol><![CDATA[A01611]]></symbol>
     <product_name><![CDATA[Obelisk dekoracyjny LALIS_Aluro]]></product_name>
     <images><![CDATA[]]></images>
-    <stock><![CDATA[10]]></stock>
-    <cena_detaliczna><![CDATA[890.000000]]></cena_detaliczna>
-    <EAN13><![CDATA[]]></EAN13>
-    <opis><![CDATA[]]></opis>
-    <kategoria_domyslna><![CDATA[Christmas Collection 2022]]></kategoria_domyslna>
-    <szerokosc><![CDATA[32.000000]]></szerokosc>
-    <wysokosc><![CDATA[83.000000]]></wysokosc>
-    <glebokosc><![CDATA[32.000000]]></glebokosc>
-    <waga_z_opakowaniem><![CDATA[0.000000]]></waga_z_opakowaniem>
-  </product>
-  <product>
-    <symbol><![CDATA[A01611]]></symbol>
-    <product_name><![CDATA[Obelisk dekoracyjny LALIS_Aluro]]></product_name>
-    <images><![CDATA[]]></images>
     <stock><![CDATA[4]]></stock>
     <cena_detaliczna><![CDATA[890.000000]]></cena_detaliczna>
     <EAN13><![CDATA[]]></EAN13>
@@ -1623,20 +1748,6 @@ Lampion jest celowo postarzany, możliwe przetarcia na metalu i odpryski farby.]
     <szerokosc><![CDATA[0.000000]]></szerokosc>
     <wysokosc><![CDATA[185.000000]]></wysokosc>
     <glebokosc><![CDATA[0.000000]]></glebokosc>
-    <waga_z_opakowaniem><![CDATA[0.000000]]></waga_z_opakowaniem>
-  </product>
-  <product>
-    <symbol><![CDATA[A01620]]></symbol>
-    <product_name><![CDATA[Osłonka, donica GOLDI - XL_Aluro]]></product_name>
-    <images><![CDATA[]]></images>
-    <stock><![CDATA[10]]></stock>
-    <cena_detaliczna><![CDATA[230.000000]]></cena_detaliczna>
-    <EAN13><![CDATA[]]></EAN13>
-    <opis><![CDATA[]]></opis>
-    <kategoria_domyslna><![CDATA[Christmas Collection 2022]]></kategoria_domyslna>
-    <szerokosc><![CDATA[22.000000]]></szerokosc>
-    <wysokosc><![CDATA[30.000000]]></wysokosc>
-    <glebokosc><![CDATA[22.000000]]></glebokosc>
     <waga_z_opakowaniem><![CDATA[0.000000]]></waga_z_opakowaniem>
   </product>
 </export_products>

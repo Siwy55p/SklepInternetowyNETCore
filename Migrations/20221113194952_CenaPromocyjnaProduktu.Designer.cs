@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using partner_aluro.Data;
 
@@ -11,9 +12,10 @@ using partner_aluro.Data;
 namespace partner_aluro.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221113194952_CenaPromocyjnaProduktu")]
+    partial class CenaPromocyjnaProduktu
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -631,9 +633,6 @@ namespace partner_aluro.Migrations
 
                     b.Property<int>("ProductImagesId")
                         .HasColumnType("int");
-
-                    b.Property<bool?>("Promocja")
-                        .HasColumnType("bit");
 
                     b.Property<int?>("SubCategoryId")
                         .HasColumnType("int");

@@ -639,6 +639,10 @@ namespace partner_aluro.Controllers
 
 
                 var Cena_brutto = (decimal)item.Product.CenaProduktu * (decimal)partner_aluro.Core.Constants.Vat;
+                if(item.Product.Promocja == true && item.Product.CenaPromocyja != null)
+                {
+                    Cena_brutto = (decimal)item.Product.CenaPromocyja * (decimal)partner_aluro.Core.Constants.Vat;
+                }
 
                 var CenaJednostkowa = Cena_brutto * (1 - (partner_aluro.Core.Constants.Rabat / 100));
 

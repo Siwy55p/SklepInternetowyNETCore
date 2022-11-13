@@ -55,9 +55,9 @@
                 <div class="owl-carousel owl-theme">
                     @foreach (var produkt in Model.Nowosci)
                     {
-                    <div class="row product-item mx-auto" id="SekcjaListaKategori">
-                                @await Html.PartialAsync("_ProductCart",(Product)@produkt)
-                        </div>
+                    <div class="col product-item mx-auto">
+                        @await Html.PartialAsync("_ProductCart",(Product)@produkt)
+                    </div>
                     }
                 </div>
             </div>

@@ -58,19 +58,32 @@
                             <div class="mt-2 pr-3">
                                 <p>Symbol: <b>@Model.Symbol</b></p>
                             </div>
-                    
+                            @if (@Model.KrotkiOpis != null)
+                            {
+                                <div class="row p-3">@Model.KrotkiOpis</div>
+                            }
                             @*<div @*style="max-width:460px;" class="row body_product float-end text-end m-1 p-2">*@
                             <div class="row">
 
+                                @{
+                                    var Cena_brutto = (decimal)Model.CenaProduktu * (decimal)partner_aluro.Core.Constants.Vat;
+
+                                }
+
+
                                 <div class="col justify-content-end text-end">
-                                    Cena hurtowa: <br>
+                                    Cena hurtowa: <br />
+                                    <br />
                                     @*Twoja cena po rabacie: @CenaJednostkowa.ToString("C") <br>*@
-                                    Cena detaliczna:<br />
+                                    Cena Detaliczna:
                                 </div>
                                 <div class="col">
-                                    @Model.CenaProduktu.ToString("C") <br>
+                                    @Model.CenaProduktu.ToString("C") (netto)<br>
+                                    @Cena_brutto.ToString("C") (brutto)<br />
                                     @Model.CenaProduktuDetal.Value.ToString("C") <br />
+
                                 </div>
+
                             </div>
 
                             <div class="row card-bar-action align-items-center" >
@@ -95,7 +108,20 @@
 
                             <div class="row p-3">
 
-                             @if (Model.WysokoscProduktu != null)
+                                @if (Model.CenaPromocyja != null && Model.Promocja == true)
+                                {
+                                    decimal ProcentPromocji = (decimal)(1 - (Model.CenaPromocyja / Model.CenaProduktu));
+
+
+                                    <div class="sale">@ProcentPromocji.ToString(".##") %</div>
+
+                                    <span class="text-decoration-line-through">@Model.CenaProduktu.ToString("C")</span><br />
+                                    <span>@Model.CenaPromocyja.Value.ToString("C")</span>
+                                    <div class="h2">PROMOCJA: @ProcentPromocji.ToString(".##") %</div>
+                                }
+
+
+                                @if (Model.WysokoscProduktu != null)
                                 {
                                 <div class="row">Specyfikacja produktu: </div>
                                 <div class="row">

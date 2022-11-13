@@ -26,6 +26,11 @@
             <span asp-validation-for="@Model.Symbol" class="text-danger"></span>
             </div>
         </div>
+        <div class="form-group row p-2">
+            <label asp-for="@Model.KrotkiOpis" class="col-sm-4 col-form-label">Krótki opis</label>
+            <textarea asp-for="@Model.KrotkiOpis" class="form-control" rows="2"></textarea>
+        </div>
+
         <div class="form-group row">
             <label asp-for="@Model.EAN13" class="col-sm-3 col-form-label text-end">EAN13 </label>
             <div class="col-sm-4">
@@ -76,7 +81,7 @@
                 </span>
             </div>
         </div>
-
+        <hr />
         <h4 class="mb-2">Wymiary</h4>
         <div class="input-group">
             Wymiary zewnętrzne:
@@ -106,6 +111,22 @@
                 <span asp-validation-for="@Model.WagaProduktu" class="text-danger">
                 </span>
             </div>
+        </div>
+        <hr />
+        <div class="form-group">
+            <label asp-for="@Model.Promocja" class="col-sm-3 col-form-label text-end">Cena promocyjna: </label>
+            Tak @Html.RadioButtonFor(model => model.Promocja, "True", Model.Promocja == true ? new { Checked = "checked" } : null)
+            Nie @Html.RadioButtonFor(model => model.Promocja, "False", Model.Promocja == false ? new { Checked = "unchecked" } : null)
+            <span asp-validation-for="@Model.Promocja" class="text-danger"></span>
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="@Model.CenaPromocyja" class="col-sm-3 col-form-label text-end">Cena promocyjna: </label>
+                <div class="col-sm-4">
+        <input asp-for="@Model.CenaPromocyja" class="form-control" aria-required="true" placeholder="Cena promocyjna" />
+        <span asp-validation-for="@Model.CenaPromocyja" class="text-danger">
+                </span>
+                </div>
         </div>
 
         <hr class="my-4">

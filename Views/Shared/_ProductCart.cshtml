@@ -3,6 +3,13 @@
 @using X.PagedList.Mvc.Core
 
 <div class="card m-1">
+    @if (Model.Promocja == true && Model.CenaPromocyja != null)
+    {   
+            decimal ProcentPromocji = (decimal)(1 - (Model.CenaPromocyja / Model.CenaProduktu));
+
+        <div class="sale">@ProcentPromocji.ToString(".##") %</div>
+    }
+
     <div class="thumbnail">
         <a class="product-name link-dark" asp-controller="Product" asp-action="Details" asp-route-id="@Model.ProductId">
             <img class="card-img-top" src="~/images/produkty/@Model.Symbol/@Model.ImageUrl" alt="@Model.Name" style="width:260px;">
