@@ -1,11 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using NuGet.Packaging;
+﻿using Microsoft.EntityFrameworkCore;
 using partner_aluro.Data;
 using partner_aluro.Models;
 using partner_aluro.Services.Interfaces;
-using System.Runtime.Serialization;
-using System.Security.Cryptography.Xml;
 
 namespace partner_aluro.Services
 {
@@ -21,6 +17,17 @@ namespace partner_aluro.Services
         public int DeleteProductId(int id)
         {
             var product = _context.Products.Find(id);
+
+
+            List<ProductCategory> productCategor = _context.ProductCategory.Where(x=>x.ProductID==id).ToList();
+            for(int i = 0; i < productCategor.Count; i++)
+            {
+                _context.ProductCategory.Remove(productCategor[i]);
+                _context.SaveChanges();
+            }
+
+
+
             _context.Products.Remove(product);
             _context.SaveChanges();
             return id;
@@ -30,7 +37,6 @@ namespace partner_aluro.Services
         {
             var product = await _context.Products
                 .Include(p => p.CategoryNavigation)
-                .Include(p => p.CategorySubNavigation)
                 .Include(p => p.Product_Images)
                 .FirstOrDefaultAsync(m => m.ProductId == id);
 

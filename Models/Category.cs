@@ -12,9 +12,6 @@ namespace partner_aluro.Models
         public int? ParentId { get; set; }
 
         public int? ChildId { get; set; }
-        //[InverseProperty(nameof(SubCategory.Categories))]
-        public ICollection<SubCategory>? SubCategories { get; set; } = new List<SubCategory>();
-
 
         [Required(ErrorMessage = "Wprowadz nazwę kategorii")]
         public string Name { get; set; }
@@ -36,32 +33,32 @@ namespace partner_aluro.Models
     }
 
 
-    public class SubCategory 
-    {
+    //public class SubCategory 
+    //{
 
-        [Key]
-        public int SubCategoryId { get; set; }
-        public string Name { get; set; }
+    //    [Key]
+    //    public int SubCategoryId { get; set; }
+    //    public string Name { get; set; }
 
-        public bool? Aktywny { get; set; }
-
-
-        public string? Description { get; set; }
-
-        public int? kolejnosc { get; set; }
-
-        public int CatID { get; set; }
-
-        // Foreign key 
-        [Display(Name = "Category")]
-        public int SubCatId { get; set; }
-        [ForeignKey("SubCatId")]
-        public virtual Category Category { get; set; }
-
-        public virtual ICollection<Product>? Produkty { get; set; }
+    //    public bool? Aktywny { get; set; }
 
 
-    }
+    //    public string? Description { get; set; }
+
+    //    public int? kolejnosc { get; set; }
+
+    //    public int CatID { get; set; }
+
+    //    // Foreign key 
+    //    [Display(Name = "Category")]
+    //    public int SubCatId { get; set; }
+    //    [ForeignKey("SubCatId")]
+    //    public virtual Category Category { get; set; }
+
+    //    public virtual ICollection<Product>? Produkty { get; set; }
+
+
+    //}
 
 
 }

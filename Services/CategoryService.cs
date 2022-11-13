@@ -28,7 +28,7 @@ namespace partner_aluro.Services
         public int Delete(int id)
         {
             Category category = _context.Category
-                .Include(x => x.SubCategories).FirstOrDefault(x => x.CategoryId == id);
+                .FirstOrDefault(x => x.CategoryId == id);
 
 
             _context.Category.Remove(category);
@@ -36,18 +36,10 @@ namespace partner_aluro.Services
             _context.SaveChanges();
             return id;
         }
-        public int DeleteSubCategory(int id)
-        {
-            SubCategory subCategory = _context.SubCategory.FirstOrDefault(x => x.SubCategoryId == id);
 
-            _context.SubCategory.Remove(subCategory);
-
-            _context.SaveChanges();
-            return id;
-        }
         public int Delete(string name)
         {
-            Category category = _context.Category.Include(x => x.SubCategories).FirstOrDefault(x => x.Name == name);
+            Category category = _context.Category.FirstOrDefault(x => x.Name == name);
             int id = category.CategoryId;
 
             _context.Category.Remove(category);
@@ -60,7 +52,6 @@ namespace partner_aluro.Services
         {
             var category = await _context.Category
                 .Include(p => p.Produkty)
-                .Include(sc => sc.SubCategories)
                 .FirstOrDefaultAsync(x => x.CategoryId == id);
 
             return category;
@@ -70,7 +61,6 @@ namespace partner_aluro.Services
 
             var category = await _context.Category
                 .Include(p => p.Produkty)
-                .Include(sc => sc.SubCategories)
                 .FirstOrDefaultAsync(x => x.Name == name);
 
 
@@ -81,7 +71,6 @@ namespace partner_aluro.Services
         {
             var category = await _context.Category
                 .Include(p => p.Produkty)
-                .Include(sc => sc.SubCategories)
                 .ToListAsync();
 
 
@@ -135,11 +124,6 @@ namespace partner_aluro.Services
             return category;
         }
 
-        public async Task AddSave(SubCategory category)
-        {
-            await _context.SubCategory.AddAsync(category);
-            await _context.SaveChangesAsync();
-        }
 
         public string GetName(int id)
         {
@@ -148,11 +132,5 @@ namespace partner_aluro.Services
             return name;
         }
 
-        public string GetNameSub(int id)
-        {
-            List<SubCategory> list = _context.SubCategory.ToList();
-            string name = list.Find(x => x.SubCategoryId == id).Name;
-            return name;
-        }
     }
 }

@@ -23,8 +23,6 @@ namespace partner_aluro.Data
         //Sluzy do tego ktory model odpowiada ktorej encji w bazie danych DbSet 
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Category { get; set; }
-        public DbSet<SubCategory> SubCategory { get; set; }
-
         public DbSet<CartItem> CartItems { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }

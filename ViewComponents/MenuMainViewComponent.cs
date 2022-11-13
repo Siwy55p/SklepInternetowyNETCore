@@ -15,7 +15,6 @@ namespace partner_aluro.ViewComponents
         public async Task<IViewComponentResult> InvokeAsync()
         {
             var resul = await _context.Category
-            .Include(sb => sb.SubCategories)
             .OrderBy(c => c.kolejnosc)
             .ToListAsync();
             return View(resul);

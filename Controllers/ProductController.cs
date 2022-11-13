@@ -48,7 +48,7 @@ namespace partner_aluro.Controllers
         public async Task <IActionResult> Edit(int id)
         {
             ViewBag.Category = GetCategories();
-            ViewBag.SubCategory = GetSubCategories();
+
             Product produkt = await _ProductService.GetProductId(id);
             produkt.Kategorie = _context.ProductCategory.Where(x => x.ProductID == id).ToList();
             return View(produkt);
@@ -61,7 +61,7 @@ namespace partner_aluro.Controllers
         public async Task<IActionResult> Edit(int id, Product product)
         {
             ViewBag.Category = GetCategories();
-            ViewBag.SubCategory = GetSubCategories();
+
             if (id != product.ProductId)
             {
                 return NotFound();
@@ -97,7 +97,7 @@ namespace partner_aluro.Controllers
         public IActionResult Add()
         {
             ViewBag.Category = GetCategories();
-            ViewBag.SubCategory = GetSubCategories();
+
             Product product = new();
 
             //product.Cats = _ProductService.GetListCategory();
@@ -121,11 +121,6 @@ namespace partner_aluro.Controllers
                 _productCategoryService.DeleteProductCategoryMultiple(ProduktId, KategoriaID);
             }
 
-            //dodaj kategorie Lista
-            int i =0;
-            i++;
-
-
         }
 
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
@@ -133,10 +128,6 @@ namespace partner_aluro.Controllers
         public async Task<IActionResult> Add(Product product)
         {
             ViewBag.Category = GetCategories();
-            ViewBag.SubCategory = GetSubCategories();
-
-            product.DataDodania = DateTime.Now;
-
 
             product.Bestseller = true;
             product.ImageUrl = "";
@@ -145,7 +136,10 @@ namespace partner_aluro.Controllers
             ModelState.Remove("CategorySubNavigation");
             ModelState.Remove("product_Images");
 
-            if (!ModelState.IsValid)
+            var mod = ModelState.First(c => c.Key == "Symbol");  // this
+            mod.Value.Errors.Add("Symbol musi być unikatowy, ten Symbol już występuje.");    // this
+
+            if (ModelState.IsValid)
             {
                 return View(product);
             }
@@ -350,32 +344,6 @@ namespace partner_aluro.Controllers
             //    Value = di.CategoryId.ToString(),
             //    Text = di.Name
             //}).ToList();
-
-
-            //lstCategories.Insert(0, dmyItem );
-
-            return lstCategories;
-        }
-
-        private List<SelectListItem> GetSubCategories()
-        {
-            //var lstCategories = new List<SelectListItem>();
-
-            //lstCategories = _ProductService.GetListCategory().Select(ct => new SelectListItem()
-            //{
-            //    Value = ct.CategoryId.ToString(),
-            //    Text = ct.Name
-            //}).ToList();
-
-            //var dmyItem = new List<SelectListItem>();
-
-            var lstCategories = new List<SelectListItem>();
-
-            lstCategories = _context.SubCategory.ToList().OrderBy(x=> x.SubCategoryId).Select(di => new SelectListItem()
-            {
-                Value = di.SubCategoryId.ToString(),
-                Text = di.Name
-            }).ToList();
 
 
             //lstCategories.Insert(0, dmyItem );

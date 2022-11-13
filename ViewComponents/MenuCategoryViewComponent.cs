@@ -18,7 +18,6 @@ namespace partner_aluro.ViewComponents
             //var resul = await _context.Category.ToListAsync();
 
             var resul = await _context.Category
-                .Include(sb => sb.SubCategories)
                 .OrderBy(c => c.kolejnosc)
                 .ToListAsync();
             //cat.SubCategory = await _context.SubCategory.ToListAsync();

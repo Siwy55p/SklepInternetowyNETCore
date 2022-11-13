@@ -117,21 +117,20 @@
                 @*<option>Select one</option>*@
             </select>
         </div>
-
-        <div class="form-group">
-            <label asp-for="@Model.SubCategoryId" class="control-label">Pod kategoria:</label>
-            <select asp-for="@Model.SubCategoryId" class="form-control" asp-items="ViewBag.SubCategory">
-            </select>
-        </div>
         <div class="form-group row">
             <label asp-for="@Model.Description" class="col-sm-4 col-form-label">Opis produktu</label>
             <textarea asp-for="@Model.Description" class="form-control" rows="3"></textarea>
         </div>
 
-        <div class="form-group">
-            <input hidden asp-for="@Model.ImageUrl" class="form-control" />
-            </span>
-        </div>
+<div class="form-group row">
+    <label asp-for="@Model.DataDodania" class="col-sm-3 col-form-label text-end">DataDodania: </label>
+    <div class="col-sm-4">
+        <input asp-for="@Model.DataDodania" class="form-control" aria-required="true" placeholder="Materiał" readonly="readonly" />
+        <span asp-validation-for="@Model.DataDodania" class="text-danger">
+        </span>
+    </div>
+</div>
+
 
 
         <h4 class="mb-2">Widoczność</h4>

@@ -26,6 +26,8 @@ namespace partner_aluro.Controllers
         private readonly ApplicationDbContext _context;
 
 
+        public static int Pages = 12;
+
         public CategoryController(ICategoryService categoryDB, IUnitOfWorkCategory iUnitOfWorkCategory, ApplicationDbContext context)
         {
             _categoryService = categoryDB;
@@ -63,32 +65,6 @@ namespace partner_aluro.Controllers
         }
 
         [HttpGet]
-        public IActionResult AddSubCategory()
-        {
-            ViewData["kategorie"] = GetCategories();
-            SubCategory subCategory = new SubCategory();
-            return View(subCategory);
-        }
-        [HttpPost]
-        public async Task<IActionResult> AddSubCategoryAsync(SubCategory data)
-        {
-            data.Category = await _categoryService.GetAsync(data.SubCatId);
-            //data.Category = await _categoryService.GetAsync(data.SubCategoryId);
-
-            ModelState.Remove("SubCategories");
-            ModelState.Remove("Category");
-            if (!ModelState.IsValid)
-            {
-                return View();
-            }
-
-            //logika zapisania kategorii do bazy.
-            _categoryService.AddSave(data); //speclajnie nie ma await 
-
-            return RedirectToAction("List");
-        }
-
-        [HttpGet]
         public async Task<IActionResult> EditAsync(int id)
         {
             var kategoria = await _categoryService.GetAsync(id);
@@ -116,41 +92,6 @@ namespace partner_aluro.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> EditSubCategory(int SubId)
-        {
-            ViewData["kategorie"] = GetCategories();
-            SubCategory subCategory = await _context.SubCategory.FirstOrDefaultAsync(x => x.SubCategoryId == SubId);
-
-            if (subCategory == null)
-            {
-                return NotFound();
-            }
-
-            return View(subCategory);
-        }
-        [HttpPost]
-        public async Task<IActionResult> EditSubCategory(SubCategory data)
-        {
-            ViewData["kategorie"] = GetCategories();
-            Category kategoria = await _iUnitOfWorkCategory.Category.GetAsync(data.SubCategoryId);
-
-            if (kategoria == null)
-            {
-                return NotFound();
-            }
-
-            kategoria.Name = data.Name;
-            //kategoria.Description = data.Description;
-            //kategoria.kolejnosc = data.kolejnosc;
-            kategoria.Aktywny = data.Aktywny;
-
-            _iUnitOfWorkCategory.Category.Update(kategoria);
-
-            return RedirectToAction("List");
-        }
-
-
-        [HttpGet]
         public IActionResult Details(int id)
         {
             var category = _categoryService.GetAsync(id);
@@ -165,12 +106,6 @@ namespace partner_aluro.Controllers
         }
 
 
-        public IActionResult DeleteSubCategory(int SubId)
-        {
-            _categoryService.DeleteSubCategory(SubId);
-            return RedirectToAction("List");
-        }
-
 
         [HttpGet]
         public async Task<IActionResult> List()
@@ -179,65 +114,6 @@ namespace partner_aluro.Controllers
 
             return View(Category);
         }
-
-        //TUTAJ WYSWIETLAM STRONE PODSTAWOWĄ DLA WYSWIETLENIA PRODUKTOW Z ID KATEGORIA
-        //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public async Task<IActionResult> Lista1Sub(int KategoriaId, int? page, string? szukanaNazwa, int? Sort) //Link do wyswietlania po wyborze kategorii
-        {
-
-            //KategoriaId = 3;
-
-
-            //var products = _cart.GetAllCartItems();
-
-            List<Product> produkty = await _context.Products.Where(x => x.Ukryty == false).Where(x => x.SubCategoryId == KategoriaId).ToListAsync();
-
-            szukanaNazwa = _categoryService.GetNameSub(KategoriaId);
-            var categoryPage = new MvcBreadcrumbNode("Kategoria", "Home", szukanaNazwa);
-            ViewData["BreadcrumbNode"] = categoryPage;
-            ViewData["Title"] = szukanaNazwa;
-            ViewData["szukanaNazwa"] = szukanaNazwa;
-
-            ViewData["Sort"] = Sort;
-
-            //jesli jest cos w karcie przekaz do zmiennej, pokaz wartosc karty true
-            //if (products.Count > 0)
-            //{
-            //    ViewData["Pokaz"] = "show";
-            //}
-
-            var pageNumber = page ?? 1; // if no page was specified in the querystring, default to the first page (1)
-            var onePageOfProducts = produkty.ToPagedList(pageNumber, 9); // will only contain 25 products max because of the pageSize
-
-            if (Sort == 1)
-            {
-                onePageOfProducts = produkty.OrderBy(p => p.Name).ToPagedList(pageNumber, 9); // will only contain 25 products max because of the pageSize
-            }
-            else if (Sort == 2)
-            {
-                onePageOfProducts = produkty.OrderByDescending(p => p.Name).ToPagedList(pageNumber, 9); // will only contain 25 products max because of the pageSize
-            }
-            else if (Sort == 3)
-            {
-                onePageOfProducts = produkty.OrderBy(p => p.Symbol).ToPagedList(pageNumber, 9); // will only contain 25 products max because of the pageSize
-            }
-            else if (Sort == 4)
-            {
-                onePageOfProducts = produkty.OrderByDescending(p => p.Symbol).ToPagedList(pageNumber, 9); // will only contain 25 products max because of the pageSize
-            }
-
-
-            ViewBag.OnePageOfProducts = onePageOfProducts;
-
-
-            ViewBag.KategoriaId = 99999;
-            ViewBag.KategoriaId2 = KategoriaId;
-
-            return View(produkty);
-
-
-        }
-
 
         //TUTAJ WYSWIETLAM STRONE PODSTAWOWĄ DLA WYSWIETLENIA PRODUKTOW Z ID KATEGORIA
         //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -269,26 +145,26 @@ namespace partner_aluro.Controllers
             //}
 
             var pageNumber = page ?? 1; // if no page was specified in the querystring, default to the first page (1)
-            var onePageOfProducts = produkty.ToPagedList(pageNumber, 9); // will only contain 25 products max because of the pageSize
+            var onePageOfProducts = produkty.ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
 
             if (Sort == 1)
             {
-                onePageOfProducts = produkty.OrderBy(p => p.Name).ToPagedList(pageNumber, 9); // will only contain 25 products max because of the pageSize
+                onePageOfProducts = produkty.OrderBy(p => p.Name).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
             }
             else if (Sort == 2)
             {
-                onePageOfProducts = produkty.OrderByDescending(p => p.Name).ToPagedList(pageNumber, 9); // will only contain 25 products max because of the pageSize
+                onePageOfProducts = produkty.OrderByDescending(p => p.Name).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
             }
             else if (Sort == 3)
             {
-                onePageOfProducts = produkty.OrderBy(p => p.Symbol).ToPagedList(pageNumber, 9); // will only contain 25 products max because of the pageSize
+                onePageOfProducts = produkty.OrderBy(p => p.Symbol).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
             }
             else if (Sort == 4)
             {
-                onePageOfProducts = produkty.OrderByDescending(p => p.Symbol).ToPagedList(pageNumber, 9); // will only contain 25 products max because of the pageSize
+                onePageOfProducts = produkty.OrderByDescending(p => p.Symbol).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
             }else
             {
-                onePageOfProducts = produkty.OrderByDescending(p => p.Symbol).ToPagedList(pageNumber, 9);
+                onePageOfProducts = produkty.OrderByDescending(p => p.Symbol).ToPagedList(pageNumber, Pages);
             }
 
             //ViewData["OnePageOfProducts"] = onePageOfProducts;
@@ -333,20 +209,20 @@ namespace partner_aluro.Controllers
                 szukanaNazwa = "";
                 List<Product> produkty = await _context.Products.Where(x => x.Ukryty == false).ToListAsync();
                 var pageNumber = page ?? 1; // if no page was specified in the querystring, default to the first page (1)
-                var onePageOfProducts = produkty.ToPagedList(pageNumber, 9); // will only contain 25 products max because of the pageSize
+                var onePageOfProducts = produkty.ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
 
                 if (Sort == 1)
                 {
-                    onePageOfProducts = produkty.OrderBy(p => p.Name).ToPagedList(pageNumber, 9); // will only contain 25 products max because of the pageSize
+                    onePageOfProducts = produkty.OrderBy(p => p.Name).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
                 } else if (Sort == 2)
                 {
-                    onePageOfProducts = produkty.OrderByDescending(p => p.Name).ToPagedList(pageNumber, 9); // will only contain 25 products max because of the pageSize
+                    onePageOfProducts = produkty.OrderByDescending(p => p.Name).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
                 } else if (Sort == 3)
                 {
-                    onePageOfProducts = produkty.OrderBy(p => p.Symbol).ToPagedList(pageNumber, 9); // will only contain 25 products max because of the pageSize
+                    onePageOfProducts = produkty.OrderBy(p => p.Symbol).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
                 } else if (Sort == 4)
                 {
-                    onePageOfProducts = produkty.OrderByDescending(p => p.Symbol).ToPagedList(pageNumber, 9); // will only contain 25 products max because of the pageSize
+                    onePageOfProducts = produkty.OrderByDescending(p => p.Symbol).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
                 }
 
 
@@ -361,7 +237,7 @@ namespace partner_aluro.Controllers
             else
             {
 
-                List<Product> produkty2 = await _context.Products.Where(x => x.Ukryty == false).Where(x => x.CategoryNavigation.Name == szukanaNazwa || x.CategorySubNavigation.Name == szukanaNazwa).ToListAsync();
+                List<Product> produkty2 = await _context.Products.Where(x => x.Ukryty == false).Where(x => x.CategoryNavigation.Name == szukanaNazwa ).ToListAsync();
 
 
                 if (szukanaNazwa != null && szukanaNazwa.Length >= 1)
@@ -375,20 +251,20 @@ namespace partner_aluro.Controllers
                         produkty.Add(produkt);
                     }
 
-                    var onePageOfProducts = produkty.ToPagedList(pageNumber, 9); // will only contain 25 products max because of the pageSize
+                    var onePageOfProducts = produkty.ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
 
                     if (Sort == 1)
                     {
-                        onePageOfProducts = produkty.OrderBy(p => p.Name).ToPagedList(pageNumber, 9); // will only contain 25 products max because of the pageSize
+                        onePageOfProducts = produkty.OrderBy(p => p.Name).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
                     } else if (Sort == 2)
                     {
-                        onePageOfProducts = produkty.OrderByDescending(p => p.Name).ToPagedList(pageNumber, 9); // will only contain 25 products max because of the pageSize
+                        onePageOfProducts = produkty.OrderByDescending(p => p.Name).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
                     } else if (Sort == 3)
                     {
-                        onePageOfProducts = produkty.OrderBy(p => p.Symbol).ToPagedList(pageNumber, 9); // will only contain 25 products max because of the pageSize
+                        onePageOfProducts = produkty.OrderBy(p => p.Symbol).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
                     } else if (Sort == 4)
                     {
-                        onePageOfProducts = produkty.OrderByDescending(p => p.Symbol).ToPagedList(pageNumber, 9); // will only contain 25 products max because of the pageSize
+                        onePageOfProducts = produkty.OrderByDescending(p => p.Symbol).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
                     }
 
                     ViewBag.OnePageOfProducts = onePageOfProducts;
@@ -422,20 +298,20 @@ namespace partner_aluro.Controllers
 
             List<Product> produkty = await Szukanie(szukanaNazwa);
             var pageNumber = page ?? 1; // if no page was specified in the querystring, default to the first page (1)
-            var onePageOfProducts = produkty.ToPagedList(pageNumber, 9); // will only contain 25 products max because of the pageSize
+            var onePageOfProducts = produkty.ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
 
             if (Sort == 1)
             {
-                onePageOfProducts = produkty.OrderBy(p => p.Name).ToPagedList(pageNumber, 9); // will only contain 25 products max because of the pageSize
+                onePageOfProducts = produkty.OrderBy(p => p.Name).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
             } else if (Sort == 2)
             {
-                onePageOfProducts = produkty.OrderByDescending(p => p.Name).ToPagedList(pageNumber, 9); // will only contain 25 products max because of the pageSize
+                onePageOfProducts = produkty.OrderByDescending(p => p.Name).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
             } else if (Sort == 3)
             {
-                onePageOfProducts = produkty.OrderBy(p => p.Symbol).ToPagedList(pageNumber, 9); // will only contain 25 products max because of the pageSize
+                onePageOfProducts = produkty.OrderBy(p => p.Symbol).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
             } else if (Sort == 4)
             {
-                onePageOfProducts = produkty.OrderByDescending(p => p.Symbol).ToPagedList(pageNumber, 9); // will only contain 25 products max because of the pageSize
+                onePageOfProducts = produkty.OrderByDescending(p => p.Symbol).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
             }
 
             //ViewBag.OnePageOfProducts = onePageOfProducts;

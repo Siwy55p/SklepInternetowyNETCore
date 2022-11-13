@@ -1,4 +1,5 @@
-﻿using partner_aluro.Services.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using partner_aluro.Services.Interfaces;
 using System.Collections;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -6,6 +7,8 @@ using System.Security.Claims;
 
 namespace partner_aluro.Models
 {
+
+    [Index(nameof(Symbol),IsUnique =true)]
     public class Product
     {
         [Key]
@@ -22,12 +25,12 @@ namespace partner_aluro.Models
         [StringLength(100)]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Symbol jest wymagany np: A01532")]
+        [Required(ErrorMessage = "Symbol jest wymagany np: A01532 i musi być unikatowy")]
         [StringLength(13)]
         public string Symbol { get; set; }
 
         public string? Description { get; set; }
-        public DateTime? DataDodania { get; set; }
+        public DateTime? DataDodania { get; set; } = DateTime.Now;
         public string? NazwaPlikuObrazka { get; set; }
 
         [Required(ErrorMessage = "Cena Produktu jest wymagana")]
@@ -67,11 +70,6 @@ namespace partner_aluro.Models
         [Display(Name="Kategoria")]
         [InverseProperty("Produkty")]
         public virtual Category? CategoryNavigation { get; set; }
-
-        [ForeignKey(nameof(SubCategoryId))]
-        [Display(Name = "SubKategoria")]
-        [InverseProperty("Produkty")]
-        public virtual SubCategory? CategorySubNavigation { get; set; }
 
         [ForeignKey(nameof(ProductImagesId))]
         public virtual List<ImageModel>? Product_Images { get; set; } = new List<ImageModel>();
