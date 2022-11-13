@@ -19,6 +19,67 @@
                 @Html.Partial("_FormProductImage")
             </div>
         </div>
+
+
+
+
+
+
+
+@*        @for (int  x = 0; x < ViewBag.Category.Count; x++)
+        {
+            for (int y = 0; y < Model.Kategorie.Count; y++)
+            {
+                if (ViewBag.Category[x].Value == Model.Kategorie[y].CategoryID.ToString())
+                {
+                    <input onclick="AddToKategoria(@Model.ProductId,@ViewBag.Category[x].Value)" type="checkbox" id="@x" class="chkclass" value="@ViewBag.Category[x].Value" checked /> @ViewBag.Category[x].Text
+                }
+            }
+
+        <input onclick="AddToKategoria(@Model.ProductId,@ViewBag.Category[x].Value)" type="checkbox" id="@x" class="chkclass" value="@ViewBag.Category[x].Value" /> @ViewBag.Category[x].Text
+        }
+*@
+
+
+    @{
+        int i = 0;
+        bool pokaz = true;
+    }
+        @foreach (var names in ViewBag.Category)
+        {
+        pokaz = true;
+            
+            var checkBoxId = "chk" + names.Value;
+            var tdId = "td" + names.Value;
+            <table width="100%">
+                <tr>
+                    <td width="20px">
+
+                        @foreach (var item in Model.Kategorie)
+                        {
+                            @if (item.CategoryID.ToString() == @names.Value)
+                            {
+                            pokaz = false;
+                            <input onclick="AddToKategoria(@Model.ProductId,@names.Value)" type="checkbox" id="@checkBoxId" class="chkclass" value="@names.Value" checked />
+
+                            @names.Text
+                            }
+                        }
+
+                    @if (pokaz)
+                        {
+                            <input onclick="AddToKategoria(@Model.ProductId,@names.Value)" type="checkbox" id="@checkBoxId" class="chkclass" value="@names.Value" />
+                            @names.Text
+                        }else
+                        {
+
+                        }
+
+                    </td>
+                </tr>
+            </table>
+        }
+
     </form>
 
 
@@ -40,5 +101,29 @@
             $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
         });
     </script>
+    <script>
+        function AddToKategoria(ProduktId, KategoriaID) {
 
+            var check = document.getElementById('chk' + KategoriaID);
+            if (check.checked) {
+                check = true;
+            } else {
+                check = false;
+            }
+
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("AddToKategoria", "Product")',
+                data: { ProduktId: ProduktId, KategoriaID: KategoriaID, check: check },
+                success: function (result) {
+                    alert(KategoriaID, check);
+                },
+
+                error: function (abc) {
+                    alert(abc.statusText);
+                },
+            });
+        }
+    </script>
 }

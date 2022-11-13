@@ -1,7 +1,48 @@
-﻿@model IEnumerable<Category>
+﻿@model List<Category>
 
 <div class="owl-one owl-carousel" >
-    @foreach (var kategorie in Model)
+
+
+    @for (int x = 0; x < Model.Count() ; x++)
+    {
+
+        @if (Model[x].Aktywny == true && Model[x].ParentId == 0)
+        {
+
+            var active = "";
+
+            if (Model[x].CategoryId == ViewBag.KategoriaId)
+            {
+                active = "active";
+            }
+
+            <div class="dropdown p-1">
+
+                <a href="@Url.Action("Lista1","Category", new {KategoriaId = @Model[x].CategoryId})" class="@active catmenu text-white mainmenu" style="border-radius:20px; width: 100px; height:100px; max-height: 100px;" aria-expanded="false">
+                    @Model[x].Name
+                </a>
+
+                @for(int y = 0; y < @Model.Count(); y++)
+                {
+                    @if (Model[y].ParentId == Model[x].CategoryId && Model[y].ParentId !=0)
+                    {
+                        <a href="#" role="button" id="dropdownMenu1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Rozwiń <i class="fas fa-ellipsis-h"></i></a>
+                        <ul class="dropdown-menu dropdown-menu-dark p-1" aria-labelledby="navbarDarkDropdownMenuLink">
+                            <li>
+                                <a class="@active text-white text-decoration-none" href="@Url.Action("Lista1","Category", new {KategoriaId = Model[y].CategoryId})">
+                                    @Model[y].Name
+                                </a>
+                            </li>
+                        </ul>
+                    }
+
+                }
+            </div>
+        }
+    }
+
+
+    @*@foreach (var kategorie in Model)
     {
         var active = "";
         var active2 = "";
@@ -11,7 +52,7 @@
             active = "active";
         }
 
-        @if (kategorie.Aktywny == true)
+        @if (kategorie.Aktywny == true && kategorie.ParentId == 0)
         {
 
             <div class="dropdown p-1">
@@ -20,7 +61,28 @@
                     @kategorie.Name
                 </a>
 
-                @if (kategorie.SubCategories.Count >= 1)
+
+
+
+@* @if (kategorie.ParentId != 0) //podrzedna kategoria
+                {
+                    <a href="#" role="button" id="dropdownMenu1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Rozwiń <i class="fas fa-ellipsis-h"></i></a>
+                    <ul class="dropdown-menu dropdown-menu-dark p-1" aria-labelledby="navbarDarkDropdownMenuLink">
+                        @foreach (var kategorie2 in Model)
+                        {
+                            <li>
+                                <a href="@Url.Action("Lista1","Category", new {KategoriaId = kategorie.CategoryId})" class="@active catmenu text-white mainmenu" style="border-radius:20px; width: 100px; height:100px; max-height: 100px;" aria-expanded="false">
+                                    @kategorie.Name
+                                </a>
+                                <a class="@active2 text-white text-decoration-none" href="@Url.Action("Lista1Sub","Category", new {KategoriaId = kategorie.CategoryId})">
+                                @kategorie.Name
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                }*@
+
+               @* @if (kategorie.SubCategories.Count >= 1)
                 {
 
                     <a href="#" role="button" id="dropdownMenu1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Rozwiń <i class="fas fa-ellipsis-h"></i></a>
@@ -45,8 +107,11 @@
 
                 }
             </div>
+        }else
+        {
+
         }
-    }
+    }*@
 </div>
 
 

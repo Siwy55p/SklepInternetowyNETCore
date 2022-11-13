@@ -4,10 +4,7 @@ using partner_aluro.Models;
 using partner_aluro.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using partner_aluro.Data;
-using partner_aluro.ViewModels;
-using System.IO;
 using Microsoft.EntityFrameworkCore;
-using partner_aluro.Services;
 
 namespace partner_aluro.Controllers
 {
@@ -53,6 +50,7 @@ namespace partner_aluro.Controllers
             ViewBag.Category = GetCategories();
             ViewBag.SubCategory = GetSubCategories();
             Product produkt = await _ProductService.GetProductId(id);
+            produkt.Kategorie = _context.ProductCategory.Where(x => x.ProductID == id).ToList();
             return View(produkt);
         }
 
@@ -100,21 +98,35 @@ namespace partner_aluro.Controllers
         {
             ViewBag.Category = GetCategories();
             ViewBag.SubCategory = GetSubCategories();
-
-
-
             Product product = new();
 
-
+            //product.Cats = _ProductService.GetListCategory();
 
             return View(product);
         }
 
-        //public void AddToKategoria(int KategoriaID)
-        //{
-        //    //dodaj kategorie Lista
+        public void AddToKategoria(int ProduktId, int KategoriaID, bool check)
+        {
 
-        //}
+            if (check)
+            {
+                ProductCategory productCategory = new ProductCategory()
+                {
+                    ProductID = ProduktId,
+                    CategoryID = KategoriaID
+                };
+                _productCategoryService.AddProductCategoryMultiple(productCategory);
+            }else
+            {
+                _productCategoryService.DeleteProductCategoryMultiple(ProduktId, KategoriaID);
+            }
+
+            //dodaj kategorie Lista
+            int i =0;
+            i++;
+
+
+        }
 
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
         [HttpPost]

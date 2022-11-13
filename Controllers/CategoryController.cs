@@ -42,6 +42,7 @@ namespace partner_aluro.Controllers
         [HttpGet]
         public IActionResult Add()
         {
+            ViewData["kategorie"] = GetCategories();
             return View();
         }
 
@@ -245,10 +246,13 @@ namespace partner_aluro.Controllers
 
             //KategoriaId = 3;
 
-
+            List<Product> produkty = await _context.ProductCategory.Where(x => x.CategoryID == KategoriaId).Include(x=>x.Product).Where(x => x.Product.Ukryty == false).Select(p=>p.Product).ToListAsync();
+            
             //var products = _cart.GetAllCartItems();
 
-            List<Product> produkty = await _context.Products.Where(x => x.Ukryty == false).Where(x => x.CategoryId == KategoriaId).ToListAsync();
+            //List<Product> produkty = await _context.Products.Where(x => x.Ukryty == false).Where(x => x.CategoryId == KategoriaId).ToListAsync();
+
+            //List<Product> produkty = await _context.Products.Where(x => x.Ukryty == false).Where(x => x.CategoryId == KategoriaId).ToListAsync();
 
             szukanaNazwa = _categoryService.GetName(KategoriaId);
             var categoryPage = new MvcBreadcrumbNode("Kategoria", "Home", szukanaNazwa);

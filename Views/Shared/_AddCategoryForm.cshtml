@@ -31,6 +31,15 @@
     </div>
 </div>
 
+<div class="form-group">
+    <label asp-for="@Model.ParentId" class="control-label">Kategoria nadrzędna</label>
+    <select asp-for="@Model.ParentId" class="form-control" asp-items="(IEnumerable<SelectListItem>)@ViewData["kategorie"]">
+    </select>
+</div>
+
+
+
+
 @Html.RadioButtonFor(model => model.Aktywny, true) Aktywny
 <br />
 @Html.RadioButtonFor(model => model.Aktywny, false) Nieaktywny

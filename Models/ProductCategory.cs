@@ -12,8 +12,10 @@ namespace partner_aluro.Models
 
         public int? CategoryID { get; set; }
 
+        [ForeignKey(nameof(ProductID))]
         virtual public Product? Product { get; set; }
 
+        [ForeignKey(nameof(CategoryID))]
         virtual public Category? Category { get; set; }
 
     }

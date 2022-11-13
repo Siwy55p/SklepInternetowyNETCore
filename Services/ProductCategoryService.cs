@@ -22,5 +22,26 @@ namespace partner_aluro.Services
             _context.ProductCategory.Add(productCategory);
             _context.SaveChanges();
         }
+
+        public void DeleteProductCategoryMultiple(ProductCategory productCategory)
+        {
+
+            ProductCategory productCategor = _context.ProductCategory.FirstOrDefault(x => x.ProductCategoryId == productCategory.ProductCategoryId);
+
+            _context.ProductCategory.Remove(productCategor);
+
+            _context.SaveChanges();
+
+        }
+        public void DeleteProductCategoryMultiple(int ProduktID, int KategoriaID)
+        {
+
+            ProductCategory productCategor = _context.ProductCategory.Where(x => x.ProductID == ProduktID).Where(y => y.CategoryID == KategoriaID).FirstOrDefault();
+
+            _context.ProductCategory.Remove(productCategor);
+
+            _context.SaveChanges();
+
+        }
     }
 }

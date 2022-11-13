@@ -5,19 +5,33 @@
     Layout = "~/Views/Shared/_Dashboard.cshtml";
 }
 
-        <form class="needs-validation" asp-action="Add" asp-route-id="@Model.ProductId" asp-controller="Product" class="form-horizontal" method="post" enctype="multipart/form-data">
-            <div class="row g-0">
-                <div class="col-md-6 border-end">
-                    @Html.HiddenFor(h=>Model.ProductId)
-                    @Html.ValidationSummary()
-                    @Html.Partial("_FormProduct")
-                </div>
-                <div class="col-md-6">
-                    @Html.Partial("_FormProductImage")
+<form class="needs-validation" asp-action="Add" asp-route-id="@Model.ProductId" asp-controller="Product" class="form-horizontal" method="post" enctype="multipart/form-data">
+    <div class="row g-0">
+        <div class="col-md-6 border-end">
+            @Html.HiddenFor(h=>Model.ProductId)
+            @Html.ValidationSummary()
+            @Html.Partial("_FormProduct")
+        </div>
+        <div class="col-md-6">
+            @Html.Partial("_FormProductImage")
             <button type="submit" class="btn btn-success">Dodaj produkt</button>
-                </div>
-            </div>
-        </form>
+        </div>
+    </div>
+
+    @*
+    @foreach (var item in ViewBag.Category)
+    {
+    <input name="AreChecked" type="checkbox" value="@item.Value" /> @item.Text <br />
+    }
+    *@
+
+    @*
+    <input asp-for="IsChecked">Solicitation
+    <input type="checkbox" data-val="true" data-val-required="The IsChecked field is required." id="IsChecked" name="IsChecked" value="true">
+    <input name="IsChecked" type="hidden" value="false">
+    *@
+
+</form>
 
 @*    <div class="col-md-6">
         <form class="needs-validation" asp-action="AddImage" asp-route-id="@Model.ProductId" asp-controller="Image" class="form-horizontal" method="post" enctype="multipart/form-data">
@@ -28,8 +42,6 @@
             <button type="submit">Dodaj Obrazy</button>
         </form>
     </div>*@
-
-
 
 @section Scripts {
     <script>
@@ -44,9 +56,19 @@
     </script>
 
     <script type="text/javascript">
-    $(".custom-file-input").on("change", function () {
-        var fileName = $(this).val().split("\\").pop();
-        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-    }); 
+        $(".custom-file-input").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
     </script>
+
+    @*
+    <script type="text/javascript">
+        $(".chkclass").on("change", function () {
+
+        });
+    </script>
+*@
+
+
 }
