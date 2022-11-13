@@ -9,7 +9,7 @@ a.active {
     left:12px;
     border: 1px solid red;
     border-radius: 5px;
-    position: fixed;
+    position: absolute;
     color: white;
     display: blok;
     background-color: red;
