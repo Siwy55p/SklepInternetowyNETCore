@@ -12,38 +12,34 @@
 
             var active2 = "";
 
-        if (@kategorie.CategoryId == ViewBag.KategoriaId)
-        {
-            active = "active";
-        }
-
-            @if(kategorie.Aktywny == true)
+            @if (kategorie.Aktywny == true && kategorie.ParentId == 0)
             {
-                <li class="nav-link list-group-item list-group-item-action p-2">
-                    <a class="@active text-dark text-decoration-none" asp-controller="Category" asp-route-KategoriaId="@kategorie.CategoryId" asp-action="Lista1">@kategorie.Name</a>
-                </li>
 
-                @if (kategorie.SubCategories.Count >= 1)
+                if (@kategorie.CategoryId == ViewBag.KategoriaId)
                 {
-                    @foreach (var kategorie2 in kategorie.SubCategories)
-                    {
+                    active = "active";
+                }
 
-                    if (@kategorie2.SubCategoryId == ViewBag.KategoriaId2)
-                    {
-                        active2 = "active";
-                    }
-                    else
-                    {
-                        active2="";
-                    }
-
-                    <li class="nav-link list-group-item list-group-item-action px-4">
-                        <a class="@active2 text-dark text-decoration-none" href="@Url.Action("Lista1Sub","Category", new {KategoriaId = kategorie2.SubCategoryId})">
-                            @kategorie2.Name
-                        </a>
+                @if (kategorie.Aktywny == true)
+                {
+                    <li class="nav-link list-group-item list-group-item-action p-2">
+                        <a class="@active text-dark text-decoration-none" asp-controller="Category" asp-route-KategoriaId="@kategorie.CategoryId" asp-action="Lista1">@kategorie.Name</a>
                     </li>
+
+                    @foreach (var kategorie2 in Model)
+                    {
+                        @if (kategorie2.ParentId == kategorie.CategoryId && kategorie2.ParentId != 0)
+                        {
+
+                            <li class="nav-link list-group-item list-group-item-action px-4">
+                                <a class="@active text-dark text-decoration-none" href="@Url.Action("Lista1","Category", new {KategoriaId = kategorie2.CategoryId})">
+                                @kategorie2.Name
+                                </a>
+                            </li>
+                        }
                     }
                 }
+
             }
         }
     </ul>
