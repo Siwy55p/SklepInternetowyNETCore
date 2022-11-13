@@ -66,6 +66,15 @@ namespace partner_aluro.Controllers
                 return NotFound();
             }
 
+            ImageModel front = _context.Images.FirstOrDefault(x => x.ImageName == "Front_" + product.Symbol + ".jpg");
+            if (front != null)
+            {
+                product.ImageUrl = front.ImageName;
+            }
+
+            int i = 0;
+            i++;
+
             if(product.product_Image.ImageFile != null)
             {
                 product.ImageUrl = await _imageService.DeleteFrontImage(product);

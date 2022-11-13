@@ -249,4 +249,52 @@
             });
         }
     </script>
+
+    <script>
+        function ReduceQuantity(ProductId) {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("ReduceQuantity2", "Cart")',
+                data: { id: ProductId },
+                success: function (result) {
+                    $("#mydiv").load(location.href + " #mydiv");
+                },
+
+                error: function (abc) {
+                    alert(abc.statusText);
+                },
+            });
+        }
+    </script>
+    <script>
+        function IncreaseQuantity(ProductId) {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("IncreaseQuantity2", "Cart")',
+                data: { id: ProductId },
+                success: function (result) {
+                    $("#mydiv").load(location.href + " #mydiv");
+                },
+
+                error: function (abc) {
+                    alert(abc.statusText);
+                },
+            });
+        }
+    </script>
+    <script>
+        function RemoveFromCart(ProductId) {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("RemoveFromCart2", "Cart")',
+                data: { id: ProductId },
+                success: function (result) {
+                    $("#mydiv").load(location.href + " #mydiv");
+                },
+                error: function (abc) {
+                    alert(abc.statusText);
+                },
+            });
+        }
+    </script>
 }
