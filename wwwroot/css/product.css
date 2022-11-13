@@ -24,8 +24,9 @@
     justify-content: center;
     align-items: center;
     border-bottom: 1px solid #eee;
-    height: 400px;
-    width: 100%;
+    max-height: 400px;
+/*
+    max-width: 100%;*/
     overflow: hidden
 }
 /*Prduct page ciag dalszy*/
@@ -40,13 +41,8 @@
 }
 
 .column {
-    width: 600px;
+    max-width: 600px;
     padding: 10px;
-}
-
-.big_picture
-{
-    width: 400px;
 }
 
 #featured {

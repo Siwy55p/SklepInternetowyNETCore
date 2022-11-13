@@ -7,135 +7,134 @@
     <link href="~/css/glightbox.css" rel="stylesheet" />
     <link href="~/css/glightbox.min.css" rel="stylesheet" />
 
-
     <link href="~/css/product.css" rel="stylesheet" />
     }
+<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-8">
+            <div class="card">	
+                <div class="row g-0">
+                        @if (User.IsInRole("Administrator") || User.IsInRole("Manager"))
+                        {
+                            <a asp-controller="Product" asp-action="Edit" asp-route-id="@Model.ProductId" class="text-end">Edytuj</a>
+                        }
 
-<div class="container mt-5 mb-5">	
-    <div class="card">	
-        <div class="row g-0">
-                @if (User.IsInRole("Administrator") || User.IsInRole("Manager"))
-                {
-                    <a asp-controller="Product" asp-action="Edit" asp-route-id="@Model.ProductId" class="text-end">Edytuj</a>
-                }
-
-            @{
-                var CenaJednostkowa = Model.CenaProduktu * (1 - (partner_aluro.Core.Constants.Rabat / 100));
-            }
+                    @{
+                        var CenaJednostkowa = Model.CenaProduktu * (1 - (partner_aluro.Core.Constants.Rabat / 100));
+                    }
 
 
-            <div class="col-md-6 border-end" id="content-wrapper">
+                    <div class="col-md-6 border-end" id="content-wrapper">
 
-                <div class="column">
-                    <div class="main_image">
-                        <a id="myLink" href="~/images/produkty/@Model.Symbol/@Model.ImageUrl" class="glightbox">
-                            <img class="big_picture" id=featured src="~/images/produkty/@Model.Symbol/@Model.ImageUrl" max-height="350px">
-                        </a>
-
-                    </div>
-
-                    <div id="slide-wrapper">
-                        <img  id="slideLeft" class="arrow" src="~/images/produktslider/arrow-left.png">
-
-                        <div id="slider">
-                            @foreach (var img in Model.Product_Images.OrderBy(i=>i.kolejnosc) )
-                            {
-                                <a href="~/images/produkty/@Model.Symbol/@img.ImageName" class="glightbox" data-gallery="gallery">
-                                    <img class="thumbnail_product" src="~/images/produkty/@Model.Symbol/@img.ImageName" alt="@img.Product" width="70px">
+                        <div class="column">
+                            <div class="main_image">
+                                <a id="myLink" href="~/images/produkty/@Model.Symbol/@Model.ImageUrl" class="glightbox">
+                                    <img class="main_image" id=featured src="~/images/produkty/@Model.Symbol/@Model.ImageUrl">
                                 </a>
-                            }
+                            </div>
+
+                            <div id="slide-wrapper">
+                                <img  id="slideLeft" class="arrow" src="~/images/produktslider/arrow-left.png">
+                                <div id="slider">
+                                    @foreach (var img in Model.Product_Images.OrderBy(i=>i.kolejnosc) )
+                                    {
+                                        <a href="~/images/produkty/@Model.Symbol/@img.ImageName" class="glightbox" data-gallery="gallery">
+                                            <img class="thumbnail_product" src="~/images/produkty/@Model.Symbol/@img.ImageName" alt="@img.Product" width="70px">
+                                        </a>
+                                    }
+                                </div>
+                                <img id="slideRight" class="arrow" src="~/images/produktslider/arrow-right.png">
+                            </div>
                         </div>
 
-                        <img id="slideRight" class="arrow" src="~/images/produktslider/arrow-right.png">
-                    </div>
-                </div>
 
 
-
-            </div>	
-            <div class="col-md-6">
-                <div class="p-3">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h4>@Model.Name</h4>
-                        </div>
-                    <div class="mt-2 pr-3">
-                        <p>Symbol: <b>@Model.Symbol</b></p>
-                    </div>
+                    </div>	
+                    <div class="col-md-6">
+                        <div class="">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h4>@Model.Name</h4>
+                            </div>
+                            <div class="mt-2 pr-3">
+                                <p>Symbol: <b>@Model.Symbol</b></p>
+                            </div>
                     
-                    @*<div @*style="max-width:460px;" class="row body_product float-end text-end m-1 p-2">*@
-                    <div class="row">
-
-                        <div class="col justify-content-end text-end">
-                            Cena hurtowa: <br>
-                            @*Twoja cena po rabacie: @CenaJednostkowa.ToString("C") <br>*@
-                            Cena detaliczna:<br />
-                        </div>
-                        <div class="col">
-                            @Model.CenaProduktu.ToString("C") <br>
-                            @Model.CenaProduktuDetal.Value.ToString("C") <br />
-                        </div>
-                    </div>
-
-                    <div class="row card-bar-action m-1 p-2 align-items-center" >
-                            @if(Model.Ilosc <= 0)
-                            {
-                                <div>Produkt jest już niedostępny.</div>
-                            }
-                            else
-                            {
-                                <div class="col-2">
-                                Ilość:
-                            </div>
-                            <div class="col-3">
-                                <input type="number" id="@Model.ProductId" name="quantity" value="1" class="form-control" aria-required="true" placeholder="Ilość" min="1" max="@Model.Ilosc" />
-                            </div>
-                            <div class="col">
-                                <button value="@Model.ProductId" onclick="AddToCart(@Model.ProductId)" data-bs-target="offcanvas" role="button">Dodaj do zamowienia</button>
-                            </div>
-                            }
-                    </div>
-
-
-                    <div class="row">
-
-                     @if (Model.WysokoscProduktu != null)
-                        {
-                        <div class="row">Specyfikacja produktu: </div>
-                        <div class="row">
-                            <div class="col">Szerokość: @Model.SzerokoscProduktu cm</div>
-                            <div class="col">Wysokość: @Model.WysokoscProduktu cm</div>
-                            <div class="col">Głębokość: @Model.GlebokoscProduktu cm</div>
-                        </div>
-
-                        }
-                        @if(Model.WagaProduktu != null)
-                        {
+                            @*<div @*style="max-width:460px;" class="row body_product float-end text-end m-1 p-2">*@
                             <div class="row">
-                                <div class="col">Waga: @Model.WagaProduktu</div>
+
+                                <div class="col justify-content-end text-end">
+                                    Cena hurtowa: <br>
+                                    @*Twoja cena po rabacie: @CenaJednostkowa.ToString("C") <br>*@
+                                    Cena detaliczna:<br />
+                                </div>
+                                <div class="col">
+                                    @Model.CenaProduktu.ToString("C") <br>
+                                    @Model.CenaProduktuDetal.Value.ToString("C") <br />
+                                </div>
                             </div>
-                        }
 
-                        @if(Model.Pakowanie != null)
-                        {
-                        <div class="row">Pakowanie: @Model.Pakowanie </div>
-                        }
+                            <div class="row card-bar-action align-items-center" >
+                                    @if(Model.Ilosc <= 0)
+                                    {
+                                        <div>Produkt jest już niedostępny.</div>
+                                    }
+                                    else
+                                    {
+                                    <div class="col-2">
+                                        Ilość:
+                                    </div>
+                                    <div class="col-2">
+                                        <input type="number" id="@Model.ProductId" name="quantity" value="1" class="form-control" aria-required="true" placeholder="Ilość" min="1" max="@Model.Ilosc" />
+                                    </div>
+                                    <div class="col">
+                                        <button value="@Model.ProductId" onclick="AddToCart(@Model.ProductId)" data-bs-target="offcanvas" role="button">Dodaj do zamowienia</button>
+                                    </div>
+                                    }
+                            </div>
 
-                        @if (Model.Materiał != null)
-                        {
-                            <div class="row">Materiał: @Model.Materiał </div>
-                        }
+
+                            <div class="row p-3">
+
+                             @if (Model.WysokoscProduktu != null)
+                                {
+                                <div class="row">Specyfikacja produktu: </div>
+                                <div class="row">
+                                    <div class="col">Szerokość: @Model.SzerokoscProduktu cm</div>
+                                    <div class="col">Wysokość: @Model.WysokoscProduktu cm</div>
+                                    <div class="col">Głębokość: @Model.GlebokoscProduktu cm</div>
+                                </div>
+
+                                }
+                                @if(Model.WagaProduktu != null)
+                                {
+                                    <div class="row">
+                                        <div class="col">Waga: @Model.WagaProduktu</div>
+                                    </div>
+                                }
+
+                                @if(Model.Pakowanie != null)
+                                {
+                                <div class="row">Pakowanie: @Model.Pakowanie </div>
+                                }
+
+                                @if (Model.Materiał != null)
+                                {
+                                    <div class="row">Materiał: @Model.Materiał </div>
+                                }
 
 
-                        <div class="row">@Model.Description</div>
+                                <div class="row">@Model.Description</div>
 
-                    </div>
+                            </div>
 
-                    @*<div class="buttons d-flex flex-row mt-5 gap-3">
-                        <button class="btn btn-outline-dark">Dodaj do zamówienia</button>
-                    </div>*@
-                </div>	
-            </div>	
-        </div> 
+                            @*<div class="buttons d-flex flex-row mt-5 gap-3">
+                                <button class="btn btn-outline-dark">Dodaj do zamówienia</button>
+                            </div>*@
+                        </div>	
+                    </div>	
+                </div> 
+            </div>
+        </div>
     </div>
 </div>
 

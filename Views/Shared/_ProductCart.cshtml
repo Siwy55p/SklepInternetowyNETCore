@@ -1,0 +1,56 @@
+﻿@model partner_aluro.Models.Product
+@using X.PagedList
+@using X.PagedList.Mvc.Core
+
+<div class="card m-1">
+    <div class="thumbnail">
+        <a class="product-name link-dark" asp-controller="Product" asp-action="Details" asp-route-id="@Model.ProductId">
+            <img class="card-img-top" src="~/images/produkty/@Model.Symbol/@Model.ImageUrl" alt="@Model.Name" style="width:260px;">
+        </a>
+    </div>
+    <div class="row card-bar-action justify-content-center align-items-center">
+
+        @if (Model.Ilosc <= 0)
+        {
+            <div class="col" align="center">Produkt jest już niedostępny</div>
+        }
+        else
+        {
+            <div class="col-4 d-none d-sm-none d-md-none d-lg-block text-wrap text-break">
+                <input type="number" id="@Model.ProductId" name="quantity" value="1" class="form-control" aria-required="true" placeholder="Ilość" min="1" max="@Model.Ilosc" />
+            </div>
+            <div class="col">
+                <button value="@Model.ProductId" onclick="AddToCart(@Model.ProductId)" data-bs-target="offcanvas" role="button">Dodaj do zamowienia</button>
+            </div>
+        }
+    </div>
+    <div class="row p-1">
+        <p>
+            <span>
+                <b>@Model.Symbol</b><br>
+            </span>
+            <span>
+                <a class="text-decoration-none link-dark" asp-controller="Product" asp-action="Details" asp-route-id="@Model.ProductId">
+                    @Model.Name <br>
+                </a>
+            </span>
+        </p>
+        @{
+            var Cena_brutto = (decimal)Model.CenaProduktu * (decimal)partner_aluro.Core.Constants.Vat;
+
+            var CenaJednostkowa = Cena_brutto * (1 - (partner_aluro.Core.Constants.Rabat / 100));
+        }
+        <div class="float-end text-end">
+            Cena hurtowa: @Model.CenaProduktu.ToString("C") (netto)
+        </div>
+        <div class="float-end text-end">
+            @Cena_brutto.ToString("C") <span class="brutto">(brutto)</span>
+        </div>
+
+        @if (partner_aluro.Core.Constants.Rabat != 0 && partner_aluro.Core.Constants.Rabat >= 0)
+        {
+            <div class="float-end text-end">Twoja cena po rabacie: @CenaJednostkowa.ToString("C") </div>
+        }
+        <div class="float-end text-end">Cena detaliczna: @Model.CenaProduktuDetal.ToString() </div>
+    </div>
+</div>

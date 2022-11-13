@@ -136,8 +136,14 @@ namespace partner_aluro.Controllers
             ModelState.Remove("CategorySubNavigation");
             ModelState.Remove("product_Images");
 
-            var mod = ModelState.First(c => c.Key == "Symbol");  // this
-            mod.Value.Errors.Add("Symbol musi być unikatowy, ten Symbol już występuje.");    // this
+            Product produktTest = _context.Products.Where(x => x.Symbol == product.Symbol).FirstOrDefault();
+            if (produktTest != null)
+            {
+                var mod = ModelState.First(c => c.Key == "Symbol");  // this
+                mod.Value.Errors.Add("Symbol musi być unikatowy, ten Symbol już występuje.");    // this
+                return View(product);
+            }
+
 
             if (ModelState.IsValid)
             {
