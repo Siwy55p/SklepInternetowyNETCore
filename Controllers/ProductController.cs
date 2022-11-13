@@ -48,7 +48,6 @@ namespace partner_aluro.Controllers
         public async Task <IActionResult> Edit(int id)
         {
             ViewBag.Category = GetCategories();
-
             Product produkt = await _ProductService.GetProductId(id);
             produkt.Kategorie = _context.ProductCategory.Where(x => x.ProductID == id).ToList();
             return View(produkt);
@@ -145,7 +144,7 @@ namespace partner_aluro.Controllers
             }
 
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return View(product);
             }
@@ -181,6 +180,7 @@ namespace partner_aluro.Controllers
         [HttpGet]
         public async Task<IActionResult> List()
         {
+            ViewBag.Category = GetCategories();
             return View(await _ProductService.GetProductList());
         }
 

@@ -28,6 +28,7 @@ namespace partner_aluro.Models
         [Required(ErrorMessage = "Symbol jest wymagany np: A01532 i musi być unikatowy")]
         [StringLength(13)]
         public string Symbol { get; set; }
+        public string? KrotkiOpis { get; set; }
 
         public string? Description { get; set; }
         public DateTime? DataDodania { get; set; } = DateTime.Now;
