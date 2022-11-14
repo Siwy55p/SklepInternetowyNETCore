@@ -24,6 +24,8 @@ namespace partner_aluro.Controllers
             _content = content;
         }
 
+        //https://partneralluro.hostingasp.pl/modules/nvn_export_products/download/aluro_products_export_ldWd8HWmUY.xml
+
         [Route("modules/nvn_export_products/download/")]
         public async Task<IActionResult> IndexAsync()
         {
