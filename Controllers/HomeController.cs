@@ -14,6 +14,8 @@ using System.Security.Claims;
 
 using ServiceReference1;
 using partner_aluro.Enums;
+using System.Runtime.CompilerServices;
+using Microsoft.EntityFrameworkCore;
 
 namespace partner_aluro.Controllers
 {
@@ -36,7 +38,7 @@ namespace partner_aluro.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
 
             //logika zalogowania
@@ -49,9 +51,9 @@ namespace partner_aluro.Controllers
                 //var kategorie = _context.Category.ToList();
 
                 //pobieramu produkty
-                var nowosci = _context.Products.Where(a => !a.Ukryty).OrderByDescending(a => a.DataDodania).Take(9).ToList();
+                var nowosci = await _context.Products.Where(a => !a.Ukryty).OrderByDescending(a => a.DataDodania).Take(9).ToListAsync();
 
-                var bestseller = _context.Products.Where(a => !a.Ukryty).OrderBy(a => Guid.NewGuid()).Take(3).ToList();
+                var bestseller = await _context.Products.Where(a => !a.Ukryty).OrderBy(a => Guid.NewGuid()).Take(3).ToListAsync();
                 //Category category = new Category { Name = "Kategoria1", Description = "Opis kategoria", NazwaPlikuIkony = "ikona.png" };
                 //_context.Add(category);
                 //_context.SaveChanges();
@@ -117,18 +119,6 @@ namespace partner_aluro.Controllers
             return View();
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Index(HomeViewModel vm)
-        {
-            //zawsze trzeba pobrac dane i wrzucic do widoku
-            var kategorie = _context.Category.ToList();
-            var nowosci = _context.Products.Where(a => !a.Ukryty).OrderByDescending(a => a.DataDodania).Take(3).ToList();
-            var bestseller = _context.Products.Where(a => !a.Ukryty).OrderBy(a => Guid.NewGuid()).Take(3).ToList();
-
-            var vm2 = new HomeViewModel() { Kategorie = kategorie, Nowosci = nowosci, Bestsellery = bestseller};
-
-            return View(vm2);
-        }
 
     }
 }

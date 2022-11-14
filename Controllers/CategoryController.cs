@@ -25,8 +25,7 @@ namespace partner_aluro.Controllers
 
         private readonly ApplicationDbContext _context;
 
-
-        public static int Pages = 12;
+        private static int Pages = 12;
 
         public CategoryController(ICategoryService categoryDB, IUnitOfWorkCategory iUnitOfWorkCategory, ApplicationDbContext context)
         {
@@ -116,7 +115,7 @@ namespace partner_aluro.Controllers
         }
 
         //TUTAJ WYSWIETLAM STRONE PODSTAWOWĄ DLA WYSWIETLENIA PRODUKTOW Z ID KATEGORIA
-        //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public async Task<IActionResult> Lista1(int KategoriaId, int? page, string? szukanaNazwa, int? Sort) //Link do wyswietlania po wyborze kategorii
         {
 

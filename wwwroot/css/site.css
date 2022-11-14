@@ -25,11 +25,12 @@ a.active {
     color: #a9a9a9;
 }
 
+
 .card {
     background: #f1f1f1;
     border: 1px solid #BAB5AF;
-    padding: 1px;
-    margin: 1px;
+    padding: 0px;
+    margin: 4px;
 }
 .card-bar-action {
     background: #e7e7e7;
@@ -60,9 +61,13 @@ a.active {
     padding: 0px
 }
 
+.breadcrumb {
+    margin-bottom: 0rem;
+}
+
 .breadcrumb a:before {
     content: " ";
-    padding: 10px;
+    padding-left: 12px;
     /*    width: 15px;*/
 
     background-image: url('../images/home.png');
@@ -70,7 +75,7 @@ a.active {
     background-size: cover;
     
     /*   font-family: entypo-fontello;*/
-    font-size: 1px;
+    font-size: 10px;
     color: #000;
     visibility: visible;
 }

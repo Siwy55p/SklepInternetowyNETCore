@@ -16,7 +16,7 @@
                 active = "active";
             }
 
-            <div class="dropdown p-1">
+            <div class="dropdown px-2 mx-1">
 
                 <a href="@Url.Action("Lista1","Category", new {KategoriaId = @Model[x].CategoryId})" class="@active catmenu text-white mainmenu" style="border-radius:20px; width: 100px; height:100px; max-height: 100px;" aria-expanded="false">
                     @Model[x].Name
@@ -26,7 +26,7 @@
                 {
                     @if (Model[y].ParentId == Model[x].CategoryId && Model[y].ParentId !=0)
                     {
-                        <a href="#" role="button" id="dropdownMenu1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Rozwiń <i class="fas fa-ellipsis-h"></i></a>
+                        <a href="#" role="button" id="dropdownMenu1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-h"></i></a>
                         <ul class="dropdown-menu dropdown-menu-dark p-1" aria-labelledby="navbarDarkDropdownMenuLink">
                             <li>
                                 <a class="@active text-white text-decoration-none" href="@Url.Action("Lista1","Category", new {KategoriaId = Model[y].CategoryId})">
