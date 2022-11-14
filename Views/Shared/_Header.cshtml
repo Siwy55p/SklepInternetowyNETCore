@@ -74,12 +74,14 @@
                 </div>
             @*KONIEC PRAWA STRONA*@
     </div>
-</div>
     <div class="sticky-top row float-end text-right">
         <a class="btn-open" data-bs-toggle="offcanvas" href="#offcanvas" role="button" aria-controls="offcanvas">
             <i class="fa fa-arrow-left" aria-hidden="true"></i>
         </a>
     </div>
+</div>
 
-        @Html.Partial("_Header2")
+<div>
+        @Html.PartialAsync("_Header2")
+
 </div>

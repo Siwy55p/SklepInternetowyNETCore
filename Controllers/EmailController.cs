@@ -23,6 +23,11 @@ namespace partner_aluro.Controllers
         [HttpPost]
         public IActionResult SendEmailFromConf(EmailViewModel send)
         {
+            if (send is null)
+            {
+                throw new ArgumentNullException(nameof(send));
+            }
+
             _emailService.SendEmailAsync(send.Send);
             return View();
         }

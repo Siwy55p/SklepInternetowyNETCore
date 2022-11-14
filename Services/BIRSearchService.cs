@@ -90,7 +90,9 @@ namespace partner_aluro
             foreach (var item in errors)
             {
                 var error = DeserializeXMLElement<ErrorModel>(item);
-                errorsList.Add(error);                
+
+                _ = errorsList.Add(error);
+                
             }
 
             if (property != null) property.SetValue(model, errorsList, null);

@@ -20,7 +20,7 @@ namespace partner_aluro.ViewComponents
         public async Task<IViewComponentResult> InvokeAsync()
         {
             UserStatusModel model = new UserStatusModel();
-            model.User = _userManager.GetUserAsync(Request.HttpContext.User).Result;
+            model.User = await _userManager.GetUserAsync(Request.HttpContext.User);
 
             if (model.User != null)
             {

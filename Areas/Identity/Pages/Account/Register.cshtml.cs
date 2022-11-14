@@ -178,7 +178,7 @@ namespace partner_aluro.Areas.Identity.Pages.Account
             public string NIP { get; set; }
         }
 
-        [HttpGet]
+        //[HttpGet]
         public async Task OnGetAsync(string pass, string email, string returnUrl = null)
         {
             //TUTAJ
@@ -192,7 +192,7 @@ namespace partner_aluro.Areas.Identity.Pages.Account
 
 
 
-        [HttpPost]
+        //[HttpPost]
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             ViewData["Profile"] = GetProfiles();
