@@ -31,7 +31,7 @@ builder.Services.AddSingleton<ISchedulerFactory, StdSchedulerFactory>();
 builder.Services.AddSingleton<JobReminders>();
 //builder.Services.AddSingleton(new MyJob(type: typeof(JobReminders), expression: "0/30 0/1 * 1/1 * ? *")); //Every 30 sec
 //builder.Services.AddSingleton(new MyJob(type: typeof(JobReminders), expression: "1/0 0/1 * 1/1 * ? *")); //Every 1min
-builder.Services.AddSingleton(new MyJob(type: typeof(JobReminders), expression: "0 15 23 * * ?")); //Every Uruchamiaj codziennie o 10:15" />
+builder.Services.AddSingleton(new MyJob(type: typeof(JobReminders), expression: "0/30 0/1 * 1/1 * ? *")); //Every Uruchamiaj codziennie o 10:15" />
 
 
 //builder.Services.AddSingleton<LanguageService>();

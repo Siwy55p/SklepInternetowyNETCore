@@ -1,10 +1,12 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.Extensions.DependencyInjection;
 using partner_aluro.Controllers;
 using partner_aluro.Data;
 using partner_aluro.Models;
 using partner_aluro.Services.Interfaces;
 using Quartz;
 using static System.Formats.Asn1.AsnWriter;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace partner_aluro.Services
 {
@@ -12,11 +14,12 @@ namespace partner_aluro.Services
     {
         public IServiceScopeFactory ServiceScopeFactory { get; set; }
         public readonly IWebHostEnvironment _webHostEnvironment;
-        
+
         public JobReminders(IServiceScopeFactory serviceScopeFactory, IWebHostEnvironment webHostEnvironment)
         {
             ServiceScopeFactory = serviceScopeFactory;
             _webHostEnvironment = webHostEnvironment;
+
         }
 
         public Task Execute(IJobExecutionContext context)
