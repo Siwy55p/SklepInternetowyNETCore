@@ -12,6 +12,7 @@ using partner_aluro.Services;
 using Microsoft.AspNetCore.WebUtilities;
 using System.Text;
 using System.Text.Encodings.Web;
+using partner_aluro.Data;
 
 namespace partner_aluro.Controllers
 {
@@ -23,13 +24,15 @@ namespace partner_aluro.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IProfildzialalnosciService _profildzialalnosciService;
 
+        private readonly RegonService RegonService;
+
 
         private readonly IAdress1rozliczeniowyService _adress1RozliczeniowyService;
         private readonly IAdress2dostawyService _adress2DostawyService;
 
         private readonly IEmailService _emailService;
 
-        public UserController(IEmailService emailService, IUnitOfWorkAdress1rozliczeniowy unitOfWorkAdress1Rozliczeniowy, IAdress2dostawyService adress2DostawyServicee, IAdress1rozliczeniowyService adress1RozliczeniowyService, IUnitOfWork unitOfWork, SignInManager<ApplicationUser> signInManager, IProfildzialalnosciService profildzialalnosciService)
+        public UserController(RegonService regonService, IEmailService emailService, IUnitOfWorkAdress1rozliczeniowy unitOfWorkAdress1Rozliczeniowy, IAdress2dostawyService adress2DostawyServicee, IAdress1rozliczeniowyService adress1RozliczeniowyService, IUnitOfWork unitOfWork, SignInManager<ApplicationUser> signInManager, IProfildzialalnosciService profildzialalnosciService)
         {
             _unitOfWork = unitOfWork;
             _signInManager = signInManager;
@@ -40,6 +43,8 @@ namespace partner_aluro.Controllers
             _unitOfWorkAdress1Rozliczeniowy = unitOfWorkAdress1Rozliczeniowy;
 
             _emailService = emailService;
+
+            RegonService = regonService;
         }
 
         public IActionResult Index()
@@ -99,6 +104,7 @@ namespace partner_aluro.Controllers
         [HttpPost]
         public async Task<IActionResult> OnPostAsync(EditUserViewModel data) //Zapis uzytkownika do bazy
         {
+
             var user = _unitOfWork.User.GetUser(data.User.Id);
             if (user == null)
             {
@@ -207,6 +213,63 @@ namespace partner_aluro.Controllers
         {
             //utworz uzytkownika i zapisz do bazy na podstawie zmiennej data
 
+            CompanyModel _model = new CompanyModel();
+
+            _model.Vat = data.User.Adress1rozliczeniowy.Vat;
+            _model = await RegonService.GetCompanyDataByNipAsync(_model.Vat);
+
+            data.User.Adress1rozliczeniowy.Regon = _model.Regon;
+
+            //if (data.User.Adress1rozliczeniowy.Wojewodztwo != null)
+            //{
+            //    data.User.Adress1rozliczeniowy.Wojewodztwo = _model.Wojewodztwo;
+            //}
+
+            //if (data.User.NazwaFirmy != null)
+            //{
+            //    data.User.NazwaFirmy = _model.Name;
+            //}
+
+            //if (data.User.Adress1rozliczeniowy.Wojewodztwo != null)
+            //{
+            //    data.User.Adress1rozliczeniowy.Wojewodztwo = _model.Wojewodztwo;
+            //}
+            //if (data.User.Adress1rozliczeniowy.Powiat != null)
+            //{
+            //    data.User.Adress1rozliczeniowy.Powiat = _model.Powiat;
+            //}
+
+            //if (data.User.Adress1rozliczeniowy.Ulica != null)
+            //{
+            //    data.User.Adress1rozliczeniowy.Ulica = _model.Ulica;
+            //}
+
+            //if (data.User.Adress1rozliczeniowy.Miasto != null)
+            //{
+            //    data.User.Adress1rozliczeniowy.Miasto = _model.Miejscowosc;
+            //}
+
+            //if (data.User.Adress1rozliczeniowy.KodPocztowy != null)
+            //{
+            //    data.User.Adress1rozliczeniowy.KodPocztowy = _model.KodPocztowy;
+            //}
+
+            //if (data.User.Adress2dostawy.Miasto != null)
+            //{
+            //    data.User.Adress2dostawy.Miasto = data.User.Adress1rozliczeniowy.Miasto;
+            //}
+
+            //if (data.User.Adress2dostawy.Ulica != null)
+            //{
+            //    data.User.Adress2dostawy.Ulica = data.User.Adress1rozliczeniowy.Ulica;
+            //}
+
+
+            //if (data.User.Adress2dostawy.KodPocztowy != null)
+            //{ 
+            //    data.User.Adress2dostawy.KodPocztowy = data.User.Adress1rozliczeniowy.KodPocztowy;
+            //}
+
             ViewData["Profile"] = GetProfiles();
 
 
@@ -258,6 +321,17 @@ namespace partner_aluro.Controllers
             {
                 await _signInManager.UserManager.RemoveFromRolesAsync(user, rolesToDelete);
             }
+
+            user.Imie = data.User.Imie;
+            user.Nazwisko = data.User.Nazwisko;
+            user.Email = data.User.Email;
+            user.UserName = data.User.UserName;
+            user.NotatkaOsobista = data.User.NotatkaOsobista;
+            user.IdProfilDzialalnosci = data.User.IdProfilDzialalnosci;
+            user.NazwaFirmy = data.User.NazwaFirmy;
+            _unitOfWork.User.UpdateUser(user);
+
+            var Adres1roz = _unitOfWorkAdress1Rozliczeniowy.adress1Rozliczeniowy.Get(data.User.Id);
 
 
 
