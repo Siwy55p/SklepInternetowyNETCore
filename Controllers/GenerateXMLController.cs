@@ -156,8 +156,6 @@ namespace partner_aluro.Controllers
                 OpisNode.AppendChild(CDataOpis);
                 productNode.AppendChild(OpisNode);
 
-
-
                 //Opis CData
                 XmlCDataSection CDatakategoria_domyslna;
                 CDatakategoria_domyslna = doc.CreateCDataSection(produkty[i].CategoryNavigation.Name);
@@ -166,8 +164,6 @@ namespace partner_aluro.Controllers
                 XmlNode kategoria_domyslnaNode = doc.CreateElement("kategoria_domyslna");
                 kategoria_domyslnaNode.AppendChild(CDatakategoria_domyslna);
                 productNode.AppendChild(kategoria_domyslnaNode);
-
-
 
                 //Opis CDataszerokosc
                 XmlCDataSection CDataszerokosc;
