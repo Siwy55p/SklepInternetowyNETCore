@@ -9,20 +9,19 @@
 
 @if (SignInManager.IsSignedIn(User) && @Model.User != null)
 {
-    <ul class="navbar-nav">
-        <li class="nav-item nav-link"><span class="text-white">Witaj</span> <span class="text-warning">@Model.User.Imie @Model.User.Nazwisko</span>
+    <div class="nav-item nav-link text-center">
+        <span class="text-white">Witaj</span> <span class="text-warning">@Model.User.Imie @Model.User.Nazwisko</span>
             @if(Model.User.ProfilDzialalnosci != null && Model.User.ProfilDzialalnosci.Rabat != 0)
             {
             <br />
-                <span class="text-white">
+                <span class="text-white ">
                 Twój rabat: @Model.User.ProfilDzialalnosci.Rabat %
                 </span>
             }
             else{
                 ;
             }
-        </li>
-    </ul>
+    </div>
 }
 else
 {

@@ -4,6 +4,66 @@ a.active {
     font-weight: bold;
 }
 
+
+/*header menu menu nav bar*/
+.navbar {
+    height: 25px;
+    min-height: 25px;
+}
+
+.navbar-nav > li > a {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.navbar-brand {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+/*header menu menu nav bar*/
+
+/*header */
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/*Koszyj header*/
+.badge {
+    padding-left: 9px;
+    padding-right: 9px;
+    -webkit-border-radius: 9px;
+    -moz-border-radius: 9px;
+    border-radius: 9px;
+}
+
+.label-warning[href],
+.badge-warning[href] {
+    background-color: #c67605;
+}
+
+
+.field-validation-error {
+    color: red;
+    font-size: smaller;
+}
+/*header*/
+
+#lblCartCount {
+    font-size: 12px;
+    background: #ff0000;
+    color: #fff;
+    padding: 0 5px;
+    vertical-align: top;
+    margin-left: -6px;
+    margin-top: -5px;
+}
+/*Koszyj header*/
+
+
+
 .sale {
     max-width: 70px;
     top:12px;
@@ -106,13 +166,6 @@ a.active {
     z-index: 1;
 }
 
-
-.header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .thumbnail img {
     max-width: 100%;
     height: auto;
@@ -126,39 +179,6 @@ a.active {
     background: white;
 }
 
-/*Koszyj header*/
-.badge {
-    padding-left: 9px;
-    padding-right: 9px;
-    -webkit-border-radius: 9px;
-    -moz-border-radius: 9px;
-    border-radius: 9px;
-}
-
-.label-warning[href],
-.badge-warning[href] {
-    background-color: #c67605;
-}
-
-
-.field-validation-error {
-    color: red;
-    font-size: smaller;
-}
-
-
-
-
-#lblCartCount {
-    font-size: 12px;
-    background: #ff0000;
-    color: #fff;
-    padding: 0 5px;
-    vertical-align: top;
-    margin-left: -6px;
-    margin-top: -5px;
-}
-/*Koszyj header*/
 
 /*POPRAWKI bdo BOOTSTRP STYLE*/
 .offcanvas-end {

@@ -11,36 +11,47 @@
 <div class="row justify-content-center align-items-center sticky-top navbar-expand-lg navbar-dark bg-dark">
     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-10 col-xxl-8">
 
-                <div class="header row justify-content-md-center">
+                <div class="row">
                     @*Lewa strona*@
                     @if (User.IsInRole("Administrator") || User.IsInRole("Manager"))
                     {
-                        <div class="col-2">
-
+                        <div class="col" style="max-width:60px">
                             <a class="btn btn-secondary" href="@Url.Action("Index","Dashboard")" role="button" alt="panel użytkownika">
                                 Panel
                             </a>
                         </div>
                     }
-                    <div class="col">
+                    <div class="col" style="max-width:110px">
+                            <a class="nav-link dropdown-toggle"
+                                href="#"
+                                role="button"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false">Language</i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li class="nav-item dropdown navbar-dark"><a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="pl-POL" class="nav-link"><i class="ui-icon-flag flag-icon-en"></i>Polski</a></li>
+                                <li class="nav-item dropdown navbar-dark"><a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="en-US" class="nav-link"><i class="ui-icon-flag flag-icon-en"></i>English</a></li>
+                                <li class="nav-item dropdown navbar-dark"><a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="de-DE" class="nav-link"><i class="ui-icon-flag flag-icon-en"></i>Niemiecki</a></li>
+                            </ul>
+                        @*
                         <ul class="navbar-nav z-index-2">
                             <li class="nav-item dropdown navbar-dark"><a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="pl-POL" class="nav-link"><i class="ui-icon-flag flag-icon-en"></i>Polski</a></li>
                                 <li class ="nav-item dropdown navbar-dark"><a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="en-US" class="nav-link"><i class="ui-icon-flag flag-icon-en"></i>English</a></li>
                             <li class="nav-item dropdown navbar-dark"><a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="de-DE" class="nav-link"><i class="ui-icon-flag flag-icon-en"></i>Niemiecki</a></li>
-                        </ul>
+                        </ul>*@
                     </div>
-                    @*Srodek strona*@
-                    <div class="col">
+            @*Srodek strona*@
+            <div class="col justify-content-center align-items-center center d-none d-sm-block d-md-block d-lg-block">
                         @await Component.InvokeAsync("UserStatus")
-                    </div>
-                    @*Srodek strona*@
+            </div>
+            @*Srodek strona*@
 
                     @*PRAWA STRONA START*@
-                    <div class="col-3">
-                        <nav class="navbar navbar-fixed-top navbar-dark bg-inverse">
+            <div class="col  text-end" style="width:200px; max-width: 200px;">
+
                             @*PRAWA STRONA START*@
-                            <div id="navbarNavDarkDropdown2 ">
-                            <ul class="nav z-index-2 custom-nav">
+                    <div id="navbarNavDarkDropdown2 text-end ">
+                    <ul class="nav custom-nav menu-end">
                                 
 
                                     <li>
@@ -67,11 +78,11 @@
                                             </li>
                                         </ul>
                                     </li>
-                                </ul>
-                            </div>
-                        </nav>
+                            </ul>
                     </div>
+
                 </div>
+            </div>
             @*KONIEC PRAWA STRONA*@
     </div>
 </div>
