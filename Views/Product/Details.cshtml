@@ -110,10 +110,10 @@
 
                                 @if (Model.CenaPromocyja != null && Model.Promocja == true)
                                 {
-                                    decimal ProcentPromocji = (decimal)(1 - (Model.CenaPromocyja / Model.CenaProduktu));
+                                    decimal ProcentPromocji = (decimal)(1 - (Model.CenaPromocyja / Model.CenaProduktu)) * 100;
 
 
-                                    <div class="sale" >@ProcentPromocji.ToString(".##") %</div>
+                                    <div class="sale" >@ProcentPromocji.ToString("##.") %</div>
 
                                     <span class="text-decoration-line-through">@Model.CenaProduktu.ToString("C")</span><br />
                                     <span>@Model.CenaPromocyja.Value.ToString("C")</span>

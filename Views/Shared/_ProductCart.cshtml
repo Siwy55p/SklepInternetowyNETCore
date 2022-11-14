@@ -7,7 +7,7 @@
     {   
             decimal ProcentPromocji = (decimal)(1 - (Model.CenaPromocyja / Model.CenaProduktu)) * 100;
 
-        <div class="sale">@ProcentPromocji.ToString(".##") %</div>
+        <div class="sale">@ProcentPromocji.ToString("##.") %</div>
     }
 
     <div class="thumbnail">
