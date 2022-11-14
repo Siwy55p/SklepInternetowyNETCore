@@ -1,24 +1,24 @@
 ﻿<div class="row justify-content-center align-items-center">
-    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-10 col-xxl-8 pt-3">
+    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-10 col-xxl-8 pt-3 ">
         <div class="row">
-            <div class="col-lg-2 col-xl-2 d-none d-sm-none d-md-none d-lg-block" style="max-width:290px; width:290px">
+            <div class="col d-none d-sm-none d-md-none d-lg-block" style="max-width:290px; width:290px">
                     <a href="@Url.Action("Index","Home")">
                         <img src="~/images/logo/aluro_logo-1024x509.png" />
                     </a>
-                </div>
-                <div class="col-sm-12 col-md-12 col-lg-10 col-xl-8"> 
-                    <div class="row">
-                                @await Component.InvokeAsync("MenuMain")
-                    </div>
-                    <div class="row">
-                        <form asp-controller="Category" asp-action="Lista" method="get">
-                            <div class="search input-group mb-3 ">
-                                <input type="text" name="szukanaNazwa" id="szukanaNazwa" class="form-control mr-sm-2" placeholder="Szukaj..." />
-                            </div>
-                        </form>
-                    </div>
+            </div>
+            <div class="col-12 col-md-12 col-lg-8 col-xl col-xxl">
+                @await Component.InvokeAsync("MenuMain")
 
-                </div>
+            </div>
+
+
+        </div>
+        <div class="row justify-content-center align-items-center">
+            <div class="col search pb-1">
+                <form asp-controller="Category" asp-action="Lista" method="get">
+                        <input type="text" name="szukanaNazwa" id="szukanaNazwa" class="form-control mr-sm-2" placeholder="Szukaj..." />
+                </form>
+            </div>
         </div>
     </div>
 </div>

@@ -11,7 +11,7 @@
 <div class="row justify-content-center align-items-center sticky-top navbar-expand-lg navbar-dark bg-dark">
     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-10 col-xxl-8">
 
-                <div class="row">
+        <div class="row">
                     @*Lewa strona*@
                     @if (User.IsInRole("Administrator") || User.IsInRole("Manager"))
                     {
@@ -47,7 +47,7 @@
             @*Srodek strona*@
 
                     @*PRAWA STRONA START*@
-            <div class="col  text-end" style="width:200px; max-width: 200px;">
+            <div class="col "  style="width:200px; max-width: 200px;">
 
                             @*PRAWA STRONA START*@
                     <div id="navbarNavDarkDropdown2 text-end ">
@@ -81,20 +81,14 @@
                             </ul>
                     </div>
 
-                </div>
             </div>
+        </div>
             @*KONIEC PRAWA STRONA*@
     </div>
 </div>
-<div>
-    <div class="sticky-top row float-end text-right">
-        <a class="btn-open" data-bs-toggle="offcanvas" href="#offcanvas" role="button" aria-controls="offcanvas">
-            <i class="fa fa-arrow-left" aria-hidden="true"></i>
-        </a>
-    </div>
+<div class="sticky-top float-end" style="max-width:20px;">
+    <a class="sticky-top float-end" data-bs-toggle="offcanvas" href="#offcanvas" role="button" aria-controls="offcanvas">
+        <i class="fa fa-arrow-left"></i>
+    </a>
 </div>
-
-<div>
         @await Html.PartialAsync("_Header2")
-
-</div>
