@@ -3,10 +3,9 @@
 @using X.PagedList.Mvc.Core
 
 
-
     @foreach (var produkt in ViewBag.OnePageOfProducts)
     {    
-        <div class="col-6 col-md-6 col-lg-4 p-0">
+        <div class="col-6 col-md-6 col-lg-4 p-0 m-0">
             @await Html.PartialAsync("_ProductCart",(Product)@produkt)
         </div>
     }

@@ -13,18 +13,17 @@
                 <div class="row custom-kategory-menu sticky-top">
                         @await Component.InvokeAsync("MenuCategory")
                 </div>
-            </div>
+            </div>@*
             @*CONTENT PRAWA STRONA*@
-            <div class="col bg-white border p-1 m-1">
+            <div class="col px-3 m-0"> @*tutajdodalem kolor*@
                 @*HEADER*@
-                <div class="row align-items-center mb-7">
-                    <div class="col-8 col-md-auto">
+                <div class="row align-items-center mb-1 bg-light p-1 border">
+                    <div class="col start d-flex align-items-center justify-vertical-center">
                         <!-- Breadcrumb -->
                         <breadcrumb></breadcrumb>
                     </div>
-                    <div class="col-4 col-md-auto">
+                    <div class="col d-flex justify-content-end">
                         <!-- Select -->
-
                         <div class="dropdown">
                             <button class="sortuj dropdown-toggle" type="button" id="dropdownMenuButtonSort" data-bs-toggle="dropdown" aria-expanded="false">
                                 Sortuj
@@ -36,12 +35,10 @@
                                 <li class="dropdown-item link-dark">@Html.ActionLink("Symbol od największej do najmniejszej", "Lista", "Category", new { page = 1, szukanaNazwa=ViewData["szukanaNazwa"], sort=4 } )</li>
                             </ul>
                         </div>
-
-
                     </div>
                 </div>
                 @*PRODKUCTS*@
-                <div class="row">
+                <div class="row bg-light p-1 border">
                     @await Html.PartialAsync("_ProductList")
                 </div>
             </div>
