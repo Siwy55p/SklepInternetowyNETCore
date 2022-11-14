@@ -9,7 +9,7 @@
 
 
 <div class="row justify-content-center align-items-center sticky-top navbar-expand-lg navbar-dark bg-dark">
-   <div class="col-sm-12 col-md-12 col-lg-12 col-xl-10">
+    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-10 col-xxl-8">
 
                 <div class="header row justify-content-md-center">
                     @*Lewa strona*@
@@ -75,11 +75,15 @@
             @*KONIEC PRAWA STRONA*@
     </div>
 </div>
+<div>
     <div class="sticky-top row float-end text-right">
         <a class="btn-open" data-bs-toggle="offcanvas" href="#offcanvas" role="button" aria-controls="offcanvas">
             <i class="fa fa-arrow-left" aria-hidden="true"></i>
         </a>
     </div>
+</div>
 
-        @Html.Partial("_Header2")
+<div>
+        @await Html.PartialAsync("_Header2")
+
 </div>

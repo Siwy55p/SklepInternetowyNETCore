@@ -178,7 +178,7 @@ namespace partner_aluro.Areas.Identity.Pages.Account
             public string NIP { get; set; }
         }
 
-        [HttpGet]
+        //[HttpGet]
         public async Task OnGetAsync(string pass, string email, string returnUrl = null)
         {
             //TUTAJ
@@ -192,7 +192,7 @@ namespace partner_aluro.Areas.Identity.Pages.Account
 
 
 
-        [HttpPost]
+        //[HttpPost]
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             ViewData["Profile"] = GetProfiles();
@@ -290,7 +290,7 @@ namespace partner_aluro.Areas.Identity.Pages.Account
                         Body = text,
                     };
 
-                    _emailService.SendEmailAsync(newClint); //Bardzo specjalnie tak jest jak jest zrobione. Musi tak zostać.
+                    await _emailService.SendEmailAsync(newClint); //Bardzo specjalnie tak jest jak jest zrobione. Musi tak zostać.
 
                     //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     //code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
@@ -303,15 +303,15 @@ namespace partner_aluro.Areas.Identity.Pages.Account
                     //await _emailSender.SendEmailAsync(Input.Email, "Ustaw swoj e-mail",
                     //    $"Ustaw swój e-mail: <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>kliknij tutaj</a>.");
 
-                    //if (_userManager.Options.SignIn.RequireConfirmedAccount)
-                    //{
-                    //    return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
-                    //}
-                    //else
-                    //{
-                    //    await _signInManager.SignInAsync(user, isPersistent: false);
-                    //    return LocalRedirect(returnUrl);
-                    //}
+                    if (_userManager.Options.SignIn.RequireConfirmedAccount)
+                    {
+                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
+                    }
+                    else
+                    {
+                        await _signInManager.SignInAsync(user, isPersistent: false);
+                        return LocalRedirect(returnUrl);
+                    }
                 }
                 foreach (var error in result.Errors)
                 {

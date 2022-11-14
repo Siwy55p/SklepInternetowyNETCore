@@ -7,7 +7,7 @@
 
 <form asp-controller="Category" asp-action="Edit" asp-route-id="@Model.CategoryId">
 
-        @Html.Partial("_AddCategoryForm")
+        @await Html.PartialAsync("_AddCategoryForm")
 
     <button type="submit">Zapisz zmiany</button>
 </form>

@@ -33,7 +33,7 @@ namespace partner_aluro.Controllers
             //patch root www
             string webRootPath = _webHostEnvironment.WebRootPath;
 
-            var produkty = _content.Products.Where(p => p.Ukryty == false).Where(p => p.CategoryNavigation.Aktywny == true).Include(p=>p.Product_Images).Include(p => p.CategoryNavigation).OrderBy(p => p.Symbol).ToList();
+            var produkty = await _content.Products.Where(p => p.Ukryty == false).Where(p => p.CategoryNavigation.Aktywny == true).Include(p=>p.Product_Images).Include(p => p.CategoryNavigation).OrderBy(p => p.Symbol).ToListAsync();
 
             XmlDocument doc = new();
             XmlNode docNode = doc.CreateXmlDeclaration("1.0", "UTF-8", null);

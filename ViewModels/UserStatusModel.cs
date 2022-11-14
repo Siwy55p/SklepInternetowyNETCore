@@ -5,6 +5,6 @@ namespace partner_aluro.ViewModels
 {
     public class UserStatusModel
     {
-        public ApplicationUser User { get; set; }
+        public ApplicationUser? User { get; set; }
     }
 }

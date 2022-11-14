@@ -21,7 +21,7 @@ namespace partner_aluro.Controllers
         public async Task<IActionResult> Search()
         {
             string term = HttpContext.Request.Query["term"].ToString();
-            var szukanaNazwa = _db.Products.Where(x=> x.Ukryty==false).Where(p => p.Name.Contains(term))
+            var szukanaNazwa = await _db.Products.Where(x=> x.Ukryty==false).Where(p => p.Name.Contains(term))
                                             .Select(p => p.Name).ToListAsync();
             return Ok(szukanaNazwa);
         }

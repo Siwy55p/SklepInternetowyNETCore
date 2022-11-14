@@ -12,9 +12,9 @@ namespace partner_aluro.ViewModels
             Subject = Constants.RegisterNewAccoutMessageEmailSubject
         };
 
-        public EmailDto Active { get; set; }
+        public EmailDto? Active { get; set; }
 
-        public EmailDto Send { get; set; }
+        public EmailDto? Send { get; set; }
 
     }
 }

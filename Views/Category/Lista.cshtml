@@ -5,27 +5,28 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
 <div class="row justify-content-center align-items-center">
-    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-8">
+    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-10 col-xxl-8">
+
         @*MENU LEFA STRONA LEFT KATEGORIE*@
         <div class="row">
-            <div class="col-12 col-md-4 col-lg-3 d-none d-sm-none d-md-none d-lg-block">
+            @* <div class="col-12 col-md-4 col-lg-4 col-xl-4 col-xxl-3 d-none d-sm-none d-md-none d-lg-block">*@
+            <div class="col d-none d-sm-none d-md-none d-lg-block" style="max-width:235px;">
                 <div class="row custom-kategory-menu sticky-top">
                             @await Component.InvokeAsync("MenuCategory")
-                    </div>
-            </div>
+                </div>
+            </div>@*
             @*CONTENT PRAWA STRONA*@
-            <div class="col-12 col-md-8 col-lg-9"> 
+            <div class="col px-3 m-0">
+                @*tutajdodalem kolor*@
                 @*HEADER*@
-                <div class="row align-items-center mb-7">
-                    <div class="col-12 col-md">
+                <div class="row align-items-center mb-1 bg-light p-1 border">
+                    <div class="col start d-flex">
                         <!-- Breadcrumb -->
                         <breadcrumb></breadcrumb>
                     </div>
-                    <div class="col-12 col-md-auto">
+                    <div class="col d-flex justify-content-end">
                         <!-- Select -->
-
                         <div class="dropdown">
                             <button class="sortuj dropdown-toggle" type="button" id="dropdownMenuButtonSort" data-bs-toggle="dropdown" aria-expanded="false">
                                 Sortuj
@@ -42,7 +43,7 @@
                     </div>
                 </div>
                 @*PRODKUCTS*@
-                <div class="row">
+                <div class="row p-1">
                     @await Html.PartialAsync("_ProductList")
                 </div>
             </div>

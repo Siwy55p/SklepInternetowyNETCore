@@ -10,10 +10,10 @@
         <div class="col-md-6 border-end">
             @Html.HiddenFor(h=>Model.ProductId)
             @Html.ValidationSummary()
-            @Html.Partial("_FormProduct")
+            @await Html.PartialAsync("_FormProduct")
         </div>
         <div class="col-md-6">
-            @Html.Partial("_FormProductImage")
+            @await Html.PartialAsync("_FormProductImage")
             <button type="submit" class="btn btn-success">Dodaj produkt</button>
         </div>
     </div>

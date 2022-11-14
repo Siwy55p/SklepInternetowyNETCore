@@ -76,7 +76,7 @@ namespace partner_aluro.Controllers
 
 
         [HttpPost]
-        public async Task<List<string>> SprawdzNIPAsync(string Vat = null)
+        public async Task<List<string>> SprawdzNIPAsync(string? Vat = null)
         {
 
             CompanyModel _model = new CompanyModel();
@@ -115,7 +115,7 @@ namespace partner_aluro.Controllers
             return list;
         }
         [HttpPost]
-        public async Task<List<string>> SprawdzNIPAdminAddUser(string Vat = null)
+        public async Task<List<string>> SprawdzNIPAdminAddUser(string? Vat = null)
         {
 
             CompanyModel _model = new CompanyModel();
