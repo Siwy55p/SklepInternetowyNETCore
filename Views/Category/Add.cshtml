@@ -7,6 +7,6 @@
 
 @using (Html.BeginForm("Add", "Category", FormMethod.Post))
 {
-    @Html.Partial("_AddCategoryForm", Model)
+    @await Html.PartialAsync("_AddCategoryForm", Model)
     <button type="submit">Dodaj kategorię</button>
 }

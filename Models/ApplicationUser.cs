@@ -7,7 +7,10 @@ namespace partner_aluro.Models;
 public class ApplicationUser : IdentityUser
 {
     public int? IdProfilDzialalnosci { get; set; }
+    [Required]
     public string Imie { get; set; }
+
+    [Required]
     public string Nazwisko { get; set; }
     public string? NazwaFirmy { get; set; }
     public DateTime? DataZałożenia { get; set; }
