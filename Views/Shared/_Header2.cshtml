@@ -16,9 +16,17 @@
         <div class="row justify-content-center align-items-center">
             <div class="col search pb-1">
                 <form asp-controller="Category" asp-action="Lista" method="get">
-                        <input type="text" name="szukanaNazwa" id="szukanaNazwa" class="form-control mr-sm-2" placeholder="Szukaj..." />
+                    <div class="search input-group mb-3 ">
+                        <input type="text" name="szukanaNazwa" id="szukanaNazwa" class="form-control mr-sm-2" placeholder="Szukaj produktu" />
+                    </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
+
+
+
+@section Scripts{
+
+}

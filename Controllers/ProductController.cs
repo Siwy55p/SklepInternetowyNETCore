@@ -10,6 +10,8 @@ using System.Drawing;
 using System;
 using System.Drawing;
 using System.Resources;
+using System.Resources.NetStandard;
+using System.Collections;
 
 namespace partner_aluro.Controllers
 {
@@ -135,6 +137,49 @@ namespace partner_aluro.Controllers
             }
 
         }
+        public static void UpdateResourceFile(Hashtable data, String path)
+        {
+            Hashtable resourceEntries = new Hashtable();
+
+            //Get existing resources
+            ResXResourceReader reader = new ResXResourceReader(path);
+            if (reader != null)
+            {
+                IDictionaryEnumerator id = reader.GetEnumerator();
+                foreach (DictionaryEntry d in reader)
+                {
+                    if (d.Value == null)
+                        resourceEntries.Add(d.Key.ToString(), "");
+                    else
+                        resourceEntries.Add(d.Key.ToString(), d.Value.ToString());
+                }
+                reader.Close();
+            }
+
+            //Modify resources here...
+            foreach (String key in data.Keys)
+            {
+                if (!resourceEntries.ContainsKey(key))
+                {
+
+                    String value = data[key].ToString();
+                    if (value == null) value = "";
+
+                    resourceEntries.Add(key, value);
+                }
+            }
+
+            //Write the combined resource file
+            ResXResourceWriter resourceWriter = new ResXResourceWriter(path);
+
+            foreach (String key in resourceEntries.Keys)
+            {
+                resourceWriter.AddResource(key, resourceEntries[key]);
+            }
+            resourceWriter.Generate();
+            resourceWriter.Close();
+
+        }
 
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
         [HttpPost]
@@ -143,22 +188,24 @@ namespace partner_aluro.Controllers
             ViewBag.Category = GetCategories();
 
 
-            string webRootPath = _webHostEnvironment.WebRootPath;
+            string webRootPath = _webHostEnvironment.ContentRootPath;
 
 
-            //string resxFile = webRootPath+ "\\Resources\\SharedResource.pl-PL.resx";
+            string resxFile = webRootPath+ "\\Resources\\SharedResource.pl-PL.resx";
 
-            //using (ResXResourceWriter resx = new ResXResourceWriter(@".\CarResources.resx"))
+            Dictionary<string, string> dict = new Dictionary<string, string>();
+            dict.Add("raz", "one");
+            dict.Add("dwa", "two");
+            dict.Add("trzy", "three");
+
+            Hashtable data = new Hashtable(dict);
+
+            UpdateResourceFile(data, resxFile);
+
+            //using (ResXResourceWriter resx = new ResXResourceWriter(resxFile))
             //{
-            //    resx.AddResource("Title", "Classic American Cars");
-            //    resx.AddResource("HeaderString1", "Make");
-            //    resx.AddResource("HeaderString2", "Model");
-            //    resx.AddResource("HeaderString3", "Year");
-            //    resx.AddResource("HeaderString4", "Doors");
-            //    resx.AddResource("HeaderString5", "Cylinders");
-            //    resx.AddResource("Information", SystemIcons.Information);
-            //    resx.AddResource("EarlyAuto1", car1);
-            //    resx.AddResource("EarlyAuto2", car2);
+            //    resx.AddResource(product.Name, product.Name);
+
             //}
 
 
