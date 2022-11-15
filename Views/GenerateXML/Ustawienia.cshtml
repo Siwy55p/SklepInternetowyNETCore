@@ -7,9 +7,23 @@
 <form asp-controller="GenerateXML" asp-action="SetUstawienia">
 
     <div class="col-sm-6">
-        <label asp-for="@Model.path" class="form-label">Adres strony http://</label>
-        <input asp-for="@Model.path" id="Nazwisko" class="form-control" value="@Model.path" autocomplete="Nazwisko" aria-required="true" />
+        <label asp-for="@Model.path" class="form-label">Aktualne ustawienie path</label>
+        <input asp-for="@Model.path" id="Nazwisko" class="form-control" value="@Model.path" aria-required="true" readonly/>
+
+    </div>
+    <div class="col-sm-6">
+        <label asp-for="@Model.adresStrony" class="form-label">Adres strony http://</label>
+        <input asp-for="@Model.adresStrony" id="Nazwisko" class="form-control" value="@Model.adresStrony" aria-required="true" />
 
     </div>
 
+    <div class="row">
+        <button class="btn btn-success" type="submit">Zapisz</button>
+    </div>
 </form>
+
+<div class="row">
+    <a href="@Url.Action("Index","GenerateXML")" class=" btn btn-primary px-3">
+        <span>Pokaz XML plik</span>
+    </a>
+</div>
