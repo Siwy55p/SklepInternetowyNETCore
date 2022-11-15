@@ -41,7 +41,10 @@ namespace partner_aluro.Controllers
                 Directory.CreateDirectory(basePath);
             }
 
+            //var newFileName = string.Format("{0}{1}",Guid.NewGuid().ToString("N"),".xml");
+
             var newFileName = string.Format("{0}{1}", "aluro_products_export_ldWd8HWmUY", ".xml");
+
 
             string xml = System.IO.File.ReadAllText(webRootPath + basePath + newFileName, Encoding.UTF8);
 
