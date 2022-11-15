@@ -4,6 +4,7 @@
     ViewBag.Title = "Aluro - Strona główna";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@inject LanguageService language
 
 @section LinkStyleHead
     {
@@ -41,7 +42,12 @@
         <div class="row justify-content-center align-items-center">
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-10 col-xxl-8">
                 <div class="row">
-                    <h4>Nowości</h4>
+                    @{
+                    int i = 0;
+                    i++;
+                    }
+                    <h4>@language.Getkey("welcome")</h4>
+                @ViewData["Message"]
                 </div>
             </div>
         </div>

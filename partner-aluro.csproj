@@ -88,6 +88,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Resources\SharedResource.nl-LN.resx">
+      <LastGenOutput>SharedResource.en-US.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\SharedResource.de-DE.resx">
+      <LastGenOutput>SharedResource.en-US.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Resources\SharedResource.de-DE.resx">
       <SubType>Designer</SubType>
       <LastGenOutput>SharedResource.de-DE.Designer.cs</LastGenOutput>

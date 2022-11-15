@@ -16,6 +16,7 @@ using ServiceReference1;
 using partner_aluro.Enums;
 using System.Runtime.CompilerServices;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
 
 namespace partner_aluro.Controllers
 {
@@ -29,12 +30,16 @@ namespace partner_aluro.Controllers
 
         private readonly  RegonService RegonService;
 
+        private readonly IStringLocalizer<HomeController> _localizer;
+
         //Kontrolery odzoruwuja widoki , sluza do generowania róznych treści
-        public HomeController(ApplicationDbContext context,ILogger<HomeController> logger, RegonService regonService)
+        public HomeController(IStringLocalizer<HomeController> localizer,ApplicationDbContext context,ILogger<HomeController> logger, RegonService regonService)
         {
             _logger = logger;
             _context = context;
             RegonService = regonService;
+
+            _localizer = localizer;
         }
 
         [HttpGet]
@@ -44,13 +49,9 @@ namespace partner_aluro.Controllers
             //logika zalogowania
             if (User.Identity.IsAuthenticated)
             {
-                ////Potrzebne do REGON
-                //CompanyModel _model = new CompanyModel();
+                string name = "Czesc";
+                ViewData["Message"] = _localizer["<b>Hello</b><i> {0}</i>", name];
 
-                //zawsze trzeba pobrac dane i wrzucic do widoku
-                //var kategorie = _context.Category.ToList();
-
-                //pobieramu produkty
                 var nowosci = await _context.Products.Where(a => !a.Ukryty).OrderByDescending(a => a.DataDodania).Take(9).ToListAsync();
 
                 var bestseller = await _context.Products.Where(a => !a.Ukryty).OrderBy(a => Guid.NewGuid()).Take(3).ToListAsync();
