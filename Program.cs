@@ -16,6 +16,7 @@ using Quartz.Impl;
 using Microsoft.AspNetCore.Localization;
 using System.Globalization;
 using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Mvc.Razor;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DbContextProductionConnection");
@@ -90,30 +91,23 @@ builder.Services.AddLocalization(options=>
     });
 
 builder.Services.AddMvc()
-    .AddViewLocalization()
-    .AddDataAnnotationsLocalization(options =>
-    {
-        options.DataAnnotationLocalizerProvider = (type, factory) =>
-        {
-            var assemblyName = new AssemblyName(typeof(SharedResource).GetTypeInfo().Assembly.FullName);
-            return factory.Create("ShareResource", assemblyName.Name);
-        };
-    });
+    .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+    .AddDataAnnotationsLocalization();
 
-builder.Services.Configure<RequestLocalizationOptions>(options =>
-{
-    var supportedCultures = new List<CultureInfo>
-    {
-        new CultureInfo("en-US"),
-        new CultureInfo("nl-NL"),
-        new CultureInfo("de-DE"),
-    };
-    options.DefaultRequestCulture = new RequestCulture(culture: "en-US", uiCulture: "en-US");
-    options.SupportedCultures = supportedCultures;
-    options.SupportedUICultures = supportedCultures;
+//builder.Services.Configure<RequestLocalizationOptions>(options =>
+//{
+//    var supportedCultures = new List<CultureInfo>
+//    {
+//        new CultureInfo("en-US"),
+//        new CultureInfo("nl-NL"),
+//        new CultureInfo("de-DE"),
+//    };
+//    options.DefaultRequestCulture = new RequestCulture(culture: "en-US", uiCulture: "en-US");
+//    options.SupportedCultures = supportedCultures;
+//    options.SupportedUICultures = supportedCultures;
 
-    options.RequestCultureProviders.Insert(0, new QueryStringRequestCultureProvider());
-});
+//    options.RequestCultureProviders.Insert(0, new QueryStringRequestCultureProvider());
+//});
 //LANGUAGE
 
 #region
@@ -135,8 +129,16 @@ if (!app.Environment.IsDevelopment())
 }
 
 //LANGUAGE
-var locOptions = app.Services.GetService<IOptions<RequestLocalizationOptions>>();
-app.UseRequestLocalization(locOptions.Value);
+var supportedCulture = new[] { "en", "fr", "es" };
+var localizationOptions = new RequestLocalizationOptions().SetDefaultCulture(supportedCulture[0])
+    .AddSupportedCultures(supportedCulture)
+    .AddSupportedUICultures(supportedCulture);
+
+app.UseRequestLocalization(localizationOptions);
+
+
+//var locOptions = app.Services.GetService<IOptions<RequestLocalizationOptions>>();
+//app.UseRequestLocalization(locOptions.Value);
 //LANGUAGE
 
 app.UseHttpsRedirection();

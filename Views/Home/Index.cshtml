@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @inject LanguageService language
-
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
 @section LinkStyleHead
     {
 
@@ -48,6 +48,7 @@
                     }
                     <h4>@language.Getkey("welcome")</h4>
                 @ViewData["Message"]
+                <h4>@localizer["welcome"]</h4>
                 </div>
             </div>
         </div>

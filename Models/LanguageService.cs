@@ -12,7 +12,7 @@ namespace partner_aluro.Models
             var type = typeof(SharedResource);
             var assemblyName = new AssemblyName(type.GetTypeInfo().Assembly.FullName);
             
-            _localizer = factory.Create("partner_aluro.SharedResource",assemblyName.Name);
+            _localizer = factory.Create("SharedResource",assemblyName.Name);
         }
 
         public LocalizedString Getkey(string key)
