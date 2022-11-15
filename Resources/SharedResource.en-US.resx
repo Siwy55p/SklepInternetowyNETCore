@@ -117,7 +117,55 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="welcome" xml:space="preserve">
-    <value>"asdasd"</value>
+  <data name="Angielski" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="CenaDetaliczna" xml:space="preserve">
+    <value>Retail price</value>
+  </data>
+  <data name="CenaHurtowa" xml:space="preserve">
+    <value>Wholesale price</value>
+  </data>
+  <data name="Dodaj do zamowienia" xml:space="preserve">
+    <value>Add to Cart</value>
+  </data>
+  <data name="Dodatki do wnętrz" xml:space="preserve">
+    <value>Interior accessories</value>
+  </data>
+  <data name="Donice i Osłonki" xml:space="preserve">
+    <value>Pots and Covers</value>
+  </data>
+  <data name="Język" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="Meble" xml:space="preserve">
+    <value>Furniture</value>
+  </data>
+  <data name="Nowa Kolekcja" xml:space="preserve">
+    <value>New collection</value>
+  </data>
+  <data name="Nowa Kolekcja 2022" xml:space="preserve">
+    <value>New Collection 2022</value>
+  </data>
+  <data name="Nowości" xml:space="preserve">
+    <value>News</value>
+  </data>
+  <data name="Oświetlenie" xml:space="preserve">
+    <value>Lighting</value>
+  </data>
+  <data name="Polski" xml:space="preserve">
+    <value>Polish</value>
+  </data>
+  <data name="ProduktNiedostępny" xml:space="preserve">
+    <value>The product is no longer available</value>
+  </data>
+  <data name="Rośliny sztuczne" xml:space="preserve">
+    <value>Artificial plants</value>
+  </data>
+  <data name="Witaj" xml:space="preserve">
+    <value>Hello</value>
+  </data>
+  <data name="Świąteczka Kolekcja" xml:space="preserve">
+    <value>Christmas Collection</value>
   </data>
 </root>

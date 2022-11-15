@@ -6,16 +6,16 @@
 
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
-
+@inject LanguageService language
 @if (SignInManager.IsSignedIn(User) && @Model.User != null)
 {
     <div class="nav-item nav-link text-center">
-        <span class="text-white">Witaj</span> <span class="text-warning">@Model.User.Imie @Model.User.Nazwisko</span>
+        <span class="text-white">@language.Getkey("Witaj")</span> <span class="text-warning">@Model.User.Imie @Model.User.Nazwisko</span>
             @if(Model.User.ProfilDzialalnosci != null && Model.User.ProfilDzialalnosci.Rabat != 0)
             {
             <br />
                 <span class="text-white ">
-                Twój rabat: @Model.User.ProfilDzialalnosci.Rabat %
+                @language.Getkey("Twój rabat: ") @Model.User.ProfilDzialalnosci.Rabat %
                 </span>
             }
             else{

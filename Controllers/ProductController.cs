@@ -5,6 +5,11 @@ using partner_aluro.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using partner_aluro.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Drawing;
+
+using System;
+using System.Drawing;
+using System.Resources;
 
 namespace partner_aluro.Controllers
 {
@@ -136,6 +141,26 @@ namespace partner_aluro.Controllers
         public async Task<IActionResult> Add(Product product)
         {
             ViewBag.Category = GetCategories();
+
+
+            string webRootPath = _webHostEnvironment.WebRootPath;
+
+
+            //string resxFile = webRootPath+ "\\Resources\\SharedResource.pl-PL.resx";
+
+            //using (ResXResourceWriter resx = new ResXResourceWriter(@".\CarResources.resx"))
+            //{
+            //    resx.AddResource("Title", "Classic American Cars");
+            //    resx.AddResource("HeaderString1", "Make");
+            //    resx.AddResource("HeaderString2", "Model");
+            //    resx.AddResource("HeaderString3", "Year");
+            //    resx.AddResource("HeaderString4", "Doors");
+            //    resx.AddResource("HeaderString5", "Cylinders");
+            //    resx.AddResource("Information", SystemIcons.Information);
+            //    resx.AddResource("EarlyAuto1", car1);
+            //    resx.AddResource("EarlyAuto2", car2);
+            //}
+
 
             product.Bestseller = true;
             product.ImageUrl = "";

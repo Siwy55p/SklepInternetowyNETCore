@@ -2,6 +2,8 @@
 @using X.PagedList
 @using X.PagedList.Mvc.Core
 
+@inject LanguageService language
+
 <div class="card"> @*odstepy miedzy kartami w stylu site.css pozycja card*@
     @if (Model.Promocja == true && Model.CenaPromocyja != null)
     {   
@@ -19,7 +21,7 @@
 
         @if (Model.Ilosc <= 0)
         {
-            <div class="col" align="center">Produkt jest już niedostępny</div>
+            <div class="col" align="center">@language.Getkey("ProduktNiedostępny")</div>
         }
         else
         {
@@ -27,7 +29,7 @@
                 <input type="number" id="@Model.ProductId" name="quantity" value="1" class="form-control" aria-required="true" placeholder="Ilość" min="1" max="@Model.Ilosc" />
             </div>
             <div class="col">
-                <button value="@Model.ProductId" onclick="AddToCart(@Model.ProductId)" data-bs-target="offcanvas" role="button">Dodaj do zamowienia</button>
+                <button value="@Model.ProductId" onclick="AddToCart(@Model.ProductId)" data-bs-target="offcanvas" role="button">@language.Getkey("Dodaj do zamowienia")</button>
             </div>
         }
     </div>
@@ -48,7 +50,7 @@
             var CenaJednostkowa = Cena_brutto * (1 - (partner_aluro.Core.Constants.Rabat / 100));
         }
         <div class="float-end text-end">
-            Cena hurtowa: @Model.CenaProduktu.ToString("C") (netto)
+            @language.Getkey("CenaHurtowa"): @Model.CenaProduktu.ToString("C") (netto)
         </div>
         <div class="float-end text-end">
             @Cena_brutto.ToString("C") <span class="brutto">(brutto)</span>
@@ -58,6 +60,6 @@
         {
             <div class="float-end text-end">Twoja cena po rabacie: @CenaJednostkowa.ToString("C") </div>
         }
-        <div class="float-end text-end">Cena detaliczna: @Model.CenaProduktuDetal.ToString() </div>
+        <div class="float-end text-end">@language.Getkey("CenaDetaliczna"): @Model.CenaProduktuDetal.ToString() </div>
     </div>
 </div>

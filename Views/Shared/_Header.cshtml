@@ -7,6 +7,7 @@
 @inject UserManager<ApplicationUser> UserManager
 @inject Cart cart
 
+@inject LanguageService language
 
 <div class="row justify-content-center align-items-center sticky-top navbar-expand-lg navbar-dark bg-dark">
     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-10 col-xxl-8">
@@ -26,12 +27,12 @@
                                 href="#"
                                 role="button"
                                 data-bs-toggle="dropdown"
-                                aria-expanded="false">Language</i>
+                   aria-expanded="false">
+                    @language.Getkey("Język")</i>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
-                                <li class="nav-item dropdown navbar-dark"><a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="en-US" class="nav-link"><i class="ui-icon-flag flag-icon-en"></i>Angielski</a></li>
-                                <li class="nav-item dropdown navbar-dark"><a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="de-DE" class="nav-link"><i class="ui-icon-flag flag-icon-en"></i>Niemiecki</a></li>
-                                <li class="nav-item dropdown navbar-dark"><a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="nl-NL" class="nav-link"><i class="ui-icon-flag flag-icon-en"></i>Nordecki</a></li>
+                    <li class="nav-item dropdown navbar-dark"><a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="pl" class="nav-link"><i class="ui-icon-flag flag-icon-pl"></i>@language.Getkey("Polski")</a></li>
+                    <li class="nav-item dropdown navbar-dark"><a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="en-US" class="nav-link"><i class="ui-icon-flag flag-icon-en"></i>@language.Getkey("Angielski")</a></li>
                             </ul>
                         @*
                         <ul class="navbar-nav z-index-2">

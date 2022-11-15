@@ -1,8 +1,7 @@
 ﻿@model List<Category>
+@inject LanguageService language
 
 <div class="owl-one owl-carousel" >
-
-
     @for (int x = 0; x < Model.Count() ; x++)
     {
 
@@ -19,7 +18,7 @@
             <div class="dropdown px-2 mx-1">
 
                 <a href="@Url.Action("Lista1","Category", new {KategoriaId = @Model[x].CategoryId})" class="@active catmenu text-white mainmenu" style="border-radius:20px; width: 100px; height:100px; max-height: 100px;" aria-expanded="false">
-                    @Model[x].Name
+                    @language.Getkey(@Model[x].Name)
                 </a>
 
                 @for(int y = 0; y < @Model.Count(); y++)
@@ -30,7 +29,7 @@
                         <ul class="dropdown-menu dropdown-menu-dark p-1" aria-labelledby="navbarDarkDropdownMenuLink">
                             <li>
                                 <a class="@active text-white text-decoration-none" href="@Url.Action("Lista1","Category", new {KategoriaId = Model[y].CategoryId})">
-                                    @Model[y].Name
+                                    @language.Getkey(@Model[y].Name)
                                 </a>
                             </li>
                         </ul>
