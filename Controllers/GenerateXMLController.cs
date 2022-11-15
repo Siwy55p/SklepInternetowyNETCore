@@ -6,8 +6,6 @@ using System.Text;
 using partner_aluro.Data;
 using partner_aluro.Models;
 using Microsoft.EntityFrameworkCore;
-using static System.Net.WebRequestMethods;
-using static iTextSharp.text.pdf.AcroFields;
 
 namespace partner_aluro.Controllers
 {
@@ -23,6 +21,7 @@ namespace partner_aluro.Controllers
             _webHostEnvironment = hostEnvironment;
             _content = content;
         }
+        public static string _webRootPath = "http:\\partneralluro.hostingasp.pl\\";
 
         //https://partneralluro.hostingasp.pl/modules/nvn_export_products/download/aluro_products_export_ldWd8HWmUY.xml
 
@@ -30,8 +29,10 @@ namespace partner_aluro.Controllers
         public async Task<IActionResult> IndexAsync()
         {
 
-            //patch root www
-            string webRootPath = _webHostEnvironment.WebRootPath;
+            ////patch root www
+            //string webRootPath = _webHostEnvironment.WebRootPath;
+            //string webRootPath = "~//images//produkty//";
+            string webRootPath = _webRootPath;
 
             var produkty = await _content.Products.Where(p => p.Ukryty == false).Where(p => p.CategoryNavigation.Aktywny == true).Include(p=>p.Product_Images).Include(p => p.CategoryNavigation).OrderBy(p => p.Symbol).ToListAsync();
 
@@ -289,11 +290,14 @@ namespace partner_aluro.Controllers
             //return this.Content(xml, "text/xml");
         }
 
-        public static async Task GenerateProductXMLAsync(ApplicationDbContext _content, IWebHostEnvironment _webHostEnvironment)
+        public static string GenerateProductXMLAsync(ApplicationDbContext _content, IWebHostEnvironment _webHostEnvironment)
         {
 
-            //patch root www
-            string webRootPath = _webHostEnvironment.WebRootPath;
+            ////patch root www
+            //string webRootPath = _webHostEnvironment.WebRootPath;
+
+            //string webRootPath = "~//images//produkty//";
+            string webRootPath = _webRootPath;
 
             var produkty = _content.Products.Where(p => p.Ukryty == false).Where(p => p.CategoryNavigation.Aktywny == true).Include(p => p.Product_Images).Include(p => p.CategoryNavigation).OrderBy(p => p.Symbol).ToList();
 
@@ -538,6 +542,9 @@ namespace partner_aluro.Controllers
 
 
             string xml = System.IO.File.ReadAllText(webRootPath + basePath + newFileName, Encoding.UTF8);
+
+
+            return "Wykonane";
             //return this.Content(xml, "text/xml");
             ////patch root www
             //string webRootPath = _webHostEnvironment.WebRootPath;
@@ -554,6 +561,19 @@ namespace partner_aluro.Controllers
             //string xml = System.IO.File.ReadAllText(webRootPath + basePath + newFileName, Encoding.UTF8);
 
             //return this.Content(xml, "text/xml");
+        }
+
+        [HttpGet]
+        public IActionResult Ustawienia()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult SetUstawienia(GenerateXML ustawienia)
+        {
+            _webRootPath = ustawienia.path;
+            return View("Ustawienia");
         }
     }
 }

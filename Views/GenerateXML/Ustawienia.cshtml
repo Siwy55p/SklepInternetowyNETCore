@@ -1,0 +1,15 @@
+﻿@model partner_aluro.Models.GenerateXML
+@{
+    ViewData["Title"] = "Ustawienia Generowania XML";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+<form asp-controller="GenerateXML" asp-action="SetUstawienia">
+
+    <div class="col-sm-6">
+        <label asp-for="@Model.path" class="form-label">Adres strony http://</label>
+        <input asp-for="@Model.path" id="Nazwisko" class="form-control" value="@Model.path" autocomplete="Nazwisko" aria-required="true" />
+
+    </div>
+
+</form>
