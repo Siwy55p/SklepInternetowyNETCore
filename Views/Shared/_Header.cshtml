@@ -23,31 +23,46 @@
                             </a>
                         </div>
                     }
-            <div class="col" style="max-width:110px">
+            <div class="col" style="max-width:150px">
                             <a class="nav-link link-secondary dropdown-toggle"
                                 href="#"
                                 role="button"
                                 data-bs-toggle="dropdown"
-                   aria-expanded="false">
-                    @language.Getkey("Język")
+                                aria-expanded="false">
+                                @language.Getkey("Język")
                             </a>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li class="dropdown-item"><a class="dropdown-item" asp-controller="Register" asp-action="ChangeLanguage" asp-route-culture="pl"><i class="flag-icon flag-icon-pl"></i> @language.Getkey("Polski")</a></li>
-                    <li class="dropdown-item"><a class="dropdown-item" asp-controller="Register" asp-action="ChangeLanguage" asp-route-culture="en-US"><i class="flag-icon flag-icon-us"></i> @language.Getkey("Angielski")</a></li>
-                    <li class="dropdown-item"><a class="dropdown-item" asp-controller="Register" asp-action="ChangeLanguage" asp-route-culture="de-DE"><i class="flag-icon flag-icon-it"></i> @language.Getkey("Niemiecki")</a></li>
+                            <li class="dropdown-item"><a class="dropdown-item" asp-controller="Register" asp-action="ChangeLanguage" asp-route-culture="en-US"><i class="flag-icon flag-icon-us"></i> @language.Getkey("Angielski")</a></li>
+                            <li class="dropdown-item"><a class="dropdown-item" asp-controller="Register" asp-action="ChangeLanguage" asp-route-culture="de-DE"><i class="flag-icon flag-icon-it"></i> @language.Getkey("Niemiecki")</a></li>
                         </ul>
 
-                        <ul class="dropdown-menu dropdown-menu-end">
-                    <li class="dropdown-item"><a class="dropdown-item" asp-controller="Register" asp-action="ChangeValue" asp-route-culture="pl"><i class="flag-icon flag-icon-pl"></i> @language.Getkey("zł")</a></li>
-                    <li class="dropdown-item"><a class="dropdown-item" asp-controller="Register" asp-action="ChangeValue" asp-route-culture="en-US"><i class="flag-icon flag-icon-us"></i> @language.Getkey("EURO")</a></li>
-                        </ul>
-                        @*
-                        <ul class="navbar-nav z-index-2">
-                            <li class="nav-item dropdown navbar-dark"><a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="pl-POL" class="nav-link"><i class="ui-icon-flag flag-icon-en"></i>Polski</a></li>
-                                <li class ="nav-item dropdown navbar-dark"><a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="en-US" class="nav-link"><i class="ui-icon-flag flag-icon-en"></i>English</a></li>
-                            <li class="nav-item dropdown navbar-dark"><a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="de-DE" class="nav-link"><i class="ui-icon-flag flag-icon-en"></i>Niemiecki</a></li>
-                        </ul>*@
-                    </div>
+            </div>
+            <div class="col" style="max-width:100px">
+
+                @{
+                    var active1 = "";
+                    var active2 = "";
+                    @if (Constants.myNumberFormatInfo.CurrencySymbol == "zł")
+                    {
+                        active1 = "active";
+                        active2 = "";
+                    }else
+                    {
+                        active1 = "";
+                        active2 = "active";
+                    }
+                }
+                <ul class="navbar-nav pt-2">
+                    <li class="nav-item active">
+                        <a class="nav-link @active1" asp-controller="Register" asp-action="ChangeValue" asp-route-culture="zl"> @language.Getkey("zł")</a> /
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @active2" asp-controller="Register" asp-action="ChangeValue" asp-route-culture="euro"> @language.Getkey("€")</a>
+                    </li>
+                </ul>
+            </div>
+
             @*Srodek strona*@
             <div class="col justify-content-center align-items-center center d-none d-sm-block d-md-block d-lg-block">
                         @await Component.InvokeAsync("UserStatus")

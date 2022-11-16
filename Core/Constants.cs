@@ -1,4 +1,5 @@
 ﻿using partner_aluro.Models;
+using System.Globalization;
 using System.Text.Encodings.Web;
 
 namespace partner_aluro.Core
@@ -18,6 +19,8 @@ namespace partner_aluro.Core
             public const string RequireAdmin = "RequireAdmin";
             public const string RequireManager = "RequireManager";
         }
+
+        public static NumberFormatInfo myNumberFormatInfo = new CultureInfo("de-DE", false).NumberFormat;
 
         public static Kurs Euro { get; set; } = new Kurs();
 

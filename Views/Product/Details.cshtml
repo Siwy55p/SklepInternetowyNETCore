@@ -1,6 +1,6 @@
 ﻿@model partner_aluro.Models.Product
 @inject LanguageService language
-
+@using partner_aluro.Core;
 @using System.Globalization;
 @using partner_aluro.Resources;
 
@@ -64,17 +64,16 @@
                             </div>
                             @if (@Model.KrotkiOpis != null)
                             {
-                                <div class="row p-3">@Model.KrotkiOpis</div>
+                                <div class="row p-3">@Html.Raw(@Model.KrotkiOpis)</div>
                             }
                             @*<div @*style="max-width:460px;" class="row body_product float-end text-end m-1 p-2">*@
                              @{
                                     var Cena_brutto = (decimal)Model.CenaProduktu * (decimal)partner_aluro.Core.Constants.Vat;
 
                                 }
-
-                            <div class="row">
+                        <div class="row">
                                 <div class="col justify-content-end text-end">
-                                    @language.Getkey("CenaHurtowa"): @language.GetCurrently(@Cena_brutto, @CultureInfo.CurrentUICulture.Name).ToString("C") @language.Getkey("(brutto)")
+                                    @language.Getkey("CenaHurtowa"): @language.GetCurrently(Model.CenaProduktu, @CultureInfo.CurrentUICulture.Name).ToString("C", Constants.myNumberFormatInfo) @language.Getkey("(netto)")
                                 </div>
                                 <div class="col">
 
@@ -82,7 +81,15 @@
                             </div>
                             <div class="row">
                                 <div class="col justify-content-end text-end">
-                                    @language.Getkey("CenaDetaliczna"): @language.GetCurrently( @Model.CenaProduktuDetal.Value, @CultureInfo.CurrentUICulture.Name).ToString("C") @language.Getkey("(netto)")
+                                    @language.GetCurrently(@Cena_brutto, @CultureInfo.CurrentUICulture.Name).ToString("C",Constants.myNumberFormatInfo) <span class="brutto">@language.Getkey("(brutto)")</span>
+                                </div>
+                                <div class="col">
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col justify-content-start text-start">
+                                    @language.Getkey("CenaDetaliczna"): @language.GetCurrently( @Model.CenaProduktuDetal.Value, @CultureInfo.CurrentUICulture.Name).ToString("C")
                                 </div>
                                 <div class="col">
 
@@ -153,7 +160,7 @@
                                 }
 
 
-                                <div class="row">@Model.Description</div>
+                                <div class="row">@Html.Raw(@Model.Description)</div>
 
                             </div>
 

@@ -41,5 +41,37 @@ namespace partner_aluro.Resources
 
             return value;
         }
+        public decimal GetCurrently(decimal value, NumberFormatInfo myNumberFormatInfo)
+        {
+
+            if (myNumberFormatInfo.CurrencySymbol == "zł")
+            {
+                //var val = _currentCulture.IsNeutralCulture;
+                value = value;
+
+            }
+            else if (myNumberFormatInfo.CurrencySymbol == "€")
+            {
+                value = value / Core.Constants.Eur;
+            }
+            
+            return value;
+        }
+        public decimal GetCurrently(decimal value, CultureInfo myNumberFormatInfo)
+        {
+
+            if (myNumberFormatInfo.NumberFormat.CurrencySymbol == "zł")
+            {
+                //var val = _currentCulture.IsNeutralCulture;
+                value = value;
+
+            }
+            else if (myNumberFormatInfo.NumberFormat.CurrencySymbol == "€")
+            {
+                value = value / Core.Constants.Eur;
+            }
+
+            return value;
+        }
     }
 }

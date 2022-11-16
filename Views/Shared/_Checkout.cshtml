@@ -1,5 +1,5 @@
 ﻿@model partner_aluro.ViewModels.CartOrderViewModel
-@using System.Globalization;
+@using partner_aluro.Core;
 @using partner_aluro.Resources;
 
 @inject LanguageService language
@@ -91,7 +91,7 @@
                                             <span class="pozycja">@item.Product.Symbol </span>
                                         </div>
                                 <div class="col border border-top-0 d-none d-sm-none d-md-none d-lg-block text-center" style="display: inline-flex; vertical-align:middle">
-                            <span class="pozycja">@language.GetCurrently(@CenaJednostkowa_brutto, @CultureInfo.CurrentUICulture.Name).ToString("C")</span>
+                            <span class="pozycja">@language.GetCurrently(@CenaJednostkowa_brutto, Constants.myNumberFormatInfo).ToString("C",Constants.myNumberFormatInfo)</span>
                                         </div>
                                 <div class="col border border-top-0 text-center">
                                             <a asp-controller="Cart" asp-action="ReduceQuantity" asp-route-id="@item.Product.ProductId"><i class="fa-solid fa-minus"></i></a>
@@ -101,7 +101,8 @@
                                         </div>
                                 <div class="col border border-top-0 text-center">
                             <span class="pozycja">
-                                @language.GetCurrently(@ProductTotal, @CultureInfo.CurrentUICulture.Name).ToString("C")</span>
+                                @language.GetCurrently(@ProductTotal, Constants.myNumberFormatInfo).ToString("C",Constants.myNumberFormatInfo)
+                            </span>
                                 </div>
                                 <div class="col border border-top-0 text-center" style="max-width: 60px">
                                 <span class="pozycja">
@@ -117,7 +118,7 @@
                             <div class="col-8 d-none d-sm-none d-md-none d-lg-block"></div>
                             <div class="border bg-light text text-end" style="width:150px">@language.Getkey("Wartość (brutto)"):</div>
                             <div class="border bg-light" style="width:150px">
-                        <strong>@language.GetCurrently(@Model.Carts.GetCartTotalBrutto(), @CultureInfo.CurrentUICulture.Name).ToString("C")</strong>
+                        <strong>@language.GetCurrently(@Model.Carts.GetCartTotalBrutto(), Constants.myNumberFormatInfo).ToString("C",Constants.myNumberFormatInfo)</strong>
                                 </div>
                         </div>
 
@@ -126,7 +127,7 @@
                             <div class="col-8 d-none d-sm-none d-md-none d-lg-block"></div>
                             <div class="border bg-light text text-end" style="width:150px">@language.Getkey("Razem (netto)"):</div>
                             <div class="border bg-light" style="width:150px">
-                        <strong>@language.GetCurrently(@Model.Carts.GetCartTotalNetto(), @CultureInfo.CurrentUICulture.Name).ToString("C")</strong>
+                        <strong>@language.GetCurrently(@Model.Carts.GetCartTotalNetto(), Constants.myNumberFormatInfo).ToString("C",Constants.myNumberFormatInfo)</strong>
                             </div>
                         </div>
 

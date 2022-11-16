@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using partner_aluro.Data;
 using partner_aluro.Models;
 using partner_aluro.Services.Interfaces;
+using System.Globalization;
 using System.Text;
 using System.Text.Encodings.Web;
 
@@ -42,9 +43,17 @@ namespace partner_aluro.Controllers
         public IActionResult ChangeValue(string culture)
         {
 
-            Response.Cookies.Append(CookieRequestCultureProvider.DefaultCookieName,
-                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
-                new CookieOptions() { Expires = DateTimeOffset.UtcNow.AddYears(1) });
+            if (culture == "zl")
+            {
+                NumberFormatInfo myNumberFormatInfo1 = new CultureInfo("pl-PL", false).NumberFormat;
+                Core.Constants.myNumberFormatInfo = myNumberFormatInfo1;
+            }
+            else
+            {
+                NumberFormatInfo myNumberFormatInfo2 = new CultureInfo("de-DE", false).NumberFormat;
+                Core.Constants.myNumberFormatInfo = myNumberFormatInfo2;
+            }
+
 
             return Redirect(Request.Headers["Referer"].ToString());
         }
