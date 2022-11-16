@@ -195,6 +195,7 @@ namespace partner_aluro.Controllers
             var translator = new Translator(authKey);
 
             string NameEn = product.Name.ToString();
+            string NameDE = product.Name.ToString();
 
             var translatedText = await translator.TranslateTextAsync(
               NameEn,
@@ -220,6 +221,14 @@ namespace partner_aluro.Controllers
             UpdateResourceFile(data2, resxFile2);
             // KONIEC Dodanie do pliku resx tlumaczenia nazwy produktu
 
+            //Dodanie do pliku resx tlumaczenia nazwy produktu
+            string resxFile3 = webRootPath + "\\Resources\\SharedResource.de-DE.resx";
+
+            Dictionary<string, string> dict3 = new Dictionary<string, string>();
+            dict3.Add(product.Name, NameDE);
+            Hashtable data3 = new Hashtable(dict3);
+            UpdateResourceFile(data3, resxFile3);
+            // KONIEC Dodanie do pliku resx tlumaczenia nazwy produktu Niemiecki
 
             product.Bestseller = true;
             product.ImageUrl = "";

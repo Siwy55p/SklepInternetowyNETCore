@@ -192,4 +192,7 @@
   <data name="Sortuj" xml:space="preserve">
     <value>Sort</value>
   </data>
+  <data name="Niemiecki" xml:space="preserve">
+    <value>Germany</value>
+  </data>
 </root>
