@@ -73,7 +73,7 @@
                                 }
                         <div class="row">
                                 <div class="col justify-content-end text-end">
-                                    @language.Getkey("CenaHurtowa"): @language.GetCurrently(Model.CenaProduktu, @CultureInfo.CurrentUICulture.Name).ToString("C", Constants.myNumberFormatInfo) @language.Getkey("(netto)")
+                                    @language.Getkey("CenaHurtowa"): @language.GetCurrently(Model.CenaProduktu, Constants.myNumberFormatInfo).ToString("C", Constants.myNumberFormatInfo) @language.Getkey("(netto)")
                                 </div>
                                 <div class="col">
 
@@ -81,7 +81,7 @@
                             </div>
                             <div class="row">
                                 <div class="col justify-content-end text-end">
-                                    @language.GetCurrently(@Cena_brutto, @CultureInfo.CurrentUICulture.Name).ToString("C",Constants.myNumberFormatInfo) <span class="brutto">@language.Getkey("(brutto)")</span>
+                                    @language.GetCurrently(@Cena_brutto, Constants.myNumberFormatInfo).ToString("C",Constants.myNumberFormatInfo) <span class="brutto">@language.Getkey("(brutto)")</span>
                                 </div>
                                 <div class="col">
 
@@ -89,7 +89,7 @@
                             </div>
                             <div class="row">
                                 <div class="col justify-content-start text-start">
-                                    @language.Getkey("CenaDetaliczna"): @language.GetCurrently( @Model.CenaProduktuDetal.Value, @CultureInfo.CurrentUICulture.Name).ToString("C")
+                                    @language.Getkey("CenaDetaliczna"): @language.GetCurrently( @Model.CenaProduktuDetal.Value, Constants.myNumberFormatInfo).ToString("C", Constants.myNumberFormatInfo)
                                 </div>
                                 <div class="col">
 
