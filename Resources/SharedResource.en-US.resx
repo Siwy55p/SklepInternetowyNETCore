@@ -780,4 +780,7 @@
   <data name="Złóż zamówienie" xml:space="preserve">
     <value>Submit your order</value>
   </data>
+  <data name="Zaloguj się" xml:space="preserve">
+    <value>Log in</value>
+  </data>
 </root>

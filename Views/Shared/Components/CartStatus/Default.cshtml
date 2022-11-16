@@ -5,6 +5,8 @@
 @using partner_aluro.ViewComponents;
 @using partner_aluro.Models
 
+@using System.Globalization;
+@using partner_aluro.Resources;
 @inject Cart _cart
 
 @if(Model.Cart.CartItems.Count > 0)
@@ -53,7 +55,7 @@
                 <p class="text-max text-wrap text-break">
                     @item.Product.Symbol <br>
                     <a class="text-black" asp-controller="Product" asp-action="Details" asp-route-id="@item.Product.ProductId">@language.Getkey(@item.Product.Name)</a><br>
-                    @CenaJednostkowa_brutto.ToString("C")
+                    @language.GetCurrently(@CenaJednostkowa_brutto, @CultureInfo.CurrentUICulture.Name).ToString("C")
                 </p>
             </div>
             <div class="col border border-top-0 text-center" style="max-width: 75px; width:75px">
@@ -68,10 +70,10 @@
     }
     <div class="row">
         <div class="text-end">
-            @language.Getkey("Wartość (brutto)"): <strong>@Model.Cart.GetCartTotalBrutto().ToString("C")</strong>
+            @language.Getkey("Wartość (brutto)"): <strong>@language.GetCurrently(@Model.Cart.GetCartTotalBrutto(), @CultureInfo.CurrentUICulture.Name).ToString("C")</strong>
         </div>
         <div class="text-end">
-            @language.Getkey("Razem (netto)"): <strong>@Model.Cart.GetCartTotalNetto().ToString("C")</strong>
+            @language.Getkey("Razem (netto)"): <strong>@language.GetCurrently(@Model.Cart.GetCartTotalNetto(), @CultureInfo.CurrentUICulture.Name).ToString("C")</strong>
         </div>
     </div>
     <div class="row">

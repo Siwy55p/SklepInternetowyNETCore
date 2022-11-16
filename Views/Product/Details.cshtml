@@ -1,6 +1,9 @@
 ﻿@model partner_aluro.Models.Product
 @inject LanguageService language
 
+@using System.Globalization;
+@using partner_aluro.Resources;
+
 @*https://mansfeld.pl/programowanie/galeria-lightbox-bez-jquery/*@
 
 @section LinkStyleHead
@@ -64,28 +67,28 @@
                                 <div class="row p-3">@Model.KrotkiOpis</div>
                             }
                             @*<div @*style="max-width:460px;" class="row body_product float-end text-end m-1 p-2">*@
-                            <div class="row">
-
-                                @{
+                             @{
                                     var Cena_brutto = (decimal)Model.CenaProduktu * (decimal)partner_aluro.Core.Constants.Vat;
 
                                 }
 
-
+                            <div class="row">
                                 <div class="col justify-content-end text-end">
-                                    @language.Getkey("CenaHurtowa"): <br />
-                                    <br />
-                                    @*Twoja cena po rabacie: @CenaJednostkowa.ToString("C") <br>*@
-                                    @language.Getkey("CenaDetaliczna"):
+                                    @language.Getkey("CenaHurtowa"): @language.GetCurrently(@Cena_brutto, @CultureInfo.CurrentUICulture.Name).ToString("C") @language.Getkey("(brutto)")
                                 </div>
                                 <div class="col">
-                                    @Model.CenaProduktu.ToString("C") (netto)<br>
-                                    @Cena_brutto.ToString("C") (brutto)<br />
-                                    @Model.CenaProduktuDetal.Value.ToString("C") <br />
 
                                 </div>
-
                             </div>
+                            <div class="row">
+                                <div class="col justify-content-end text-end">
+                                    @language.Getkey("CenaDetaliczna"): @language.GetCurrently( @Model.CenaProduktuDetal.Value, @CultureInfo.CurrentUICulture.Name).ToString("C") @language.Getkey("(netto)")
+                                </div>
+                                <div class="col">
+
+                                </div>
+                            </div>
+
 
                             <div class="row card-bar-action align-items-center" >
                                     @if(Model.Ilosc <= 0)

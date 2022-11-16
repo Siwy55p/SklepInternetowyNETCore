@@ -777,4 +777,7 @@
   <data name="Złóż zamówienie" xml:space="preserve">
     <value>Senden Sie Ihre Bestellung ab</value>
   </data>
+  <data name="Zaloguj się" xml:space="preserve">
+    <value>Einloggen</value>
+  </data>
 </root>

@@ -2,6 +2,12 @@
 @using partner_aluro.Areas.Identity.Pages.Account
 @model LoginModel
 
+@using System.Globalization;
+@using partner_aluro.Resources;
+@inject LanguageService language
+
+
+
 @{
     ViewData["Title"] = "Zaloguj się";
 }
@@ -32,15 +38,24 @@
                         @Html.DisplayNameFor(m => m.Input.RememberMe)
                     </label>
                 </div>
+            </div> 
+
+            <div class="col" style="max-width:110px">
+                    <li class="dropdown-item"><a class="dropdown-item" asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="pl"><i class="flag-icon flag-icon-pl"></i> @language.Getkey("Polski")</a></li>
+                    <li class="dropdown-item"><a class="dropdown-item" asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="en-US"><i class="flag-icon flag-icon-us"></i> @language.Getkey("Angielski")</a></li>
+                    <li class="dropdown-item"><a class="dropdown-item" asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="de-DE"><i class="flag-icon flag-icon-it"></i> @language.Getkey("Niemiecki")</a></li>
+
             </div>
+
             <div class="row">
                 <div class="col-6">
-                    <button id="login-submit" type="submit" class="w-100 btn btn-md btn-primary">Zaloguj się</button>
+                    <button id="login-submit" type="submit" class="w-100 btn btn-md btn-primary">@language.Getkey("Zaloguj się")</button>
+
                 </div>
 
 
                 <div class="col-6">
-                    <a class="w-100 btn btn-md btn-success" asp-page="./Register" asp-route-pass="@Model.pass2" asp-route-email="Input.Email" asp-route-returnUrl="@Model.ReturnUrl">Utwórz nowe konto</a>
+                    <a class="w-100 btn btn-md btn-success" asp-page="./Register" asp-route-pass="@Model.pass2" asp-route-email="Input.Email" asp-route-returnUrl="@Model.ReturnUrl">@language.Getkey("Utwórz nowe konto")</a>
                 </div>
             </div>
             <div>

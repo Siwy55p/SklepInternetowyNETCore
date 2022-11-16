@@ -2,23 +2,18 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
 using partner_aluro.Models;
 using System.Security.Claims;
-using NuGet.Packaging;
-using partner_aluro.Services;
 using partner_aluro.Services.Interfaces;
+using Microsoft.Extensions.Localization;
+using System.Reflection;
+using Microsoft.Extensions.Logging;
+using partner_aluro.Resources;
 
 namespace partner_aluro.Areas.Identity.Pages.Account
 {
@@ -28,12 +23,19 @@ namespace partner_aluro.Areas.Identity.Pages.Account
         private readonly ILogger<LoginModel> _logger;
         private readonly IProfildzialalnosciService _profildzialalnosciService;
 
-        public LoginModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginModel> logger, IProfildzialalnosciService profildzialalnosciService)
+        private readonly IStringLocalizer _identityLocalizer;
+
+        public LoginModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginModel> logger, IProfildzialalnosciService profildzialalnosciService , IStringLocalizerFactory factory)
         {
             _signInManager = signInManager;
             _logger = logger;
 
             _profildzialalnosciService = profildzialalnosciService;
+
+            var type = typeof(SharedResource);
+            var assemblyName = new AssemblyName(type.GetTypeInfo().Assembly.FullName);
+            _identityLocalizer = factory.Create("ShareResource", assemblyName.Name);
+
         }
 
         /// <summary>
@@ -94,7 +96,6 @@ namespace partner_aluro.Areas.Identity.Pages.Account
             public string Password { get; set; }
 
 
-            [Display(Name = "Password")]
             [DataType(DataType.Password)]
             public string Password2 { get; set; }
 
@@ -102,7 +103,6 @@ namespace partner_aluro.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Display(Name = "Zapamiętaj mnie?")]
             public bool RememberMe { get; set; }
         }
 
@@ -145,7 +145,6 @@ namespace partner_aluro.Areas.Identity.Pages.Account
                 var result = await _signInManager.CheckPasswordSignInAsync(user, Input.Password, false);
                 if(result.Succeeded)
                 {
-
                     var claims = new List<Claim>
                     {
                         new Claim("arm","pwd"),
@@ -171,19 +170,8 @@ namespace partner_aluro.Areas.Identity.Pages.Account
                     return LocalRedirect(returnUrl);
                 }
 
-                if (result.Succeeded)
-                {
-                    Core.Constants.UserId = user.Id; //Pobierz uzytkownika
-                    Core.Constants.Rabat = _profildzialalnosciService.GetRabat(Core.Constants.UserId);
-
-                    _logger.LogInformation("ApplicationUser logged in.");
-                    return LocalRedirect(returnUrl);
-                }
                 if (result.RequiresTwoFactor)
                 {
-                    Core.Constants.UserId = user.Id; //Pobierz uzytkownika
-                    Core.Constants.Rabat = _profildzialalnosciService.GetRabat(Core.Constants.UserId);
-
                     return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
                 }
                 if (result.IsLockedOut)
@@ -194,7 +182,7 @@ namespace partner_aluro.Areas.Identity.Pages.Account
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, _identityLocalizer["INVALID_LOGIN_ATTEMPT"]);
                     return Page();
                 }
             }
