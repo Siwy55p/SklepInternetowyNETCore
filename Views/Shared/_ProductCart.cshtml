@@ -1,8 +1,13 @@
 ﻿@model partner_aluro.Models.Product
+@using partner_aluro.Core;
 @using X.PagedList
 @using X.PagedList.Mvc.Core
-
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 @inject LanguageService language
+@using System.Globalization;
+
+
 
 <div class="card"> @*odstepy miedzy kartami w stylu site.css pozycja card*@
     @if (Model.Promocja == true && Model.CenaPromocyja != null)
@@ -48,9 +53,27 @@
             var Cena_brutto = (decimal)Model.CenaProduktu * (decimal)partner_aluro.Core.Constants.Vat;
 
             var CenaJednostkowa = Cena_brutto * (1 - (partner_aluro.Core.Constants.Rabat / 100));
+
+            var cena_produktu = @Model.CenaProduktu;
+
+            //if (culture == "en")
+            //{
+
+
+                //if (Constants.Euro != null)
+                //{
+
+                //@language.GetCurrently(@Model.CenaProduktu, "EUR");
+
+                ////cena_produktu = (decimal)@Model.CenaProduktu / (decimal)Constants.Euro.rates[0].mid;
+                //}
+            //}
+
         }
         <div class="float-end text-end">
-            @language.Getkey("CenaHurtowa"): @Model.CenaProduktu.ToString("C") (netto)
+            @language.Getkey("CenaHurtowa"): @language.GetCurrently(@cena_produktu, @CultureInfo.CurrentUICulture.Name).ToString("C") (netto)
+
+
         </div>
         <div class="float-end text-end">
             @Cena_brutto.ToString("C") <span class="brutto">(brutto)</span>

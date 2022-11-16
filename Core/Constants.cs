@@ -1,4 +1,5 @@
-﻿using System.Text.Encodings.Web;
+﻿using partner_aluro.Models;
+using System.Text.Encodings.Web;
 
 namespace partner_aluro.Core
 {
@@ -17,6 +18,12 @@ namespace partner_aluro.Core
             public const string RequireAdmin = "RequireAdmin";
             public const string RequireManager = "RequireManager";
         }
+
+        public static Kurs Euro { get; set; } = new Kurs();
+
+        public static decimal Eur = (decimal)4.69;
+        public static decimal Zloty = (decimal)1;
+
 
         public static decimal Vat = (decimal)1.23;
 

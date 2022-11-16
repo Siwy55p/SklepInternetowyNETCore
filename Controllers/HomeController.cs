@@ -49,9 +49,6 @@ namespace partner_aluro.Controllers
             //logika zalogowania
             if (User.Identity.IsAuthenticated)
             {
-                string name = "Czesc";
-                ViewData["Message"] = _localizer["<b>Hello</b><i> {0}</i>", name];
-
                 var nowosci = await _context.Products.Where(a => !a.Ukryty).OrderByDescending(a => a.DataDodania).Take(9).ToListAsync();
 
                 var bestseller = await _context.Products.Where(a => !a.Ukryty).OrderBy(a => Guid.NewGuid()).Take(3).ToListAsync();
@@ -79,7 +76,15 @@ namespace partner_aluro.Controllers
 
             return Redirect(Request.Headers["Referer"].ToString());
         }
+        public IActionResult ChangeValue(string culture)
+        {
 
+            Response.Cookies.Append(CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+                new CookieOptions() { Expires = DateTimeOffset.UtcNow.AddYears(1) });
+
+            return Redirect(Request.Headers["Referer"].ToString());
+        }
         [Route("Ogolne-warunki-sprzedazy")]
         [HttpGet]
         public IActionResult WarunkiSprzedazy()

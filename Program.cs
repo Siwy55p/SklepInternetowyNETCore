@@ -270,5 +270,6 @@ void AddScoped()
 
     builder.Services.AddScoped<IProductCategoryService, ProductCategoryService>();
 
+    builder.Services.AddScoped<IApiServiceNBPKurs, ApiServiceNBPKurs>();
 
 }

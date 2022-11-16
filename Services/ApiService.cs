@@ -25,5 +25,7 @@ namespace partner_aluro.Services
             return myDeserializedClass;
         }
 
+        
+
     }
 }
