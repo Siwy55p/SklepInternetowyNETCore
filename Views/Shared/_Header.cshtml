@@ -22,19 +22,19 @@
                             </a>
                         </div>
                     }
-                    <div class="col" style="max-width:110px">
-                            <a class="nav-link dropdown-toggle"
+            <div class="col" style="max-width:110px">
+                            <a class="nav-link link-secondary dropdown-toggle"
                                 href="#"
                                 role="button"
                                 data-bs-toggle="dropdown"
                    aria-expanded="false">
-                    @language.Getkey("Język")</i>
+                    @language.Getkey("Język")
                             </a>
-                            <ul class="dropdown-menu dropdown-menu-end">
-                    <li class="nav-item dropdown navbar-dark"><a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="pl" class="nav-link"><i class="ui-icon-flag flag-icon-pl"></i>@language.Getkey("Polski")</a></li>
-                    <li class="nav-item dropdown navbar-dark"><a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="en-US" class="nav-link"><i class="ui-icon-flag flag-icon-en"></i>@language.Getkey("Angielski")</a></li>
-                    <li class="nav-item dropdown navbar-dark"><a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="de-DE" class="nav-link"><i class="ui-icon-flag flag-icon-de"></i>@language.Getkey("Niemiecki")</a></li>
-                </ul>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li class="dropdown-item"><a class="dropdown-item" asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="pl"><i class="flag-icon flag-icon-pl"></i> @language.Getkey("Polski")</a></li>
+                            <li class="dropdown-item"><a class="dropdown-item" asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="en-US"><i class="flag-icon flag-icon-us"></i> @language.Getkey("Angielski")</a></li>
+                            <li class="dropdown-item"><a class="dropdown-item" asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="de-DE"><i class="flag-icon flag-icon-it"></i> @language.Getkey("Niemiecki")</a></li>
+                        </ul>
                         @*
                         <ul class="navbar-nav z-index-2">
                             <li class="nav-item dropdown navbar-dark"><a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="pl-POL" class="nav-link"><i class="ui-icon-flag flag-icon-en"></i>Polski</a></li>

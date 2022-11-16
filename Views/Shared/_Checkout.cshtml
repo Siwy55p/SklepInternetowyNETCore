@@ -147,7 +147,7 @@
 
                         @Html.HiddenFor(h=>Model.Orders.User.Id)
 
-                        @Html.Partial("_AdressForm")
+                        @await Html.PartialAsync("_AdressForm")
 
                         <button class="btn btn-primary btn-lg btn-block" type="submit">@language.Getkey("Złóż zamówienie")</button>
                     </form>
