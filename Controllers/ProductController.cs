@@ -5,11 +5,7 @@ using partner_aluro.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using partner_aluro.Data;
 using Microsoft.EntityFrameworkCore;
-using System.Drawing;
-
-using System;
-using System.Drawing;
-using System.Resources;
+using DeepL;
 using System.Resources.NetStandard;
 using System.Collections;
 
@@ -32,6 +28,7 @@ namespace partner_aluro.Controllers
 
         private readonly IProductCategoryService _productCategoryService;
 
+       
         public ProductController(IProductCategoryService productCategoryService, ApplicationDbContext applicationDbContext, IProductService productService, IUnitOfWorkProduct unitOfWorkProduct, IWebHostEnvironment webHostEnvironment, IImageService imageService)
         {
             _ProductService = productService;
@@ -41,6 +38,9 @@ namespace partner_aluro.Controllers
             _imageService = imageService;
 
             _productCategoryService = productCategoryService;
+
+
+            
         }
 
         public async Task<IActionResult> Index()
@@ -187,26 +187,38 @@ namespace partner_aluro.Controllers
         {
             ViewBag.Category = GetCategories();
 
+            //string NameEn = "Angielska Nazwa";
 
+
+
+            var authKey = $"bbc4aaae-78af-4f5e-37dd-34e29f91a480:fx"; // Replace with your key
+            var translator = new Translator(authKey);
+
+            string NameEn = product.Name.ToString();
+
+            var translatedText = await translator.TranslateTextAsync(
+              NameEn,
+              "PL",
+              "en-US");
+            NameEn = translatedText.Text;
+
+            //Dodanie do pliku resx tlumaczenia nazwy produktu
             string webRootPath = _webHostEnvironment.ContentRootPath;
+            string resxFile1 = webRootPath+ "\\Resources\\SharedResource.pl-PL.resx";
 
+            Dictionary<string, string> dict1 = new Dictionary<string, string>();
+            dict1.Add(product.Name, product.Name);
+            Hashtable data1 = new Hashtable(dict1);
+            UpdateResourceFile(data1, resxFile1);
+            // KONIEC Dodanie do pliku resx tlumaczenia nazwy produktu
+            //Dodanie do pliku resx tlumaczenia nazwy produktu
+            string resxFile2 = webRootPath + "\\Resources\\SharedResource.en-US.resx";
 
-            string resxFile = webRootPath+ "\\Resources\\SharedResource.pl-PL.resx";
-
-            Dictionary<string, string> dict = new Dictionary<string, string>();
-            dict.Add("raz", "one");
-            dict.Add("dwa", "two");
-            dict.Add("trzy", "three");
-
-            Hashtable data = new Hashtable(dict);
-
-            UpdateResourceFile(data, resxFile);
-
-            //using (ResXResourceWriter resx = new ResXResourceWriter(resxFile))
-            //{
-            //    resx.AddResource(product.Name, product.Name);
-
-            //}
+            Dictionary<string, string> dict2 = new Dictionary<string, string>();
+            dict2.Add(product.Name, NameEn);
+            Hashtable data2 = new Hashtable(dict2);
+            UpdateResourceFile(data2, resxFile2);
+            // KONIEC Dodanie do pliku resx tlumaczenia nazwy produktu
 
 
             product.Bestseller = true;

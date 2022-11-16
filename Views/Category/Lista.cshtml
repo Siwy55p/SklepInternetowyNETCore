@@ -4,6 +4,7 @@
     ViewData["Title"] = "Kategoria";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@inject LanguageService language
 
 <div class="row justify-content-center align-items-center">
     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-10 col-xxl-8">
@@ -29,7 +30,7 @@
                         <!-- Select -->
                         <div class="dropdown">
                             <button class="sortuj dropdown-toggle" type="button" id="dropdownMenuButtonSort" data-bs-toggle="dropdown" aria-expanded="false">
-                                Sortuj
+                                @language.Getkey("Sortuj")
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonSort">
                                 <li class="dropdown-item link-dark">@Html.ActionLink("Alfabetycznie od A do Z", "Lista", "Category", new { page = 1, szukanaNazwa=ViewData["szukanaNazwa"], sort=1 } )</li>

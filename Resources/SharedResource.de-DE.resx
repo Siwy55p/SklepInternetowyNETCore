@@ -117,7 +117,79 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ProduktNiedostępny" xml:space="preserve">
+    <value>Dieses Produkt ist nicht länger verfügbar</value>
+  </data>
+  <data name="Dodaj do zamowienia" xml:space="preserve">
+    <value>Zur Bestellung hinzufügen</value>
+  </data>
+  <data name="Nowa Kolekcja 2022" xml:space="preserve">
+    <value>Neue Kollektion 2022</value>
+  </data>
+  <data name="Roślina sztuczna - palma w doniczce_Aluro" xml:space="preserve">
+    <value>Kunstpflanze - Palme im Topf_Aluro</value>
+  </data>
+  <data name="drzewo" xml:space="preserve">
+    <value>Baum</value>
+  </data>
+  <data name="Twoja cena po rabacie" xml:space="preserve">
+    <value>Ihr reduzierter Preis</value>
+  </data>
+  <data name="CenaDetaliczna" xml:space="preserve">
+    <value>Endverbraucherpreis</value>
+  </data>
+  <data name="Meble" xml:space="preserve">
+    <value>Möbel</value>
+  </data>
+  <data name="Dodatki do wnętrz" xml:space="preserve">
+    <value>Innenausstattung</value>
+  </data>
+  <data name="Świąteczka Kolekcja" xml:space="preserve">
+    <value>Weihnachtskollektion</value>
+  </data>
+  <data name="CenaHurtowa" xml:space="preserve">
+    <value>Großhandelspreis</value>
+  </data>
+  <data name="Angielski" xml:space="preserve">
+    <value>Englisch</value>
+  </data>
+  <data name="Oświetlenie" xml:space="preserve">
+    <value>Beleuchtung</value>
+  </data>
+  <data name="Polski" xml:space="preserve">
+    <value>Polieren</value>
+  </data>
+  <data name="Donice i Osłonki" xml:space="preserve">
+    <value>Töpfe und Deckel</value>
+  </data>
+  <data name="netto" xml:space="preserve">
+    <value>Netz</value>
+  </data>
+  <data name="Język" xml:space="preserve">
+    <value>Sprache wählen</value>
+  </data>
+  <data name="Witaj" xml:space="preserve">
+    <value>Hallo</value>
+  </data>
+  <data name="Rośliny sztuczne" xml:space="preserve">
+    <value>Künstliche Pflanzen</value>
+  </data>
+  <data name="Nowa Kolekcja" xml:space="preserve">
+    <value>Neue Kollektion</value>
+  </data>
   <data name="Nowości" xml:space="preserve">
-    <value>Nowe produkty</value>
+    <value>Nachrichten</value>
+  </data>
+  <data name="Ilość" xml:space="preserve">
+    <value>Menge</value>
+  </data>
+  <data name="Szukaj" xml:space="preserve">
+    <value>Suche...</value>
+  </data>
+  <data name="Kategorie" xml:space="preserve">
+    <value>Kategorien</value>
+  </data>
+  <data name="Sortuj" xml:space="preserve">
+    <value>Sortieren</value>
   </data>
 </root>

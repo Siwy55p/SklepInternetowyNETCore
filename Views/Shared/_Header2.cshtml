@@ -1,4 +1,6 @@
-﻿<div class="row justify-content-center align-items-center">
+﻿@inject LanguageService language
+
+<div class="row justify-content-center align-items-center">
     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-10 col-xxl-8 pt-3 ">
         <div class="row">
             <div class="col d-none d-sm-none d-md-none d-lg-block" style="max-width:290px; width:290px">
@@ -17,7 +19,7 @@
             <div class="col search pb-1">
                 <form asp-controller="Category" asp-action="Lista" method="get">
                     <div class="search input-group mb-3 ">
-                        <input type="text" name="szukanaNazwa" id="szukanaNazwa" class="form-control mr-sm-2" placeholder="Szukaj produktu" />
+                        <input type="text" name="szukanaNazwa" id="szukanaNazwa" class="form-control mr-sm-2" placeholder="@language.Getkey("Szukaj")" />
                     </div>
                 </form>
             </div>

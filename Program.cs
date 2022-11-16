@@ -109,6 +109,7 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
     {
         new CultureInfo("pl-PL"),
         new CultureInfo("en-US"),
+        new CultureInfo("de-DE"),
     };
     options.DefaultRequestCulture = new RequestCulture(culture: "pl-PL", uiCulture: "pl-PL");
     options.SupportedCultures = supportedCultures;
@@ -268,5 +269,6 @@ void AddScoped()
     builder.Services.AddScoped<IImageService, ImageService>();
 
     builder.Services.AddScoped<IProductCategoryService, ProductCategoryService>();
+
 
 }

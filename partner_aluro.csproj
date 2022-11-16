@@ -13,8 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="AWSSDK.Core" Version="3.7.100.17" />
-    <PackageReference Include="AWSSDK.Translate" Version="3.7.100.16" />
+    <PackageReference Include="DeepL.net" Version="1.5.0" />
     <PackageReference Include="iTextSharp" Version="5.5.13.3" />
     <PackageReference Include="jQuery" Version="3.6.1" />
     <PackageReference Include="MailKit" Version="3.4.2" />
@@ -91,6 +90,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Resources\SharedResource.de-DE.resx">
+      <SubType>Designer</SubType>
+      <LastGenOutput>SharedResource.en-US.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Resources\SharedResource.en-US.resx">
       <SubType>Designer</SubType>
       <LastGenOutput>SharedResource.en-US.Designer.cs</LastGenOutput>
@@ -99,15 +103,6 @@
     <EmbeddedResource Update="Resources\SharedResource.pl-PL.resx">
       <LastGenOutput>SharedResource.en-US.Designer.cs</LastGenOutput>
       <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\SharedResource.de-DE.resx">
-      <LastGenOutput>SharedResource.en-US.Designer.cs</LastGenOutput>
-      <Generator>ResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\SharedResource.de-DE.resx">
-      <SubType>Designer</SubType>
-      <LastGenOutput>SharedResource.de-DE.Designer.cs</LastGenOutput>
-      <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\SharedResource.pl-POL.resx">
       <LastGenOutput>SharedResource.pl-POL.Designer.cs</LastGenOutput>

@@ -40,7 +40,7 @@
             </div>
             <div class="row text-decoration-none link-dark text-wrap">
                 <a class="text-decoration-none link-dark text-wrap" asp-controller="Product" asp-action="Details" asp-route-id="@Model.ProductId">
-                    @Model.Name <br>
+                    @language.Getkey(@Model.Name) <br>
                 </a>
             </div>
         </div>
@@ -58,7 +58,7 @@
 
         @if (partner_aluro.Core.Constants.Rabat != 0 && partner_aluro.Core.Constants.Rabat >= 0)
         {
-            <div class="float-end text-end">Twoja cena po rabacie: @CenaJednostkowa.ToString("C") </div>
+            <div class="float-end text-end">@language.Getkey("Twoja cena po rabacie"): @CenaJednostkowa.ToString("C") </div>
         }
         <div class="float-end text-end">@language.Getkey("CenaDetaliczna"): @Model.CenaProduktuDetal.ToString() </div>
     </div>

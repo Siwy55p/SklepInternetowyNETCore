@@ -1,4 +1,5 @@
 ﻿@model partner_aluro.Models.Product
+@inject LanguageService language
 
 @*https://mansfeld.pl/programowanie/galeria-lightbox-bez-jquery/*@
 
@@ -53,7 +54,7 @@
                     <div class="col-md-6">
                         <div class="">
                             <div class="d-flex justify-content-between align-items-center">
-                                <h4>@Model.Name</h4>
+                                <h4>@language.Getkey(@Model.Name)</h4>
                             </div>
                             <div class="mt-2 pr-3">
                                 <p>Symbol: <b>@Model.Symbol</b></p>
@@ -72,10 +73,10 @@
 
 
                                 <div class="col justify-content-end text-end">
-                                    Cena hurtowa: <br />
+                                    @language.Getkey("CenaHurtowa"): <br />
                                     <br />
                                     @*Twoja cena po rabacie: @CenaJednostkowa.ToString("C") <br>*@
-                                    Cena Detaliczna:
+                                    @language.Getkey("CenaDetaliczna"):
                                 </div>
                                 <div class="col">
                                     @Model.CenaProduktu.ToString("C") (netto)<br>
@@ -94,13 +95,13 @@
                                     else
                                     {
                                     <div class="col-2">
-                                        Ilość:
+                                        @language.Getkey("Ilość"):
                                     </div>
                                     <div class="col-2">
                                         <input type="number" id="@Model.ProductId" name="quantity" value="1" class="form-control" aria-required="true" placeholder="Ilość" min="1" max="@Model.Ilosc" />
                                     </div>
                                     <div class="col">
-                                        <button value="@Model.ProductId" onclick="AddToCart(@Model.ProductId)" data-bs-target="offcanvas" role="button">Dodaj do zamowienia</button>
+                                        <button value="@Model.ProductId" onclick="AddToCart(@Model.ProductId)" data-bs-target="offcanvas" role="button">@language.Getkey("Dodaj do zamowienia")</button>
                                     </div>
                                     }
                             </div>
