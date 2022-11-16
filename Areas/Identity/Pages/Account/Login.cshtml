@@ -9,7 +9,7 @@
 
 
 @{
-    ViewData["Title"] = "Zaloguj się";
+    ViewData["Title"] = @language.Getkey("Zaloguj się");
 }
 
 <div class="logoLoginReg">
@@ -17,8 +17,20 @@
         <img id="logoLogin" src="~/images/logo/aluro_logo-x-300_2.png" width="300px" />
     </div>
 </div>
-<div class="col-md-3 justify-content-center align-items-center bg-white">
+<div class="col justify-content-center align-items-center bg-white">
     <section class="p-3 border">
+        
+            <div class="row">
+                <div class="col">
+                    <a class="dropdown-item" asp-controller="Register" asp-action="ChangeLanguage" asp-route-culture="pl"><i class="flag-icon flag-icon-pl"></i> @language.Getkey("Polski")</a>
+                 </div>
+                <div class="col">
+                    <a class="dropdown-item" asp-controller="Register" asp-action="ChangeLanguage" asp-route-culture="en-US"><i class="flag-icon flag-icon-us"></i> @language.Getkey("Angielski")</a>
+                </div>
+                <div class="col">
+                    <a class="dropdown-item" asp-controller="Register" asp-action="ChangeLanguage" asp-route-culture="de-DE"><i class="flag-icon flag-icon-it"></i> @language.Getkey("Niemiecki")</a>
+                </div>
+            </div>
         <form id="account" method="post" >
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-floating">
@@ -28,29 +40,26 @@
             </div>
             <div class="form-floating">
                 <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" />
-                <label asp-for="Input.Password" class="form-label"></label>
+                <label asp-for="Input.Password" class="form-label">@language.Getkey("Hasło")</label>
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
             <div>
                 <div class="checkbox">
-                    <label asp-for="Input.RememberMe" class="form-label">
-                        <input class="form-check-input" asp-for="Input.RememberMe" />
-                        @Html.DisplayNameFor(m => m.Input.RememberMe)
+                    <label asp-for="Input.RememberMe">
+                        <input asp-for="Input.RememberMe" />
+                        @language.Getkey("zapamietaj mnie")
                     </label>
                 </div>
             </div> 
 
-            <div class="col" style="max-width:110px">
-                    <li class="dropdown-item"><a class="dropdown-item" asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="pl"><i class="flag-icon flag-icon-pl"></i> @language.Getkey("Polski")</a></li>
-                    <li class="dropdown-item"><a class="dropdown-item" asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="en-US"><i class="flag-icon flag-icon-us"></i> @language.Getkey("Angielski")</a></li>
-                    <li class="dropdown-item"><a class="dropdown-item" asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="de-DE"><i class="flag-icon flag-icon-it"></i> @language.Getkey("Niemiecki")</a></li>
-
-            </div>
 
             <div class="row">
                 <div class="col-6">
                     <button id="login-submit" type="submit" class="w-100 btn btn-md btn-primary">@language.Getkey("Zaloguj się")</button>
-
+                    @foreach (var provider in Model.ExternalLogins)
+                    {
+                        <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                    }
                 </div>
 
 
@@ -60,7 +69,7 @@
             </div>
             <div>
                 <p>
-                    <a id="forgot-password" asp-page="./ForgotPassword">Zapomniałeś hasło?</a>
+                    <a id="forgot-password" asp-page="./ForgotPassword">@language.Getkey("Zapomniałeś hasło?")</a>
                 </p>
                 @* <p>
                     <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Wyślij wiadomość przypominającą </a>

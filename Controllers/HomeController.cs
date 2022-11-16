@@ -68,23 +68,6 @@ namespace partner_aluro.Controllers
 
         }
 
-        public IActionResult ChangeLanguage(string culture)
-        {
-            Response.Cookies.Append(CookieRequestCultureProvider.DefaultCookieName,
-                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
-                new CookieOptions() { Expires = DateTimeOffset.UtcNow.AddYears(1)});
-
-            return Redirect(Request.Headers["Referer"].ToString());
-        }
-        public IActionResult ChangeValue(string culture)
-        {
-
-            Response.Cookies.Append(CookieRequestCultureProvider.DefaultCookieName,
-                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
-                new CookieOptions() { Expires = DateTimeOffset.UtcNow.AddYears(1) });
-
-            return Redirect(Request.Headers["Referer"].ToString());
-        }
         [Route("Ogolne-warunki-sprzedazy")]
         [HttpGet]
         public IActionResult WarunkiSprzedazy()

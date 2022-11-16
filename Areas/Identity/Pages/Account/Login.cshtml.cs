@@ -12,7 +12,6 @@ using System.Security.Claims;
 using partner_aluro.Services.Interfaces;
 using Microsoft.Extensions.Localization;
 using System.Reflection;
-using Microsoft.Extensions.Logging;
 using partner_aluro.Resources;
 
 namespace partner_aluro.Areas.Identity.Pages.Account
@@ -167,7 +166,7 @@ namespace partner_aluro.Areas.Identity.Pages.Account
                     Core.Constants.Rabat = _profildzialalnosciService.GetRabat(Core.Constants.UserId);
 
                     _logger.LogInformation("ApplicationUser zalogował się");
-                    return LocalRedirect(returnUrl);
+                    return Redirect("/Home/Index");
                 }
 
                 if (result.RequiresTwoFactor)

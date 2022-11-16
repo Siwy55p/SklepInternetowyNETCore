@@ -783,4 +783,19 @@
   <data name="Zaloguj się" xml:space="preserve">
     <value>Zaloguj się</value>
   </data>
+  <data name="Email" xml:space="preserve">
+    <value>adres email</value>
+  </data>
+  <data name="Hasło" xml:space="preserve">
+    <value>Hasło</value>
+  </data>
+  <data name="Utwórz nowe konto" xml:space="preserve">
+    <value>Utwórz nowe konto</value>
+  </data>
+  <data name="zapamietaj mnie" xml:space="preserve">
+    <value>zapamietaj mnie</value>
+  </data>
+  <data name="Zapomniałeś hasło?" xml:space="preserve">
+    <value>Zapomniałeś hasło?</value>
+  </data>
 </root>

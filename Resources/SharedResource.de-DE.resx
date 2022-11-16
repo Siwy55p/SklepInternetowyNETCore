@@ -780,4 +780,16 @@
   <data name="Zaloguj się" xml:space="preserve">
     <value>Einloggen</value>
   </data>
+  <data name="Hasło" xml:space="preserve">
+    <value>Passwort</value>
+  </data>
+  <data name="Utwórz nowe konto" xml:space="preserve">
+    <value>Neuen Account erstellen</value>
+  </data>
+  <data name="zapamietaj mnie" xml:space="preserve">
+    <value>Erinnere dich an mich</value>
+  </data>
+  <data name="Zapomniałeś hasło?" xml:space="preserve">
+    <value>Haben Sie Ihr Passwort vergessen?</value>
+  </data>
 </root>
