@@ -197,11 +197,17 @@ namespace partner_aluro.Controllers
             string NameEn = product.Name.ToString();
             string NameDE = product.Name.ToString();
 
-            var translatedText = await translator.TranslateTextAsync(
+            var translatedText1 = await translator.TranslateTextAsync(
               NameEn,
               "PL",
               "en-US");
-            NameEn = translatedText.Text;
+            NameEn = translatedText1.Text;
+
+            var translatedText2 = await translator.TranslateTextAsync(
+              NameDE,
+              "PL",
+              "DE");
+            NameEn = translatedText2.Text;
 
             //Dodanie do pliku resx tlumaczenia nazwy produktu
             string webRootPath = _webHostEnvironment.ContentRootPath;

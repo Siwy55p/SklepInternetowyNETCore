@@ -32,6 +32,8 @@
     <!-- Section: Social media -->
     <!-- Section: Links  -->
 
+    @inject LanguageService language
+
 <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
     <div class="row justify-content-center align-items-center">
         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-10 col-xxl-8">
@@ -55,8 +57,8 @@
                             </p>
                             <p><i class="fas fa-phone me-3 text-secondary"></i> (0048) 61 306 70 60</p>
                             <p>
-                            godz. otwarcia<br />
-                            w tygodniu 9:00-17:00<br />
+                            @language.Getkey("godz. otwarcia")<br />
+                            @language.Getkey("w tygodniu") 9:00-17:00<br />
                             sobota 9:00 - 14:00<br />
                             </p>
                             </div>
@@ -65,20 +67,20 @@
                             <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
                                 <!-- Links -->
                                 <h6 class="text-uppercase fw-bold mb-4">
-                                Account management
+                                @language.Getkey("Zarządzaj kontem")
                                 </h6>
                                 <p>
-                                <a href="#!" class="dropdown-item">Moje konto</a>
+                                <a href="#!" class="dropdown-item">@language.Getkey("Moje konto")</a>
                                 </p>
                                 <p>
-                                <a class="dropdown-item" asp-controller="Order" asp-action="ListaZamowienZalogowanegoUzytkownika">Historia zamówień</a>
+                                <a class="dropdown-item" asp-controller="Order" asp-action="ListaZamowienZalogowanegoUzytkownika">@language.Getkey("Historia zamówień")</a>
                                 </p>
                                 <p>
-                                <a href="#!" class="dropdown-item">Moje informacje osobiste</a>
+                                <a href="#!" class="dropdown-item">@language.Getkey("Moje informacje osobiste")</a>
                                 </p>
                                 <p>
                                 <form id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                                    <button id="logout" type="submit" class="dropdown-item">Wyloguj</button>
+                                    <button id="logout" type="submit" class="dropdown-item">@language.Getkey("Wyloguj")</button>
                                 </form>
                                 </p>
                             </div>
@@ -87,25 +89,25 @@
                             <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
                                 <!-- Links -->
                                 <h6 class="text-uppercase fw-bold mb-4">
-                                Information
+                                @language.Getkey("Informacje")"
                                 </h6>
                                 <p>
-                                <a class="dropdown-item" asp-controller="Home" asp-action="IntegracjaXML">Integracja XML</a>
+                                <a class="dropdown-item" asp-controller="Home" asp-action="IntegracjaXML">@language.Getkey("Integracja XML")</a>
                                 </p>
                                 <p>
-                                <a href="https://onedrive.live.com/?cid=e3384b60395d8a69&id=E3384B60395D8A69%21492&ithint=folder,png&authkey=!AKD8Z89gR9FPQ9w" target="_blank" class="dropdown-item">Baza zdjęć produktów aluro</a>
+                                <a href="https://onedrive.live.com/?cid=e3384b60395d8a69&id=E3384B60395D8A69%21492&ithint=folder,png&authkey=!AKD8Z89gR9FPQ9w" target="_blank" class="dropdown-item">@language.Getkey("Baza zdjęć produktów aluro")</a>
                                 </p>
                             </div>
                             <!-- Grid column -->
                             <!-- Grid column -->
                             <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
                                 <!-- Links -->
-                            <h6 class="text-uppercase fw-bold mb-4">Important information</h6>
+                            <h6 class="text-uppercase fw-bold mb-4">@language.Getkey("Ważne informacje")</h6>
                                 <p>
-                                <a asp-action="WarunkiSprzedazy" asp-controller="Home" class="dropdown-item">Ogólne warunki sprzedaży</a>
+                                <a asp-action="WarunkiSprzedazy" asp-controller="Home" class="dropdown-item">@language.Getkey("Ogólne warunki sprzedaży")</a>
                                 </p>
                                 <p>
-                                <a asp-action="PlatnoscDostawa" asp-controller="Home" class="dropdown-item">Płatność i dostawa</a>
+                                <a asp-action="PlatnoscDostawa" asp-controller="Home" class="dropdown-item">@language.Getkey("Płatność i dostawa")</a>
                                 </p>
                             </div>
                             <!-- Grid column -->
@@ -117,8 +119,8 @@
                 <!-- Copyright -->
                 <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.025);">
                 ALURO fashion at home<br />
-                Potrzebujesz pomocy? Zadzwoń: 0048 61 306 70 60<br>
-                Copyright © 2014 - Wszelkie prawa zastrzeżone.<br />
+                @language.Getkey("Potrzebujesz pomocy? Zadzwoń"): 0048 61 306 70 60<br>
+                Copyright © 2014 - @language.Getkey("Wszelkie prawa zastrzeżone.")<br />
                 </div>
                 <!-- Copyright -->
 

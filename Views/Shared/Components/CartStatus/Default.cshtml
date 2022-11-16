@@ -1,4 +1,5 @@
 ﻿@model partner_aluro.ViewModels.CartStatusModel
+@inject LanguageService language
 
 @using Microsoft.AspNetCore.Identity
 @using partner_aluro.ViewComponents;
@@ -10,9 +11,9 @@
 {
     <div class="row bg-light">
         <div class="col border text-center fw-bold" style="max-width: 75px;"></div>
-        <div class="col border text-center fw-bold  text-wrap text-break">Produkt</div>
-        <div class="col border text-center fw-bold" style="max-width: 75px;">Ilość</div>
-        <div class="col border text-center fw-bold" style="max-width: 60px;">Usuń</div>
+        <div class="col border text-center fw-bold  text-wrap text-break">@language.Getkey("Produkt")</div>
+        <div class="col border text-center fw-bold" style="max-width: 75px;">@language.Getkey("Ilość")</div>
+        <div class="col border text-center fw-bold" style="max-width: 60px;">@language.Getkey("Usuń")</div>
     </div>
     @foreach (var item in Model.Cart.CartItems)
     {
@@ -51,7 +52,7 @@
             <div class="col border border-top-0 text-center wrapper">
                 <p class="text-max text-wrap text-break">
                     @item.Product.Symbol <br>
-                    <a class="text-black" asp-controller="Product" asp-action="Details" asp-route-id="@item.Product.ProductId">@item.Product.Name</a><br>
+                    <a class="text-black" asp-controller="Product" asp-action="Details" asp-route-id="@item.Product.ProductId">@language.Getkey(@item.Product.Name)</a><br>
                     @CenaJednostkowa_brutto.ToString("C")
                 </p>
             </div>
@@ -67,16 +68,16 @@
     }
     <div class="row">
         <div class="text-end">
-            Wartość (brutto): <strong>@Model.Cart.GetCartTotalBrutto().ToString("C")</strong>
+            @language.Getkey("Wartość (brutto)"): <strong>@Model.Cart.GetCartTotalBrutto().ToString("C")</strong>
         </div>
         <div class="text-end">
-            Razem (netto): <strong>@Model.Cart.GetCartTotalNetto().ToString("C")</strong>
+            @language.Getkey("Razem (netto)"): <strong>@Model.Cart.GetCartTotalNetto().ToString("C")</strong>
         </div>
     </div>
     <div class="row">
         <div class="col text-center">
 
-        <a class="btn btn-success" asp-controller="Cart" asp-action="ZlozZamowienie">Złóż zamówienie</a>
+        <a class="btn btn-success" asp-controller="Cart" asp-action="ZlozZamowienie">@language.Getkey("Złóż zamówienie")</a>
 
         </div>
     </div>
@@ -84,5 +85,5 @@
 
  }else
 {
-    <h3 class="text-center">Koszyk jest pusty</h3>
+    <h3 class="text-center">@language.Getkey("Koszyk jest pusty")</h3>
 }

@@ -1,6 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DeepL;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using partner_aluro.Data;
 using partner_aluro.Models;
+using System.Collections;
+using System.Resources.NetStandard;
 
 namespace partner_aluro.Controllers
 {
@@ -8,9 +12,13 @@ namespace partner_aluro.Controllers
     {
         ApplicationDbContext _context;
 
-        public InicializerProductCategory(ApplicationDbContext context)
+        private readonly IWebHostEnvironment _webHostEnvironment;
+
+        public InicializerProductCategory(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
+
+            _webHostEnvironment = webHostEnvironment;
         }
 
         public IActionResult Index()
@@ -33,6 +41,109 @@ namespace partner_aluro.Controllers
         List<ProductCategory> produktyMultipleCategory = _context.ProductCategory.ToList();
 
             return View(produktyMultipleCategory);
+        }
+        public async Task<IActionResult> TlumaczAsync()
+        {
+            List<Product> Prodykty = _context.Products.ToList();
+
+            for (int i = 0; i < Prodykty.Count; i++)
+            {
+
+                var authKey = $"bbc4aaae-78af-4f5e-37dd-34e29f91a480:fx"; // Replace with your key
+                var translator = new Translator(authKey);
+
+                string NameEn = Prodykty[i].Name.ToString();
+                string NameDE = Prodykty[i].Name.ToString();
+
+                var translatedText1 = await translator.TranslateTextAsync(
+                  NameEn,
+                  "PL",
+                  "en-US");
+                NameEn = translatedText1.Text;
+
+                var translatedText2 = await translator.TranslateTextAsync(
+                  NameDE,
+                  "PL",
+                  "DE");
+                NameDE = translatedText2.Text;
+
+
+                //Dodanie do pliku resx tlumaczenia nazwy produktu
+                string webRootPath = _webHostEnvironment.ContentRootPath;
+                string resxFile1 = webRootPath + "\\Resources\\SharedResource.pl-PL.resx";
+
+                Dictionary<string, string> dict1 = new Dictionary<string, string>();
+                dict1.Add(Prodykty[i].Name, Prodykty[i].Name);
+                Hashtable data1 = new Hashtable(dict1);
+                UpdateResourceFile(data1, resxFile1);
+                // KONIEC Dodanie do pliku resx tlumaczenia nazwy produktu
+
+
+
+                //Dodanie do pliku resx tlumaczenia nazwy produktu
+                string resxFile2 = webRootPath + "\\Resources\\SharedResource.en-US.resx";
+
+                Dictionary<string, string> dict2 = new Dictionary<string, string>();
+                dict2.Add(Prodykty[i].Name, NameEn);
+                Hashtable data2 = new Hashtable(dict2);
+                UpdateResourceFile(data2, resxFile2);
+                // KONIEC Dodanie do pliku resx tlumaczenia nazwy produktu
+
+                //Dodanie do pliku resx tlumaczenia nazwy produktu
+                string resxFile3 = webRootPath + "\\Resources\\SharedResource.de-DE.resx";
+
+                Dictionary<string, string> dict3 = new Dictionary<string, string>();
+                dict3.Add(Prodykty[i].Name, NameDE);
+                Hashtable data3 = new Hashtable(dict3);
+                UpdateResourceFile(data3, resxFile3);
+                // KONIEC Dodanie do pliku resx tlumaczenia nazwy produktu Niemiecki
+            }
+
+            return View();
+        }
+
+        public static void UpdateResourceFile(Hashtable data, String path)
+        {
+            Hashtable resourceEntries = new Hashtable();
+
+            //Get existing resources
+            ResXResourceReader reader = new ResXResourceReader(path);
+            if (reader != null)
+            {
+                IDictionaryEnumerator id = reader.GetEnumerator();
+                foreach (DictionaryEntry d in reader)
+                {
+                    if (d.Value == null)
+                        resourceEntries.Add(d.Key.ToString(), "");
+                    else
+                        resourceEntries.Add(d.Key.ToString(), d.Value.ToString());
+                }
+                reader.Close();
+            }
+
+            //Modify resources here...
+            foreach (String key in data.Keys)
+            {
+                if (!resourceEntries.ContainsKey(key))
+                {
+
+                    String value = data[key].ToString();
+                    if (value == null) value = "";
+
+                    resourceEntries.Add(key, value);
+                }
+            }
+
+            //Write the combined resource file
+            ResXResourceWriter resourceWriter = new ResXResourceWriter(path);
+
+            foreach (String key in resourceEntries.Keys)
+            {
+                resourceWriter.AddResource(key, resourceEntries[key]);
+            }
+            resourceWriter.Generate();
+            resourceWriter.Close();
+
         }
     }
 }
