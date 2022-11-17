@@ -12,13 +12,13 @@
 @inject LanguageService language
 
 <div class="row justify-content-center align-items-center sticky-top navbar-expand-lg navbar-dark bg-dark">
-    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-10 col-xxl-8">
+    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-10 col-xxl-8 header px-0 mx-0">
 
         <div class="row p-0 m-0">
                     @*Lewa strona*@
                     @if (User.IsInRole("Administrator") || User.IsInRole("Manager"))
                     {
-                        <div class="col" style="max-width:60px">
+                        <div class="col" style="max-width:55px">
                             <a class="btn btn-secondary" href="@Url.Action("Index","Dashboard")" role="button" alt="panel użytkownika">
                                 Panel
                             </a>
@@ -57,7 +57,7 @@
                             </ul>
 
                 </div>
-            <div class="col d-sm-inline-block  " style="max-width:110px">
+            <div class="col d-sm-inline-block px-0 mx-0" style="max-width:110px">
 
                     @{
                     var active1 = "";
@@ -74,7 +74,7 @@
                     }
                 <ul class="nav custom-nav" >
                     <li>
-                        <a class="nav-link @active1" asp-controller="Register" asp-action="ChangeValue" asp-route-culture="zl"> @language.Getkey("zł")</a> /
+                        <a class="nav-link @active1" asp-controller="Register" asp-action="ChangeValue" asp-route-culture="zl"> @language.Getkey("zł")</a>
                     </li>
                     <li>
                         <a class="nav-link @active2" asp-controller="Register" asp-action="ChangeValue" asp-route-culture="euro"> @language.Getkey("€")</a>
@@ -92,7 +92,7 @@
                 <div class="col "  style="width:200px; max-width: 200px;">
 
                                 @*PRAWA STRONA START*@
-                        <div id="navbarNavDarkDropdown2 text-end ">
+                        <div id="navbarNavDarkDropdown2 text-end px-0 mx-0">
                         <ul class="nav custom-nav menu-end">
                                     
 

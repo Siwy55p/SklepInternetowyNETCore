@@ -29,10 +29,10 @@
                                 @language.Getkey("Sortuj")
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonSort">
-                                <li class="dropdown-item link-dark">@Html.ActionLink(@language.Getkey("Alfabetycznie od A do Z"), "Lista", "Category", new { page = 1, szukanaNazwa=ViewData["szukanaNazwa"], sort=1 } )</li>
-                                <li class="dropdown-item link-dark">@Html.ActionLink(@language.Getkey("Alfabetycznie od Z do A"), "Lista", "Category", new { page = 1, szukanaNazwa=ViewData["szukanaNazwa"], sort=2 } )</li>
-                                <li class="dropdown-item link-dark">@Html.ActionLink(@language.Getkey("Symbol od najmniejszej do największej"), "Lista", "Category", new { page = 1, szukanaNazwa=ViewData["szukanaNazwa"], sort=3 } )</li>
-                                <li class="dropdown-item link-dark">@Html.ActionLink(@language.Getkey("Symbol od największej do najmniejszej"), "Lista", "Category", new { page = 1, szukanaNazwa=ViewData["szukanaNazwa"], sort=4 } )</li>
+                                <li class="dropdown-item link-dark">@Html.ActionLink(language.Getkey("Alfabetycznie od A do Z"), "Lista", "Category", new { page = 1, szukanaNazwa=ViewData["szukanaNazwa"], sort=1 } )</li>
+                                <li class="dropdown-item link-dark">@Html.ActionLink(language.Getkey("Alfabetycznie od Z do A"), "Lista", "Category", new { page = 1, szukanaNazwa=ViewData["szukanaNazwa"], sort=2 } )</li>
+                                <li class="dropdown-item link-dark">@Html.ActionLink(language.Getkey("Symbol od najmniejszej do największej"), "Lista", "Category", new { page = 1, szukanaNazwa=ViewData["szukanaNazwa"], sort=3 } )</li>
+                                <li class="dropdown-item link-dark">@Html.ActionLink(language.Getkey("Symbol od największej do najmniejszej"), "Lista", "Category", new { page = 1, szukanaNazwa=ViewData["szukanaNazwa"], sort=4 } )</li>
                             </ul>
                         </div>
                     </div>

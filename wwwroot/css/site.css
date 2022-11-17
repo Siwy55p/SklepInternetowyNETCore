@@ -6,11 +6,6 @@ a.active {
 
 
 /*header menu menu nav bar*/
-.navbar {
-    height: 25px;
-    min-height: 25px;
-}
-
 .navbar-nav > li > a {
     padding-top: 0;
     padding-bottom: 0;
@@ -24,9 +19,8 @@ a.active {
 
 /*header */
 .header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    height: 40px;
+    min-height: 25px;
 }
 
 
@@ -182,7 +176,7 @@ a.active {
 
 /*POPRAWKI bdo BOOTSTRP STYLE*/
 .offcanvas-end {
-    top: 52px;
+    top: 40px;
 }
 
 .product-name {
