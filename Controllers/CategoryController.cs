@@ -44,14 +44,35 @@ namespace partner_aluro.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(Category category)
+        public async Task<IActionResult> AddAsync(Category category)
         {
             ModelState.Remove("SubCategories");
             if (!ModelState.IsValid)
             {
                 return View(category);
             }
+            if(category.ParentId > 0)
+            {
+                category.ChildId = 2;
+                Category cat = _context.Category.Where(c => c.CategoryId == category.ParentId).FirstOrDefault();
 
+                Category kategoria = await _iUnitOfWorkCategory.Category.GetAsync(cat.CategoryId);
+
+                if (kategoria == null)
+                {
+                    return NotFound();
+                }
+
+                kategoria.ChildId = 1;
+
+                _iUnitOfWorkCategory.Category.Update(kategoria);
+
+                _context.SaveChanges();
+
+            }else
+            {
+                category.ChildId = 0;
+            }
             //logika zapisania kategorii do bazy.
             _categoryService.AddSave(category);
 
@@ -355,7 +376,7 @@ namespace partner_aluro.Controllers
         {
             var lstCategories = new List<SelectListItem>();
 
-            lstCategories = _categoryService.GetList().OrderBy(x => x.CategoryId).Select(ct => new SelectListItem()
+            lstCategories = _categoryService.GetList().Where(x=>x.ParentId == 0).OrderBy(x => x.CategoryId).Select(ct => new SelectListItem()
             {
                 Value = ct.CategoryId.ToString(),
                 Text = ct.Name

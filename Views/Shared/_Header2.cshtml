@@ -1,33 +1,31 @@
 ﻿@inject LanguageService language
 
-<div class="row justify-content-center align-items-center px-0 mx-0">
-    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-10 col-xxl-8 pt-3 px-0 mx-0 ">
-        <div class="row">
-            <div class="col d-none d-sm-none d-md-none d-lg-block" style="max-width:290px; width:290px">
-                    <a href="@Url.Action("Index","Home")">
-                        <img src="~/images/logo/aluro_logo-1024x509.png" />
-                    </a>
-            </div>
-            <div class="col-12 col-md-12 col-lg-8 col-xl col-xxl px-0 mx-0">
-                @await Component.InvokeAsync("MenuMain")
+    <div class="row justify-content-center align-items-center px-0 mx-0">
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-10 col-xxl-8 pt-3 px-0 mx-0 ">
+            <div class="row">
+                <div class="col d-none d-sm-none d-md-none d-lg-block" style="max-width:290px; width:290px">
+                        <a href="@Url.Action("Index","Home")">
+                            <img src="~/images/logo/aluro_logo-1024x509.png" />
+                        </a>
+                </div>
+                <div class="col-12 col-md-12 col-lg-8 col-xl col-xxl px-0 mx-0">
+                    @await Component.InvokeAsync("MenuMain")
 
-            </div>
-
-
-        </div>
-        <div class="row justify-content-center align-items-center">
-            <div class="col search pb-1">
-                <form asp-controller="Category" asp-action="Lista" method="get">
-                    <div class="search input-group mb-3 ">
-                        <input type="text" name="szukanaNazwa" id="szukanaNazwa" class="form-control mr-sm-2" placeholder="@language.Getkey("Szukaj")" />
+                </div>
+                <div class="row justify-content-center align-items-center" style="position: relative; z-index: 0;">
+                    <div class="col search pb-1">
+                        <form asp-controller="Category" asp-action="Lista" method="get">
+                            <div class="search input-group mb-3 pt-1">
+                                <input type="text" name="szukanaNazwa" id="szukanaNazwa" class="form-control mr-sm-2" placeholder="@language.Getkey("Szukaj")" />
+                            </div>
+                        </form>
                     </div>
-                </form>
+                </div>
+
             </div>
+            
         </div>
     </div>
-</div>
-
-
 
 @section Scripts{
 

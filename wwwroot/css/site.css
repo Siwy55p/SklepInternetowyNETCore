@@ -1,4 +1,24 @@
 
+#main-wrapper .owl-item {
+    visibility: hidden;
+    opacity: 0;
+}
+
+    #main-wrapper .owl-item.active {
+        visibility: visible;
+        opacity: 1;
+        z-index: 2323;
+    }
+
+
+.rozwin
+{
+    position: fixed;
+    top: 75px;
+    right:13px;
+    color:white;
+}
+
 /*menu aktywny link*/
 a:hover {
     font-size: 16px;

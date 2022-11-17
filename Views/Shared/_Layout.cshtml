@@ -25,7 +25,7 @@
 </head>
 <body>
     @{
-        @inject LanguageService language
+                                                    @inject LanguageService language
     }
     @await Html.PartialAsync("_Header")
     <main>
@@ -93,37 +93,14 @@
                 });
             });
         });
+
     </script>
     <script>
-        $(function () {
-            $('.owl-one.owl-carousel')
-                .each(function () {
-                    let carousel = $(this);
-                    carousel.on('show.bs.dropdown', '[data-bs-toggle=dropdown]', function () {
-                        // universal solution
-                        let dropdown = bootstrap.Dropdown.getInstance(this);
-                        $(dropdown._menu).insertAfter(carousel);
-
-                         alternative for this particular layout
-                         $(this).next('.dropdown-menu').insertAfter(carousel);
-                    });
-                })
-                .owl - one.owlCarousel({
-                    loop: true,
-                    nav: true,
-                     margin: 10
-                });
-
-        });
-    </script>
-
-    <script type="text/javascript">
         $('.owl-one.owl-carousel').owlCarousel({
             loop: false,
             margin: 5,
             nav: true,
-            stagePadding: 30,
-            navText : ['<i class="fa fa-angle-left" aria-hidden="true"></i>','<i class="fa fa-angle-right" aria-hidden="true"></i>'],
+            stageOuterClass: 'owl-stage-outer overflow-visible',
             responsive: {
                 0: {
                     items: 2
@@ -150,8 +127,65 @@
                     items: 8
                 }
             }
-
         })
+
+        //$(function () {
+        //    $('.owl-one.owl-carousel')
+        //        .each(function () {
+        //            let carousel = $(this);
+        //            carousel.on('show.bs.dropdown', '[data-bs-toggle=dropdown]', function () {
+        //                // universal solution
+        //                let dropdown = bootstrap.Dropdown.getInstance(this);
+        //                $(dropdown._menu).insertAfter(carousel);
+
+        //                 //alternative for this particular layout
+        //                 //$(this).next('.dropdown-menu').insertAfter(carousel);
+        //            });
+        //        })
+        //        .owl - one.owlCarousel({
+        //            loop: true,
+        //            nav: true,
+        //             margin: 10
+        //        });
+
+        //});
+    </script>
+
+    <script type="text/javascript">
+        //$('.owl-one.owl-carousel').owlCarousel({
+        //    loop: false,
+        //    margin: 5,
+        //    nav: true,
+        //    stagePadding: 30,
+        //    navText : ['<i class="fa fa-angle-left" aria-hidden="true"></i>','<i class="fa fa-angle-right" aria-hidden="true"></i>'],
+            //responsive: {
+            //    0: {
+            //        items: 2
+            //    },
+            //    300: {
+            //        items: 3
+            //    },
+            //    450: {
+            //        items: 4
+            //    },
+            //    600: {
+            //        items: 5
+            //    },
+            //    800: {
+            //        items: 6
+            //    },
+            //    1000: {
+            //        items: 6
+            //    },
+            //    1300: {
+            //        items: 7
+            //    },
+            //    1500: {
+            //        items: 8
+            //    }
+            //}
+
+        //})
     </script>
     <script type="text/javascript">
         $('.owl-carousel').owlCarousel({
