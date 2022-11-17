@@ -32,20 +32,20 @@
                                 aria-expanded="false">
 
                         @{
-                                                @if (@CultureInfo.CurrentUICulture.TextInfo.CultureName == "pl-PL")
+                                                    @if (@CultureInfo.CurrentUICulture.TextInfo.CultureName == "pl-PL")
                             {
-                                                    <i class="flag-icon flag-icon-pl"></i>
+                                                        <i class="flag-icon flag-icon-pl"></i>
                             }
                             else if (@CultureInfo.CurrentUICulture.TextInfo.CultureName == "en-US")
                             {
-                                                        <i class="flag-icon flag-icon-us"></i>
+                                                            <i class="flag-icon flag-icon-us"></i>
                             }
                             else if (@CultureInfo.CurrentUICulture.TextInfo.CultureName == "de-DE")
                             {
-                                                    <i class="flag-icon flag-icon-it"></i>
+                                                        <i class="flag-icon flag-icon-it"></i>
                             }else
                             {
-                                                @language.Getkey("Język")
+                                                    @language.Getkey("Język")
                             }
                         }
                                     @*@language.Getkey("Język")*@
@@ -62,7 +62,7 @@
                     @{
                     var active1 = "";
                     var active2 = "";
-                                                @if (Constants.myNumberFormatInfo.CurrencySymbol == "zł")
+                                                    @if (Constants.myNumberFormatInfo.CurrencySymbol == "zł")
                     {
                         active1 = "active";
                         active2 = "";
@@ -89,11 +89,11 @@
                 @*Srodek strona*@
 
                         @*PRAWA STRONA START*@
-                <div class="col px-0 mx-0" style="width:200px; max-width:200px;">
+            <div class="col px-0 mx-0 text-end px-0 mx-0"  style="width:200px; max-width:200px;">
 
                                 @*PRAWA STRONA START*@
-                        <div id="navbarNavDarkDropdown2 text-end px-0 mx-0">
-                        <ul class="nav custom-nav menu-end">
+                <div id="navbarNavDarkDropdown2 text-end px-0 mx-0 " style="right:20px">
+                        <ul class="nav custom-nav menu-end text-end">
                                     
 
                                         <li>
