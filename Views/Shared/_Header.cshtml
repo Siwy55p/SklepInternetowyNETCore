@@ -14,7 +14,7 @@
 <div class="row justify-content-center align-items-center sticky-top navbar-expand-lg navbar-dark bg-dark">
     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-10 col-xxl-8 header px-0 mx-0">
 
-        <div class="row p-0 m-0">
+        <div class="row p-0 m-0 pt-1">
                     @*Lewa strona*@
                     @if (User.IsInRole("Administrator") || User.IsInRole("Manager"))
                     {
@@ -57,7 +57,7 @@
                             </ul>
 
                 </div>
-            <div class="col d-sm-inline-block px-0 mx-0" style="max-width:110px">
+            <div class="col d-sm-inline-block px-0 mx-0" style="max-width:90px">
 
                     @{
                     var active1 = "";
@@ -72,7 +72,7 @@
                         active2 = "active";
                     }
                     }
-                <ul class="nav custom-nav" >
+                <ul class="nav custom-nav px-0 mx-0">
                     <li>
                         <a class="nav-link @active1" asp-controller="Register" asp-action="ChangeValue" asp-route-culture="zl"> @language.Getkey("zł")</a>
                     </li>
@@ -89,7 +89,7 @@
                 @*Srodek strona*@
 
                         @*PRAWA STRONA START*@
-                <div class="col "  style="width:200px; max-width: 200px;">
+                <div class="col px-0 mx-0" style="width:200px; max-width:200px;">
 
                                 @*PRAWA STRONA START*@
                         <div id="navbarNavDarkDropdown2 text-end px-0 mx-0">
@@ -97,14 +97,14 @@
                                     
 
                                         <li>
-                                            <a class="nav-link" asp-controller="Order" asp-action="ListaZamowienZalogowanegoUzytkownika"><i class="bi bi-clipboard-data"></i></a>
+                            <a class="nav-link px-0" asp-controller="Order" asp-action="ListaZamowienZalogowanegoUzytkownika"><i class="bi bi-clipboard-data"></i></a>
                                         </li>
                                         <li>
                                             @await Component.InvokeAsync("CartHeader")
                                             @*<a class="nav-link" asp-area="" asp-controller="Cart" asp-action="ZlozZamowienie"><i class="fa-solid fa-cart-shopping">@cart.CartItems.Count</i></a>*@
                                         </li>
                                         <li class="nav-item dropdown">
-                                            <a class="nav-link dropdown-toggle"
+                            <a class="nav-link dropdown-toggle px-0"
                                                href="#"
                                                role="button"
                                                data-bs-toggle="dropdown"
