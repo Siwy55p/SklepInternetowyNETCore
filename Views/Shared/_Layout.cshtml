@@ -104,8 +104,8 @@
                         let dropdown = bootstrap.Dropdown.getInstance(this);
                         $(dropdown._menu).insertAfter(carousel);
 
-                        // alternative for this particular layout
-                        // $(this).next('.dropdown-menu').insertAfter(carousel);
+                         alternative for this particular layout
+                         $(this).next('.dropdown-menu').insertAfter(carousel);
                     });
                 })
                 .owl - one.owlCarousel({
@@ -121,7 +121,8 @@
         $('.owl-one.owl-carousel').owlCarousel({
             loop: false,
             margin: 5,
-            nav: false,
+            nav: true,
+            navText : ['<i class="fa fa-angle-left" aria-hidden="true"></i>','<i class="fa fa-angle-right" aria-hidden="true"></i>'],
             responsive: {
                 0: {
                     items: 2
