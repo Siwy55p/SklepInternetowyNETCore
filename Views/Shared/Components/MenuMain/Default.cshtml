@@ -1,35 +1,43 @@
-﻿@model List<Category>
+﻿@model IEnumerable<Category>
 @inject LanguageService language
 
 <div class="owl-one owl-carousel" >
-    @for (int x = 0; x < Model.Count() ; x++)
-    {
+        @foreach (var kategorie in Model)
+        {
 
-        @if (Model[x].Aktywny == true && Model[x].ParentId == 0)
+        @if (kategorie.Aktywny == true && kategorie.ParentId == 0)
         {
 
             var active = "";
-
-            if (Model[x].CategoryId == ViewBag.KategoriaId)
+@*
+            if (Model[x].Name.ToString() == ViewData["szukanaNazwa"].ToString())
             {
                 active = "active";
+            }
+*@
+            if (ViewData["szukanaNazwa"] != null)
+            {
+                if (@kategorie.Name.ToString() == ViewData["szukanaNazwa"].ToString())
+                {
+                    active = "active";
+                }
             }
 
             <div class="dropdown px-2 mx-1">
 
-                <a href="@Url.Action("Lista1","Category", new {KategoriaId = @Model[x].CategoryId})" class="@active catmenu text-white mainmenu" style="border-radius:20px; width: 100px; height:100px; max-height: 100px;" aria-expanded="false">
-                    @language.Getkey(@Model[x].Name)
+                <a href="@Url.Action("Lista1","Category", new {KategoriaId = @kategorie.CategoryId})" class="@active catmenu text-white mainmenu" style="border-radius:20px; width: 100px; height:100px; max-height: 100px;" aria-expanded="false">
+                    @language.Getkey(kategorie.Name)
                 </a>
 
-                @for(int y = 0; y < @Model.Count(); y++)
+                @foreach (var kategorie2 in Model)
                 {
-                    @if (Model[y].ParentId == Model[x].CategoryId && Model[y].ParentId !=0)
+                    @if (kategorie2.ParentId == kategorie.CategoryId && kategorie2.ParentId != 0)
                     {
                         <a href="#" role="button" id="dropdownMenu1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-h"></i></a>
                         <ul class="dropdown-menu dropdown-menu-dark p-1" aria-labelledby="navbarDarkDropdownMenuLink">
                             <li>
-                                <a class="@active text-white text-decoration-none" href="@Url.Action("Lista1","Category", new {KategoriaId = Model[y].CategoryId})">
-                                    @language.Getkey(@Model[y].Name)
+                                <a class="@active text-white text-decoration-none" href="@Url.Action("Lista1","Category", new {KategoriaId = kategorie2.CategoryId})">
+                                    @language.Getkey(kategorie2.Name)
                                 </a>
                             </li>
                         </ul>

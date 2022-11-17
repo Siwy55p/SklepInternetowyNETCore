@@ -45,7 +45,6 @@ namespace partner_aluro.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-
             //logika zalogowania
             if (User.Identity.IsAuthenticated)
             {

@@ -1,18 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using partner_aluro.Core;
 using partner_aluro.Data;
 using partner_aluro.Models;
-using partner_aluro.Services;
 using partner_aluro.Services.Interfaces;
-using Polly;
 using SmartBreadcrumbs.Nodes;
-using System.Reflection;
 using X.PagedList;
 using X.PagedList.Mvc.Core;
 
@@ -174,9 +168,6 @@ namespace partner_aluro.Controllers
             ViewBag.OnePageOfProducts = onePageOfProducts;
 
 
-            ViewBag.KategoriaId = KategoriaId;
-            ViewBag.KategoriaId2 = 99999999;
-
             return View(produkty);
 
 
@@ -231,9 +222,6 @@ namespace partner_aluro.Controllers
                 ViewBag.OnePageOfProducts = onePageOfProducts;
 
 
-                ViewBag.KategoriaId = 99999999;
-                ViewBag.KategoriaId2 = 99999999;
-
                 return View();
             }
             else
@@ -271,14 +259,10 @@ namespace partner_aluro.Controllers
 
                     ViewBag.OnePageOfProducts = onePageOfProducts;
 
-                    ViewBag.KategoriaId = 99999999;
-                    ViewBag.KategoriaId2 = 99999999;
                     return View(produkty);
                 }
                 else
                 {
-                    ViewBag.KategoriaId = 99999999;
-                    ViewBag.KategoriaId2 = 99999999;
                     return View(produkty2);
                 }
 
@@ -319,6 +303,7 @@ namespace partner_aluro.Controllers
             //ViewBag.OnePageOfProducts = onePageOfProducts;
 
             ViewData["OnePageOfProducts"] = onePageOfProducts;
+
             return View();
         }
 

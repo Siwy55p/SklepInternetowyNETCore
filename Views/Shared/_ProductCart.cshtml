@@ -18,7 +18,7 @@
 
     <div class="thumbnail">
         <a class="product-name link-dark" asp-controller="Product" asp-action="Details" asp-route-id="@Model.ProductId">
-            <img class="card-img-top" src="~/images/produkty/@Model.Symbol/@Model.ImageUrl" alt="@Model.Name" style="width:260px;">
+            <img class="card-img-top" onError="this.src = 'new default path'" src="~/images/produkty/@Model.Symbol/@Model.ImageUrl" alt="@Model.Name" style="width:260px;">
         </a>
     </div>
     <div class="row card-bar-action justify-content-center align-items-center">
@@ -33,7 +33,7 @@
                 <input type="number" id="@Model.ProductId" name="quantity" value="1" class="form-control" aria-required="true" placeholder="Ilość" min="1" max="@Model.Ilosc" />
             </div>
             <div class="col justify-content-center text-center">
-                <button value="@Model.ProductId" onclick="AddToCart(@Model.ProductId)" data-bs-target="offcanvas" role="button">@language.Getkey("Dodaj do zamowienia")</button>
+                <button value="@Model.ProductId" class="btn btn-add" onclick="AddToCart(@Model.ProductId)" data-bs-target="offcanvas" role="button">@language.Getkey("Dodaj do zamowienia")</button>
             </div>
         }
     </div>

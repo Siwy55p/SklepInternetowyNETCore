@@ -20,7 +20,7 @@ namespace partner_aluro.Core
             public const string RequireManager = "RequireManager";
         }
 
-        public static NumberFormatInfo myNumberFormatInfo = new CultureInfo("de-DE", false).NumberFormat;
+        public static NumberFormatInfo myNumberFormatInfo = new CultureInfo("pl-PL", false).NumberFormat;
 
         public static Kurs Euro { get; set; } = new Kurs();
 

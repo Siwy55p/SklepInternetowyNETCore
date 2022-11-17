@@ -1,9 +1,36 @@
 
-a.active {
+/*menu aktywny link*/
+a:hover {
     font-size: 16px;
-    font-weight: bold;
+    font-weight: 500;
+}
+/*menu aktywny link*/
+
+a.active {
+    background-color: #6e1a1a;
+    font-size: 15px;
+    font-weight: 600;
 }
 
+.btn.btn-add {
+    border: 1px solid #000;
+    background-color: #fcfcfc;
+}
+    .btn.btn-add:hover {
+        font-weight: 500;
+        background-color: #6e1a1a;
+        color: white;
+    }
+/*menu lefe kategorie*/
+a.activecat {
+    font-size: 15px;
+    font-weight: 700;
+}
+a.activecat2 {
+    font-size: 15px;
+    font-weight: 700;
+}
+/*menu lefe kategorie*/
 
 /*header menu menu nav bar*/
 .navbar-nav > li > a {
@@ -19,8 +46,8 @@ a.active {
 
 /*header */
 .header {
-    height: 40px;
-    min-height: 25px;
+    height: 47px;
+    min-height: 47px;
 }
 
 
@@ -77,9 +104,13 @@ a.active {
 }
 .custom-nav .nav-link:hover {
     color: #a9a9a9;
+    /*color: white;*/
 }
-
-
+    .custom-nav .active {
+        /* color: #a9a9a9;*/
+        color: white;
+        border: 1px solid white;
+    }
 .card {
     background: #f1f1f1;
     border: 1px solid #BAB5AF;

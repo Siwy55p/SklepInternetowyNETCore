@@ -32,7 +32,7 @@
                                 aria-expanded="false">
 
                         @{
-                                                    @if (@CultureInfo.CurrentUICulture.TextInfo.CultureName == "pl-PL")
+                            @if (@CultureInfo.CurrentUICulture.TextInfo.CultureName == "pl-PL")
                             {
                                                         <i class="flag-icon flag-icon-pl"></i>
                             }
@@ -62,7 +62,7 @@
                     @{
                     var active1 = "";
                     var active2 = "";
-                                                    @if (Constants.myNumberFormatInfo.CurrencySymbol == "zł")
+                    @if (Constants.myNumberFormatInfo.CurrencySymbol == "zł")
                     {
                         active1 = "active";
                         active2 = "";
