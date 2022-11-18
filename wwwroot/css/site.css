@@ -9,7 +9,7 @@
         opacity: 1;
     }
 */
-@media screen and (max-width: 391px) {
+@media screen and (max-width: 768px) {
     body, html {
         overflow-x: hidden;
     }
@@ -18,7 +18,6 @@
     overflow-x: hidden;
 }*/
 body {
-    overflow: hidden;
     /*
     background-color: #eceff1;*/
     /*overflow-y: scroll;*/
