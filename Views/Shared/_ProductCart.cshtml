@@ -18,7 +18,7 @@
 
     <div class="thumbnail">
         <a class="product-name link-dark" asp-controller="Product" asp-action="Details" asp-route-id="@Model.ProductId">
-            <img class="card-img-top" onError='this.src="~/images/images.jpg"' src="~/images/produkty/@Model.Symbol/@Model.ImageUrl" alt="@Model.Name" style="width:260px;">
+            <img class="card-img-top" onerror="this.onerror=null;this.src='../images/noimage.png';" src="~/images/produkty/@Model.Symbol/@Model.ImageUrl" alt="@Model.Name" style="width:260px;">
         </a>
     </div>
     <div class="row card-bar-action justify-content-center align-items-center">
@@ -70,12 +70,12 @@
 
         }
         <div class="float-end text-end">
-            @language.Getkey("CenaHurtowa"): @language.GetCurrently(@cena_produktu, Constants.myNumberFormatInfo).ToString("C",Constants.myNumberFormatInfo) (netto)
+            @language.Getkey("CenaHurtowa"): @language.GetCurrently(@cena_produktu, Constants.myNumberFormatInfo).ToString("C",Constants.myNumberFormatInfo) @language.Getkey("(netto)")
 
 
         </div>
         <div class="float-end text-end">
-            @language.GetCurrently(@Cena_brutto, Constants.myNumberFormatInfo).ToString("C",Constants.myNumberFormatInfo) <span class="brutto">(brutto)</span>
+            @language.GetCurrently(@Cena_brutto, Constants.myNumberFormatInfo).ToString("C",Constants.myNumberFormatInfo) <span class="brutto">@language.Getkey("(brutto)")</span>
         </div>
 
         @if (partner_aluro.Core.Constants.Rabat != 0 && partner_aluro.Core.Constants.Rabat >= 0)
