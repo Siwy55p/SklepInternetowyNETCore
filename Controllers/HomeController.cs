@@ -55,8 +55,44 @@ namespace partner_aluro.Controllers
                 //_context.Add(category);
                 //_context.SaveChanges();
 
+                Slider slider = new Slider();
+
+                ImageModel img1 = new ImageModel()
+                {
+                    ImageName = "slider1",
+                    kolejnosc = 1,
+                    path = $"../images/sliderhome/slider1.jpg",
+
+                };
+                ImageModel img2 = new ImageModel()
+                {
+                    ImageName = "slider2",
+                    kolejnosc = 2,
+                    path = $"../images/sliderhome/slider2.jpg",
+
+                };
+                ImageModel img3 = new ImageModel()
+                {
+                    ImageName = "slider3",
+                    kolejnosc = 3,
+                    path = "..\\images\\SliderHome\\slider3.jpg",
+
+                };
+                slider.ObrazkiDostepneWSliderze.Add(img1);
+                slider.ObrazkiDostepneWSliderze.Add(img2);
+                slider.ObrazkiDostepneWSliderze.Add(img3);
+
+                List<Slider> sliders = new List<Slider>();
+                Slider slider2 = new Slider();
+                slider2.ObrazkiDostepneWSliderze.Add(img1);
+                slider2.ObrazkiDostepneWSliderze.Add(img2);
+                slider2.ObrazkiDostepneWSliderze.Add(img3);
+                slider2.Name = "SliderHome";
+
+                sliders.Add(slider);
+                sliders.Add(slider2);
                 //zainicjuj view model
-                var vm = new HomeViewModel() { Nowosci = nowosci, Bestsellery = bestseller};
+                var vm = new HomeViewModel() { Nowosci = nowosci, Bestsellery = bestseller, SliderHome = sliders ,SliderHome1 = slider2};
 
                 return View(vm); //zapewnia renderowania widoków 
             }

@@ -9,6 +9,9 @@ namespace partner_aluro.ViewModels
         public IEnumerable<Category>? Kategorie { get; set; }
         public IEnumerable<Product>? Nowosci { get; set; }
         public IEnumerable<Product>? Bestsellery { get; set; }
+        public IEnumerable<Slider>? SliderHome { get; set; }
+
+        public Slider? SliderHome1 { get; set; }
 
         //public CompanyModel _model {get; set;}
 
