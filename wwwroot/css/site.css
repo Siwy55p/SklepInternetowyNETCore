@@ -9,13 +9,22 @@
         opacity: 1;
     }
 
+@media screen and (max-width: 600px) {
+    body, html {
+      /*  overflow-x: hidden;*/
+    }
+    .owl-stage{
+        max-width:400px;
+    }
+}
+
 /*body, html {
     overflow-x: hidden;
 }*/
 body {
-    overflow-x: hidden;
-    background-color: #eceff1;
-    overflow-y: scroll;
+/*
+    background-color: #eceff1;*/
+    /*overflow-y: scroll;*/
     margin:0;
     padding:0;
     
@@ -72,6 +81,10 @@ a.active {
     font-size: 15px;
     font-weight: 600;
 }
+.page-link
+{
+    color: black;
+}
 
 .btn-success, .btn-success:visited, .btn-success:focus {
     background-color: #fcfcfc !important;
@@ -79,7 +92,7 @@ a.active {
     border: 1px solid black;
 }
     .btn-success:hover {
-        background-color: #a11212 !important;
+        background-color: #6e1a1a !important;
         color: white;
         border: 1px solid black;
     }
@@ -376,4 +389,19 @@ label.required::before {
 .body_product
 {
     display: flex;
+}
+
+
+.page-item.active .page-link {
+    z-index: 3;
+    color: black;
+    background-color: #a11212;
+
+}
+.page-item.active .page-link {
+    z-index: 3;
+    color: black;
+    background-color: #0d6efd;
+    border: 2px solid #a11212;
+    border-color: #a11212;
 }
