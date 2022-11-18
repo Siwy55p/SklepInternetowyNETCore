@@ -825,4 +825,22 @@
   <data name="Symbol od największej do najmniejszej" xml:space="preserve">
     <value>Symbol from largest to smallest</value>
   </data>
+  <data name="DANE ROZLICZENIOWE FIRMY" xml:space="preserve">
+    <value>COMPANY BILLING INFORMATION</value>
+  </data>
+  <data name="Nazwa Firmy" xml:space="preserve">
+    <value>Company name</value>
+  </data>
+  <data name="Powtórz hasło" xml:space="preserve">
+    <value>Repeat password</value>
+  </data>
+  <data name="PROFIL DZIAŁALNOŚCI" xml:space="preserve">
+    <value>BUSINESS PROFILE</value>
+  </data>
+  <data name="STWÓRZ KONTO" xml:space="preserve">
+    <value>CREATE AN ACCOUNT</value>
+  </data>
+  <data name="Wybierz profil działalności." xml:space="preserve">
+    <value>Choose a business profile.</value>
+  </data>
 </root>

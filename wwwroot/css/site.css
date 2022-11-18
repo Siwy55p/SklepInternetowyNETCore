@@ -9,6 +9,17 @@
         opacity: 1;
     }
 
+.bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    /* Preserve aspet ratio */
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -200;
+}
+
+
 body, html {
     overflow-x: hidden;
 }
@@ -16,8 +27,36 @@ body {
     overflow-x: hidden;
     background-color: #eceff1;
     overflow-y: scroll;
-    margin-left: 7px;
-    margin-right: 7px;
+    margin:0;
+    padding:0;
+    
+}
+
+.container1{
+    position:absolute;
+    left:0;
+    top:0;
+    width 100%;
+    height: 100vh;
+    animation: animate 16s ease-in-out infinite;
+}
+
+@keyframes animate {
+    0%,100% {
+        background-image: url('../images/sliderhome/slider1.jpg');
+    }
+
+    25% {
+        background-image: url('../images/SliderHome/slider2.jpg');
+    }
+
+    50% {
+        background-image: url('../images/SliderHome/slider3.jpg');
+    }
+
+    0% {
+        background-image: url('../images/SliderHome/slider4.jpg');
+    }
 }
 
 .rozwin {
