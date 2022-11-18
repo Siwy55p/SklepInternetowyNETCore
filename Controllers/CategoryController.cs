@@ -247,9 +247,20 @@ namespace partner_aluro.Controllers
             }
             else
             {
+                List<Product> produkty2 = new List<Product>();
                 Category a = _context.Category.Where(x => x.Name == szukanaNazwa).FirstOrDefault();
-                List<Product> produkty2 = await _context.ProductCategory.Where(x => x.CategoryID == a.CategoryId).Select(x=>x.Product).ToListAsync();
+                if (a == null)
+                {
+                    // bnie znaleziono takiej kategori o takiej nazwie 
+                    //wiec szukam produktu z z List produktow
+                    produkty2 = await _context.Products.Where(x => x.Name == szukanaNazwa).ToListAsync();
 
+
+                }
+                else
+                {
+                    produkty2 = await _context.ProductCategory.Where(x => x.CategoryID == a.CategoryId).Select(x => x.Product).ToListAsync();
+                }
                 //List<Product> produkty2 = await _context.Products.Where(x => x.Ukryty == false).Where(x => x.CategoryNavigation.Name == szukanaNazwa ).ToListAsync();
                
 

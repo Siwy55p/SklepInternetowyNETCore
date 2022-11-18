@@ -7,6 +7,8 @@ namespace partner_aluro.Models
 
         public int ImageSliderID { get; set; }
 
+        public string Name { get; set; }
+
         public virtual ImageModel? slider_Image { get; set; } = new ImageModel();
         //public IFormFile? FrontImage { get; set; }
 
