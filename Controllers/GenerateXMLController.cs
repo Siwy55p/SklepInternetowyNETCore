@@ -140,8 +140,15 @@ namespace partner_aluro.Controllers
 
                 //product_name CData
                 XmlCDataSection CDatastoc;
-                CDatastoc = doc.CreateCDataSection(produkty[i].Ilosc.ToString());
-
+                CDatastoc = doc.CreateCDataSection("0");
+                if (produkty[i].Ilosc > 8)
+                {
+                    CDatastoc = doc.CreateCDataSection("8");
+                }else if(produkty[i].Ilosc < 8)
+                {
+                    CDatastoc = doc.CreateCDataSection(produkty[i].Ilosc.ToString());
+                }
+                
                 //stock
                 XmlNode stockNode = doc.CreateElement("stock");
                 stockNode.AppendChild(CDatastoc);

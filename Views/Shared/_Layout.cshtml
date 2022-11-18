@@ -24,33 +24,39 @@
     @RenderSection("LinkStyleHead", required: false)
 </head>
 <body>
-    @{
-        @inject LanguageService language
-    }
-    @await Html.PartialAsync("_Header")
-    <main>
-        @*<div class="container-lg">*@
-            <div class="offcanvas offcanvas-end w-5 @ViewData["Pokaz"]" tabindex="-1" id="offcanvas" data-bs-scroll="true" data-bs-keyboard="false" data-bs-backdrop="false">
-                <div class="offcanvas-header">
-                    <h6 class="offcanvas-title d-none d-sm-block" id="offcanvas">@language.Getkey("Twoje zamówienie")</h6>
-                    <button type="button" class="btn-close btn btn-success text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                </div>
-                <div class="offcanvas-body px-1" id="mydiv">
-                    @await Component.InvokeAsync("CartStatus")
-                </div>
-            </div>
-           @* <div class="container-fluid">
-                @RenderBody()
-            </div>*@
-       @* </div>*@
 
-    </main>
-    <div class="row justify-content-center align-items-center">
-        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-            @RenderBody()
-        </div>
-    </div>
-    
+
+
+
+                @{
+                    @inject LanguageService language
+                }
+                @await Html.PartialAsync("_Header")
+                <main>
+                    @*<div class="container-lg">*@
+                        <div class="offcanvas offcanvas-end w-5 @ViewData["Pokaz"]" tabindex="-1" id="offcanvas" data-bs-scroll="true" data-bs-keyboard="false" data-bs-backdrop="false">
+                            <div class="offcanvas-header">
+                                <h6 class="offcanvas-title d-none d-sm-block" id="offcanvas">@language.Getkey("Twoje zamówienie")</h6>
+                                <button type="button" class="btn-close btn btn-success text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                            </div>
+                            <div class="offcanvas-body px-1" id="mydiv">
+                                @await Component.InvokeAsync("CartStatus")
+                            </div>
+                        </div>
+                       @* <div class="container-fluid">
+                            @RenderBody()
+                        </div>*@
+                   @* </div>*@
+
+                </main>
+
+
+                        <div class="row justify-content-center align-items-center">
+                            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+
+                                @RenderBody()
+                            </div>
+                        </div>
 
     <!-- Footer -->
     <footer class="text-center text-lg-start bg-light text-muted">
@@ -93,28 +99,62 @@
                 });
             });
         });
+
     </script>
     <script>
-        $(function () {
-            $('.owl-one.owl-carousel')
-                .each(function () {
-                    let carousel = $(this);
-                    carousel.on('show.bs.dropdown', '[data-bs-toggle=dropdown]', function () {
-                        // universal solution
-                        let dropdown = bootstrap.Dropdown.getInstance(this);
-                        $(dropdown._menu).insertAfter(carousel);
+        //$('.owl-one.owl-carousel').owlCarousel({
+        //    loop: false,
+        //    margin: 5,
+        //    nav: true,
+        //    stageOuterClass: 'overflow-visible',
+        //    responsive: {
+        //        0: {
+        //            items: 2
+        //        },
+        //        300: {
+        //            items: 3
+        //        },
+        //        450: {
+        //            items: 4
+        //        },
+        //        600: {
+        //            items: 5
+        //        },
+        //        800: {
+        //            items: 6
+        //        },
+        //        1000: {
+        //            items: 6
+        //        },
+        //        1300: {
+        //            items: 7
+        //        },
+        //        1500: {
+        //            items: 8
+        //        }
+        //    }
+        //})
 
-                         alternative for this particular layout
-                         $(this).next('.dropdown-menu').insertAfter(carousel);
-                    });
-                })
-                .owl - one.owlCarousel({
-                    loop: true,
-                    nav: true,
-                     margin: 10
-                });
+        //$(function () {
+        //    $('.owl-one.owl-carousel')
+        //        .each(function () {
+        //            let carousel = $(this);
+        //            carousel.on('show.bs.dropdown', '[data-bs-toggle=dropdown]', function () {
+        //                // universal solution
+        //                let dropdown = bootstrap.Dropdown.getInstance(this);
+        //                $(dropdown._menu).insertAfter(carousel);
 
-        });
+        //                 //alternative for this particular layout
+        //                 //$(this).next('.dropdown-menu').insertAfter(carousel);
+        //            });
+        //        })
+        //        .owl - one.owlCarousel({
+        //            loop: true,
+        //            nav: true,
+        //             margin: 10
+        //        });
+
+        //});
     </script>
 
     <script type="text/javascript">
@@ -122,7 +162,8 @@
             loop: false,
             margin: 5,
             nav: true,
-            stagePadding: 30,
+            //stageOuterClass: 'overflow-visible',
+            stageOuterClass: 'owl-stage-outer overflow-visible',
             navText : ['<i class="fa fa-angle-left" aria-hidden="true"></i>','<i class="fa fa-angle-right" aria-hidden="true"></i>'],
             responsive: {
                 0: {

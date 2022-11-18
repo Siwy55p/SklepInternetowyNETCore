@@ -822,4 +822,22 @@
   <data name="Symbol od największej do najmniejszej" xml:space="preserve">
     <value>Symbol vom größten zum kleinsten</value>
   </data>
+  <data name="DANE ROZLICZENIOWE FIRMY" xml:space="preserve">
+    <value>RECHNUNGSINFORMATIONEN DES UNTERNEHMENS</value>
+  </data>
+  <data name="Nazwa Firmy" xml:space="preserve">
+    <value>Name der Firma</value>
+  </data>
+  <data name="Powtórz hasło" xml:space="preserve">
+    <value>Passwort wiederholen</value>
+  </data>
+  <data name="PROFIL DZIAŁALNOŚCI" xml:space="preserve">
+    <value>GESCHÄFTSPROFIL</value>
+  </data>
+  <data name="STWÓRZ KONTO" xml:space="preserve">
+    <value>EIN KONTO ERSTELLEN</value>
+  </data>
+  <data name="Wybierz profil działalności." xml:space="preserve">
+    <value>Wählen Sie ein Unternehmensprofil aus.</value>
+  </data>
 </root>

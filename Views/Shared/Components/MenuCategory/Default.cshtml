@@ -30,6 +30,9 @@
                         if (@kategorie2.Name == ViewData["szukanaNazwa"])
                         {
                             activecat2 = "activecat2";
+                        }else
+                        {
+                            activecat2 = "";
                         }
 
                         @if (kategorie2.ParentId == kategorie.CategoryId && kategorie2.ParentId != 0)

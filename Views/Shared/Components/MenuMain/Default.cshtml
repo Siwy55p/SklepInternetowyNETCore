@@ -1,124 +1,199 @@
 ﻿@model IEnumerable<Category>
 @inject LanguageService language
+<div id="main-wrapper">
+    <div class="owl-one owl-carousel" >
 
-<div class="owl-one owl-carousel" >
-        @foreach (var kategorie in Model)
-        {
 
-        @if (kategorie.Aktywny == true && kategorie.ParentId == 0)
-        {
+        @{
 
-            var active = "";
-@*
-            if (Model[x].Name.ToString() == ViewData["szukanaNazwa"].ToString())
+            string pokaz = "d-none";
+
+
+            string pokaz2 = "d-none";
+
+        }
+
+            @foreach (var kategorie in Model.Where(x=> x.ParentId == 0))
             {
-                active = "active";
-            }
-*@
-            if (ViewData["szukanaNazwa"] != null)
+
+            @if (kategorie.Aktywny == true)
             {
-                if (@kategorie.Name.ToString() == ViewData["szukanaNazwa"].ToString())
+
+            
+
+                var active = "";
+
+                var activecat2 = "";
+
+                if (ViewData["szukanaNazwa"] != null)
                 {
-                    active = "active";
-                }
-            }
-
-            <div class="dropdown px-2 mx-1">
-
-                <a href="@Url.Action("Lista1","Category", new {KategoriaId = @kategorie.CategoryId})" class="@active catmenu text-white mainmenu" style="border-radius:20px; width: 100px; height:100px; max-height: 100px;" aria-expanded="false">
-                    @language.Getkey(kategorie.Name)
-                </a>
-
-                @foreach (var kategorie2 in Model)
-                {
-                    @if (kategorie2.ParentId == kategorie.CategoryId && kategorie2.ParentId != 0)
+                    if (@kategorie.Name.ToString() == ViewData["szukanaNazwa"].ToString())
                     {
-                        <a href="#" role="button" id="dropdownMenu1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-h"></i></a>
-                        <ul class="dropdown-menu dropdown-menu-dark p-1" aria-labelledby="navbarDarkDropdownMenuLink">
-                            <li>
-                                <a class="@active text-white text-decoration-none" href="@Url.Action("Lista1","Category", new {KategoriaId = kategorie2.CategoryId})">
-                                    @language.Getkey(kategorie2.Name)
-                                </a>
-                            </li>
+                        active = "active";
+                    }
+                }
+
+                @if (kategorie.ParentId == 0)
+                {
+                    pokaz = "";
+                }else
+                {
+                    pokaz = "d-none hidden";
+                }
+
+                @if (kategorie.ChildId == 2)
+                {
+                    pokaz2 = "d-none hidden";
+                }
+                else
+                {
+                    pokaz2 = "";
+                }
+
+                <div class="dropdown px-2 mx-1">
+                    <a href="@Url.Action("Lista1","Category", new {KategoriaId = @kategorie.CategoryId})"  class="@pokaz @active catmenu text-white mainmenu" style="border-radius:20px; width: 100px; height:100px; max-height: 100px;" aria-expanded="false">
+                            @language.Getkey(kategorie.Name)
+                    </a>
+
+
+                    @if (kategorie.ChildId == 1)
+                    {
+                    <a class="@pokaz2 rozwin" href="#" role="button" id="@kategorie.CategoryId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-h"></i></a>
+                        <ul class="dropdown-menu" style="z-index=1000">
+                            @foreach (var kategorie2 in Model)
+                            {
+
+
+                                if (@kategorie2.Name == ViewData["szukanaNazwa"])
+                                {
+                                    activecat2 = "activecat2";
+                                }
+                                else
+                                {
+                                    activecat2 = "";
+                                }
+
+
+
+
+                                @if (kategorie2.ParentId == kategorie.CategoryId)
+                                {
+                                    <li>
+                                        <a class="@activecat2 text-black text-decoration-none" href="@Url.Action("Lista1","Category", new {KategoriaId = kategorie2.CategoryId})">
+                                            @language.Getkey(kategorie2.Name)
+                                        </a>
+                                    </li>
+                                }
+
+                            }
                         </ul>
                     }
-
-                }
-            </div>
-        }
-    }
-
-
-    @*@foreach (var kategorie in Model)
-    {
-        var active = "";
-        var active2 = "";
-
-        if (@kategorie.CategoryId == ViewBag.KategoriaId)
-        {
-            active = "active";
-        }
-
-        @if (kategorie.Aktywny == true && kategorie.ParentId == 0)
-        {
-
-            <div class="dropdown p-1">
-
-                <a href="@Url.Action("Lista1","Category", new {KategoriaId = kategorie.CategoryId})" class="@active catmenu text-white mainmenu" style="border-radius:20px; width: 100px; height:100px; max-height: 100px;" aria-expanded="false">
-                    @kategorie.Name
-                </a>
+                    else
+                    {
+                   @* <ul class="dropdown-menu" style="z-index=1000">
+                    @foreach (var kategorie2 in Model)
+                    {
 
 
-
-
-@* @if (kategorie.ParentId != 0) //podrzedna kategoria
-                {
-                    <a href="#" role="button" id="dropdownMenu1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Rozwiń <i class="fas fa-ellipsis-h"></i></a>
-                    <ul class="dropdown-menu dropdown-menu-dark p-1" aria-labelledby="navbarDarkDropdownMenuLink">
-                        @foreach (var kategorie2 in Model)
-                        {
-                            <li>
-                                <a href="@Url.Action("Lista1","Category", new {KategoriaId = kategorie.CategoryId})" class="@active catmenu text-white mainmenu" style="border-radius:20px; width: 100px; height:100px; max-height: 100px;" aria-expanded="false">
-                                    @kategorie.Name
-                                </a>
-                                <a class="@active2 text-white text-decoration-none" href="@Url.Action("Lista1Sub","Category", new {KategoriaId = kategorie.CategoryId})">
-                                @kategorie.Name
-                                </a>
-                            </li>
-                        }
-                    </ul>
-                }*@
-
-               @* @if (kategorie.SubCategories.Count >= 1)
-                {
-
-                    <a href="#" role="button" id="dropdownMenu1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Rozwiń <i class="fas fa-ellipsis-h"></i></a>
-                    <ul class="dropdown-menu dropdown-menu-dark p-1" aria-labelledby="navbarDarkDropdownMenuLink">
-                        @foreach (var kategorie2 in kategorie.SubCategories)
-                        {
-                            if (@kategorie2.SubCategoryId == ViewBag.KategoriaId2)
+                            if (@kategorie2.Name == ViewData["szukanaNazwa"])
                             {
-                                active2 = "active";
+                                activecat2 = "activecat2";
                             }
                             else
                             {
-                                active2 = "";
+                                activecat2 = "";
                             }
-                            <li>
-                                <a class="@active2 text-white text-decoration-none" href="@Url.Action("Lista1Sub","Category", new {KategoriaId = kategorie2.SubCategoryId})">
-                                    @kategorie2.Name
-                                </a>
-                            </li>
+
+
+
+
+                        @if (kategorie2.ParentId == kategorie.CategoryId)
+                        {
+                                <li>
+                                    <a class="@activecat2 text-black text-decoration-none" href="@Url.Action("Lista1","Category", new {KategoriaId = kategorie2.CategoryId})">
+                                        @language.Getkey(kategorie2.Name)
+                                    </a>
+                                </li>
                         }
-                    </ul>
 
-                }
-            </div>
-        }else
-        {
-
+                    }
+                    </ul>*@
+                    }
+                </div>
+            }
         }
-    }*@
+
+
+        @*@foreach (var kategorie in Model)
+        {
+            var active = "";
+            var active2 = "";
+
+            if (@kategorie.CategoryId == ViewBag.KategoriaId)
+            {
+                active = "active";
+            }
+
+            @if (kategorie.Aktywny == true && kategorie.ParentId == 0)
+            {
+
+                <div class="dropdown p-1">
+
+                    <a href="@Url.Action("Lista1","Category", new {KategoriaId = kategorie.CategoryId})" class="@active catmenu text-white mainmenu" style="border-radius:20px; width: 100px; height:100px; max-height: 100px;" aria-expanded="false">
+                        @kategorie.Name
+                    </a>
+
+
+
+
+    @* @if (kategorie.ParentId != 0) //podrzedna kategoria
+                    {
+                        <a href="#" role="button" id="dropdownMenu1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Rozwiń <i class="fas fa-ellipsis-h"></i></a>
+                        <ul class="dropdown-menu dropdown-menu-dark p-1" aria-labelledby="navbarDarkDropdownMenuLink">
+                            @foreach (var kategorie2 in Model)
+                            {
+                                <li>
+                                    <a href="@Url.Action("Lista1","Category", new {KategoriaId = kategorie.CategoryId})" class="@active catmenu text-white mainmenu" style="border-radius:20px; width: 100px; height:100px; max-height: 100px;" aria-expanded="false">
+                                        @kategorie.Name
+                                    </a>
+                                    <a class="@active2 text-white text-decoration-none" href="@Url.Action("Lista1Sub","Category", new {KategoriaId = kategorie.CategoryId})">
+                                    @kategorie.Name
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    }*@
+
+                   @* @if (kategorie.SubCategories.Count >= 1)
+                    {
+
+                        <a href="#" role="button" id="dropdownMenu1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Rozwiń <i class="fas fa-ellipsis-h"></i></a>
+                        <ul class="dropdown-menu dropdown-menu-dark p-1" aria-labelledby="navbarDarkDropdownMenuLink">
+                            @foreach (var kategorie2 in kategorie.SubCategories)
+                            {
+                                if (@kategorie2.SubCategoryId == ViewBag.KategoriaId2)
+                                {
+                                    active2 = "active";
+                                }
+                                else
+                                {
+                                    active2 = "";
+                                }
+                                <li>
+                                    <a class="@active2 text-white text-decoration-none" href="@Url.Action("Lista1Sub","Category", new {KategoriaId = kategorie2.SubCategoryId})">
+                                        @kategorie2.Name
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+
+                    }
+                </div>
+            }else
+            {
+
+            }
+        }*@
+    </div>
+
 </div>
-
-
