@@ -1,0 +1,87 @@
+﻿@model partner_aluro.Models.Slider
+@{
+    ViewData["Title"] = "Ustawienia Generowania XML";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+
+<div class="row">
+    <div class="col">Ustawienia slider strona główna</div>
+</div>
+
+<form class="needs-validation" asp-action="Add" asp-route-id="@Model.ImageSliderID" asp-controller="Slider" class="form-horizontal" method="post" enctype="multipart/form-data">
+    
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label asp-for="@Model.Slider_Images" class="control-label"></label>
+            <input type="file" asp-for="@Model.Slider_Images" id="images" name="images[]" onchange="preview_images();" multiple accept="image/jpeg, image/png, image/jpg" />
+            <span asp-validation-for="@Model.Slider_Images" class="text-danger"></span>
+        </div>
+
+    </div>
+</div>
+
+</form>
+@if (Model.Slider_Images != null)
+{
+    <div class="row">
+        <div class="col-md-12 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="example"
+                           class="table table-striped data-table"
+                           style="width: 100%">
+                            <thead>
+                                <tr>
+                                    <th>Obrazek</th>
+                                    <th>Kolejnosc</th>
+                                    <th>Akcje</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var image in Model.Slider_Images)
+                                {
+                                    <tr>
+                                        <td>
+                                            <img src="~/images/sliderhome/@image.ImageName" alt="Logo image" width="100" height="100" style="border:1px; margin-top:20px;" />
+                                        </td>
+                                        <td>@image.kolejnosc</td>
+
+
+                                        <td>
+                                            <a asp-action="Edit" asp-controller="Image" asp-route-id="@image.ImageId">Edit</a> |
+                                            <a asp-action="Details" asp-controller="Image" asp-route-id="@image.ImageId">Details</a> |
+                                            <a asp-action="Delete" asp-controller="Image" asp-route-id="@image.ImageId">Delete</a>
+                                        </td>
+
+
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="row" id="image_preview">
+</div>
+
+
+@section Scripts {
+
+    <script>
+        function preview_images() {
+            var total_file = document.getElementById("images").files.length;
+            $('#image_preview').append("");
+
+            for (var i = 0; i < total_file; i++) {
+                $('#image_preview').append("<div class='col-sm-2'><img  style='width: 110px;' src='" + URL.createObjectURL(event.target.files[i]) + "'></div>");
+            }
+        }
+    </script>
+}

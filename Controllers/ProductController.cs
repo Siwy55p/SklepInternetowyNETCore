@@ -207,7 +207,7 @@ namespace partner_aluro.Controllers
               NameDE,
               "PL",
               "DE");
-            NameEn = translatedText2.Text;
+            NameDE = translatedText2.Text;
 
             //Dodanie do pliku resx tlumaczenia nazwy produktu
             string webRootPath = _webHostEnvironment.ContentRootPath;
@@ -222,7 +222,7 @@ namespace partner_aluro.Controllers
             string resxFile2 = webRootPath + "\\Resources\\SharedResource.en-US.resx";
 
             Dictionary<string, string> dict2 = new Dictionary<string, string>();
-            dict2.Add(product.Name, NameEn);
+            dict2.Add(product.Name, NameDE);
             Hashtable data2 = new Hashtable(dict2);
             UpdateResourceFile(data2, resxFile2);
             // KONIEC Dodanie do pliku resx tlumaczenia nazwy produktu

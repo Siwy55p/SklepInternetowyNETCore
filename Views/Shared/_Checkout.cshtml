@@ -136,7 +136,7 @@
                         <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
                         <button class="btn btn-success float-right mr-5" type="submit" name="returnUrl" value="@ViewBag.returnUrl"><i class="fa-solid fa-angles-right"></i>Powrót</button>
                     </form>*@
-                   <a class="a-cleanup" asp-controller="Cart" asp-action="ClearCart"><div class="btn btn-danger float-right mr-5"><i class="fa-solid fa-trash-can"></i>@language.Getkey("Wyczyść zamówienie")</div></a>
+                   <a class="a-cleanup" asp-controller="Cart" asp-action="ClearCart"><div class="btn btn-success float-right mr-5"><i class="fa-solid fa-trash-can"> </i> @language.Getkey("Wyczyść zamówienie")</div></a>
             }
             else
             {
@@ -154,7 +154,7 @@
 
                         @await Html.PartialAsync("_AdressForm")
 
-                        <button class="btn btn-primary btn-lg btn-block" type="submit">@language.Getkey("Złóż zamówienie")</button>
+                        <button class="btn btn-success btn-lg btn-block" type="submit">@language.Getkey("Złóż zamówienie")</button>
                     </form>
             }
 

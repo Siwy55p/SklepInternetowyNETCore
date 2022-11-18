@@ -9,20 +9,9 @@
         opacity: 1;
     }
 
-.bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    /* Preserve aspet ratio */
-    min-width: 100%;
-    min-height: 100%;
-    z-index: -200;
-}
-
-
-body, html {
+/*body, html {
     overflow-x: hidden;
-}
+}*/
 body {
     overflow-x: hidden;
     background-color: #eceff1;
@@ -32,39 +21,14 @@ body {
     
 }
 
-.container1{
-    position:absolute;
-    left:0;
-    top:0;
-    width 100%;
-    height: 100vh;
-    animation: animate 16s ease-in-out infinite;
-}
-
-@keyframes animate {
-    0%,100% {
-        background-image: url('../images/sliderhome/slider1.jpg');
-    }
-
-    25% {
-        background-image: url('../images/SliderHome/slider2.jpg');
-    }
-
-    50% {
-        background-image: url('../images/SliderHome/slider3.jpg');
-    }
-
-    0% {
-        background-image: url('../images/SliderHome/slider4.jpg');
-    }
-}
-
+/*menu rozwijanie glowne kafelki kolory*/
 .rozwin {
     position: fixed;
     top: 75px;
     right: 13px;
     color: white;
 }
+/*menu rozwijanie glowne kafelki koloryk*/
 
 /*menu aktywny link*/
 a:hover {
@@ -102,11 +66,29 @@ a:hover {
 /*Nawigacja MainMenuCarusel*/
 
 
-a.active {
-    background-color: #6e1a1a;
+/*a.active {*/
+    /*background-color: #6e1a1a;*/
+    /*background-color: #a11212;
     font-size: 15px;
     font-weight: 600;
+}*/
+
+.btn-success, .btn-success:visited {
+    background-color: #fcfcfc !important;
+    color: black;
+    border: 1px solid black;
 }
+    .btn-success:hover {
+        background-color: #a11212 !important;
+        color: white;
+        border: 1px solid black;
+    }
+
+    .btn-success:active {
+        color: black;
+        border: 1px solid black;
+    }
+
 
 .btn.btn-add {
     border: 1px solid #000;
@@ -114,9 +96,12 @@ a.active {
 }
     .btn.btn-add:hover {
         font-weight: 500;
-        background-color: #6e1a1a;
+        background-color: #a11212; 
         color: white;
     }
+
+/*super kolor #a11212*/
+
 /*menu lefe kategorie*/
 a.activecat {
     font-size: 15px;

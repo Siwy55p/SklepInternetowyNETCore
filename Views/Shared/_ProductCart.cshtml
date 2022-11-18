@@ -33,7 +33,7 @@
                 <input type="number" id="@Model.ProductId" name="quantity" value="1" class="form-control" aria-required="true" placeholder="Ilość" min="1" max="@Model.Ilosc" />
             </div>
             <div class="col justify-content-center text-center">
-                <button value="@Model.ProductId" class="btn btn-add" onclick="AddToCart(@Model.ProductId)" data-bs-target="offcanvas" role="button">@language.Getkey("Dodaj do zamowienia")</button>
+                <button value="@Model.ProductId" class="btn btn-success" onclick="AddToCart(@Model.ProductId)" data-bs-target="offcanvas" role="button">@language.Getkey("Dodaj do zamowienia")</button>
             </div>
         }
     </div>
