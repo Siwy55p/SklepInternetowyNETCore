@@ -32,6 +32,7 @@ namespace partner_aluro.Data
         public DbSet<ProfilDzialalnosci> ProfileDzialalnosci { get; set; }
 
         public DbSet<ProductCategory> ProductCategory { get; set; }
+        public DbSet<Slider> Sliders { get; set; }
 
         //musimy nadpisac OnModelCreating(ModelBuild builder) musimy nadpisac metoda ktora pochodzi DbContext
         protected override void OnModelCreating(ModelBuilder builder)

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using partner_aluro.Data;
 using partner_aluro.Models;
 using partner_aluro.Services.Interfaces;
 
@@ -7,16 +8,18 @@ namespace partner_aluro.Controllers
 {
     public class SliderController : Controller
     {
+        private readonly ApplicationDbContext _context;
 
         private readonly IWebHostEnvironment _webHostEnvironment;
 
         private readonly IImageService _imageService;
 
 
-        public SliderController(IImageService imageService, IWebHostEnvironment webHostEnvironment)
+        public SliderController(IImageService imageService, IWebHostEnvironment webHostEnvironment, ApplicationDbContext applicationDbContext)
         {
             _webHostEnvironment = webHostEnvironment;
             _imageService = imageService;
+            _context = applicationDbContext;
         }
 
         public IActionResult Index()  // Lista wszystkich sliderow
@@ -33,11 +36,13 @@ namespace partner_aluro.Controllers
 
 
         [HttpPost]
-        public IActionResult Add(Slider slider)
+        public async Task<IActionResult> AddAsync(Slider slider)
         {
             UploadFile2Async(slider);
 
-            return View();
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index");
         }
 
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
