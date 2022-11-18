@@ -66,14 +66,14 @@ a:hover {
 /*Nawigacja MainMenuCarusel*/
 
 
-/*a.active {*/
-    /*background-color: #6e1a1a;*/
-    /*background-color: #a11212;
+a.active {
+    background-color: #6e1a1a;
+    /*background-color: #a11212;*/
     font-size: 15px;
     font-weight: 600;
-}*/
+}
 
-.btn-success, .btn-success:visited {
+.btn-success, .btn-success:visited, .btn-success:focus {
     background-color: #fcfcfc !important;
     color: black;
     border: 1px solid black;
@@ -88,7 +88,10 @@ a:hover {
         color: black;
         border: 1px solid black;
     }
-
+    /*.btn-success:focus {
+        color: black;
+        border: 1px solid black;
+    }*/
 
 .btn.btn-add {
     border: 1px solid #000;
