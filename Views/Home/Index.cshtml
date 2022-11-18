@@ -21,9 +21,9 @@
                                                             @foreach (var image in Model.SliderHome1.ObrazkiDostepneWSliderze)
                                                             {
                                                                 <div>
-                                    
-                                                                        <a href="@image.path" class="glightbox" data-gallery="gallery">
-                                                                        <img src="@image.path" alt="" >
+
+                            <a href="..\@image.fullPath" class="glightbox" data-gallery="gallery" style="width:50px; height:50px;">
+                                <img src="..\@image.fullPath" alt="">
                                                                         </a>
 
                                                                 </div>

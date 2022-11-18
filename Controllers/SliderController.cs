@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using partner_aluro.Data;
+using partner_aluro.Migrations;
 using partner_aluro.Models;
+using partner_aluro.Services;
 using partner_aluro.Services.Interfaces;
 
 namespace partner_aluro.Controllers
@@ -14,17 +16,21 @@ namespace partner_aluro.Controllers
 
         private readonly IImageService _imageService;
 
+        private readonly ISliderService _sliderService;
 
-        public SliderController(IImageService imageService, IWebHostEnvironment webHostEnvironment, ApplicationDbContext applicationDbContext)
+
+        public SliderController(ISliderService sliderService, IImageService imageService, IWebHostEnvironment webHostEnvironment, ApplicationDbContext applicationDbContext)
         {
             _webHostEnvironment = webHostEnvironment;
             _imageService = imageService;
             _context = applicationDbContext;
+            _sliderService = sliderService;
         }
 
         public IActionResult Index()  // Lista wszystkich sliderow
         {
-            return View();
+            List<Slider> slidery = _context.Sliders.ToList();
+            return View(slidery);
         }
         [HttpGet]
         public IActionResult Add()
@@ -38,7 +44,22 @@ namespace partner_aluro.Controllers
         [HttpPost]
         public async Task<IActionResult> AddAsync(Slider slider)
         {
-            UploadFile2Async(slider);
+
+            if (ModelState.IsValid)
+            {
+                _sliderService.AddSlider(slider);
+            }
+            else
+            {
+                return View();
+            }
+
+            Slider sliders =_sliderService.Get(slider.ImageSliderID);
+
+            UploadFile2Async(sliders);
+
+            _sliderService.EditSlider(sliders.ImageSliderID);
+
 
             await _context.SaveChangesAsync();
 
@@ -51,12 +72,13 @@ namespace partner_aluro.Controllers
             var files = HttpContext.Request.Form.Files;
 
                 string webRootPath = _webHostEnvironment.WebRootPath;
-
-                for (int i = 1; i <= files.Count; i++)
+            if (files.Count > 0)
+            {
+                for (int i = 0; i < files.Count; i++)
                 {
                     //Save image to wwwroot/image
                     string path0 = "images\\SliderHome\\";
-                    var uploadsFolder = Path.Combine(webRootPath, "images\\SliderHome" );
+                    var uploadsFolder = Path.Combine(webRootPath, "images\\SliderHome");
 
                     if (!Directory.Exists(uploadsFolder))
                     {
@@ -74,53 +96,24 @@ namespace partner_aluro.Controllers
                     //add product Image for new product
                     ImageModel imgModel = new()
                     {
-                        path = path0 + dynamicFileName,
+                        path = path0,
+                        fullPath = path0 + dynamicFileName,
                         kolejnosc = i,
                         Tytul = "sliderHome",
-                        ImageName = dynamicFileName
+                        SliderIds = slid.ImageSliderID,
+                        Opis = "slider",
+                        ImageName = dynamicFileName,
+                        
+                        
                     };
+
+                    slid.ObrazkiDostepneWSliderze.Add(imgModel);
 
                     _imageService.Add(imgModel);
 
                 }
 
-            if (files.Count > 0 ) //Fronyowy obrazek nie został dodany zacznij dodawac od 0
-            {
-
-                webRootPath = _webHostEnvironment.WebRootPath;
-
-                for (int i = 0; i <= files.Count; i++)
-                {
-                    string path0 = "images\\SliderHome\\";
-                    var uploads = Path.Combine(webRootPath, "images\\SliderHome");
-
-                    if (!Directory.Exists(uploads))
-                    {
-                        Directory.CreateDirectory(uploads);
-                    }
-
-                    var extension = Path.GetExtension(files[i].FileName);
-                    var dynamicFileName = "slider" + i + extension;
-
-                    using (var filesStream = new FileStream(Path.Combine(uploads, dynamicFileName), FileMode.Create))
-                    {
-                        files[i].CopyTo(filesStream);
-                    }
-
-
-                    //add product Image for new product
-                    ImageModel imgModel = new()
-                    {
-                        path = path0 + dynamicFileName,
-                        kolejnosc = i,
-                        Tytul = "sliderHome",
-                        ImageName = dynamicFileName
-                    };
-
-                    _imageService.Add(imgModel);
-                }
             }
-
             return Task.CompletedTask;
         }
 

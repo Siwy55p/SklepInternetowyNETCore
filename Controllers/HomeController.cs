@@ -89,10 +89,13 @@ namespace partner_aluro.Controllers
                 slider2.ObrazkiDostepneWSliderze.Add(img3);
                 slider2.Name = "SliderHome";
 
+
+                Slider sliderHomes = _context.Sliders.Where(x => x.ImageSliderID == 6).Include(x=>x.ObrazkiDostepneWSliderze).FirstOrDefault();
+
                 sliders.Add(slider);
                 sliders.Add(slider2);
                 //zainicjuj view model
-                var vm = new HomeViewModel() { Nowosci = nowosci, Bestsellery = bestseller, SliderHome = sliders ,SliderHome1 = slider2};
+                var vm = new HomeViewModel() { Nowosci = nowosci, Bestsellery = bestseller, SliderHome = sliders ,SliderHome1 = sliderHomes };
 
                 return View(vm); //zapewnia renderowania widoków 
             }

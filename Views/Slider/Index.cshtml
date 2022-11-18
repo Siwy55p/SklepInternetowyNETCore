@@ -7,7 +7,7 @@
 @model IEnumerable<partner_aluro.Models.Slider>
 
 <div class="text-center">
-    <h1 class="display-4">Lista produktów</h1>
+    <h1 class="display-4">Lista sliderow</h1>
     
     <a asp-controller="Slider" asp-action="Add" class="btn btn-success" px-3">
     Dodaj slider
@@ -34,7 +34,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (var Slider in Model)
+                                    @foreach (var Slider in Model.ToList())
                                     {
                                         <tr>
                                             <td>@Slider.ImageSliderID</td>

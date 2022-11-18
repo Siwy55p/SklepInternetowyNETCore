@@ -1,6 +1,8 @@
 ﻿using DeepL;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using partner_aluro.Data;
 using partner_aluro.Models;
 using System.Collections;
@@ -42,6 +44,26 @@ namespace partner_aluro.Controllers
 
             return View(produktyMultipleCategory);
         }
+
+        public IActionResult PathImageAsync()
+        {
+            IEnumerable<ImageModel> listaObrazkow =  _context.Images.Where(x => x.fullPath == null).ToList();
+
+            foreach (var item in listaObrazkow)
+            {
+                item.fullPath = item.path + "\\" + item.ImageName;
+
+                _context.Update(item);
+                _context.SaveChanges();
+
+            }
+            int i = 0;
+            i++;
+            string test="";
+
+            return View(listaObrazkow);
+        }
+
         public async Task<IActionResult> TlumaczAsync()
         {
             List<Product> Prodykty = _context.Products.ToList();

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using partner_aluro.Data;
 
@@ -11,9 +12,10 @@ using partner_aluro.Data;
 namespace partner_aluro.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221118192956_FullPathImage")]
+    partial class FullPathImage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -461,9 +463,6 @@ namespace partner_aluro.Migrations
                     b.Property<string>("ImageName")
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<int?>("ImageSliderID")
-                        .HasColumnType("int");
-
                     b.Property<string>("Opis")
                         .HasColumnType("nvarchar(max)");
 
@@ -473,7 +472,7 @@ namespace partner_aluro.Migrations
                     b.Property<int?>("ProductImagesId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SliderIds")
+                    b.Property<int?>("SliderImageSliderID")
                         .HasColumnType("int");
 
                     b.Property<string>("Tytul")
@@ -490,9 +489,9 @@ namespace partner_aluro.Migrations
 
                     b.HasKey("ImageId");
 
-                    b.HasIndex("ImageSliderID");
-
                     b.HasIndex("ProductImagesId");
+
+                    b.HasIndex("SliderImageSliderID");
 
                     b.ToTable("Images");
                 });
@@ -739,9 +738,6 @@ namespace partner_aluro.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ImageSliderID"), 1L, 1);
 
-                    b.Property<int?>("IdObrazek")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -863,13 +859,13 @@ namespace partner_aluro.Migrations
 
             modelBuilder.Entity("partner_aluro.Models.ImageModel", b =>
                 {
-                    b.HasOne("partner_aluro.Models.Slider", null)
-                        .WithMany("ObrazkiDostepneWSliderze")
-                        .HasForeignKey("ImageSliderID");
-
                     b.HasOne("partner_aluro.Models.Product", "Product")
                         .WithMany("Product_Images")
                         .HasForeignKey("ProductImagesId");
+
+                    b.HasOne("partner_aluro.Models.Slider", null)
+                        .WithMany("ObrazkiDostepneWSliderze")
+                        .HasForeignKey("SliderImageSliderID");
 
                     b.Navigation("Product");
                 });

@@ -10,9 +10,12 @@ namespace partner_aluro.Models
         public int ImageId { get; set; }
 
         public string? path { get; set; }
+        public string? fullPath { get; set; }
 
         public int? kolejnosc { get; set; }
         public int? ProductId { get; set; }
+
+        public int? SliderIds { get; set; }
 
         [Column(TypeName ="nvarchar(50)")]
         public string? Tytul { get; set; }

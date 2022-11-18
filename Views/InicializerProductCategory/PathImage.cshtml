@@ -1,0 +1,27 @@
+﻿@model List<partner_aluro.Models.ImageModel>
+
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+<div class="row">
+    <div class="col">ID</div>
+    <div class="col">path</div>
+    <div class="col">ImageName</div>
+    <div class="col">Path</div>
+    <div class="col">FullPath</div>
+</div>
+@foreach (var item in Model)
+{
+    <div class="row">
+        <div class="col">@item.ImageId</div>
+        <div class="col">@item.path</div>
+        <div class="col">@item.ImageName</div>
+        <div class="col">@item.path</div>
+        <div class="col">@item.fullPath</div>
+    </div>
+}

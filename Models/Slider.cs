@@ -1,5 +1,6 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using partner_aluro.Services.Interfaces;
 using System.Collections;
 using System.ComponentModel.DataAnnotations;
@@ -20,6 +21,9 @@ namespace partner_aluro.Models
         public virtual ImageModel? ObrazekSlidera { get; set; } = new ImageModel();
         //public IFormFile? FrontImage { get; set; }
 
+        public int? IdObrazek { get; set; }
+
+        [ForeignKey(nameof(ImageSliderID))]
         public virtual List<ImageModel>? ObrazkiDostepneWSliderze { get; set; } = new List<ImageModel>();
 
 

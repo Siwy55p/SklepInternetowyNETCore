@@ -252,4 +252,6 @@ void AddScoped()
 
     builder.Services.AddScoped<IApiServiceNBPKurs, ApiServiceNBPKurs>();
 
+    builder.Services.AddScoped<ISliderService, SliderService>();
+
 }
