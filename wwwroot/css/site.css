@@ -1,23 +1,20 @@
 
-/*#main-wrapper .owl-item {
-    visibility: hidden;
-    opacity: 0;
+@media screen and (max-width: 700px) {
+    body, html {
+        overflow-x: clip;
+    }
+}
+::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
 }
 
-    #main-wrapper .owl-item.active {
-        visibility: visible;
-        opacity: 1;
-    }
-*/
-@media screen and (max-width: 768px) {
-    body, html {
-        overflow-x: hidden;
-    }
+::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
 }
-/*body, html {
-    overflow-x: hidden;
-}*/
-body {
+
+    body {
     /*
     background-color: #eceff1;*/
     /*overflow-y: scroll;*/
