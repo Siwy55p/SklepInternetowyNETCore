@@ -1,5 +1,5 @@
 
-#main-wrapper .owl-item {
+/*#main-wrapper .owl-item {
     visibility: hidden;
     opacity: 0;
 }
@@ -8,16 +8,12 @@
         visibility: visible;
         opacity: 1;
     }
-
-@media screen and (max-width: 600px) {
+*/
+@media screen and (max-width: 381px) {
     body, html {
-      /*  overflow-x: hidden;*/
-    }
-    .owl-stage{
-        max-width:400px;
+
     }
 }
-
 /*body, html {
     overflow-x: hidden;
 }*/
