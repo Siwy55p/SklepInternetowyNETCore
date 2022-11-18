@@ -9,21 +9,21 @@
         opacity: 1;
     }
 */
-@media screen and (max-width: 381px) {
+@media screen and (max-width: 391px) {
     body, html {
-
+        overflow-x: hidden;
     }
 }
 /*body, html {
     overflow-x: hidden;
 }*/
 body {
-/*
+    overflow: hidden;
+    /*
     background-color: #eceff1;*/
     /*overflow-y: scroll;*/
-    margin:0;
-    padding:0;
-    
+    margin: 0;
+    padding: 0;
 }
 
 /*menu rozwijanie glowne kafelki kolory*/
