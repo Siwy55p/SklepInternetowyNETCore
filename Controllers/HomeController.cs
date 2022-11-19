@@ -17,6 +17,7 @@ using partner_aluro.Enums;
 using System.Runtime.CompilerServices;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
+using partner_aluro.Services;
 
 namespace partner_aluro.Controllers
 {
@@ -30,15 +31,17 @@ namespace partner_aluro.Controllers
 
         private readonly  RegonService RegonService;
 
+        private readonly ISliderService _sliderService;
+
         private readonly IStringLocalizer<HomeController> _localizer;
 
         //Kontrolery odzoruwuja widoki , sluza do generowania róznych treści
-        public HomeController(IStringLocalizer<HomeController> localizer,ApplicationDbContext context,ILogger<HomeController> logger, RegonService regonService)
+        public HomeController(ISliderService sliderService, IStringLocalizer<HomeController> localizer,ApplicationDbContext context,ILogger<HomeController> logger, RegonService regonService)
         {
             _logger = logger;
             _context = context;
             RegonService = regonService;
-
+            _sliderService = sliderService;
             _localizer = localizer;
         }
 
@@ -55,47 +58,11 @@ namespace partner_aluro.Controllers
                 //_context.Add(category);
                 //_context.SaveChanges();
 
-                Slider slider = new Slider();
 
-                ImageModel img1 = new ImageModel()
-                {
-                    ImageName = "slider1",
-                    kolejnosc = 1,
-                    path = $"../images/sliderhome/slider1.jpg",
+                Slider sliderHomes = await _sliderService.GetAsync(9); //Id slider
 
-                };
-                ImageModel img2 = new ImageModel()
-                {
-                    ImageName = "slider2",
-                    kolejnosc = 2,
-                    path = $"../images/sliderhome/slider2.jpg",
-
-                };
-                ImageModel img3 = new ImageModel()
-                {
-                    ImageName = "slider3",
-                    kolejnosc = 3,
-                    path = "..\\images\\SliderHome\\slider3.jpg",
-
-                };
-                slider.ObrazkiDostepneWSliderze.Add(img1);
-                slider.ObrazkiDostepneWSliderze.Add(img2);
-                slider.ObrazkiDostepneWSliderze.Add(img3);
-
-                List<Slider> sliders = new List<Slider>();
-                Slider slider2 = new Slider();
-                slider2.ObrazkiDostepneWSliderze.Add(img1);
-                slider2.ObrazkiDostepneWSliderze.Add(img2);
-                slider2.ObrazkiDostepneWSliderze.Add(img3);
-                slider2.Name = "SliderHome";
-
-
-                Slider sliderHomes = _context.Sliders.Where(x => x.ImageSliderID == 6).Include(x=>x.ObrazkiDostepneWSliderze).FirstOrDefault();
-
-                sliders.Add(slider);
-                sliders.Add(slider2);
                 //zainicjuj view model
-                var vm = new HomeViewModel() { Nowosci = nowosci, Bestsellery = bestseller, SliderHome = sliders ,SliderHome1 = sliderHomes };
+                var vm = new HomeViewModel() { Nowosci = nowosci, Bestsellery = bestseller, SliderHome1 = sliderHomes };
 
                 return View(vm); //zapewnia renderowania widoków 
             }

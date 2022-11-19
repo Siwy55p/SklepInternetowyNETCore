@@ -254,4 +254,6 @@ void AddScoped()
 
     builder.Services.AddScoped<ISliderService, SliderService>();
 
+    builder.Services.AddScoped<INewsletter, NewsletterService>();
+
 }

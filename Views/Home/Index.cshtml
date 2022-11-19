@@ -16,22 +16,21 @@
     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
         <div class="row justify-content-center align-items-center" >
             <div class="row">
-                                <div class="col" >
-                                    <div class="owl-two owl-carousel owl-theme">
-                                                            @foreach (var image in Model.SliderHome1.ObrazkiDostepneWSliderze)
-                                                            {
-                                                                <div>
+                <div class="col" >
+                    <div class="owl-two owl-carousel owl-theme">
+                            @foreach (var image in Model.SliderHome1.ObrazkiDostepneWSliderze)
+                            {
+                                <div>
 
-                            <a href="..\@image.fullPath" class="glightbox" data-gallery="gallery" style="width:50px; height:50px;">
-                                <img src="..\@image.fullPath" alt="">
-                                                                        </a>
+                                            <a href="..\@image.fullPath" class="glightbox" data-gallery="gallery" style="width:50px; height:50px;">
+                                                <img src="..\@image.fullPath" alt="">
+                                        </a>
 
-                                                                </div>
-                                                            }
-                                    </div>
                                 </div>
-
-
+                            }
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

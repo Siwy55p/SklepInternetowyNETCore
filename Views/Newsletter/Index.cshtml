@@ -1,0 +1,63 @@
+﻿@model IEnumerable<partner_aluro.Models.Newsletter>
+@{
+    ViewData["Title"] = "Newsletter";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+
+<a asp-controller="Newsletter" asp-action="Add" class="btn btn-success" px-3">
+    Dodaj Newsletter
+</a>
+
+<div class="row">
+    <div class="col-md-12 mb-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="example"
+                           class="table table-striped data-table"
+                           style="width: 100%">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Zaznacz</th>
+                                <th>Nazwa</th>
+                                <th>Emaile</th>
+                                <th>Wiadomosc</th>
+                                <th>Akcje</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var newsletter in Model)
+                            {
+                                <tr>
+                                    <td>@newsletter.NewsletterID</td>
+                                    <td><input id="takenBefore" type="checkbox" value="@newsletter.NewsletterID" data-toggle="toggle"></td>
+                                    <td>@newsletter.Nazwa</td>
+                                    <td>@newsletter.listaEmail</td>
+
+                                    <td>@newsletter.listaEmail</td>
+                                    <td>
+                                        <a asp-controller="Newsletter" asp-action="Edit" asp-route-id="@newsletter.NewsletterID">Edytuj</a> |
+                                        <a asp-controller="Newsletter" asp-action="Delete" asp-route-id="@newsletter.NewsletterID">Usuń</a> |
+                                        <a asp-controller="Newsletter" asp-action="Details" asp-route-id="@newsletter.NewsletterID">Podgląd</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">Zaznacz</th>
+                                <th scope="col">Nazwa</th>
+                                <th scope="col">Emaile</th>
+                                <th scope="col">Wiadomosc</th>
+                                <th scope="col">Akcje</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -14,8 +14,7 @@
     </a>
 
 
-    @if (@Model != null && @Model.Any())
-    {
+
         <div class="row">
             <div class="col-md-12 mb-3">
                 <div class="card">
@@ -28,24 +27,20 @@
                                     <tr>
                                         <th>Id</th>
                                         <th>Zaz</th>
-                                        <th>Obrazek</th>
                                         <th>Ukryte</th>
                                         <th>Akcje</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (var Slider in Model.ToList())
+                                    @foreach (var Slider in Model)
                                     {
                                         <tr>
                                             <td>@Slider.ImageSliderID</td>
                                             <td><input id="takenBefore" type="checkbox" value="@Slider.ImageSliderID" data-toggle="toggle"></td>
-                                            <td><img class="img-thumbnail" src="~/images/produkty/@Slider.ImageSliderID/@Slider.ImageSliderID" alt="@Slider.ImageSliderID" style="width:75px;height:75px;"></td>
                                             <td>@Slider.Name</td>
                                             <td>
-                                                <a asp-controller="Product" asp-action="Edit" asp-route-id="@Slider.ImageSliderID">Edytuj</a> |
-                                                <a asp-controller="Product" asp-action="Delete" asp-route-id="@Slider.ImageSliderID">Usuń</a> |
-                                                <a asp-controller="Product" asp-action="Details" asp-route-id="@Slider.ImageSliderID">Podgląd</a>
-
+                                                <a asp-controller="Slider" asp-action="Edit" asp-route-id="@Slider.ImageSliderID">Edytuj</a> |
+                                                <a asp-controller="Slider" asp-action="Delete" asp-route-id="@Slider.ImageSliderID">Usuń</a> |
                                             </td>
                                         </tr>
                                     }
@@ -54,7 +49,6 @@
                                     <tr>
                                         <th>Id</th>
                                         <th>Zaz</th>
-                                        <th>Obrazek</th>
                                         <th>Ukryte</th>
                                         <th scope="col">Akcje</th>
                                     </tr>
@@ -66,7 +60,7 @@
             </div>
         </div>
 
-    }
+
 
 </div>
 

@@ -1,10 +1,7 @@
-﻿using partner_aluro.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using partner_aluro.Data;
 using partner_aluro.Models;
 using partner_aluro.Services.Interfaces;
-
-
-
-
 
 namespace partner_aluro.Services
 {
@@ -26,22 +23,20 @@ namespace partner_aluro.Services
 
         public void DeleteSlider(int id)
         {
-            Slider slider = _context.Sliders.Where(x=>x.ImageSliderID == id).FirstOrDefault();
+            Slider slider = _context.Sliders.Where(x=>x.ImageSliderID == id).Include(x => x.ObrazkiDostepneWSliderze).FirstOrDefault();
             _context.Sliders.Remove(slider);
             _context.SaveChanges();
 
         }
 
-        public void EditSlider(int id)
+        public async Task EditSliderAsync(Slider slider)
         {
-            Slider slider = _context.Sliders.Where(x => x.ImageSliderID == id).FirstOrDefault();
             _context.Update(slider);
-            _context.SaveChanges();
+            _context.SaveChangesAsync();
         }
-
-        public Slider Get(int id)
+        public async Task<Slider> GetAsync(int id)
         {
-            Slider slider = _context.Sliders.Where(x => x.ImageSliderID == id).FirstOrDefault();
+            Slider slider = await _context.Sliders.Where(x => x.ImageSliderID == id).Include(x=>x.ObrazkiDostepneWSliderze).FirstOrDefaultAsync();
             return slider;
         }
 

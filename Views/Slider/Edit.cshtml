@@ -1,21 +1,16 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model partner_aluro.Models.Slider
 @{
-}
-@model partner_aluro.Models.Slider
-@{
-    ViewData["Title"] = "Ustawienia slider o id ";
+    ViewData["Title"] = "Ustawienia slider o id " +Model.ImageSliderID;
     Layout = "~/Views/Shared/_Dashboard.cshtml";
 }
 
+<form asp-action="Edit" asp-controller="Slider" method="post" enctype="multipart/form-data">
 
-<form asp-action="Add" asp-controller="Slider" method="post" enctype="multipart/form-data">
+@await Html.PartialAsync("_FormSlider")
 
-    @await Html.PartialAsync("_FormSlider")
-
-    <button type="submit">Dodaj Slider</button>
+    <button type="submit">Zapisz zmiany</button>
 </form>
+
 
 
 @section Scripts {

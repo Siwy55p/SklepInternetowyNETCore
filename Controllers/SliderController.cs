@@ -54,14 +54,44 @@ namespace partner_aluro.Controllers
                 return View();
             }
 
-            Slider sliders =_sliderService.Get(slider.ImageSliderID);
+            //Slider sliders =await _sliderService.GetAsync(slider.ImageSliderID);
 
-            UploadFile2Async(sliders);
+            UploadFile2Async(slider);
 
-            _sliderService.EditSlider(sliders.ImageSliderID);
+            await _sliderService.EditSliderAsync(slider);
 
+            return RedirectToAction("Index");
+        }
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
 
-            await _context.SaveChangesAsync();
+            Slider sliders = await _sliderService.GetAsync(id);
+
+            return View(sliders);
+        }
+
+        
+        public async Task<IActionResult> Delete(int id)
+        {
+            _sliderService.DeleteSlider(id);
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(Slider slider)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            UploadFile2Async(slider);
+
+            await _sliderService.EditSliderAsync(slider);
+
 
             return RedirectToAction("Index");
         }
@@ -77,8 +107,8 @@ namespace partner_aluro.Controllers
                 for (int i = 0; i < files.Count; i++)
                 {
                     //Save image to wwwroot/image
-                    string path0 = "images\\SliderHome\\";
-                    var uploadsFolder = Path.Combine(webRootPath, "images\\SliderHome");
+                    string path0 = "images\\SliderHome\\" + slid.ImageSliderID +"\\";
+                    var uploadsFolder = Path.Combine(webRootPath, "images\\SliderHome\\"+ slid.ImageSliderID);
 
                     if (!Directory.Exists(uploadsFolder))
                     {

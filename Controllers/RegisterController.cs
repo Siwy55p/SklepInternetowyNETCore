@@ -86,7 +86,9 @@ namespace partner_aluro.Controllers
                 {
                     Subject = "Reset hasła",
                     To = Email,
-                    Body = $"Proszę zresetuj twoje hasło: <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'> naciskając tutaj.</a>."
+                    Body = $@"<div>
+<p>Proszę zresetuj twoje hasło: <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'> naciskając tutaj.</a>.<p>
+<p>Dziękujemy Zespół Aluro.</p> </div>"
                 };
 
                 _emailService.SendEmailAsync(newClint); //Bardzo specjalnie tak jest jak jest zrobione. Musi tak zostać.

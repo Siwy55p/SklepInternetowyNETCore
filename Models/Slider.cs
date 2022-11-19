@@ -18,9 +18,6 @@ namespace partner_aluro.Models
 
         public string Name { get; set; }
 
-        public virtual ImageModel? ObrazekSlidera { get; set; } = new ImageModel();
-        //public IFormFile? FrontImage { get; set; }
-
         public int? IdObrazek { get; set; }
 
         [ForeignKey(nameof(ImageSliderID))]

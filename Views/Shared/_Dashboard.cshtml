@@ -119,6 +119,11 @@
                         </a>
                     </li>
                     <li>
+                        <a href="@Url.Action("Index","Newsletter")" class="nav-link px-3">
+                            <span>Newsletter</span>
+                        </a>
+                    </li>
+                    <li>
                         <a class="nav-link px-3" asp-area="" asp-controller="Order" asp-action="ListaZamowien">Zamówienia</a>
                     </li>
                     <li>
@@ -239,13 +244,8 @@
     <!-- offcanvas -->
     <main class="mt-5 pt-3">
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
 @*                    <h4>Panel zarządzania</h4>*@
                     @RenderBody()
-                    <hr class="my-4">
-                </div>
-            </div>
         </div>
     </main>
     <script src="~/dashboard/js/bootstrap.bundle.min.js"></script>
