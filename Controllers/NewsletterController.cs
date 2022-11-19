@@ -120,6 +120,9 @@ namespace partner_aluro.Controllers
         {
             var fil = Request.Form.Files[0];
 
+
+            var context = HttpContext.Features;
+
             string wwwRootPath = _hostEnvironment.WebRootPath;
 
             using (var fs = new FileStream(wwwRootPath + $"\\Images\\" + fil.FileName, FileMode.Create))
@@ -131,9 +134,11 @@ namespace partner_aluro.Controllers
         }
 
         [HttpGet]
-        [Route("filelist")]
+        [Route("filelist")]   //Do edytora laduje liste z Images tak jak jest w tej funkcji
         public IActionResult Filelist()
         {
+            var context = HttpContext.Features;
+
             string wwwRootPath = _hostEnvironment.WebRootPath;
             var files = Directory.GetFiles(wwwRootPath + $"\\Images");
 
