@@ -52,7 +52,7 @@ namespace partner_aluro.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ImageId,Tytul,ImageFile")] ImageModel imageModel)
+        public async Task<IActionResult> Create(ImageModel imageModel)
         {
             ModelState.Remove("Product");
 
@@ -62,14 +62,15 @@ namespace partner_aluro.Controllers
                 string wwwRootPath = _hostEnvironment.WebRootPath;
                 string fileName = Path.GetFileNameWithoutExtension(imageModel.ImageFile.FileName);
                 string extension = Path.GetExtension(imageModel.ImageFile.FileName);
-                imageModel.ImageName =  fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                string path = Path.Combine(wwwRootPath + "/Images/", fileName); 
+                imageModel.ImageName =  fileName = fileName +"_"+ DateTime.Now.ToString("yymmssfff") + extension;
+                string path = Path.Combine(wwwRootPath + "/images/", fileName); 
                 using (var fileStream = new FileStream(path, FileMode.Create))
                 {
                     await imageModel.ImageFile.CopyToAsync(fileStream);
                 }
                 //insert record
-                imageModel.path = "\\Images\\" + fileName;
+                imageModel.path = "images\\";
+                imageModel.fullPath = "images\\" + fileName;
                 _context.Add(imageModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

@@ -10,69 +10,81 @@
 <p>
     <a class="btn" asp-action="Create">Dodaj nowy</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Id
-            </th>
-            <th>
-                Obrazek
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Tytul)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.path)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.fullPath)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.kolejnosc)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ImageName)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                    @Html.DisplayFor(model => item.ImageId)
-            </td>
-            <td>
-                <img src="@item.path\@item.ImageName" width="50px" height="50px">
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Tytul)
-            </td>
-            <td>
-                    @Html.DisplayFor(model => item.path)
-            </td>
-            <td>
-                @Html.DisplayFor(model => item.fullPath)
-            </td>
-            <td>
-                    @Html.DisplayFor(model => item.kolejnosc)
-            </td>
-            <td>
-                    @Html.DisplayFor(model => item.ProductId)
-            </td>
-            <td>
-                    @Html.DisplayFor(modelItem => item.ImageName)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ImageId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ImageId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ImageId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="row">
+    <div class="col-md-12 mb-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="example"
+                           class="table table-striped data-table"
+                           style="width: 100%">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Id
+                                </th>
+                                <th>
+                                    Obrazek
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Tytul)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.path)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.fullPath)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.kolejnosc)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.ProductId)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.ImageName)
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                @foreach (var item in Model) {
+                                        <tr>
+                                            <td>
+                                                    @Html.DisplayFor(model => item.ImageId)
+                                            </td>
+                                            <td>
+                                                <img src="@item.path\@item.ImageName" width="50px" height="50px">
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Tytul)
+                                            </td>
+                                            <td>
+                                                    @Html.DisplayFor(model => item.path)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(model => item.fullPath)
+                                            </td>
+                                            <td>
+                                                    @Html.DisplayFor(model => item.kolejnosc)
+                                            </td>
+                                            <td>
+                                                    @Html.DisplayFor(model => item.ProductId)
+                                            </td>
+                                            <td>
+                                                    @Html.DisplayFor(modelItem => item.ImageName)
+                                            </td>
+                                            <td>
+                                                <a asp-action="Edit" asp-route-id="@item.ImageId">Edit</a> |
+                                                <a asp-action="Details" asp-route-id="@item.ImageId">Details</a> |
+                                                <a asp-action="Delete" asp-route-id="@item.ImageId">Delete</a>
+                                            </td>
+                                        </tr>
+                                }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
