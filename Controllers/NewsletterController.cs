@@ -14,10 +14,13 @@ namespace partner_aluro.Controllers
 
         public readonly ApplicationDbContext _context;
 
-        public NewsletterController(INewsletter newsletter, ApplicationDbContext context)
+        public readonly IEmailService _emailService;
+
+        public NewsletterController(INewsletter newsletter, ApplicationDbContext context, IEmailService emailService)
         {
             _newsletter = newsletter;
             _context = context;
+            _emailService = emailService;
         }
 
         // GET: Newsletter
@@ -67,7 +70,7 @@ namespace partner_aluro.Controllers
         // POST: Newsletter/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> EditAsync(Newsletter newsletter)
+        public async Task<ActionResult> Edit(Newsletter newsletter)
         {
 
             newsletter.listaEmail = await _context.Users.Where(x => x.Newsletter == true).Select(x => x.Email).ToListAsync();
@@ -85,5 +88,22 @@ namespace partner_aluro.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public async Task<ActionResult> SendEmail(int id)
+        {
+            Newsletter newsletter = await _newsletter.GetAsync(id);
+
+            newsletter.listaEmail = await _context.Users.Where(x => x.Newsletter == true).Select(x => x.Email).ToListAsync();
+
+            EmailDto emailDto = new EmailDto()
+            {
+                Body = newsletter.MessagerBody,
+                To = "szuminski.p@gmail.com",
+                Subject = "Newsletter"
+            };
+
+            await _emailService.SendEmailAsync(emailDto);
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
