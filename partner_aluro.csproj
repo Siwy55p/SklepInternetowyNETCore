@@ -47,13 +47,13 @@
     <PackageReference Include="System.ServiceModel.Http" Version="4.10.0" />
     <PackageReference Include="System.ServiceModel.NetTcp" Version="4.10.0" />
     <PackageReference Include="System.ServiceModel.Security" Version="4.10.0" />
+    <PackageReference Include="TinyMCE" Version="6.2.0" />
     <PackageReference Include="WcfCoreMtomEncoder" Version="0.1.16" />
     <PackageReference Include="X.PagedList.Mvc.Core" Version="8.4.3" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="wwwroot\images\logo\logo.jpg" />
-    <None Include="wwwroot\tinymce\langs\pl.js" />
   </ItemGroup>
 
   <ItemGroup>
