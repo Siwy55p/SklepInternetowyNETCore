@@ -176,6 +176,10 @@ namespace partner_aluro.Areas.Identity.Pages.Account
             [StringLength(10, ErrorMessage = "Proszę wprowadzic poprawy nr NIP składający się z 10-ciu znaków.", MinimumLength = 10)]
             [RegularExpression("^([0-9]{10})$", ErrorMessage = "Nieprawidłowy nr NIP.")]
             public string NIP { get; set; }
+
+            public bool Newsletter { get; set; }
+
+            public bool PolitykaPrywatnosci { get; set; }
         }
 
         //[HttpGet]
@@ -221,6 +225,7 @@ namespace partner_aluro.Areas.Identity.Pages.Account
             {
                 var user = CreateUser();
 
+
                 user.Imie = Input.Imie;
                 user.Nazwisko = Input.Nazwisko;
 
@@ -264,6 +269,9 @@ namespace partner_aluro.Areas.Identity.Pages.Account
 
                 user.DataZałożenia = DateTime.Now;
                 user.IdProfilDzialalnosci = Input.IdProfildzialalnosci;
+
+                user.Newsletter = true;
+                user.PolitykaPrywatnosci = true;
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);

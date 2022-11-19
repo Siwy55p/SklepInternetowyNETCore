@@ -25,6 +25,8 @@ public class ApplicationUser : IdentityUser
     public virtual Adress2dostawy? Adress2dostawy { get; set; }
 
     public string? NotatkaOsobista { get; set; }
+    public bool? PolitykaPrywatnosci { get; set; }
+    public bool? Newsletter { get; set; }
 
     [InverseProperty(nameof(Order.User))]
     public virtual ICollection<Order>? Orders { get; set; }

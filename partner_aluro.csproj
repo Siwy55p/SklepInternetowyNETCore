@@ -53,6 +53,7 @@
 
   <ItemGroup>
     <None Include="wwwroot\images\logo\logo.jpg" />
+    <None Include="wwwroot\tinymce\langs\pl.js" />
   </ItemGroup>
 
   <ItemGroup>

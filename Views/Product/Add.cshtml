@@ -4,6 +4,11 @@
     ViewData["Title"] = "Dodaj produkt";
     Layout = "~/Views/Shared/_Dashboard.cshtml";
 }
+@section LinkStyleHead
+    {
+    <script src="https://cdn.tiny.cloud/1/7jymcsfhr21jkg9tegltt4mduk03g8tkuk3zgof7cwr9i3i5/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+
+    }
 
 <form class="needs-validation" asp-action="Add" asp-route-id="@Model.ProductId" asp-controller="Product" class="form-horizontal" method="post" enctype="multipart/form-data">
     <div class="row g-0">
@@ -17,33 +22,22 @@
             <button type="submit" class="btn btn-success">Dodaj produkt</button>  <button id="btnBack" runat="server" text="Back" class="btn btn-primary" onclick="JavaScript: window.history.back(1); return false;">Powrót</button>
         </div>
     </div>
-
-    @*
-    @foreach (var item in ViewBag.Category)
-    {
-    <input name="AreChecked" type="checkbox" value="@item.Value" /> @item.Text <br />
-    }
-    *@
-
-    @*
-    <input asp-for="IsChecked">Solicitation
-    <input type="checkbox" data-val="true" data-val-required="The IsChecked field is required." id="IsChecked" name="IsChecked" value="true">
-    <input name="IsChecked" type="hidden" value="false">
-    *@
-
 </form>
 
-@*    <div class="col-md-6">
-        <form class="needs-validation" asp-action="AddImage" asp-route-id="@Model.ProductId" asp-controller="Image" class="form-horizontal" method="post" enctype="multipart/form-data">
-            @Html.HiddenFor(h=>Model.ProductId)
-            @Html.ValidationSummary()
-
-            @Html.Partial("_FormProductImage")
-            <button type="submit">Dodaj Obrazy</button>
-        </form>
-    </div>*@
-
 @section Scripts {
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage tinycomments tableofcontents footnotes mergetags autocorrect',
+            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+            tinycomments_mode: 'embedded',
+            tinycomments_author: 'Author name',
+            mergetags_list: [
+                { value: 'First.Name', title: 'First Name' },
+                { value: 'Email', title: 'Email' },
+            ]
+        });
+    </script>
 
     <script>
         function preview_images() {

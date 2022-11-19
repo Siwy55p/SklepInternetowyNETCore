@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using partner_aluro.Data;
 
@@ -11,9 +12,10 @@ using partner_aluro.Data;
 namespace partner_aluro.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221119174534_newsleteruser")]
+    partial class newsleteruser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -342,6 +344,9 @@ namespace partner_aluro.Migrations
                     b.Property<bool?>("Newsletter")
                         .HasColumnType("bit");
 
+                    b.Property<int?>("NewsletterID")
+                        .HasColumnType("int");
+
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -384,6 +389,8 @@ namespace partner_aluro.Migrations
                     b.HasIndex("IdProfilDzialalnosci");
 
                     b.HasIndex("IdUser");
+
+                    b.HasIndex("NewsletterID");
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
@@ -863,6 +870,10 @@ namespace partner_aluro.Migrations
                         .WithMany("UserProfilDzialalnosci")
                         .HasForeignKey("IdUser");
 
+                    b.HasOne("partner_aluro.Models.Newsletter", null)
+                        .WithMany("listaEmail")
+                        .HasForeignKey("NewsletterID");
+
                     b.Navigation("Adress1rozliczeniowy");
 
                     b.Navigation("Adress2dostawy");
@@ -974,6 +985,11 @@ namespace partner_aluro.Migrations
             modelBuilder.Entity("partner_aluro.Models.Category", b =>
                 {
                     b.Navigation("Produkty");
+                });
+
+            modelBuilder.Entity("partner_aluro.Models.Newsletter", b =>
+                {
+                    b.Navigation("listaEmail");
                 });
 
             modelBuilder.Entity("partner_aluro.Models.Order", b =>

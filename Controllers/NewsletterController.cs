@@ -30,9 +30,11 @@ namespace partner_aluro.Controllers
         }
 
         // GET: Newsletter/Create
-        public ActionResult Add()
+        public async Task<ActionResult> Add()
         {
             Newsletter newsletter = new Newsletter();
+
+            newsletter.listaEmail = await _context.Users.Where(x => x.Newsletter == true).Select(x => x.Email).ToListAsync();
 
             return View(newsletter);
         }
@@ -40,54 +42,48 @@ namespace partner_aluro.Controllers
         // POST: Newsletter/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Add(IFormCollection collection)
+        public async Task<ActionResult> AddAsync(Newsletter newsletter)
         {
-            Newsletter newsletter = new Newsletter();
 
-            return View(newsletter);
+            newsletter.listaEmail = await _context.Users.Where(x => x.Newsletter == true).Select(x => x.Email).ToListAsync();
+
+            _newsletter.Add(newsletter);
+
+
+            return RedirectToAction(nameof(Index));
 
         }
 
         // GET: Newsletter/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
-            return View();
+            Newsletter newsletter = await _newsletter.GetAsync(id);
+
+            newsletter.listaEmail = await _context.Users.Where(x => x.Newsletter == true).Select(x => x.Email).ToListAsync();
+
+            return View(newsletter);
         }
 
         // POST: Newsletter/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<ActionResult> EditAsync(Newsletter newsletter)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+
+            newsletter.listaEmail = await _context.Users.Where(x => x.Newsletter == true).Select(x => x.Email).ToListAsync();
+
+            _newsletter.Edit(newsletter);
+
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Newsletter/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            _newsletter.Delete(id);
+
+            return RedirectToAction(nameof(Index));
         }
 
-        // POST: Newsletter/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }

@@ -1,0 +1,69 @@
+﻿@model partner_aluro.Models.Newsletter
+
+@{
+    ViewData["Title"] = "Dodaj Newsletter";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+@section LinkStyleHead
+    {
+    <script src="https://cdn.tiny.cloud/1/7jymcsfhr21jkg9tegltt4mduk03g8tkuk3zgof7cwr9i3i5/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+
+    }
+
+    <form class="needs-validation" asp-action="Edit" asp-route-id="@Model.NewsletterID" asp-controller="Newsletter" class="form-horizontal" method="post" enctype="multipart/form-data">
+
+        <div class="row g-0">
+            <div class="col-md-10 border-end">
+                @Html.ValidationSummary()
+                @await Html.PartialAsync("_FormNewsletter")
+            </div>
+            <div class="col-md-1">
+                <button type="submit" class="btn btn-success">Zapisz zmiany</button>
+                <button type="submit" class="btn btn-success">Wyslij</button>  <button id="btnBack" runat="server" text="Back" class="btn btn-primary" onclick="JavaScript: window.history.back(1); return false;">Powrót</button>
+            </div>
+
+        </div>
+    </form>
+
+    @section Scripts {
+    <script>
+        tinymce.init({
+            selector: '#editor',
+            language_url: '/langs/pl.js'  // site absolute URL
+            plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage tableofcontents footnotes mergetags autocorrect image code',
+            toolbar1: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck',
+            toolbar2: 'align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat ',
+                    // enable title field in the Image dialog
+            image_title: true,
+            // enable automatic uploads of images represented by blob or data URIs
+            automatic_uploads: true,
+            // add custom filepicker only to Image dialog
+            file_picker_types: 'image',
+            file_picker_callback: function (cb, value, meta) {
+                var input = document.createElement('input');
+                input.setAttribute('type', 'file');
+                input.setAttribute('accept', 'image/*');
+
+                input.onchange = function () {
+                    var file = this.files[0];
+                    var reader = new FileReader();
+
+                    reader.onload = function () {
+                        var id = 'blobid' + (new Date()).getTime();
+                        var blobCache = tinymce.activeEditor.editorUpload.blobCache;
+                        var base64 = reader.result.split(',')[1];
+                        var blobInfo = blobCache.create(id, file, base64);
+                        blobCache.add(blobInfo);
+
+                        // call the callback and populate the Title field with the file name
+                        cb(blobInfo.blobUri(), { title: file.name });
+                    };
+                    reader.readAsDataURL(file);
+                };
+
+                input.click();
+            }
+        });
+    </script>
+
+}

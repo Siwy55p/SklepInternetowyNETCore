@@ -22,7 +22,7 @@ namespace partner_aluro.Services
 
         public void Delete(int id)
         {
-            Newsletter newsletter = _context.Newsletter.Where(x => x.NewsletterID == id).Include(x => x.listaEmail).FirstOrDefault();
+            Newsletter newsletter = _context.Newsletter.Where(x => x.NewsletterID == id).FirstOrDefault();
             _context.Remove(newsletter);
             _context.SaveChanges();
         }
@@ -35,7 +35,7 @@ namespace partner_aluro.Services
 
         public async Task<Newsletter> GetAsync(int id)
         {
-            Newsletter newsletter =  await _context.Newsletter.Where(x => x.NewsletterID == id).Include(x => x.listaEmail).FirstOrDefaultAsync();
+            Newsletter newsletter =  await _context.Newsletter.Where(x => x.NewsletterID == id).FirstOrDefaultAsync();
 
             return newsletter;
         }

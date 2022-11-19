@@ -1,6 +1,6 @@
 ﻿using Org.BouncyCastle.Asn1.X509;
 using System.ComponentModel.DataAnnotations;
-
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace partner_aluro.Models
 {
@@ -11,8 +11,8 @@ namespace partner_aluro.Models
 
         public string? Nazwa { get; set; }
 
-
-        public List<ApplicationUser>? listaEmail { get; set; }
+        [NotMapped]
+        public List<string>? listaEmail { get; set; }
 
         public string? MessagerBody { get; set; }
 
