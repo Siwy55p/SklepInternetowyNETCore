@@ -4,11 +4,10 @@ namespace partner_aluro.Services.Interfaces
 {
     public interface IProductQuantityPrestashop
     {
-        void Add(ProductPrestashop product);
+        void Add(ProductQuantityPrestashop QuantityProduct);
 
-        ProductPrestashop Get(int id);
+        ProductQuantityPrestashop Get(int id);
 
-        List<ProductPrestashop> ListaProduktowPrestashop();
-
+        int iloscProduktu(int product_id);
     }
 }

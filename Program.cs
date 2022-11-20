@@ -269,4 +269,6 @@ void AddScoped()
 
     builder.Services.AddScoped<IProductNazwyPrestashop, ProductNazwyPrestashopService>();
 
+    builder.Services.AddScoped<IProductQuantityPrestashop, ProductQuantityPrestashopService>();
+
 }

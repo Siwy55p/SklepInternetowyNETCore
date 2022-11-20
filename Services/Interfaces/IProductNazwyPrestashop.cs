@@ -8,5 +8,11 @@ namespace partner_aluro.Services.Interfaces
 
         ProductNazwyPrestashop Get(int id);
 
+        string NazwaProduktu(int id_product);
+
+        string KrotkiOpisProduktu(int id_product);
+
+        string DlugiOpisProduktu(int id_product);
+
     }
 }

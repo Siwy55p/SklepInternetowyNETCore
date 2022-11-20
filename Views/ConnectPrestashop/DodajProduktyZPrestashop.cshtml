@@ -1,0 +1,63 @@
+﻿@model partner_aluro.ViewModels.ProductPrestashopNoweModel
+
+@{
+    ViewData["Title"] = "Ustawienia Generowania XML";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+
+CONNECT TO PRESTASHOP
+
+Dodane produkty
+
+
+<div class="row">
+    <div class="row">Nowe</div>
+    <div class="row">
+        <div class="col">ProductID</div>
+        <div class="col">Name </div>
+        <div class="col">CategoryId</div>
+        <div class="col">Symbol</div>
+        <div class="col">CenaProduktu</div>
+        <div class="col">Ilosc</div>
+
+    </div>
+    @foreach (var item in Model.nowe)
+    {
+        <div class="row">
+            <div class="col">ProductID @item.ProductId</div>
+            <div class="col">@item.Name </div>
+            <div class="col">@item.CategoryId</div>
+            <div class="col">@item.Symbol</div>
+            <div class="col">@item.CenaProduktu</div>
+            <div class="col">@item.Ilosc</div>
+
+        </div>
+    }
+    
+</div>
+<div class="row">
+    <div class="row">Zaktualizowane</div>
+    <div class="row">
+        <div class="col">ProductID</div>
+        <div class="col">Name </div>
+        <div class="col">CategoryId</div>
+        <div class="col">Symbol</div>
+        <div class="col">CenaProduktu</div>
+        <div class="col">Ilosc</div>
+
+    </div>
+    @foreach (var item in Model.zaktualizowen)
+    {
+        <div class="row">
+            <div class="col">ProductID @item.ProductId</div>
+            <div class="col">@item.Name </div>
+            <div class="col">@item.CategoryId</div>
+            <div class="col">@item.Symbol</div>
+            <div class="col">@item.CenaProduktu</div>
+            <div class="col">@item.Ilosc</div>
+
+        </div>
+    }
+
+</div>

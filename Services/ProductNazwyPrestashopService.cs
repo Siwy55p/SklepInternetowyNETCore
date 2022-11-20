@@ -25,5 +25,29 @@ namespace partner_aluro.Services
             ProductNazwyPrestashop productNazwa = _context.ProductsNamePrestashop.Where(x => x.Id == id).FirstOrDefault();
             return productNazwa;
         }
+
+        public string NazwaProduktu(int id_product)
+        {
+            string nazwa = _context.ProductsNamePrestashop.Where(x => x.id_product == id_product).FirstOrDefault().name;
+            if (nazwa == null)
+            {
+                return "Brak Nazwy";
+            }
+            else
+            {
+                return nazwa;
+            }
+        }
+        public string KrotkiOpisProduktu(int id_product)
+        {
+            string krotkiOpis = _context.ProductsNamePrestashop.Where(x => x.id_product == id_product).FirstOrDefault().description_short;
+            return krotkiOpis;
+        }
+
+        public string DlugiOpisProduktu(int id_product)
+        {
+            string description = _context.ProductsNamePrestashop.Where(x => x.id_product == id_product).FirstOrDefault().description;
+            return description;
+        }
     }
 }

@@ -2,8 +2,10 @@
 using Microsoft.EntityFrameworkCore;
 using MySqlConnector;
 using partner_aluro.Data;
+using partner_aluro.Migrations;
 using partner_aluro.Models;
 using partner_aluro.Services.Interfaces;
+using partner_aluro.ViewModels;
 using System.Globalization;
 
 
@@ -16,6 +18,7 @@ namespace partner_aluro.Controllers
         readonly IAddressPrestashop _addressPrestashop;
         readonly IProductPrestashop _productPrestashop;
         readonly IProductNazwyPrestashop _productNazwyPrestashop;
+        readonly IProductQuantityPrestashop _productQuantityPrestashop;
 
         readonly IProductService _productService;
 
@@ -23,7 +26,7 @@ namespace partner_aluro.Controllers
 
         public string con1 = "server=aluro.mysql.dhosting.pl;user=ieg3ga_aluro;database=ieza7a_aluropar;port=3306;password=Siiwy1a2!;Allow Zero Datetime=True";
         public string con2 = "server=aluro.mysql.dhosting.pl;user=iefi4n_aluro2;database=euhi4i_aluroshop;port=3306;password=3jjN9vEn7T;Allow Zero Datetime=True"; //aktualna baza bierzaca
-        public ConnectPrestashopController(IContactPrestashop contactPrestashop, IAddressPrestashop addressPrestashop, IProductPrestashop productPrestashop, ApplicationDbContext context, IProductNazwyPrestashop productNazwyPrestashop, IProductService productService)
+        public ConnectPrestashopController(IContactPrestashop contactPrestashop, IAddressPrestashop addressPrestashop, IProductPrestashop productPrestashop, ApplicationDbContext context, IProductNazwyPrestashop productNazwyPrestashop, IProductService productService, IProductQuantityPrestashop productQuantityPrestashop)
         {
             _contactPrestashop = contactPrestashop;
             _addressPrestashop = addressPrestashop;
@@ -34,41 +37,80 @@ namespace partner_aluro.Controllers
             _context = context;
             _productNazwyPrestashop = productNazwyPrestashop;
             _productService = productService;
+
+            _productQuantityPrestashop = productQuantityPrestashop;
         }
         public IActionResult DodajProduktyZPrestashop()
         {
 
-            var listaProduktowDostepnychzPresta = _context.ProductsPrestashop.Where(x => x.quantity >= 1).ToList();
+            List<ProductPrestashop> listaProduktowDostepnychzPresta = _context.ProductsPrestashop.ToList(); // Ta lista nie potrzebna
+            List<ProductPrestashop> listaproduktowDostepnychZPresty = new List<ProductPrestashop>();
 
-            Product produkt = _context.Products.Where(x => x.Symbol == listaProduktowDostepnychzPresta[1].reference).FirstOrDefault();
-            if(produkt != null)
+            List<ProductQuantityPrestashop> listaProduktowKToreSaNaStanie = _context.ProductsQuantityPrestashop.Where(x => x.quantity >= 1).ToList();
+
+            for(int i = 0; i < listaProduktowKToreSaNaStanie.Count(); i ++)
             {
-                //produkt wystepuje i trzeba zaktualizowac dane
-                produkt.EAN13 = listaProduktowDostepnychzPresta[1].ean13;
-                produkt.Ilosc = listaProduktowDostepnychzPresta[1].quantity;
-                produkt.CenaProduktu = (decimal)listaProduktowDostepnychzPresta[1].price;
-                produkt.CenaProduktuDetal = (decimal)listaProduktowDostepnychzPresta[1].wholesale_price;
-                produkt.SzerokoscProduktu = (decimal)listaProduktowDostepnychzPresta[1].width;
-                produkt.WysokoscProduktu = (decimal)listaProduktowDostepnychzPresta[1].height;
-                produkt.GlebokoscProduktu = (decimal)listaProduktowDostepnychzPresta[1].depth;
-                produkt.WagaProduktu = (decimal)listaProduktowDostepnychzPresta[1].weight;
-                produkt.DataDodania = DateTime.Parse(listaProduktowDostepnychzPresta[1].date_add);
-                _productService.Update(produkt);
-
-            }
-            else
-            {
-                Product product = new Product();
-                product.CategoryId = 31;
-                product.Name = _context.ProductsNamePrestashop.Where(x => x.id_product == listaProduktowDostepnychzPresta[1].id_product).Where(x=>x.id_lang==1).FirstOrDefault().name;
-                product.Symbol = listaProduktowDostepnychzPresta[1].reference;
-                product.Description = _context.ProductsNamePrestashop.Where(x => x.id_product == listaProduktowDostepnychzPresta[1].id_product).Where(x => x.id_lang == 1).FirstOrDefault().description;
-
-                produkt.DataDodania = DateTime.Parse(listaProduktowDostepnychzPresta[1].date_add);
-                product.CenaProduktu = (decimal)listaProduktowDostepnychzPresta[1].price;
-                //product.Pakowanie = 
+                ProductPrestashop produktPresta = listaProduktowDostepnychzPresta.Where(x => x.id_product == listaProduktowKToreSaNaStanie[i].id_product).FirstOrDefault();
+                //jesli sa ilosci dostepne to dodaj
+                listaproduktowDostepnychZPresty.Add(produktPresta);
             }
 
+
+            List<Product> nowe = new List<Product>();
+            List<Product> aktualizacja = new List<Product>();
+
+            for (int i = 0; i < 10; i++)
+            {
+
+
+                Product produkt = _context.Products.Where(x => x.Symbol == listaproduktowDostepnychZPresty[i].reference).FirstOrDefault();
+                
+
+                if (produkt != null)
+                {
+
+                    //produkt wystepuje i trzeba zaktualizowac dane
+                    produkt.EAN13 = listaproduktowDostepnychZPresty[1].ean13;
+                    produkt.Ilosc = _productQuantityPrestashop.iloscProduktu((int)listaproduktowDostepnychZPresty[1].id_product);
+                    produkt.CenaProduktu = (decimal)listaproduktowDostepnychZPresty[i].price;
+                    produkt.CenaProduktuDetal = (decimal)listaproduktowDostepnychZPresty[i].wholesale_price;
+                    produkt.SzerokoscProduktu = (decimal)listaproduktowDostepnychZPresty[i].width;
+                    produkt.WysokoscProduktu = (decimal)listaproduktowDostepnychZPresty[i].height;
+                    produkt.GlebokoscProduktu = (decimal)listaproduktowDostepnychZPresty[i].depth;
+                    produkt.WagaProduktu = (decimal)listaproduktowDostepnychZPresty[i].weight;
+                    produkt.DataDodania = DateTime.Parse(listaproduktowDostepnychZPresty[i].date_add);
+                    _productService.Update(produkt);
+
+                    aktualizacja.Add(produkt);
+                }
+                else
+                {
+                    //produkt niewystepuje dodaj do bazy
+                    Product product = new Product();
+                    product.CategoryId = 31;
+                    product.Name = _productNazwyPrestashop.NazwaProduktu((int)listaproduktowDostepnychZPresty[i].id_product);
+                    product.Symbol = listaproduktowDostepnychZPresty[i].reference;
+                    product.Description = _productNazwyPrestashop.DlugiOpisProduktu((int)listaproduktowDostepnychZPresty[i].id_product);
+
+                    product.DataDodania = DateTime.Parse(listaproduktowDostepnychZPresty[1].date_add);
+                    product.CenaProduktu = (decimal)listaproduktowDostepnychZPresty[1].price;
+                    product.Pakowanie = "";
+                    product.Materiał = "";
+                    product.Ilosc = _productQuantityPrestashop.iloscProduktu((int)listaproduktowDostepnychZPresty[1].id_product);
+                    product.CenaProduktuDetal = (decimal)listaproduktowDostepnychZPresty[i].wholesale_price;
+                    product.WagaProduktu = (decimal)listaproduktowDostepnychZPresty[i].weight;
+                    product.SzerokoscProduktu = (decimal)listaproduktowDostepnychZPresty[i].width;
+                    product.WysokoscProduktu = (decimal)listaproduktowDostepnychZPresty[i].height;
+                    product.GlebokoscProduktu = (decimal)listaproduktowDostepnychZPresty[i].depth;
+                    product.DataDodania = DateTime.Parse(listaproduktowDostepnychZPresty[i].date_add);
+                    product.Ukryty = true;
+                    product.EAN13 = listaproduktowDostepnychZPresty[i].ean13;
+                    product.KrotkiOpis = _productNazwyPrestashop.KrotkiOpisProduktu((int)listaproduktowDostepnychZPresty[i].id_product);
+                    product.Promocja = false;
+                    _productService.AddProduct(product);
+                    nowe.Add(product);
+                }
+            }
             //if(listaProduktowDostepnychzPresta[1].reference == )
 
             //listaProduktowDostepnychzPresta[1];
@@ -78,16 +120,57 @@ namespace partner_aluro.Controllers
 
             //}
 
+            ProductPrestashopNoweModel vm = new ProductPrestashopNoweModel();
 
+            vm.nowe = nowe;
+            vm.zaktualizowen = aktualizacja;
 
-            List<ProductNazwyPrestashop> NazwyProduktow = new List<ProductNazwyPrestashop>();
-
-            return View(NazwyProduktow);
+            return View(vm);
         }
 
 
 
 
+
+        public IActionResult ProductQuantityPrestashop()
+        {
+            List<ProductQuantityPrestashop> ProduktQuantity = new List<ProductQuantityPrestashop>();
+
+
+
+            using (MySqlConnection con = new MySqlConnection(con2))
+            {
+                con.Open();
+
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM ps_stock_available", con);
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    //fetch your data
+                    ProductQuantityPrestashop productQuantityPresta = new ProductQuantityPrestashop();
+                    productQuantityPresta.id_stock_available = Convert.ToInt32(reader["id_stock_available"]);
+                    productQuantityPresta.id_product = Convert.ToInt32(reader["id_product"]);
+                    productQuantityPresta.id_product_attribute = Convert.ToInt32(reader["id_product_attribute"]);
+                    productQuantityPresta.id_shop = Convert.ToInt32(reader["id_shop"]);
+                    productQuantityPresta.quantity = Convert.ToInt32(reader["quantity"]);
+                    productQuantityPresta.depends_on_stock = Convert.ToInt32(reader["depends_on_stock"]);
+                    productQuantityPresta.out_of_stock = Convert.ToInt32(reader["out_of_stock"]);
+
+                    ProductQuantityPrestashop wystepuje = _context.ProductsQuantityPrestashop.Where(x => x.id_product == productQuantityPresta.id_product).FirstOrDefault();
+                    if (wystepuje != null)
+                    {
+
+                    }
+                    else
+                    {
+                        _productQuantityPrestashop.Add(productQuantityPresta);
+                    }
+                }
+                reader.Close();
+            }
+            return View();
+        }
         public IActionResult ProductNazwyPrestashop()
         {
             List<ProductNazwyPrestashop> NazwyProduktow = new List<ProductNazwyPrestashop>();

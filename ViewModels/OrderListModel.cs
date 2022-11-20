@@ -3,10 +3,10 @@ using partner_aluro.Models;
 
 namespace partner_aluro.ViewModels
 {
-    public class OrderListModel
+    public class ProductPrestashopNoweModel
     {
-        public List<ApplicationUser>? Users { get; set; }
-        public List<Order>? Orders { get; set; }
+        public List<Product>? nowe { get; set; }
+        public List<Product>? zaktualizowen { get; set; }
 
     }
 }
