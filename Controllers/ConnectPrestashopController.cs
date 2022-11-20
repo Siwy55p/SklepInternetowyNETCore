@@ -66,7 +66,7 @@ namespace partner_aluro.Controllers
 
                 produkt.DataDodania = DateTime.Parse(listaProduktowDostepnychzPresta[1].date_add);
                 product.CenaProduktu = (decimal)listaProduktowDostepnychzPresta[1].price;
-                product.Pakowanie = 
+                //product.Pakowanie = 
             }
 
             //if(listaProduktowDostepnychzPresta[1].reference == )
