@@ -6,7 +6,9 @@
 }
 @section LinkStyleHead
     {
-    <script src="~/js/tinymce/tinymce.min.js"></script>
+    <link href="~/dashboard/datatables/datatables.min.css" rel="stylesheet" />
+   <script src="~/js/tinymce/tinymce.min.js"></script>
+
     }
 
     <form class="needs-validation" asp-action="Edit" asp-route-id="@Model.NewsletterID" asp-controller="Newsletter" class="form-horizontal" method="post" enctype="multipart/form-data">
@@ -15,6 +17,9 @@
             <div class="col-md-12 border-end">
                 @Html.ValidationSummary()
                 @await Html.PartialAsync("_FormNewsletter")
+
+
+
             </div>
             <div class="col-md-1">
                 <button type="submit" class="btn btn-success">Zapisz zmiany</button>
@@ -28,5 +33,49 @@
 
 
     <script src="~/js/tinymce.js"></script>
+
+    <script src="~/dashboard/datatables/datatables.min.js"></script>
+    <script src="~/dashboard/js/scriptnewsletter.js"></script>
+    <script>
+        function DodajDoNewsletter(ProduktId) {
+
+            alert('test');
+            //var check = document.getElementById('Nazwa'+ KategoriaID);
+
+            //document.getElementById('Nazwa'+ProduktId).innerHTML = "element";
+            //alert('test2');
+
+            var activeEditor = tinyMCE.get('editor');
+            var content = activeEditor.getContent();
+            var content1 = `<div><a href="#"><img src="https://localhost:44315/Images/Aluro_logo-x-300_2.png" alt="Aluro_logo-x-300_2.png" width="583" height="290">tekst</a> ${ProduktId},</div>`;
+
+            activeEditor.setContent(content + content1);
+            
+            alert(ProduktId);
+
+
+
+            //produktyNewsletter
+            //if (check.checked) {
+            //    check = true;
+            //} else {
+            //    check = false;
+            //}
+
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("AddProductNewsletter", "Newsletter")',
+                data: { ProduktId: ProduktId },
+                success: function (result) {
+                    alert(abc.statusText);
+                },
+
+                error: function (abc) {
+                    alert(abc.statusText);
+                },
+            });
+        }
+    </script>
 
 }

@@ -5,6 +5,7 @@ using partner_aluro.Data;
 using partner_aluro.Models;
 using partner_aluro.Services.Interfaces;
 using System.Collections.Generic;
+using System.Data;
 using System.Security.Cryptography.X509Certificates;
 using System.Web;
 
@@ -43,6 +44,7 @@ namespace partner_aluro.Controllers
         // GET: Newsletter/Create
         public async Task<ActionResult> Add()
         {
+            ViewData["produkty"] = await _context.Products.ToListAsync();
             Newsletter newsletter = new Newsletter();
 
             newsletter.listaEmail = await _context.Users.Where(x => x.Newsletter == true).Select(x => x.Email).ToListAsync();
@@ -56,6 +58,8 @@ namespace partner_aluro.Controllers
         public async Task<ActionResult> AddAsync(Newsletter newsletter)
         {
 
+            ViewData["produkty"] = await _context.Products.ToListAsync();
+
             newsletter.listaEmail = await _context.Users.Where(x => x.Newsletter == true).Select(x => x.Email).ToListAsync();
 
             _newsletter.Add(newsletter);
@@ -68,6 +72,8 @@ namespace partner_aluro.Controllers
         // GET: Newsletter/Edit/5
         public async Task<ActionResult> Edit(int id)
         {
+            ViewData["produkty"] = await _context.Products.ToListAsync();
+
             Newsletter newsletter = await _newsletter.GetAsync(id);
 
             newsletter.listaEmail = await _context.Users.Where(x => x.Newsletter == true).Select(x => x.Email).ToListAsync();
@@ -80,6 +86,7 @@ namespace partner_aluro.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(Newsletter newsletter)
         {
+            ViewData["produkty"] = await _context.Products.ToListAsync();
 
             newsletter.listaEmail = await _context.Users.Where(x => x.Newsletter == true).Select(x => x.Email).ToListAsync();
 
@@ -113,6 +120,17 @@ namespace partner_aluro.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        public string AddProductNewsletter(int ProduktId)
+        {
+            Product produkt = _context.Products.Where(x => x.ProductId == ProduktId).FirstOrDefault();
+
+            string product = $"<img src=~/images/produkty/"+produkt.Symbol + "/" + produkt.ImageUrl + " alt = " + produkt.Name + "  >";
+
+            return product;
+        }
+
+
 
         [HttpPost]
         [Route("upload")]

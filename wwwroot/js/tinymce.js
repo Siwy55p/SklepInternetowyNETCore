@@ -1,7 +1,5 @@
-var system_url = "http://partneralluro.hostingasp.pl/";
-
 tinymce.init({
-        selector: '#editor',
+    selector: '#editor',
     language: 'pl',
     language_url: 'https://partneralluro.hostingasp.pl/js/tinymce/langs/pl.js',  // site absolute URL
 /*    document_base_url: system_url,*/
