@@ -48,7 +48,7 @@ namespace partner_aluro.Controllers
 
             List<ProductQuantityPrestashop> listaProduktowKToreSaNaStanie = _context.ProductsQuantityPrestashop.Where(x => x.quantity >= 1).ToList();
 
-            for(int i = 0; i < listaProduktowKToreSaNaStanie.Count(); i ++)
+            for(int i = 0; i < listaProduktowKToreSaNaStanie.Count(); i++)
             {
                 ProductPrestashop produktPresta = listaProduktowDostepnychzPresta.Where(x => x.id_product == listaProduktowKToreSaNaStanie[i].id_product).FirstOrDefault();
                 //jesli sa ilosci dostepne to dodaj
@@ -59,56 +59,60 @@ namespace partner_aluro.Controllers
             List<Product> nowe = new List<Product>();
             List<Product> aktualizacja = new List<Product>();
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 160; i < listaproduktowDostepnychZPresty.Count(); i++)
             {
-
-
-                Product produkt = _context.Products.Where(x => x.Symbol == listaproduktowDostepnychZPresty[i].reference).FirstOrDefault();
+                //blad dla i = 120 id_product=1512 i=od 0
+                //blad dla i = 158 id_product= 1570 i=od 121
+                //blad dla i = 159 id_product= 1570 i=od 121
+                if (listaproduktowDostepnychZPresty[i].reference != null || listaproduktowDostepnychZPresty[i].reference != "")
+                {
+                        Product produkt = _context.Products.Where(x => x.Symbol == listaproduktowDostepnychZPresty[i].reference).FirstOrDefault();
                 
 
-                if (produkt != null)
-                {
+                    if (produkt != null)
+                    {
 
-                    //produkt wystepuje i trzeba zaktualizowac dane
-                    produkt.EAN13 = listaproduktowDostepnychZPresty[1].ean13;
-                    produkt.Ilosc = _productQuantityPrestashop.iloscProduktu((int)listaproduktowDostepnychZPresty[1].id_product);
-                    produkt.CenaProduktu = (decimal)listaproduktowDostepnychZPresty[i].price;
-                    produkt.CenaProduktuDetal = (decimal)listaproduktowDostepnychZPresty[i].wholesale_price;
-                    produkt.SzerokoscProduktu = (decimal)listaproduktowDostepnychZPresty[i].width;
-                    produkt.WysokoscProduktu = (decimal)listaproduktowDostepnychZPresty[i].height;
-                    produkt.GlebokoscProduktu = (decimal)listaproduktowDostepnychZPresty[i].depth;
-                    produkt.WagaProduktu = (decimal)listaproduktowDostepnychZPresty[i].weight;
-                    produkt.DataDodania = DateTime.Parse(listaproduktowDostepnychZPresty[i].date_add);
-                    _productService.Update(produkt);
+                        //produkt wystepuje i trzeba zaktualizowac dane
+                        produkt.EAN13 = listaproduktowDostepnychZPresty[1].ean13;
+                        produkt.Ilosc = _productQuantityPrestashop.iloscProduktu((int)listaproduktowDostepnychZPresty[1].id_product);
+                        produkt.CenaProduktu = (decimal)listaproduktowDostepnychZPresty[i].price;
+                        produkt.CenaProduktuDetal = (decimal)listaproduktowDostepnychZPresty[i].wholesale_price;
+                        produkt.SzerokoscProduktu = (decimal)listaproduktowDostepnychZPresty[i].width;
+                        produkt.WysokoscProduktu = (decimal)listaproduktowDostepnychZPresty[i].height;
+                        produkt.GlebokoscProduktu = (decimal)listaproduktowDostepnychZPresty[i].depth;
+                        produkt.WagaProduktu = (decimal)listaproduktowDostepnychZPresty[i].weight;
+                        produkt.DataDodania = DateTime.Parse(listaproduktowDostepnychZPresty[i].date_add);
+                        _productService.Update(produkt);
 
-                    aktualizacja.Add(produkt);
-                }
-                else
-                {
-                    //produkt niewystepuje dodaj do bazy
-                    Product product = new Product();
-                    product.CategoryId = 31;
-                    product.Name = _productNazwyPrestashop.NazwaProduktu((int)listaproduktowDostepnychZPresty[i].id_product);
-                    product.Symbol = listaproduktowDostepnychZPresty[i].reference;
-                    product.Description = _productNazwyPrestashop.DlugiOpisProduktu((int)listaproduktowDostepnychZPresty[i].id_product);
+                        aktualizacja.Add(produkt);
+                    }
+                    else
+                    {
+                        //produkt niewystepuje dodaj do bazy
+                        Product product = new Product();
+                        product.CategoryId = 31;
+                        product.Name = _productNazwyPrestashop.NazwaProduktu((int)listaproduktowDostepnychZPresty[i].id_product);
+                        product.Symbol = listaproduktowDostepnychZPresty[i].reference;
+                        product.Description = _productNazwyPrestashop.DlugiOpisProduktu((int)listaproduktowDostepnychZPresty[i].id_product);
 
-                    product.DataDodania = DateTime.Parse(listaproduktowDostepnychZPresty[1].date_add);
-                    product.CenaProduktu = (decimal)listaproduktowDostepnychZPresty[1].price;
-                    product.Pakowanie = "";
-                    product.Materiał = "";
-                    product.Ilosc = _productQuantityPrestashop.iloscProduktu((int)listaproduktowDostepnychZPresty[1].id_product);
-                    product.CenaProduktuDetal = (decimal)listaproduktowDostepnychZPresty[i].wholesale_price;
-                    product.WagaProduktu = (decimal)listaproduktowDostepnychZPresty[i].weight;
-                    product.SzerokoscProduktu = (decimal)listaproduktowDostepnychZPresty[i].width;
-                    product.WysokoscProduktu = (decimal)listaproduktowDostepnychZPresty[i].height;
-                    product.GlebokoscProduktu = (decimal)listaproduktowDostepnychZPresty[i].depth;
-                    product.DataDodania = DateTime.Parse(listaproduktowDostepnychZPresty[i].date_add);
-                    product.Ukryty = true;
-                    product.EAN13 = listaproduktowDostepnychZPresty[i].ean13;
-                    product.KrotkiOpis = _productNazwyPrestashop.KrotkiOpisProduktu((int)listaproduktowDostepnychZPresty[i].id_product);
-                    product.Promocja = false;
-                    _productService.AddProduct(product);
-                    nowe.Add(product);
+                        product.DataDodania = DateTime.Parse(listaproduktowDostepnychZPresty[1].date_add);
+                        product.CenaProduktu = (decimal)listaproduktowDostepnychZPresty[1].price;
+                        product.Pakowanie = "";
+                        product.Materiał = "";
+                        product.Ilosc = _productQuantityPrestashop.iloscProduktu((int)listaproduktowDostepnychZPresty[1].id_product);
+                        product.CenaProduktuDetal = (decimal)listaproduktowDostepnychZPresty[i].wholesale_price;
+                        product.WagaProduktu = (decimal)listaproduktowDostepnychZPresty[i].weight;
+                        product.SzerokoscProduktu = (decimal)listaproduktowDostepnychZPresty[i].width;
+                        product.WysokoscProduktu = (decimal)listaproduktowDostepnychZPresty[i].height;
+                        product.GlebokoscProduktu = (decimal)listaproduktowDostepnychZPresty[i].depth;
+                        product.DataDodania = DateTime.Parse(listaproduktowDostepnychZPresty[i].date_add);
+                        product.Ukryty = true;
+                        product.EAN13 = listaproduktowDostepnychZPresty[i].ean13;
+                        product.KrotkiOpis = _productNazwyPrestashop.KrotkiOpisProduktu((int)listaproduktowDostepnychZPresty[i].id_product);
+                        product.Promocja = false;
+                        _productService.AddProduct(product);
+                        nowe.Add(product);
+                    }
                 }
             }
             //if(listaProduktowDostepnychzPresta[1].reference == )
