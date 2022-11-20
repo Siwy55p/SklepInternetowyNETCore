@@ -138,6 +138,12 @@ namespace partner_aluro.Controllers
         {
             Product produkt = _context.Products.Where(x => x.ProductId == ProduktId).FirstOrDefault();
 
+            if(ile == 0)
+            {
+
+            }
+
+
             //string tresc = 
             //    $"<div class='row border=1'>" +
             //    "<div class='mojstyl'>"+
@@ -188,7 +194,7 @@ namespace partner_aluro.Controllers
 
 
 
-            return tab1 + value;
+            return tab1 + content + value;
         }
         static string thead = "<table \">\r\n\tTabela 1" +
                     "<thead>\r\n\t" +
