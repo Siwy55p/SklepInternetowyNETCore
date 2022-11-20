@@ -59,7 +59,7 @@ namespace partner_aluro.Controllers
             List<Product> nowe = new List<Product>();
             List<Product> aktualizacja = new List<Product>();
 
-            for (int i = 160; i < listaproduktowDostepnychZPresty.Count(); i++)
+            for (int i = 0; i < listaproduktowDostepnychZPresty.Count(); i++)
             {
                 //blad dla i = 120 id_product=1512 i=od 0
                 //blad dla i = 158 id_product= 1570 i=od 121
@@ -74,7 +74,7 @@ namespace partner_aluro.Controllers
 
                         //produkt wystepuje i trzeba zaktualizowac dane
                         produkt.EAN13 = listaproduktowDostepnychZPresty[1].ean13;
-                        produkt.Ilosc = _productQuantityPrestashop.iloscProduktu((int)listaproduktowDostepnychZPresty[1].id_product);
+                        produkt.Ilosc = _productQuantityPrestashop.iloscProduktu((int)listaproduktowDostepnychZPresty[i].id_product);
                         produkt.CenaProduktu = (decimal)listaproduktowDostepnychZPresty[i].price;
                         produkt.CenaProduktuDetal = (decimal)listaproduktowDostepnychZPresty[i].wholesale_price;
                         produkt.SzerokoscProduktu = (decimal)listaproduktowDostepnychZPresty[i].width;
