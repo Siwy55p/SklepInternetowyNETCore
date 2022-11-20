@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using iTextSharp.text.pdf;
+using iTextSharp.text.pdf.codec;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Build.Execution;
 using Microsoft.EntityFrameworkCore;
 using partner_aluro.Data;
 using partner_aluro.Models;
@@ -121,14 +124,102 @@ namespace partner_aluro.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public string AddProductNewsletter(int ProduktId)
+        static string body = "";
+
+
+        static string tab1 = "";
+        static string tab2 = "";
+        static string tab3 = "";
+        static string tab4 = "";
+        static string tab5 = "";
+
+
+        public string AddProductNewsletter(int ProduktId, int ile, string content)
         {
             Product produkt = _context.Products.Where(x => x.ProductId == ProduktId).FirstOrDefault();
 
-            string product = $"<img src=~/images/produkty/"+produkt.Symbol + "/" + produkt.ImageUrl + " alt = " + produkt.Name + "  >";
+            //string tresc = 
+            //    $"<div class='row border=1'>" +
+            //    "<div class='mojstyl'>"+
+            //    $"<img src=../../images/produkty/"+produkt.Symbol + "/" + produkt.ImageUrl + " alt = " + produkt.Name + " style='width:200px;'>" +
+            //    "</div>"+
+            //    "<div class='col'>"+ produkt.Name+"</div>"+
+            //    "<div class='col'>" + produkt.CenaProduktu + "</div>" +
+            //    "<div class='col'>" + produkt.Symbol + "</div>" +
+            //    "</div>";
+            string tresc =
+                $"<img src=../../images/produkty/" + produkt.Symbol + "/" + produkt.ImageUrl + " alt = " + produkt.Name + " style='width:200px;'>" +
+                " " + produkt.Name + " "  + produkt.CenaProduktu + " " + produkt.Symbol + " " +
+                " ";
 
-            return product;
+
+            string td1 = "<th>  \"<img src=../../images/produkty/" + produkt.Symbol + "/" + produkt.ImageUrl + " alt = " + produkt.Name + " style='width:200px;'>\"  </th>\r\n\t";
+            string td2 = "<td>" + produkt.Name + "</td>\r\n\t";
+
+
+                thead = thead + td1;
+                tbody = tbody + td2;
+                tfoot = tfoot;
+
+
+            string value = thead + tbody + tfoot;
+            if (ile%3 == 0)
+            {
+                thead = cthead;
+                tbody = ctbody;
+                tfoot = ctfoot;
+                tab1 += value;
+                value = "";
+            }
+
+            string tabelka = "" +
+                "<table \">\r\n\tTabela 1" +
+                    "<thead>\r\n\t" +
+                        "<tr>\r\n\t\t" +
+                            td1+
+                            "</tr>\r\n\t" +
+                    "</thead>\r\n\t" +
+                    "<tbody>\r\n\t" +
+                        "<tr>\r\n\t\t" +
+                            td2+
+                        "</tr>\r\n\t" +
+                    "</tbody>\r\n" +
+                "</table>";
+
+
+
+            return tab1 + value;
         }
+        static string thead = "<table \">\r\n\tTabela 1" +
+                    "<thead>\r\n\t" +
+                        "<tr>\r\n\t\t";
+        const string cthead = "<table \">\r\n\tTabela 1" +
+                    "<thead>\r\n\t" +
+                        "<tr>\r\n\t\t";
+
+        static string tbody = "</tr>\r\n\t" +
+                    "</thead>\r\n\t" +
+                    "<tbody>\r\n\t" +
+                        "<tr>\r\n\t\t";
+        const string ctbody = "</tr>\r\n\t" +
+                   "</thead>\r\n\t" +
+                   "<tbody>\r\n\t" +
+                       "<tr>\r\n\t\t";
+
+        static string tfoot = "</ tr >\r\n\t" +
+                    "</tbody>\r\n" +
+                "</table>";
+        const string ctfoot = "</ tr >\r\n\t" +
+                    "</tbody>\r\n" +
+                "</table>";
+
+
+        public string tabelka()
+        {
+            string tab = thead + tbody + tfoot;
+            return tab;
+        }
+
 
 
 

@@ -6,6 +6,7 @@ tinymce.init({
     relative_urls: false,
     remove_script_host: false,
     convert_urls: true,
+    content_css: 'css/Newsletter/newsletter.css',
     plugins: 'image anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage tableofcontents footnotes mergetags autocorrect image code',
     toolbar1: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck',
     toolbar2: 'image | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat ',
