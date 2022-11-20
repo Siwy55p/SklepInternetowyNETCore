@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using partner_aluro.Data;
 
@@ -11,9 +12,10 @@ using partner_aluro.Data;
 namespace partner_aluro.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221120175213_prod12")]
+    partial class prod12
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -917,8 +919,8 @@ namespace partner_aluro.Migrations
                     b.Property<byte?>("advanced_stock_management")
                         .HasColumnType("tinyint");
 
-                    b.Property<string>("available_date")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime?>("available_date")
+                        .HasColumnType("datetime2");
 
                     b.Property<byte?>("available_for_order")
                         .HasColumnType("tinyint");
@@ -932,17 +934,17 @@ namespace partner_aluro.Migrations
                     b.Property<byte?>("cache_is_pack")
                         .HasColumnType("tinyint");
 
-                    b.Property<int?>("condition")
-                        .HasColumnType("int");
+                    b.Property<byte?>("condition")
+                        .HasColumnType("tinyint");
 
                     b.Property<byte?>("customizable")
                         .HasColumnType("tinyint");
 
-                    b.Property<string>("date_add")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime?>("date_add")
+                        .HasColumnType("datetime2");
 
-                    b.Property<string>("date_upd")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime?>("date_upd")
+                        .HasColumnType("datetime2");
 
                     b.Property<decimal?>("depth")
                         .HasColumnType("decimal(18,2)");

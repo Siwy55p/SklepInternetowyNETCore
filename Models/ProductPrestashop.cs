@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data;
 using System.Security.Permissions;
 
 namespace partner_aluro.Models
@@ -19,23 +21,31 @@ namespace partner_aluro.Models
         public byte? on_sale { get; set; }
 
         public byte? online_only { get; set; }
-        public char? ean13 { get; set; }
 
-        public char? upc { get; set; }
+        [StringLength(13, ErrorMessage = "EAN Max Length is 13")]
+        public string? ean13 { get; set; }
+
+        [StringLength(12, ErrorMessage = "upc Max Length is 12")]
+        public string? upc { get; set; }
         public decimal? ecotax { get; set; }
         public int? quantity { get; set; }
         public int? minimal_quantity { get; set; }
         public decimal? price { get; set; }
         public decimal? wholesale_price { get; set; }
-        public char? unity { get; set; }
+
+        [StringLength(255, ErrorMessage = "unity Max Length is 255")]
+        public string? unity { get; set; }
         public decimal? unit_price_ratio { get; set; }
         public decimal? additional_shipping_cost { get; set; }
-        public char? reference { get; set; }
-        public char? supplier_reference { get; set; }
-        public char? location { get; set; }
+        [StringLength(32, ErrorMessage = "reference Max Length is 32")]
+        public string? reference { get; set; }
+        [StringLength(32, ErrorMessage = "supplier_reference Max Length is 32")]
+        public string? supplier_reference { get; set; }
+        [StringLength(64, ErrorMessage = "location Max Length is 64")]
+        public string? location { get; set; }
         public decimal? width { get; set; }
         public decimal? height { get; set; }
-        public decimal? dept { get; set; }
+        public decimal? depth { get; set; }
         public decimal? weight { get; set; }
 
         public int? out_of_stock {get; set;}
@@ -46,18 +56,19 @@ namespace partner_aluro.Models
         public byte? active { get; set; }
         public int? id_product_redirected { get; set; }
         public byte? available_for_order { get; set; }
-        public DateTime? available_date { get; set; }
+        public string? available_date { get; set; }
         public condit? condition { get; set; }
 
         public byte? show_price { get; set; }
         public byte? indexed { get; set; }
-        public visible? visibility { get; set; }
+        //public visible? visibility { get; set; }
+        public byte? visibility { get; set; }
         public byte? cache_is_pack { get; set; }
         public byte? cache_has_attachments { get; set; }
         public byte? is_virtual { get; set; }
         public int? cache_default_attribute { get; set; }
-        public DateTime? date_add { get; set; }
-        public DateTime? date_upd { get; set; }
+        public string? date_add { get; set; }
+        public string? date_upd { get; set; }
         public byte? advanced_stock_management { get; set; }
         public int? pack_stock_type { get; set; }
 

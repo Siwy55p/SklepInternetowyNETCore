@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using partner_aluro.Data;
 
@@ -11,9 +12,10 @@ using partner_aluro.Data;
 namespace partner_aluro.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221120171417_ProduktyPrestashop")]
+    partial class ProduktyPrestashop
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -917,8 +919,8 @@ namespace partner_aluro.Migrations
                     b.Property<byte?>("advanced_stock_management")
                         .HasColumnType("tinyint");
 
-                    b.Property<string>("available_date")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime?>("available_date")
+                        .HasColumnType("datetime2");
 
                     b.Property<byte?>("available_for_order")
                         .HasColumnType("tinyint");
@@ -938,18 +940,17 @@ namespace partner_aluro.Migrations
                     b.Property<byte?>("customizable")
                         .HasColumnType("tinyint");
 
-                    b.Property<string>("date_add")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime?>("date_add")
+                        .HasColumnType("datetime2");
 
-                    b.Property<string>("date_upd")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime?>("date_upd")
+                        .HasColumnType("datetime2");
 
-                    b.Property<decimal?>("depth")
+                    b.Property<decimal?>("dept")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("ean13")
-                        .HasMaxLength(13)
-                        .HasColumnType("nvarchar(13)");
+                        .HasColumnType("nvarchar(1)");
 
                     b.Property<decimal?>("ecotax")
                         .HasColumnType("decimal(18,2)");
@@ -985,8 +986,7 @@ namespace partner_aluro.Migrations
                         .HasColumnType("tinyint");
 
                     b.Property<string>("location")
-                        .HasMaxLength(64)
-                        .HasColumnType("nvarchar(64)");
+                        .HasColumnType("nvarchar(1)");
 
                     b.Property<int?>("minimal_quantity")
                         .HasColumnType("int");
@@ -1013,15 +1013,13 @@ namespace partner_aluro.Migrations
                         .HasColumnType("tinyint");
 
                     b.Property<string>("reference")
-                        .HasMaxLength(32)
-                        .HasColumnType("nvarchar(32)");
+                        .HasColumnType("nvarchar(1)");
 
                     b.Property<byte?>("show_price")
                         .HasColumnType("tinyint");
 
                     b.Property<string>("supplier_reference")
-                        .HasMaxLength(32)
-                        .HasColumnType("nvarchar(32)");
+                        .HasColumnType("nvarchar(1)");
 
                     b.Property<byte?>("text_fields")
                         .HasColumnType("tinyint");
@@ -1030,18 +1028,16 @@ namespace partner_aluro.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("unity")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("nvarchar(1)");
 
                     b.Property<string>("upc")
-                        .HasMaxLength(12)
-                        .HasColumnType("nvarchar(12)");
+                        .HasColumnType("nvarchar(1)");
 
                     b.Property<byte?>("uploadable_files")
                         .HasColumnType("tinyint");
 
-                    b.Property<byte?>("visibility")
-                        .HasColumnType("tinyint");
+                    b.Property<int?>("visibility")
+                        .HasColumnType("int");
 
                     b.Property<decimal?>("weight")
                         .HasColumnType("decimal(18,2)");
