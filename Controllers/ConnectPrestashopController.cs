@@ -64,7 +64,7 @@ namespace partner_aluro.Controllers
                 //blad dla i = 120 id_product=1512 i=od 0
                 //blad dla i = 158 id_product= 1570 i=od 121
                 //blad dla i = 159 id_product= 1570 i=od 121
-                if (listaproduktowDostepnychZPresty[i].reference != null || listaproduktowDostepnychZPresty[i].reference != "")
+                if (listaproduktowDostepnychZPresty[i] != null)
                 {
                         Product produkt = _context.Products.Where(x => x.Symbol == listaproduktowDostepnychZPresty[i].reference).FirstOrDefault();
                 
