@@ -11,6 +11,7 @@ using SmartBreadcrumbs.Extensions;
 using System.Reflection;
 using partner_aluro;
 using Quartz.Spi;
+using MySqlConnector;
 using Quartz;
 using Quartz.Impl;
 using Microsoft.AspNetCore.Localization;
@@ -18,9 +19,12 @@ using System.Globalization;
 using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Mvc.Razor;
 using partner_aluro.Resources;
+using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DbContextProductionConnection");
+
+var connectionPrestashop = builder.Configuration.GetConnectionString("Prestashop");
 
 
 //global using partner_aluro.Services.EmailService;
@@ -77,7 +81,8 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.R
 builder.Services.AddTransient<IBIRSearchService>(x => new BIRSearchService(birKey)); //Dodanie klucza do Service BIRSearchService birKy w jsonsetting.json
 builder.Services.AddSingleton<RegonService>();
 
-
+//builder.Services.AddTransient<MySqlConnection>(_ => new MySqlConnection(Configuration["ConnectionString:Prestashop"]) ));
+builder.Services.AddTransient<MySqlConnection>(_ => new MySqlConnection(connectionPrestashop));
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();

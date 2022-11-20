@@ -1,5 +1,8 @@
-﻿@*@model partner_aluro.Models.GenerateXML
-*@
+﻿
+
+@model List<partner_aluro.Models.ContactPrestashop>
+
+
 @{
     ViewData["Title"] = "Ustawienia Generowania XML";
     Layout = "~/Views/Shared/_Dashboard.cshtml";
@@ -7,3 +10,29 @@
 
 
 CONNECT TO PRESTASHOP
+
+
+<div class="row">
+    <div class="col">
+        Id
+    </div>
+     <div class="col">
+        FirsName
+    </div> <div class="col">
+        LastName
+    </div>
+
+</div>
+@foreach (var person in Model)
+{
+    <div class="row">
+        <div class="col">
+            @person.Id
+        </div>
+        <div class="col">
+            @person.FirstName
+        </div> <div class="col">
+            @person.LastName
+        </div>
+    </div>
+}
