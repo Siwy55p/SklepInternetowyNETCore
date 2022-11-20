@@ -95,24 +95,6 @@
                             <span>Slider</span> 
                         </a>
                     </li>
-                  @*  <li>
-                        <a href="@Url.Action("PathImage","InicializerProductCategory")" class="nav-link px-3">
-                            <span>InicjalizeFULLPATH</span>
-                        </a>
-                    </li>*@
-@*
-                    <li>
-                        <a href="@Url.Action("Index","InicializerProductCategory")" class="nav-link px-3">
-                            <span>INICIALIZE</span>
-                        </a>
-                    </li>
-*@
-                  @*  <li>
-                        <a href="@Url.Action("Tlumacz","InicializerProductCategory")" class="nav-link px-3">
-                            <span>TLUMACZ</span>
-                        </a>
-                    </li>*@
-
                     <li>
                         <a href="@Url.Action("Index","ApiNBPKurs")" class="nav-link px-3">
                             <span>NBPKurs</span>
@@ -123,16 +105,7 @@
                             <span>Newsletter</span>
                         </a>
                     </li>
-                    @*<li>
-                        <a href="@Url.Action("AddressPrestashop","ConnectPrestashop")" class="nav-link px-3">
-                            <span>Adressy z Prestashop init</span>
-                        </a>
-                    </li>*@
-                    <li>
-                        <a href="@Url.Action("ProductPrestashop","ConnectPrestashop")" class="nav-link px-3">
-                            <span>Produkty z Prestashop</span>
-                        </a>
-                    </li>
+                    
                     <li>
                         <a class="nav-link px-3" asp-area="" asp-controller="Order" asp-action="ListaZamowien">Zamówienia</a>
                     </li>
@@ -247,6 +220,32 @@
                             <span>Ustawienia generowania XML</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="@Url.Action("ProductNazwyPrestashop","ConnectPrestashop")" class="nav-link px-3">
+                            <span>Nazwy produktow z Prestashop</span>
+                        </a>
+                    </li>
+
+                    @*<li>
+                    <a href="@Url.Action("AddressPrestashop","ConnectPrestashop")" class="nav-link px-3">
+                    <span>Adressy z Prestashop init</span>
+                    </a>
+                    </li>*@
+                    @* <li>
+                    <a href="@Url.Action("ProductPrestashop","ConnectPrestashop")" class="nav-link px-3">
+                    <span>Produkty z Prestashop</span>
+                    </a>
+                    </li>
+                    <li>
+                    <a href="@Url.Action("AddressPrestashop","ConnectPrestashop")" class="nav-link px-3">
+                    <span>Address z Prestashop</span>
+                    </a>
+                    </li>
+                    <li>
+                    <a href="@Url.Action("UsersPrestahop","ConnectPrestashop")" class="nav-link px-3">
+                    <span>Uzytkownicy z Prestashop</span>
+                    </a>
+                    </li>*@
                 </ul>
             </nav>
         </div>

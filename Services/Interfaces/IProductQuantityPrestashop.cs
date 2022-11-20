@@ -2,7 +2,7 @@
 
 namespace partner_aluro.Services.Interfaces
 {
-    public interface IProductPrestashop
+    public interface IProductQuantityPrestashop
     {
         void Add(ProductPrestashop product);
 

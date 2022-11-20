@@ -2,7 +2,6 @@
 using partner_aluro.Models;
 using partner_aluro.Services.Interfaces;
 
-
 namespace partner_aluro.Services
 {
     public class ProductPrestashopService : IProductPrestashop
@@ -24,6 +23,12 @@ namespace partner_aluro.Services
         {
             ProductPrestashop address = _context.ProductsPrestashop.Where(x => x.Id == id).FirstOrDefault();
             return address;
+        }
+
+        public List<ProductPrestashop> ListaProduktowPrestashop()
+        {
+            List<ProductPrestashop> lista = _context.ProductsPrestashop.ToList();
+            return lista;
         }
     }
 }

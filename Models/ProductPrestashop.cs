@@ -16,7 +16,7 @@ namespace partner_aluro.Models
         public int? id_supplier { get; set; } //FOREGING KEY
         public int? id_manufacturer { get; set; } //FOREGING KEY
         public int? id_category_default { get; set; } //FOREGING KEY
-        public int? id_shop_default { get; set; } 
+        public int? id_shop_default { get; set; }
         public int? id_tax_rules_group { get; set; }
         public byte? on_sale { get; set; }
 
@@ -48,7 +48,7 @@ namespace partner_aluro.Models
         public decimal? depth { get; set; }
         public decimal? weight { get; set; }
 
-        public int? out_of_stock {get; set;}
+        public int? out_of_stock { get; set; }
         public byte? quantity_discount { get; set; }
         public byte? customizable { get; set; }
         public byte? uploadable_files { get; set; }

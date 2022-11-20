@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MySqlConnector;
 using partner_aluro.Data;
 using partner_aluro.Models;
@@ -14,20 +15,129 @@ namespace partner_aluro.Controllers
         readonly IContactPrestashop _contactPrestashop;
         readonly IAddressPrestashop _addressPrestashop;
         readonly IProductPrestashop _productPrestashop;
+        readonly IProductNazwyPrestashop _productNazwyPrestashop;
+
+        readonly IProductService _productService;
 
         readonly ApplicationDbContext _context;
 
         public string con1 = "server=aluro.mysql.dhosting.pl;user=ieg3ga_aluro;database=ieza7a_aluropar;port=3306;password=Siiwy1a2!;Allow Zero Datetime=True";
-        public string con2 = "Server=aluro.mysql.dhosting.pl,3306;ID=iefi4n_aluro2;Password=3jjN9vEn7T;Database=euhi4i_aluroshop;Allow Zero Datetime=True"; //aktualna baza bierzaca
-        public ConnectPrestashopController(IContactPrestashop contactPrestashop, IAddressPrestashop addressPrestashop, IProductPrestashop productPrestashop, ApplicationDbContext context)
+        public string con2 = "server=aluro.mysql.dhosting.pl;user=iefi4n_aluro2;database=euhi4i_aluroshop;port=3306;password=3jjN9vEn7T;Allow Zero Datetime=True"; //aktualna baza bierzaca
+        public ConnectPrestashopController(IContactPrestashop contactPrestashop, IAddressPrestashop addressPrestashop, IProductPrestashop productPrestashop, ApplicationDbContext context, IProductNazwyPrestashop productNazwyPrestashop, IProductService productService)
         {
             _contactPrestashop = contactPrestashop;
             _addressPrestashop = addressPrestashop;
             _productPrestashop = productPrestashop;
 
 
+
             _context = context;
+            _productNazwyPrestashop = productNazwyPrestashop;
+            _productService = productService;
         }
+        public IActionResult DodajProduktyZPrestashop()
+        {
+
+            var listaProduktowDostepnychzPresta = _context.ProductsPrestashop.Where(x => x.quantity >= 1).ToList();
+
+            Product produkt = _context.Products.Where(x => x.Symbol == listaProduktowDostepnychzPresta[1].reference).FirstOrDefault();
+            if(produkt != null)
+            {
+                //produkt wystepuje i trzeba zaktualizowac dane
+                produkt.EAN13 = listaProduktowDostepnychzPresta[1].ean13;
+                produkt.Ilosc = listaProduktowDostepnychzPresta[1].quantity;
+                produkt.CenaProduktu = (decimal)listaProduktowDostepnychzPresta[1].price;
+                produkt.CenaProduktuDetal = (decimal)listaProduktowDostepnychzPresta[1].wholesale_price;
+                produkt.SzerokoscProduktu = (decimal)listaProduktowDostepnychzPresta[1].width;
+                produkt.WysokoscProduktu = (decimal)listaProduktowDostepnychzPresta[1].height;
+                produkt.GlebokoscProduktu = (decimal)listaProduktowDostepnychzPresta[1].depth;
+                produkt.WagaProduktu = (decimal)listaProduktowDostepnychzPresta[1].weight;
+                produkt.DataDodania = DateTime.Parse(listaProduktowDostepnychzPresta[1].date_add);
+                _productService.Update(produkt);
+
+            }
+            else
+            {
+                Product product = new Product();
+                product.CategoryId = 31;
+                product.Name = _context.ProductsNamePrestashop.Where(x => x.id_product == listaProduktowDostepnychzPresta[1].id_product).Where(x=>x.id_lang==1).FirstOrDefault().name;
+                product.Symbol = listaProduktowDostepnychzPresta[1].reference;
+                product.Description = _context.ProductsNamePrestashop.Where(x => x.id_product == listaProduktowDostepnychzPresta[1].id_product).Where(x => x.id_lang == 1).FirstOrDefault().description;
+
+                produkt.DataDodania = DateTime.Parse(listaProduktowDostepnychzPresta[1].date_add);
+                product.CenaProduktu = (decimal)listaProduktowDostepnychzPresta[1].price;
+                product.Pakowanie = 
+            }
+
+            //if(listaProduktowDostepnychzPresta[1].reference == )
+
+            //listaProduktowDostepnychzPresta[1];
+
+            //foreach (var prestaprodukt in listaProduktowDostepnychzPresta)
+            //{
+
+            //}
+
+
+
+            List<ProductNazwyPrestashop> NazwyProduktow = new List<ProductNazwyPrestashop>();
+
+            return View(NazwyProduktow);
+        }
+
+
+
+
+        public IActionResult ProductNazwyPrestashop()
+        {
+            List<ProductNazwyPrestashop> NazwyProduktow = new List<ProductNazwyPrestashop>();
+
+
+
+            using (MySqlConnection con = new MySqlConnection(con2))
+            {
+                con.Open();
+
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM ps_product_lang", con);
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    //fetch your data
+                    ProductNazwyPrestashop productNazwa = new ProductNazwyPrestashop();
+                    productNazwa.id_product = Convert.ToInt32(reader["id_product"]);
+                    productNazwa.id_shop = Convert.ToInt32(reader["id_shop"]);
+                    productNazwa.id_lang = Convert.ToInt32(reader["id_lang"]);
+                    productNazwa.description = Convert.ToString(reader["description"]);
+                    productNazwa.description_short = Convert.ToString(reader["description_short"]);
+                    productNazwa.link_rewrite = Convert.ToString(reader["link_rewrite"]);
+                    productNazwa.meta_description = Convert.ToString(reader["meta_description"]);
+                    productNazwa.meta_keywords = Convert.ToString(reader["meta_keywords"]);
+                    productNazwa.meta_title = Convert.ToString(reader["meta_title"]);
+                    productNazwa.name = Convert.ToString(reader["name"]);
+                    productNazwa.available_now = Convert.ToString(reader["available_now"]);
+                    productNazwa.available_later = Convert.ToString(reader["available_later"]);
+
+
+                    ProductNazwyPrestashop wystepuje = _context.ProductsNamePrestashop.Where(x => x.name == productNazwa.name).FirstOrDefault();
+                    if (wystepuje != null)
+                    {
+
+                    }
+                    else
+                    {
+
+                        NazwyProduktow.Add(productNazwa);
+
+                        _productNazwyPrestashop.Add(productNazwa);
+                    }
+                }
+                reader.Close();
+            }
+            return View(NazwyProduktow);
+        }
+
+
 
         public IActionResult ProductPrestashop()
         {
@@ -118,7 +228,7 @@ namespace partner_aluro.Controllers
         {
             List<AddresPrestashop> addresss = new List<AddresPrestashop>();
 
-            using (MySqlConnection con = new MySqlConnection(con1))
+            using (MySqlConnection con = new MySqlConnection(con2))
             {
                 con.Open();
 
@@ -169,8 +279,18 @@ namespace partner_aluro.Controllers
                     //address.newsletter_date_add = Convert.ToDateTime(reader["newsletter_date_add"]);
 
 
-                    addresss.Add(address);
-                    _addressPrestashop.Add(address);
+                    AddresPrestashop wystepuje = _context.AddressPrestashop.Where(x => x.id_address == address.id_address).FirstOrDefault();
+                    if (wystepuje != null)
+                    {
+
+                    }
+                    else
+                    {
+
+                        addresss.Add(address);
+                        _addressPrestashop.Add(address);
+                    }
+
                 }
                 reader.Close();
             }
@@ -180,7 +300,7 @@ namespace partner_aluro.Controllers
         {
             List<ContactPrestashop> persons = new List<ContactPrestashop>();
 
-            using (MySqlConnection con = new MySqlConnection(con1))
+            using (MySqlConnection con = new MySqlConnection(con2))
             {
                 con.Open();
 
@@ -223,8 +343,16 @@ namespace partner_aluro.Controllers
                     //person.newsletter_date_add = Convert.ToDateTime(reader["newsletter_date_add"]);
 
 
-                    persons.Add(person);
-                    _contactPrestashop.Add(person);
+                    ContactPrestashop wystepuje = _context.ContactsPrestashop.Where(x => x.Idcustommer == person.Idcustommer).FirstOrDefault();
+                    if (wystepuje != null)
+                    {
+
+                    }
+                    else
+                    {
+                        persons.Add(person);
+                        _contactPrestashop.Add(person);
+                    }
                 }
                 reader.Close();
             }

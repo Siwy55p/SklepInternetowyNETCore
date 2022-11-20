@@ -102,5 +102,11 @@ namespace partner_aluro.Services
             //_context.Entry(product).State = Microsoft.EntityFrameworkCore.EntityState.Added;
             _context.SaveChanges();
         }
+
+        public void Update(Product produkt)
+        {
+            _context.Products.Update(produkt);
+            _context.SaveChanges();
+        }
     }
 }

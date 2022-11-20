@@ -1,0 +1,38 @@
+﻿@model List<partner_aluro.Models.ProductNazwyPrestashop>
+
+
+@{
+    ViewData["Title"] = "Ustawienia Generowania XML";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+
+CONNECT TO PRESTASHOP
+
+
+<div class="row">
+    <div class="col">
+        Id
+    </div>
+    <div class="col">
+        Name
+    </div> <div class="col">
+        Description
+    </div>
+
+</div>
+@*@for (var i = 0; i < Model.Count; i++)*@
+@for (var i = 0; i < 20; i++)
+{
+    <div class="row">
+        <div class="col">
+            @Model[i].id_product
+        </div>
+        <div class="col">
+            @Model[i].name
+        </div> <div class="col">
+            @Model[i].description
+        </div>
+    </div>
+}
+<div>Ile nowych :  @Model.Count </div>
