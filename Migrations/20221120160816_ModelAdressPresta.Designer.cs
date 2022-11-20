@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using partner_aluro.Data;
 
@@ -11,9 +12,10 @@ using partner_aluro.Data;
 namespace partner_aluro.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221120160816_ModelAdressPresta")]
+    partial class ModelAdressPresta
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -157,91 +159,6 @@ namespace partner_aluro.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
-                });
-
-            modelBuilder.Entity("partner_aluro.Models.AddresPrestashop", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int?>("active")
-                        .HasColumnType("int");
-
-                    b.Property<string>("address1")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("address2")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("alias")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("city")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("company")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("date_add")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("date_upd")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("deleted")
-                        .HasColumnType("int");
-
-                    b.Property<string>("dni")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("firstname")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("id_address")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("id_country")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("id_customer")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("id_manufacturer")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("id_state")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("id_supplier")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("id_warehouse")
-                        .HasColumnType("int");
-
-                    b.Property<string>("lastname")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("other")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("phone")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("phone_mobile")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("postcode")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("vat_number")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AddressPrestashop");
                 });
 
             modelBuilder.Entity("partner_aluro.Models.Adress1rozliczeniowy", b =>

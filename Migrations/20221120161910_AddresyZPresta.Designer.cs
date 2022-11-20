@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using partner_aluro.Data;
 
@@ -11,9 +12,10 @@ using partner_aluro.Data;
 namespace partner_aluro.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221120161910_AddresyZPresta")]
+    partial class AddresyZPresta
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -167,76 +169,89 @@ namespace partner_aluro.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int?>("active")
+                    b.Property<int>("active")
                         .HasColumnType("int");
 
                     b.Property<string>("address1")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("address2")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("alias")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("city")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("company")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("date_add")
+                    b.Property<DateTime>("date_add")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("date_upd")
+                    b.Property<DateTime>("date_upd")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("deleted")
+                    b.Property<int>("deleted")
                         .HasColumnType("int");
 
                     b.Property<string>("dni")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("firstname")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("id_address")
+                    b.Property<int>("id_address")
                         .HasColumnType("int");
 
-                    b.Property<int?>("id_country")
+                    b.Property<int>("id_country")
                         .HasColumnType("int");
 
-                    b.Property<int?>("id_customer")
+                    b.Property<int>("id_customer")
                         .HasColumnType("int");
 
-                    b.Property<int?>("id_manufacturer")
+                    b.Property<int>("id_manufacturer")
                         .HasColumnType("int");
 
-                    b.Property<int?>("id_state")
+                    b.Property<int>("id_state")
                         .HasColumnType("int");
 
-                    b.Property<int?>("id_supplier")
+                    b.Property<int>("id_supplier")
                         .HasColumnType("int");
 
-                    b.Property<int?>("id_warehouse")
+                    b.Property<int>("id_warehouse")
                         .HasColumnType("int");
 
                     b.Property<string>("lastname")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("other")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("phone")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("phone_mobile")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("postcode")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("vat_number")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

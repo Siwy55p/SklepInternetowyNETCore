@@ -261,4 +261,8 @@ void AddScoped()
 
     builder.Services.AddScoped<INewsletter, NewsletterService>();
 
+    builder.Services.AddScoped<IContactPrestashop, ContactPrestashopService>();
+
+    builder.Services.AddScoped<IAddressPrestashop, AddressPrestashopService>();
+
 }
