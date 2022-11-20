@@ -22,7 +22,7 @@ namespace partner_aluro.Services
 
         public AddresPrestashop Get(int id)
         {
-            AddresPrestashop address = new AddresPrestashop(); /*_context.AddressPrestashop.Where(x=>x.)*/
+            AddresPrestashop address = _context.AddressPrestashop.Where(x => x.Id == id).FirstOrDefault();
             return address;
         }
     }
