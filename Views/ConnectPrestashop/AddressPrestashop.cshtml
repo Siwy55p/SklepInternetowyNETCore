@@ -1,0 +1,36 @@
+﻿@model List<partner_aluro.Models.AddresPrestashop>
+
+
+@{
+    ViewData["Title"] = "Ustawienia Generowania XML";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+
+CONNECT TO PRESTASHOP
+
+
+<div class="row">
+    <div class="col">
+        Id
+    </div>
+    <div class="col">
+        FirsName
+    </div> <div class="col">
+        LastName
+    </div>
+
+</div>
+@for (var i = 0; i < 6; i++)
+{
+    <div class="row">
+        <div class="col">
+            @Model[i].Id
+        </div>
+        <div class="col">
+            @Model[i].firstname
+        </div> <div class="col">
+            @Model[i].company
+        </div>
+    </div>
+}

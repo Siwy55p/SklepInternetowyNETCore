@@ -10,13 +10,76 @@ namespace partner_aluro.Controllers
     public class ConnectPrestashopController : Controller
     {
         readonly IContactPrestashop _contactPrestashop;
+        readonly IAddressPrestashop _addressPrestashop;
 
-        public ConnectPrestashopController(IContactPrestashop contactPrestashop)
+        public ConnectPrestashopController(IContactPrestashop contactPrestashop, IAddressPrestashop addressPrestashop)
         {
             _contactPrestashop = contactPrestashop;
+            _addressPrestashop = addressPrestashop; 
         }
+        public IActionResult AddressPrestashop()
+        {
+            List<AddresPrestashop> addresss = new List<AddresPrestashop>();
 
-        public IActionResult Index()
+            using (MySqlConnection con = new MySqlConnection("server=aluro.mysql.dhosting.pl;user=ieg3ga_aluro;database=ieza7a_aluropar;port=3306;password=Siiwy1a2!;Allow Zero Datetime=True"))
+            {
+                con.Open();
+
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM ps_address", con);
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    //fetch your data
+                    AddresPrestashop address = new AddresPrestashop();
+                    address.id_address = Convert.ToInt32(reader["id_address"]);
+                    address.alias = reader["alias"].ToString();
+                    address.company = reader["company"].ToString();
+
+                    address.id_country = Convert.ToInt32(reader["id_country"]);
+                    address.id_state = Convert.ToInt32(reader["id_state"]);
+                    address.id_customer = Convert.ToInt32(reader["id_customer"]);
+                    address.id_manufacturer = Convert.ToInt32(reader["id_manufacturer"]);
+                    address.id_supplier = Convert.ToInt32(reader["id_supplier"]);
+                    address.id_warehouse = Convert.ToInt32(reader["id_warehouse"]);
+
+                    address.company = reader["company"].ToString();
+                    address.lastname = reader["lastname"].ToString();
+                    address.firstname = reader["firstname"].ToString();
+                    address.address1 = reader["address1"].ToString();
+                    address.address2 = reader["address2"].ToString();
+                    address.postcode = reader["postcode"].ToString();
+
+
+                    address.other = reader["other"].ToString();
+                    address.phone = reader["phone"].ToString();
+                    address.phone_mobile = reader["phone_mobile"].ToString();
+                    address.vat_number = reader["vat_number"].ToString();
+                    address.dni = reader["dni"].ToString();
+
+
+                    address.date_add = Convert.ToDateTime(reader["date_add"]);
+                    address.date_upd = Convert.ToDateTime(reader["date_upd"]);
+
+
+                    address.active = Convert.ToInt32(reader["active"]);
+                    address.deleted = Convert.ToInt32(reader["deleted"]);
+
+                    //address.birthday = Convert.ToDateTime(reader["birthday"]);
+
+                    //address.optin = Convert.ToInt32(reader["optin"]);
+
+                    //address.newsletter_date_add = Convert.ToDateTime(reader["newsletter_date_add"]);
+
+
+                    addresss.Add(address);
+                    _addressPrestashop.Add(address);
+                }
+                reader.Close();
+            }
+            return View(addresss);
+        }
+        public IActionResult UsersPrestahop()
         {
             List<ContactPrestashop> persons = new List<ContactPrestashop>();
 
