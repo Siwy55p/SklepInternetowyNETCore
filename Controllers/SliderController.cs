@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using partner_aluro.Data;
 using partner_aluro.Migrations;
@@ -8,6 +9,7 @@ using partner_aluro.Services.Interfaces;
 
 namespace partner_aluro.Controllers
 {
+    [Authorize]
     public class SliderController : Controller
     {
         private readonly ApplicationDbContext _context;

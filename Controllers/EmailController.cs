@@ -9,9 +9,11 @@ using partner_aluro.Services.Interfaces;
 using System.Reflection.Metadata;
 using partner_aluro.Core;
 using partner_aluro.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace partner_aluro.Controllers
 {
+    [Authorize]
     public class EmailController : Controller
     {
         private readonly IEmailService _emailService;

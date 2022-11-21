@@ -1,4 +1,5 @@
 ﻿using DeepL;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -10,6 +11,7 @@ using System.Resources.NetStandard;
 
 namespace partner_aluro.Controllers
 {
+    [Authorize]
     public class InicializerProductCategory : Controller
     {
         ApplicationDbContext _context;

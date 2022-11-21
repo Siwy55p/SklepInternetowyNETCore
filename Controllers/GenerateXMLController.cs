@@ -6,9 +6,11 @@ using System.Text;
 using partner_aluro.Data;
 using partner_aluro.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace partner_aluro.Controllers
 {
+    [Authorize]
     public class GenerateXMLController : Controller
     {
 

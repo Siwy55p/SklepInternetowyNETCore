@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using partner_aluro.Data;
 using partner_aluro.Models;
 
 namespace partner_aluro.Controllers
 {
+    [Authorize]
     public class ImageController : Controller
     {
         private readonly ApplicationDbContext _context;

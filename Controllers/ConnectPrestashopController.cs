@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MySqlConnector;
 using partner_aluro.Data;
@@ -12,6 +13,7 @@ using System.Globalization;
 //"Prestashop": "Server=aluro.mysql.dhosting.pl,3306;ID=ieg3ga_aluro;Password=Siiwy1a2!;Database=ieza7a_aluropar",
 namespace partner_aluro.Controllers
 {
+    [Authorize]
     public class ConnectPrestashopController : Controller
     {
         readonly IContactPrestashop _contactPrestashop;

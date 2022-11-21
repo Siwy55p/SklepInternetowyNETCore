@@ -1,5 +1,6 @@
 ﻿using iTextSharp.text.pdf;
 using iTextSharp.text.pdf.codec;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Build.Execution;
@@ -14,7 +15,7 @@ using System.Web;
 
 namespace partner_aluro.Controllers
 {
-
+    [Authorize]
     public class NewsletterController : Controller
     {
         public readonly INewsletter _newsletter;

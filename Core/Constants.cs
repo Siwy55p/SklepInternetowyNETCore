@@ -20,6 +20,24 @@ namespace partner_aluro.Core
             public const string RequireManager = "RequireManager";
         }
 
+        public static async Task<byte[]> DownloadFile(string url)
+        {
+            using (var client = new HttpClient())
+            {
+
+                using (var result = await client.GetAsync(url))
+                {
+                    if (result.IsSuccessStatusCode)
+                    {
+
+                        return await result.Content.ReadAsByteArrayAsync();
+                    }
+
+                }
+            }
+            return null;
+        }
+
         public static NumberFormatInfo myNumberFormatInfo = new CultureInfo("pl-PL", false).NumberFormat;
 
         public static Kurs Euro { get; set; } = new Kurs();
