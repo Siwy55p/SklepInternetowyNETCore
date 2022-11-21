@@ -1,12 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using NuGet.Protocol;
 using System.Xml;
-using Microsoft.AspNetCore.Hosting;
 using System.Text;
 using partner_aluro.Data;
 using partner_aluro.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
+using System.Xml.Serialization;
+using partner_aluro.Services.Interfaces;
+using System.Net;
 
 namespace partner_aluro.Controllers
 {
@@ -14,20 +15,125 @@ namespace partner_aluro.Controllers
     public class GenerateXMLController : Controller
     {
 
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public readonly IWebHostEnvironment _webHostEnvironment;
+        public readonly IImageService _imageService;
+
         public readonly ApplicationDbContext _content;
 
-        public GenerateXMLController(IWebHostEnvironment hostEnvironment, ApplicationDbContext content)
+        public GenerateXMLController(IWebHostEnvironment hostEnvironment, ApplicationDbContext content, IImageService imageService)
         {
             _webHostEnvironment = hostEnvironment;
             _content = content;
+            _imageService = imageService;
         }
         public static string _webRootPath = "http:\\\\partneralluro.hostingasp.pl\\";
 
         public static string _adresStrony = "http:\\\\partneralluro.hostingasp.pl";
 
         //https://partneralluro.hostingasp.pl/modules/nvn_export_products/download/aluro_products_export_ldWd8HWmUY.xml
+
+        //http://www.partner.aluro.pl/modules/nvn_export_products/download/aluro_products_export_ldWd8HWmUY.xml
+        public async Task<IActionResult> DeserializeXML(string url)
+        {
+            url = "http://www.partner.aluro.pl/modules/nvn_export_products/download/aluro_products_export_ldWd8HWmUY.xml";
+
+            var filepath = url;
+
+            //XmlSerializer serializer = new XmlSerializer(typeof(ExportProducts));
+            //WebClient wc = new WebClient();
+            //using (Stream fs = wc.OpenWrite(url))
+            //{
+            //    var obj = (ExportProducts)serializer.Deserialize(fs);
+            //    return View(obj.Product.Images);
+            //}
+
+            using (var client = new HttpClient())
+            {
+
+                var content = await client.GetStreamAsync(url);
+                //var contents = await client.GetStreamAsync("http://www.partner.aluro.pl/modules/nvn_export_products/download/aluro_products_export_ldWd8HWmUY.xml");
+
+                XmlSerializer serializer = new XmlSerializer(typeof(Export_products));
+                Export_products obj = (Export_products)serializer.Deserialize(content);
+
+                //1215 w Images Mozna usuwac
+                char[] delimiterChars = { ',' };
+
+                //src = "~/images/produkty/@Model.Symbol/@Model.ImageUrl"
+                for(int x = 178; x < obj.Product.Count(); x++)
+                //foreach (var item in obj.Product)
+                {
+                    string text = obj.Product[x].Images;
+                    string[] words = text.Split(delimiterChars);
+
+                    for(int i = 0; i < words.Count(); i++)
+                    {
+
+                        using (WebClient client2 = new WebClient())
+                        {
+                            string webRootPath = _webHostEnvironment.WebRootPath;
+                            string path0 = "images\\produkty\\" + obj.Product[x].Symbol + "\\";
+                            var uploadsFolder = Path.Combine(webRootPath, "images\\produkty\\" + obj.Product[x].Symbol+"\\");
+                            if (!Directory.Exists(uploadsFolder))
+                            {
+                                Directory.CreateDirectory(uploadsFolder);
+                            }
+
+                            var dynamicFileName = obj.Product[x].Symbol + "_" + i + "_.jpg";
+
+
+                            client2.DownloadFileAsync(new Uri(words[i]), uploadsFolder + dynamicFileName);
+
+                            ImageModel imgModel = new ImageModel();
+
+                            var cont = _content.Products.Where(p => p.Symbol == obj.Product[x].Symbol).FirstOrDefault()?.ProductId;
+                            if(cont != null)
+                            { 
+
+                                imgModel = new()
+                                {
+                                    path = path0,
+                                    fullPath = path0 + dynamicFileName,
+                                    Opis = obj.Product[x].Symbol,
+                                    kolejnosc = i,
+                                    Tytul = obj.Product[x].Product_name,
+                                    ImageName = dynamicFileName,
+                                    ProductId = cont,
+                                    ProductImagesId = cont,
+
+                                };
+                            }else
+                            {
+                                imgModel = new()
+                                {
+                                    path = path0,
+                                    fullPath = path0 + dynamicFileName,
+                                    Opis = obj.Product[x].Symbol,
+                                    kolejnosc = i,
+                                    Tytul = obj.Product[x].Product_name,
+                                    ImageName = dynamicFileName
+                                };
+                            }
+                        _imageService.Add(imgModel);
+
+                        }
+
+                    }
+
+                }
+
+
+
+                return View(obj);
+
+            }
+
+
+
+            return View();
+        }
+
 
         [Route("modules/nvn_export_products/download/")]
         public async Task<IActionResult> IndexAsync()
@@ -146,11 +252,11 @@ namespace partner_aluro.Controllers
                 if (produkty[i].Ilosc > 8)
                 {
                     CDatastoc = doc.CreateCDataSection("8");
-                }else if(produkty[i].Ilosc < 8)
+                } else if (produkty[i].Ilosc < 8)
                 {
                     CDatastoc = doc.CreateCDataSection(produkty[i].Ilosc.ToString());
                 }
-                
+
                 //stock
                 XmlNode stockNode = doc.CreateElement("stock");
                 stockNode.AppendChild(CDatastoc);
@@ -340,7 +446,7 @@ namespace partner_aluro.Controllers
             GenerateXML generate = new GenerateXML()
             {
                 path = _webRootPath,
-                adresStrony= _adresStrony,
+                adresStrony = _adresStrony,
             };
 
             return View(generate);
@@ -354,6 +460,53 @@ namespace partner_aluro.Controllers
 
             return RedirectToAction("Ustawienia");
 
+        }
+
+
+        [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
+        private async Task UploadFile2Async(Product product)
+        {
+            var files = HttpContext.Request.Form.Files;
+
+            if (product.ImageUrl != "" && files.Count > 1) //To oznacza ze frontowy obrazek został dodany
+            {
+                string webRootPath = _webHostEnvironment.WebRootPath;
+
+                for (int i = 1; i <= files.Count; i++)
+                {
+                    //Save image to wwwroot/image
+                    string path0 = "images\\produkty\\";
+                    var uploadsFolder = Path.Combine(webRootPath, "images\\produkty\\" + product.Symbol);
+
+                    if (!Directory.Exists(uploadsFolder))
+                    {
+                        Directory.CreateDirectory(uploadsFolder);
+                    }
+
+                    var extension = Path.GetExtension(files[i].FileName);
+                    var dynamicFileName = product.Symbol + "_" + i + "_" + extension;
+
+                    using (var filesStream = new FileStream(Path.Combine(uploadsFolder, dynamicFileName), FileMode.Create))
+                    {
+                        files[i].CopyTo(filesStream);
+                    }
+
+                    //add product Image for new product
+                    ImageModel imgModel = new()
+                    {
+                        path = path0 + product.Symbol,
+                        kolejnosc = i,
+                        Tytul = product.Name,
+                        ImageName = dynamicFileName,
+                        ProductId = product.ProductId
+                    };
+
+                    product.Product_Images.Add(imgModel);
+
+                    _imageService.Add(imgModel);
+
+                }
+            }
         }
     }
 }

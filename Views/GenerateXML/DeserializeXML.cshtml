@@ -1,0 +1,24 @@
+﻿@model Export_products
+@{
+    ViewData["Title"] = "Lista kategori";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+<div class=" row">@ViewData["urlImage"]</div>
+
+<div class=" row">
+    @ViewData["urlImage2"] = words[1];</div>
+
+<div class="row">
+    <div class="col border-1">Symbol</div>
+    <div class="col border-1">Product_name </div>
+    <div class="col border-1">Images </div>
+</div>
+@foreach (var item in @Model.Product)
+{
+    <div class="row">
+        <div class="col border-1">@item.Symbol</div>
+        <div class="col border-1">@item.Product_name </div>
+        <div class="col border-1">@item.Images </div>
+    </div>
+}
