@@ -13,6 +13,8 @@
 
 <form class="needs-validation" asp-action="Edit" asp-route-id="@Model.ProductId" asp-controller="Product" class="form-horizontal" method="post" enctype="multipart/form-data">
         <div class="row g-0">
+
+            <button type="submit" class="btn btn-success">Zapisz zmiany</button>
             <div class="col-md-6 border-end">
                 @Html.HiddenFor(h=>Model.ProductId)
                 @Html.ValidationSummary()

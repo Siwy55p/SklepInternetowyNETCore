@@ -2,6 +2,7 @@
 body,
 button {
   font-family: "Inter", sans-serif;
+  font-size: 14px;
 }
 :root {
   --offcanvas-width: 200px;

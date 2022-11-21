@@ -7,17 +7,10 @@ using partner_aluro.Models;
 using partner_aluro.Services.Interfaces;
 using partner_aluro.ViewModels;
 using SmartBreadcrumbs.Attributes;
-using System;
 using System.Data;
 using System.Diagnostics;
-using System.Security.Claims;
-
-using ServiceReference1;
-using partner_aluro.Enums;
-using System.Runtime.CompilerServices;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
-using partner_aluro.Services;
 
 namespace partner_aluro.Controllers
 {
