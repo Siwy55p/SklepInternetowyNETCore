@@ -21,9 +21,11 @@
 
                 @if (kategorie.Aktywny == true)
                 {
-                    <li class="nav-link list-group-item list-group-item-action p-2">
-                        <a class="@activecat text-dark text-decoration-none" asp-controller="Category" asp-route-KategoriaId="@kategorie.CategoryId" asp-action="Lista1">@language.Getkey(@kategorie.Name)</a>
-                    </li>
+                    <a class="@activecat kategoria_class_menu text-dark text-decoration-none" asp-controller="Category" asp-route-KategoriaId="@kategorie.CategoryId" asp-action="Lista1">
+                        <li class=" p-2 ">
+                            @language.Getkey(@kategorie.Name)
+                        </li>
+                    </a>
 
                     @foreach (var kategorie2 in Model)
                     {
@@ -37,12 +39,13 @@
 
                         @if (kategorie2.ParentId == kategorie.CategoryId && kategorie2.ParentId != 0)
                         {
+                            <a class="@activecat2 kategoria_class_menu text-dark text-decoration-none" href="@Url.Action("Lista1","Category", new {KategoriaId = kategorie2.CategoryId})">
 
-                            <li class="nav-link list-group-item list-group-item-action px-4">
-                                <a class="@activecat2 text-dark text-decoration-none" href="@Url.Action("Lista1","Category", new {KategoriaId = kategorie2.CategoryId})">
-                                @language.Getkey(@kategorie2.Name)
-                                </a>
-                            </li>
+                                <li class="  px-4">
+                                            @language.Getkey(@kategorie2.Name)
+                              
+                                </li>
+                            </a>
                         }
                     }
                 }

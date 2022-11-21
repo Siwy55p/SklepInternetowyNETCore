@@ -103,6 +103,11 @@ namespace partner_aluro.Controllers
                 }
                 //insert record
 
+                //migajace
+                //przenika
+
+
+
                 _context.Add(product.product_Image);
                 await _context.SaveChangesAsync();
 
