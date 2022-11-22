@@ -28,16 +28,49 @@
                     </div>
                     <div class="col d-flex justify-content-end" style="max-width:110px">
                         <!-- Select -->
-                        <div class="dropdown">
-                            <button class="sortuj dropdown-toggle" type="button" id="dropdownMenuButtonSort" data-bs-toggle="dropdown" aria-expanded="false">
-                                @language.Getkey("Sortuj")
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonSort">
-                                <li class="dropdown-item link-dark">@Html.ActionLink(@language.Getkey("Alfabetycznie od A do Z"), "Lista", "Category", new { page = 1, szukanaNazwa=ViewData["szukanaNazwa"], sort=1 } )</li>
-                                <li class="dropdown-item link-dark">@Html.ActionLink(language.Getkey("Alfabetycznie od Z do A"), "Lista", "Category", new { page = 1, szukanaNazwa=ViewData["szukanaNazwa"], sort=2 } )</li>
-                                <li class="dropdown-item link-dark">@Html.ActionLink(language.Getkey("Symbol od najmniejszej do największej"), "Lista", "Category", new { page = 1, szukanaNazwa=ViewData["szukanaNazwa"], sort=3 } )</li>
-                                <li class="dropdown-item link-dark">@Html.ActionLink(language.Getkey("Symbol od największej do najmniejszej"), "Lista", "Category", new { page = 1, szukanaNazwa=ViewData["szukanaNazwa"], sort=4 } )</li>
-                            </ul>
+                        <div class="col d-flex justify-content-end" style="max-width:110px">
+                            <!-- Select -->
+                            <div class="dropdown">
+                                <button class="sortuj dropdown-toggle" type="button" id="dropdownMenuButtonSort" data-bs-toggle="dropdown" aria-expanded="false">
+                                    @language.Getkey("Sortuj")
+                                </button>
+                                @{
+                                    int sort = 0;
+
+                                    string activecat1 = "";
+                                    string activecat2 = "";
+                                    string activecat3 = "";
+                                    string activecat4 = "";
+
+                                    @if (ViewData["sort"] != null)
+                                    {
+                                        sort = (int)ViewData["sort"];
+                                    }
+                                }
+                                @if (sort == 1)
+                                {
+                                    activecat1 = "activecat";
+                                }
+                                else if (sort == 2)
+                                {
+                                    activecat2 = "activecat";
+                                }
+                                else if (sort == 3)
+                                {
+                                    activecat3 = "activecat";
+                                }
+                                else if (sort == 4)
+                                {
+                                    activecat4 = "activecat";
+                                }
+
+                                <ul class="dropdown-menu text-decoration-none">
+                                    <li class="@activecat1 kategoria_class_menu ">@Html.ActionLink(language.Getkey("Alfabetycznie od A do Z"), "Lista", "Category", new { page = 1, szukanaNazwa=ViewData["szukanaNazwa"], sort=1 } )</li>
+                                    <li class="@activecat2 kategoria_class_menu ">@Html.ActionLink(language.Getkey("Alfabetycznie od Z do A"), "Lista", "Category", new { page = 1, szukanaNazwa=ViewData["szukanaNazwa"], sort=2 } )</li>
+                                    <li class="@activecat3 kategoria_class_menu ">@Html.ActionLink(language.Getkey("Symbol od najmniejszej do największej"), "Lista", "Category", new { page = 1, szukanaNazwa=ViewData["szukanaNazwa"], sort=3 } )</li>
+                                    <li class="@activecat4 kategoria_class_menu ">@Html.ActionLink(language.Getkey("Symbol od największej do najmniejszej"), "Lista", "Category", new { page = 1, szukanaNazwa=ViewData["szukanaNazwa"], sort=4 } )</li>
+                                </ul>
+                            </div>
                         </div>
 
 
