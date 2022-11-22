@@ -21,7 +21,7 @@
 
                 @if (kategorie.Aktywny == true)
                 {
-                    <a class="@activecat kategoria_class_menu text-dark text-decoration-none" asp-controller="Category" asp-route-KategoriaId="@kategorie.CategoryId" asp-action="Lista1">
+                    <a class="@activecat kategoria_class_menu" asp-controller="Category" asp-route-KategoriaId="@kategorie.CategoryId" asp-action="Lista1">
                         <li class=" p-2 ">
                             @language.Getkey(@kategorie.Name)
                         </li>
@@ -31,7 +31,7 @@
                     {
                         if (@kategorie2.Name == ViewData["szukanaNazwa"])
                         {
-                            activecat2 = "activecat2";
+                            activecat2 = "activecat";
                         }else
                         {
                             activecat2 = "";
@@ -39,9 +39,9 @@
 
                         @if (kategorie2.ParentId == kategorie.CategoryId && kategorie2.ParentId != 0)
                         {
-                            <a class="@activecat2 kategoria_class_menu text-dark text-decoration-none" href="@Url.Action("Lista1","Category", new {KategoriaId = kategorie2.CategoryId})">
+                            <a class="@activecat2 kategoria_class_menu" href="@Url.Action("Lista1","Category", new {KategoriaId = kategorie2.CategoryId})">
 
-                                <li class="  px-4">
+                                <li class=" p-2 px-4">
                                             @language.Getkey(@kategorie2.Name)
                               
                                 </li>

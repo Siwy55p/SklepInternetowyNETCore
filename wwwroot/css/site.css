@@ -190,14 +190,19 @@ a.active {
             border: 1px solid black;
         }
 
-
-.kategoria_class_menu, .kategoria_class_menu:visited, .kategoria_class_menu:focus {
-    background-color: #fcfcfc !important;
+/*
+.kategoria_class_menu, .kategoria_class_menu:visited, .kategoria_class_menu:focus {*/
+.kategoria_class_menu {
     outline: none !important;
     box-shadow: none;
     color: black;
-    border: 1px solid black;
-    heaight: 40px;
+    border: 1px solid white;
+    min-height: 40px;
+    justify-content: center;
+    justify-items: center;
+    vertical-align: middle;
+    text-decoration: none;
+    border: 1px solid #dee2e6;
 }
     .kategoria_class_menu:hover {
         background-color: #6e1a1a !important;
@@ -205,23 +210,22 @@ a.active {
         outline: none !important;
         box-shadow: none;
         border: 1px solid black;
-        heaight: 40px;
+        font-weight: 600;
     }
 
 /*menu lefe kategorie*/
 .activecat {
-    background-color: #fcfcfc !important;
-    outline: none !important;
-    box-shadow: none;
-    color: black;
-    border: 1px solid black;
-}
 
-    .activecat2 {
+    font-weight: 600;
+    background-color: #6e1a1a !important;
+    color: white;
+}
+/*
+.activecat2 {
     font-size: 15px;
     font-weight: 700;
     background-color: green;
-}
+}*/
 /*menu lefe kategorie*/
 
 /*header menu menu nav bar*/
