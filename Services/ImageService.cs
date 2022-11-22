@@ -57,7 +57,7 @@ namespace partner_aluro.Services
 
 
 
-            if (imageModel != null)
+            if (imageModel != null && product.ImageUrl !=null)
             {
                 //delete image from wwwroot/images
                 var imagePath = Path.Combine(imageModel.path, imageModel.ImageName);
