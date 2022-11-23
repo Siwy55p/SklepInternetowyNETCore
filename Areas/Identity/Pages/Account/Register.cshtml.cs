@@ -173,8 +173,7 @@ namespace partner_aluro.Areas.Identity.Pages.Account
 
             [Required(ErrorMessage = "NIP jest wymagany.")]
             [Display(Name = "NIP:")]
-            [StringLength(10, ErrorMessage = "Proszę wprowadzic poprawy nr NIP składający się z 10-ciu znaków.", MinimumLength = 10)]
-            [RegularExpression("^([0-9]{10})$", ErrorMessage = "Nieprawidłowy nr NIP.")]
+            [StringLength(13, ErrorMessage = "Proszę wprowadzic poprawy nr NIP składający się z 10-ciu znaków.", MinimumLength = 9)]
             public string NIP { get; set; }
 
             public bool Newsletter { get; set; }

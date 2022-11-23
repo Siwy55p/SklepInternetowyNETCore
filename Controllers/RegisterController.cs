@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore;
 using partner_aluro.Data;
+using partner_aluro.Migrations;
 using partner_aluro.Models;
 using partner_aluro.Services.Interfaces;
 using System.Globalization;
@@ -108,17 +109,45 @@ namespace partner_aluro.Controllers
         [HttpPost]
         public async Task<List<string>> SprawdzNIPAsync(string? Vat = null)
         {
+            var komunikat = "Brak danych";
+            var nazwa_firmy = "Nie znaleziono takiej firmy";
+            var adres = "";
+            var miasto = "";
+            var kod_pocztowy = "";
+
+            EuropeanVatInformation companyEuropa = EuropeanVatInformation.Get(Vat);
+
+            if(companyEuropa != null)
+            {
+                komunikat = "Aktywne";
+                nazwa_firmy = companyEuropa.Name;
+                adres = companyEuropa.Address;
+                miasto = companyEuropa.CountryCode;
+                kod_pocztowy = "";
+
+
+                List<string> list1 = new List<string>();
+
+                list1.Add(komunikat);
+                list1.Add(nazwa_firmy);
+                list1.Add(adres);
+                list1.Add(miasto);
+                list1.Add(kod_pocztowy);
+
+
+                return list1;
+            }
 
             CompanyModel _model = new CompanyModel();
 
             _model.Vat = Vat;
             _model = await RegonService.GetCompanyDataByNipAsync(_model.Vat);
 
-            var komunikat = "Brak danych";
-            var nazwa_firmy = "Nie znaleziono takiej firmy";
-            var adres = "";
-            var miasto = "";
-            var kod_pocztowy = "";
+            komunikat = "Brak danych";
+            nazwa_firmy = "Nie znaleziono takiej firmy";
+            adres = "";
+            miasto = "";
+            kod_pocztowy = "";
 
             if (_model.Errors.Count > 0)
             {
