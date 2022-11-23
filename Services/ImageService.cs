@@ -42,8 +42,19 @@ namespace partner_aluro.Services
                 //insert record
                 imageModel.fullPath = path + "\\" + fileName + extension;
                 imageModel.path = path;
-                _context.Add(imageModel);
-                await _context.SaveChangesAsync();
+
+
+
+                var image = _context.Images.Where(x => x.ImageName == imageModel.ImageName).FirstOrDefault();
+                if (image != null)
+                {
+                    _context.Images.Update(image);
+                }
+                else
+                {
+                    _context.Add(imageModel);
+                    await _context.SaveChangesAsync();
+                }
 
                 return wwwRootPath;
             }
@@ -115,8 +126,18 @@ namespace partner_aluro.Services
 
                 product.product_Image.fullPath = path0 + product.Symbol + "\\" + uniqueFileName;
 
-                _context.Add(product.product_Image);
-                await _context.SaveChangesAsync();
+
+                var image = _context.Images.Where(x => x.ImageName == product.product_Image.ImageName).FirstOrDefault();
+                if (image != null)
+                {
+                    _context.Images.Update(image);
+                }
+                else
+                {
+                    _context.Add(product.product_Image);
+                    await _context.SaveChangesAsync();
+                }
+
 
                 return uniqueFileName;
             }
@@ -161,6 +182,30 @@ namespace partner_aluro.Services
                 {
 
                 }
+            }
+        }
+
+        public ImageModel Get(string name)
+        {
+            var image = _context.Images.Where(x => x.ImageName == name).FirstOrDefault();
+            if (image != null)
+            {
+                return image;
+            }
+            else
+            {
+
+                return null;
+            }
+        }
+
+        public void Update(ImageModel imageModel)
+        {
+            var content = _context.Images.Where(x => x.ImageId == imageModel.ImageId).FirstOrDefault();
+            if( content != null)
+            {
+                _context.Images.Update(content);
+                _context.SaveChanges();
             }
         }
     }

@@ -73,6 +73,10 @@
 <div>
     <a asp-action="Index">Wróc do listy</a>
 </div>
+<div>
+
+    <a asp-action="Delete" asp-route-id="@Model.ImageId">Delete</a>
+</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

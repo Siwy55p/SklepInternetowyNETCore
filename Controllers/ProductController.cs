@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using DeepL;
 using System.Resources.NetStandard;
 using System.Collections;
+using Microsoft.Extensions.Hosting;
 
 namespace partner_aluro.Controllers
 {
@@ -73,7 +74,8 @@ namespace partner_aluro.Controllers
                 return NotFound();
             }
 
-            ImageModel front = _context.Images.FirstOrDefault(x => x.ImageName == "Front_" + product.Symbol + ".jpg");
+            string imageName = "Front_" + product.Symbol + ".jpg";
+            ImageModel front = _imageService.Get(imageName);
             if (front != null)
             {
                 product.ImageUrl = front.ImageName;
@@ -89,7 +91,18 @@ namespace partner_aluro.Controllers
                 product.ImageUrl = await _imageService.CreateImageAddAsync(product);
             }
 
-            UploadFile2Async(product);
+            await UploadFile2Async(product);
+
+
+            if ((product.ImageUrl == null || product.ImageUrl == "") && product.Product_Images != null)  //Jesli nie ma obrazka glownego a jest obrazk [0] jako dodatkowy do wysietlenia , to wybierze ten obrazek i ustaw jako glowny.
+            {
+                if (product.Product_Images[0].fullPath != "")
+                {
+                    product.product_Image = product.Product_Images[0];
+                    product.ImageUrl = product.Product_Images[0].ImageName;
+                }
+            }
+
 
             ModelState.Remove("product_Image.path");
             ModelState.Remove("product_Image.ImageName");
@@ -98,8 +111,10 @@ namespace partner_aluro.Controllers
             {
                 try
                 {
-                    _context.Update(product);
-                    await _context.SaveChangesAsync();
+                    await _ProductService.UpdateAsync(product);
+                    //_context.Update(product);
+                    //await _ProductService.Up
+                    //await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -116,8 +131,7 @@ namespace partner_aluro.Controllers
         {
             ViewBag.Category = GetCategories();
 
-            Product product = new();
-
+            Product product = new Product();
             //product.Cats = _ProductService.GetListCategory();
 
             return View(product);
@@ -266,7 +280,7 @@ namespace partner_aluro.Controllers
 
             product.ProductImagesId = product.product_Image.ImageId;
 
-            UploadFile2Async(product);
+            await UploadFile2Async(product);
 
             //var id = _ProductService.AddProduct(product);//wazne aby przypisac
             //var produkt = _unitOfWorkProduct.Product.GetProductId(product.ProductId);
@@ -313,11 +327,11 @@ namespace partner_aluro.Controllers
         {
             var files = HttpContext.Request.Form.Files;
 
-            if (product.ImageUrl != "" && files.Count > 1) //To oznacza ze frontowy obrazek został dodany
+            if (files.Count > 1 && product.ImageUrl != "") //To oznacza ze frontowy obrazek został dodany
             {
                 string webRootPath = _webHostEnvironment.WebRootPath;
 
-                for (int i = 1; i <= files.Count; i++)
+                for (int i = 1; i < files.Count; i++)
                 {
                     //Save image to wwwroot/image
                     string path0 = "images\\produkty\\";
@@ -349,7 +363,7 @@ namespace partner_aluro.Controllers
 
                     product.Product_Images.Add(imgModel);
 
-                    _imageService.AddAsync(imgModel);
+                    await _imageService.AddAsync(imgModel);
 
                 }
             }
@@ -358,7 +372,7 @@ namespace partner_aluro.Controllers
 
                 string webRootPath = _webHostEnvironment.WebRootPath;
 
-                for (int i = 0; i <= files.Count; i++)
+                for (int i = 0; i < files.Count; i++)
                 {
                     string path0 = "images\\produkty\\";
 
@@ -393,7 +407,7 @@ namespace partner_aluro.Controllers
                     product.Product_Images.Add(imgModel);
 
 
-                    _imageService.AddAsync(imgModel);
+                    await _imageService.AddAsync(imgModel);
 
 
                 }

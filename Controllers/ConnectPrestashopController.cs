@@ -84,7 +84,7 @@ namespace partner_aluro.Controllers
                         produkt.GlebokoscProduktu = (decimal)listaproduktowDostepnychZPresty[i].depth;
                         produkt.WagaProduktu = (decimal)listaproduktowDostepnychZPresty[i].weight;
                         produkt.DataDodania = DateTime.Parse(listaproduktowDostepnychZPresty[i].date_add);
-                        _productService.Update(produkt);
+                        _productService.UpdateAsync(produkt);
 
                         aktualizacja.Add(produkt);
                     }

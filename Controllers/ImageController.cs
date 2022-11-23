@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using partner_aluro.Data;
 using partner_aluro.Models;
+using partner_aluro.Services;
+using partner_aluro.Services.Interfaces;
 
 namespace partner_aluro.Controllers
 {
@@ -13,10 +15,13 @@ namespace partner_aluro.Controllers
 
         public readonly IWebHostEnvironment _hostEnvironment;
 
-        public ImageController(ApplicationDbContext context, IWebHostEnvironment hostEnvironment)
+        public readonly IImageService _imageService;
+
+        public ImageController(ApplicationDbContext context, IWebHostEnvironment hostEnvironment, IImageService imageServer)
         {
             _context = context;
             _hostEnvironment = hostEnvironment;
+            _imageService = imageServer;
         }
 
         // GET: Image
@@ -54,7 +59,25 @@ namespace partner_aluro.Controllers
 
             //}
             //return View(lista2);
-            return View(await _context.Images.ToListAsync());
+
+
+            //await _context.Images.OrderByDescending(x => x.ImageId).Take(1000).ToListAsync();
+
+            //List<ImageModel> lista = _context.Images.TakeLast(100).ToList();
+            return View(await _context.Images.OrderByDescending(x => x.ImageId).Take(1000).ToListAsync());
+        }
+        public async Task<IActionResult> GetFileServer()
+        {
+            //String path = Server.MapPath("~/images/"); // get the server path images folder
+
+
+            string wwwRootPath = _hostEnvironment.WebRootPath;
+            string path = Path.Combine(wwwRootPath + "/images/");
+
+            String[] imagesfiles = Directory.GetFiles(path); //get all file from path
+            ViewBag.images = imagesfiles;
+
+            return View();
         }
 
         // GET: Image/Details/5
@@ -185,8 +208,9 @@ namespace partner_aluro.Controllers
             {
                 try
                 {
-                    _context.Update(imageModel);
-                    await _context.SaveChangesAsync();
+                    _imageService.Update(imageModel);
+
+                    //await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -219,6 +243,9 @@ namespace partner_aluro.Controllers
             {
                 return NotFound();
             }
+
+            _context.Images.Remove(imageModel);
+            _context.SaveChanges();
 
             return View(imageModel);
         }

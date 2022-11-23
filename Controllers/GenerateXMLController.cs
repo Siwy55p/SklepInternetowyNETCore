@@ -60,68 +60,139 @@ namespace partner_aluro.Controllers
                 //1215 w Images Mozna usuwac
                 char[] delimiterChars = { ',' };
 
-                //src = "~/images/produkty/@Model.Symbol/@Model.ImageUrl"
-                for(int x = 178; x < obj.Product.Count(); x++)
-                //foreach (var item in obj.Product)
-                {
-                    string text = obj.Product[x].Images;
+
+
+                var produkt = obj.Product.Where(x => x.Symbol == "A01165").FirstOrDefault();
+
+
+                string text = produkt.Images;
                     string[] words = text.Split(delimiterChars);
 
-                    for(int i = 0; i < words.Count(); i++)
+
+                for (int i = 0; i < words.Count(); i++)
+                {
+
+                    using (WebClient client2 = new WebClient())
                     {
-
-                        using (WebClient client2 = new WebClient())
+                        string webRootPath = _webHostEnvironment.WebRootPath;
+                        string path0 = "images\\produkty\\" + produkt.Symbol + "\\";
+                        var uploadsFolder = Path.Combine(webRootPath, "images\\produkty\\" + produkt.Symbol + "\\");
+                        if (!Directory.Exists(uploadsFolder))
                         {
-                            string webRootPath = _webHostEnvironment.WebRootPath;
-                            string path0 = "images\\produkty\\" + obj.Product[x].Symbol + "\\";
-                            var uploadsFolder = Path.Combine(webRootPath, "images\\produkty\\" + obj.Product[x].Symbol+"\\");
-                            if (!Directory.Exists(uploadsFolder))
-                            {
-                                Directory.CreateDirectory(uploadsFolder);
-                            }
-
-                            var dynamicFileName = obj.Product[x].Symbol + "_" + i + "_.jpg";
-
-
-                            client2.DownloadFileAsync(new Uri(words[i]), uploadsFolder + dynamicFileName);
-
-                            ImageModel imgModel = new ImageModel();
-
-                            var cont = _content.Products.Where(p => p.Symbol == obj.Product[x].Symbol).FirstOrDefault()?.ProductId;
-                            if(cont != null)
-                            { 
-
-                                imgModel = new()
-                                {
-                                    path = path0,
-                                    fullPath = path0 + dynamicFileName,
-                                    Opis = obj.Product[x].Symbol,
-                                    kolejnosc = i,
-                                    Tytul = obj.Product[x].Product_name,
-                                    ImageName = dynamicFileName,
-                                    ProductId = cont,
-                                    ProductImagesId = cont,
-
-                                };
-                            }else
-                            {
-                                imgModel = new()
-                                {
-                                    path = path0,
-                                    fullPath = path0 + dynamicFileName,
-                                    Opis = obj.Product[x].Symbol,
-                                    kolejnosc = i,
-                                    Tytul = obj.Product[x].Product_name,
-                                    ImageName = dynamicFileName
-                                };
-                            }
-                        _imageService.AddAsync(imgModel);
-
+                            Directory.CreateDirectory(uploadsFolder);
                         }
+
+                        var dynamicFileName = produkt + "_" + i + "_.jpg";
+
+
+                        client2.DownloadFileAsync(new Uri(words[i]), uploadsFolder + dynamicFileName);
+
+                        ImageModel imgModel = new ImageModel();
+
+                        var cont = _content.Products.Where(p => p.Symbol == produkt.Symbol).FirstOrDefault()?.ProductId;
+                        if (cont != null)
+                        {
+
+                            imgModel = new()
+                            {
+                                path = path0,
+                                fullPath = path0 + dynamicFileName,
+                                Opis = produkt.Symbol,
+                                kolejnosc = i,
+                                Tytul = produkt.Product_name,
+                                ImageName = dynamicFileName,
+                                ProductId = cont,
+                                ProductImagesId = cont,
+
+                            };
+                        }
+                        else
+                        {
+                            imgModel = new()
+                            {
+                                path = path0,
+                                fullPath = path0 + dynamicFileName,
+                                Opis = produkt.Symbol,
+                                kolejnosc = i,
+                                Tytul = produkt.Product_name,
+                                ImageName = dynamicFileName
+                            };
+                        }
+                        _imageService.AddAsync(imgModel);
 
                     }
 
                 }
+
+
+
+
+
+
+
+                ////src = "~/images/produkty/@Model.Symbol/@Model.ImageUrl"
+                //for (int x = 0; x < obj.Product.Count(); x++)
+                ////foreach (var item in obj.Product)
+                //{
+
+                //    string text = obj.Product[x].Images;
+                //    string[] words = text.Split(delimiterChars);
+
+                //    for(int i = 0; i < words.Count(); i++)
+                //    {
+
+                //        using (WebClient client2 = new WebClient())
+                //        {
+                //            string webRootPath = _webHostEnvironment.WebRootPath;
+                //            string path0 = "images\\produkty\\" + obj.Product[x].Symbol + "\\";
+                //            var uploadsFolder = Path.Combine(webRootPath, "images\\produkty\\" + obj.Product[x].Symbol+"\\");
+                //            if (!Directory.Exists(uploadsFolder))
+                //            {
+                //                Directory.CreateDirectory(uploadsFolder);
+                //            }
+
+                //            var dynamicFileName = obj.Product[x].Symbol + "_" + i + "_.jpg";
+
+
+                //            client2.DownloadFileAsync(new Uri(words[i]), uploadsFolder + dynamicFileName);
+
+                //            ImageModel imgModel = new ImageModel();
+
+                //            var cont = _content.Products.Where(p => p.Symbol == obj.Product[x].Symbol).FirstOrDefault()?.ProductId;
+                //            if(cont != null)
+                //            { 
+
+                //                imgModel = new()
+                //                {
+                //                    path = path0,
+                //                    fullPath = path0 + dynamicFileName,
+                //                    Opis = obj.Product[x].Symbol,
+                //                    kolejnosc = i,
+                //                    Tytul = obj.Product[x].Product_name,
+                //                    ImageName = dynamicFileName,
+                //                    ProductId = cont,
+                //                    ProductImagesId = cont,
+
+                //                };
+                //            }else
+                //            {
+                //                imgModel = new()
+                //                {
+                //                    path = path0,
+                //                    fullPath = path0 + dynamicFileName,
+                //                    Opis = obj.Product[x].Symbol,
+                //                    kolejnosc = i,
+                //                    Tytul = obj.Product[x].Product_name,
+                //                    ImageName = dynamicFileName
+                //                };
+                //            }
+                //        _imageService.AddAsync(imgModel);
+
+                //        }
+
+                //    }
+
+                //}
 
 
 

@@ -103,10 +103,10 @@ namespace partner_aluro.Services
             _context.SaveChanges();
         }
 
-        public void Update(Product produkt)
+        public async Task UpdateAsync(Product produkt)
         {
             _context.Products.Update(produkt);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
     }
 }

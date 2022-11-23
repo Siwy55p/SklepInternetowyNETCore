@@ -21,6 +21,6 @@ namespace partner_aluro.Services.Interfaces
         int DeleteProductId(int id);
 
 
-        void Update(Product produkt);
+        Task UpdateAsync(Product produkt);
     }
 }
