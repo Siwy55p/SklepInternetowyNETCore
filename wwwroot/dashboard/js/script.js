@@ -120,6 +120,7 @@ charts.forEach(function (chart) {
 $(document).ready(function () {
     $(".data-table").each(function (_, table) {
         $(table).DataTable({
+            pageLength: 200,
             order: [[0, 'desc'], [2, 'asc']]
         });
     });
@@ -128,6 +129,7 @@ $(document).ready(function () {
 $(document).ready(function () {
     $(".data-table2").each(function (_, table) {
         $(table).DataTable({
+            pageLength: 50,
             paging: false,
             searching: false
         });

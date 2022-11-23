@@ -97,7 +97,7 @@ namespace partner_aluro.Services
                 string path0 = "images\\produkty\\";
                 var uploadsFolder = Path.Combine(webRootPath, "images\\produkty\\" + product.Symbol);
 
-                if (!Directory.Exists(uploadsFolder))
+                if (Directory.Exists(uploadsFolder))
                 {
                     Directory.CreateDirectory(uploadsFolder);
                 }
@@ -157,7 +157,7 @@ namespace partner_aluro.Services
 
             if (imgExist != null)
             {
-                //To zamien zrob update
+                //To zamien i zrob update
                 _context.Update(imgModel);
                 await _context.SaveChangesAsync();
             }

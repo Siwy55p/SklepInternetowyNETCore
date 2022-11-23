@@ -66,7 +66,7 @@ namespace partner_aluro.Controllers
 
 
 
-                var produkt = obj.Product.Where(x => x.Symbol == "A01165").FirstOrDefault();
+                var produkt = obj.Product.Where(x => x.Symbol == "A01306").FirstOrDefault();
 
 
                 string text = produkt.Images;
@@ -86,15 +86,19 @@ namespace partner_aluro.Controllers
                             Directory.CreateDirectory(uploadsFolder);
                         }
 
-                        var dynamicFileName = produkt + "_" + i + "_.jpg";
+                        var dynamicFileName = produkt.Symbol + "_" + i + "_.jpg";
 
 
                         client2.DownloadFileAsync(new Uri(words[i]), uploadsFolder + dynamicFileName);
 
                         ImageModel imgModel = new ImageModel();
-                        var cont = _productService.GetProductId(produkt.Symbol);
+                        var cont = _productService.GetProduct(produkt.Symbol);
                         if (cont != null)
                         {
+                            if(cont.Product_Images == null)
+                            {
+                                cont.Product_Images = new List<ImageModel>();
+                            }
 
                             imgModel = new()
                             {
@@ -104,10 +108,15 @@ namespace partner_aluro.Controllers
                                 kolejnosc = i,
                                 Tytul = produkt.Product_name,
                                 ImageName = dynamicFileName,
-                                ProductId = cont,
-                                ProductImagesId = cont,
+                                ProductId = cont.ProductId,
+                                ProductImagesId = cont.ProductId,
 
                             };
+
+                            cont.Product_Images.Add(imgModel);
+                            await _productService.UpdateAsync(cont);
+
+                            await _imageService.AddAsync(imgModel);
                         }
                         else
                         {
@@ -199,7 +208,7 @@ namespace partner_aluro.Controllers
 
 
 
-                return View(obj);
+                return View(produkt);
 
             }
 
@@ -577,7 +586,7 @@ namespace partner_aluro.Controllers
 
                     product.Product_Images.Add(imgModel);
 
-                    _imageService.AddAsync(imgModel);
+                    await _imageService.AddAsync(imgModel);
 
                 }
             }

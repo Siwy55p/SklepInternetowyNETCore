@@ -114,5 +114,12 @@ namespace partner_aluro.Services
             var product = _context.Products.FirstOrDefault(x => x.Symbol == Symbol);
             return product.ProductId;
         }
+
+        public Product GetProduct(string Symbol)
+        {
+            Product produkt = new Product();
+            produkt = _context.Products.Where(x => x.Symbol == Symbol).FirstOrDefault();
+            return produkt;
+        }
     }
 }

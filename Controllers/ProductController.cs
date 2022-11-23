@@ -69,6 +69,8 @@ namespace partner_aluro.Controllers
         {
             ViewBag.Category = GetCategories();
 
+            product.Product_Images = _context.Images.Where(x => x.ProductImagesId == product.ProductId).ToList();
+
             if (id != product.ProductId)
             {
                 return NotFound();
@@ -96,10 +98,14 @@ namespace partner_aluro.Controllers
 
             if ((product.ImageUrl == null || product.ImageUrl == "") && product.Product_Images != null)  //Jesli nie ma obrazka glownego a jest obrazk [0] jako dodatkowy do wysietlenia , to wybierze ten obrazek i ustaw jako glowny.
             {
-                if (product.Product_Images[0].fullPath != "")
+
+                if (product.Product_Images.Count >= 1)
                 {
-                    product.product_Image = product.Product_Images[0];
-                    product.ImageUrl = product.Product_Images[0].ImageName;
+                    if (product.Product_Images[0].fullPath != "" && product.Product_Images[0] != null)
+                    {
+                        product.product_Image = product.Product_Images[0];
+                        product.ImageUrl = product.Product_Images[0].ImageName;
+                    }
                 }
             }
 
@@ -268,7 +274,9 @@ namespace partner_aluro.Controllers
                 return View(product);
             }
 
-
+            ModelState.Remove("product_Image.fullPath");
+            ModelState.Remove("product_Image.ImageName");
+            ModelState.Remove("product_Image.path");
             if (!ModelState.IsValid)
             {
                 return View(product);
