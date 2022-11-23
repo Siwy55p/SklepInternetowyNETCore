@@ -38,11 +38,11 @@ namespace partner_aluro.Models
         [StringLength(9)]
         public string Telefon { get; set; }
 
-        [Display(Name = "Nr Nip")]
+        [Display(Name = "Nr Nip/VAT")]
         public string Vat { get; set; }
 
         [Display(Name = "Wojewodztwo")]
-        public string Wojewodztwo { get; set; }
+        public string? Wojewodztwo { get; set; }
 
         [Display(Name = "Powiat")]
         public string? Powiat { get; set; }
@@ -57,7 +57,7 @@ namespace partner_aluro.Models
         public string? DataZakonczeniaDzialalnosci { get; set; }
 
         [Display(Name = "Nr Regon")]
-        public string Regon { get; set; }
+        public string? Regon { get; set; }
 
         public string? UserID { get; set; }
 

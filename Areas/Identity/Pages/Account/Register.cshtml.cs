@@ -204,11 +204,11 @@ namespace partner_aluro.Areas.Identity.Pages.Account
             _model = await RegonService.GetCompanyDataByNipAsync(_model.Vat);
 
 
-            if (_model.Errors.Count > 0)
-            {
-                komunikat = _model.Errors[0].ErrorMessagePl;
-                return Page();
-            }
+            //if (_model.Errors.Count > 0)
+            //{
+            //    komunikat = _model.Errors[0].ErrorMessagePl;
+            //    return Page();
+            //}
 
             Input.NazwaFirmy = _model.Name;
             Input.Miasto = _model.Miejscowosc;
@@ -286,7 +286,7 @@ namespace partner_aluro.Areas.Identity.Pages.Account
                     user.Adress1rozliczeniowy.UserID = userId;
                     user.Adress2dostawy.UserID = userId;
 
-                    string text = $"Dziękujemy za rejestrację nowego konta w systemie platformy hurtowej B2B marki ALURO.<br><br>Po weryfikacji danych, otrzymają Państwo dostęp do platformy hurtowej<br>z możliwością zakupów w cenach hurtowych.<br><br>Zazwyczaj proces weryfikacji trwa od 1 do 12 godzin, <br>dziękujemy za cierpliwość.";
+                    string text1 = $"Dziękujemy za rejestrację nowego konta w systemie platformy hurtowej B2B marki ALURO.<br><br>Po weryfikacji danych, otrzymają Państwo dostęp do platformy hurtowej<br>z możliwością zakupów w cenach hurtowych.<br><br>Zazwyczaj proces weryfikacji trwa od 1 do 12 godzin, <br>dziękujemy za cierpliwość.";
 
                     //text = text.Replace("@", "@" + System.Environment.NewLine);
 
@@ -294,10 +294,22 @@ namespace partner_aluro.Areas.Identity.Pages.Account
                     {
                     Subject = "Dziękujemy za rejestracje w Aluro",
                         To = Input.Email,
-                        Body = text,
+                        Body = text1,
                     };
 
                     await _emailService.SendEmailAsync(newClint); //Bardzo specjalnie tak jest jak jest zrobione. Musi tak zostać.
+
+
+                    string text2 = $"Nowy uzytkownik, zarejestrował się do Aluro. Czeka za weryfikacją.";
+
+                    EmailDto newClintDzialTechniczny = new EmailDto()
+                    {
+                        Subject = "Nowy użytkownik, do werfikacji",
+                        To = "aluro@aluro.pl",
+                        Body = text2,
+                    };
+
+                    await _emailService.SendEmailAsync(newClintDzialTechniczny); //Bardzo specjalnie tak jest jak jest zrobione. Musi tak zostać.
 
                     //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     //code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));

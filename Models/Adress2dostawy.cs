@@ -16,8 +16,8 @@ namespace partner_aluro.Models
 
         public string? Ulica { get; set; }
 
-        public string Miasto { get; set; }
-        public string Kraj { get; set; }
+        public string? Miasto { get; set; }
+        public string? Kraj { get; set; }
         public string? KodPocztowy { get; set; }
 
         public string? Telefon { get; set; }
