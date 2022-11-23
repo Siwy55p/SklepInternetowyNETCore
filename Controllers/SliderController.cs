@@ -141,7 +141,7 @@ namespace partner_aluro.Controllers
 
                     slid.ObrazkiDostepneWSliderze.Add(imgModel);
 
-                    _imageService.Add(imgModel);
+                    _imageService.AddAsync(imgModel);
 
                 }
 

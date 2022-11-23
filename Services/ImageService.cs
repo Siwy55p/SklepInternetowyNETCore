@@ -7,6 +7,7 @@ using NuGet.Protocol.Core.Types;
 using partner_aluro.Data;
 using partner_aluro.Models;
 using partner_aluro.Services.Interfaces;
+using Polly;
 using System.Linq;
 
 namespace partner_aluro.Services
@@ -39,26 +40,22 @@ namespace partner_aluro.Services
                     await imageModel.ImageFile.CopyToAsync(fileStream);
                 }
                 //insert record
-                imageModel.fullPath = path +"\\" + fileName + extension;
+                imageModel.fullPath = path + "\\" + fileName + extension;
                 imageModel.path = path;
                 _context.Add(imageModel);
                 await _context.SaveChangesAsync();
 
                 return wwwRootPath;
             }
-            
+
             return komunikat;
         }
         public async Task<string> DeleteFrontImage(Product product) //Dodaj obrazek Front przy dodawaniu produktu
         {
-            var imageModel = await _context.Images.FirstOrDefaultAsync(x=>x.ImageName == product.ImageUrl);
+            var imageModel = await _context.Images.FirstOrDefaultAsync(x => x.ImageName == product.ImageUrl);
 
 
-
-
-
-
-            if (imageModel != null && product.ImageUrl !=null)
+            if (imageModel != null && product.ImageUrl != null)
             {
                 //delete image from wwwroot/images
                 var imagePath = Path.Combine(imageModel.path, imageModel.ImageName);
@@ -109,14 +106,14 @@ namespace partner_aluro.Services
                     await product.product_Image.ImageFile.CopyToAsync(fileStream);
                 }
                 //insert record
-                product.product_Image.path = path0 + product.Symbol;
+                product.product_Image.path = path0 + product.Symbol +"\\";
                 product.product_Image.kolejnosc = 0;
                 product.product_Image.ProductId = product.ProductId;
                 product.product_Image.Tytul = product.Name;
                 product.product_Image.ProductImagesId = product.ProductId;
                 product.product_Image.ImageName = uniqueFileName;
 
-                product.product_Image.fullPath = path0 + product.Symbol +"\\"+ uniqueFileName;
+                product.product_Image.fullPath = path0 + product.Symbol + "\\" + uniqueFileName;
 
                 _context.Add(product.product_Image);
                 await _context.SaveChangesAsync();
@@ -133,11 +130,22 @@ namespace partner_aluro.Services
             return await _context.Images.ToListAsync();
         }
 
-        public void Add(ImageModel imgModel)
+        public async Task AddAsync(ImageModel imgModel)
         {
+            ImageModel imgExist = await _context.Images.Where(x => x.ImageName == imgModel.ImageName).FirstOrDefaultAsync();
 
-            _context.Add(imgModel);
-            _context.SaveChanges();
+            if (imgExist != null)
+            {
+                //To zamien zrob update
+                _context.Update(imgModel);
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                //Nieistenie wiec dodaj nowy rekord do bazy
+                await _context.AddAsync(imgModel);
+                await _context.SaveChangesAsync();
+            }
         }
 
         public async Task Edit(int id, ImageModel imageModel)
@@ -155,6 +163,5 @@ namespace partner_aluro.Services
                 }
             }
         }
-
     }
 }

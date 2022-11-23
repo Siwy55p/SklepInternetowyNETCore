@@ -115,7 +115,7 @@ namespace partner_aluro.Controllers
                                     ImageName = dynamicFileName
                                 };
                             }
-                        _imageService.Add(imgModel);
+                        _imageService.AddAsync(imgModel);
 
                         }
 
@@ -503,7 +503,7 @@ namespace partner_aluro.Controllers
 
                     product.Product_Images.Add(imgModel);
 
-                    _imageService.Add(imgModel);
+                    _imageService.AddAsync(imgModel);
 
                 }
             }
