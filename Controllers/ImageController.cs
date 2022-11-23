@@ -22,7 +22,39 @@ namespace partner_aluro.Controllers
         // GET: Image
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Images.ToListAsync());
+            //List<ImageModel> lista1 = await _context.Images.ToListAsync();
+
+            //for (int i = 0; i < lista2.Count(); i++)
+            //{
+
+            //    var img = _context.Images.Where(x => x.ImageId == lista2[i].ImageId).FirstOrDefault();
+            //    if (img != null)
+            //    { 
+            //    _context.Images.Remove(img);
+            //    _context.SaveChanges();
+            //    }
+            //}
+            //List<ImageModel> lista = await _context.Images.ToListAsync();
+
+            //for (int i = 0; i < lista.Count; i++)
+            //{
+
+            //    string sz = lista[i].path;
+            //    if (sz[sz.Length - 1] == '\\')
+            //    {
+            //    }
+            //    else
+            //    {
+            //        //lista[i].path = lista[i].path + '\\';
+            //        ImageModel image = await _context.Images.Where(x => x.ImageId == lista[i].ImageId).FirstOrDefaultAsync();
+            //        image.path = image.path + '\\';
+            //        _context.Update(image);
+            //        _context.SaveChanges();
+            //    }
+
+            //}
+            //return View(lista2);
+            return View(await _context.Images.ToListAsync());
         }
 
         // GET: Image/Details/5

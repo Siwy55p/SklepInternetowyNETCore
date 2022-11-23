@@ -9,8 +9,8 @@ namespace partner_aluro.Models
         [Key]
         public int ImageId { get; set; }
 
-        public string? path { get; set; }
-        public string? fullPath { get; set; }
+        public string path { get; set; }
+        public string fullPath { get; set; }
 
         public int? kolejnosc { get; set; }
         public int? ProductId { get; set; }
@@ -22,7 +22,7 @@ namespace partner_aluro.Models
 
         [Column(TypeName = "nvarchar(100)")]
         [DisplayName("Image Name")]
-        public string? ImageName { get; set; }
+        public string ImageName { get; set; }
 
         [DisplayName("Opis obrazka")]
         public string? Opis { get; set; }

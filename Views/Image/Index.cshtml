@@ -27,24 +27,15 @@
                                     Obrazek
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.Tytul)
-                                </th>
-                                <th>
                                     @Html.DisplayNameFor(model => model.path)
                                 </th>
                                 <th>
                                     @Html.DisplayNameFor(model => model.fullPath)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.kolejnosc)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.ProductId)
-                                </th>
-                                <th>
                                     @Html.DisplayNameFor(model => model.ImageName)
                                 </th>
-                                <th></th>
+                                <th>Akcje</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -57,19 +48,10 @@
                                                 <img src="@item.path\@item.ImageName" width="50px" height="50px">
                                             </td>
                                             <td>
-                                                @Html.DisplayFor(modelItem => item.Tytul)
-                                            </td>
-                                            <td>
                                                     @Html.DisplayFor(model => item.path)
                                             </td>
                                             <td>
                                                 @Html.DisplayFor(model => item.fullPath)
-                                            </td>
-                                            <td>
-                                                    @Html.DisplayFor(model => item.kolejnosc)
-                                            </td>
-                                            <td>
-                                                    @Html.DisplayFor(model => item.ProductId)
                                             </td>
                                             <td>
                                                     @Html.DisplayFor(modelItem => item.ImageName)
