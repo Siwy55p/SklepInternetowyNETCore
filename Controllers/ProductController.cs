@@ -336,7 +336,7 @@ namespace partner_aluro.Controllers
                     //add product Image for new product
                     ImageModel imgModel = new()
                     {
-                        path = path0 + product.Symbol,
+                        path = path0 + product.Symbol + "\\",
                         fullPath = path0 + product.Symbol + dynamicFileName,
                         kolejnosc = i,
                         Tytul = product.Name,
@@ -379,7 +379,7 @@ namespace partner_aluro.Controllers
                     //add product Image for new product
                     ImageModel imgModel = new()
                     {
-                        path = path0 + product.Symbol,
+                        path = path0 + product.Symbol +"\\",
                         fullPath = path0 + product.Symbol + dynamicFileName,
                         kolejnosc = i,
                         Tytul = product.Name,
