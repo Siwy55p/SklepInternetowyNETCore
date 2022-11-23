@@ -97,7 +97,7 @@ namespace partner_aluro.Services
                 string path0 = "images\\produkty\\";
                 var uploadsFolder = Path.Combine(webRootPath, "images\\produkty\\" + product.Symbol);
 
-                if (Directory.Exists(uploadsFolder))
+                if (!Directory.Exists(uploadsFolder))
                 {
                     Directory.CreateDirectory(uploadsFolder);
                 }

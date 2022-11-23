@@ -3,14 +3,14 @@
 @using X.PagedList.Mvc.Core
 
 
-    @foreach (var produkt in ViewBag.OnePageOfProducts)
+@foreach (var produkt in ViewData["OnePageOfProducts"] as IEnumerable<partner_aluro.Models.Product>)
     {    
         <div class="col-6 col-sm-4 col-md-4 col-lg-4 p-0 m-0">
             @await Html.PartialAsync("_ProductCart",(Product)@produkt)
         </div>
     }
-
-@Html.PagedListPager( (IPagedList)ViewBag.OnePageOfProducts, page => Url.Action("Lista", "Category", new { page = page, szukanaNazwa=ViewData["szukanaNazwa"] } )
+    @*ViewData["OnePageOfProducts"]*@
+@Html.PagedListPager( (IPagedList)ViewData["OnePageOfProducts"], page => Url.Action("Lista", "Category", new { page = page, szukanaNazwa=ViewData["szukanaNazwa"] } )
 ,
 new X.PagedList.Web.Common.PagedListRenderOptions{
     DisplayEllipsesWhenNotShowingAllPageNumbers = false,

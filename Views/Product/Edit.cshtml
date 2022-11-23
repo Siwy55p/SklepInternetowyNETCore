@@ -12,8 +12,50 @@
 
 
 <form class="needs-validation" asp-action="Edit" asp-route-id="@Model.ProductId" asp-controller="Product" class="form-horizontal" method="post" enctype="multipart/form-data">
-        <div class="row g-0">
+        
+    
+    
+    <div class="row g-0">
 
+
+            @{
+            bool pokaz = true;
+        }
+        @foreach (var names in ViewBag.Category)
+        {
+            pokaz = true;
+
+            var checkBoxId = "chk" + names.Value;
+            var tdId = "td" + names.Value;
+            <table width="100%">
+                <tr>
+                    <td width="20px">
+
+                        @foreach (var item in Model.Kategorie)
+                        {
+                            @if (item.CategoryID.ToString() == @names.Value)
+                            {
+                                pokaz = false;
+                                <input onclick="AddToKategoria(@Model.ProductId,@names.Value)" type="checkbox" id="@checkBoxId" class="chkclass" value="@names.Value" checked />
+
+                                @names.Text
+                            }
+                        }
+
+                        @if (pokaz)
+                        {
+                            <input onclick="AddToKategoria(@Model.ProductId,@names.Value)" type="checkbox" id="@checkBoxId" class="chkclass" value="@names.Value" />
+                            @names.Text
+                        }
+                        else
+                        {
+
+                        }
+
+                    </td>
+                </tr>
+            </table>
+        }
             <button type="submit" class="btn btn-success">Zapisz zmiany</button>
             <div class="col-md-6 border-end">
                 @Html.HiddenFor(h=>Model.ProductId)
@@ -24,7 +66,7 @@
             <button type="submit" class="btn btn-success">Zapisz zmiany</button>
                 <button id="btnBack" runat="server" text="Back" class="btn btn-primary" onclick="JavaScript: window.history.back(1); return false;">Powrót</button>
             <hr />
-
+@*
             @{
                 bool pokaz = true;
             }
@@ -62,7 +104,7 @@
                         </td>
                     </tr>
                 </table>
-            }
+            }*@
 
 
 
