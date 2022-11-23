@@ -22,5 +22,7 @@ namespace partner_aluro.Services.Interfaces
 
 
         Task UpdateAsync(Product produkt);
+
+        int GetProductId(string Symbol);
     }
 }

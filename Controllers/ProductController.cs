@@ -73,7 +73,7 @@ namespace partner_aluro.Controllers
             {
                 return NotFound();
             }
-
+            
             string imageName = "Front_" + product.Symbol + ".jpg";
             ImageModel front = _imageService.Get(imageName);
             if (front != null)

@@ -108,5 +108,11 @@ namespace partner_aluro.Services
             _context.Products.Update(produkt);
             await _context.SaveChangesAsync();
         }
+
+        public int GetProductId(string Symbol)
+        {
+            var product = _context.Products.FirstOrDefault(x => x.Symbol == Symbol);
+            return product.ProductId;
+        }
     }
 }

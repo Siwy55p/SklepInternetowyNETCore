@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using System.Xml.Serialization;
 using partner_aluro.Services.Interfaces;
 using System.Net;
+using partner_aluro.Services;
 
 namespace partner_aluro.Controllers
 {
@@ -19,13 +20,16 @@ namespace partner_aluro.Controllers
 
         public readonly IImageService _imageService;
 
+        public readonly IProductService _productService;
+
         public readonly ApplicationDbContext _content;
 
-        public GenerateXMLController(IWebHostEnvironment hostEnvironment, ApplicationDbContext content, IImageService imageService)
+        public GenerateXMLController(IWebHostEnvironment hostEnvironment, ApplicationDbContext content, IImageService imageService, IProductService productService)
         {
             _webHostEnvironment = hostEnvironment;
             _content = content;
             _imageService = imageService;
+            _productService = productService;   
         }
         public static string _webRootPath = "http:\\\\partneralluro.hostingasp.pl\\";
 
@@ -88,8 +92,7 @@ namespace partner_aluro.Controllers
                         client2.DownloadFileAsync(new Uri(words[i]), uploadsFolder + dynamicFileName);
 
                         ImageModel imgModel = new ImageModel();
-
-                        var cont = _content.Products.Where(p => p.Symbol == produkt.Symbol).FirstOrDefault()?.ProductId;
+                        var cont = _productService.GetProductId(produkt.Symbol);
                         if (cont != null)
                         {
 
@@ -118,7 +121,7 @@ namespace partner_aluro.Controllers
                                 ImageName = dynamicFileName
                             };
                         }
-                        _imageService.AddAsync(imgModel);
+                        await _imageService.AddAsync(imgModel);
 
                     }
 
