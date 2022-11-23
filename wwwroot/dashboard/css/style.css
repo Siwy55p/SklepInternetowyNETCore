@@ -6,7 +6,7 @@ button {
 }
 :root {
   --offcanvas-width: 200px;
-  --topNavbarHeight: 56px;
+  --topNavbarHeight: 49px;
 }
 .sidebar-nav {
   width: var(--offcanvas-width);

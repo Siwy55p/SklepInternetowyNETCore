@@ -8,6 +8,8 @@
     {
     <script src="~/js/tinymce/tinymce.min.js"></script>
 
+
+
     }
 
 <form class="needs-validation" asp-action="Add" asp-route-id="@Model.ProductId" asp-controller="Product" class="form-horizontal" method="post" enctype="multipart/form-data">
@@ -44,7 +46,11 @@
             $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
         });
     </script>
-
+    <script>
+        $('#modal').on('shown.bs.modal', function () {
+            $('#modal').trigger('focus')
+        })
+    </script>
     @*
     <script type="text/javascript">
         $(".chkclass").on("change", function () {
