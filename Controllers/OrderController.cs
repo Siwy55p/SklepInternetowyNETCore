@@ -286,19 +286,19 @@ namespace partner_aluro.Controllers
                 string text3_1 = order.AdressDostawy.Imie + " " + order.AdressDostawy.Nazwisko + "\n";
                 string text4_2 = order.User.Imie + " " + order.User.Nazwisko + "\n";
                 string text4_3 = order.AdressDostawy.Ulica + "\n";
-                string text4_4 = order.AdressDostawy.KodPocztowy + " " + order.adresRozliczeniowy.Miasto + "\n";
+                string text4_4 = order.AdressDostawy.KodPocztowy + " " + order.AdressDostawy.Miasto + "\n";
                 string text4_5 = order.AdressDostawy.Telefon + "\n";
 
                 string text4_7 = order.User.Email + "\n";
                 //Paragraph para1 = new Paragraph("Data zamówienia: " + order.OrderPlaced, bold);
 
-                Chunk c4_1 = new(text2_1, bold);
-                Chunk c4_2 = new(text2_2, regular);
-                Chunk c4_3 = new(text2_3, regular);
-                Chunk c4_4 = new(text2_4, regular);
-                Chunk c4_5 = new(text2_5, regular);
+                Chunk c4_1 = new(text3_1, bold);
+                Chunk c4_2 = new(text4_2, regular);
+                Chunk c4_3 = new(text4_3, regular);
+                Chunk c4_4 = new(text4_4, regular);
+                Chunk c4_5 = new(text4_5, regular);
                 Chunk c4_6 = new(text2_6, bold);
-                Chunk c4_7 = new(text2_7, regular);
+                Chunk c4_7 = new(text4_7, regular);
 
                 Paragraph para5 = new Paragraph
                 {
@@ -398,8 +398,8 @@ namespace partner_aluro.Controllers
 
 
 
-                string text6_1 = order.AdressDostawy.Imie + " " + order.AdressDostawy.Nazwisko + "\n";
-                string text6_3 = order.AdressDostawy.Ulica + "\n";
+                string text6_1 = " "  + "\n";
+                string text6_3 = "\n";
                 //Paragraph para1 = new Paragraph("Data zamówienia: " + order.OrderPlaced, bold);
 
                 Chunk c6_1 = new(text6_1, bold);

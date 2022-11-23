@@ -91,6 +91,9 @@ namespace partner_aluro.Controllers
 
             UploadFile2Async(product);
 
+            ModelState.Remove("product_Image.path");
+            ModelState.Remove("product_Image.ImageName");
+            ModelState.Remove("product_Image.fullPath");
             if (ModelState.IsValid)
             {
                 try

@@ -32,14 +32,15 @@ namespace partner_aluro.Services
                 string wwwRootPath = _webHostEnvironment.WebRootPath;
                 string fileName = Path.GetFileNameWithoutExtension(imageModel.ImageFile.FileName);
                 string extension = Path.GetExtension(imageModel.ImageFile.FileName);
-                imageModel.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                imageModel.ImageName = fileName + extension;
                 string path = Path.Combine(wwwRootPath + "/Images/", fileName);
                 using (var fileStream = new FileStream(path, FileMode.Create))
                 {
                     await imageModel.ImageFile.CopyToAsync(fileStream);
                 }
                 //insert record
-
+                imageModel.fullPath = path +"\\" + fileName + extension;
+                imageModel.path = path;
                 _context.Add(imageModel);
                 await _context.SaveChangesAsync();
 
@@ -115,6 +116,7 @@ namespace partner_aluro.Services
                 product.product_Image.ProductImagesId = product.ProductId;
                 product.product_Image.ImageName = uniqueFileName;
 
+                product.product_Image.fullPath = path0 + product.Symbol +"\\"+ uniqueFileName;
 
                 _context.Add(product.product_Image);
                 await _context.SaveChangesAsync();

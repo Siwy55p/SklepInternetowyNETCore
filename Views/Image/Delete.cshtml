@@ -28,10 +28,7 @@
             Uploaded Image
         </dd>
         <dd class="col-sm-10">
-            <img src="@("~/images/"+Model.ImageName)" asp-append-version="true" width="250px" height="250px" />
-        </dd>
-        <dd class="col-sm-10">
-            <img src="@("~/"+Model.path+"/"+Model.ImageName)" asp-append-version="true" width="250px" height="250px" />
+            <img src="@Model.fullPath" asp-append-version="true" width="250px" height="250px" />
         </dd>
 
     </dl>
