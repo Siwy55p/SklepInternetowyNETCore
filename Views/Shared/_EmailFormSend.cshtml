@@ -10,8 +10,7 @@
         </div>
         <div class="row">
             <label class="form-label" asp-for="@Model.Send.Body">Wiadomość</label>
-            <textarea cols="20" rows="3" asp-for="@Model.Send.Body">
-            </textarea>
+            <textarea asp-for="@Model.Send.Body" id="editor"> </textarea>
         </div>
         <div class="row">
             <label class ="form-label" asp-for="@Model.Send.To">Do</label>
