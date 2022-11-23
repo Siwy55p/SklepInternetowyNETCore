@@ -120,8 +120,8 @@ charts.forEach(function (chart) {
 $(document).ready(function () {
     $(".data-table").each(function (_, table) {
         $(table).DataTable({
-            pageLength: 200,
-            order: [[0, 'desc'], [2, 'asc']]
+            pageLength: 50,
+            order: [[0, 'desc'], [1, 'asc']]
         });
     });
 });
@@ -132,6 +132,7 @@ $(document).ready(function () {
             pageLength: 50,
             paging: false,
             searching: false
+            order: [[0, 'desc'], [1, 'asc']]
         });
     });
 });

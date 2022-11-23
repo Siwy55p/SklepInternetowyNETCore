@@ -11,21 +11,27 @@
         <link href="~/css/glightbox.css" rel="stylesheet" />
         <link href="~/css/glightbox.min.css" rel="stylesheet" />
         <link href="~/css/home.css" rel="stylesheet" />
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+    
     }
     
     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
         <div class="row justify-content-center align-items-center" >
             <div class="row">
                 <div class="col" >
+
+                    <div class="test animate__animated animate__bounce animate_delay-2s">An animated element</div>
+
                     <div class="owl-two owl-carousel owl-theme">
                             @foreach (var image in Model.SliderHome1.ObrazkiDostepneWSliderze)
                             {
                                 <div>
 
-                                            <a href="..\@image.fullPath" class="glightbox" data-gallery="gallery" style="width:50px; height:50px;">
-                                                <img src="..\@image.fullPath" alt="">
-                                        </a>
-
+                                    <a href="..\@image.fullPath" class="glightbox" data-gallery="gallery" style="width:50px; height:50px;">
+                                        <img class="fade-in" src="..\@image.fullPath" alt="" />
+                                </a>
                                 </div>
                             }
                     </div>
@@ -48,12 +54,14 @@
                     autoplayVideos: true
                 });
             </script>
-
+@*
  <script type="text/javascript">
         $('.owl-two.owl-carousel').owlCarousel({
-            loop: true,
+            loop: false,
             margin: 5,
             autoplay: 1000,
+            animateIn: 'fadeIn',
+            animateOut: 'fadeOut',
             nav: true,
             //autoWidth: true,
             ////stageOuterClass: 'overflow-visible',
@@ -72,10 +80,51 @@
                     items: 2
                 },
                 768: {
-                    items: 3
+                    items: 2
                 },
                 1000: {
+                    items: 2
+                },
+                1300: {
                     items: 3
+                },
+                1500: {
+                    items: 3
+                }
+            }
+
+        })
+    </script>*@
+
+    <script type="text/javascript">
+        $('.owl-two.owl-carousel').owlCarousel({
+            animateOut: 'slideOutDown',
+            animateIn: 'flipInX',
+            items: 1,
+            margin: 30,
+            stagePadding: 30,
+            smartSpeed: 450
+            //autoWidth: true,
+            ////stageOuterClass: 'overflow-visible',
+            //navText: ['<i class="fa fa-angle-left" aria-hidden="true"></i>', '<i class="fa fa-angle-right" aria-hidden="true"></i>'],
+            responsive: {
+                0: {
+                    items: 1
+                },
+                361: {
+                    items: 1
+                },
+                450: {
+                    items: 1
+                },
+                600: {
+                    items: 2
+                },
+                768: {
+                    items: 2
+                },
+                1000: {
+                    items: 2
                 },
                 1300: {
                     items: 3
@@ -87,7 +136,6 @@
 
         })
     </script>
-
 
 
     <script>
