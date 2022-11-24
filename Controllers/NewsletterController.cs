@@ -195,7 +195,7 @@ namespace partner_aluro.Controllers
 
 
 
-            return tab1 + content + value;
+            return tab1 + value;
         }
         static string thead = "<table \">\r\n\tTabela 1" +
                     "<thead>\r\n\t" +
