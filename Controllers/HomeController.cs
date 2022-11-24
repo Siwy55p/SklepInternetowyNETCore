@@ -52,10 +52,12 @@ namespace partner_aluro.Controllers
                 //_context.SaveChanges();
 
 
-                Slider sliderHomes = await _sliderService.GetAsync(9); //Id slider
+                Slider sliderHomes1 = await _sliderService.GetAsync(9); //Id slider
+                Slider sliderHomes2 = await _sliderService.GetAsync(10); //Id slider
+                Slider sliderHomes3 = await _sliderService.GetAsync(11); //Id slider
 
                 //zainicjuj view model
-                var vm = new HomeViewModel() { Nowosci = nowosci, Bestsellery = bestseller, SliderHome1 = sliderHomes };
+                var vm = new HomeViewModel() { SliderHome1 = sliderHomes1, SliderHome2 = sliderHomes2, SliderHome3 = sliderHomes3 };
 
                 return View(vm); //zapewnia renderowania widoków 
             }

@@ -12,6 +12,8 @@ namespace partner_aluro.ViewModels
 
 
         public Slider? SliderHome1 { get; set; }
+        public Slider? SliderHome2 { get; set; }
+        public Slider? SliderHome3 { get; set; }
 
         //public CompanyModel _model {get; set;}
 

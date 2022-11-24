@@ -20,20 +20,40 @@
     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
         <div class="row justify-content-center align-items-center" >
             <div class="row">
-                <div class="col" >
-
-                    <div class="test animate__animated animate__bounce animate_delay-2s">An animated element</div>
-
-                    <div class="owl-two owl-carousel owl-theme">
+                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-4 m-0 p-0 d-block d-sm-block d-md-block d-lg-block d-xl-block">
+                    <div class="owl-two owl-carousel">
                             @foreach (var image in Model.SliderHome1.ObrazkiDostepneWSliderze)
                             {
                                 <div>
-
-                                    <a href="..\@image.fullPath" class="glightbox" data-gallery="gallery" style="width:50px; height:50px;">
-                                        <img class="fade-in" src="..\@image.fullPath" alt="" />
-                                </a>
+                                    <a href="..\@image.fullPath" class="glightbox" data-gallery="gallery">
+                                <img src="..\@image.fullPath" alt="" style="height: 450px;" />
+                                    </a>
                                 </div>
                             }
+                    </div>
+                </div>
+            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 col-xxl-4 m-0 p-0 d-none d-sm-none d-md-block d-lg-block d-xl-block">
+                    <div class="owl-tree owl-carousel">
+                        @foreach (var image in Model.SliderHome2.ObrazkiDostepneWSliderze)
+                        {
+                            <div>
+                                <a href="..\@image.fullPath" class="glightbox" data-gallery="gallery">
+                                <img src="..\@image.fullPath" alt="" style="height: 450px;" />
+                                </a>
+                            </div>
+                        }
+                    </div>
+                </div>
+            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 m-0 p-0 d-none d-sm-none d-md-none d-lg-none d-xl-none d-xxl-block">
+                    <div class="owl-four owl-carousel">
+                        @foreach (var image in Model.SliderHome3.ObrazkiDostepneWSliderze)
+                        {
+                            <div>
+                                <a href="..\@image.fullPath" class="glightbox" data-gallery="gallery">
+                                <img src="..\@image.fullPath" alt="" style="height: 450px;" />
+                                </a>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
@@ -51,12 +71,73 @@
                 const lightbox = GLightbox({
                     touchNavigation: true,
                     loop: false,
-                    autoplayVideos: true
+                    autoplayVideos: false
                 });
             </script>
 @*
- <script type="text/javascript">
+            <script>
+                var owl_carousel_one = $('.owl-carousel-one');
+                .owl_carousel_one.owlCarousel({
+                    loop: true,
+                    margin: 30,
+                    items: 1,
+                    autoplay: true,
+                    autoplayTimeout: 5000,
+                    autoplayHoverPause: true,
+                    smartSpeed: 1000
+                });
+
+            </script>*@
+
+    <script type="text/javascript">
         $('.owl-two.owl-carousel').owlCarousel({
+            animateOut: 'fadeOut',
+            animateIn: 'fadeIn',
+            transitionStyle: "fadeIn",
+            loop: true,
+            items: 1,
+            autoplayTimeout: 6500,
+            margin: 5,
+            navigation: false,
+            singleItem: true,
+            nav: false,
+            autoplay: 500,
+            stagePadding: 5,
+            smartSpeed: 3400
+        });
+    </script>
+
+    <script type="text/javascript">
+        $('.owl-tree.owl-carousel').owlCarousel({
+            animateOut: 'fadeOut',
+            animateIn: 'fadeIn',
+            transitionStyle: "fadeIn",
+            loop: true,
+            items: 1,
+            margin: 5,
+            autoplay: 2000,
+            autoplayTimeout: 8800,
+            stagePadding: 5,
+            smartSpeed: 5450
+        });
+    </script>
+    <script type="text/javascript">
+        $('.owl-four.owl-carousel').owlCarousel({
+            animateOut: 'fadeOut',
+            animateIn: 'fadeIn',
+            transitionStyle: "fadeIn",
+            loop: true,
+            items: 1,
+            margin: 5,
+            autoplayTimeout: 5500,
+            autoplay: 1000,
+            stagePadding: 5,
+            smartSpeed: 2450
+        });
+    </script>
+    @*
+ <script type="text/javascript">
+        $('.owl-two.1wl-carousel').owlCarousel({
             loop: false,
             margin: 5,
             autoplay: 1000,
@@ -95,15 +176,15 @@
 
         })
     </script>*@
-
-    <script type="text/javascript">
+    @*<script type="text/javascript">
         $('.owl-two.owl-carousel').owlCarousel({
-            animateOut: 'slideOutDown',
+            animateOut: 'fadeOut',
             animateIn: 'flipInX',
             items: 1,
+            autoplay: 1000,
             margin: 30,
             stagePadding: 30,
-            smartSpeed: 450
+            smartSpeed: 450,
             //autoWidth: true,
             ////stageOuterClass: 'overflow-visible',
             //navText: ['<i class="fa fa-angle-left" aria-hidden="true"></i>', '<i class="fa fa-angle-right" aria-hidden="true"></i>'],
@@ -135,7 +216,7 @@
             }
 
         })
-    </script>
+    </script>*@
 
 
     <script>
