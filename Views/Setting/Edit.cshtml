@@ -1,0 +1,61 @@
+﻿@model partner_aluro.Models.Setting;
+
+@{
+    ViewData["Title"] = "Ustawienia";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+
+<form class="needs-validation" asp-action="Edit" asp-route-id="@Model.SettingID" asp-controller="Setting" class="form-horizontal" method="post">
+
+    <div class="row">
+
+        <div class="col">
+            <div>
+                Ustawienia witryny
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="form-group row p-2">
+                    <label asp-for="@Model.SettingID" class="col-sm-4 col-form-label">SettingID</label>
+                    <input asp-for="@Model.SettingID" class="form-control" aria-required="true" readonly />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label asp-for="@Model.SliderHome1" class="control-label">Kategoria Główna:</label>
+                    <select asp-for="@Model.SliderHome1" class="form-control" asp-items="(IEnumerable<SelectListItem>)@ViewData["Slider"]">
+                        @*<option>Select one</option>*@
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+                <div class="form-group">
+                <label asp-for="@Model.SliderHome2" class="control-label">Kategoria Główna:</label>
+                    <select asp-for="@Model.SliderHome2" class="form-control" asp-items="(IEnumerable<SelectListItem>)@ViewData["Slider"]">
+                        @*<option>Select one</option>*@
+                    </select>
+                </div>
+
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label asp-for="@Model.SliderHome3" class="control-label">Kategoria Główna:</label>
+                    <select asp-for="@Model.SliderHome3" class="form-control" asp-items="(IEnumerable<SelectListItem>)@ViewData["Slider"]">
+                        @*<option>Select one</option>*@
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <button type="submit" class="btn btn-success">Zapisz</button>  <button id="btnBack" runat="server" text="Back" class="btn btn-primary" onclick="JavaScript: window.history.back(1); return false;">Powrót</button>
+        </div>
+    </div>
+</form>

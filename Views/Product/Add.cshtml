@@ -6,8 +6,7 @@
 }
 @section LinkStyleHead
     {
-    <script src="~/js/tinymce/tinymce.min.js"></script>
-
+        <script src="~/js/tinymce/tinymce.min.js"></script>
     }
 
 <form class="needs-validation" asp-action="Add" asp-route-id="@Model.ProductId" asp-controller="Product" class="form-horizontal" method="post" enctype="multipart/form-data">
@@ -25,8 +24,8 @@
 </form>
 
 @section Scripts {
-    <script src="~/js/tinymce.js"></script>
-
+ @*   <script src="~/js/tinymce.js"></script>*@
+    <script src="~/js/tinymceproduct.js"></script>
     <script>
         function preview_images() {
             var total_file = document.getElementById("images").files.length;

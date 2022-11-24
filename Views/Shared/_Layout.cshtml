@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - partner_aluro</title>
+    <title>@ViewData["Title"] - Partner Aluro</title>
     <!-- Core theme CSS (includes Bootstrap)-->
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -71,6 +71,8 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+    
     @await RenderSectionAsync("Scripts", required: false)
 
 @*     SZUKANIE SCRIPTS
@@ -101,61 +103,7 @@
         });
 
     </script>
-    <script>
-        //$('.owl-one.owl-carousel').owlCarousel({
-        //    loop: false,
-        //    margin: 5,
-        //    nav: true,
-        //    stageOuterClass: 'overflow-visible',
-        //    responsive: {
-        //        0: {
-        //            items: 2
-        //        },
-        //        300: {
-        //            items: 3
-        //        },
-        //        450: {
-        //            items: 4
-        //        },
-        //        600: {
-        //            items: 5
-        //        },
-        //        800: {
-        //            items: 6
-        //        },
-        //        1000: {
-        //            items: 6
-        //        },
-        //        1300: {
-        //            items: 7
-        //        },
-        //        1500: {
-        //            items: 8
-        //        }
-        //    }
-        //})
-
-        //$(function () {
-        //    $('.owl-one.owl-carousel')
-        //        .each(function () {
-        //            let carousel = $(this);
-        //            carousel.on('show.bs.dropdown', '[data-bs-toggle=dropdown]', function () {
-        //                // universal solution
-        //                let dropdown = bootstrap.Dropdown.getInstance(this);
-        //                $(dropdown._menu).insertAfter(carousel);
-
-        //                 //alternative for this particular layout
-        //                 //$(this).next('.dropdown-menu').insertAfter(carousel);
-        //            });
-        //        })
-        //        .owl - one.owlCarousel({
-        //            loop: true,
-        //            nav: true,
-        //             margin: 10
-        //        });
-
-        //});
-    </script>
+    
 
     <script type="text/javascript">
         $('.owl-one.owl-carousel').owlCarousel({
@@ -195,32 +143,10 @@
 
         })
     </script>
-    <script type="text/javascript">
-        $('.owl-carousel').owlCarousel({
-            loop: false,
-            margin: 5,
-            nav: false,
-            responsive: {
-                0: {
-                    items: 1
-                },
-                300: {
-                    items: 2
-                },
-                800: {
-                    items: 3
-                },
-                1000: {
-                    items: 4
-                }
-            }
-
-        })
-    </script>
 
 
     @*BOOTSTRAP*@
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script> 
     @*BOOTSTRAP*@
 </body>
 </html>

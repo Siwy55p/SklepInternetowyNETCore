@@ -29,7 +29,9 @@
         </div>
         <div class="form-group row p-2">
             <label asp-for="@Model.KrotkiOpis" class="col-sm-4 col-form-label">Krótki opis</label>
-            <textarea asp-for="@Model.KrotkiOpis" class="form-control" rows="2"></textarea>
+    <textarea asp-for="@Model.KrotkiOpis" id="#textarea" class="form-control" rows="2"></textarea>
+          
+        
         </div>
 
         <div class="form-group row">
@@ -135,13 +137,13 @@
 
         <div class="form-group">
             <label asp-for="@Model.CategoryId" class="control-label">Kategoria Główna:</label>
-            <select asp-for="@Model.CategoryId" class="form-control" asp-items="ViewBag.Category">
+    <select asp-for="@Model.CategoryId" class="form-control" asp-items="(IEnumerable<SelectListItem>)@ViewData["Category"]">
                 @*<option>Select one</option>*@
             </select>
         </div>
         <div class="form-group row">
             <label asp-for="@Model.Description" class="col-sm-4 col-form-label">Opis produktu</label>
-            <textarea asp-for="@Model.Description" class="form-control" rows="3"></textarea>
+    <textarea asp-for="@Model.Description" id="#textarea" class="form-control" rows="3"></textarea>
         </div>
 
 <div class="form-group row">
