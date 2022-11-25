@@ -16,6 +16,8 @@ namespace partner_aluro.Controllers
         public IActionResult Index()
         {
             var response = _apiServiceNBPKurs.Get("EUR");
+            ViewData["Euro"] = response;
+
             return View();
         }
     }

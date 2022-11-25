@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using partner_aluro.Data;
 using partner_aluro.Services.Interfaces;
 using partner_aluro.ViewComponents;
+using System;
 using System.Security.Claims;
 using System.Threading.Tasks.Sources;
 
@@ -134,16 +135,13 @@ namespace partner_aluro.Models
 
         public decimal GetCartTotalBrutto()
         {
-
-
-
             decimal CartTotal1 = _context.CartItems
                 .Where(ci => ci.CartId == Id)
                 .Where(ci=> ci.Product.Promocja == false)
                 .Select(ci => ci.Product.CenaProduktu * ci.Quantity)
                 .Sum();
 
-            decimal CartTotal2 = (decimal)_context.CartItems
+            decimal CartTotal2 = _context.CartItems
                 .Where(ci => ci.CartId == Id)
                 .Where(ci => ci.Product.Promocja == true)
                 .Select(ci => ci.Product.CenaPromocyja * ci.Quantity)
@@ -159,14 +157,13 @@ namespace partner_aluro.Models
         }
         public decimal GetCartTotalNetto()
         {
-
             decimal CartTotal1 = _context.CartItems
                 .Where(ci => ci.CartId == Id)
                 .Where(ci => ci.Product.Promocja == false)
                 .Select(ci => ci.Product.CenaProduktu * ci.Quantity)
                 .Sum();
 
-            decimal CartTotal2 = (decimal)_context.CartItems
+            decimal CartTotal2 = _context.CartItems
                 .Where(ci => ci.CartId == Id)
                 .Where(ci => ci.Product.Promocja == true)
                 .Select(ci => ci.Product.CenaPromocyja * ci.Quantity)

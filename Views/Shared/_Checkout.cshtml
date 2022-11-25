@@ -43,7 +43,7 @@
                             }
 
                             var Cena_brutto = (decimal)item.Product.CenaProduktu * (decimal)partner_aluro.Core.Constants.Vat;
-                            @if (item.Product.Promocja == true && item.Product.CenaPromocyja != null)
+                            @if (item.Product.Promocja == true /*&& item.Product.CenaPromocyja != null*/)
                             {
 
                                 Cena_brutto = (decimal)item.Product.CenaPromocyja * (decimal)partner_aluro.Core.Constants.Vat;
@@ -53,7 +53,7 @@
 
 
                             var CenaJednostkowa_netto = item.Product.CenaProduktu;
-                            @if (item.Product.Promocja == true && item.Product.CenaPromocyja != null)
+                            @if (item.Product.Promocja == true /*&& item.Product.CenaPromocyja != null*/)
                             {
 
                                 CenaJednostkowa_netto = (decimal)item.Product.CenaPromocyja;
@@ -70,7 +70,7 @@
                                     CenaJednostkowa_netto = item.Product.CenaProduktu * (1 - (partner_aluro.Core.Constants.Rabat / 100));
                                     CenaJednostkowa_brutto = (decimal)Cena_brutto * (1 - (partner_aluro.Core.Constants.Rabat / 100));
                             }
-                            else if (item.Product.Promocja == true && item.Product.CenaPromocyja != null)
+                            else if (item.Product.Promocja == true /*&& item.Product.CenaPromocyja != null*/)
                             {
                                 CenaJednostkowa_netto = (decimal)((decimal)item.Product.CenaPromocyja * (1 - (partner_aluro.Core.Constants.Rabat / 100)));
                                 CenaJednostkowa_brutto = (decimal)Cena_brutto * (1 - (partner_aluro.Core.Constants.Rabat / 100));
@@ -136,6 +136,8 @@
                         <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
                         <button class="btn btn-success float-right mr-5" type="submit" name="returnUrl" value="@ViewBag.returnUrl"><i class="fa-solid fa-angles-right"></i>Powrót</button>
                     </form>*@
+
+                <button id="btnBack" runat="server" text="Back" class="btn btn-primary" onclick="JavaScript: window.history.back(1); return false;">@language.Getkey("Powrót do sklepu")</button>
                    <a class="a-cleanup" asp-controller="Cart" asp-action="ClearCart"><div class="btn btn-success float-right mr-5"><i class="fa-solid fa-trash-can"> </i> @language.Getkey("Wyczyść zamówienie")</div></a>
             }
             else

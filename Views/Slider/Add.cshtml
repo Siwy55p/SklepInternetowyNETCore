@@ -1,15 +1,8 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
-@model partner_aluro.Models.Slider
+﻿@model partner_aluro.Models.Slider
 @{
     ViewData["Title"] = "Ustawienia slider o id ";
     Layout = "~/Views/Shared/_Dashboard.cshtml";
 }
-
-
 <form asp-action="Add" asp-controller="Slider" method="post" enctype="multipart/form-data">
 
     @await Html.PartialAsync("_FormSlider")
@@ -19,14 +12,22 @@
 
 
 @section Scripts {
+    <script>
+    $(document).ready(function () {
+    $('#SliderTable').DataTable(
+        {
+            "order": [[0, 'desc']]
+        });
+    });
+    </script>
 
     <script>
-        function preview_images() {
+        function preview_images1() {
             var total_file = document.getElementById("images").files.length;
-            $('#image_preview').append("");
+            $('#image_preview1').append("");
 
             for (var i = 0; i < total_file; i++) {
-                $('#image_preview').append("<div class='col-sm-2'><img  style='width: 110px;' src='" + URL.createObjectURL(event.target.files[i]) + "'></div>");
+                $('#image_preview1').append("<div class='col-sm-2'><img  style='width: 110px;' src='" + URL.createObjectURL(event.target.files[i]) + "'></div>");
             }
         }
     </script>

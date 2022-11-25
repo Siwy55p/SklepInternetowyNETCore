@@ -1,22 +1,24 @@
-﻿
+﻿@model partner_aluro.Models.KursResponse
 
 @{
     ViewData["Title"] = "ApiKursNBP";
     Layout = "~/Views/Shared/_Dashboard.cshtml";
 }
 
+@{
+    var today = DateTime.Today;
+    var yesterday = today.AddDays(-1);
 
+}
 
-
-<div class="col-sm-6">
-    TEST
-@*
-    <input asp-for="@Model.User.Nazwisko" id="Nazwisko" class="form-control" value="@Model.User.Nazwisko" autocomplete="Nazwisko" aria-required="true" />*@
+<div class="row">
+    <div class="col-sm-6">
+        Aktualny kurs Euro <b>@ViewData["Euro"]</b> pobierany z NBP z dnia: <b>@yesterday</b>;
+    </div>
 </div>
-
-
-<div class="col-sm-6">@*
-    <label asp-for="@Model.User.NazwaFirmy" class="form-label">Nazwa firmy</label>
-    <input asp-for="@Model.User.NazwaFirmy" id="NazwaFirmy" class="form-control" autocomplete="NazwaFirmy" aria-required="true" />
-*@
+<hr />
+<div class="row">
+    <div class="col-sm-2">
+        <button id="btnBack" runat="server" text="Back" class="btn btn-primary" onclick="JavaScript: window.history.back(1); return false;">Powrót</button>
+    </div>
 </div>

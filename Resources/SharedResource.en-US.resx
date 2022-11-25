@@ -867,4 +867,7 @@
   <data name="Resetuj hasło" xml:space="preserve">
     <value>Reset password</value>
   </data>
+  <data name="Powrót do sklepu" xml:space="preserve">
+    <value>Return to the shop</value>
+  </data>
 </root>

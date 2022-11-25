@@ -10,11 +10,9 @@ using partner_aluro.Data;
 using partner_aluro.Models;
 using partner_aluro.Services;
 using partner_aluro.Services.Interfaces;
+//using partner_aluro.Services.Interfaces;
 using partner_aluro.ViewModels;
-using System;
-using static DeepL.Model.Usage;
-using static iTextSharp.text.pdf.AcroFields;
-using Order = partner_aluro.Models.Order;
+
 
 namespace partner_aluro.Controllers
 {
@@ -728,7 +726,7 @@ namespace partner_aluro.Controllers
             
             order.OrderItems = orderItems;
 
-            ViewBag.StanyZamowienia = GetStanyZamowienia();
+            ViewData["StanyZamowienia"] = GetStanyZamowienia();
 
             //var adres1 = _orderService.GetUserAdress1(order.UserID);
             //var adres2 = _orderService.GetUserAdress2(order.UserID);

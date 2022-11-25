@@ -14,7 +14,14 @@
 
 
 @section Scripts {
-
+    <script>
+        $(document).ready(function () {
+            $('#SliderTable').DataTable(
+                {
+                    "order": [[0, 'desc']]
+                });
+        });
+    </script>
     <script>
         function preview_images() {
             var total_file = document.getElementById("images").files.length;

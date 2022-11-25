@@ -870,4 +870,7 @@
   <data name="Resetuj hasło" xml:space="preserve">
     <value>Resetuj hasło</value>
   </data>
+  <data name="Powrót do sklepu" xml:space="preserve">
+    <value>Powrót do sklepu</value>
+  </data>
 </root>

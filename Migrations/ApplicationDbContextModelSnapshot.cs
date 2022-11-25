@@ -241,7 +241,7 @@ namespace partner_aluro.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AddressPrestashop", (string)null);
+                    b.ToTable("AddressPrestashop");
                 });
 
             modelBuilder.Entity("partner_aluro.Models.Adress1rozliczeniowy", b =>
@@ -314,7 +314,7 @@ namespace partner_aluro.Migrations
                         .IsUnique()
                         .HasFilter("[UserID] IS NOT NULL");
 
-                    b.ToTable("Adress1rozliczeniowy", (string)null);
+                    b.ToTable("Adress1rozliczeniowy");
                 });
 
             modelBuilder.Entity("partner_aluro.Models.Adress2dostawy", b =>
@@ -361,7 +361,7 @@ namespace partner_aluro.Migrations
                         .IsUnique()
                         .HasFilter("[UserID] IS NOT NULL");
 
-                    b.ToTable("Adress2dostawy", (string)null);
+                    b.ToTable("Adress2dostawy");
                 });
 
             modelBuilder.Entity("partner_aluro.Models.ApplicationUser", b =>
@@ -499,7 +499,7 @@ namespace partner_aluro.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("CartItems", (string)null);
+                    b.ToTable("CartItems");
                 });
 
             modelBuilder.Entity("partner_aluro.Models.Category", b =>
@@ -534,7 +534,7 @@ namespace partner_aluro.Migrations
 
                     b.HasKey("CategoryId");
 
-                    b.ToTable("Category", (string)null);
+                    b.ToTable("Category");
                 });
 
             modelBuilder.Entity("partner_aluro.Models.ContactPrestashop", b =>
@@ -616,7 +616,7 @@ namespace partner_aluro.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ContactsPrestashop", (string)null);
+                    b.ToTable("ContactsPrestashop");
                 });
 
             modelBuilder.Entity("partner_aluro.Models.ImageModel", b =>
@@ -666,7 +666,7 @@ namespace partner_aluro.Migrations
 
                     b.HasIndex("ProductImagesId");
 
-                    b.ToTable("Images", (string)null);
+                    b.ToTable("Images");
                 });
 
             modelBuilder.Entity("partner_aluro.Models.Newsletter", b =>
@@ -685,7 +685,7 @@ namespace partner_aluro.Migrations
 
                     b.HasKey("NewsletterID");
 
-                    b.ToTable("Newsletter", (string)null);
+                    b.ToTable("Newsletter");
                 });
 
             modelBuilder.Entity("partner_aluro.Models.Order", b =>
@@ -738,7 +738,7 @@ namespace partner_aluro.Migrations
 
                     b.HasIndex("adresRozliczeniowyAdres1rozliczeniowyId");
 
-                    b.ToTable("Orders", (string)null);
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("partner_aluro.Models.OrderItem", b =>
@@ -767,7 +767,7 @@ namespace partner_aluro.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("OrderItems", (string)null);
+                    b.ToTable("OrderItems");
                 });
 
             modelBuilder.Entity("partner_aluro.Models.Product", b =>
@@ -790,7 +790,7 @@ namespace partner_aluro.Migrations
                     b.Property<decimal?>("CenaProduktuDetal")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<decimal?>("CenaPromocyja")
+                    b.Property<decimal>("CenaPromocyja")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime?>("DataDodania")
@@ -873,7 +873,7 @@ namespace partner_aluro.Migrations
                     b.HasIndex("Symbol")
                         .IsUnique();
 
-                    b.ToTable("Products", (string)null);
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("partner_aluro.Models.ProductCategory", b =>
@@ -896,7 +896,7 @@ namespace partner_aluro.Migrations
 
                     b.HasIndex("ProductID");
 
-                    b.ToTable("ProductCategory", (string)null);
+                    b.ToTable("ProductCategory");
                 });
 
             modelBuilder.Entity("partner_aluro.Models.ProductNazwyPrestashop", b =>
@@ -945,7 +945,7 @@ namespace partner_aluro.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ProductsNamePrestashop", (string)null);
+                    b.ToTable("ProductsNamePrestashop");
                 });
 
             modelBuilder.Entity("partner_aluro.Models.ProductPrestashop", b =>
@@ -1102,7 +1102,7 @@ namespace partner_aluro.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ProductsPrestashop", (string)null);
+                    b.ToTable("ProductsPrestashop");
                 });
 
             modelBuilder.Entity("partner_aluro.Models.ProductQuantityPrestashop", b =>
@@ -1136,7 +1136,7 @@ namespace partner_aluro.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("ProductsQuantityPrestashop", (string)null);
+                    b.ToTable("ProductsQuantityPrestashop");
                 });
 
             modelBuilder.Entity("partner_aluro.Models.ProfilDzialalnosci", b =>
@@ -1159,7 +1159,7 @@ namespace partner_aluro.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ProfileDzialalnosci", (string)null);
+                    b.ToTable("ProfileDzialalnosci");
                 });
 
             modelBuilder.Entity("partner_aluro.Models.Setting", b =>
@@ -1181,7 +1181,7 @@ namespace partner_aluro.Migrations
 
                     b.HasKey("SettingID");
 
-                    b.ToTable("Setting", (string)null);
+                    b.ToTable("Setting");
                 });
 
             modelBuilder.Entity("partner_aluro.Models.Slider", b =>
@@ -1201,7 +1201,7 @@ namespace partner_aluro.Migrations
 
                     b.HasKey("ImageSliderID");
 
-                    b.ToTable("Sliders", (string)null);
+                    b.ToTable("Sliders");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
