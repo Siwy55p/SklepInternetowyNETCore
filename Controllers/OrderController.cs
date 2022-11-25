@@ -12,6 +12,7 @@ using partner_aluro.Services;
 using partner_aluro.Services.Interfaces;
 using partner_aluro.ViewModels;
 using System;
+using static DeepL.Model.Usage;
 using static iTextSharp.text.pdf.AcroFields;
 using Order = partner_aluro.Models.Order;
 
@@ -34,8 +35,10 @@ namespace partner_aluro.Controllers
 
         private readonly IProductService _productService;
 
+        private readonly IEmailService _emailService;
 
-        public OrderController(IProductService productService, IUnitOfWorkOrder unitOfWorkOrder ,ApplicationDbContext context, Cart cart, UserManager<ApplicationUser> userManager, IOrderService orderService, IUnitOfWork unitOfWork, IUnitOfWorkAdress1rozliczeniowy unitOfWorkAdress1rozliczeniowy, IUnitOfWorkAdress2dostawy unitOfWorkAdress2dostawy)
+
+        public OrderController(IProductService productService, IUnitOfWorkOrder unitOfWorkOrder ,ApplicationDbContext context, Cart cart, UserManager<ApplicationUser> userManager, IOrderService orderService, IUnitOfWork unitOfWork, IUnitOfWorkAdress1rozliczeniowy unitOfWorkAdress1rozliczeniowy, IUnitOfWorkAdress2dostawy unitOfWorkAdress2dostawy, IEmailService emailService)
         {
             _context = context;
             _cart = cart;
@@ -50,6 +53,8 @@ namespace partner_aluro.Controllers
             _unitOfWorkAdress2dostawy = unitOfWorkAdress2dostawy;
 
             _productService = productService;
+
+            _emailService = emailService;
         }
 
         [HttpGet]
@@ -163,6 +168,16 @@ namespace partner_aluro.Controllers
 
                 CreateOrder(CartOrder.Orders);
                 _cart.ClearCart();
+
+                EmailDto email = new EmailDto()
+                {
+                    To = user.Email,
+                    Subject = "Dziękujemy za złożenie zamówienia.",
+                    Body = $"<h1> Dziękujemy za założenie zamówienia.</h1>Potwierdzenie zamówienia <br/>Twoje zamówienie zostało przyjęte.<br/>Po skompletowaniu Twojego zamówienia otrzymasz email z kosztem dostawy i łączną sumą do zapłaty.<br/>W razie pytań lub wątpliwości, prosimy o kontakt z naszą obsługą klienta.<br/>"
+
+                };
+
+                _emailService.SendEmailAsync(email);
 
 
 
