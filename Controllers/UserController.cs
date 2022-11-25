@@ -388,7 +388,7 @@ namespace partner_aluro.Controllers
                 {
                     Subject = "Reset hasła",
                     To = email,
-                    Body = $"<p>Proszę ustaw swoje hasło <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>klikając tutaj</a>.</p>"
+                    Body = $"<p>Proszę ustaw swoje nowe hasło <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>klikając tutaj</a>.</p>"
                 };
 
                 _emailService.SendEmailAsync(newClint); //Bardzo specjalnie tak jest jak jest zrobione. Musi tak zostać.
@@ -397,8 +397,10 @@ namespace partner_aluro.Controllers
                 //    Input.Email,
                 //    "Reset Password",
                 //    $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
-                return RedirectToAction("Edit", new { id = user.Id });
+                return View(user);
+                //return RedirectToAction("Edit", new { id = user.Id });
             }
+
             return RedirectToAction("Index");
         }
         private ApplicationUser CreateUser()
