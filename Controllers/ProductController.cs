@@ -55,7 +55,8 @@ namespace partner_aluro.Controllers
         [HttpGet]
         public async Task <IActionResult> Edit(int id)
         {
-            ViewBag.Category = GetCategories();
+            ViewData["Category"] = GetCategories();
+            //ViewBag.Category = GetCategories();
             Product produkt = await _ProductService.GetProductId(id);
             produkt.Kategorie = _context.ProductCategory.Where(x => x.ProductID == id).ToList();
             return View(produkt);
@@ -67,7 +68,8 @@ namespace partner_aluro.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Product product)
         {
-            ViewBag.Category = GetCategories();
+            ViewData["Category"] = GetCategories();
+            //ViewBag.Category = GetCategories();
 
             product.Product_Images = _context.Images.Where(x => x.ProductImagesId == product.ProductId).ToList();
 
@@ -135,7 +137,9 @@ namespace partner_aluro.Controllers
         [HttpGet]
         public IActionResult Add()
         {
-            ViewBag.Category = GetCategories();
+            //ViewBag.Category = GetCategories();
+
+            ViewData["Category"] = GetCategories();
 
             Product product = new Product();
             //product.Cats = _ProductService.GetListCategory();
@@ -208,7 +212,9 @@ namespace partner_aluro.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(Product product)
         {
-            ViewBag.Category = GetCategories();
+            //ViewBag.Category = GetCategories();
+
+            ViewData["Category"] = GetCategories();
 
             //string NameEn = "Angielska Nazwa";
 
@@ -313,7 +319,8 @@ namespace partner_aluro.Controllers
         [HttpGet]
         public async Task<IActionResult> List()
         {
-            ViewBag.Category = GetCategories();
+            //ViewData["Category"] = GetCategories();
+            //ViewBag.Category = GetCategories();
             return View(await _ProductService.GetProductList());
         }
 

@@ -32,18 +32,23 @@
 
                         <div class="column">
                             <div class="main_image">
-                                <a id="myLink" href="~/images/produkty/@Model.Symbol/@Model.ImageUrl" class="glightbox">
-                                    <img class="main_image" id=featured src="~/images/produkty/@Model.Symbol/@Model.ImageUrl">
+                                @*<a id="myLink" href="~/images/produkty/@Model.Symbol/@Model.ImageUrl" class="glightbox">*@
+                                <a id="myLink" href="~/images/produkty/@Model.Symbol/@Model.ImageUrl" onclick="Open(this)" value="2" class="glightbox">
+                                    <img class="main_image" id=featured src="~/images/produkty/@Model.Symbol/@Model.ImageUrl" >
                                 </a>
                             </div>
 
                             <div id="slide-wrapper">
                                 <img  id="slideLeft" class="arrow" src="~/images/produktslider/arrow-left.png">
                                 <div id="slider">
-                                    @foreach (var img in Model.Product_Images.OrderBy(i=>i.kolejnosc) )
+                                    @foreach (var img in Model.Product_Images.OrderBy(o=>o.kolejnosc).Select((value, x) => (value,x)) )
                                     {
-                                        <a href="~/images/produkty/@Model.Symbol/@img.ImageName" class="glightbox" data-gallery="gallery">
-                                            <img class="thumbnail_product" src="~/images/produkty/@Model.Symbol/@img.ImageName" alt="@img.Product" width="70px">
+                                        
+                                            var index = @img.x + 1;
+                                        
+
+                                        <a href="~/images/produkty/@Model.Symbol/@img.value.ImageName" class="glightbox" data-gallery="gallery">
+                                            <img id="@index" value="@img.value.kolejnosc" class="thumbnail_product" onmouseover="Over(this)" src="~/images/produkty/@Model.Symbol/@img.value.ImageName" alt="@img.value.Product" width="70px">
                                         </a>
                                     }
                                 </div>
@@ -177,15 +182,49 @@
 
 @section Scripts {
 
+    @*<script>
+        function Open()
+        {
+
+        }
+    </script>*@
+
     <script src="~/js/glightbox.js"></script>
     <script src="~/js/glightbox.min.js"></script>
 
+
+
     <script>
+        function Open(elem) {
+
+            //var value = elem.value;
+            //var id = elem.id;
+
+            //lightbox.settings.startAt = value;
+            //lightbox.open()
+
+            //alert(value);
+        }
+        function Over(elem) {
+
+            var value2 = elem.value;
+            var id2 = elem.id;
+            
+            lightbox.settings.startAt = id2;
+            
+            //alert(id2);
+        }
+
         const lightbox = GLightbox({
             touchNavigation: true,
             loop: false,
             autoplayVideos: true
         });
+
+        lightbox.on('open', () => {
+            // Do something
+        });
+
     </script>
 
 @*    <script>
@@ -201,25 +240,23 @@
 *@
 
     <script type="text/javascript">
-		let thumbnails = document.getElementsByClassName('thumbnail_product')
+		let thumbnails = document.getElementsByClassName('thumbnail_product');
 
-		let activeImages = document.getElementsByClassName('active')
+		let activeImages = document.getElementsByClassName('active');
 
 		for (var i=0; i < thumbnails.length; i++){
 
 			thumbnails[i].addEventListener('mouseover', function(){
-				console.log(activeImages)
-				
+				console.log(activeImages);
+
+
 				if (activeImages.length > 0){
-					activeImages[0].classList.remove('active')
+					activeImages[0].classList.remove('active');
 				}
 				
 
 				this.classList.add('active')
-				document.getElementById('featured').src = this.src
-
-
-                document.getElementById('myLink').href = this.src
+				document.getElementById('featured').src = this.src;
 
             })
 		}

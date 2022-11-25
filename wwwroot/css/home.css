@@ -1,3 +1,12 @@
+
+img.image {
+    max-height: 400px;
+}
+
+image {
+    height: 300px;
+}
+
 .fade-in {
     animation: fadeIn 1s;
 }
@@ -8,9 +17,7 @@
 
 .test 
 {
-
     font-size: 36px;
-    
 }
 
 @keyframes fadeIn {

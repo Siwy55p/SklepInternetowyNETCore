@@ -51,6 +51,9 @@ namespace partner_aluro.Core
         public static string UserId;
 
         public static decimal Rabat;
+        public static int SliderHome1;
+        public static int SliderHome2;
+        public static int SliderHome3;
 
         public static string ResetMessageEmail = $"Wiadomosc.";
 

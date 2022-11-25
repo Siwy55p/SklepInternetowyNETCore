@@ -32,12 +32,12 @@ a {
     font-weight: 400;
 }
     a:hover {
-        color: white;
+        color: black;
         font-weight: 600;
         text-decoration: none;
     }
     a:active {
-        color: white;
+        color: black;
         font-weight: 600;
         text-decoration: none;
     }
