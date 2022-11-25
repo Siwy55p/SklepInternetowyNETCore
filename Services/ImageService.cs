@@ -147,7 +147,6 @@ namespace partner_aluro.Services
 
         public async Task<List<ImageModel>> ListImageAsync()
         {
-
             return await _context.Images.ToListAsync();
         }
 

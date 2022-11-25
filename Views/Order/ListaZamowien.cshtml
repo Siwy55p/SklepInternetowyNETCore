@@ -3,10 +3,15 @@
     ViewData["Title"] = "Users Page";
     Layout = "~/Views/Shared/_Dashboard.cshtml";
 }
+<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-8">
 
-@await Html.PartialAsync("_ListOrder")
+                @await Html.PartialAsync("_ListOrder")
 
-
+        </div>
+    </div>
+</div>
 
 @section Scripts {
 @*

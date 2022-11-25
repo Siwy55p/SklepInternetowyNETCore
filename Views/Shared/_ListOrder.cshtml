@@ -1,11 +1,6 @@
 ﻿@model ICollection<partner_aluro.Models.Order>
 
-<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-    <div class="row justify-content-center align-items-center">
-        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-10 col-xxl-8">
 
-            <h4>HISTORIA ZAMÓWIEŃ</h4>
-                Poniżej wyświetlone są wszystkie Twoje zamówienia, złożone przez Ciebie od momentu utworzenia konta.
             @if (@Model != null)
             {
                 <div class="row">
@@ -31,8 +26,8 @@
                                                 @if (User.IsInRole("Administrator") || User.IsInRole("Manager"))
                                                 {
                                                     <th>Podgląd</th>
+                                                    <th>PDF</th>
                                                 }
-                                                <th>PDF</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -50,16 +45,16 @@
                                             
                                                     @if (order.StanZamowienia == StanZamowienia.Nowe)
                                                     {
-                                                        <td style="background: green">@order.StanZamowienia</td>
+                                            <td><span style="background-color: green">@order.StanZamowienia<span></td>
                                                     }else if (order.StanZamowienia == StanZamowienia.Wrealizacji)
                                                     {
-                                                        <td style="background: DarkOrange">@order.StanZamowienia</td>
+                                            <td><span style="background: DarkOrange">@order.StanZamowienia<span></td>
                                                     }else if (order.StanZamowienia == StanZamowienia.Zrealizowane)
                                                     {
-                                                        <td style="background: BlueViolet">@order.StanZamowienia</td>
+                                            <td><span style="background: BlueViolet">@order.StanZamowienia<span></td>
                                                     }else if (order.StanZamowienia == StanZamowienia.Anulowane)
                                                     {
-                                                        <td style="background: red">@order.StanZamowienia</td>
+                                            <td><span style="background: red">@order.StanZamowienia</span></td>
                                                     }else
                                                     {
                                                         <td>@order.StanZamowienia</td>
@@ -70,7 +65,6 @@
                                                         <td>
                                                         <a asp-controller="Order" asp-action="Detail" asp-route-id="@order.Id">Podgląd</a>
                                                         </td>
-                                                    }
 
                                                     <td>
                                                         <form method="post" asp-controller="Order" asp-route-id="@order.Id" asp-action="PDFOrder">
@@ -78,6 +72,7 @@
                                                             <input type="submit" value="PDF"/>
                                                         </form>
                                                     </td>
+                                                    }
                                                 </tr>
                                             }
                                         </tbody>
@@ -89,7 +84,3 @@
                 </div>
 
             }
-        </div>
-
-    </div>
-</div>

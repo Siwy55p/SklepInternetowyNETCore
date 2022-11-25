@@ -4,4 +4,15 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@await Html.PartialAsync("_ListOrder")
+<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-10 col-xxl-8">
+
+            <h4>HISTORIA ZAMÓWIEŃ</h4>
+                Poniżej wyświetlone są wszystkie Twoje zamówienia, złożone przez Ciebie od momentu utworzenia konta.
+
+                @await Html.PartialAsync("_ListOrder")
+
+        </div>
+    </div>
+</div>
