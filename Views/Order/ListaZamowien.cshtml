@@ -1,11 +1,22 @@
 ﻿@model ICollection<partner_aluro.Models.Order>
 @{
-    ViewData["Title"] = "Users Page";
+    ViewData["Title"] = "Zamówienia";
     Layout = "~/Views/Shared/_Dashboard.cshtml";
 }
+
+@section LinkStyleHead
+    {
+        @*table*@
+   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
+   <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+        @*table*@
+    }
+
+
+
 <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
     <div class="row justify-content-center align-items-center">
-        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-8">
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12"">
 
                 @await Html.PartialAsync("_ListOrder")
 
@@ -13,15 +24,7 @@
     </div>
 </div>
 
+
 @section Scripts {
-@*
-    <script>
-        $(document).ready(function () {
-          $(".data-table2").each(function (_, table) {
-              $(table).DataTable({
-                  order: [[0, 'desc'], [2, 'asc']]
-              });
-          });
-        });
-    </script>*@
+    <script src="~/dashboard/js/scriptorder.js"></script> @*//inicjalizacja*@
 }

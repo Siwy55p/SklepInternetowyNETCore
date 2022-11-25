@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="~/dashboard/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" />
 
-    <link href="~/dashboard/css/jquery.datatables.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/dashboard/css/style.css" rel="stylesheet" />
 
 
@@ -283,13 +282,13 @@
                     @RenderBody()
         </div>
     </main>
+    @await RenderSectionAsync("Scripts", required: false)
+
     <script src="~/dashboard/js/bootstrap.bundle.min.js"></script>
     <script src="~/dashboard/js/jquery-3.5.1.js"></script>
+    <script src="~/dashboard/js/scriptorder.js"></script>
+@*
+    <script src="~/dashboard/js/script.js"></script>*@
 
-    <script src="~/dashboard/datatables/datatables.min.js"></script>
-
-    <script src="~/dashboard/js/script.js"></script>
-
-    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

@@ -45,7 +45,9 @@ namespace partner_aluro.Models
     {
         Anulowane,
         Nowe,
+        [Display(Name = "W realizacji")]
         Wrealizacji,
-        Zrealizowane
+        Zrealizowane,
+        Wysłane
     }
 }

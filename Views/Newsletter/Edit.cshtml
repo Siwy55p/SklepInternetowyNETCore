@@ -6,7 +6,7 @@
 }
 @section LinkStyleHead
     {
-    <link href="~/dashboard/datatables/datatables.min.css" rel="stylesheet" />
+    @*<link href="~/dashboard/datatables/datatables.min.css" rel="stylesheet" />*@
     <link href="~/css/newsletter/newsletter.css" rel="stylesheet" />
     <script src="~/js/tinymce/tinymce.min.js"></script>
     }
@@ -30,42 +30,38 @@
     <button asp-controller="Newsletter" asp-action="SendEmail">Wyslij</button>
 
     @section Scripts {
+        <script src="~/js/tinymceNewsletter.js"></script>
+
+        <script src="~/dashboard/js/scriptnewsletter.js"></script>
+        <script>
+
+            var ile=0;
+
+            function DodajDoNewsletter(ProduktId) {
+                ile++;
+                //var check = document.getElementById('Nazwa'+ KategoriaID);
+
+                //document.getElementById('Nazwa'+ProduktId).innerHTML = "element";
+                //alert('test2');
+
+                var activeEditor = tinyMCE.get('editor');
+                var content = activeEditor.getContent();
+                //var content1 = `<div><a href="#"><img src="https://localhost:44315/Images/Aluro_logo-x-300_2.png" alt="Aluro_logo-x-300_2.png" width="583" height="290">tekst</a> ${ProduktId},</div>`;
 
 
-    <script src="~/js/tinymceNewsletter.js"></script>
+                activeEditor.setContent("");
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("AddProductNewsletter", "Newsletter")',
+                    data: { ProduktId: ProduktId, ile: ile, content: content },
+                    success: function (result) {
+                        activeEditor.setContent(result);
+                    },
 
-    <script src="~/dashboard/datatables/datatables.min.js"></script>
-    <script src="~/dashboard/js/scriptnewsletter.js"></script>
-    <script>
-
-        var ile=0;
-
-        function DodajDoNewsletter(ProduktId) {
-            ile++;
-            //var check = document.getElementById('Nazwa'+ KategoriaID);
-
-            //document.getElementById('Nazwa'+ProduktId).innerHTML = "element";
-            //alert('test2');
-
-            var activeEditor = tinyMCE.get('editor');
-            var content = activeEditor.getContent();
-            //var content1 = `<div><a href="#"><img src="https://localhost:44315/Images/Aluro_logo-x-300_2.png" alt="Aluro_logo-x-300_2.png" width="583" height="290">tekst</a> ${ProduktId},</div>`;
-
-
-            activeEditor.setContent("");
-            $.ajax({
-                type: "POST",
-                url: '@Url.Action("AddProductNewsletter", "Newsletter")',
-                data: { ProduktId: ProduktId, ile: ile, content: content },
-                success: function (result) {
-                    activeEditor.setContent(result);
-                },
-
-                error: function (abc) {
-                    alert(abc.statusText);
-                },
-            });
-        }
-    </script>
-
-}
+                    error: function (abc) {
+                        alert(abc.statusText);
+                    },
+                });
+            }
+        </script>
+    }
