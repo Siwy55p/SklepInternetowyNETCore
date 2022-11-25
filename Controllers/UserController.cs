@@ -388,7 +388,7 @@ namespace partner_aluro.Controllers
                 {
                     Subject = "Reset hasła",
                     To = email,
-                    Body = $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>."
+                    Body = $"<p>Proszę ustaw swoje hasło <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>klikając tutaj</a>.</p>"
                 };
 
                 _emailService.SendEmailAsync(newClint); //Bardzo specjalnie tak jest jak jest zrobione. Musi tak zostać.
