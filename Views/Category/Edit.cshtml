@@ -9,7 +9,9 @@
 
         @await Html.PartialAsync("_AddCategoryForm")
 
-    <button type="submit">Zapisz zmiany</button>
+    <button class="btn btn-success" type="submit">Zapisz zmiany</button>
+    <button id="btnBack" runat="server" text="Back" class="btn btn-primary" onclick="JavaScript: window.history.back(1); return false;">Powrót</button>
+
 </form>
 @*
 @using (Html.BeginForm("Edit", "Category", FormMethod.Post))

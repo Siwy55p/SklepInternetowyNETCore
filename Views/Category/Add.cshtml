@@ -8,5 +8,7 @@
 @using (Html.BeginForm("Add", "Category", FormMethod.Post))
 {
     @await Html.PartialAsync("_AddCategoryForm", Model)
-    <button type="submit">Dodaj kategorię</button>
+    <button class="btn btn-success" type="submit">Dodaj kategorię</button>
+    <button id="btnBack" runat="server" text="Back" class="btn btn-primary" onclick="JavaScript: window.history.back(1); return false;">Powrót</button>
+
 }

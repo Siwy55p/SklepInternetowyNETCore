@@ -95,11 +95,7 @@
                             <span>Slider</span> 
                         </a>
                     </li>
-                    <li>
-                        <a href="@Url.Action("Index","ApiNBPKurs")" class="nav-link px-3">
-                            <span>NBPKurs</span>
-                        </a>
-                    </li>
+                    
                     <li>
                         <a href="@Url.Action("Index","Newsletter")" class="nav-link px-3">
                             <span>Newsletter</span>
@@ -109,11 +105,9 @@
                     <li>
                         <a class="nav-link px-3" asp-area="" asp-controller="Order" asp-action="ListaZamowien">Zamówienia</a>
                     </li>
+                    
                     <li>
-                        <a class="nav-link px-3" asp-area="" asp-controller="Email" asp-action="Index">Konfiguracja wiadomości Email</a>
-                    </li>
-                    <li>
-                        <a class="nav-link px-3" asp-area="" asp-controller="Image" asp-action="Index">Image</a>
+                        <a class="nav-link px-3" asp-area="" asp-controller="Image" asp-action="Index">Media</a>
                     </li>
                     <li class="my-4"><hr class="dropdown-divider bg-light" /></li>
                     <li>
@@ -197,7 +191,7 @@
                             </ul>
                         </div>
                     </li>
-                    <li class="my-4"><hr class="dropdown-divider bg-light" /></li>
+                    @*<li class="my-4"><hr class="dropdown-divider bg-light" /></li>
                     <li>
                         <div class="text-muted small fw-bold text-uppercase px-3 mb-3">
                             Addons
@@ -214,7 +208,7 @@
                             <span class="me-2"><i class="bi bi-table"></i></span>
                             <span>Tables</span>
                         </a>
-                    </li>
+                    </li>*@
                     @*<li>
                         <a href="@Url.Action("DeserializeXML","GenerateXML")" class="nav-link px-3">
                             <span>DeserializeXML</span>
@@ -273,9 +267,18 @@
                     <span>Uzytkownicy z Prestashop</span>
                     </a>
                     </li>*@
-                    <li>
+                    @*<li>
                         <a href="@Url.Action("CenaPromocyjnaChangeNotNull","ConnectPrestashop")" class="nav-link px-3">
                             <span>Ceny Nul Promocja</span>
+                        </a>
+                    </li>*@
+
+                    <li>
+                        <a class="nav-link px-3" asp-area="" asp-controller="Email" asp-action="Index">Konfiguracja Email</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index","ApiNBPKurs")" class="nav-link px-3">
+                            <span>Kurs Valut</span>
                         </a>
                     </li>
                 </ul>
