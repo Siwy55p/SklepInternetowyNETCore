@@ -175,7 +175,7 @@ namespace partner_aluro.Controllers
 
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
         // GET: Image/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int id)
         {
             if (id == null || _context.Images == null)
             {
@@ -187,6 +187,7 @@ namespace partner_aluro.Controllers
             {
                 return NotFound();
             }
+
             return View(imageModel);
         }
 
@@ -230,7 +231,7 @@ namespace partner_aluro.Controllers
 
         // GET: Image/Delete/5
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int id)
         {
             if (id == null || _context.Images == null)
             {

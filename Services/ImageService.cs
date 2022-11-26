@@ -200,12 +200,12 @@ namespace partner_aluro.Services
 
         public void Update(ImageModel imageModel)
         {
-            var content = _context.Images.Where(x => x.ImageId == imageModel.ImageId).FirstOrDefault();
-            if( content != null)
-            {
-                _context.Images.Update(content);
+            //var content = _context.Images.Where(x => x.ImageId == imageModel.ImageId).FirstOrDefault();
+            //if( content != null)
+            //{
+                _context.Images.Update(imageModel);
                 _context.SaveChanges();
-            }
+            //}
         }
     }
 }

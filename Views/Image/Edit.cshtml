@@ -5,13 +5,11 @@
     Layout = "~/Views/Shared/_Dashboard.cshtml";
 }
 
-<h1>Edit</h1>
-
-<h4>ImageModel </h4>
+<h1>Edycja obrazka</h1>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit" enctype="multipart/form-data" method="post">
+        <form asp-action="Edit" asp-route-id="@Model.ImageId" enctype="multipart/form-data" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <input asp-for="ImageId" class="form-control" readonly="readonly" />
@@ -64,7 +62,9 @@
                 <img src="\@Model.path\@Model.ImageName" asp-append-version="true" width="250px" height="250px">
             </div>
             <div class="form-group">
-                <input type="submit" value="Zapisz" class="btn btn-primary" />
+                <button id="btnBack" type="submit" class="btn btn-success">Zapisz </button>
+                @*<button id="btnBack" runat="server" text="Back" class="btn btn-primary" onclick="JavaScript: window.history.back(1); return false;">Powrót</button>*@
+
             </div>
         </form>
     </div>
