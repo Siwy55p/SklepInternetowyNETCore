@@ -169,5 +169,22 @@ namespace partner_aluro.Controllers
             resourceWriter.Close();
 
         }
+
+
+        public void CenaPromocyjnaChangeNotNull()
+        {
+            List<Product> produkty = new List<Product>();
+
+            List<Product> Produkty = _context.Products.Where(x => x.CenaPromocyja == null).ToList();
+
+            for (int i = 0; i < Produkty.Count(); i++)
+            {
+                Product produkt = Produkty[i];
+                produkt.CenaPromocyja = 0;
+                _context.Products.Update(produkt);
+                _context.SaveChanges();
+            }
+
+        }
     }
 }

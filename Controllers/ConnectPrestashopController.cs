@@ -42,17 +42,17 @@ namespace partner_aluro.Controllers
 
             _productQuantityPrestashop = productQuantityPrestashop;
         }
-        public IActionResult DodajProduktyZPrestashop()
+        public async Task<IActionResult> DodajProduktyZPrestashopAsync()  //Dodaj jeśli sa nowe lub aktualizuj jesli sa juz dodane do bazy
         {
 
             List<ProductPrestashop> listaProduktowDostepnychzPresta = _context.ProductsPrestashop.ToList(); // Ta lista nie potrzebna
             List<ProductPrestashop> listaproduktowDostepnychZPresty = new List<ProductPrestashop>();
 
-            List<ProductQuantityPrestashop> listaProduktowKToreSaNaStanie = _context.ProductsQuantityPrestashop.Where(x => x.quantity >= 1).ToList();
+            List<ProductQuantityPrestashop> listaProduktowKtoreSaNaStanie = _context.ProductsQuantityPrestashop.Where(x => x.quantity >= 1).ToList();
 
-            for(int i = 0; i < listaProduktowKToreSaNaStanie.Count(); i++)
+            for(int i = 0; i < listaProduktowKtoreSaNaStanie.Count(); i++)
             {
-                ProductPrestashop produktPresta = listaProduktowDostepnychzPresta.Where(x => x.id_product == listaProduktowKToreSaNaStanie[i].id_product).FirstOrDefault();
+                ProductPrestashop produktPresta = listaProduktowDostepnychzPresta.Where(x => x.id_product == listaProduktowKtoreSaNaStanie[i].id_product).FirstOrDefault();
                 //jesli sa ilosci dostepne to dodaj
                 listaproduktowDostepnychZPresty.Add(produktPresta);
             }
@@ -75,7 +75,7 @@ namespace partner_aluro.Controllers
                     {
 
                         //produkt wystepuje i trzeba zaktualizowac dane
-                        produkt.EAN13 = listaproduktowDostepnychZPresty[1].ean13;
+                        produkt.EAN13 = listaproduktowDostepnychZPresty[i].ean13;
                         produkt.Ilosc = _productQuantityPrestashop.iloscProduktu((int)listaproduktowDostepnychZPresty[i].id_product);
                         produkt.CenaProduktu = (decimal)listaproduktowDostepnychZPresty[i].price;
                         produkt.CenaProduktuDetal = (decimal)listaproduktowDostepnychZPresty[i].wholesale_price;
@@ -84,7 +84,7 @@ namespace partner_aluro.Controllers
                         produkt.GlebokoscProduktu = (decimal)listaproduktowDostepnychZPresty[i].depth;
                         produkt.WagaProduktu = (decimal)listaproduktowDostepnychZPresty[i].weight;
                         produkt.DataDodania = DateTime.Parse(listaproduktowDostepnychZPresty[i].date_add);
-                        _productService.UpdateAsync(produkt);
+                        await _productService.UpdateAsync(produkt);
 
                         aktualizacja.Add(produkt);
                     }
@@ -97,11 +97,11 @@ namespace partner_aluro.Controllers
                         product.Symbol = listaproduktowDostepnychZPresty[i].reference;
                         product.Description = _productNazwyPrestashop.DlugiOpisProduktu((int)listaproduktowDostepnychZPresty[i].id_product);
 
-                        product.DataDodania = DateTime.Parse(listaproduktowDostepnychZPresty[1].date_add);
-                        product.CenaProduktu = (decimal)listaproduktowDostepnychZPresty[1].price;
+                        product.DataDodania = DateTime.Parse(listaproduktowDostepnychZPresty[i].date_add);
+                        product.CenaProduktu = (decimal)listaproduktowDostepnychZPresty[i].price;
                         product.Pakowanie = "";
                         product.Materiał = "";
-                        product.Ilosc = _productQuantityPrestashop.iloscProduktu((int)listaproduktowDostepnychZPresty[1].id_product);
+                        product.Ilosc = _productQuantityPrestashop.iloscProduktu((int)listaproduktowDostepnychZPresty[i].id_product);
                         product.CenaProduktuDetal = (decimal)listaproduktowDostepnychZPresty[i].wholesale_price;
                         product.WagaProduktu = (decimal)listaproduktowDostepnychZPresty[i].weight;
                         product.SzerokoscProduktu = (decimal)listaproduktowDostepnychZPresty[i].width;
@@ -448,20 +448,5 @@ namespace partner_aluro.Controllers
             return View(persons);
         }
 
-        public void CenaPromocyjnaChangeNotNull()
-        {
-            List<Product> produkty = new List<Product>();
-
-            List<Product> Produkty = _context.Products.Where(x => x.CenaPromocyja == null).ToList();
-
-            for(int i  = 0; i < Produkty.Count(); i ++)
-            {
-                Product produkt = Produkty[i];
-                produkt.CenaPromocyja = 0;
-                _context.Products.Update(produkt);
-                _context.SaveChanges();
-            }
-
-        }
     }
 }
