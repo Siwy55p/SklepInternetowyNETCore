@@ -273,10 +273,12 @@ namespace partner_aluro.Controllers
             //    data.User.Adress2dostawy.KodPocztowy = data.User.Adress1rozliczeniowy.KodPocztowy;
             //}
 
+            var user = CreateUser();
+
             ViewData["Profile"] = GetProfiles();
 
 
-            var user = data.User;
+            user = data.User;
             if (user == null)
             {
                 return View(data);
@@ -290,6 +292,22 @@ namespace partner_aluro.Controllers
             {
                 return View(data);
             }
+
+
+            user.Imie = data.User.Imie;
+            user.Nazwisko = data.User.Nazwisko;
+            user.Email = data.User.Email;
+            user.UserName = data.User.UserName;
+            user.NotatkaOsobista = data.User.NotatkaOsobista;
+            user.IdProfilDzialalnosci = data.User.IdProfilDzialalnosci;
+            user.NazwaFirmy = data.User.NazwaFirmy;
+
+            user.Adress1rozliczeniowy = data.User.Adress1rozliczeniowy;
+            user.Adress2dostawy = data.User.Adress2dostawy;
+            _unitOfWork.User.UpdateUser(user);
+
+            
+
 
             var rolesToAdd = new List<string>();
             var rolesToDelete = new List<string>();
@@ -325,17 +343,6 @@ namespace partner_aluro.Controllers
                 await _signInManager.UserManager.RemoveFromRolesAsync(user, rolesToDelete);
             }
 
-            user.Imie = data.User.Imie;
-            user.Nazwisko = data.User.Nazwisko;
-            user.Email = data.User.Email;
-            user.UserName = data.User.UserName;
-            user.NotatkaOsobista = data.User.NotatkaOsobista;
-            user.IdProfilDzialalnosci = data.User.IdProfilDzialalnosci;
-            user.NazwaFirmy = data.User.NazwaFirmy;
-
-            user.Adress1rozliczeniowy = data.User.Adress1rozliczeniowy;
-            user.Adress2dostawy = data.User.Adress2dostawy;
-            _unitOfWork.User.UpdateUser(user);
 
             var Adres1roz = _unitOfWorkAdress1Rozliczeniowy.adress1Rozliczeniowy.Get(data.User.Id);
 
