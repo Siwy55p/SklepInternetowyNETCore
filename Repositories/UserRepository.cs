@@ -32,8 +32,18 @@ namespace partner_aluro.Repositories
 
         public ApplicationUser UpdateUser(ApplicationUser user)
         {
-            _context.Update(user);
-            _context.SaveChanges();
+
+            var users = _context.Users.FirstOrDefault(u => u.Id == user.Id);
+            if(users != null)
+            {
+                _context.Update(users);
+                _context.SaveChanges();
+            }
+            else
+            {
+                _context.Users.Add(user);
+                _context.SaveChanges();
+            }
 
             return user;
         }

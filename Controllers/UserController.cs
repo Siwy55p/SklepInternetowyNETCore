@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.WebUtilities;
 using System.Text;
 using System.Text.Encodings.Web;
 using partner_aluro.Data;
+using partner_aluro.Repositories;
 
 namespace partner_aluro.Controllers
 {
@@ -24,6 +25,8 @@ namespace partner_aluro.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IProfildzialalnosciService _profildzialalnosciService;
 
+        private readonly IUserRepository _userRepository;
+
         private readonly RegonService RegonService;
 
 
@@ -32,7 +35,7 @@ namespace partner_aluro.Controllers
 
         private readonly IEmailService _emailService;
 
-        public UserController(RegonService regonService, IEmailService emailService, IUnitOfWorkAdress1rozliczeniowy unitOfWorkAdress1Rozliczeniowy, IAdress2dostawyService adress2DostawyServicee, IAdress1rozliczeniowyService adress1RozliczeniowyService, IUnitOfWork unitOfWork, SignInManager<ApplicationUser> signInManager, IProfildzialalnosciService profildzialalnosciService)
+        public UserController(RegonService regonService, IEmailService emailService, IUnitOfWorkAdress1rozliczeniowy unitOfWorkAdress1Rozliczeniowy, IAdress2dostawyService adress2DostawyServicee, IAdress1rozliczeniowyService adress1RozliczeniowyService, IUnitOfWork unitOfWork, SignInManager<ApplicationUser> signInManager, IProfildzialalnosciService profildzialalnosciService, IUserRepository userRepository)
         {
             _unitOfWork = unitOfWork;
             _signInManager = signInManager;
@@ -45,6 +48,7 @@ namespace partner_aluro.Controllers
             _emailService = emailService;
 
             RegonService = regonService;
+            _userRepository = userRepository;   
         }
 
         public IActionResult Index()
@@ -163,9 +167,9 @@ namespace partner_aluro.Controllers
             user.Adress1rozliczeniowy = data.User.Adress1rozliczeniowy;
             user.Adress2dostawy = data.User.Adress2dostawy;
             _unitOfWork.User.UpdateUser(user);
+            //_userRepository.UpdateUser(user);
 
-
-            var Adres1roz = _unitOfWorkAdress1Rozliczeniowy.adress1Rozliczeniowy.Get(data.User.Id);
+            //var Adres1roz = _unitOfWorkAdress1Rozliczeniowy.adress1Rozliczeniowy.Get(data.User.Id);
 
             //_unitOfWorkAdress1Rozliczeniowy.adress1Rozliczeniowy.Update(data.User.Adress1rozliczeniowy);
 
@@ -275,6 +279,7 @@ namespace partner_aluro.Controllers
 
             var user = CreateUser();
 
+
             ViewData["Profile"] = GetProfiles();
 
 
@@ -304,9 +309,11 @@ namespace partner_aluro.Controllers
 
             user.Adress1rozliczeniowy = data.User.Adress1rozliczeniowy;
             user.Adress2dostawy = data.User.Adress2dostawy;
+            //_unitOfWork.User.UpdateUser(user);
+
             _unitOfWork.User.UpdateUser(user);
 
-            
+            //_userRepository.UpdateUser(user);
 
 
             var rolesToAdd = new List<string>();
@@ -344,13 +351,28 @@ namespace partner_aluro.Controllers
             }
 
 
-            var Adres1roz = _unitOfWorkAdress1Rozliczeniowy.adress1Rozliczeniowy.Get(data.User.Id);
+            var roles = _unitOfWork.Role.GetRoles();
+
+            var userRoles = await _signInManager.UserManager.GetRolesAsync(user);
+
+            var roleItems = roles.Select(role =>
+                new SelectListItem(
+                    role.Name,
+                    role.Id,
+                    userRoles.Any(ur => ur.Contains(role.Name)))).ToList();
 
 
+            var vm = new EditUserViewModel
+            {
+                User = user,
+                Roles = roleItems
+            };
+
+            return View(vm);
+
+            //var Adres1roz = _unitOfWorkAdress1Rozliczeniowy.adress1Rozliczeniowy.Get(data.User.Id);
 
 
-
-            return View();
         }
 
         private List<SelectListItem> GetProfiles() //Pobierz profile dzialalnbosci rabaty w zaleznosci jakiprofil dzialalnosci (sklep internetowy, stacjonarny)

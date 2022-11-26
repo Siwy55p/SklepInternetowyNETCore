@@ -31,6 +31,7 @@ namespace partner_aluro.Models
         public string? SposobDostawy { get; set; }
         public string? MetodaPlatnosci { get; set; }
 
+        public MetodaPlatnosci MetodPay { get; set;}
 
         public Adress1rozliczeniowy adresRozliczeniowy { get; set; }
 
@@ -38,8 +39,14 @@ namespace partner_aluro.Models
         public Adress2dostawy AdressDostawy { get; set; }
 
 
-    }
 
+    }
+    public enum MetodaPlatnosci
+    {
+        Przelew,
+        [Display(Name = "Gotówka")]
+        Gotowka
+    }
 
     public enum StanZamowienia
     {
