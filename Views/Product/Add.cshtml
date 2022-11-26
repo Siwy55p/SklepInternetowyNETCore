@@ -24,7 +24,16 @@
 </form>
 
 @section Scripts {
- @*   <script src="~/js/tinymce.js"></script>*@
+    <script>
+        $(document).ready(function () {
+            $('#ProductAddTable').DataTable(
+                {
+                    "order": [[0, 'desc']]
+                });
+        });
+    </script>
+
+
     <script src="~/js/tinymceproduct.js"></script>
     <script>
         function preview_images() {

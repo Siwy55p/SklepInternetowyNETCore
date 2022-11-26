@@ -32,31 +32,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="table-responsive">
-                           @* <table id="example"
-                               class="table table-striped data-table"
-                               style="width: 100%">
-                                <thead>
-                                    <tr>
-                                        <th>Column 1</th>
-                                        <th>Column 2</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Row 1 Data 1</td>
-                                        <td>Row 1 Data 2</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Row 2 Data 1</td>
-                                        <td>Row 2 Data 2</td>
-                                    </tr>
-                                </tbody>
-                            </table>*@
-
-
-                                <table 
-                                   class="table table-striped data-table"
-                                   style="width: 100%">
+                            <table id="ProductTableList" class="display" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th>Id</th>
@@ -132,8 +108,14 @@
 </div>
 
 @section Scripts{
-
-    <script src="~/dashboard/js/script.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#ProductTableList').DataTable(
+                {
+                    "order": [[0, 'desc']]
+                });
+        });
+    </script>
 
     <script>
         checkBox = document.getElementById('takenBefore').addEventListener('click', event => {
@@ -143,7 +125,3 @@
         });
     </script>
 }
-
-@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@

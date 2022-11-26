@@ -117,54 +117,54 @@
 //    });
 //});
 
-$(document).ready(function () {
-    $(".data-table").each(function (_, table) {
-        $(table).DataTable({
-            pageLength: 50,
-            order: [[0, 'desc'], [1, 'asc']]
-        });
-    });
-});
+//$(document).ready(function () {
+//    $(".data-table").each(function (_, table) {
+//        $(table).DataTable({
+//            pageLength: 50,
+//            order: [[0, 'desc'], [1, 'asc']]
+//        });
+//    });
+//});
 
-$(document).ready(function () {
-    $(".data-table2").each(function (_, table) {
-        $(table).DataTable({
-            pageLength: 50,
-            paging: false,
-            searching: false
-            order: [[0, 'desc'], [1, 'asc']]
-        });
-    });
-});
+//$(document).ready(function () {
+//    $(".data-table2").each(function (_, table) {
+//        $(table).DataTable({
+//            pageLength: 50,
+//            paging: false,
+//            searching: false
+//            order: [[0, 'desc'], [1, 'asc']]
+//        });
+//    });
+//});
 
-$(document).ready(function () {
-    $(".data-table12").each(function (_, table) {
-        $(table).DataTable({
-            pageLength: 50,
-            paging: false,
-            searching: false
-            order: [[0, 'desc'], [1, 'asc']]
-        });
-    });
-});
+//$(document).ready(function () {
+//    $(".data-table12").each(function (_, table) {
+//        $(table).DataTable({
+//            pageLength: 50,
+//            paging: false,
+//            searching: false
+//            order: [[0, 'desc'], [1, 'asc']]
+//        });
+//    });
+//});
 
-$(document).ready(function () {
-    $("#example").each(function (_, table) {
-        $(table).DataTable({
-            paging: false,
-            searching: false
-        });
-    });
-});
+//$(document).ready(function () {
+//    $("#example").each(function (_, table) {
+//        $(table).DataTable({
+//            paging: false,
+//            searching: false
+//        });
+//    });
+//});
 
-$(document).ready(function () {
-    $(".data-table12").each(function (_, table) {
-        $(table).DataTable({
-            "scrollY": "300px",
-            "paging": true,
-            "scrollCollapse": true,
-            pageLength: 10,
-            order: [[1, 'desc']]
-        });
-    });
-});
+//$(document).ready(function () {
+//    $(".data-table12").each(function (_, table) {
+//        $(table).DataTable({
+//            "scrollY": "300px",
+//            "paging": true,
+//            "scrollCollapse": true,
+//            pageLength: 10,
+//            order: [[1, 'desc']]
+//        });
+//    });
+//});
