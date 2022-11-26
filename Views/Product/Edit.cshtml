@@ -12,12 +12,12 @@
 
 
 <form class="needs-validation" asp-action="Edit" asp-route-id="@Model.ProductId" asp-controller="Product" class="form-horizontal" method="post" enctype="multipart/form-data">
-        
-    
+
+
+    <button type="submit" class="btn btn-success">Zapisz zmiany</button>
     
     <div class="row g-0">
 
-            <button type="submit" class="btn btn-success">Zapisz zmiany</button>
             <div class="col-md-6 border-end">
                 @Html.HiddenFor(h=>Model.ProductId)
                 @Html.ValidationSummary()
@@ -31,7 +31,7 @@
             @{
                 bool pokaz = true;
             }
-            @foreach (var names in ViewBag.Category)
+            @foreach (var names in (IEnumerable<SelectListItem>)@ViewData["Category"] )
             {
                 pokaz = true;
 
@@ -81,7 +81,17 @@
 <a class="btn btn-primary" asp-controller="Product" asp-action="Details" asp-route-id="@Model.ProductId">Podgląd </a>
 
 @section Scripts {
-
+    <script>
+        $(document).ready(function () {
+            $('#ProductEditImage').DataTable(
+                {
+                    "columnDefs": [
+                        { "width": "50px", "targets": 0 }
+                    ],
+                    "order": [[1, 'desc']]
+                });
+        });
+    </script>
     <script src="~/js/tinymceproduct.js"></script>
     <script>
         function preview_images() {

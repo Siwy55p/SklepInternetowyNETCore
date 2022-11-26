@@ -8,16 +8,13 @@
 
 @section LinkStyleHead
     {
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
-
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
 
     }
 @*
 @model partner_aluro.ViewModels.AddProductFormModel
 *@
 
-<div class="text-center">
+<div>
     <h1 class="display-4">Lista produktów</h1>
     
     <a asp-controller="Product" asp-action="Add" class="btn btn-success" px-3">
@@ -112,7 +109,11 @@
         $(document).ready(function () {
             $('#ProductTableList').DataTable(
                 {
-                    "order": [[0, 'desc']]
+                    "columnDefs": [
+                        { "width": "50px", "targets": 2 }
+                    ],
+                    pageLength: 50,
+                    "order": [[0, 'desc'], [3, 'desc']]
                 });
         });
     </script>
