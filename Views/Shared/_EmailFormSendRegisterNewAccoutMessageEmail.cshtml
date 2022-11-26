@@ -10,14 +10,15 @@
     }
     <form id="usrform" asp-controller="Email" asp-action="SaveChangeMessageToRegister">
         <div class="row">
-            <div class="col-8">
+            <div class="col">
             <label class="form-label" asp-for="@Model">Tytuł</label>
-                <input class="input-group" type="text" asp-for="@Model.Register.Subject" value="@Constants.RegisterNewAccoutMessageEmailSubject" />
+                @*<input class="input-group" type="text" asp-for="@Model.Register.Subject" @*value="@Constants.RegisterNewAccoutMessageEmailSubject"*@ />*@
+                <input class="input-group" type="text" asp-for="@Model.Register.Subject"/>
             </div>
         </div>
         <div class="row">
             <div class="form-group">
-                <label asp-for="@Model.Register.Body">Example textarea</label>
+                <label asp-for="@Model.Register.Body">Treść wiadomości</label>
                 <textarea class="form-control" asp-for="@Model.Register.Body" rows="3"></textarea>
             </div>
         </div>
