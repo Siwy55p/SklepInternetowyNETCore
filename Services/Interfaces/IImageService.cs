@@ -19,5 +19,7 @@ namespace partner_aluro.Services.Interfaces
 
         void Update(ImageModel imageModel);
 
+        Task UploadFilesAsync(IFormFileCollection files, Product? product = null);
+
     }
 }

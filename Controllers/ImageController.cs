@@ -1,10 +1,14 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 using partner_aluro.Data;
 using partner_aluro.Models;
 using partner_aluro.Services;
 using partner_aluro.Services.Interfaces;
+using System.Net;
 
 namespace partner_aluro.Controllers
 {
@@ -13,16 +17,18 @@ namespace partner_aluro.Controllers
     {
         private readonly ApplicationDbContext _context;
 
-        public readonly IWebHostEnvironment _hostEnvironment;
+        public readonly IWebHostEnvironment _webHostEnvironment;
+
 
         public readonly IImageService _imageService;
 
-        public ImageController(ApplicationDbContext context, IWebHostEnvironment hostEnvironment, IImageService imageServer)
+        public ImageController(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment, IImageService imageServer)
         {
             _context = context;
-            _hostEnvironment = hostEnvironment;
+            _webHostEnvironment = webHostEnvironment;
             _imageService = imageServer;
         }
+
 
         // GET: Image
         public async Task<IActionResult> Index()
@@ -71,7 +77,7 @@ namespace partner_aluro.Controllers
             //String path = Server.MapPath("~/images/"); // get the server path images folder
 
 
-            string wwwRootPath = _hostEnvironment.WebRootPath;
+            string wwwRootPath = _webHostEnvironment.WebRootPath;
             string path = Path.Combine(wwwRootPath + "/images/");
 
             String[] imagesfiles = Directory.GetFiles(path); //get all file from path
@@ -115,8 +121,8 @@ namespace partner_aluro.Controllers
 
             if (ModelState.IsValid)
             {
-                //Sabe image to wwwroot/image
-                string wwwRootPath = _hostEnvironment.WebRootPath;
+                //Save image to wwwroot/image
+                string wwwRootPath = _webHostEnvironment.WebRootPath;
                 string fileName = Path.GetFileNameWithoutExtension(imageModel.ImageFile.FileName);
                 string extension = Path.GetExtension(imageModel.ImageFile.FileName);
                 imageModel.ImageName =  fileName = fileName +"_"+ DateTime.Now.ToString("yymmssfff") + extension;
@@ -147,7 +153,7 @@ namespace partner_aluro.Controllers
             if (ModelState.IsValid)
             {
                 //Sabe image to wwwroot/image
-                string wwwRootPath = _hostEnvironment.WebRootPath;
+                string wwwRootPath = _webHostEnvironment.WebRootPath;
                 string fileName = Path.GetFileNameWithoutExtension(product.product_Image.ImageFile.FileName);
                 string extension = Path.GetExtension(product.product_Image.ImageFile.FileName);
                 product.product_Image.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
@@ -183,10 +189,14 @@ namespace partner_aluro.Controllers
             }
 
             var imageModel = await _context.Images.FindAsync(id);
+
             if (imageModel == null)
             {
                 return NotFound();
             }
+
+
+
 
             return View(imageModel);
         }
@@ -209,7 +219,41 @@ namespace partner_aluro.Controllers
             {
                 try
                 {
-                    _imageService.Update(imageModel);
+
+                    var files = HttpContext.Request.Form.Files;
+
+                    if (files.Count > 0 && imageModel.ImageFile != null) //To oznacza ze frontowy obrazek został dodany
+                    {
+                        string webRootPath = _webHostEnvironment.WebRootPath;
+
+                        for (int i = 0; i < files.Count; i++)
+                        {
+                            //Save image to wwwroot/image
+                            string path0 = imageModel.path;
+                            var uploadsFolder = Path.Combine(webRootPath, imageModel.path);
+
+                            if (!Directory.Exists(uploadsFolder))
+                            {
+                                Directory.CreateDirectory(uploadsFolder);
+                            }
+
+                            var extension = Path.GetExtension(files[i].FileName);
+                            var dynamicFileName = imageModel.ImageName;
+
+                            using (var filesStream = new FileStream(Path.Combine(uploadsFolder, dynamicFileName), FileMode.Create))
+                            {
+                                files[i].CopyTo(filesStream);
+                            }
+
+                            _imageService.Update(imageModel);
+                        }
+                    }
+
+
+
+
+
+
 
                     //await _context.SaveChangesAsync();
                 }
@@ -245,8 +289,6 @@ namespace partner_aluro.Controllers
                 return NotFound();
             }
 
-            _context.Images.Remove(imageModel);
-            _context.SaveChanges();
 
             return View(imageModel);
         }
@@ -260,7 +302,7 @@ namespace partner_aluro.Controllers
             var imageModel = await _context.Images.FindAsync(id);
 
             //delete image from wwwroot/images
-            var imagePath = Path.Combine(_hostEnvironment.WebRootPath, imageModel.path, imageModel.ImageName);
+            var imagePath = Path.Combine(_webHostEnvironment.WebRootPath, imageModel.path, imageModel.ImageName);
             if (System.IO.File.Exists(imagePath))
                 System.IO.File.Delete(imagePath);
             //delete tge record
@@ -275,11 +317,125 @@ namespace partner_aluro.Controllers
             if (imageModel != null)
             {
                 _context.Images.Remove(imageModel);
+
+                if (imageModel == null)
+                {
+                    return NotFound();
+                }
+
+                string webRootPath = _webHostEnvironment.WebRootPath;
+
+                if (imageModel.path != null)
+                {
+                    if (imageModel.fullPath != null)
+                    {
+                        string ExitingFile = Path.Combine(webRootPath, imageModel.path, imageModel.ImageName);
+                        System.IO.File.Delete(ExitingFile);
+                    }
+                    _context.Images.Remove(imageModel);
+                    _context.SaveChanges();
+                }
+
+
             }
             
-            await _context.SaveChangesAsync();
+            //await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+        
+
+        //[ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
+        //public static ImageModel UploadFiles(IFormFileCollection files, Product? product = null)
+        //{
+        //    //var files = HttpContext.Request.Form.Files;
+            
+
+        //    if (!IsInitialized)
+        //        throw new InvalidOperationException("Object is not initialized");
+
+        //    //var path = Path.Combine(_hostingEnvironment.WebRootPath, "uploads");
+        //    ImageModel imgModel = new ImageModel();  // sprawdz czy istnieje.
+
+        //    if (files.Count > 0) //To oznacza ze frontowy obrazek został dodany
+        //    {
+        //        string webRootPath = _hostingEnvironment.WebRootPath;
+
+        //        for (int i = 0; i < files.Count; i++)
+        //        {
+        //            //Save image to wwwroot/image
+        //            string path0 = "images\\produkty\\";
+
+        //            var uploadsFolder = Path.Combine(webRootPath, "images\\");
+        //            if (product != null)
+        //            {
+        //                uploadsFolder = Path.Combine(webRootPath, "images\\produkty\\" + product.Symbol);
+        //            }
+
+
+        //            if (!Directory.Exists(uploadsFolder))
+        //            {
+        //                Directory.CreateDirectory(uploadsFolder);
+        //            }
+
+        //            FileInfo fileInfo = new FileInfo(files[i].FileName);
+
+        //            var extension = Path.GetExtension(files[i].FileName);
+        //            var dynamicFileName = fileInfo.Name + extension;
+
+
+        //            if (product != null)
+        //            {
+        //                dynamicFileName = product.Symbol + "_" + i + "_" + extension;
+        //            }
+
+
+        //            using (var filesStream = new FileStream(Path.Combine(uploadsFolder, dynamicFileName), FileMode.Create))
+        //            {
+        //                files[i].CopyTo(filesStream);
+        //            }
+
+        //            //add product Image for new product
+        //            imgModel = new()
+        //            {
+        //                path = path0 + product.Symbol + "\\",
+        //                fullPath = path0 + product.Symbol + "\\" + dynamicFileName,
+        //                kolejnosc = i,
+        //                Tytul = product.Name,
+        //                ImageName = dynamicFileName,
+        //                //ProductId = product.ProductId
+        //            };
+
+        //            if (product != null)
+        //            {
+        //                product.Product_Images.Add(imgModel);
+        //            }
+
+        //            //_imageService.AddAsync(imgModel);
+        //        }
+        //        return imgModel;
+        //    }
+
+        //    imgModel = new()
+        //    {
+        //        path = "images\\",
+        //        fullPath = "\\images\\",
+        //        kolejnosc = -1,
+        //        Tytul = "",
+        //        ImageName = ".jpg",
+        //        //ProductId = product.ProductId
+        //    };
+        //    return imgModel;
+
+
+
+        //}
+
+
+
+
+
+
+
 
         private bool ImageModelExists(int id)
         {

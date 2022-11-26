@@ -94,7 +94,10 @@
                             </div>
                             <div class="row">
                                 <div class="col justify-content-start text-start">
-                                    @language.Getkey("CenaDetaliczna"): @language.GetCurrently( @Model.CenaProduktuDetal.Value, Constants.myNumberFormatInfo).ToString("C", Constants.myNumberFormatInfo)
+                                    @if (@Model.CenaProduktuDetal != null)
+                                    {
+                                        <p>@language.Getkey("CenaDetaliczna"): @language.GetCurrently(@Model.CenaProduktuDetal.Value, Constants.myNumberFormatInfo).ToString("C", Constants.myNumberFormatInfo)</p>
+                                    }
                                 </div>
                                 <div class="col">
 

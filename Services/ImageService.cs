@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Hosting.Internal;
 using NuGet.Protocol.Core.Types;
+using partner_aluro.Controllers;
 using partner_aluro.Data;
 using partner_aluro.Models;
 using partner_aluro.Services.Interfaces;
@@ -17,10 +19,21 @@ namespace partner_aluro.Services
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _webHostEnvironment;
 
+        private static IWebHostEnvironment _hostingEnvironment;
+
         public ImageService(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
             _webHostEnvironment = webHostEnvironment;
+        }
+        public static bool IsInitialized { get; private set; }
+        public static void Initialize(IWebHostEnvironment hostEnvironment)
+        {
+            if (IsInitialized)
+                throw new InvalidOperationException("Object already initialized");
+
+            _hostingEnvironment = hostEnvironment;
+            IsInitialized = true;
         }
 
         public async Task<string> CreateImageAddAsync(ImageModel imageModel)
@@ -61,6 +74,98 @@ namespace partner_aluro.Services
 
             return komunikat;
         }
+
+
+
+        [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
+        public async Task UploadFilesAsync(IFormFileCollection files, Product? product = null)
+        {
+            //var files = HttpContext.Request.Form.Files;
+
+            Initialize(_webHostEnvironment);
+
+
+            if (!IsInitialized)
+                throw new InvalidOperationException("Object is not initialized");
+
+            //var path = Path.Combine(_hostingEnvironment.WebRootPath, "uploads");
+            ImageModel imgModel = new ImageModel();  // sprawdz czy istnieje.
+
+            if (files.Count > 0) //To oznacza ze frontowy obrazek został dodany
+            {
+                string webRootPath = _hostingEnvironment.WebRootPath;
+
+                for (int i = 0; i < files.Count; i++)
+                {
+                    //Save image to wwwroot/image
+                    string path0 = "images\\produkty\\";
+
+                    var uploadsFolder = Path.Combine(webRootPath, "images\\");
+                    if (product != null)
+                    {
+                        uploadsFolder = Path.Combine(webRootPath, "images\\produkty\\" + product.Symbol);
+                    }
+
+
+                    if (!Directory.Exists(uploadsFolder))
+                    {
+                        Directory.CreateDirectory(uploadsFolder);
+                    }
+
+                    FileInfo fileInfo = new FileInfo(files[i].FileName);
+
+                    var extension = Path.GetExtension(files[i].FileName);
+                    var dynamicFileName = fileInfo.Name + extension;
+
+
+                    if (product != null)
+                    {
+                        dynamicFileName = product.Symbol + "_" + i + "_" + extension;
+                    }
+
+
+                    using (var filesStream = new FileStream(Path.Combine(uploadsFolder, dynamicFileName), FileMode.Create))
+                    {
+                        files[i].CopyTo(filesStream);
+                    }
+
+                    //add product Image for new product
+                    imgModel = new()
+                    {
+                        path = path0 + product.Symbol + "\\",
+                        fullPath = path0 + product.Symbol + "\\" + dynamicFileName,
+                        kolejnosc = i,
+                        Tytul = product.Name,
+                        ImageName = dynamicFileName,
+                        //ProductId = product.ProductId
+                    };
+
+                    if (product != null)
+                    {
+                        product.Product_Images.Add(imgModel);
+                    }
+
+                    await AddAsync(imgModel);
+                }
+
+            }
+
+            //imgModel = new()
+            //{
+            //    path = "images\\",
+            //    fullPath = "\\images\\",
+            //    kolejnosc = -1,
+            //    Tytul = "",
+            //    ImageName = ".jpg",
+            //    //ProductId = product.ProductId
+            //};
+            //await AddAsync(imgModel);
+
+
+
+        }
+
+
         public async Task<string> DeleteFrontImage(Product product) //Dodaj obrazek Front przy dodawaniu produktu
         {
             var imageModel = await _context.Images.FirstOrDefaultAsync(x => x.ImageName == product.ImageUrl);

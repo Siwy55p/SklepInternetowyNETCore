@@ -6,6 +6,7 @@ using partner_aluro.Migrations;
 using partner_aluro.Models;
 using partner_aluro.Services;
 using partner_aluro.Services.Interfaces;
+using System.Data;
 
 namespace partner_aluro.Controllers
 {
@@ -117,8 +118,10 @@ namespace partner_aluro.Controllers
                         Directory.CreateDirectory(uploadsFolder);
                     }
 
+                    FileInfo fileInfo = new FileInfo(files[i].FileName);
+
                     var extension = Path.GetExtension(files[i].FileName);
-                    var dynamicFileName = "slider" + i + extension;
+                    var dynamicFileName = "slider" + i +"_"+ DateTime.Now.ToString("mm_ss") + extension;
 
                     using (var filesStream = new FileStream(Path.Combine(uploadsFolder, dynamicFileName), FileMode.Create))
                     {

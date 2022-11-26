@@ -136,14 +136,14 @@ namespace partner_aluro.Models
         public decimal GetCartTotalBrutto()
         {
             decimal CartTotal1 = _context.CartItems
-                .Where(ci => ci.CartId == Id)
-                .Where(ci=> ci.Product.Promocja == false)
+                .Where(ci => ci.CartId == Id && ci.Product.Promocja == false)
+                //.Where(ci=> ci.Product.Promocja == false)
                 .Select(ci => ci.Product.CenaProduktu * ci.Quantity)
                 .Sum();
 
             decimal CartTotal2 = _context.CartItems
-                .Where(ci => ci.CartId == Id)
-                .Where(ci => ci.Product.Promocja == true)
+                .Where(ci => ci.CartId == Id && ci.Product.Promocja == true)
+                //.Where(ci => ci.Product.Promocja == true)
                 .Select(ci => ci.Product.CenaPromocyja * ci.Quantity)
                 .Sum();
 
@@ -158,14 +158,12 @@ namespace partner_aluro.Models
         public decimal GetCartTotalNetto()
         {
             decimal CartTotal1 = _context.CartItems
-                .Where(ci => ci.CartId == Id)
-                .Where(ci => ci.Product.Promocja == false)
+                .Where(ci => ci.CartId == Id && ci.Product.Promocja == false)
                 .Select(ci => ci.Product.CenaProduktu * ci.Quantity)
                 .Sum();
 
             decimal CartTotal2 = _context.CartItems
-                .Where(ci => ci.CartId == Id)
-                .Where(ci => ci.Product.Promocja == true)
+                .Where(ci => ci.CartId == Id && ci.Product.Promocja == true)
                 .Select(ci => ci.Product.CenaPromocyja * ci.Quantity)
                 .Sum();
 
