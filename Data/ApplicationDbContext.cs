@@ -29,6 +29,7 @@ namespace partner_aluro.Data
         public DbSet<Adress1rozliczeniowy> Adress1rozliczeniowy { get; set; }
         public DbSet<Adress2dostawy> Adress2dostawy { get; set; }
         public DbSet<ImageModel> Images { get; set; }
+        public DbSet<MetodyDostawy> MetodyDostawy { get; set; }
         public DbSet<ProfilDzialalnosci> ProfileDzialalnosci { get; set; }
         public DbSet<Newsletter> Newsletter { get; set; }
 

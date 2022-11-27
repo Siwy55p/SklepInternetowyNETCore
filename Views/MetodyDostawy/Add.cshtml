@@ -1,0 +1,20 @@
+﻿@model partner_aluro.Models.MetodyDostawy
+
+@{
+    ViewData["Title"] = "Detail";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+<form class="needs-validation" asp-action="Add" asp-controller="MetodyDostawy" class="form-horizontal" method="post">
+    <div class="row g-0">
+        <div class="col-md-6 border-end">
+            @Html.HiddenFor(h=>Model.Id)
+            @Html.ValidationSummary()
+            @await Html.PartialAsync("_FormMetodyDostawy")
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <button type="submit" class="btn btn-success">Dodaj</button>  <button id="btnBack" runat="server" text="Back" class="btn btn-primary" onclick="JavaScript: window.history.back(1); return false;">Powrót</button>
+    </div>
+</form>

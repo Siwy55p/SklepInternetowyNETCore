@@ -28,10 +28,8 @@ namespace partner_aluro.Models
 
         public string? Komentarz { get; set; }
 
-        public string? SposobDostawy { get; set; }
+        public string? MetodaDostawy { get; set; }
         public string? MetodaPlatnosci { get; set; }
-
-        public MetodaPlatnosci MetodPay { get; set;}
 
         public Adress1rozliczeniowy adresRozliczeniowy { get; set; }
 

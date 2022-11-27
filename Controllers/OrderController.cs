@@ -8,9 +8,7 @@ using partner_aluro.Core;
 using partner_aluro.Core.Repositories;
 using partner_aluro.Data;
 using partner_aluro.Models;
-using partner_aluro.Services;
 using partner_aluro.Services.Interfaces;
-//using partner_aluro.Services.Interfaces;
 using partner_aluro.ViewModels;
 
 
@@ -36,7 +34,7 @@ namespace partner_aluro.Controllers
         private readonly IEmailService _emailService;
 
 
-        public OrderController(IProductService productService, IUnitOfWorkOrder unitOfWorkOrder ,ApplicationDbContext context, Cart cart, UserManager<ApplicationUser> userManager, IOrderService orderService, IUnitOfWork unitOfWork, IUnitOfWorkAdress1rozliczeniowy unitOfWorkAdress1rozliczeniowy, IUnitOfWorkAdress2dostawy unitOfWorkAdress2dostawy, IEmailService emailService)
+        public OrderController(IProductService productService, IUnitOfWorkOrder unitOfWorkOrder, ApplicationDbContext context, Cart cart, UserManager<ApplicationUser> userManager, IOrderService orderService, IUnitOfWork unitOfWork, IUnitOfWorkAdress1rozliczeniowy unitOfWorkAdress1rozliczeniowy, IUnitOfWorkAdress2dostawy unitOfWorkAdress2dostawy, IEmailService emailService)
         {
             _context = context;
             _cart = cart;
@@ -58,12 +56,17 @@ namespace partner_aluro.Controllers
         [HttpGet]
         public IActionResult Checkout()
         {
+            ViewData["MetodyPlatnosci"] = GetMetodyPlatnosci();
+            ViewData["MetodyDostawy"] = _context.MetodyDostawy.ToList();
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> CheckoutAsync(CartOrderViewModel CartOrder) //ZAPIS BARDZO WAZNA FUNKCJA
+        public async Task<IActionResult> Checkout(CartOrderViewModel CartOrder) //ZAPIS BARDZO WAZNA FUNKCJA
         {
+            ViewData["MetodyPlatnosci"] = GetMetodyPlatnosci();
+            ViewData["MetodyDostawy"] = _context.MetodyDostawy.ToList();
+
             var cartItems = await _cart.GetAllCartItemsAsync();
             _cart.CartItems = cartItems;
 
@@ -139,7 +142,7 @@ namespace partner_aluro.Controllers
             ModelState.Remove("Orders.User.Adres2.ApplicationUser");
             ModelState.Remove("Orders.User.ProfilDzialalnosci");
             ModelState.Remove("Orders.User.Adress1rozliczeniowy.Wojewodztwo");
- 
+
 
             CartOrder.Orders.User.Adress1rozliczeniowy.Wojewodztwo = _context.Adress1rozliczeniowy.FirstOrDefault(x => x.Adres1rozliczeniowyId == user.Adress1rozliczeniowyId).Wojewodztwo;
 
@@ -204,7 +207,7 @@ namespace partner_aluro.Controllers
             var orderItems = await _orderService.ListAsync(id);
             Order order = await _orderService.GetOrder(id);
 
-            order.OrderItems =  orderItems;
+            order.OrderItems = orderItems;
 
 
             using (MemoryStream ms = new())
@@ -242,7 +245,7 @@ namespace partner_aluro.Controllers
                 //Paragraph para1 = new Paragraph("Data zamówienia: " + order.OrderPlaced, bold);
 
                 Chunk c1 = new(text1, bold);
-                Chunk c2 = new(text2, regular);   
+                Chunk c2 = new(text2, regular);
 
                 Paragraph para1 = new();
                 para1.Add(c1);
@@ -267,7 +270,7 @@ namespace partner_aluro.Controllers
 
 
                 string text2_1 = order.User.NazwaFirmy + "\n";
-                string text2_2 = order.User.Imie + " " + order.User.Nazwisko +"\n";
+                string text2_2 = order.User.Imie + " " + order.User.Nazwisko + "\n";
                 string text2_3 = order.adresRozliczeniowy.Ulica + "\n";
                 string text2_4 = order.adresRozliczeniowy.KodPocztowy + " " + order.adresRozliczeniowy.Miasto + "\n";
                 string text2_5 = order.adresRozliczeniowy.Telefon + "\n";
@@ -293,7 +296,7 @@ namespace partner_aluro.Controllers
                 };
                 para4.Alignment = Element.ALIGN_LEFT;
                 //document.Add(para4);
-                
+
 
 
                 string text3_1 = order.AdressDostawy.Imie + " " + order.AdressDostawy.Nazwisko + "\n";
@@ -411,7 +414,7 @@ namespace partner_aluro.Controllers
 
 
 
-                string text6_1 = " "  + "\n";
+                string text6_1 = " " + "\n";
                 string text6_3 = "\n";
                 //Paragraph para1 = new Paragraph("Data zamówienia: " + order.OrderPlaced, bold);
 
@@ -434,7 +437,7 @@ namespace partner_aluro.Controllers
 
                 table2.TotalWidth = 500f;
                 table2.LockedWidth = true;
-                float[] widths2 = new float[] { 10f, 55f, 200f, 50f, 40f, 40f,40f, 40f };
+                float[] widths2 = new float[] { 10f, 55f, 200f, 50f, 40f, 40f, 40f, 40f };
                 table2.SetWidths(widths2);
 
                 PdfPCell cell1_tab2 = new(new Phrase("#", regular));
@@ -512,18 +515,18 @@ namespace partner_aluro.Controllers
                 table2.AddCell(cell8_tab2);
 
 
-                foreach(var item in order.OrderItems)
+                foreach (var item in order.OrderItems)
                 {
                     decimal cenaJednostkowa = item.Product.CenaProduktu * (1 - ((decimal)order.RabatZamowienia / 100));
                     decimal cenaJednostkowaIlosc = cenaJednostkowa * @item.Quantity;
 
                     PdfPCell cell_1 = new(new Phrase(item.Id));
 
-                    Image image = Image.GetInstance("wwwroot/images/produkty/"+@item.Product.Symbol+"/"+@item.Product.ImageUrl);
+                    Image image = Image.GetInstance("wwwroot/images/produkty/" + @item.Product.Symbol + "/" + @item.Product.ImageUrl);
                     image.ScaleAbsoluteWidth(50);
                     image.ScaleAbsoluteHeight(45);
                     PdfPCell cell_2 = new(image);
-                    PdfPCell cell_3 = new(new Phrase(item.Product.Name,regular));
+                    PdfPCell cell_3 = new(new Phrase(item.Product.Name, regular));
                     PdfPCell cell_4 = new(new Phrase(item.Product.Symbol, regular));
                     PdfPCell cell_5 = new(new Phrase(item.Quantity.ToString(), regular));
                     PdfPCell cell_6 = new(new Phrase(order.RabatZamowienia.ToString(), regular));
@@ -592,7 +595,7 @@ namespace partner_aluro.Controllers
                     cell_1.Border = Rectangle.BOTTOM_BORDER | Rectangle.TOP_BORDER | Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER;
                     cell_1.BorderWidth = 0;
 
-                    PdfPCell cell_2 = new(new Phrase("Do zapłaty: " + order.OrderTotal.ToString("C"),bold)); //odstep
+                    PdfPCell cell_2 = new(new Phrase("Do zapłaty: " + order.OrderTotal.ToString("C"), bold)); //odstep
                     cell_2.Border = Rectangle.BOTTOM_BORDER | Rectangle.TOP_BORDER | Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER;
                     cell_2.BorderWidth = 1;
 
@@ -616,7 +619,7 @@ namespace partner_aluro.Controllers
 
 
                 PdfPCell cell1_tab4 = new(new Phrase("Wiadomość: " + order.Komentarz, bold));
-                cell1_tab4.Border = Rectangle.BOTTOM_BORDER | Rectangle.TOP_BORDER ;
+                cell1_tab4.Border = Rectangle.BOTTOM_BORDER | Rectangle.TOP_BORDER;
                 cell1_tab4.BorderWidth = 1;
                 cell1_tab4.PaddingTop = 10;
                 cell1_tab4.PaddingBottom = 10;
@@ -652,7 +655,7 @@ namespace partner_aluro.Controllers
 
 
                 var Cena_brutto = (decimal)item.Product.CenaProduktu * (decimal)partner_aluro.Core.Constants.Vat;
-                if(item.Product.Promocja == true && item.Product.CenaPromocyja != null)
+                if (item.Product.Promocja == true && item.Product.CenaPromocyja != null)
                 {
                     Cena_brutto = (decimal)item.Product.CenaPromocyja * (decimal)partner_aluro.Core.Constants.Vat;
                 }
@@ -717,13 +720,13 @@ namespace partner_aluro.Controllers
         [HttpGet]
         public async Task<IActionResult> Detail(int id)
         {
-            if(id == 0)
+            if (id == 0)
             {
                 return RedirectToAction("ListaZamowien");
             }
             var orderItems = await _orderService.ListAsync(id);
             Order order = await _orderService.GetOrder(id);
-            
+
             order.OrderItems = orderItems;
 
             ViewData["StanyZamowienia"] = GetStanyZamowienia();
@@ -750,7 +753,7 @@ namespace partner_aluro.Controllers
             int id = order.Id;
 
             //user.NotatkaOsobista = notatka;
-            return RedirectToAction("Detail", new {id = id});
+            return RedirectToAction("Detail", new { id = id });
         }
 
         private static List<SelectListItem> GetStanyZamowienia()
@@ -771,5 +774,24 @@ namespace partner_aluro.Controllers
         }
 
 
+        public static List<SelectListItem> GetMetodyPlatnosci()
+        {
+            var lstMetodyPlatnosci = new List<SelectListItem>();
+
+            foreach (MetodaPlatnosci suit in (MetodaPlatnosci[])Enum.GetValues(typeof(MetodaPlatnosci)))
+            {
+                var dmyItemA = new SelectListItem()
+                {
+                    Value = suit.ToString(),
+                    Text = suit.ToString()
+                };
+                lstMetodyPlatnosci.Insert(0, dmyItemA);
+            }
+
+            return lstMetodyPlatnosci;
+        }
+
     }
+
+
 }

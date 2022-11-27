@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using partner_aluro.Data;
 using partner_aluro.Models;
@@ -42,6 +43,10 @@ namespace partner_aluro.Controllers
         {
             _cart.CartItems = await _cart.GetAllCartItemsAsync();
 
+            ViewData["MetodyPlatnosci"] = OrderController.GetMetodyPlatnosci();
+            ViewData["MetodyDostawy"] = _context.MetodyDostawy.ToList();
+
+
             var returnUrl = Request.Headers["Referer"].ToString();
 
             return Redirect(returnUrl);
@@ -54,6 +59,9 @@ namespace partner_aluro.Controllers
         {
             ViewBag.returnUrl = Request.Headers["Referer"].ToString();
             var returnUrl = Request.Headers["Referer"].ToString();
+
+            ViewData["MetodyPlatnosci"] = OrderController.GetMetodyPlatnosci();
+            ViewData["MetodyDostawy"] = _context.MetodyDostawy.ToList();
 
             var products = await _cart.GetAllCartItemsAsync();
             //_cart.CartItems = products;
@@ -69,7 +77,10 @@ namespace partner_aluro.Controllers
             CartOrderViewModel vm = new()
             {
                 Carts = _cart,
-                Orders = new Order() { User = applicationUser },
+                Orders = new Order() { 
+                    User = applicationUser,
+                    MetodaPlatnosci = "Przelew"
+                },
             };
 
 
@@ -204,5 +215,8 @@ namespace partner_aluro.Controllers
         {
             return await _context.Products.FirstOrDefaultAsync(p => p.ProductId == id);
         }
+
+
+
     }
 }

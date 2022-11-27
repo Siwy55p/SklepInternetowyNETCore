@@ -13,9 +13,13 @@
         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-10 col-xxl-8">
             <h4 class="mb-4">@language.Getkey("Zamówienie")</h4>
             <hr class="mb-4">
-            @if (Model.Carts.CartItems.Count > 0)
+
+            @if (Model != null)
             {
-            
+
+                @if (Model.Carts.CartItems.Count > 0)
+                {
+
 
                     <div class="row bg-light">
                         <div class="col border text-center fw-bold" style="max-width: 75px; width:75px"></div>
@@ -31,120 +35,121 @@
                     @foreach (var item in Model.Carts.CartItems)
                     {
                         <div class="row @zmienna" >
-            
-                        @{
-                            i++;
-                            if(i%2 != 0)
-                            {
-                                zmienna = "bg-light";
-                            }else
-                            {
-                                zmienna = "bg-white";
-                            }
 
-                            var Cena_brutto = (decimal)item.Product.CenaProduktu * (decimal)partner_aluro.Core.Constants.Vat;
-                            @if (item.Product.Promocja == true /*&& item.Product.CenaPromocyja != null*/)
-                            {
+                            @{
+                                i++;
+                                if (i % 2 != 0)
+                                {
+                                    zmienna = "bg-light";
+                                }
+                                else
+                                {
+                                    zmienna = "bg-white";
+                                }
 
-                                Cena_brutto = (decimal)item.Product.CenaPromocyja * (decimal)partner_aluro.Core.Constants.Vat;
+                                var Cena_brutto = item.Product.CenaProduktu * partner_aluro.Core.Constants.Vat;
+                                @if (item.Product.Promocja == true /*&& item.Product.CenaPromocyja != null*/)
+                                {
 
-                            }
-
-
-
-                            var CenaJednostkowa_netto = item.Product.CenaProduktu;
-                            @if (item.Product.Promocja == true /*&& item.Product.CenaPromocyja != null*/)
-                            {
-
-                                CenaJednostkowa_netto = (decimal)item.Product.CenaPromocyja;
-
-                            }
-
-
-
-
-                            var CenaJednostkowa_brutto = (decimal)Cena_brutto;
-
-                            if (partner_aluro.Core.Constants.Rabat >= 0)
-                            {
-                                    CenaJednostkowa_netto = item.Product.CenaProduktu * (1 - (partner_aluro.Core.Constants.Rabat / 100));
-                                    CenaJednostkowa_brutto = (decimal)Cena_brutto * (1 - (partner_aluro.Core.Constants.Rabat / 100));
-                            }
-                            else if (item.Product.Promocja == true /*&& item.Product.CenaPromocyja != null*/)
-                            {
-                                CenaJednostkowa_netto = (decimal)((decimal)item.Product.CenaPromocyja * (1 - (partner_aluro.Core.Constants.Rabat / 100)));
-                                CenaJednostkowa_brutto = (decimal)Cena_brutto * (1 - (partner_aluro.Core.Constants.Rabat / 100));
-
-                            }
-
-                                var ProductTotal = CenaJednostkowa_brutto * item.Quantity;
+                                    Cena_brutto = item.Product.CenaPromocyja * partner_aluro.Core.Constants.Vat;
 
                                 }
 
-                                <div class="col border border-top-0" style="max-width: 75px; width:75px">
-                                    <img src="~/images/produkty/@item.Product.Symbol/@item.Product.ImageUrl"  style="height: 4em">
-                                </div>
-                                <div class="col border border-top-0 text-center d-none d-sm-none d-md-none d-lg-block text-wrap text-break" style="width: 10%">
-                                    <a class="text-black" asp-controller="Product" asp-action="Details" asp-route-id="@item.Product.ProductId">@language.Getkey(@item.Product.Name)</a>
-                                </div>
-                                <div class="col border border-top-0 d-none d-sm-none d-md-none d-lg-block text-center">
-                                            <span class="pozycja">@item.Product.Symbol </span>
-                                        </div>
-                                <div class="col border border-top-0 d-none d-sm-none d-md-none d-lg-block text-center" style="display: inline-flex; vertical-align:middle">
-                            <span class="pozycja">@language.GetCurrently(@CenaJednostkowa_brutto, Constants.myNumberFormatInfo).ToString("C",Constants.myNumberFormatInfo)</span>
-                                        </div>
-                                <div class="col border border-top-0 text-center">
-                                            <a asp-controller="Cart" asp-action="ReduceQuantity" asp-route-id="@item.Product.ProductId"><i class="fa-solid fa-minus"></i></a>
+
+
+                                var CenaJednostkowa_netto = item.Product.CenaProduktu;
+                                @if (item.Product.Promocja == true /*&& item.Product.CenaPromocyja != null*/)
+                                {
+
+                                    CenaJednostkowa_netto = item.Product.CenaPromocyja;
+
+                                }
+
+
+
+
+                                var CenaJednostkowa_brutto = Cena_brutto;
+
+                                if (partner_aluro.Core.Constants.Rabat >= 0)
+                                {
+                                    CenaJednostkowa_netto = item.Product.CenaProduktu * (1 - (partner_aluro.Core.Constants.Rabat / 100));
+                                    CenaJednostkowa_brutto = Cena_brutto * (1 - (partner_aluro.Core.Constants.Rabat / 100));
+                                }
+                                else if (item.Product.Promocja == true /*&& item.Product.CenaPromocyja != null*/)
+                                {
+                                    CenaJednostkowa_netto = (item.Product.CenaPromocyja * (1 - (partner_aluro.Core.Constants.Rabat / 100)));
+                                    CenaJednostkowa_brutto = Cena_brutto * (1 - (partner_aluro.Core.Constants.Rabat / 100));
+
+                                }
+
+                                var ProductTotal = CenaJednostkowa_brutto * item.Quantity;
+
+                            }
+
+                            <div class="col border border-top-0" style="max-width: 75px; width:75px">
+                                <img src="~/images/produkty/@item.Product.Symbol/@item.Product.ImageUrl"  style="height: 4em">
+                            </div>
+                            <div class="col border border-top-0 text-center d-none d-sm-none d-md-none d-lg-block text-wrap text-break" style="width: 10%">
+                                <a class="text-black" asp-controller="Product" asp-action="Details" asp-route-id="@item.Product.ProductId">@language.Getkey(@item.Product.Name)</a>
+                            </div>
+                            <div class="col border border-top-0 d-none d-sm-none d-md-none d-lg-block text-center">
+                                <span class="pozycja">@item.Product.Symbol </span>
+                            </div>
+                            <div class="col border border-top-0 d-none d-sm-none d-md-none d-lg-block text-center" style="display: inline-flex; vertical-align:middle">
+                                <span class="pozycja">@language.GetCurrently(@CenaJednostkowa_brutto, Constants.myNumberFormatInfo).ToString("C",Constants.myNumberFormatInfo)</span>
+                            </div>
+                            <div class="col border border-top-0 text-center">
+                                <a asp-controller="Cart" asp-action="ReduceQuantity" asp-route-id="@item.Product.ProductId"><i class="fa-solid fa-minus"></i></a>
                                 <span class="pozycja">
                                     @item.Quantity</span>
-                                            <a asp-controller="Cart" asp-action="IncreaseQuantity" asp-route-id="@item.Product.ProductId"><i class="fa-solid fa-plus"></i></a>
-                                        </div>
-                                <div class="col border border-top-0 text-center">
-                            <span class="pozycja">
-                                @language.GetCurrently(@ProductTotal, Constants.myNumberFormatInfo).ToString("C",Constants.myNumberFormatInfo)
-                            </span>
-                                </div>
-                                <div class="col border border-top-0 text-center" style="max-width: 60px">
+                                <a asp-controller="Cart" asp-action="IncreaseQuantity" asp-route-id="@item.Product.ProductId"><i class="fa-solid fa-plus"></i></a>
+                            </div>
+                            <div class="col border border-top-0 text-center">
+                                <span class="pozycja">
+                                    @language.GetCurrently(@ProductTotal, Constants.myNumberFormatInfo).ToString("C",Constants.myNumberFormatInfo)
+                                </span>
+                            </div>
+                            <div class="col border border-top-0 text-center" style="max-width: 60px">
                                 <span class="pozycja">
                                     <a asp-controller="Cart" asp-action="RemoveFromCart" asp-route-id="@item.Product.ProductId" class="text-danger"><i class="fa-solid fa-xmark"></i></a>
                                 </span>
-                                </div>
                             </div>
-                        }
+                        </div>
+                    }
                     <hr class="my-4">
 
 
-                        <div class="row">
-                            <div class="col-8 d-none d-sm-none d-md-none d-lg-block"></div>
-                            <div class="border bg-light text text-end" style="width:150px">@language.Getkey("Wartość (brutto)"):</div>
-                            <div class="border bg-light" style="width:150px">
-                        <strong>@language.GetCurrently(@Model.Carts.GetCartTotalBrutto(), Constants.myNumberFormatInfo).ToString("C",Constants.myNumberFormatInfo)</strong>
-                                </div>
+                    <div class="row">
+                        <div class="col-8 d-none d-sm-none d-md-none d-lg-block"></div>
+                        <div class="border bg-light text text-end" style="width:150px">@language.Getkey("Wartość (brutto)"):</div>
+                        <div class="border bg-light" style="width:150px">
+                            <strong>@language.GetCurrently(@Model.Carts.GetCartTotalBrutto(), Constants.myNumberFormatInfo).ToString("C",Constants.myNumberFormatInfo)</strong>
                         </div>
+                    </div>
 
 
-                        <div class="row">
-                            <div class="col-8 d-none d-sm-none d-md-none d-lg-block"></div>
-                            <div class="border bg-light text text-end" style="width:150px">@language.Getkey("Razem (netto)"):</div>
-                            <div class="border bg-light" style="width:150px">
-                        <strong>@language.GetCurrently(@Model.Carts.GetCartTotalNetto(), Constants.myNumberFormatInfo).ToString("C",Constants.myNumberFormatInfo)</strong>
-                            </div>
+                    <div class="row">
+                        <div class="col-8 d-none d-sm-none d-md-none d-lg-block"></div>
+                        <div class="border bg-light text text-end" style="width:150px">@language.Getkey("Razem (netto)"):</div>
+                        <div class="border bg-light" style="width:150px">
+                            <strong>@language.GetCurrently(@Model.Carts.GetCartTotalNetto(), Constants.myNumberFormatInfo).ToString("C",Constants.myNumberFormatInfo)</strong>
                         </div>
+                    </div>
 
 
-                     @*   <form asp-action="Return" asp-controller="Cart" method="POST" >
-                        <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
-                        <button class="btn btn-success float-right mr-5" type="submit" name="returnUrl" value="@ViewBag.returnUrl"><i class="fa-solid fa-angles-right"></i>Powrót</button>
-                    </form>*@
+                    @*   <form asp-action="Return" asp-controller="Cart" method="POST" >
+                            <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
+                            <button class="btn btn-success float-right mr-5" type="submit" name="returnUrl" value="@ViewBag.returnUrl"><i class="fa-solid fa-angles-right"></i>Powrót</button>
+                        </form>*@
 
-                <button id="btnBack" runat="server" text="Back" class="btn btn-primary" onclick="JavaScript: window.history.back(1); return false;">@language.Getkey("Powrót do sklepu")</button>
-                   <a class="a-cleanup" asp-controller="Cart" asp-action="ClearCart"><div class="btn btn-success float-right mr-5"><i class="fa-solid fa-trash-can"> </i> @language.Getkey("Wyczyść zamówienie")</div></a>
-            }
-            else
-            {
+                    <button id="btnBack" runat="server" text="Back" class="btn btn-primary" onclick="JavaScript: window.history.back(1); return false;">@language.Getkey("Powrót do sklepu")</button>
+                    <a class="a-cleanup" asp-controller="Cart" asp-action="ClearCart"><div class="btn btn-success float-right mr-5"><i class="fa-solid fa-trash-can"> </i> @language.Getkey("Wyczyść zamówienie")</div></a>
+                }
+                else
+                {
                     <h3 class="text-center">@language.Getkey("Koszyk jest pusty")</h3>
+                }
             }
-
 
             @if (Model != null)
             {

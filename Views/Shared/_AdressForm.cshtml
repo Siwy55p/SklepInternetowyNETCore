@@ -7,7 +7,7 @@
         <span asp-validation-for="@Model.Orders.Komentarz" class="text-danger"></span>
     </div>
 
-<h4 class="d-flex justify-content-between align-items-center mb-3">2. @language.Getkey("Adresy")</h4>
+<h4 class="d-flex justify-content-between align-items-center mb-3">1. @language.Getkey("Adresy")</h4>
 
         <hr class="mb-4">
         <div class="custom-control custom-checkbox">
@@ -137,19 +137,43 @@
         </div>
 </div>
 <hr class="mb-4">
+<h4 class="mb-4">2. @language.Getkey("Metoda dostawy")</h4>
+<div class="d-block my-3">
+    <div class="custom-control custom-radio">
+
+        <div class="row">
+            <div class="col">
+                Wybierz metodę wysyłki
+            </div>
+        </div>
+        @foreach (var item in @ViewData["MetodyDostawy"] as List<MetodyDostawy>)
+        {
+            <div class="row">
+                <div class="col border">
+                    <label class="custom-control-label">
+                        <input asp-for="@Model.Orders.MetodaDostawy" type="radio" value="@item.Opis" id="@item.Nazwa" class="custom-control-input" required="">
+                        @language.Getkey(item.Nazwa)
+                    </label>
+                </div>
+                <div class="col border">
+                        @item.SzczegolowyOpis
+                </div>
+
+            </div>
+        }
+    </div>
+</div>
+<hr class="mb-4">
 <h4 class="mb-4">3. @language.Getkey("Płatność")</h4>
 <div class="d-block my-3">
-@*    <div class="custom-control custom-radio">
-        <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked="" required="">
-        <label class="custom-control-label" for="credit">@language.Getkey("Karta kredytowa")</label>
-    </div>*@
     <div class="custom-control custom-radio">
-        <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required="">
-        <label class="custom-control-label" for="debit">@language.Getkey("Przelew")</label>
-    </div>
-    <div class="custom-control custom-radio">
-        <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required="">
-        <label class="custom-control-label" for="paypal">@language.Getkey("Gotówka odbiór w Bogucinie ul. Gnieźnieńska 159")</label>
+        @foreach (var item in (IEnumerable<SelectListItem>)@ViewData["MetodyPlatnosci"])
+        {
+            <label class="custom-control-label" >
+                <input asp-for="@Model.Orders.MetodaPlatnosci" type="radio" value="@item.Value" id="@item.Text" class="custom-control-input" required="">
+                @language.Getkey(item.Text)
+            </label>
+        }
     </div>
 </div>
 <hr class="mb-4">
