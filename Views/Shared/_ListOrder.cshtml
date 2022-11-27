@@ -12,7 +12,8 @@
                                     <th>Id</th>
                                     <th>Wartość zamówienia</th>
                                     <th>Data zamówienia</th>
-                                    <th>Metoda płatności</th>
+                                <th>Metoda płatności</th>
+                                <th>Metoda dostawy</th>
                                     @if (User.IsInRole("Administrator") || User.IsInRole("Manager"))
                                     {
                                         <th>Klient</th>
@@ -34,6 +35,7 @@
                                         <td>@order.OrderTotal.ToString("C")</td>
                                         <td>@order.OrderPlaced</td>
                                         <td>@order.MetodaPlatnosci</td>
+                                        <td>@order.MetodaDostawy</td>
                                         @if (User.IsInRole("Administrator") || User.IsInRole("Manager"))
                                         {
                                             <td>@order.User.Imie @order.User.Nazwisko</td>

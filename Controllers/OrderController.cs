@@ -161,7 +161,10 @@ namespace partner_aluro.Controllers
                     Komentarz = CartOrder.Orders.Komentarz,
                     MessageToOrder = CartOrder.Orders.MessageToOrder,
                     adresRozliczeniowy = OrderAdres1,
-                    AdressDostawy = OrderAdres2
+                    AdressDostawy = OrderAdres2,
+                    MetodaDostawy = CartOrder.Orders.MetodaDostawy,
+                    MetodaPlatnosci = CartOrder.Orders.MetodaPlatnosci
+
                 };
 
 
