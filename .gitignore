@@ -366,4 +366,4 @@ FodyWeavers.xsd
 # Migrations 
 #Migrations/
 /wwwroot/MyLogs
-/wwwroot/modules/nvn_export_products/download
+

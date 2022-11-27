@@ -32,8 +32,8 @@
                 @metoda.Nazwa
             </div>
             <div class="col">
-                <a asp-action="Edit" asp-controller="MetodyDostawy" asp-route="@metoda.Id">Edytuj</a> |
-                <a asp-action="Delete" asp-controller="MetodyDostawy" asp-route="@metoda.Id">Usuń</a>
+            <a asp-controller="MetodyDostawy" asp-action="Edit" asp-route-id="@metoda.Id">Edytuj</a> |
+            <a asp-controller="MetodyDostawy" asp-action="Delete" asp-route-id="@metoda.Id">Usuń</a>
             </div>
         </div>
     }
