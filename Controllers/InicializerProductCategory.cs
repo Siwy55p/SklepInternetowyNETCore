@@ -186,5 +186,31 @@ namespace partner_aluro.Controllers
             }
 
         }
+
+
+        public void ImageNameRemoveIfDuplicate()
+        {
+            List<ImageModel> images = new List<ImageModel>();
+
+            List<ImageModel> imagines = _context.Images.ToList();
+
+            for (int i = 0; i < imagines.Count(); i++)
+            {
+                ImageModel Image = imagines[i];
+
+                for(int y = 0; y < imagines.Count(); y++)
+                {
+                    if (imagines[y].ImageName == Image.ImageName && imagines[y].ImageId != Image.ImageId)
+                    {
+                        _context.Images.Remove(imagines[y]);
+                        _context.SaveChanges();
+                    }
+                }
+
+            }
+
+        }
+
+
     }
 }
