@@ -64,9 +64,9 @@
             </div>
 
             <div class="mb-3">
-            <label asp-for="@Model.Orders.adresRozliczeniowy.Ulica">@language.Getkey("Ulica")</label>
-            @Html.TextBoxFor(m => m.Orders.adresRozliczeniowy.Ulica, new {id="UlicaAdress1", @class="form-control", Value=String.Format("{0:d}", Model.Orders.adresRozliczeniowy.Ulica)  })
-            <span asp-validation-for="@Model.Orders.adresRozliczeniowy.Ulica" class="text-danger"></span>
+                <label asp-for="@Model.Orders.adresRozliczeniowy.Ulica">@language.Getkey("Ulica")</label>
+                @Html.TextBoxFor(m => m.Orders.adresRozliczeniowy.Ulica, new {id="UlicaAdress1", @class="form-control", Value=String.Format("{0:d}", Model.Orders.adresRozliczeniowy.Ulica)  })
+                <span asp-validation-for="@Model.Orders.adresRozliczeniowy.Ulica" class="text-danger"></span>
             </div>
             <div class="row">
                 <div class="col-md-5 mb-3">
@@ -117,7 +117,7 @@
             <div class="mb-3">
             <label asp-for="@Model.Orders.AdressDostawy">@language.Getkey("Ulica")</label>
             @Html.TextBoxFor(m => m.Orders.AdressDostawy.Ulica, new {id="UlicaAdress2", @class="form-control", Value=String.Format("{0:d}", Model.Orders.AdressDostawy.Ulica)  })
-            <span asp-validation-for="@Model.Orders.AdressDostawy" class="text-danger"></span>
+            <span asp-validation-for="@Model.Orders.AdressDostawy.Ulica" class="text-danger"></span>
             </div>
             <div class="row">
                 <div class="col-md-5 mb-3">

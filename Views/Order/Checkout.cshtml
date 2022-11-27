@@ -1,3 +1,23 @@
 ﻿@model partner_aluro.ViewModels.CartOrderViewModel
 
 @await Html.PartialAsync("_Checkout")
+
+
+@section Scripts{
+    <script>
+        function toggleCheckbox(element) {
+            const div = document.getElementById('box2');
+            if (document.getElementById('xxx').checked) {
+                div.innerHTML = `Adres rozliczeniowy`;
+                document.getElementById('box1').style.display = '';
+                document.getElementById('UlicaAdress2').value = document.getElementById('UlicaAdress1').value;
+                document.getElementById('KrajAdress2').value = document.getElementById('KrajAdress1').value;
+                document.getElementById('MiastoAdress2').value = document.getElementById('MiastoAdress1').value;
+                document.getElementById('KodPocztowyAdress2').value = document.getElementById('KodPocztowyAdress1').value;
+            } else {
+                div.innerHTML = `Adres rozliczeniowy i dostawy`;
+                document.getElementById('box1').style.display = 'none';
+            }
+        }
+    </script>
+}

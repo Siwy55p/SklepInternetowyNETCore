@@ -98,10 +98,10 @@ namespace partner_aluro.Controllers
             {
                 vm.Orders.User.Adress1rozliczeniowy = new Adress1rozliczeniowy
                 {
-                    KodPocztowy = "00000",
+                    KodPocztowy = "",
                     Miasto = "",
                     Kraj = "",
-                    Telefon = "123123123"
+                    Telefon = ""
                 };
             }
 
@@ -112,10 +112,11 @@ namespace partner_aluro.Controllers
             {
                 vm.Orders.adresRozliczeniowy = new Adress1rozliczeniowy
                 {
-                    KodPocztowy = "00000",
+                    KodPocztowy = "",
                     Miasto = "",
                     Kraj = "",
-                    Telefon = "123123123"
+                    Ulica = "",
+                    Telefon = ""
                 };
 
             }
@@ -124,11 +125,12 @@ namespace partner_aluro.Controllers
             if (vm.Orders.User.Adress2dostawy == null)
             {
                 Adress2dostawy adres2 = new Adress2dostawy()
-                { 
-                    KodPocztowy = "00000",
+                {
+                    KodPocztowy = "",
                     Miasto = "",
                     Kraj = "",
-                    Telefon = ""
+                    Telefon = "",
+                    Ulica = ""
                 };
                 vm.Orders.User.Adress2dostawy = adres2;
             }
@@ -140,9 +142,10 @@ namespace partner_aluro.Controllers
             {
                 Adress2dostawy adres2 = new Adress2dostawy()
                 {
-                    KodPocztowy = "00000",
+                    KodPocztowy = "",
                     Miasto = "",
                     Kraj = "",
+                    Ulica = "",
                     Telefon = ""
                 };
                 vm.Orders.AdressDostawy = adres2;

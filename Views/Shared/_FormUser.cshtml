@@ -170,7 +170,7 @@
                     <div class="col-md-6 mb-3">
                         <label asp-for="@Model.User.Adress2dostawy">Ulica</label>
                         <input class="form-control" asp-for="@Model.User.Adress2dostawy.Ulica" id="Ulica2" class="form-control" />
-
+                        <span asp-validation-for="@Model.User.Adress2dostawy.Ulica" class="text-danger"></span>
                     </div>
                     <div class="col-md-5 mb-3">
                         <label asp-for="@Model.User.Adress2dostawy.Kraj">Kraj</label>

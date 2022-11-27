@@ -307,6 +307,8 @@ namespace partner_aluro.Controllers
             user.IdProfilDzialalnosci = data.User.IdProfilDzialalnosci;
             user.NazwaFirmy = data.User.NazwaFirmy;
 
+            user.DataZałożenia = DateTime.Now;
+
             user.Adress1rozliczeniowy = data.User.Adress1rozliczeniowy;
             user.Adress2dostawy = data.User.Adress2dostawy;
             //_unitOfWork.User.UpdateUser(user);
@@ -368,7 +370,7 @@ namespace partner_aluro.Controllers
                 Roles = roleItems
             };
 
-            return View(vm);
+            return RedirectToAction("Index");
 
             //var Adres1roz = _unitOfWorkAdress1Rozliczeniowy.adress1Rozliczeniowy.Get(data.User.Id);
 

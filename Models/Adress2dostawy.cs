@@ -14,10 +14,14 @@ namespace partner_aluro.Models
         public string? Nazwisko { get; set; }
         public string? Email { get; set; }
 
+        [Required]
         public string? Ulica { get; set; }
 
+        [Required]
         public string? Miasto { get; set; }
         public string? Kraj { get; set; }
+
+        [Required]
         public string? KodPocztowy { get; set; }
 
         public string? Telefon { get; set; }

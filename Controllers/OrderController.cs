@@ -75,6 +75,13 @@ namespace partner_aluro.Controllers
             if(CartOrder.Orders.AdresDostawyInny == false)
             {
 
+                ModelState.Remove("Orders.AdressDostawy.Ulica");
+                CartOrder.Orders.AdressDostawy.Ulica = CartOrder.Orders.adresRozliczeniowy.Ulica;
+                ModelState.Remove("Orders.AdressDostawy.Miasto");
+                CartOrder.Orders.AdressDostawy.Miasto = CartOrder.Orders.adresRozliczeniowy.Miasto;
+                ModelState.Remove("Orders.AdressDostawy.KodPocztowy");
+                CartOrder.Orders.AdressDostawy.KodPocztowy = CartOrder.Orders.adresRozliczeniowy.KodPocztowy;
+
 
             }
 
