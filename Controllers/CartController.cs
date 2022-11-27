@@ -22,14 +22,21 @@ namespace partner_aluro.Controllers
 
         private readonly IHttpContextAccessor _httpContextAccessor;
 
+        private readonly IUnitOfWorkAdress1rozliczeniowy _unitOfWorkAdress1rozliczeniowy;
+        private readonly IUnitOfWorkAdress2dostawy _unitOfWorkAdress2dostawy;
+
+
         private readonly UserManager<ApplicationUser> _userManager;
-        public CartController(Cart cart, ApplicationDbContext applicationDbContext, UserManager<ApplicationUser> userManager, IHttpContextAccessor httpContextAccessor)
+        public CartController(Cart cart, ApplicationDbContext applicationDbContext, UserManager<ApplicationUser> userManager, IHttpContextAccessor httpContextAccessor, IUnitOfWorkAdress1rozliczeniowy unitOfWorkAdress1Rozliczeniowy, IUnitOfWorkAdress2dostawy unitOfWorkAdress2Dostawy)
         {
             _cart = cart;
             _context = applicationDbContext;
 
             _userManager = userManager;
             _httpContextAccessor = httpContextAccessor;
+
+            _unitOfWorkAdress1rozliczeniowy = unitOfWorkAdress1Rozliczeniowy;
+            _unitOfWorkAdress2dostawy = unitOfWorkAdress2Dostawy;
         }
 
         [HttpPost]
@@ -84,13 +91,11 @@ namespace partner_aluro.Controllers
             };
 
 
-            vm.Orders.User.Adress1rozliczeniowy = _context.Adress1rozliczeniowy.FirstOrDefault(x => x.Adres1rozliczeniowyId == vm.Orders.User.Adress1rozliczeniowyId);
-            vm.Orders.User.Adress2dostawy = _context.Adress2dostawy.FirstOrDefault(x => x.Adres2dostawyId == vm.Orders.User.Adress2dostawyId);
+            vm.Orders.User.Adress1rozliczeniowy = _context.Adress1rozliczeniowy.FirstOrDefault(x => x.UserID == vm.Orders.User.Id);
+            vm.Orders.User.Adress2dostawy = _context.Adress2dostawy.FirstOrDefault(x => x.UserID == vm.Orders.User.Id);
 
             if (vm.Orders.User.Adress1rozliczeniowy == null)
             {
-                vm.Orders.User.Adress1rozliczeniowy = _context.Adress1rozliczeniowy.Where(a => a.UserID == Core.Constants.UserId).FirstOrDefault();
-
                 vm.Orders.User.Adress1rozliczeniowy = new Adress1rozliczeniowy
                 {
                     KodPocztowy = "00000",
@@ -100,7 +105,22 @@ namespace partner_aluro.Controllers
                 };
             }
 
-            //vm.Orders.User.Adress2dostawy = _context.Adress2dostawy.Where(a => a.UserID == Core.Constants.UserId).FirstOrDefault();
+
+            vm.Orders.adresRozliczeniowy = _unitOfWorkAdress1rozliczeniowy.adress1Rozliczeniowy.Get(applicationUser.Id);
+
+            if (vm.Orders.adresRozliczeniowy == null)
+            {
+                vm.Orders.adresRozliczeniowy = new Adress1rozliczeniowy
+                {
+                    KodPocztowy = "00000",
+                    Miasto = "",
+                    Kraj = "",
+                    Telefon = "123123123"
+                };
+
+            }
+
+
             if (vm.Orders.User.Adress2dostawy == null)
             {
                 Adress2dostawy adres2 = new Adress2dostawy()
@@ -110,10 +130,24 @@ namespace partner_aluro.Controllers
                     Kraj = "",
                     Telefon = ""
                 };
-
                 vm.Orders.User.Adress2dostawy = adres2;
-
             }
+
+
+            vm.Orders.AdressDostawy = _unitOfWorkAdress2dostawy.adress2dostawy.Get(applicationUser.Id);
+
+            if (vm.Orders.AdressDostawy == null)
+            {
+                Adress2dostawy adres2 = new Adress2dostawy()
+                {
+                    KodPocztowy = "00000",
+                    Miasto = "",
+                    Kraj = "",
+                    Telefon = ""
+                };
+                vm.Orders.AdressDostawy = adres2;
+            }
+
 
             return View(vm);
         }

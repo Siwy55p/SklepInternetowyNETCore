@@ -9,8 +9,8 @@
 
     <link rel="stylesheet" href="~/dashboard/css/style.css" rel="stylesheet" />
 
-    <link href="~/lib/datatables/css/jquery.datatables.css" rel="stylesheet" />
-
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.3.1/css/fixedHeader.dataTables.min.css" />
 
     @RenderSection("LinkStyleHead", required: false)
 
@@ -297,6 +297,11 @@
                             <span>Usun duplikaty z bazy danych</span>
                         </a>
                     </li>*@
+                    <li>
+                        <a href="@Url.Action("AdresDostawyNullAdress","InicializerProductCategory")" class="nav-link px-3">
+                            <span>Usun adresy null</span>
+                        </a>
+                    </li>
                 </ul>
             </nav>
         </div>
@@ -319,10 +324,11 @@
     <script src="~/dashboard/js/bootstrap.bundle.min.js"></script>
     <script src="~/dashboard/js/jquery-3.5.1.js"></script>
     @*<script src="~/dashboard/js/scriptorder.js"></script>*@
-@*
-    <script src="~/dashboard/js/script.js"></script>*@
 
     <script src="~/lib/datatables/js/jquery.datatables.js"></script>
+    <script src="~/lib/datatables-fixedheader/datatables.fixedheader.min.js"></script>
+
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

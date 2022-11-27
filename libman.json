@@ -9,6 +9,14 @@
     {
       "library": "datatables@1.10.21",
       "destination": "wwwroot/lib/datatables/"
+    },
+    {
+      "library": "datatables.net-fixedheader-bs5@3.3.1",
+      "destination": "wwwroot/lib/datatables.net-fixedheader-bs5/"
+    },
+    {
+      "library": "datatables-fixedheader@3.3.1",
+      "destination": "wwwroot/lib/datatables-fixedheader/"
     }
   ]
 }

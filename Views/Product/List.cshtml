@@ -105,10 +105,17 @@
 </div>
 
 @section Scripts{
+
     <script>
+
         $(document).ready(function () {
             $('#ProductTableList').DataTable(
                 {
+                    fixedHeader: {
+                        headerOffset: 56,
+                        header: true,
+                        footer: true
+                    },
                     "columnDefs": [
                         { "width": "50px", "targets": 2 }
                     ],
@@ -116,6 +123,7 @@
                     "order": [[0, 'desc'], [3, 'desc']]
                 });
         });
+
     </script>
 
     <script>

@@ -67,8 +67,24 @@ namespace partner_aluro.Controllers
             ViewData["MetodyPlatnosci"] = GetMetodyPlatnosci();
             ViewData["MetodyDostawy"] = _context.MetodyDostawy.ToList();
 
+
             var cartItems = await _cart.GetAllCartItemsAsync();
             _cart.CartItems = cartItems;
+            ModelState.Remove("Orders.UserID");
+
+            if(CartOrder.Orders.AdresDostawyInny == false)
+            {
+
+
+            }
+
+            if (!ModelState.IsValid)
+            {
+                CartOrder.Carts = _cart;
+
+                return View(CartOrder);
+            }
+
 
             if (_cart.CartItems.Count == 0 && _cart != null)
             {
@@ -87,33 +103,79 @@ namespace partner_aluro.Controllers
 
 
             var nowyAdres1rozliczeniowy = _unitOfWorkAdress1rozliczeniowy.adress1Rozliczeniowy.Get(CartOrder.Orders.User.Id);
-            nowyAdres1rozliczeniowy.Ulica = CartOrder.Orders.User.Adress1rozliczeniowy.Ulica;
-            nowyAdres1rozliczeniowy.Kraj = CartOrder.Orders.User.Adress1rozliczeniowy.Kraj;
-            nowyAdres1rozliczeniowy.Miasto = CartOrder.Orders.User.Adress1rozliczeniowy.Miasto;
-            nowyAdres1rozliczeniowy.KodPocztowy = CartOrder.Orders.User.Adress1rozliczeniowy.KodPocztowy;
-            nowyAdres1rozliczeniowy.Telefon = CartOrder.Orders.User.Adress1rozliczeniowy.Telefon;
 
+            if (nowyAdres1rozliczeniowy == null)
+            {
+                nowyAdres1rozliczeniowy = new Adress1rozliczeniowy();
+                nowyAdres1rozliczeniowy.UserID = CartOrder.Orders.User.Id;
+                nowyAdres1rozliczeniowy.Adres1UserID = CartOrder.Orders.User.Id;
+                nowyAdres1rozliczeniowy.Ulica = CartOrder.Orders.adresRozliczeniowy.Ulica;
+                nowyAdres1rozliczeniowy.Kraj = CartOrder.Orders.adresRozliczeniowy.Kraj;
+                nowyAdres1rozliczeniowy.Miasto = CartOrder.Orders.adresRozliczeniowy.Miasto;
+                nowyAdres1rozliczeniowy.KodPocztowy = CartOrder.Orders.adresRozliczeniowy.KodPocztowy;
+                nowyAdres1rozliczeniowy.Telefon = CartOrder.Orders.adresRozliczeniowy.Telefon;
+                nowyAdres1rozliczeniowy.Vat = CartOrder.Orders.adresRozliczeniowy.Vat;
+                nowyAdres1rozliczeniowy.Regon = CartOrder.Orders.adresRozliczeniowy.Regon;
+
+                _context.Adress1rozliczeniowy.Add(nowyAdres1rozliczeniowy);
+                _context.SaveChanges();
+            }
+            else
+            {
+                nowyAdres1rozliczeniowy.UserID = CartOrder.Orders.User.Id;
+                nowyAdres1rozliczeniowy.Adres1UserID = CartOrder.Orders.User.Id;
+                nowyAdres1rozliczeniowy.Ulica = CartOrder.Orders.adresRozliczeniowy.Ulica;
+                nowyAdres1rozliczeniowy.Kraj = CartOrder.Orders.adresRozliczeniowy.Kraj;
+                nowyAdres1rozliczeniowy.Miasto = CartOrder.Orders.adresRozliczeniowy.Miasto;
+                nowyAdres1rozliczeniowy.KodPocztowy = CartOrder.Orders.adresRozliczeniowy.KodPocztowy;
+                nowyAdres1rozliczeniowy.Telefon = CartOrder.Orders.adresRozliczeniowy.Telefon;
+                nowyAdres1rozliczeniowy.Vat = CartOrder.Orders.adresRozliczeniowy.Vat;
+                nowyAdres1rozliczeniowy.Regon = CartOrder.Orders.adresRozliczeniowy.Regon;
+                _context.Adress1rozliczeniowy.Update(nowyAdres1rozliczeniowy);
+                _context.SaveChanges();
+            }
 
 
             //nowyAdres1rozliczeniowy.UserID = CartOrder.Orders.User.Id;
             var nowyAdres2dostawy = _unitOfWorkAdress2dostawy.adress2dostawy.Get(CartOrder.Orders.User.Id);
-            nowyAdres2dostawy.Ulica = CartOrder.Orders.User.Adress2dostawy.Ulica;
-            nowyAdres2dostawy.Kraj = CartOrder.Orders.User.Adress2dostawy.Kraj;
-            nowyAdres2dostawy.Miasto = CartOrder.Orders.User.Adress2dostawy.Miasto;
-            nowyAdres2dostawy.KodPocztowy = CartOrder.Orders.User.Adress2dostawy.KodPocztowy;
-            nowyAdres2dostawy.Email = CartOrder.Orders.User.Adress2dostawy.Email;
-            nowyAdres2dostawy.Imie = CartOrder.Orders.User.Adress2dostawy.Imie;
-            nowyAdres2dostawy.Nazwisko = CartOrder.Orders.User.Adress2dostawy.Nazwisko;
-            //nowyAdres2dostawy.UserID = CartOrder.Orders.User.Id;
 
+            if (nowyAdres2dostawy == null)
+            {
+                nowyAdres2dostawy = new Adress2dostawy();
+                nowyAdres2dostawy.UserID = CartOrder.Orders.User.Id;
+                nowyAdres2dostawy.Adres2UserID = CartOrder.Orders.User.Id;
+                nowyAdres2dostawy.Ulica = CartOrder.Orders.AdressDostawy.Ulica;
+                nowyAdres2dostawy.Kraj = CartOrder.Orders.AdressDostawy.Kraj;
+                nowyAdres2dostawy.Miasto = CartOrder.Orders.AdressDostawy.Miasto;
+                nowyAdres2dostawy.KodPocztowy = CartOrder.Orders.AdressDostawy.KodPocztowy;
+                nowyAdres2dostawy.Email = CartOrder.Orders.AdressDostawy.Email;
+                nowyAdres2dostawy.Imie = CartOrder.Orders.AdressDostawy.Imie;
+                nowyAdres2dostawy.Nazwisko = CartOrder.Orders.AdressDostawy.Nazwisko;
+                _context.Adress2dostawy.Add(nowyAdres2dostawy);
+                _context.SaveChanges();
+            }
+            else
+            {
+                nowyAdres2dostawy.UserID = CartOrder.Orders.User.Id;
+                nowyAdres2dostawy.Adres2UserID = CartOrder.Orders.User.Id;
+                nowyAdres2dostawy.Ulica = CartOrder.Orders.AdressDostawy.Ulica;
+                nowyAdres2dostawy.Kraj = CartOrder.Orders.AdressDostawy.Kraj;
+                nowyAdres2dostawy.Miasto = CartOrder.Orders.AdressDostawy.Miasto;
+                nowyAdres2dostawy.KodPocztowy = CartOrder.Orders.AdressDostawy.KodPocztowy;
+                nowyAdres2dostawy.Email = CartOrder.Orders.AdressDostawy.Email;
+                nowyAdres2dostawy.Imie = CartOrder.Orders.AdressDostawy.Imie;
+                nowyAdres2dostawy.Nazwisko = CartOrder.Orders.AdressDostawy.Nazwisko;
+                _context.Adress2dostawy.Update(nowyAdres2dostawy);
+                _context.SaveChanges();
+            }
 
             Adress1rozliczeniowy OrderAdres1 = new()
             {
-                Ulica = CartOrder.Orders.User.Adress1rozliczeniowy.Ulica,
-                Kraj = CartOrder.Orders.User.Adress1rozliczeniowy.Kraj,
-                Miasto = CartOrder.Orders.User.Adress1rozliczeniowy.Miasto,
-                KodPocztowy = CartOrder.Orders.User.Adress1rozliczeniowy.KodPocztowy,
-                Telefon = CartOrder.Orders.User.Adress1rozliczeniowy.Telefon,
+                Ulica = CartOrder.Orders.adresRozliczeniowy.Ulica,
+                Kraj = CartOrder.Orders.adresRozliczeniowy.Kraj,
+                Miasto = CartOrder.Orders.adresRozliczeniowy.Miasto,
+                KodPocztowy = CartOrder.Orders.adresRozliczeniowy.KodPocztowy,
+                Telefon = CartOrder.Orders.adresRozliczeniowy.Telefon,
                 NrNieruchomosci = nowyAdres1rozliczeniowy.NrNieruchomosci,
                 NrLokalu = nowyAdres1rozliczeniowy.NrLokalu,
                 Vat = nowyAdres1rozliczeniowy.Vat,
@@ -126,13 +188,14 @@ namespace partner_aluro.Controllers
 
             Adress2dostawy OrderAdres2 = new()
             {
-                Ulica = CartOrder.Orders.User.Adress2dostawy.Ulica,
-                Kraj = CartOrder.Orders.User.Adress2dostawy.Kraj,
-                Miasto = CartOrder.Orders.User.Adress2dostawy.Miasto,
-                KodPocztowy = CartOrder.Orders.User.Adress2dostawy.KodPocztowy,
-                Email = CartOrder.Orders.User.Adress2dostawy.Email,
-                Imie = CartOrder.Orders.User.Adress2dostawy.Imie,
-                Nazwisko = CartOrder.Orders.User.Adress2dostawy.Nazwisko
+                Ulica = CartOrder.Orders.AdressDostawy.Ulica,
+                Kraj = CartOrder.Orders.AdressDostawy.Kraj,
+                Miasto = CartOrder.Orders.AdressDostawy.Miasto,
+                KodPocztowy = CartOrder.Orders.AdressDostawy.KodPocztowy,
+                Email = CartOrder.Orders.AdressDostawy.Email,
+                Imie = CartOrder.Orders.AdressDostawy.Imie,
+                Nazwisko = CartOrder.Orders.AdressDostawy.Nazwisko,
+                UserID = user.Id
             };
 
             ModelState.Remove("Orders.UserID");
@@ -144,13 +207,12 @@ namespace partner_aluro.Controllers
             ModelState.Remove("Orders.User.Adress1rozliczeniowy.Wojewodztwo");
 
 
-            CartOrder.Orders.User.Adress1rozliczeniowy.Wojewodztwo = _context.Adress1rozliczeniowy.FirstOrDefault(x => x.Adres1rozliczeniowyId == user.Adress1rozliczeniowyId).Wojewodztwo;
+            //CartOrder.Orders.User.Adress1rozliczeniowy.Wojewodztwo = _context.Adress1rozliczeniowy.FirstOrDefault(x => x.Adres1rozliczeniowyId == user.).Wojewodztwo;
 
             CartOrder.Orders.adresRozliczeniowy = OrderAdres1;
             CartOrder.Orders.AdressDostawy = OrderAdres2;
 
-            ModelState.Remove("Orders.AdressDostawy");
-            ModelState.Remove("Orders.adresRozliczeniowy");
+
             if (ModelState.IsValid)
             {
                 _unitOfWorkAdress1rozliczeniowy.adress1Rozliczeniowy.Update(nowyAdres1rozliczeniowy);

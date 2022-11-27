@@ -211,6 +211,27 @@ namespace partner_aluro.Controllers
 
         }
 
+        public void AdresDostawyNullAdress()
+        {
+            List<Adress2dostawy> images = new List<Adress2dostawy>();
+
+            List<Adress2dostawy> adresyDostawy = _context.Adress2dostawy.ToList();
+
+            for (int i = 0; i < adresyDostawy.Count(); i++)
+            {
+                Adress2dostawy AdresDostawy = adresyDostawy[i];
+
+                if(AdresDostawy.Ulica == null && AdresDostawy.UserID ==null && AdresDostawy.Adres2UserID ==null)
+                {
+                    _context.Adress2dostawy.Remove(AdresDostawy);
+                    _context.SaveChanges();
+                }
+
+
+            }
+
+        }
+
 
     }
 }

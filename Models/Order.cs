@@ -31,6 +31,8 @@ namespace partner_aluro.Models
         public string? MetodaDostawy { get; set; }
         public string? MetodaPlatnosci { get; set; }
 
+        public bool AdresDostawyInny { get; set; } = true;
+
         public Adress1rozliczeniowy adresRozliczeniowy { get; set; }
 
 
