@@ -96,7 +96,7 @@
                                 <div class="col justify-content-start text-start">
                                     @if (@Model.CenaProduktuDetal != null)
                                     {
-                                        <p>@language.Getkey("CenaDetaliczna"): @language.GetCurrently(@Model.CenaProduktuDetal.Value, Constants.myNumberFormatInfo).ToString("C", Constants.myNumberFormatInfo)</p>
+                                        <p>@language.Getkey("CenaDetaliczna"): @language.GetCurrently(@Model.CenaProduktuDetal, Constants.myNumberFormatInfo).ToString("C", Constants.myNumberFormatInfo)</p>
                                     }
                                 </div>
                                 <div class="col">

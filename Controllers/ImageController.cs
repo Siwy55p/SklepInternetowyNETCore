@@ -89,6 +89,11 @@ namespace partner_aluro.Controllers
         // GET: Image/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+
+            ViewData["returnUrl"] = Request.Headers["Referer"].ToString();
+            var returnUrl = Request.Headers["Referer"].ToString();
+
+
             if (id == null || _context.Images == null)
             {
                 return NotFound();
@@ -183,6 +188,8 @@ namespace partner_aluro.Controllers
         // GET: Image/Edit/5
         public async Task<IActionResult> Edit(int id)
         {
+            ViewData["returnUrl"] = Request.Headers["Referer"].ToString();
+            var returnUrl = Request.Headers["Referer"].ToString();
             if (id == null || _context.Images == null)
             {
                 return NotFound();
@@ -195,9 +202,6 @@ namespace partner_aluro.Controllers
                 return NotFound();
             }
 
-
-
-
             return View(imageModel);
         }
 
@@ -208,8 +212,11 @@ namespace partner_aluro.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
-        public async Task<IActionResult> Edit(int id, ImageModel imageModel)
+        public async Task<IActionResult> Edit(int id, ImageModel imageModel, string returnUrl)
         {
+
+            //ViewData["returnUrl"] = Request.Headers["Referer"].ToString();
+            //var returnUrl = Request.Headers["Referer"].ToString();
             if (id != imageModel.ImageId)
             {
                 return NotFound();
@@ -249,11 +256,7 @@ namespace partner_aluro.Controllers
                         }
                     }
 
-
-
-
-
-
+                    _imageService.Update(imageModel);
 
                     //await _context.SaveChangesAsync();
                 }
@@ -268,22 +271,30 @@ namespace partner_aluro.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return Redirect(returnUrl);
+                //return RedirectToAction(nameof(Index));
             }
-            return View(imageModel);
+            return Redirect(returnUrl);
+            //return View(imageModel);
         }
 
-        // GET: Image/Delete/5
-        [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
+        //// GET: Image/Delete/5
+        //[ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
+        [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
+            ViewData["returnUrl"] = Request.Headers["Referer"].ToString();
+            var returnUrl = Request.Headers["Referer"].ToString();
+
+            var imageModel = await _context.Images.FindAsync(id);
+
             if (id == null || _context.Images == null)
             {
                 return NotFound();
             }
 
-            var imageModel = await _context.Images
-                .FirstOrDefaultAsync(m => m.ImageId == id);
+            //var imageModel = await _context.Images
+            //    .FirstOrDefaultAsync(m => m.ImageId == id);
             if (imageModel == null)
             {
                 return NotFound();
@@ -297,7 +308,7 @@ namespace partner_aluro.Controllers
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int id, string returnUrl)
         {
             var imageModel = await _context.Images.FindAsync(id);
 
@@ -338,9 +349,9 @@ namespace partner_aluro.Controllers
 
 
             }
-            
+            return Redirect(returnUrl);
             //await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            //return RedirectToAction(nameof(Index));
         }
         
 
@@ -429,11 +440,6 @@ namespace partner_aluro.Controllers
 
 
         //}
-
-
-
-
-
 
 
 

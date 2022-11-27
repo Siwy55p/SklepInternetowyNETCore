@@ -9,9 +9,9 @@
 @inject LanguageService language
 
 <div class="card"> @*odstepy miedzy kartami w stylu site.css pozycja card*@
-    @if (Model.Promocja == true && Model.CenaPromocyja != null)
+    @if (Model.Promocja == true)
     {   
-            decimal ProcentPromocji = (decimal)(1 - (Model.CenaPromocyja / Model.CenaProduktu)) * 100;
+            decimal ProcentPromocji = (1 - (Model.CenaPromocyja / Model.CenaProduktu)) * 100;
 
         <div class="sale">@ProcentPromocji.ToString("##.") %</div>
     }
@@ -49,7 +49,7 @@
             </div>
         </div>
         @{
-            var Cena_brutto = (decimal)Model.CenaProduktu * (decimal)partner_aluro.Core.Constants.Vat;
+            var Cena_brutto = Model.CenaProduktu * partner_aluro.Core.Constants.Vat;
 
             var CenaJednostkowa = Cena_brutto * (1 - (partner_aluro.Core.Constants.Rabat / 100));
 
@@ -82,6 +82,6 @@
         {
             <div class="float-end text-end">@language.Getkey("Twoja cena po rabacie"): @language.GetCurrently(@CenaJednostkowa, Constants.myNumberFormatInfo).ToString("C",Constants.myNumberFormatInfo)) </div>
         }
-        <div class="float-end text-end">@language.Getkey("CenaDetaliczna"): @language.GetCurrently((decimal)@Model.CenaProduktuDetal,Constants.myNumberFormatInfo).ToString("C",Constants.myNumberFormatInfo) </div>
+        <div class="float-end text-end">@language.Getkey("CenaDetaliczna"): @language.GetCurrently(@Model.CenaProduktuDetal,Constants.myNumberFormatInfo).ToString("C",Constants.myNumberFormatInfo) </div>
     </div>
 </div>

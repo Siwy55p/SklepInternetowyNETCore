@@ -58,6 +58,10 @@ namespace partner_aluro.Controllers
         public async Task <IActionResult> Edit(int id)
         {
             ViewData["Category"] = GetCategories();
+
+            ViewData["returnUrl"] = Request.Headers["Referer"].ToString();
+
+
             //ViewBag.Category = GetCategories();
             Product produkt = await _ProductService.GetProductId(id);
             produkt.Kategorie = _context.ProductCategory.Where(x => x.ProductID == id).ToList();
@@ -71,6 +75,7 @@ namespace partner_aluro.Controllers
         public async Task<IActionResult> Edit(int id, Product product)
         {
             ViewData["Category"] = GetCategories();
+            ViewData["returnUrl"] = Request.Headers["Referer"].ToString();
             //ViewBag.Category = GetCategories();
 
             product.Product_Images = _context.Images.Where(x => x.ProductImagesId == product.ProductId).ToList();
@@ -98,7 +103,7 @@ namespace partner_aluro.Controllers
             }
 
             var files = HttpContext.Request.Form.Files;
-            _imageService.UploadFilesAsync(files, product);
+            await _imageService.UploadFilesAsync(files, product);
             ////UploadNewFilePicture
             //ImageController.Initialize(_webHostEnvironment);
             //ImageModel imgModel = new ImageModel();
@@ -150,6 +155,7 @@ namespace partner_aluro.Controllers
             //ViewBag.Category = GetCategories();
 
             ViewData["Category"] = GetCategories();
+            ViewData["returnUrl"] = Request.Headers["Referer"].ToString();
 
             Product product = new Product();
             //product.Cats = _ProductService.GetListCategory();
@@ -363,6 +369,15 @@ namespace partner_aluro.Controllers
         [HttpGet]
         public IActionResult Delete(int id)
         {
+            Product product = _context.Products.Find(id);
+
+            //delete image from wwwroot/images
+            var PathProduct = Path.Combine(_webHostEnvironment.WebRootPath + "\\images\\produkty\\" + product.Symbol);
+
+            if (System.IO.Directory.Exists(PathProduct))
+                System.IO.Directory.Delete(PathProduct, true);
+            //delete tge record
+
             _ProductService.DeleteProductId(id);
             return RedirectToAction("List");
         }

@@ -9,7 +9,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit" asp-route-id="@Model.ImageId" enctype="multipart/form-data" method="post">
+        <form asp-action="Edit" asp-route-id="@Model.ImageId" asp-route-returnUrl="@ViewData["returnUrl"]" enctype="multipart/form-data" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <input asp-for="ImageId" class="form-control" readonly="readonly" />

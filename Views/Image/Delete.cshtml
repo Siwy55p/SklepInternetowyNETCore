@@ -23,16 +23,13 @@
         <dd class="col">
             @Html.DisplayFor(model => model.fullPath)
         </dd>
-
-        <dd class="col">
-            <img src="@Model.fullPath" width="250px" height="250px" />
-        </dd>
-
     </dl>
-    
-    <form asp-action="Delete">
+    <div class="form-group">
+        <img src="\@Model.path\@Model.ImageName" asp-append-version="true" width="250px" height="250px">
+    </div>
+    <form asp-action="Delete" asp-route-id="@Model.ImageId" asp-route-returnUrl="@ViewData["returnUrl"]">
         <input type="hidden" asp-for="ImageId" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <input type="submit" value="Usuń" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>
     </form>
 </div>

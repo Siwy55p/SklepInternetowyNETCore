@@ -30,7 +30,7 @@ namespace partner_aluro.Resources
             if (CultureName == "pl-PL")
             {
                 //var val = _currentCulture.IsNeutralCulture;
-                value = value;
+                //value = value;
 
             }
             else
@@ -46,7 +46,7 @@ namespace partner_aluro.Resources
             if (myNumberFormatInfo.CurrencySymbol == "zł")
             {
                 //var val = _currentCulture.IsNeutralCulture;
-                value = value;
+                //value = value;
 
             }
             else if (myNumberFormatInfo.CurrencySymbol == "€")
@@ -62,7 +62,7 @@ namespace partner_aluro.Resources
             if (myNumberFormatInfo.NumberFormat.CurrencySymbol == "zł")
             {
                 //var val = _currentCulture.IsNeutralCulture;
-                value = value;
+                //value = value;
 
             }
             else if (myNumberFormatInfo.NumberFormat.CurrencySymbol == "€")

@@ -30,7 +30,10 @@ namespace partner_aluro.Services
         public static void Initialize(IWebHostEnvironment hostEnvironment)
         {
             if (IsInitialized)
-                throw new InvalidOperationException("Object already initialized");
+            {
+                //throw new InvalidOperationException("Object already initialized");
+                
+            }
 
             _hostingEnvironment = hostEnvironment;
             IsInitialized = true;
@@ -120,7 +123,8 @@ namespace partner_aluro.Services
 
                     if (product != null)
                     {
-                        dynamicFileName = product.Symbol + "_" + i + "_" + extension;
+                        dynamicFileName = product.Symbol + "_" + i + "_" + DateTime.Now.ToString("mm_ss") + extension;
+                        
                     }
 
 

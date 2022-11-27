@@ -22,27 +22,27 @@
         <div class="row">
             @{
 
-                var Cena_brutto = (decimal)item.Product.CenaProduktu * (decimal)partner_aluro.Core.Constants.Vat;
-                if(item.Product.Promocja == true && item.Product.CenaPromocyja != null)
+                var Cena_brutto = item.Product.CenaProduktu * partner_aluro.Core.Constants.Vat;
+                if(item.Product.Promocja == true)
                 {
-                    Cena_brutto = (decimal)item.Product.CenaPromocyja * (decimal)partner_aluro.Core.Constants.Vat;
+                    Cena_brutto = item.Product.CenaPromocyja * partner_aluro.Core.Constants.Vat;
                 }
 
                 var CenaJednostkowa_netto = item.Product.CenaProduktu;
 
-                var CenaJednostkowa_brutto = (decimal)Cena_brutto;
+                var CenaJednostkowa_brutto = Cena_brutto;
 
                 if (partner_aluro.Core.Constants.Rabat >= 0)
                 {
 
-                    if (item.Product.Promocja == true && item.Product.CenaPromocyja != null)
+                    if (item.Product.Promocja == true)
                     {
-                        CenaJednostkowa_netto = (decimal)item.Product.CenaPromocyja;
+                        CenaJednostkowa_netto = item.Product.CenaPromocyja;
                     }
                     else
                     {
                         CenaJednostkowa_netto = item.Product.CenaProduktu * (1 - (partner_aluro.Core.Constants.Rabat / 100));
-                        CenaJednostkowa_brutto = (decimal)Cena_brutto * (1 - (partner_aluro.Core.Constants.Rabat / 100));
+                        CenaJednostkowa_brutto = Cena_brutto * (1 - (partner_aluro.Core.Constants.Rabat / 100));
                     }
                 }
 
