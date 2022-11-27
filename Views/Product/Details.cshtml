@@ -33,8 +33,8 @@
                         <div class="column">
                             <div class="main_image">
                                 @*<a id="myLink" href="~/images/produkty/@Model.Symbol/@Model.ImageUrl" class="glightbox">*@
-                                <a id="myLink" href="~/images/produkty/@Model.Symbol/@Model.ImageUrl" onclick="Open(this)" value="2" class="glightbox">
-                                    <img class="main_image" id=featured src="~/images/produkty/@Model.Symbol/@Model.ImageUrl" >
+                                <a id="myLink" href="~/images/produkty/@Model.Symbol/@Model.Product_Images[0].ImageName" onclick="Open(this)" data-gallery="gallery" class="glightbox">
+                                    <img class="main_image" id=featured src="~/images/produkty/@Model.Symbol/@Model.Product_Images[0].ImageName">
                                 </a>
                             </div>
 
@@ -44,7 +44,7 @@
                                     @foreach (var img in Model.Product_Images.OrderBy(o=>o.kolejnosc).Select((value, x) => (value,x)) )
                                     {
                                         
-                                            var index = @img.x+1;
+                                            var index = @img.x;
                                         
 
                                         <a href="~/images/produkty/@Model.Symbol/@img.value.ImageName" class="glightbox" data-gallery="gallery">
@@ -196,14 +196,28 @@
     <script src="~/js/glightbox.min.js"></script>
 
 
+    <script>
+        function Open(elem) {
 
+
+            //var s= document.getElementById(variable).id;
+
+
+            //lightbox.settings.startAt = s;
+            //alert(s);
+        }
+
+    </script>
     <script>
         function Over(elem) {
 
             var value2 = elem.value;
             var id2 = elem.id;
-            
-            lightbox.settings.startAt = id2;
+
+            var num = parseInt(id2, 10) + 1
+
+            lightbox.settings.startAt = num;
+            //alert(id2);
         }
 
         const lightbox = GLightbox({

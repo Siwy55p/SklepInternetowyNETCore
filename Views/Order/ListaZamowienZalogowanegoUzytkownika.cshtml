@@ -4,6 +4,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section LinkStyleHead
+    {
+
+    <link href="~/lib/datatables/css/jquery.datatables.css" rel="stylesheet" />
+
+    }
+
 <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
     <div class="row justify-content-center align-items-center">
         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-10 col-xxl-8">
@@ -16,3 +23,16 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script src="~/lib/datatables/js/jquery.datatables.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable(
+                {
+                    "order": [[0, 'desc']]
+                });
+        });
+    </script>
+}
