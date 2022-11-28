@@ -314,7 +314,7 @@ namespace partner_aluro.Controllers
             //_unitOfWork.User.UpdateUser(user);
 
             _unitOfWork.User.UpdateUser(user);
-
+            _context.SaveChange();
             //_userRepository.UpdateUser(user);
 
 

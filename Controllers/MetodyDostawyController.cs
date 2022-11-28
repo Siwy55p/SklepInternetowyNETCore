@@ -43,13 +43,15 @@ namespace partner_aluro.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             MetodyDostawy metodaDostawy = _context.MetodyDostawy.Where(x => x.Id == id).FirstOrDefault();
+           
             return View(metodaDostawy);
         }
         [HttpPost]
         public async Task<IActionResult> Edit(MetodyDostawy metodaDostawy)
         {
-            await _metodyDostawy.Update(metodaDostawy.Id);
-            return View(metodaDostawy);
+            _context.Update(metodaDostawy);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         public void Delete(int id)

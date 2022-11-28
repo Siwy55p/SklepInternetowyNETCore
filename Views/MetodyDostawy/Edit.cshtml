@@ -1,6 +1,14 @@
 ﻿@model partner_aluro.Models.MetodyDostawy
 
 
+
+@{
+    ViewData["Title"] = "Detail";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+
+
 <form class="needs-validation" asp-action="Edit" asp-route-id="@Model.Id" asp-controller="MetodyDostawy" class="form-horizontal" method="post">
     <div class="row g-0">
         <div class="col-md-6 border-end">

@@ -41,13 +41,10 @@ namespace partner_aluro.Models
         [Display(Name = "Nr Nip/VAT")]
         public string Vat { get; set; }
 
-        [Display(Name = "Wojewodztwo")]
         public string? Wojewodztwo { get; set; }
 
-        [Display(Name = "Powiat")]
         public string? Powiat { get; set; }
 
-        [Display(Name = "Gmina")]
         public string? Gmina { get; set; }
 
         [Display(Name = "StatusNip")]
