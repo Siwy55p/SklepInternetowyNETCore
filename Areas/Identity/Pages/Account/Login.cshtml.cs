@@ -181,7 +181,7 @@ namespace partner_aluro.Areas.Identity.Pages.Account
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, _identityLocalizer["Nieprawidłowy login lub hasło."]);
+                    ModelState.AddModelError(string.Empty, _identityLocalizer["Nieprawidłowe hasło."]);
                     //ModelState.AddModelError(string.Empty, _identityLocalizer["INVALID_LOGIN_ATTEMPT"]);
                     return Page();
                 }
