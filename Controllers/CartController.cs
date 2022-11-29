@@ -50,7 +50,8 @@ namespace partner_aluro.Controllers
         {
             _cart.CartItems = await _cart.GetAllCartItemsAsync();
 
-            ViewData["MetodyPlatnosci"] = OrderController.GetMetodyPlatnosci();
+            //ViewData["MetodyPlatnosci"] = OrderController.GetMetodyPlatnosci();
+            ViewData["MetodyPlatnosci"] = _context.MetodyPlatnosci.ToList();
             ViewData["MetodyDostawy"] = _context.MetodyDostawy.ToList();
 
 
@@ -67,7 +68,8 @@ namespace partner_aluro.Controllers
             ViewBag.returnUrl = Request.Headers["Referer"].ToString();
             var returnUrl = Request.Headers["Referer"].ToString();
 
-            ViewData["MetodyPlatnosci"] = OrderController.GetMetodyPlatnosci();
+            //ViewData["MetodyPlatnosci"] = OrderController.GetMetodyPlatnosci();
+            ViewData["MetodyPlatnosci"] = _context.MetodyPlatnosci.ToList();
             ViewData["MetodyDostawy"] = _context.MetodyDostawy.ToList();
 
             var products = await _cart.GetAllCartItemsAsync();

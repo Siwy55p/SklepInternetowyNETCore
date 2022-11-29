@@ -170,13 +170,30 @@
 <h4 class="mb-4">3. @language.Getkey("Płatność")</h4>
 <div class="d-block my-3">
     <div class="custom-control custom-radio">
-        @foreach (var item in (IEnumerable<SelectListItem>)@ViewData["MetodyPlatnosci"])
+        @foreach (var item in @ViewData["MetodyPlatnosci"] as List<MetodyPlatnosci>)
+        {
+            <div class="row">
+                <div class="col border">
+                    <label class="custom-control-label">
+                        <input asp-for="@Model.Orders.MetodaPlatnosci" type="radio" value="@item.Opis" id="@item.Nazwa" class="custom-control-input" required="">
+                        @language.Getkey(item.Nazwa)
+                    </label>
+                </div>
+                <div class="col border">
+                    @item.SzczegolowyOpis
+                </div>
+
+            </div>
+        }
+
+@*      @foreach (var item in (IEnumerable<SelectListItem>)@ViewData["MetodyPlatnosci"])
         {
             <label class="custom-control-label" >
                 <input asp-for="@Model.Orders.MetodaPlatnosci" type="radio" value="@item.Value" id="@item.Text" class="custom-control-input" required="">
                 @language.Getkey(item.Text)
             </label>
-        }
+        }*@
+
     </div>
 </div>
 <hr class="mb-4">

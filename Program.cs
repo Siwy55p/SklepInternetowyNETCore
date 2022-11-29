@@ -254,6 +254,8 @@ void AddScoped()
 
     builder.Services.AddScoped<IMetodyDostawy, MetodyDostawyService>();
 
+    builder.Services.AddScoped<IMetodyPlatnosci, MetodyPlatnosciService>();
+
     builder.Services.AddScoped<IImageService, ImageService>();
 
     builder.Services.AddScoped<IProductCategoryService, ProductCategoryService>();
