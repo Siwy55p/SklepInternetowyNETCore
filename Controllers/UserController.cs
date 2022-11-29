@@ -13,7 +13,6 @@ using Microsoft.AspNetCore.WebUtilities;
 using System.Text;
 using System.Text.Encodings.Web;
 using partner_aluro.Data;
-using partner_aluro.Repositories;
 
 namespace partner_aluro.Controllers
 {
@@ -21,7 +20,6 @@ namespace partner_aluro.Controllers
     public class UserController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IUnitOfWorkAdress1rozliczeniowy _unitOfWorkAdress1Rozliczeniowy;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IProfildzialalnosciService _profildzialalnosciService;
 
@@ -30,25 +28,34 @@ namespace partner_aluro.Controllers
         private readonly RegonService RegonService;
 
 
+        private readonly IUnitOfWorkAdress1rozliczeniowy _unitOfWorkAdress1rozliczeniowy;
+        private readonly IUnitOfWorkAdress2dostawy _unitOfWorkAdress2dostawy;
+
+        private readonly ApplicationDbContext _context;
+
         private readonly IAdress1rozliczeniowyService _adress1RozliczeniowyService;
         private readonly IAdress2dostawyService _adress2DostawyService;
 
         private readonly IEmailService _emailService;
 
-        public UserController(RegonService regonService, IEmailService emailService, IUnitOfWorkAdress1rozliczeniowy unitOfWorkAdress1Rozliczeniowy, IAdress2dostawyService adress2DostawyServicee, IAdress1rozliczeniowyService adress1RozliczeniowyService, IUnitOfWork unitOfWork, SignInManager<ApplicationUser> signInManager, IProfildzialalnosciService profildzialalnosciService, IUserRepository userRepository)
+        public UserController(ApplicationDbContext context ,RegonService regonService, IEmailService emailService, IUnitOfWorkAdress2dostawy unitOfWorkAdress2dostawy, IUnitOfWorkAdress1rozliczeniowy unitOfWorkAdress1Rozliczeniowy, IAdress2dostawyService adress2DostawyServicee, IAdress1rozliczeniowyService adress1RozliczeniowyService, IUnitOfWork unitOfWork, SignInManager<ApplicationUser> signInManager, IProfildzialalnosciService profildzialalnosciService, IUserRepository userRepository)
         {
+            _context = context;
+
             _unitOfWork = unitOfWork;
             _signInManager = signInManager;
             _profildzialalnosciService = profildzialalnosciService;
             _adress1RozliczeniowyService = adress1RozliczeniowyService;
             _adress2DostawyService = adress2DostawyServicee;
 
-            _unitOfWorkAdress1Rozliczeniowy = unitOfWorkAdress1Rozliczeniowy;
+            _unitOfWorkAdress1rozliczeniowy = unitOfWorkAdress1Rozliczeniowy;
+            _unitOfWorkAdress2dostawy = unitOfWorkAdress2dostawy;
 
             _emailService = emailService;
 
             RegonService = regonService;
-            _userRepository = userRepository;   
+            _userRepository = userRepository;
+
         }
 
         public IActionResult Index()
@@ -313,9 +320,49 @@ namespace partner_aluro.Controllers
             user.Adress2dostawy = data.User.Adress2dostawy;
             //_unitOfWork.User.UpdateUser(user);
 
+
+
             _unitOfWork.User.UpdateUser(user);
-            //_context.SaveChange();
-            //_userRepository.UpdateUser(user);
+
+            var nowyAdres1rozliczeniowy = _unitOfWorkAdress1rozliczeniowy.adress1Rozliczeniowy.Get(user.Id);
+
+            if (nowyAdres1rozliczeniowy == null)
+            {
+                nowyAdres1rozliczeniowy = new Adress1rozliczeniowy();
+                nowyAdres1rozliczeniowy.UserID = user.Id;
+                nowyAdres1rozliczeniowy.Adres1UserID = user.Id;
+                nowyAdres1rozliczeniowy.Ulica = user.Adress1rozliczeniowy.Ulica;
+                nowyAdres1rozliczeniowy.Kraj = user.Adress1rozliczeniowy.Kraj;
+                nowyAdres1rozliczeniowy.Miasto = user.Adress1rozliczeniowy.Miasto;
+                nowyAdres1rozliczeniowy.KodPocztowy = user.Adress1rozliczeniowy.KodPocztowy;
+                nowyAdres1rozliczeniowy.Telefon = user.Adress1rozliczeniowy.Telefon;
+                nowyAdres1rozliczeniowy.Vat = user.Adress1rozliczeniowy.Vat;
+                nowyAdres1rozliczeniowy.Regon = user.Adress1rozliczeniowy.Regon;
+
+                _context.Adress1rozliczeniowy.Add(nowyAdres1rozliczeniowy);
+                _context.SaveChanges();
+            }
+
+            var nowyAdres2dostawy = _unitOfWorkAdress2dostawy.adress2dostawy.Get(user.Id);
+
+            if (nowyAdres2dostawy == null)
+            {
+                nowyAdres2dostawy = new Adress2dostawy();
+                nowyAdres2dostawy.UserID = user.Id;
+                nowyAdres2dostawy.Adres2UserID = user.Id;
+                nowyAdres2dostawy.Ulica = user.Adress2dostawy.Ulica;
+                nowyAdres2dostawy.Kraj = user.Adress2dostawy.Kraj;
+                nowyAdres2dostawy.Miasto = user.Adress2dostawy.Miasto;
+                nowyAdres2dostawy.KodPocztowy = user.Adress2dostawy.KodPocztowy;
+                nowyAdres2dostawy.Email = user.Adress2dostawy.Email;
+                nowyAdres2dostawy.Imie = user.Adress2dostawy.Imie;
+                nowyAdres2dostawy.Nazwisko = user.Adress2dostawy.Nazwisko;
+                _context.Adress2dostawy.Add(nowyAdres2dostawy);
+                _context.SaveChanges();
+            }
+
+
+
 
 
             var rolesToAdd = new List<string>();
