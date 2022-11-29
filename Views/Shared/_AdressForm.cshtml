@@ -149,17 +149,26 @@
                 Wybierz metodę wysyłki
             </div>
         </div>
-        @foreach (var item in @ViewData["MetodyDostawy"] as List<MetodyDostawy>)
+        @foreach (var item in (@ViewData["MetodyDostawy"] as List<MetodyDostawy>).Select((value, i) => new { i, value }))
         {
             <div class="row">
                 <div class="col border">
                     <label class="custom-control-label">
-                        <input asp-for="@Model.Orders.MetodaDostawy" type="radio" value="@item.Opis" id="@item.Nazwa" class="custom-control-input" required="">
-                        @language.Getkey(item.Nazwa)
+
+                        @if (item.i == 0)
+                        {
+                            <input asp-for="@Model.Orders.MetodaDostawy" type="radio" value="@item.value.Opis" id="@item.value.Nazwa" class="custom-control-input" required="" checked>
+                            @language.Getkey(item.value.Nazwa)
+                        }
+                        else
+                        {
+                            <input asp-for="@Model.Orders.MetodaDostawy" type="radio" value="@item.value.Opis" id="@item.value.Nazwa" class="custom-control-input" required="">
+                            @language.Getkey(item.value.Nazwa)
+                        }
                     </label>
                 </div>
                 <div class="col border">
-                        @item.SzczegolowyOpis
+                        @item.value.SzczegolowyOpis
                 </div>
 
             </div>
@@ -167,20 +176,29 @@
     </div>
 </div>
 <hr class="mb-4">
-<h4 class="mb-4">3. @language.Getkey("Płatność")</h4>
+<h4 class="mb-4">3. @language.Getkey("Metoda Płatności")</h4>
 <div class="d-block my-3">
     <div class="custom-control custom-radio">
-        @foreach (var item in @ViewData["MetodyPlatnosci"] as List<MetodyPlatnosci>)
+        @foreach (var item in (@ViewData["MetodyPlatnosci"] as List<MetodyPlatnosci>).Select((value, i) => new { i, value }))
         {
+
             <div class="row">
                 <div class="col border">
                     <label class="custom-control-label">
-                        <input asp-for="@Model.Orders.MetodaPlatnosci" type="radio" value="@item.Opis" id="@item.Nazwa" class="custom-control-input" required="">
-                        @language.Getkey(item.Nazwa)
+
+                        @if(item.i == 0)
+                        {
+                            <input asp-for="@Model.Orders.MetodaPlatnosci" type="radio" value="@item.value.Opis" id="@item.value.Nazwa" class="custom-control-input" required="" checked>
+                            @language.Getkey(item.value.Nazwa)
+                        }else
+                        {
+                            <input asp-for="@Model.Orders.MetodaPlatnosci" type="radio" value="@item.value.Opis" id="@item.value.Nazwa" class="custom-control-input" required="">
+                            @language.Getkey(item.value.Nazwa)
+                        }
                     </label>
                 </div>
                 <div class="col border">
-                    @item.SzczegolowyOpis
+                    @item.value.SzczegolowyOpis
                 </div>
 
             </div>
