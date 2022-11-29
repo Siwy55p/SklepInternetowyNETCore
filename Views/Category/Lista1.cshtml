@@ -33,7 +33,7 @@
 
                                 string activecat = "";
 
-                                @if (ViewData["sort"] != null)
+                                            @if (ViewData["sort"] != null)
                                 {
                                  sort = (int)ViewData["sort"];
                                 }
@@ -74,6 +74,32 @@
     </div>
 </div>
 @section Scripts{
+
+    <script>
+        function updateQuantityManual(_this) {
+            let lot = 1;
+            let qty = parseInt($(_this).val(), 10);
+            let max = parseInt($(_this).attr('max'));
+            let myQty = parseInt(qty, 10);
+
+            if (qty > max) {
+                $(_this).val(max);
+                alert("Nie ma wystarczającej ilości na stanie.");
+                return;
+            }
+
+            if ($(_this).data('lot')) {
+                lot = parseInt($(_this).attr('data-lot'), 10);
+            }
+
+
+            if (qty % lot != 0) {
+                qty = myQty + lot - (qty % lot);
+                $(_this).val(qty);
+            }
+        }
+    </script>
+
     <script>
         function AddToCart(ProductId) {
             var myOffcanvas = document.getElementById('offcanvas');
@@ -115,12 +141,12 @@
     </script>
 
     <script>
-        function IncreaseQuantity(ProductId) {
+        function IncreaseQuantity(ProductId, Quantity) {
 
             $.ajax({
                 type: "POST",
                 url: '@Url.Action("IncreaseQuantity2", "Cart")',
-                data: { id: ProductId },
+                data: { id: ProductId, Quantity: Quantity },
                 success: function (result) {
                     $("#mydiv").load(location.href + " #mydiv");
                 },
