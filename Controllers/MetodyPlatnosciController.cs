@@ -55,9 +55,10 @@ namespace partner_aluro.Controllers
             return RedirectToAction("Index");
         }
 
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
             _metodyPlatnosci.Delete(id);
+            return RedirectToAction("Index");
         }
 
     }

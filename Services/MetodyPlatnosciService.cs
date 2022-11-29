@@ -22,9 +22,9 @@ namespace partner_aluro.Services
 
         public async Task Delete(int id)
         {
-            MetodyPlatnosci metodaPlatnosci = await _context.MetodyPlatnosci.Where(x=>x.Id == id).FirstOrDefaultAsync();
-            _context.Remove(metodaPlatnosci);
-
+            MetodyPlatnosci metodaPlatnosci = _context.MetodyPlatnosci.Where(x=>x.Id == id).FirstOrDefault();
+            _context.MetodyPlatnosci.Remove(metodaPlatnosci);
+            _context.SaveChanges();
         }
 
         public async Task Update(int id)
