@@ -1,13 +1,13 @@
 ﻿@model partner_aluro.Models.Newsletter
 
-<div class="form-group row">
+<div class="form-group row d-none">
 
     <label asp-for="@Model.NewsletterID" class="col col-form-label text-end">Newsletter ID</label>
     <div class="col">
         <input asp-for="@Model.NewsletterID" class="form-control" aria-required="true" readonly />
     </div>
 </div>
-<div class="form-group row">
+<div class="form-group row d-none">
     <label asp-for="@Model.Nazwa" class="col-sm-4 col-form-label text-end">Nazwa Newsletter </label>
     <div class="col-sm-8">
         <input asp-for="@Model.Nazwa" class="form-control" aria-required="true" />
@@ -15,37 +15,35 @@
         </span>
     </div>
 </div>
-
-
 <div class="row">
-
     <div class="col-md-6">
+        <div class="col">
+            <div class="form-group row p-2">
+                @*<label asp-for="@Model.MessagerBody" class="col col-form-label">Wiadomość e-mail</label>*@
+                <textarea asp-for="@Model.MessagerBody" id="editor2"> </textarea>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 m-0 p-0">
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="data-table7"
-                           style="width: 100%">
+                    <table class="data-table7" style="width: 100%">
                         <thead>
                             <tr>
-                                <th>Obrazek</th>
                                 <th>Nazwa</th>
-                                <th>Symbol</th>
-                                <th>Cena</th>
-                                <th>Ilość</th>
+                                <th>Nazwa</th>
                                 <th>Akcje</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var item in ViewData["produkty"] as List<partner_aluro.Models.Product>)
+                            @foreach (var item in ViewData["kategorie"] as List<partner_aluro.Models.Category>)
                             {
                                 <tr>
-                                    <td><img src="~/images/produkty/@item.Symbol/@item.ImageUrl" alt="@item.Name" style="width:30px;height:30px;"></td>
-                                    <td><div id="Nazwa_@item.ProductId">@item.Name</div></td>
-                                    <td>@item.Symbol</td>
-                                    <td><b>@item.CenaProduktu.ToString("C")</b></td>
-                                    <td><b>@item.Ilosc.ToString()</b></td>
+                                    <td>@item.Name</td>
+                                    <td>@item.Name</td>
                                     <td>
-                                        <a value="@item.ProductId" class="btn btn-success" onclick="DodajDoNewsletter(@item.ProductId)">Dodaj</a>
+                                        przycisk
                                     </td>
                                 </tr>
                             }
@@ -54,15 +52,12 @@
                 </div>
             </div>
         </div>
-    </div>
 
 
-    <div class="col-md-6 mb-3">
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="data-table7"
-                           style="width: 100%">
+                    <table class="data-table7" style="width: 100%">
                         <thead>
                             <tr>
                                 <th>Obrazek</th>
@@ -73,62 +68,24 @@
                                 <th>Akcje</th>
                             </tr>
                         </thead>
-                                <tbody>
-                                     @foreach (var item in ViewData["produkty"] as List<partner_aluro.Models.Product>)
-                                    {
-                                    <tr>
-                                        <td><img src="~/images/produkty/@item.Symbol/@item.ImageUrl" alt="@item.Name" style="width:30px;height:30px;"></td>
-                                        <td><div id="Nazwa_@item.ProductId">@item.Name</div></td> 
-                                        <td>@item.Symbol</td>
-                                        <td><b>@item.CenaProduktu.ToString("C")</b></td>
-                                        <td><b>@item.Ilosc.ToString()</b></td>
-                                        <td>
-                                            <a value="@item.ProductId" class="btn btn-success" onclick="DodajDoNewsletter(@item.ProductId)" >Dodaj</a>
-                                        </td>
-                                    </tr>
-                                    }
-                                </tbody>
+                            <tbody>
+                                    @foreach (var item in ViewData["produkty"] as List<partner_aluro.Models.Product>)
+                                {
+                                <tr>
+                                    <td><img src="~/images/produkty/@item.Symbol/@item.ImageUrl" alt="@item.Name" style="width:30px;height:30px;"></td>
+                                    <td><div id="Nazwa_@item.ProductId">@item.Name</div></td> 
+                                    <td>@item.Symbol</td>
+                                    <td><b>@item.CenaProduktu.ToString("C")</b></td>
+                                    <td><b>@item.Ilosc.ToString()</b></td>
+                                    <td>
+                                        <a value="@item.ProductId" class="btn btn-success" onclick="DodajDoNewsletter(@item.ProductId)" >Dodaj</a>
+                                    </td>
+                                </tr>
+                                }
+                            </tbody>
                     </table>
                 </div>
             </div>
         </div>
-    </div>
-
-</div>
-
-<div class="form-group row">
-
-    <div class="col">
-
-
-        <div class="form-group row p-2">
-            <label asp-for="@Model.MessagerBody" class="col col-form-label">Wiadomość e-mail</label>
-            <textarea asp-for="@Model.MessagerBody" id="editor"> </textarea>
-        </div>
-        
-
-         <div class="form-group">
-            <label asp-for="@Model.listaEmail" class="control-label">Lista emaili ktorzy akceptuja newsletter</label>
-            <div class="row">
-                <div class="col">
-                    Email:
-                </div>
-            </div>
-            @foreach (string email in Model.listaEmail)
-            {
-                <div class="row">
-                    <div class="col">
-                        @email
-                    </div>
-                </div>
-            }
-        </div>
-
-@*<div>
-            <label class="control-label">Wybierz produkty do wiadomosci newsletter</label>
-            <select class="form-control" asp-items="ViewBag.Produkty"></select>
-                <option>Select one</option>
-        </div>*@
-
     </div>
 </div>

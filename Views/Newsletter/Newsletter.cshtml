@@ -1,0 +1,68 @@
+﻿@model partner_aluro.Models.Newsletter
+
+@{
+    ViewData["Title"] = "Dodaj Newsletter";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+@section LinkStyleHead
+    {
+    @*<link href="~/dashboard/datatables/datatables.min.css" rel="stylesheet" />*@
+    <link href="~/css/newsletter/newsletter.css" rel="stylesheet" />
+    <script src="~/js/tinymce/tinymce.min.js"></script>
+    }
+
+
+<form class="needs-validation" asp-action="NewsletterEdit" asp-route-id="@Model.NewsletterID" asp-controller="Newsletter" class="form-horizontal" method="post" enctype="multipart/form-data">
+
+    <div class="row g-0">
+        <div class="col-md-12 border-end">
+            @Html.ValidationSummary()
+            @await Html.PartialAsync("_FormNewsletterView")
+
+
+
+        </div>
+        <div class="col-md-1">
+            <button type="submit" class="btn btn-success">Zapisz i wyslij</button>
+        </div>
+
+    </div>
+</form>
+
+
+    @section Scripts {
+    <script src="~/js/tinymceNewsletterEdit.js"></script>
+
+    <script src="~/dashboard/js/scriptnewsletter.js"></script>
+    <script>
+
+        var ile = 0;
+
+        function DodajDoNewsletter(ProduktId) {
+            ile++;
+            //var check = document.getElementById('Nazwa'+ KategoriaID);
+
+            //document.getElementById('Nazwa'+ProduktId).innerHTML = "element";
+            //alert('test2');
+
+            var activeEditor = tinyMCE.get('editorNewsletter');
+            var content = activeEditor.getContent();
+            //var content1 = `<div><a href="#"><img src="https://localhost:44315/Images/Aluro_logo-x-300_2.png" alt="Aluro_logo-x-300_2.png" width="583" height="290">tekst</a> ${ProduktId},</div>`;
+
+
+            activeEditor.setContent("");
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("AddProductNewsletter", "Newsletter")',
+                data: { ProduktId: ProduktId, ile: ile, content: content },
+                success: function (result) {
+                    activeEditor.setContent(result);
+                },
+
+                error: function (abc) {
+                    alert(abc.statusText);
+                },
+            });
+        }
+    </script>
+    }
