@@ -176,7 +176,7 @@ namespace partner_aluro.Areas.Identity.Pages.Account
                 if (result.IsLockedOut)
                 {
 
-                    _logger.LogWarning("ApplicationUser account locked out.");
+                    _logger.LogWarning("Konto zablokowane.");
                     return RedirectToPage("./Lockout");
                 }
                 else
