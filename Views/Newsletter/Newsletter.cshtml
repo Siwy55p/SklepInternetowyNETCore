@@ -38,25 +38,21 @@
 
         var ile = 0;
 
-        function DodajDoNewsletter(ProduktId) {
-            ile++;
-            //var check = document.getElementById('Nazwa'+ KategoriaID);
+        function DodajDoNewsletter2() {
 
-            //document.getElementById('Nazwa'+ProduktId).innerHTML = "element";
-            //alert('test2');
-
-            var activeEditor = tinyMCE.get('editorNewsletter');
+            var activeEditor = tinyMCE.get('editorNewsletter2');
             var content = activeEditor.getContent();
             //var content1 = `<div><a href="#"><img src="https://localhost:44315/Images/Aluro_logo-x-300_2.png" alt="Aluro_logo-x-300_2.png" width="583" height="290">tekst</a> ${ProduktId},</div>`;
 
 
-            activeEditor.setContent("");
+            //activeEditor.setContent("");
             $.ajax({
                 type: "POST",
-                url: '@Url.Action("AddProductNewsletter", "Newsletter")',
-                data: { ProduktId: ProduktId, ile: ile, content: content },
+                url: '@Url.Action("WstawProdukty", "Newsletter")',
+                data: { content: content },
                 success: function (result) {
-                    activeEditor.setContent(result);
+                    tinymce.activeEditor.execCommand('mceInsertContent', false, result);
+                    //activeEditor.setContent(result);
                 },
 
                 error: function (abc) {

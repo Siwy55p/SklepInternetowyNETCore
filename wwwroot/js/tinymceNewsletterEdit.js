@@ -41,7 +41,7 @@
 
 
 tinymce.init({
-    selector: '#editorNewsletter',
+    selector: '#editorNewsletter2',
     language: 'pl',
     language_url: 'https://partneralluro.hostingasp.pl/js/tinymce/langs/pl.js',  // site absolute URL
     /*    document_base_url: system_url,*/
@@ -66,9 +66,11 @@ tinymce.init({
     setup: function (editor) {
 
         editor.ui.registry.addButton('customInsertButton', {
-            text: 'Wstaw produkty',
+            text: 'Wstaw produktyTEST',
             onAction: function (_) {
+
                 editor.insertContent('&nbsp;<strong>It\'s my button!</strong>&nbsp;');
+
             }
         });
 

@@ -147,6 +147,12 @@ namespace partner_aluro.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public string WstawProdukty(string content)
+        {
+            string produkty = tab1;
+            return produkty;
+        }
+
         static string body = "";
 
 
