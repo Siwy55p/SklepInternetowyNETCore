@@ -40,7 +40,7 @@ namespace partner_aluro.Controllers
         public async Task<ActionResult> Index()
         {
             var listaNewsletter =  await _context.Newsletter.ToListAsync();
-            tab1 = "";
+            
 
             return View(listaNewsletter);
         }
@@ -82,6 +82,7 @@ namespace partner_aluro.Controllers
 
             Newsletter newsletter = await _newsletter.GetAsync(id);
 
+            newsletter.MessagerBody = "";
             return View(newsletter);
         }
 
