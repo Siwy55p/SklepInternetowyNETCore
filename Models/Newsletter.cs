@@ -16,6 +16,7 @@ namespace partner_aluro.Models
 
         public string? MessagerBody { get; set; }
 
+        public string? contentEmail { get; set; }
 
 
 

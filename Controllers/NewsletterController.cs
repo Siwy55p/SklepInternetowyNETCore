@@ -97,9 +97,10 @@ namespace partner_aluro.Controllers
 
             newsletter.listaEmail = await _context.Users.Where(x => x.Newsletter == true).Select(x => x.Email).ToListAsync();
 
+            //newsletter.contentEmail = _context.Newsletter.Where(x => x.NewsletterID == newsletter.NewsletterID).FirstOrDefault().contentEmail;
             _newsletter.Edit(newsletter);
 
-            return RedirectToAction(nameof(Newsletter));
+            return RedirectToAction(nameof(Newsletter), newsletter);
         }
 
         [HttpGet]
@@ -113,9 +114,17 @@ namespace partner_aluro.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> NewsletterEdit(Newsletter newsletter, int i)
+        public async Task<ActionResult> NewsletterEdit(Newsletter newsletter)
         {
 
+            Newsletter newsletterDB = _context.Newsletter.Where(x => x.NewsletterID == newsletter.NewsletterID).FirstOrDefault();
+
+            newsletterDB.contentEmail = newsletter.contentEmail;
+
+
+            _newsletter.Edit(newsletterDB);
+
+            //string content = _context.Newsletter.Where(x => x.NewsletterID == newsletter.NewsletterID).FirstOrDefault().contentEmail;
             newsletter.listaEmail = await _context.Users.Where(x => x.Newsletter == true).Select(x => x.Email).ToListAsync();
 
 
@@ -137,7 +146,7 @@ namespace partner_aluro.Controllers
 
             EmailDto emailDto = new EmailDto()
             {
-                Body = newsletter.MessagerBody,
+                Body = newsletter.contentEmail,
                 To = "szuminski.p@gmail.com",
                 Subject = "Newsletter"
             };
