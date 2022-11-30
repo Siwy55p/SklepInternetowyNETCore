@@ -82,25 +82,22 @@ namespace partner_aluro.Controllers
 
             Newsletter newsletter = await _newsletter.GetAsync(id);
 
-            newsletter.listaEmail = await _context.Users.Where(x => x.Newsletter == true).Select(x => x.Email).ToListAsync();
-
             return View(newsletter);
         }
 
         // POST: Newsletter/Edit/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(Newsletter newsletter)
         {
             ViewData["produkty"] = await _context.Products.ToListAsync();
             ViewData["kategorie"] = await _context.Category.ToListAsync();
 
-            newsletter.listaEmail = await _context.Users.Where(x => x.Newsletter == true).Select(x => x.Email).ToListAsync();
+            Newsletter newsletterDB = await _newsletter.GetAsync(newsletter.NewsletterID);
+            newsletterDB.MessagerBody = newsletter.MessagerBody;
 
-            //newsletter.contentEmail = _context.Newsletter.Where(x => x.NewsletterID == newsletter.NewsletterID).FirstOrDefault().contentEmail;
-            _newsletter.Edit(newsletter);
+            _newsletter.Edit(newsletterDB);
 
-            return RedirectToAction(nameof(Newsletter), newsletter);
+            return RedirectToAction(nameof(Newsletter), newsletterDB);
         }
 
         [HttpGet]
@@ -117,15 +114,14 @@ namespace partner_aluro.Controllers
         public async Task<ActionResult> NewsletterEdit(Newsletter newsletter)
         {
 
-            Newsletter newsletterDB = _context.Newsletter.Where(x => x.NewsletterID == newsletter.NewsletterID).FirstOrDefault();
-
+            Newsletter newsletterDB = await _newsletter.GetAsync(newsletter.NewsletterID);
             newsletterDB.contentEmail = newsletter.contentEmail;
 
 
             _newsletter.Edit(newsletterDB);
 
-            //string content = _context.Newsletter.Where(x => x.NewsletterID == newsletter.NewsletterID).FirstOrDefault().contentEmail;
-            newsletter.listaEmail = await _context.Users.Where(x => x.Newsletter == true).Select(x => x.Email).ToListAsync();
+            ////string content = _context.Newsletter.Where(x => x.NewsletterID == newsletter.NewsletterID).FirstOrDefault().contentEmail;
+            //newsletter.listaEmail = await _context.Users.Where(x => x.Newsletter == true).Select(x => x.Email).ToListAsync();
 
 
             return RedirectToAction(nameof(Index));
