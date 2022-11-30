@@ -81,7 +81,7 @@ namespace partner_aluro.Controllers
             ViewData["kategorie"] = await _context.Category.ToListAsync();
 
             Newsletter newsletter = await _newsletter.GetAsync(id);
-
+            newsletter.MessagerBody = "";
             return View(newsletter);
         }
 
@@ -93,7 +93,6 @@ namespace partner_aluro.Controllers
             ViewData["kategorie"] = await _context.Category.ToListAsync();
 
             Newsletter newsletterDB = await _newsletter.GetAsync(newsletter.NewsletterID);
-            newsletterDB.MessagerBody = newsletter.MessagerBody;
 
             _newsletter.Edit(newsletterDB);
 
