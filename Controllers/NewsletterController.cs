@@ -91,8 +91,10 @@ namespace partner_aluro.Controllers
         {
             ViewData["produkty"] = await _context.Products.ToListAsync();
             ViewData["kategorie"] = await _context.Category.ToListAsync();
-
+            
             Newsletter newsletterDB = await _newsletter.GetAsync(newsletter.NewsletterID);
+
+            ViewData["BodyProduct"] = newsletter.MessagerBody;
 
             _newsletter.Edit(newsletterDB);
 
@@ -104,6 +106,7 @@ namespace partner_aluro.Controllers
         {
 
             newsletter.listaEmail = await _context.Users.Where(x => x.Newsletter == true).Select(x => x.Email).ToListAsync();
+            
 
 
             return View(newsletter);
@@ -153,7 +156,9 @@ namespace partner_aluro.Controllers
 
         public string WstawProdukty(string content)
         {
-            string produkty = tab1;
+            Newsletter newsMessagaeBody =  _context.Newsletter.Where(x => x.NewsletterID == 2).FirstOrDefault();
+
+            string produkty = newsMessagaeBody.MessagerBody;
             return produkty;
         }
 
