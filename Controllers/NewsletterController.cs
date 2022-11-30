@@ -82,7 +82,6 @@ namespace partner_aluro.Controllers
 
             Newsletter newsletter = await _newsletter.GetAsync(id);
 
-            newsletter.MessagerBody = "";
             return View(newsletter);
         }
 
