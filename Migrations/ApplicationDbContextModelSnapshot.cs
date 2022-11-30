@@ -697,6 +697,31 @@ namespace partner_aluro.Migrations
                     b.ToTable("MetodyDostawy");
                 });
 
+            modelBuilder.Entity("partner_aluro.Models.MetodyPlatnosci", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Nazwa")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Opis")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SzczegolowyOpis")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MetodyPlatnosci");
+                });
+
             modelBuilder.Entity("partner_aluro.Models.Newsletter", b =>
                 {
                     b.Property<int>("NewsletterID")
@@ -709,6 +734,9 @@ namespace partner_aluro.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nazwa")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("contentEmail")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("NewsletterID");
@@ -1233,6 +1261,35 @@ namespace partner_aluro.Migrations
                     b.HasKey("ImageSliderID");
 
                     b.ToTable("Sliders");
+                });
+
+            modelBuilder.Entity("partner_aluro.Models.SMS", b =>
+                {
+                    b.Property<int>("SMSId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SMSId"), 1L, 1);
+
+                    b.Property<string>("apiKey")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("message")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("numbers")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("sender")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("SMSId");
+
+                    b.ToTable("SMS");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -8,9 +8,6 @@ using Microsoft.EntityFrameworkCore;
 using DeepL;
 using System.Resources.NetStandard;
 using System.Collections;
-using Microsoft.Extensions.Hosting;
-using Microsoft.EntityFrameworkCore.Metadata;
-using partner_aluro.Services;
 
 namespace partner_aluro.Controllers
 {
@@ -130,21 +127,22 @@ namespace partner_aluro.Controllers
             ModelState.Remove("product_Image.path");
             ModelState.Remove("product_Image.ImageName");
             ModelState.Remove("product_Image.fullPath");
+
             if (ModelState.IsValid)
             {
                 try
                 {
-                    await _ProductService.UpdateAsync(product);
-                    //_context.Update(product);
-                    //await _ProductService.Up
-                    //await _context.SaveChangesAsync();
+                    _context.Update(product);
+                    await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
                 }
-                return RedirectToAction(nameof(List));
             }
-            ViewData["CategoryId"] = GetCategories();
+
+            product.Kategorie = _context.ProductCategory.Where(x => x.ProductID == id).ToList();
+
+            ViewData["Category"] = GetCategories();
             return View(product);
         }
 

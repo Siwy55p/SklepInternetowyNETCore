@@ -1,0 +1,27 @@
+﻿@model partner_aluro.Models.MetodyPlatnosci
+
+    <div class="form-group row">
+        <input asp-for="@Model.Id" class="form-control" aria-required="true" readonly/>
+    </div>
+
+    <div class="form-group row">
+    <label asp-for="@Model.Nazwa" class="col-sm-3 col-form-label text-end">Nazwa płatnosci widczna dla klienta</label>
+        <div class="col-sm-6">
+            <input asp-for="@Model.Nazwa" class="form-control" aria-required="true" placeholder="Nazwa płatności" />
+            <span asp-validation-for="@Model.Nazwa" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label asp-for="@Model.Opis" class="col-sm-3 col-form-label text-end">Opis ktory pokaze sie w panelu po zamówieniu</label>
+        <div class="col-sm-4">
+        <input asp-for="@Model.Opis" class="form-control" aria-required="true" />
+        <span asp-validation-for="@Model.Opis" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row p-2">
+        <label asp-for="@Model.SzczegolowyOpis" class="col-sm-4 col-form-label">Szczegolowy opis, widoczny dla klienta przy zamówieniu</label>
+        <textarea asp-for="@Model.SzczegolowyOpis" id="#textarea" class="form-control" rows="2"></textarea>
+        <span asp-validation-for="@Model.SzczegolowyOpis" class="text-danger"></span>
+          
+    </div>

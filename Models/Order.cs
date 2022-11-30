@@ -41,12 +41,12 @@ namespace partner_aluro.Models
 
 
     }
-    public enum MetodaPlatnosci
-    {
-        Przelew,
-        [Display(Name = "Gotówka")]
-        Gotowka
-    }
+    //public enum MetodaPlatnosci
+    //{
+    //    Przelew,
+    //    [Display(Name = "Gotówka")]
+    //    Gotowka
+    //}
 
     public enum StanZamowienia
     {

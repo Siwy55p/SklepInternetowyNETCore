@@ -17,12 +17,9 @@
             <div class="col-md-12 border-end">
                 @Html.ValidationSummary()
                 @await Html.PartialAsync("_FormNewsletter")
-
-
-
             </div>
             <div class="col-md-1">
-                <button type="submit" class="btn btn-success">Zapisz zmiany</button>
+                <button type="submit" class="btn btn-success">Następny etap</button>
             </div>
 
         </div>
@@ -30,9 +27,23 @@
     <button asp-controller="Newsletter" asp-action="SendEmail">Wyslij</button>
 
     @section Scripts {
-        <script src="~/js/tinymceNewsletter.js"></script>
+        <script>
+        tinymce.init({
+            selector: '#editor2',  // change this value according to your HTML
+            plugin: 'a_tinymce_plugin',
+            menubar: false,
+            statusbar: false,
+            toolbar: false,
+            height: "800",
+            a_plugin_option: true,
+            a_configuration_option: 400
+        });
+            </script>
 
-        <script src="~/dashboard/js/scriptnewsletter.js"></script>
+
+@*<script src="~/js/tinymceNewsletter.js"></script>*@
+
+        <script src="~/dashboard/js/scriptnewsletter.js"></script>  @* tabelki*@
         <script>
 
             var ile=0;
@@ -44,7 +55,7 @@
                 //document.getElementById('Nazwa'+ProduktId).innerHTML = "element";
                 //alert('test2');
 
-                var activeEditor = tinyMCE.get('editor');
+                var activeEditor = tinyMCE.get('editor2');
                 var content = activeEditor.getContent();
                 //var content1 = `<div><a href="#"><img src="https://localhost:44315/Images/Aluro_logo-x-300_2.png" alt="Aluro_logo-x-300_2.png" width="583" height="290">tekst</a> ${ProduktId},</div>`;
 

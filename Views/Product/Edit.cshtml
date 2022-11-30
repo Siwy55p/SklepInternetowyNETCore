@@ -1,4 +1,6 @@
 ﻿@model partner_aluro.Models.Product
+
+
 @{
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_Dashboard.cshtml";
@@ -10,6 +12,9 @@
 
     }
 
+
+
+    <a class="btn btn-primary" asp-controller="Product" asp-action="Details" asp-route-id="@Model.ProductId">Podgląd </a>
 
 <form class="needs-validation" asp-action="Edit" asp-route-id="@Model.ProductId" asp-controller="Product" class="form-horizontal" method="post" enctype="multipart/form-data">
 
@@ -76,9 +81,6 @@
             </div>
         </div>
     </form>
-
-
-<a class="btn btn-primary" asp-controller="Product" asp-action="Details" asp-route-id="@Model.ProductId">Podgląd </a>
 
 @section Scripts {
     <script>

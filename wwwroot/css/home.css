@@ -1,10 +1,10 @@
 
 img.image {
-    max-height: 400px;
+    max-height: 300px;
 }
 
 image {
-    height: 300px;
+    max-height: 300px;
 }
 
 .fade-in {

@@ -1,0 +1,39 @@
+﻿@model List<partner_aluro.Models.MetodyPlatnosci>
+
+
+@{
+    ViewData["Title"] = "Detail";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+
+<h4>Metody płatności</h4>
+<p>
+    <a class="btn btn-succes" asp-controller="MetodyPlatnosci" asp-action="Add">Dodaj</a>
+</p>
+<div class="row">
+    <div class="col">
+        Id
+    </div>
+    <div class="col">
+        Nazwa
+    </div>
+    <div class="col">
+        Akcje
+    </div>
+</div>
+@foreach (var metoda in Model)
+{
+    <div class="row">
+        <div class="col">
+            @metoda.Id
+        </div>
+        <div class="col">
+            @metoda.Nazwa
+        </div>
+        <div class="col">
+            <a asp-controller="MetodyPlatnosci" asp-action="Edit" asp-route-id="@metoda.Id">Edytuj</a> |
+            <a asp-controller="MetodyPlatnosci" asp-action="Delete" asp-route-id="@metoda.Id">Usuń</a>
+        </div>
+    </div>
+}

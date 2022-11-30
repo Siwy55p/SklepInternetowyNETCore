@@ -30,6 +30,7 @@ namespace partner_aluro.Data
         public DbSet<Adress2dostawy> Adress2dostawy { get; set; }
         public DbSet<ImageModel> Images { get; set; }
         public DbSet<MetodyDostawy> MetodyDostawy { get; set; }
+        public DbSet<MetodyPlatnosci> MetodyPlatnosci { get; set; }
         public DbSet<ProfilDzialalnosci> ProfileDzialalnosci { get; set; }
         public DbSet<Newsletter> Newsletter { get; set; }
 
@@ -41,6 +42,7 @@ namespace partner_aluro.Data
         public DbSet<ProductNazwyPrestashop> ProductsNamePrestashop { get; set; }
         public DbSet<ProductQuantityPrestashop> ProductsQuantityPrestashop { get; set; }
         public DbSet<Setting> Setting { get; set; }
+        public DbSet<SMS> SMS { get; set; }
 
         //musimy nadpisac OnModelCreating(ModelBuild builder) musimy nadpisac metoda ktora pochodzi DbContext
         protected override void OnModelCreating(ModelBuilder builder)

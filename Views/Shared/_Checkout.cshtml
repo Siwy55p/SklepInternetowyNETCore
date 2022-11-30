@@ -102,7 +102,7 @@
                                 <a asp-controller="Cart" asp-action="ReduceQuantity" asp-route-id="@item.Product.ProductId"><i class="fa-solid fa-minus"></i></a>
                                 <span class="pozycja">
                                     @item.Quantity</span>
-                                <a asp-controller="Cart" asp-action="IncreaseQuantity" asp-route-id="@item.Product.ProductId"><i class="fa-solid fa-plus"></i></a>
+                                <a asp-controller="Cart" asp-action="IncreaseQuantity" asp-route-id="@item.Product.ProductId" asp-route-Quantity="@item.Quantity"><i class="fa-solid fa-plus"></i></a>
                             </div>
                             <div class="col border border-top-0 text-center">
                                 <span class="pozycja">

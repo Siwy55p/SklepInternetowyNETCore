@@ -1,0 +1,63 @@
+﻿@model partner_aluro.Models.SMS
+
+<div class="row">
+    <div class="row">
+        <div class="col">
+            Ustawienia wiadomosci
+        </div>
+    </div>
+
+      <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="@Model.SMSId" class="control-label">Slider ID</label>
+                <input type="text" asp-for="@Model.SMSId" readonly />
+                <span asp-validation-for="@Model.SMSId" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="@Model.apiKey" class="control-label"></label>
+                <input type="text" asp-for="@Model.apiKey" />
+                <span asp-validation-for="@Model.apiKey" class="text-danger"></span>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="@Model.numbers" class="control-label"></label>
+                <input type="text" asp-for="@Model.numbers" />
+                <span asp-validation-for="@Model.numbers" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="@Model.message" class="control-label"></label>
+                <input type="text" asp-for="@Model.message" />
+                <span asp-validation-for="@Model.message" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="@Model.sender" class="control-label"></label>
+                <input type="text" asp-for="@Model.sender" />
+                <span asp-validation-for="@Model.sender" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @*Tu nie dziala bo to partial*@
+}

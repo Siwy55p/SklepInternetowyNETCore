@@ -876,4 +876,31 @@
   <data name="Wrealizacji" xml:space="preserve">
     <value>W realizacji</value>
   </data>
+  <data name="Abażury" xml:space="preserve">
+    <value>Abażury</value>
+  </data>
+  <data name="Inne dodatki" xml:space="preserve">
+    <value>Inne dodatki</value>
+  </data>
+  <data name="Lampy stołowe" xml:space="preserve">
+    <value>Lampy stołowe</value>
+  </data>
+  <data name="Lampy wiszące" xml:space="preserve">
+    <value>Lampy wiszące</value>
+  </data>
+  <data name="Panele ścienne, lustra, zegary" xml:space="preserve">
+    <value>Panele ścienne, lustra, zegary</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>Klient</value>
+  </data>
+  <data name="Wazony, misy, tace" xml:space="preserve">
+    <value>Wazony, misy, tace</value>
+  </data>
+  <data name="Świeczniki, Lampiony" xml:space="preserve">
+    <value>Świeczniki, Lampiony</value>
+  </data>
+  <data name="Poszewki" xml:space="preserve">
+    <value>Poszewki</value>
+  </data>
 </root>

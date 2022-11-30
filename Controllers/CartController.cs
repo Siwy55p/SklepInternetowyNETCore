@@ -50,7 +50,8 @@ namespace partner_aluro.Controllers
         {
             _cart.CartItems = await _cart.GetAllCartItemsAsync();
 
-            ViewData["MetodyPlatnosci"] = OrderController.GetMetodyPlatnosci();
+            //ViewData["MetodyPlatnosci"] = OrderController.GetMetodyPlatnosci();
+            ViewData["MetodyPlatnosci"] = _context.MetodyPlatnosci.ToList();
             ViewData["MetodyDostawy"] = _context.MetodyDostawy.ToList();
 
 
@@ -67,7 +68,8 @@ namespace partner_aluro.Controllers
             ViewBag.returnUrl = Request.Headers["Referer"].ToString();
             var returnUrl = Request.Headers["Referer"].ToString();
 
-            ViewData["MetodyPlatnosci"] = OrderController.GetMetodyPlatnosci();
+            //ViewData["MetodyPlatnosci"] = OrderController.GetMetodyPlatnosci();
+            ViewData["MetodyPlatnosci"] = _context.MetodyPlatnosci.ToList();
             ViewData["MetodyDostawy"] = _context.MetodyDostawy.ToList();
 
             var products = await _cart.GetAllCartItemsAsync();
@@ -213,6 +215,8 @@ namespace partner_aluro.Controllers
         {
             var selectedProduct = await GetProductId(id);
 
+
+
             if (selectedProduct != null)
             {
                 _cart.ReduceQuantity(selectedProduct);
@@ -220,24 +224,27 @@ namespace partner_aluro.Controllers
 
         }
 
-        public async Task<IActionResult> IncreaseQuantity(int id)
+        public async Task<IActionResult> IncreaseQuantity(int id, int Quantity)
         {
             var selectedProduct = await GetProductId(id);
-
-            if (selectedProduct != null)
+            if (Quantity < selectedProduct.Ilosc)
             {
-                _cart.IncreaseQuantity(selectedProduct);
+                if (selectedProduct != null)
+                {
+                    _cart.IncreaseQuantity(selectedProduct);
+                }
             }
-
             return RedirectToAction("Index");
         }
-        public async Task IncreaseQuantity2(int id)
+        public async Task IncreaseQuantity2(int id, int Quantity)
         {
             var selectedProduct = await GetProductId(id);
-
-            if (selectedProduct != null)
+            if (Quantity < selectedProduct.Ilosc)
             {
-                _cart.IncreaseQuantity(selectedProduct);
+                if (selectedProduct != null)
+                {
+                    _cart.IncreaseQuantity(selectedProduct);
+                }
             }
 
         }

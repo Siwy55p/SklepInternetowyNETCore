@@ -116,7 +116,7 @@
                                         @language.Getkey("Ilość"):
                                     </div>
                                     <div class="col-2">
-                                        <input type="number" id="@Model.ProductId" name="quantity" value="1" class="form-control" aria-required="true" placeholder="Ilość" min="1" max="@Model.Ilosc" />
+                                        <input type="number" id="@Model.ProductId" name="quantity" value="1" class="form-control" aria-required="true" placeholder="Ilość" min="1" maxlength="@Model.Ilosc" max="@Model.Ilosc" autocomplete="off" onChange="updateQuantityManual(this)" />
                                     </div>
                                     <div class="col">
                                         <button value="@Model.ProductId" onclick="AddToCart(@Model.ProductId)" class="btn btn-success" data-bs-target="offcanvas" role="button">@language.Getkey("Dodaj do zamowienia")</button>
@@ -195,6 +195,30 @@
     <script src="~/js/glightbox.js"></script>
     <script src="~/js/glightbox.min.js"></script>
 
+
+    <script>
+        function updateQuantityManual(_this) {
+            let lot = 1;
+            let qty = parseInt($(_this).val(), 10);
+            let max = parseInt($(_this).attr('max'));
+            let myQty = parseInt(qty, 10);
+            if (qty > max) {
+                $(_this).val(max);
+                alert("Nie ma wystarczającej ilości na stanie.");
+                return;
+            }
+
+            if ($(_this).data('lot')) {
+                lot = parseInt($(_this).attr('data-lot'), 10);
+            }
+
+
+            if (qty % lot != 0) {
+                qty = myQty + lot - (qty % lot);
+                $(_this).val(qty);
+            }
+        }
+    </script>
 
     <script>
         function Open(elem) {

@@ -56,7 +56,8 @@ namespace partner_aluro.Controllers
         [HttpGet]
         public IActionResult Checkout()
         {
-            ViewData["MetodyPlatnosci"] = GetMetodyPlatnosci();
+            //ViewData["MetodyPlatnosci"] = GetMetodyPlatnosci();
+            ViewData["MetodyPlatnosci"] = _context.MetodyPlatnosci.ToList();
             ViewData["MetodyDostawy"] = _context.MetodyDostawy.ToList();
             return View();
         }
@@ -64,7 +65,8 @@ namespace partner_aluro.Controllers
         [HttpPost]
         public async Task<IActionResult> Checkout(CartOrderViewModel CartOrder) //ZAPIS BARDZO WAZNA FUNKCJA
         {
-            ViewData["MetodyPlatnosci"] = GetMetodyPlatnosci();
+            //ViewData["MetodyPlatnosci"] = GetMetodyPlatnosci();
+            ViewData["MetodyPlatnosci"] = _context.MetodyPlatnosci.ToList();
             ViewData["MetodyDostawy"] = _context.MetodyDostawy.ToList();
 
 
@@ -846,22 +848,22 @@ namespace partner_aluro.Controllers
         }
 
 
-        public static List<SelectListItem> GetMetodyPlatnosci()
-        {
-            var lstMetodyPlatnosci = new List<SelectListItem>();
+        //public static List<SelectListItem> GetMetodyPlatnosci()
+        //{
+        //    var lstMetodyPlatnosci = new List<SelectListItem>();
 
-            foreach (MetodaPlatnosci suit in (MetodaPlatnosci[])Enum.GetValues(typeof(MetodaPlatnosci)))
-            {
-                var dmyItemA = new SelectListItem()
-                {
-                    Value = suit.ToString(),
-                    Text = suit.ToString()
-                };
-                lstMetodyPlatnosci.Insert(0, dmyItemA);
-            }
+        //    foreach (MetodaPlatnosci suit in (MetodaPlatnosci[])Enum.GetValues(typeof(MetodaPlatnosci)))
+        //    {
+        //        var dmyItemA = new SelectListItem()
+        //        {
+        //            Value = suit.ToString(),
+        //            Text = suit.ToString()
+        //        };
+        //        lstMetodyPlatnosci.Insert(0, dmyItemA);
+        //    }
 
-            return lstMetodyPlatnosci;
-        }
+        //    return lstMetodyPlatnosci;
+        //}
 
     }
 

@@ -22,8 +22,10 @@ namespace partner_aluro.Services
 
         public async Task Delete(int id)
         {
-            MetodyDostawy metodaDostawy = await _context.MetodyDostawy.Where(x=>x.Id == id).FirstOrDefaultAsync();
-            _context.Remove(metodaDostawy);
+            MetodyDostawy metodaDostawy = _context.MetodyDostawy.Where(x=>x.Id == id).FirstOrDefault();
+            _context.MetodyDostawy.Remove(metodaDostawy);
+            _context.SaveChanges();
+
 
         }
 
