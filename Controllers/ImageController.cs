@@ -251,7 +251,7 @@ namespace partner_aluro.Controllers
                             {
                                 files[i].CopyTo(filesStream);
                             }
-
+                            imageModel = _context.Images.Where(x => x.ImageId == imageModel.ImageId).FirstOrDefault();
                             _imageService.Update(imageModel);
                         }
                     }
