@@ -1,11 +1,9 @@
-﻿@using Microsoft.AspNetCore.Identity
+﻿@*@using Microsoft.AspNetCore.Identity
 @using partner_aluro.Areas.Identity;
-
 @inject SignInManager<ApplicationUser> SignInManager
-@inject UserManager<ApplicationUser> UserManager
-
+@inject UserManager<ApplicationUser> UserManager*@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,18 +13,12 @@
     @*flag icon*@
     <link href="https://cdn.bootcss.com/flag-icon-css/2.8.0/css/flag-icon.css" rel="stylesheet" />
     @*flag icon*@
-@*    <link rel="stylesheet" href="~/ASP.NETCoreIdentityCustom.styles.css" asp-append-version="true" />*@
 </head>
 <body >
     <div class="d-flex flex-column min-vh-70 justify-content-center align-items-center">
-
          @RenderBody()
-
     </div>
-
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    @* <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>*@
-
+@*    <script src="~/lib/jquery/dist/jquery.min.js"></script>*@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
