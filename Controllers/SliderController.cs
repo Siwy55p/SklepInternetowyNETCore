@@ -59,7 +59,10 @@ namespace partner_aluro.Controllers
 
             //Slider sliders =await _sliderService.GetAsync(slider.ImageSliderID);
 
-            UploadFile2Async(slider);
+            var files = HttpContext.Request.Form.Files;
+            _imageService.UploadFilesAsync(files);
+
+            //UploadFile2Async(slider);
 
             await _sliderService.EditSliderAsync(slider);
 
@@ -74,27 +77,29 @@ namespace partner_aluro.Controllers
             return View(sliders);
         }
 
-        
-        public async Task<IActionResult> Delete(int id)
-        {
-            _sliderService.DeleteSlider(id);
-
-            return RedirectToAction("Index");
-        }
 
         [HttpPost]
         public async Task<IActionResult> Edit(Slider slider)
         {
-
             if (!ModelState.IsValid)
             {
                 return View();
             }
+            var files = HttpContext.Request.Form.Files;
 
-            UploadFile2Async(slider);
+            
+            _imageService.UploadFilesAsync(files,null, slider);
+
+            //UploadFile2Async(slider);
 
             await _sliderService.EditSliderAsync(slider);
 
+
+            return RedirectToAction("Index");
+        }
+        public async Task<IActionResult> Delete(int id)
+        {
+            _sliderService.DeleteSlider(id);
 
             return RedirectToAction("Index");
         }

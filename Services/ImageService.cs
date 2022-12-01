@@ -81,7 +81,7 @@ namespace partner_aluro.Services
 
 
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
-        public async Task UploadFilesAsync(IFormFileCollection files, Product? product = null)
+        public async Task UploadFilesAsync(IFormFileCollection files, Product? product = null, Slider? slider = null)
         {
             //var files = HttpContext.Request.Form.Files;
 
@@ -101,14 +101,25 @@ namespace partner_aluro.Services
                 for (int i = 0; i < files.Count; i++)
                 {
                     //Save image to wwwroot/image
-                    string path0 = "images\\produkty\\";
+                    string path0 = "images\\";
+                    if (product != null)
+                    {
+                        path0 = "images\\produkty\\";
+                    }
+                    if (slider != null)
+                    {
+                        path0 = "images\\SliderHome\\" + slider.ImageSliderID + "\\";
+                    }
 
                     var uploadsFolder = Path.Combine(webRootPath, "images\\");
                     if (product != null)
                     {
                         uploadsFolder = Path.Combine(webRootPath, "images\\produkty\\" + product.Symbol);
                     }
-
+                    if (slider != null)
+                    {
+                        uploadsFolder = Path.Combine(webRootPath, "images\\SliderHome\\" + slider.ImageSliderID);
+                    }
 
                     if (!Directory.Exists(uploadsFolder))
                     {
@@ -124,9 +135,11 @@ namespace partner_aluro.Services
                     if (product != null)
                     {
                         dynamicFileName = product.Symbol + "_" + i + "_" + DateTime.Now.ToString("mm_ss") + extension;
-                        
                     }
-
+                    if (slider != null)
+                    {
+                        dynamicFileName = "slider" + i + "_" + DateTime.Now.ToString("mm_ss") + extension;
+                    }
 
                     using (var filesStream = new FileStream(Path.Combine(uploadsFolder, dynamicFileName), FileMode.Create))
                     {
@@ -134,19 +147,40 @@ namespace partner_aluro.Services
                     }
 
                     //add product Image for new product
-                    imgModel = new()
-                    {
-                        path = path0 + product.Symbol + "\\",
-                        fullPath = path0 + product.Symbol + "\\" + dynamicFileName,
-                        kolejnosc = i,
-                        Tytul = product.Name,
-                        ImageName = dynamicFileName,
-                        //ProductId = product.ProductId
-                    };
-
                     if (product != null)
                     {
+                        imgModel = new()
+                        {
+                            path = path0 + product.Symbol + "\\",
+                            fullPath = path0 + product.Symbol + "\\" + dynamicFileName,
+                            kolejnosc = i,
+                            Tytul = product.Name,
+                            ImageName = dynamicFileName,
+                            ProductId = product.ProductId
+                        };
+                    }
+                    if (slider != null)
+                    {
+                        imgModel = new()
+                        {
+                            path = path0 +"\\",
+                            fullPath = path0 + "\\" + dynamicFileName,
+                            kolejnosc = i,
+                            Tytul = "sliderHome",
+                            SliderIds = slider.ImageSliderID,
+                            Opis = "slider",
+                            ImageName = dynamicFileName,
+                        };
+                    }
+
+                        if (product != null)
+                    {
                         product.Product_Images.Add(imgModel);
+                    }
+                    if (slider != null)
+                    {
+                        slider.ObrazkiDostepneWSliderze.Add(imgModel);
+                        //product.Product_Images.Add(imgModel);
                     }
 
                     await AddAsync(imgModel);
@@ -302,7 +336,6 @@ namespace partner_aluro.Services
             }
             else
             {
-
                 return null;
             }
         }
@@ -316,5 +349,6 @@ namespace partner_aluro.Services
                 _context.SaveChanges();
             //}
         }
+
     }
 }
