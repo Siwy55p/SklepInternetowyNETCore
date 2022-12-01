@@ -167,10 +167,10 @@ namespace partner_aluro.Controllers
 
 
         static string tab1 = "";
-        static string tab2 = "";
-        static string tab3 = "";
-        static string tab4 = "";
-        static string tab5 = "";
+        //static string tab2 = "";
+        //static string tab3 = "";
+        //static string tab4 = "";
+        //static string tab5 = "";
 
 
         public string AddProductNewsletter(int ProduktId, int ile, string content)
@@ -204,7 +204,7 @@ namespace partner_aluro.Controllers
 
                 thead = thead + td1;
                 tbody = tbody + td2;
-                tfoot = tfoot;
+                //tfoot = tfoot;
 
 
             string value = thead + tbody + tfoot;
