@@ -306,8 +306,8 @@ namespace partner_aluro.Services
             else
             {
                 //Nieistenie wiec dodaj nowy rekord do bazy
-                await _context.AddAsync(imgModel);
-                await _context.SaveChangesAsync();
+                _context.Images.Add(imgModel);
+                _context.SaveChanges();
             }
         }
 
