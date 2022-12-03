@@ -193,17 +193,17 @@ app.MapControllerRoute(
 
 app.UseResponseCaching(); //2. dodatkowo do lwykorzystawiania cache
 
-//app.Use(async (context, next) =>
-//{
-//    context.Response.GetTypedHeaders().CacheControl =
-//    new Microsoft.Net.Http.Headers.CacheControlHeaderValue()
-//    {
-//        Public = true,
-//        MaxAge = TimeSpan.FromSeconds(60)
-//    };
-//    context.Response.Headers[Microsoft.Net.Http.Headers.HeaderNames.Vary] = new string[] { "Accept-Encoding" };
-//    await next();
-//}); //CACHE
+app.Use(async (context, next) =>
+{
+    context.Response.GetTypedHeaders().CacheControl =
+    new Microsoft.Net.Http.Headers.CacheControlHeaderValue()
+    {
+        Public = true,
+        MaxAge = TimeSpan.FromSeconds(3600)
+    };
+    context.Response.Headers[Microsoft.Net.Http.Headers.HeaderNames.Vary] = new string[] { "Accept-Encoding" };
+    await next();
+}); //CACHE
 
 app.Run();
 
