@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Build.Execution;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Newtonsoft.Json.Linq;
 using partner_aluro.Data;
 using partner_aluro.Models;
@@ -24,8 +25,6 @@ namespace partner_aluro.Controllers
         public readonly ApplicationDbContext _context;
 
         public readonly IEmailService _emailService;
-
-
 
         public readonly IWebHostEnvironment _hostEnvironment;
 
@@ -50,6 +49,7 @@ namespace partner_aluro.Controllers
         public async Task<ActionResult> Add()
         {
             ViewData["produkty"] = await _context.Products.ToListAsync();
+            ViewData["kategorie"] = await _context.Category.ToListAsync();
             Newsletter newsletter = new Newsletter();
 
             newsletter.listaEmail = await _context.Users.Where(x => x.Newsletter == true).Select(x => x.Email).ToListAsync();
@@ -83,16 +83,21 @@ namespace partner_aluro.Controllers
 
             Newsletter newsletter = await _newsletter.GetAsync(id);
 
+
+            ViewData["active1"] = "active";
+            ViewData["active2"] = "";
+
             tab1 = "";
 
             thead = cthead;
             tbody = ctbody;
+            tbody2 = ctbody2;
             tfoot = ctfoot;
 
             value = "";
 
             tabelka2 = "" +
-                "<table \">\r\n\t" +
+                "<table style=\"padding: 0px; margin-left: auto; margin-right: auto; displey:table;\" >" +
                     "<thead>\r\n\t" +
                         "<tr>\r\n\t\t" +
                             "</tr>\r\n\t" +
@@ -100,8 +105,12 @@ namespace partner_aluro.Controllers
                     "<tbody>\r\n\t" +
                         "<tr>\r\n\t\t" +
                         "</tr>\r\n\t" +
-                    "</tbody>\r\n" +
+                        "<tr>\r\n\t\t" +
+                        "</tr>\r\n\t" +
+                    "</tfoot>\r\n" +
                 "</table>";
+
+
 
 
             return View(newsletter);
@@ -114,6 +123,9 @@ namespace partner_aluro.Controllers
             ViewData["produkty"] = await _context.Products.ToListAsync();
             ViewData["kategorie"] = await _context.Category.ToListAsync();
 
+
+            ViewData["active1"] = "";
+            ViewData["active2"] = "active";
 
             Newsletter newsletter1 = _context.Newsletter.Where(x => x.NewsletterID == newsletter.NewsletterID).FirstOrDefault();
 
@@ -221,37 +233,42 @@ namespace partner_aluro.Controllers
                 " ";
 
 
-            string td1 = "<th>  <img src=../../images/produkty/" + produkt.Symbol + "/" + produkt.ImageUrl + " alt = " + produkt.Name + " style='width:200px;'>  </th>\r\n\t";
-            string td2 = "<td>" + produkt.Name + "</td>\r\n\t";
+            string td1 = "<th style=\"margin:0px; padding-left:10px;padding-right:10px; padding-top:0px; padding-bottom:0px; margin: 0px;\" > <div style=\"border:1px solid black;width:200px;height:200px;margin:0px;padding:0px; \"> <img src=../../images/produkty/" + produkt.Symbol + "/" + produkt.ImageUrl + " alt = " + produkt.Name + " style='width:200px;'>  </div></th>\r\n\t";
+            string td2 = "<td style=\"padding-left:10px;padding-right:10px; padding-top:0px; padding-bottom:0px; margin: 0px; text-align: center; \"><div style=\"border:1px solid black;width:200px; border-top:0px; margin:0px; background-color: #EBEBEB; \">" + produkt.Name + "</div></td>\r\n\t";
+            string td3 = "<td style=\"padding-left:10px;padding-right:10px; padding-top:0px; padding-bottom:0px; margin: 0px; text-align: center; \"><div style=\"border:1px solid black;width:200px; border-top:0px; margin:0px;padding:0px; background-color: #EBEBEB; \">" + produkt.CenaProduktu + "</div></td>\r\n\t";
+
+            thead = thead + td1;
+            tbody = tbody + td2;
+            tbody2 = tbody2 + td3;
+            tfoot = tfoot;
 
 
-                thead = thead + td1;
-                tbody = tbody + td2;
-                //tfoot = tfoot;
-
-
-            value = thead + tbody + tfoot;
+            value = thead + tbody + tbody2 + tfoot;
             if (ile%3 == 0)
             {
                 thead = cthead;
                 tbody = ctbody;
+                tbody2 = ctbody2;
                 tfoot = ctfoot;
                 tab1 += value;
                 value = "";
             }
 
             tabelka2 = "" +
-                "<table \">\r\n\t" +
+               "<table style=\"padding: 0px; margin-left: auto; margin-right: auto; displey:table;\" >" +
                     "<thead>\r\n\t" +
-                        "<tr>\r\n\t\t" +
+                        "<tr >" +
                             td1+
                             "</tr>\r\n\t" +
                     "</thead>\r\n\t" +
                     "<tbody>\r\n\t" +
-                        "<tr>\r\n\t\t" +
+                        "<tr >" +
                             td2+
                         "</tr>\r\n\t" +
-                    "</tbody>\r\n" +
+                        "<tr  >\r\n\t\t" +
+                            td3 +
+                        "</tr>\r\n\t" +
+                    "</tfoot>\r\n" +
                 "</table>";
 
 
@@ -263,7 +280,7 @@ namespace partner_aluro.Controllers
 
 
         public string tabelka2 = "" +
-                "<table \">\r\n\t" +
+               "<table style=\"padding: 0px; margin-left: auto; margin-right: auto; displey:table;\" >" +
                     "<thead>\r\n\t" +
                         "<tr>\r\n\t\t" +
                             "</tr>\r\n\t" +
@@ -274,10 +291,10 @@ namespace partner_aluro.Controllers
                     "</tbody>\r\n" +
                 "</table>";
 
-        static string thead = "<table \">\r\n\t" +
+        static string thead = "<table style=\"padding: 0px; margin-left: auto; margin-right: auto; displey:table;\" >" +
                     "<thead>\r\n\t" +
                         "<tr>\r\n\t\t";
-        const string cthead = "<table \">\r\n\t" +
+        const string cthead = "<table style=\"padding: 0px; margin-left: auto; margin-right: auto; displey:table;\" >" +
                     "<thead>\r\n\t" +
                         "<tr>\r\n\t\t";
 
@@ -290,11 +307,18 @@ namespace partner_aluro.Controllers
                    "<tbody>\r\n\t" +
                        "<tr>\r\n\t\t";
 
+        static string tbody2 = "</tr>\r\n\t" +
+                        "<tr>\r\n\t\t";
+
+        const string ctbody2 = "</tr>\r\n\t" +
+                        "<tr>\r\n\t\t";
+
+
         static string tfoot = "</ tr >\r\n\t" +
-                    "</tbody>\r\n" +
+                    "</tfoot>\r\n" +
                 "</table>";
         const string ctfoot = "</ tr >\r\n\t" +
-                    "</tbody>\r\n" +
+                    "</tfoot>\r\n" +
                 "</table>";
 
 

@@ -19,7 +19,7 @@
         </ul>
     </div>
     <div class="tab-content">
-           <div class="tab-pane active" id="dodajprodukty">
+           <div class="tab-pane @ViewData["active1"]" id="dodajprodukty">
                 <form class="needs-validation" asp-action="Edit" asp-route-id="@Model.NewsletterID" asp-controller="Newsletter" class="form-horizontal" method="post" enctype="multipart/form-data">
          
                     <div class="row">
@@ -40,7 +40,7 @@
                     </div>
                 </form>
             </div>
-            <div class="tab-pane" id="wiadomosc">
+            <div class="tab-pane @ViewData["active2"]" id="wiadomosc">
                 <div class="row">
                     <div class="col">
                         <form class="needs-validation" asp-action="NewsletterEdit" asp-route-id="@Model.NewsletterID" asp-controller="Newsletter" class="form-horizontal" method="post" enctype="multipart/form-data">
@@ -70,7 +70,6 @@
             plugin: 'a_tinymce_plugin',
             menubar: false,
             statusbar: false,
-            toolbar: false,
             height: "800",
             a_plugin_option: true,
             a_configuration_option: 400

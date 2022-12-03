@@ -8,15 +8,20 @@ tinymce.init({
     relative_urls: false,
     remove_script_host: false,
     convert_urls: true,
-    content_css: 'css/Newsletter/newsletter.css',
-    plugins: 'template',
-    toolbar: 'template',
+    /*content_css: 'css/Newsletter/newsletter.css',*/
+    plugins: 'image code template print preview powerpaste casechange importcss tinydrive searchreplace autolink autosave save directionality advcode visualblocks visualchars fullscreen image link media mediaembed template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker imagetools textpattern noneditable help formatpainter permanentpen pageembed charmap tinycomments mentions quickbars linkchecker emoticons advtable export',
+    toolbar: [
+        "undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck",
+        "template image | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat ",
+        "|forecolor backcolor | | addcomment showcomments | spellcheckdialog a11ycheck | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat",
+        "| link image media table mergetags |"],
     image_list: [
         { title: 'My image', value: '' },
         { title: 'My image', value: '' }
     ],
     templates: [
-        { title: 'Some title 2', description: 'Some desc 2', url: '\\templates\\template0.html' }
+        { title: 'Szablon1', description: 'Szablon1', url: '\\templates\\template0.html' },
+        { title: 'Szablon2', description: 'Szablon2', url: '\\templates\\template2.html' }
     ],
     images_upload_url: '/upload', // this is the upload target URL - our first endpoint
     image_list: '/filelist', // the list of the media files, our second endpoint
