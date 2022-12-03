@@ -13,7 +13,7 @@ using X.PagedList.Mvc.Core;
 namespace partner_aluro.Controllers
 {
 
-    //[Authorize(Roles = $"{Constants.Roles.Administrator},{Constants.Roles.Manager},{Constants.Roles.Klient}")]
+    [Authorize(Roles = $"{Constants.Roles.Administrator},{Constants.Roles.Manager},{Constants.Roles.Klient}")]
     public class CategoryController : Controller
     {
         private readonly ICategoryService _categoryService;
