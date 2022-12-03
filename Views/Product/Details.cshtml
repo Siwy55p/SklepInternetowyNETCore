@@ -33,8 +33,9 @@
                         <div class="column">
                             <div class="main_image">
                                 @*<a id="myLink" href="~/images/produkty/@Model.Symbol/@Model.ImageUrl" class="glightbox">*@
-                                <a id="myLink" href="~/images/produkty/@Model.Symbol/@Model.Product_Images.Where(x=>x.kolejnosc == 0).FirstOrDefault().ImageName" onclick="Open(this)" data-gallery="gallery" class="glightbox">
-                                    <img class="main_image" id=featured src="~/images/produkty/@Model.Symbol/@Model.Product_Images.Where(x=>x.kolejnosc == 0).FirstOrDefault().ImageName">
+                                @*<a id="myLink" href="~/images/produkty/@Model.Symbol/@Model.Product_Images.Where(x=>x.kolejnosc == 0).FirstOrDefault().ImageName" onclick="Open(this)" data-gallery="gallery" class="glightbox">*@
+                                <a id="myLink" href="~/images/produkty/@Model.Symbol/@Model.Product_Images[0].ImageName" onclick="Open(this)" data-gallery="gallery" class="glightbox">
+                                    <img class="main_image" id=featured src="~/images/produkty/@Model.Symbol/@Model.Product_Images[0].ImageName">
                                 </a>
                             </div>
 

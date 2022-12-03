@@ -1,4 +1,5 @@
 ﻿using DeepL;
+using ImageMagick;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -7,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using partner_aluro.Data;
 using partner_aluro.Models;
 using System.Collections;
+using System.Net;
 using System.Resources.NetStandard;
 
 namespace partner_aluro.Controllers
@@ -229,6 +231,126 @@ namespace partner_aluro.Controllers
 
 
             }
+
+        }
+
+
+
+        public void ImageCompres250x250()
+        {
+
+            List<ImageModel> Images = _context.Images.ToList();
+
+            for (int i = 4; i < 5; i++)
+            {
+                ImageModel image = Images[i];
+
+
+
+
+
+                using (WebClient client2 = new WebClient())
+                {
+                    string webRootPath = _webHostEnvironment.WebRootPath;
+                    string path0 = image.path;
+                    var uploadsFolder = image.fullPath;
+                    if (!Directory.Exists(uploadsFolder))
+                    {
+                        Directory.CreateDirectory(uploadsFolder);
+                    }
+
+                    var dynamicFileName = image.ImageName;
+
+
+                    //client2.DownloadFileAsync(new Uri(webRootPath + image.fullPath), uploadsFolder + dynamicFileName);
+
+                    ImageModel imgModelFromDB = _context.Images.Where(x => x.ImageId == Images[i].ImageId).FirstOrDefault();
+
+
+
+                    string pathCompresImage = webRootPath + "\\" + path0;
+                    string pathname = pathCompresImage + "\\" + dynamicFileName;
+                    string ImageNameCompres = "250x250_" + dynamicFileName;
+                    string pathSaveCompres = pathCompresImage + ImageNameCompres;
+                    //save compres image
+                    using (MagickImage imageE = new MagickImage(pathname))
+                    {
+                        imageE.Format = MagickFormat.WebP; // Get or Set the format of the image.
+                        imageE.Resize(250, 250); // fit the image into the requested width and height. 
+                        imageE.Quality = 50; // This is the Compression level.
+                        imageE.Write(pathSaveCompres);
+                    }
+
+
+
+                        imgModelFromDB.ImageNameCompress250x250 = ImageNameCompres;
+
+
+                        imgModelFromDB.pathImageCompress250x250 = pathSaveCompres;
+
+
+                    _context.Images.Update(imgModelFromDB);
+                    _context.SaveChanges();
+
+
+                    //    var cont = _productService.GetProduct(produkt.Symbol);
+                    //    if (cont != null)
+                    //    {
+                    //        if (cont.Product_Images == null)
+                    //        {
+                    //            cont.Product_Images = new List<ImageModel>();
+                    //        }
+
+                    //        imgModel = new()
+                    //        {
+                    //            path = path0,
+                    //            fullPath = path0 + dynamicFileName,
+                    //            Opis = produkt.Symbol,
+                    //            kolejnosc = i,
+                    //            Tytul = produkt.Product_name,
+                    //            ImageName = dynamicFileName,
+                    //            ProductId = cont.ProductId,
+                    //            ProductImagesId = cont.ProductId,
+
+                    //        };
+
+                    //        cont.Product_Images.Add(imgModel);
+                    //        await _productService.UpdateAsync(cont);
+
+                    //        await _imageService.AddAsync(imgModel);
+                    //    }
+                    //    else
+                    //    {
+                    //        imgModel = new()
+                    //        {
+                    //            path = path0,
+                    //            fullPath = path0 + dynamicFileName,
+                    //            Opis = produkt.Symbol,
+                    //            kolejnosc = i,
+                    //            Tytul = produkt.Product_name,
+                    //            ImageName = dynamicFileName
+                    //        };
+                    //    }
+                    //    await _imageService.AddAsync(imgModel);
+
+                    //}
+
+                }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        }
 
         }
 
