@@ -241,7 +241,7 @@ namespace partner_aluro.Controllers
 
             List<ImageModel> Images = _context.Images.ToList();
 
-            for (int i = 4; i < 5; i++)
+            for (int i = 0; i < Images.Count(); i++)
             {
                 ImageModel image = Images[i];
 
@@ -269,9 +269,12 @@ namespace partner_aluro.Controllers
 
 
                     string pathCompresImage = webRootPath + "\\" + path0;
+
                     string pathname = pathCompresImage + "\\" + dynamicFileName;
                     string ImageNameCompres = "250x250_" + dynamicFileName;
                     string pathSaveCompres = pathCompresImage + ImageNameCompres;
+
+                    string path1 = path0 + ImageNameCompres;
                     //save compres image
                     using (MagickImage imageE = new MagickImage(pathname))
                     {
@@ -286,7 +289,7 @@ namespace partner_aluro.Controllers
                         imgModelFromDB.ImageNameCompress250x250 = ImageNameCompres;
 
 
-                        imgModelFromDB.pathImageCompress250x250 = pathSaveCompres;
+                        imgModelFromDB.pathImageCompress250x250 = path1;
 
 
                     _context.Images.Update(imgModelFromDB);
@@ -350,7 +353,7 @@ namespace partner_aluro.Controllers
 
 
 
-        }
+            }
 
         }
 

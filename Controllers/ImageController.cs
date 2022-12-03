@@ -304,6 +304,8 @@ namespace partner_aluro.Controllers
                             string pathname = pathCompresImage + "\\" + dynamicFileName;
                             string ImageNameCompres = "250x250_" + dynamicFileName;
                             string pathSaveCompres = pathCompresImage + "\\" + ImageNameCompres;
+
+                            string path1 = path0 + ImageNameCompres;
                             //save compres image
                             using (MagickImage image = new MagickImage(pathname))
                             {
@@ -319,7 +321,7 @@ namespace partner_aluro.Controllers
                                 imageModel.ImageNameCompress250x250 = ImageNameCompres;
 
 
-                                imageModel.pathImageCompress250x250 = pathSaveCompres;
+                                imageModel.pathImageCompress250x250 = path1;
 
 
                             _imageService.Update(imageModel);
