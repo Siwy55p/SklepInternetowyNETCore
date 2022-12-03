@@ -241,7 +241,7 @@ namespace partner_aluro.Controllers
 
             List<ImageModel> Images = _context.Images.ToList();
 
-            for (int i = 0; i < Images.Count(); i++)
+            for (int i = 5075; i < Images.Count(); i++)
             {
                 ImageModel image = Images[i];
 
