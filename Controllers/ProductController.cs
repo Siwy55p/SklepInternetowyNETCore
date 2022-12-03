@@ -124,7 +124,9 @@ namespace partner_aluro.Controllers
             }
 
             //ustaw obrazek glowny ten ktory jest jako pierwszy w tabelce imagePictures
-            product.ImageUrl = product.Product_Images.Where(x=>x.kolejnosc == 0).FirstOrDefault().ImageName;
+
+
+            product.ImageUrl = product.Product_Images.OrderBy(x=>x.kolejnosc).FirstOrDefault().ImageName;
 
 
             ModelState.Remove("product_Image.path");

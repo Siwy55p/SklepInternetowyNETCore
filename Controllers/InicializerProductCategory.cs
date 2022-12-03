@@ -245,10 +245,6 @@ namespace partner_aluro.Controllers
             {
                 ImageModel image = Images[i];
 
-
-
-
-
                 using (WebClient client2 = new WebClient())
                 {
                     string webRootPath = _webHostEnvironment.WebRootPath;
@@ -284,79 +280,35 @@ namespace partner_aluro.Controllers
                         imageE.Write(pathSaveCompres);
                     }
 
-
-
                         imgModelFromDB.ImageNameCompress250x250 = ImageNameCompres;
-
 
                         imgModelFromDB.pathImageCompress250x250 = path1;
 
-
                     _context.Images.Update(imgModelFromDB);
                     _context.SaveChanges();
-
-
-                    //    var cont = _productService.GetProduct(produkt.Symbol);
-                    //    if (cont != null)
-                    //    {
-                    //        if (cont.Product_Images == null)
-                    //        {
-                    //            cont.Product_Images = new List<ImageModel>();
-                    //        }
-
-                    //        imgModel = new()
-                    //        {
-                    //            path = path0,
-                    //            fullPath = path0 + dynamicFileName,
-                    //            Opis = produkt.Symbol,
-                    //            kolejnosc = i,
-                    //            Tytul = produkt.Product_name,
-                    //            ImageName = dynamicFileName,
-                    //            ProductId = cont.ProductId,
-                    //            ProductImagesId = cont.ProductId,
-
-                    //        };
-
-                    //        cont.Product_Images.Add(imgModel);
-                    //        await _productService.UpdateAsync(cont);
-
-                    //        await _imageService.AddAsync(imgModel);
-                    //    }
-                    //    else
-                    //    {
-                    //        imgModel = new()
-                    //        {
-                    //            path = path0,
-                    //            fullPath = path0 + dynamicFileName,
-                    //            Opis = produkt.Symbol,
-                    //            kolejnosc = i,
-                    //            Tytul = produkt.Product_name,
-                    //            ImageName = dynamicFileName
-                    //        };
-                    //    }
-                    //    await _imageService.AddAsync(imgModel);
-
-                    //}
-
                 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             }
 
         }
 
 
+        public void ImageFrontSetCompresImage()
+        {
+
+            List<Product> Products = _context.Products.ToList();
+
+            for (int i = 0; i < Products.Count(); i++)
+            {
+                Product product = Products[i];
+
+                product = _context.Products.Where(x => x.ProductId == Products[i].ProductId).FirstOrDefault();
+
+                product.ImageUrl = "250x250_" + product.ImageUrl;
+
+                    _context.Products.Update(product);
+                    _context.SaveChanges();
+            }
+
+        }
     }
 }
