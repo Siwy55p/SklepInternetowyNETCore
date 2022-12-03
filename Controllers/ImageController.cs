@@ -315,14 +315,11 @@ namespace partner_aluro.Controllers
 
                             imageModel = _context.Images.Where(x => x.ImageId == imageModel.ImageId).FirstOrDefault();
 
-                            if (imageModel.ImageNameCompress250x250 == null || imageModel.ImageNameCompress250x250 == "")
-                            {
+
                                 imageModel.ImageNameCompress250x250 = ImageNameCompres;
-                            }
-                            if (imageModel.pathImageCompress250x250 == null || imageModel.pathImageCompress250x250 == "")
-                            {
+
+
                                 imageModel.pathImageCompress250x250 = pathSaveCompres;
-                            }
 
 
                             _imageService.Update(imageModel);
