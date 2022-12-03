@@ -243,9 +243,6 @@
   <data name="CenaDetaliczna" xml:space="preserve">
     <value>Cena detaliczna</value>
   </data>
-  <data name="test" xml:space="preserve">
-    <value>test</value>
-  </data>
   <data name="Lampion wiszący SILO z wkład. szklanym_Aluro" xml:space="preserve">
     <value>Lampion wiszący SILO z wkład. szklanym_Aluro</value>
   </data>
@@ -338,9 +335,6 @@
   </data>
   <data name="Usuń" xml:space="preserve">
     <value>Usuń</value>
-  </data>
-  <data name="test22" xml:space="preserve">
-    <value>test22</value>
   </data>
   <data name="Wazon ANKLE_Aluro M" xml:space="preserve">
     <value>Wazon ANKLE_Aluro M</value>
@@ -657,9 +651,6 @@
   <data name="Osłonka, donica KUSTON - HISTORY_Aluro" xml:space="preserve">
     <value>Osłonka, donica KUSTON - HISTORY_Aluro</value>
   </data>
-  <data name="Test01" xml:space="preserve">
-    <value>Test01</value>
-  </data>
   <data name="Gazon, doniczka LAZURITE ocean blue_Aluro XL" xml:space="preserve">
     <value>Gazon, doniczka LAZURITE ocean blue_Aluro XL</value>
   </data>
@@ -710,9 +701,6 @@
   </data>
   <data name="Stół DANTE_Aluro" xml:space="preserve">
     <value>Stół DANTE_Aluro</value>
-  </data>
-  <data name="test21" xml:space="preserve">
-    <value>test21</value>
   </data>
   <data name="drzewo" xml:space="preserve">
     <value>drzewo</value>

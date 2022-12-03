@@ -101,11 +101,11 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
 {
     var supportedCultures = new List<CultureInfo>
     {
-        new CultureInfo("pl"),
+        new CultureInfo("pl-PL"),
         new CultureInfo("en-US"),
         new CultureInfo("de-DE"),
     };
-    options.DefaultRequestCulture = new RequestCulture(culture: "pl", uiCulture: "pl-PL");
+    options.DefaultRequestCulture = new RequestCulture(culture: "pl-PL", uiCulture: "pl-PL");
     options.SupportedCultures = supportedCultures;
     options.SupportedUICultures = supportedCultures;
     options.RequestCultureProviders.Insert(0, new QueryStringRequestCultureProvider());
