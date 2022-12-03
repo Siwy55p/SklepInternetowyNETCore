@@ -11,20 +11,57 @@
     <script src="~/js/tinymce/tinymce.min.js"></script>
     }
 
-    <form class="needs-validation" asp-action="Edit" asp-route-id="@Model.NewsletterID" asp-controller="Newsletter" class="form-horizontal" method="post" enctype="multipart/form-data">
+    <div class="row">
 
-        <div class="row g-0">
-            <div class="col-md-12 border-end">
-                @Html.ValidationSummary()
-                @await Html.PartialAsync("_FormNewsletter")
+        <ul class="nav nav-tabs">
+            <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#dodajprodukty">Dodaj produkty</a></li>
+            <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#wiadomosc">Podglad wiadomosci</a></li>
+        </ul>
+    </div>
+    <div class="tab-content">
+           <div class="tab-pane active" id="dodajprodukty">
+                <form class="needs-validation" asp-action="Edit" asp-route-id="@Model.NewsletterID" asp-controller="Newsletter" class="form-horizontal" method="post" enctype="multipart/form-data">
+         
+                    <div class="row">
+                        <div class="col">
+                            <div class="row g-0">
+                                    <div class="col-md-12 border-end">
+                                        @Html.ValidationSummary()
+                                        @await Html.PartialAsync("_FormNewsletter")
+                                    </div>
+                                    <div class="col-md-1">
+                                        <button type ="submit">
+                                            Następny etap
+                                        </button>
+                                    </div>
+                            </div>
+                            <button asp-controller="Newsletter" asp-action="SendEmail">Wyslij</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="col-md-1">
-                <button type="submit" class="btn btn-success">Następny etap</button>
+            <div class="tab-pane" id="wiadomosc">
+                <div class="row">
+                    <div class="col">
+                        <form class="needs-validation" asp-action="NewsletterEdit" asp-route-id="@Model.NewsletterID" asp-controller="Newsletter" class="form-horizontal" method="post" enctype="multipart/form-data">
+         
+                            <div class="row g-0">
+                                <div class="col-md-12 border-end">
+                                    @Html.ValidationSummary()
+                                    @await Html.PartialAsync("_FormNewsletterView")
+                                </div>
+                                <div class="col-md-1">
+                                    <button type="submit" class="btn btn-success">Zapisz</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
 
-        </div>
-    </form>
-    <button asp-controller="Newsletter" asp-action="SendEmail">Wyslij</button>
+    </div>
+
+
 
     @section Scripts {
         <script>
@@ -75,4 +112,36 @@
                 });
             }
         </script>
+
+                                <script src="~/js/tinymceNewsletterEdit.js"></script>
+
+                                <script>
+
+                                    var ile = 0;
+
+                                    function DodajDoNewsletter2() {
+
+                                        var activeEditor = tinyMCE.get('editorNewsletter2');
+                                        var content = activeEditor.getContent();
+                                        //var content1 = `<div><a href="#"><img src="https://localhost:44315/Images/Aluro_logo-x-300_2.png" alt="Aluro_logo-x-300_2.png" width="583" height="290">tekst</a> ${ProduktId},</div>`;
+
+
+                                        //activeEditor.setContent("");
+                                        $.ajax({
+                                            type: "POST",
+                                            url: '@Url.Action("WstawProdukty", "Newsletter")',
+                                            data: { content: content },
+                                            success: function (result) {
+                                                tinymce.activeEditor.execCommand('mceInsertContent', false, result);
+                                                //activeEditor.setContent(result);
+                                            },
+
+                                            error: function (abc) {
+                                                alert(abc.statusText);
+                                            },
+                                        });
+                                    }
+                                </script>
+
+
     }

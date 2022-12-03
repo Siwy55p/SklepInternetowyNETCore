@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Build.Execution;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
 using partner_aluro.Data;
 using partner_aluro.Models;
 using partner_aluro.Services.Interfaces;
@@ -81,7 +82,28 @@ namespace partner_aluro.Controllers
             ViewData["kategorie"] = await _context.Category.ToListAsync();
 
             Newsletter newsletter = await _newsletter.GetAsync(id);
-            newsletter.MessagerBody = "";
+
+            tab1 = "";
+
+            thead = cthead;
+            tbody = ctbody;
+            tfoot = ctfoot;
+
+            value = "";
+
+            tabelka2 = "" +
+                "<table \">\r\n\t" +
+                    "<thead>\r\n\t" +
+                        "<tr>\r\n\t\t" +
+                            "</tr>\r\n\t" +
+                    "</thead>\r\n\t" +
+                    "<tbody>\r\n\t" +
+                        "<tr>\r\n\t\t" +
+                        "</tr>\r\n\t" +
+                    "</tbody>\r\n" +
+                "</table>";
+
+
             return View(newsletter);
         }
 
@@ -91,24 +113,25 @@ namespace partner_aluro.Controllers
         {
             ViewData["produkty"] = await _context.Products.ToListAsync();
             ViewData["kategorie"] = await _context.Category.ToListAsync();
-            
-            Newsletter newsletterDB = await _newsletter.GetAsync(newsletter.NewsletterID);
-            newsletterDB.MessagerBody = newsletter.MessagerBody;
 
-            ViewData["BodyProduct"] = newsletter.MessagerBody;
 
-            _newsletter.Edit(newsletterDB);
+            Newsletter newsletter1 = _context.Newsletter.Where(x => x.NewsletterID == newsletter.NewsletterID).FirstOrDefault();
 
-            return RedirectToAction(nameof(Newsletter), newsletterDB);
+            newsletter1.MessagerBody = newsletter.MessagerBody;
+
+            //ViewData["BodyProduct"] = newsletter.MessagerBody;
+
+            _newsletter.Edit(newsletter1);
+
+
+            return View(newsletter1);
+
         }
 
         [HttpGet]
-        public async Task<ActionResult> Newsletter(Newsletter newsletter)
+        public async Task<ActionResult> Newsletter(int id)
         {
-
-            newsletter.listaEmail = await _context.Users.Where(x => x.Newsletter == true).Select(x => x.Email).ToListAsync();
-            
-
+            Newsletter newsletter = _context.Newsletter.Where(x => x.NewsletterID == id).FirstOrDefault();
 
             return View(newsletter);
         }
@@ -120,7 +143,7 @@ namespace partner_aluro.Controllers
             Newsletter newsletterDB = await _newsletter.GetAsync(newsletter.NewsletterID);
             newsletterDB.contentEmail = newsletter.contentEmail;
 
-
+            newsletterDB.MessagerBody = "";
             _newsletter.Edit(newsletterDB);
 
             ////string content = _context.Newsletter.Where(x => x.NewsletterID == newsletter.NewsletterID).FirstOrDefault().contentEmail;
@@ -207,7 +230,7 @@ namespace partner_aluro.Controllers
                 //tfoot = tfoot;
 
 
-            string value = thead + tbody + tfoot;
+            value = thead + tbody + tfoot;
             if (ile%3 == 0)
             {
                 thead = cthead;
@@ -217,7 +240,7 @@ namespace partner_aluro.Controllers
                 value = "";
             }
 
-            string tabelka = "" +
+            tabelka2 = "" +
                 "<table \">\r\n\t" +
                     "<thead>\r\n\t" +
                         "<tr>\r\n\t\t" +
@@ -235,6 +258,22 @@ namespace partner_aluro.Controllers
 
             return tab1 + value;
         }
+
+        public string value;
+
+
+        public string tabelka2 = "" +
+                "<table \">\r\n\t" +
+                    "<thead>\r\n\t" +
+                        "<tr>\r\n\t\t" +
+                            "</tr>\r\n\t" +
+                    "</thead>\r\n\t" +
+                    "<tbody>\r\n\t" +
+                        "<tr>\r\n\t\t" +
+                        "</tr>\r\n\t" +
+                    "</tbody>\r\n" +
+                "</table>";
+
         static string thead = "<table \">\r\n\t" +
                     "<thead>\r\n\t" +
                         "<tr>\r\n\t\t";
@@ -258,12 +297,6 @@ namespace partner_aluro.Controllers
                     "</tbody>\r\n" +
                 "</table>";
 
-
-        public string tabelka()
-        {
-            string tab = thead + tbody + tfoot;
-            return tab;
-        }
 
 
 

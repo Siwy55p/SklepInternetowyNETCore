@@ -1,6 +1,6 @@
 ﻿@model partner_aluro.Models.Newsletter
 
-<div class="form-group row d-none">
+<div class="form-group row">
 
     <label asp-for="@Model.NewsletterID" class="col col-form-label text-end">Newsletter ID</label>
     <div class="col">
@@ -31,14 +31,14 @@
                     Email:
                 </div>
             </div>
-            @foreach (string email in Model.listaEmail)
+            @*@foreach (string email in Model.listaEmail)
             {
                 <div class="row">
                     <div class="col">
                         @email
                     </div>
                 </div>
-            }
+            }*@
         </div>
     </div>
 </div>
