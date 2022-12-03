@@ -108,7 +108,8 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
     options.DefaultRequestCulture = new RequestCulture(culture: "pl-PL", uiCulture: "pl-PL");
     options.SupportedCultures = supportedCultures;
     options.SupportedUICultures = supportedCultures;
-    options.RequestCultureProviders.Insert(0, new QueryStringRequestCultureProvider());
+    //options.RequestCultureProviders.Insert(0, new QueryStringRequestCultureProvider());
+    options.RequestCultureProviders = new[] { new CookieRequestCultureProvider() };
 });
 builder.Services.AddMvc()
     .AddViewLocalization()
