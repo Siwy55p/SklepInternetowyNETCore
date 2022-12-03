@@ -152,13 +152,16 @@ namespace partner_aluro.Services
 
 
                     string pathCompresImage = Path.Combine(webRootPath, uploadsFolder);
+                    string pathname = pathCompresImage +"\\"+ dynamicFileName;
+                    string ImageNameCompres = "250x250_" + dynamicFileName;
+                    string pathSaveCompres = pathCompresImage + "\\" + ImageNameCompres;
                     //save compres image
-                    using (MagickImage image = new MagickImage(pathCompresImage))
+                    using (MagickImage image = new MagickImage(pathname))
                     {
-                        image.Format = image.Format; // Get or Set the format of the image.
-                        image.Resize(40, 40); // fit the image into the requested width and height. 
-                        image.Quality = 100; // This is the Compression level.
-                        image.Write(pathCompresImage);
+                        image.Format = MagickFormat.WebP; // Get or Set the format of the image.
+                        image.Resize(250, 250); // fit the image into the requested width and height. 
+                        image.Quality = 50; // This is the Compression level.
+                        image.Write(pathSaveCompres);
                     }
 
                     //        //using (MagickImage image = new MagickImage(@"YourImage.jpg"))
@@ -184,6 +187,8 @@ namespace partner_aluro.Services
                             kolejnosc = i,
                             Tytul = product.Name,
                             ImageName = dynamicFileName,
+                            pathImageCompress250x250 = pathSaveCompres,
+                            ImageNameCompress250x250 = ImageNameCompres,
                             ProductId = product.ProductId
                         };
                     }
@@ -195,13 +200,15 @@ namespace partner_aluro.Services
                             fullPath = path0 + "\\" + dynamicFileName,
                             kolejnosc = i,
                             Tytul = "sliderHome",
+                            ImageName = dynamicFileName,
+                            pathImageCompress250x250 = pathSaveCompres,
+                            ImageNameCompress250x250 = ImageNameCompres,
                             SliderIds = slider.ImageSliderID,
                             Opis = "slider",
-                            ImageName = dynamicFileName,
                         };
                     }
 
-                        if (product != null)
+                    if (product != null)
                     {
                         product.Product_Images.Add(imgModel);
                     }

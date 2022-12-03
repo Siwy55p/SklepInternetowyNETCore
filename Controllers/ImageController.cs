@@ -297,7 +297,34 @@ namespace partner_aluro.Controllers
                             {
                                 files[i].CopyTo(filesStream);
                             }
+
+
+
+                            string pathCompresImage = webRootPath + "\\" + path0;
+                            string pathname = pathCompresImage + "\\" + dynamicFileName;
+                            string ImageNameCompres = "250x250_" + dynamicFileName;
+                            string pathSaveCompres = pathCompresImage + "\\" + ImageNameCompres;
+                            //save compres image
+                            using (MagickImage image = new MagickImage(pathname))
+                            {
+                                image.Format = MagickFormat.WebP; // Get or Set the format of the image.
+                                image.Resize(250, 250); // fit the image into the requested width and height. 
+                                image.Quality = 50; // This is the Compression level.
+                                image.Write(pathSaveCompres);
+                            }
+
                             imageModel = _context.Images.Where(x => x.ImageId == imageModel.ImageId).FirstOrDefault();
+
+                            if (imageModel.ImageNameCompress250x250 == null || imageModel.ImageNameCompress250x250 == "")
+                            {
+                                imageModel.ImageNameCompress250x250 = ImageNameCompres;
+                            }
+                            if (imageModel.pathImageCompress250x250 == null || imageModel.pathImageCompress250x250 == "")
+                            {
+                                imageModel.pathImageCompress250x250 = pathSaveCompres;
+                            }
+
+
                             _imageService.Update(imageModel);
                         }
                         return Redirect(returnUrl);
