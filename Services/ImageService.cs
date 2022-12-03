@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using ImageMagick;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
@@ -39,44 +40,46 @@ namespace partner_aluro.Services
             IsInitialized = true;
         }
 
-        public async Task<string> CreateImageAddAsync(ImageModel imageModel)
-        {
-            string komunikat = "1";
 
-            if (imageModel.ImageFile != null)
-            {
-                //Save image to wwwroot/image
-                string wwwRootPath = _webHostEnvironment.WebRootPath;
-                string fileName = Path.GetFileNameWithoutExtension(imageModel.ImageFile.FileName);
-                string extension = Path.GetExtension(imageModel.ImageFile.FileName);
-                imageModel.ImageName = fileName + extension;
-                string path = Path.Combine(wwwRootPath + "/Images/", fileName);
-                using (var fileStream = new FileStream(path, FileMode.Create))
-                {
-                    await imageModel.ImageFile.CopyToAsync(fileStream);
-                }
-                //insert record
-                imageModel.fullPath = path + "\\" + fileName + extension;
-                imageModel.path = path;
+        //Obrazek prezentujacy
+        //public async Task<string> CreateImageAddAsync(ImageModel imageModel)
+        //{
+        //    string komunikat = "1";
+
+        //    if (imageModel.ImageFile != null)
+        //    {
+        //        //Save image to wwwroot/image
+        //        string wwwRootPath = _webHostEnvironment.WebRootPath;
+        //        string fileName = Path.GetFileNameWithoutExtension(imageModel.ImageFile.FileName);
+        //        string extension = Path.GetExtension(imageModel.ImageFile.FileName);
+        //        imageModel.ImageName = fileName + extension;
+        //        string path = Path.Combine(wwwRootPath + "/Images/", fileName);
+        //        using (var fileStream = new FileStream(path, FileMode.Create))
+        //        {
+        //            await imageModel.ImageFile.CopyToAsync(fileStream);
+        //        }
+        //        //insert record
+        //        imageModel.fullPath = path + "\\" + fileName + extension;
+        //        imageModel.path = path;
 
 
 
-                var image = _context.Images.Where(x => x.ImageName == imageModel.ImageName).FirstOrDefault();
-                if (image != null)
-                {
-                    _context.Images.Update(image);
-                }
-                else
-                {
-                    _context.Add(imageModel);
-                    await _context.SaveChangesAsync();
-                }
+        //        var image = _context.Images.Where(x => x.ImageName == imageModel.ImageName).FirstOrDefault();
+        //        if (image != null)
+        //        {
+        //            _context.Images.Update(image);
+        //        }
+        //        else
+        //        {
+        //            _context.Add(imageModel);
+        //            await _context.SaveChangesAsync();
+        //        }
 
-                return wwwRootPath;
-            }
+        //        return wwwRootPath;
+        //    }
 
-            return komunikat;
-        }
+        //    return komunikat;
+        //}
 
 
 
@@ -141,10 +144,35 @@ namespace partner_aluro.Services
                         dynamicFileName = "slider" + i + "_" + DateTime.Now.ToString("mm_ss") + extension;
                     }
 
+                    //save orginal image
                     using (var filesStream = new FileStream(Path.Combine(uploadsFolder, dynamicFileName), FileMode.Create))
                     {
                         files[i].CopyTo(filesStream);
                     }
+
+
+                    string pathCompresImage = Path.Combine(webRootPath, uploadsFolder);
+                    //save compres image
+                    using (MagickImage image = new MagickImage(pathCompresImage))
+                    {
+                        image.Format = image.Format; // Get or Set the format of the image.
+                        image.Resize(40, 40); // fit the image into the requested width and height. 
+                        image.Quality = 100; // This is the Compression level.
+                        image.Write(pathCompresImage);
+                    }
+
+                    //        //using (MagickImage image = new MagickImage(@"YourImage.jpg"))
+                    //        //{
+                    //        //    image.Format = image.Format; // Get or Set the format of the image.
+                    //        //    image.Resize(40, 40); // fit the image into the requested width and height. 
+                    //        //    image.Quality = 10; // This is the Compression level.
+                    //        //    image.Write("YourFinalImage.jpg");
+                    //        //}
+
+
+
+
+
 
                     //add product Image for new product
                     if (product != null)
@@ -228,65 +256,67 @@ namespace partner_aluro.Services
 
             return "";
         }
-        public async Task<string> CreateImageAddAsync(Product product) //Dodaj obrazek Front przy dodawaniu produktu
-        {
-            string uniqueFileName = "";
-
-            if (product.product_Image.ImageFile != null)
-            {
-
-                //Save image to wwwroot/image
-                string webRootPath = _webHostEnvironment.WebRootPath;
-                string path0 = "images\\produkty\\";
-                var uploadsFolder = Path.Combine(webRootPath, "images\\produkty\\" + product.Symbol);
-
-                if (!Directory.Exists(uploadsFolder))
-                {
-                    Directory.CreateDirectory(uploadsFolder);
-                }
-
-                var extension = Path.GetExtension(product.product_Image.ImageFile.FileName);
-
-                uniqueFileName = "Front_" + product.Symbol + extension;
-                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
 
 
-                string fileName = Path.GetFileNameWithoutExtension(product.product_Image.ImageFile.FileName);
-                //string extension = Path.GetExtension(product.product_Image.ImageFile.FileName);
-                //product.product_Image.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                //string path = Path.Combine(wwwRootPath + "/Images/", fileName);
-                using (var fileStream = new FileStream(filePath, FileMode.Create))
-                {
-                    await product.product_Image.ImageFile.CopyToAsync(fileStream);
-                }
-                //insert record
-                product.product_Image.path = path0 + product.Symbol +"\\";
-                product.product_Image.kolejnosc = 0;
-                product.product_Image.ProductId = product.ProductId;
-                product.product_Image.Tytul = product.Name;
-                product.product_Image.ProductImagesId = product.ProductId;
-                product.product_Image.ImageName = uniqueFileName;
+        //public async Task<string> CreateImageAddAsync(Product product) //Dodaj obrazek Front przy dodawaniu produktu
+        //{
+        //    string uniqueFileName = "";
 
-                product.product_Image.fullPath = path0 + product.Symbol + "\\" + uniqueFileName;
+        //    if (product.product_Image.ImageFile != null)
+        //    {
 
+        //        //Save image to wwwroot/image
+        //        string webRootPath = _webHostEnvironment.WebRootPath;
+        //        string path0 = "images\\produkty\\";
+        //        var uploadsFolder = Path.Combine(webRootPath, "images\\produkty\\" + product.Symbol);
 
-                var image = _context.Images.Where(x => x.ImageName == product.product_Image.ImageName).FirstOrDefault();
-                if (image != null)
-                {
-                    _context.Images.Update(image);
-                }
-                else
-                {
-                    _context.Add(product.product_Image);
-                    await _context.SaveChangesAsync();
-                }
+        //        if (!Directory.Exists(uploadsFolder))
+        //        {
+        //            Directory.CreateDirectory(uploadsFolder);
+        //        }
+
+        //        var extension = Path.GetExtension(product.product_Image.ImageFile.FileName);
+
+        //        uniqueFileName = "Front_" + product.Symbol + extension;
+        //        string filePath = Path.Combine(uploadsFolder, uniqueFileName);
 
 
-                return uniqueFileName;
-            }
+        //        string fileName = Path.GetFileNameWithoutExtension(product.product_Image.ImageFile.FileName);
+        //        //string extension = Path.GetExtension(product.product_Image.ImageFile.FileName);
+        //        //product.product_Image.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+        //        //string path = Path.Combine(wwwRootPath + "/Images/", fileName);
+        //        using (var fileStream = new FileStream(filePath, FileMode.Create))
+        //        {
+        //            await product.product_Image.ImageFile.CopyToAsync(fileStream);
+        //        }
+        //        //insert record
+        //        product.product_Image.path = path0 + product.Symbol +"\\";
+        //        product.product_Image.kolejnosc = 0;
+        //        product.product_Image.ProductId = product.ProductId;
+        //        product.product_Image.Tytul = product.Name;
+        //        product.product_Image.ProductImagesId = product.ProductId;
+        //        product.product_Image.ImageName = uniqueFileName;
 
-            return uniqueFileName;
-        }
+        //        product.product_Image.fullPath = path0 + product.Symbol + "\\" + uniqueFileName;
+
+
+        //        var image = _context.Images.Where(x => x.ImageName == product.product_Image.ImageName).FirstOrDefault();
+        //        if (image != null)
+        //        {
+        //            _context.Images.Update(image);
+        //        }
+        //        else
+        //        {
+        //            _context.Add(product.product_Image);
+        //            await _context.SaveChangesAsync();
+        //        }
+
+
+        //        return uniqueFileName;
+        //    }
+
+        //    return uniqueFileName;
+        //}
 
         public async Task<List<ImageModel>> ListImageAsync()
         {

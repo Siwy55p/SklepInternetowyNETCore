@@ -8,7 +8,11 @@ using partner_aluro.Data;
 using partner_aluro.Models;
 using partner_aluro.Services;
 using partner_aluro.Services.Interfaces;
+using System.Drawing.Imaging;
+using System.Drawing;
 using System.Net;
+using ImageMagick;
+using System.IO;
 
 namespace partner_aluro.Controllers
 {
@@ -146,43 +150,85 @@ namespace partner_aluro.Controllers
             return View(imageModel);
         }
 
+
+        //usuniecie funkcji dodwanie glownego obrazku
         // POST: Product/CreateImageProductFront
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task <IActionResult> CreateImageProductFront(Product product)
-        {
-            ModelState.Remove("Product");
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task <IActionResult> CreateImageProductFront(Product product)
+        //{
+        //    ModelState.Remove("Product");
 
-            if (ModelState.IsValid)
-            {
-                //Sabe image to wwwroot/image
-                string wwwRootPath = _webHostEnvironment.WebRootPath;
-                string fileName = Path.GetFileNameWithoutExtension(product.product_Image.ImageFile.FileName);
-                string extension = Path.GetExtension(product.product_Image.ImageFile.FileName);
-                product.product_Image.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                string path = Path.Combine(wwwRootPath + "/Images/produkty", fileName);
-                using (var fileStream = new FileStream(path, FileMode.Create))
-                {
-                    await product.product_Image.ImageFile.CopyToAsync(fileStream);
-                }
-                //insert record
-
-                //migajace
-                //przenika
+        //    if (ModelState.IsValid)
+        //    {
+        //        //Sabe image to wwwroot/image
+        //        string wwwRootPath = _webHostEnvironment.WebRootPath;
+        //        string fileName = Path.GetFileNameWithoutExtension(product.product_Image.ImageFile.FileName);
+        //        string extension = Path.GetExtension(product.product_Image.ImageFile.FileName);
+        //        product.product_Image.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                
+        //        string path = Path.Combine(wwwRootPath + "/Images/produkty", fileName);
 
 
 
-                _context.Add(product.product_Image);
-                await _context.SaveChangesAsync();
+        //        //save image in orginal format
+        //        using (var fileStream = new FileStream(path, FileMode.Create))
+        //        {
+        //            await product.product_Image.ImageFile.CopyToAsync(fileStream);
+        //        }
 
-                return RedirectToAction("Add", "Product", new { Product = product });
-                //return RedirectToAction(nameof(Index));
-            }
-            return RedirectToAction("Add", "Product", new { Product = product });
-            //return View(product.product_Image);
-        }
+        //        //string imagePath = Path.Combine(wwwRootPath, "images");
+        //        //string webPFileName = Path.GetFileNameWithoutExtension(product.product_Image.ImageFile.FileName) + ".webp";
+        //        //string normalImagePath = Path.Combine(wwwRootPath,imagePath, fileName);
+        //        //string webPImagePath = Path.Combine(wwwRootPath, imagePath, webPFileName);
+
+        //        //using (var webPimageFileStream = new FileStream(webPFileName, FileMode.Create))
+        //        //{
+        //        //    using (ImageFactory imageFactory = new ImageFactory(preserveExifData: false)
+        //        //    {
+        //        //        imageFactory.Load(product.product_Image.ImageFile.FileName.OpenReadStream())
+        //        //        .Format(new webPFortma())
+        //        //        .Quality(100)
+        //        //        .Save(webPFileName);
+        //        //    }
+        //        //}
+
+
+        //        using (MagickImage image = new MagickImage(path))
+        //        {
+        //            image.Format = image.Format; // Get or Set the format of the image.
+        //            image.Resize(40, 40); // fit the image into the requested width and height. 
+        //            image.Quality = 100; // This is the Compression level.
+        //            image.Write(path);
+        //        }
+
+        //        //using (MagickImage image = new MagickImage(@"YourImage.jpg"))
+        //        //{
+        //        //    image.Format = image.Format; // Get or Set the format of the image.
+        //        //    image.Resize(40, 40); // fit the image into the requested width and height. 
+        //        //    image.Quality = 10; // This is the Compression level.
+        //        //    image.Write("YourFinalImage.jpg");
+        //        //}
+
+
+        //        //insert record
+
+        //        //migajace
+        //        //przenika
+
+
+
+        //        _context.Add(product.product_Image);
+        //        await _context.SaveChangesAsync();
+
+        //        return RedirectToAction("Add", "Product", new { Product = product });
+        //        //return RedirectToAction(nameof(Index));
+        //    }
+        //    return RedirectToAction("Add", "Product", new { Product = product });
+        //    //return View(product.product_Image);
+        //}
 
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
         // GET: Image/Edit/5
@@ -254,6 +300,7 @@ namespace partner_aluro.Controllers
                             imageModel = _context.Images.Where(x => x.ImageId == imageModel.ImageId).FirstOrDefault();
                             _imageService.Update(imageModel);
                         }
+                        return Redirect(returnUrl);
                     }
 
                     _imageService.Update(imageModel);

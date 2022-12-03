@@ -8,12 +8,12 @@ namespace partner_aluro.Services.Interfaces
 
         Task AddAsync(ImageModel imgModel);
 
-        Task<string> CreateImageAddAsync(ImageModel imageModel);
-        Task<string> CreateImageAddAsync(Product product);
+        //Task<string> CreateImageAddAsync(ImageModel imageModel);
+        //Task<string> CreateImageAddAsync(Product product);
 
         Task Edit(int id, ImageModel imageModel);
 
-        Task<string> DeleteFrontImage(Product product);
+        //Task<string> DeleteFrontImage(Product product);
 
         ImageModel Get(string name);
 

@@ -63,10 +63,11 @@ namespace partner_aluro.Models
 
         public string? ImageUrl { get; set; }
 
-        [Display(Name = "Obrazek główny")]
-        [NotMapped]
-        public virtual ImageModel? product_Image { get; set; } = new ImageModel();
-        //public IFormFile? FrontImage { get; set; }
+        //To jest obrazek glowny ktory usuwam
+        //[Display(Name = "Obrazek główny")]
+        //[NotMapped]
+        //public virtual ImageModel? product_Image { get; set; } = new ImageModel();
+        ////public IFormFile? FrontImage { get; set; }
 
         public virtual List<ProductCategory> Kategorie { get; set; } = new List<ProductCategory>();
 
