@@ -294,6 +294,9 @@ namespace partner_aluro.Controllers
             product.Bestseller = true;
             product.ImageUrl = "";
 
+
+
+
             ModelState.Remove("CategoryNavigation");
             ModelState.Remove("CategorySubNavigation");
             ModelState.Remove("product_Images");
@@ -326,6 +329,15 @@ namespace partner_aluro.Controllers
 
 
             await _imageService.UploadFilesAsync(files, product);
+
+
+
+            product.ImageUrl = product.Product_Images.OrderBy(x => x.kolejnosc).FirstOrDefault().ImageName;
+
+            product.Product_Images = product.Product_Images.OrderBy(x => x.kolejnosc).ToList();
+
+            _context.Update(product);
+            _context.SaveChanges();
 
             //UploadNewFilePicture
             //ImageController.Initialize(_webHostEnvironment);
