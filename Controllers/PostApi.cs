@@ -23,7 +23,7 @@ namespace partner_aluro.Controllers
 
             string term = HttpContext.Request.Query["term"].ToString();
             var szukanaNazwa = await _db.Products.Where(x=> x.Ukryty==false).Where(p => p.Name.Contains(term))
-                                            .Select(p=> p.Name).ToListAsync();
+                                            .Select(p=> p.Name).Take(10).ToListAsync();
             
             return Ok(szukanaNazwa);
         }
