@@ -16,6 +16,7 @@
         <ul class="nav nav-tabs">
             <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#dodajprodukty">Dodaj produkty</a></li>
             <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#wiadomosc">Podglad wiadomosci</a></li>
+            <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#ogolne">Ogolne</a></li>
         </ul>
     </div>
     <div class="tab-content">
@@ -58,6 +59,34 @@
                     </div>
                 </div>
             </div>
+        <div class="tab-pane @ViewData["active3"]" id="ogolne">
+            <div class="row">
+                <div class="col">
+                    <form class="needs-validation" asp-action="NewsletterEditOgolne" asp-route-id="@Model.NewsletterID" asp-controller="Newsletter" class="form-horizontal" method="post" enctype="multipart/form-data">
+
+                        <div class="row g-0">
+                            <div class="form-group row">
+                                <label asp-for="@Model.NewsletterID" class="col col-form-label text-end">Newsletter ID</label>
+                                <div class="col">
+                                    <input asp-for="@Model.NewsletterID" class="form-control" aria-required="true" readonly />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label asp-for="@Model.Nazwa" class="col-sm-4 col-form-label text-end">Nazwa Newsletter </label>
+                                <div class="col-sm-8">
+                                    <input asp-for="@Model.Nazwa" class="form-control" aria-required="true" />
+                                    <span asp-validation-for="@Model.Nazwa" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-1">
+                                <button type="submit" class="btn btn-success">Zapisz</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
         <button asp-controller="Newsletter" asp-action="SendEmail" asp-route-id="@Model.NewsletterID">Wyslij</button>
 
     </div>
@@ -113,35 +142,33 @@
             }
         </script>
 
-                                <script src="~/js/tinymceNewsletterEdit.js"></script>
+        <script src="~/js/tinymceNewsletterEdit.js"></script>
 
-                                <script>
+        <script>
 
-                                    var ile = 0;
+            var ile = 0;
 
-                                    function DodajDoNewsletter2() {
+            function DodajDoNewsletter2() {
 
-                                        var activeEditor = tinyMCE.get('editorNewsletter2');
-                                        var content = activeEditor.getContent();
-                                        //var content1 = `<div><a href="#"><img src="https://localhost:44315/Images/Aluro_logo-x-300_2.png" alt="Aluro_logo-x-300_2.png" width="583" height="290">tekst</a> ${ProduktId},</div>`;
-
-
-                                        //activeEditor.setContent("");
-                                        $.ajax({
-                                            type: "POST",
-                                            url: '@Url.Action("WstawProdukty", "Newsletter")',
-                                            data: { content: content },
-                                            success: function (result) {
-                                                tinymce.activeEditor.execCommand('mceInsertContent', false, result);
-                                                //activeEditor.setContent(result);
-                                            },
-
-                                            error: function (abc) {
-                                                alert(abc.statusText);
-                                            },
-                                        });
-                                    }
-                                </script>
+                var activeEditor = tinyMCE.get('editorNewsletter2');
+                var content = activeEditor.getContent();
+                //var content1 = `<div><a href="#"><img src="https://localhost:44315/Images/Aluro_logo-x-300_2.png" alt="Aluro_logo-x-300_2.png" width="583" height="290">tekst</a> ${ProduktId},</div>`;
 
 
+                //activeEditor.setContent("");
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("WstawProdukty", "Newsletter")',
+                    data: { content: content },
+                    success: function (result) {
+                        tinymce.activeEditor.execCommand('mceInsertContent', false, result);
+                        //activeEditor.setContent(result);
+                    },
+
+                    error: function (abc) {
+                        alert(abc.statusText);
+                    },
+                });
+            }
+        </script>
     }

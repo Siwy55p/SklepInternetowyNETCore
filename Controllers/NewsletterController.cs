@@ -53,6 +53,10 @@ namespace partner_aluro.Controllers
             ViewData["kategorie"] = await _context.Category.ToListAsync();
             Newsletter newsletter = new Newsletter();
 
+            ViewData["active1"] = "active";
+            ViewData["active2"] = "";
+            ViewData["active3"] = "";
+
             newsletter.listaEmail = await _context.Users.Where(x => x.Newsletter == true).Select(x => x.Email).ToListAsync();
 
             return View(newsletter);
@@ -61,7 +65,7 @@ namespace partner_aluro.Controllers
         // POST: Newsletter/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> AddAsync(Newsletter newsletter)
+        public async Task<ActionResult> Add(Newsletter newsletter)
         {
 
             ViewData["produkty"] = await _context.Products.ToListAsync();
@@ -87,6 +91,7 @@ namespace partner_aluro.Controllers
 
             ViewData["active1"] = "active";
             ViewData["active2"] = "";
+            ViewData["active3"] = "";
 
             tab1 = "";
 
@@ -127,10 +132,34 @@ namespace partner_aluro.Controllers
 
             ViewData["active1"] = "";
             ViewData["active2"] = "active";
+            ViewData["active3"] = "";
 
             Newsletter newsletter1 = _context.Newsletter.Where(x => x.NewsletterID == newsletter.NewsletterID).FirstOrDefault();
 
             newsletter1.MessagerBody = newsletter.MessagerBody;
+
+            //ViewData["BodyProduct"] = newsletter.MessagerBody;
+
+            _newsletter.Edit(newsletter1);
+
+
+            return View(newsletter1);
+
+        }
+        [HttpPost]
+        public async Task<ActionResult> NewsletterEditOgolne(Newsletter newsletter)
+        {
+            ViewData["produkty"] = await _context.Products.ToListAsync();
+            ViewData["kategorie"] = await _context.Category.ToListAsync();
+
+
+            ViewData["active1"] = "";
+            ViewData["active2"] = "";
+            ViewData["active3"] = "active";
+
+            Newsletter newsletter1 = _context.Newsletter.Where(x => x.NewsletterID == newsletter.NewsletterID).FirstOrDefault();
+
+            newsletter1.Nazwa = newsletter.Nazwa;
 
             //ViewData["BodyProduct"] = newsletter.MessagerBody;
 

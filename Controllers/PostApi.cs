@@ -20,10 +20,19 @@ namespace partner_aluro.Controllers
         [HttpGet("search")]
         public async Task<IActionResult> Search()
         {
+
             string term = HttpContext.Request.Query["term"].ToString();
             var szukanaNazwa = await _db.Products.Where(x=> x.Ukryty==false).Where(p => p.Name.Contains(term))
-                                            .Select(p => p.Name).ToListAsync();
+                                            .Select(p=> p.Name).ToListAsync();
+            
             return Ok(szukanaNazwa);
+        }
+
+        class PInfo
+        {
+            public string Name { get; set; }
+            public string Symbol { get; set; }
+
         }
     }
 }

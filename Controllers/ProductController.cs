@@ -366,7 +366,10 @@ namespace partner_aluro.Controllers
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
-            return View(await _ProductService.GetProductId(id));
+            Product product = await _ProductService.GetProductId(id);
+            product.Product_Images = product.Product_Images.OrderBy(x=>x.kolejnosc).ToList();
+
+            return View(product);
         }
 
         [HttpGet]

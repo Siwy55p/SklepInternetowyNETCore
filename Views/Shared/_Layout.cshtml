@@ -27,43 +27,35 @@
 </head>
 <body>
 
-                @{
-                    @inject LanguageService language
-                }
-                @await Html.PartialAsync("_Header")
-                    <main>
-                        @*<div class="container-lg">*@
-                            <div class="offcanvas offcanvas-end w-5" tabindex="-1" id="offcanvas" data-bs-scroll="true" data-bs-keyboard="false" data-bs-backdrop="false">
-                                <div class="offcanvas-header">
-                                    <h6 class="offcanvas-title d-none d-sm-block">@language.Getkey("Twoje zamówienie")</h6>
-                                    <button type="button" class="btn-close btn btn-success text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                                </div>
-                                <div class="offcanvas-body px-1" id="mydiv">
-                                    @await Component.InvokeAsync("CartStatus")
-                                </div>
-                            </div>
-                           @* <div class="container-fluid">
-                                @RenderBody()
-                            </div>*@
-                       @* </div>*@
-
-                    </main>
+        @{
+            @inject LanguageService language
+        }
+        @await Html.PartialAsync("_Header")
+        <main>
+            @*<div class="container-lg">*@
+                <div class="offcanvas offcanvas-end w-5" tabindex="-1" id="offcanvas" data-bs-scroll="true" data-bs-keyboard="false" data-bs-backdrop="false">
+                    <div class="offcanvas-header">
+                        <h6 class="offcanvas-title d-none d-sm-block">@language.Getkey("Twoje zamówienie")</h6>
+                        <button type="button" class="btn-close btn btn-success text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body px-1" id="mydiv">
+                        @await Component.InvokeAsync("CartStatus")
+                    </div>
+                </div>
+        </main>
 
 
-                        <div class="row justify-content-center align-items-center">
-                            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-
-                                @RenderBody()
-                            </div>
-                        </div>
+        <div class="row justify-content-center align-items-center">
+            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                @RenderBody()
+            </div>
+        </div>
 
     <!-- Footer -->
     <footer class="text-center text-lg-start bg-light text-muted">
         <partial name="_CookieConsentPartial" />
         @await Html.PartialAsync("_Footer")
-@*
-        @Html.Partial("_Footer")
-*@
+
     </footer>
     <!-- Footer -->
 
@@ -71,17 +63,7 @@
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js" integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-
-
     @await RenderSectionAsync("Scripts", required: false)
-
-@*     SZUKANIE SCRIPTS
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>*@
-
-
-@*    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>*@
-    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>*@
 
     <script type="text/javascript">
         $(document).ready(function () {
@@ -91,9 +73,6 @@
             });
         });
     </script>
-
-
-
     <script>
         $(function () {
             $("#szukanaNazwa").autocomplete(
@@ -153,8 +132,6 @@
 
         })
     </script>
-
-
     @*BOOTSTRAP*@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script> 
     @*BOOTSTRAP*@

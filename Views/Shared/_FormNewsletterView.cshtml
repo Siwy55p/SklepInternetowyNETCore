@@ -1,7 +1,6 @@
 ﻿@model partner_aluro.Models.Newsletter
 
 <div class="form-group row">
-
     <label asp-for="@Model.NewsletterID" class="col col-form-label text-end">Newsletter ID</label>
     <div class="col">
         <input asp-for="@Model.NewsletterID" class="form-control" aria-required="true" readonly />
@@ -24,21 +23,5 @@
         <div class="form-group row p-2">
             <textarea asp-for="contentEmail" id="editorNewsletter2"> </textarea>
         </div>
-       @*  <div class="form-group">
-            <label asp-for="@Model.listaEmail" class="control-label">Lista emaili ktorzy akceptuja newsletter</label>
-            <div class="row">
-                <div class="col">
-                    Email:
-                </div>
-            </div>
-            @foreach (string email in Model.listaEmail)
-            {
-                <div class="row">
-                    <div class="col">
-                        @email
-                    </div>
-                </div>
-            }
-        </div>*@
     </div>
 </div>
