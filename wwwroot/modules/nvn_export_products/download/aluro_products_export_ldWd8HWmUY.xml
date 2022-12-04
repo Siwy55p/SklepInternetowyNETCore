@@ -2644,7 +2644,7 @@ Wymiary podane w przybliżeniu, w zależności od rozłożenia liści.]]></opis>
   <product>
     <symbol><![CDATA[A01508]]></symbol>
     <product_name><![CDATA[Roślina sztuczna - palma w doniczce_Aluro]]></product_name>
-    <images><![CDATA[http:\\partneralluro.hostingasp.pl\images\produkty\A01508\\Front_A01508.jpg]]></images>
+    <images><![CDATA[http:\\partneralluro.hostingasp.pl\images\produkty\A01508\\Front_A01508.jpg, http:\\partneralluro.hostingasp.pl\images\produkty\A01508\\A01508_0_19_25.jpg, http:\\partneralluro.hostingasp.pl\images\produkty\A01508\\A01508_1_19_32.jpg, http:\\partneralluro.hostingasp.pl\images\produkty\A01508\\A01508_2_19_32.jpg, http:\\partneralluro.hostingasp.pl\images\produkty\A01508\\A01508_3_19_32.jpg, http:\\partneralluro.hostingasp.pl\images\produkty\A01508\\A01508_5_19_32.jpg]]></images>
     <stock><![CDATA[8]]></stock>
     <cena_detaliczna><![CDATA[275.000000]]></cena_detaliczna>
     <EAN13><![CDATA[5907608354960]]></EAN13>
@@ -3664,20 +3664,6 @@ Wymiary podane w przybliżeniu, w zależności od rozłożenia liści.]]></opis>
     <szerokosc><![CDATA[0.000000]]></szerokosc>
     <wysokosc><![CDATA[185.000000]]></wysokosc>
     <glebokosc><![CDATA[0.000000]]></glebokosc>
-    <waga_z_opakowaniem><![CDATA[0.000000]]></waga_z_opakowaniem>
-  </product>
-  <product>
-    <symbol><![CDATA[A01620]]></symbol>
-    <product_name><![CDATA[Osłonka, donica GOLDI - XL_Aluro]]></product_name>
-    <images><![CDATA[http:\\partneralluro.hostingasp.pl\images\produkty\A01620\\Front_A01620.jpg, http:\\partneralluro.hostingasp.pl\images\produkty\A01620\\A01620_1_.jpg, http:\\partneralluro.hostingasp.pl\images\produkty\A01620\\A01620_2_.jpg, http:\\partneralluro.hostingasp.pl\images\produkty\A01620\\A01620_3_.jpg, http:\\partneralluro.hostingasp.pl\images\produkty\A01620\\A01620_4_.jpg]]></images>
-    <stock><![CDATA[8]]></stock>
-    <cena_detaliczna><![CDATA[230.000000]]></cena_detaliczna>
-    <EAN13><![CDATA[5907608356599]]></EAN13>
-    <opis><![CDATA[]]></opis>
-    <kategoria_domyslna><![CDATA[Donice i Osłonki]]></kategoria_domyslna>
-    <szerokosc><![CDATA[22.000000]]></szerokosc>
-    <wysokosc><![CDATA[30.000000]]></wysokosc>
-    <glebokosc><![CDATA[22.000000]]></glebokosc>
     <waga_z_opakowaniem><![CDATA[0.000000]]></waga_z_opakowaniem>
   </product>
 </export_products>

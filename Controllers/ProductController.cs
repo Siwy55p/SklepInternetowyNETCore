@@ -128,6 +128,8 @@ namespace partner_aluro.Controllers
 
             product.ImageUrl = product.Product_Images.OrderBy(x=>x.kolejnosc).FirstOrDefault().ImageName;
 
+            product.Product_Images = product.Product_Images.OrderBy(x => x.kolejnosc).ToList();
+
 
             ModelState.Remove("product_Image.path");
             ModelState.Remove("product_Image.ImageName");

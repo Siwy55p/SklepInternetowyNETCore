@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.WebUtilities;
 using System.Text;
 using System.Text.Encodings.Web;
 using partner_aluro.Data;
+using static DeepL.Model.Usage;
 
 namespace partner_aluro.Controllers
 {
@@ -174,6 +175,67 @@ namespace partner_aluro.Controllers
             user.Adress1rozliczeniowy = data.User.Adress1rozliczeniowy;
             user.Adress2dostawy = data.User.Adress2dostawy;
             _unitOfWork.User.UpdateUser(user);
+
+            for (int i = 0; i < rolesToAdd.Count(); i++)
+            {
+                if (rolesToAdd[i] == "Klient")
+                {
+                    //powiadomienie ze konto zostalo aktywowane wyslanie emaila do uzytkownika
+                    var code = await _signInManager.UserManager.GeneratePasswordResetTokenAsync(user);
+                    code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                    var callbackUrl = Url.Page(
+                        "/Account/ResetPassword",
+                        pageHandler: null,
+                        values: new { area = "Identity", code },
+                        protocol: Request.Scheme);
+
+                    var callbackUrlHome = Url.Page(
+                        "/Account/Login",
+                        pageHandler: null,
+                        values: new { area = "Identity", code },
+                        protocol: Request.Scheme);
+
+                    EmailDto newClint = new EmailDto()
+                    {
+                        Subject = "Twoje konto zostało aktywowane.",
+                        To = user.Email,
+                        Body = $"<p>Twoje konto zostało aktywnowane. Możesz zalogować się do portalu <a href='{HtmlEncoder.Default.Encode(callbackUrlHome)}'>klikając tutaj</a> , lub możesz zreserować swoje hasło <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>klikając tutaj</a>.</p>"
+                    };
+
+                    _emailService.SendEmailAsync(newClint); //Bardzo specjalnie tak jest jak jest zrobione. Musi tak zostać.
+                }
+            }
+
+            for (int i = 0; i < rolesToDelete.Count(); i++)
+            {
+                if (rolesToDelete[i] == "Klient")
+                {
+                    //powiadomienie ze konto uzytkownika zostalo zablokowane wiec wysylam email do uzytkownika z informacja o tym
+                    var code = await _signInManager.UserManager.GeneratePasswordResetTokenAsync(user);
+                    code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                    var callbackUrl = Url.Page(
+                        "/Account/ResetPassword",
+                        pageHandler: null,
+                        values: new { area = "Identity", code },
+                        protocol: Request.Scheme);
+
+                    var callbackUrlHome = Url.Page(
+                        "/Account/Login",
+                        pageHandler: null,
+                        values: new { area = "Identity", code },
+                        protocol: Request.Scheme);
+
+                    EmailDto newClint = new EmailDto()
+                    {
+                        Subject = "Twoje konto zostało zablokowane.",
+                        To = user.Email,
+                        Body = $"<p>Twoje konto zostało zablokowane.</p>"
+                    };
+
+                    _emailService.SendEmailAsync(newClint); //Bardzo specjalnie tak jest jak jest zrobione. Musi tak zostać.
+                }
+            }
+
             //_userRepository.UpdateUser(user);
 
             //var Adres1roz = _unitOfWorkAdress1Rozliczeniowy.adress1Rozliczeniowy.Get(data.User.Id);
