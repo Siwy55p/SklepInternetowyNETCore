@@ -35,7 +35,7 @@
                                         </button>
                                     </div>
                             </div>
-                            <button asp-controller="Newsletter" asp-action="SendEmail">Wyslij</button>
+                            
                         </div>
                     </div>
                 </form>
@@ -58,6 +58,7 @@
                     </div>
                 </div>
             </div>
+        <button asp-controller="Newsletter" asp-action="SendEmail" asp-route-id="@Model.NewsletterID">Wyslij</button>
 
     </div>
 

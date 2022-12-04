@@ -21,11 +21,14 @@ namespace partner_aluro.Controllers
         //private readonly IEmailSender _emailSender;
         private readonly IEmailService _emailService;
 
-        public RegisterController(RegonService regonService, IEmailService emailService, UserManager<ApplicationUser> userManager)
+        private readonly ApplicationDbContext _context;
+
+        public RegisterController(RegonService regonService, IEmailService emailService, UserManager<ApplicationUser> userManager, ApplicationDbContext context)
         {
             RegonService = regonService;
             _userManager = userManager;
             _emailService = emailService;
+            _context = context; 
         }
 
         public IActionResult Index()
@@ -57,6 +60,21 @@ namespace partner_aluro.Controllers
 
 
             return Redirect(Request.Headers["Referer"].ToString());
+        }
+
+        //https://localhost:44315/Register/unsubscribe
+
+        //https://localhost:44315/Register/unsubscribe/?Email=marcin@aluro.pl
+        public async Task<IActionResult> Unsubscribe(string Email)
+        {
+            //var user = await _userManager.FindByEmailAsync(Email);
+
+            var user = _context.Users.Where(x => x.UserName == Email).FirstOrDefault();
+            user.Newsletter = false;
+            _context.Users.Update(user);
+            _context.SaveChanges();
+
+            return View();
         }
 
         public async Task<IActionResult> ResetPassSend(string Email)
