@@ -21,8 +21,7 @@
     </div>
     <div class="tab-content">
            <div class="tab-pane @ViewData["active1"]" id="dodajprodukty">
-                <form class="needs-validation" asp-action="Edit" asp-route-id="@Model.NewsletterID" asp-controller="Newsletter" class="form-horizontal" method="post" enctype="multipart/form-data">
-         
+
                     <div class="row">
                         <div class="col">
                             <div class="row g-0">
@@ -30,15 +29,18 @@
                                         @Html.ValidationSummary()
                                         @await Html.PartialAsync("_FormNewsletter")
                                     </div>
-                                    <div class="col-md-1">
-                                        <button type ="submit">
-                                            Następny etap
-                                        </button>
-                                    </div>
                             </div>
                             
                         </div>
+
                     </div>
+                                     <form class="needs-validation" asp-action="Edit" asp-route-id="@Model.NewsletterID" asp-controller="Newsletter" class="form-horizontal" method="post" enctype="multipart/form-data">
+
+                <button type="submit">
+                    Następny etap
+                </button>
+
+
                 </form>
             </div>
             <div class="tab-pane @ViewData["active2"]" id="wiadomosc">
@@ -65,19 +67,8 @@
                     <form class="needs-validation" asp-action="NewsletterEditOgolne" asp-route-id="@Model.NewsletterID" asp-controller="Newsletter" class="form-horizontal" method="post" enctype="multipart/form-data">
 
                         <div class="row g-0">
-                            <div class="form-group row">
-                                <label asp-for="@Model.NewsletterID" class="col col-form-label text-end">Newsletter ID</label>
-                                <div class="col">
-                                    <input asp-for="@Model.NewsletterID" class="form-control" aria-required="true" readonly />
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label asp-for="@Model.Nazwa" class="col-sm-4 col-form-label text-end">Nazwa Newsletter </label>
-                                <div class="col-sm-8">
-                                    <input asp-for="@Model.Nazwa" class="form-control" aria-required="true" />
-                                    <span asp-validation-for="@Model.Nazwa" class="text-danger"></span>
-                                </div>
-                            </div>
+                                    @Html.ValidationSummary()
+                                    @await Html.PartialAsync("_FormNewsletterOgolne")
 
                             <div class="col-md-1">
                                 <button type="submit" class="btn btn-success">Zapisz</button>
@@ -94,6 +85,25 @@
 
 
     @section Scripts {
+
+     <script>
+        function SelectCategory2(CategoryId, newsleterId) {
+
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("SelectCategory", "Newsletter")',
+                data: { id: newsleterId, CatId: CategoryId },
+                success: function () {
+                    $("#mydiv").load(location.href + " #mydiv");
+                },
+
+                error: function (abc) {
+                    alert(abc.statusText);
+                },
+            });
+        }
+    </script>
+
         <script>
         tinymce.init({
             selector: '#editor2',  // change this value according to your HTML

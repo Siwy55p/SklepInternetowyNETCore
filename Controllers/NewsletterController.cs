@@ -80,10 +80,19 @@ namespace partner_aluro.Controllers
 
         }
 
+        [HttpGet]
         // GET: Newsletter/Edit/5
-        public async Task<ActionResult> Edit(int id)
+        public async Task<ActionResult> Edit(int id, int? CatId = null)
         {
-            ViewData["produkty"] = await _context.Products.ToListAsync();
+            if (CatId != null)
+            {
+                ViewData["produkty"] = await _context.Products.Where(x => x.CategoryId == CatId).ToListAsync();
+            }
+            else
+            {
+                ViewData["produkty"] = await _context.Products.ToListAsync();
+            }
+
             ViewData["kategorie"] = await _context.Category.ToListAsync();
 
             Newsletter newsletter = await _newsletter.GetAsync(id);
@@ -124,14 +133,22 @@ namespace partner_aluro.Controllers
 
         // POST: Newsletter/Edit/5
         [HttpPost]
-        public async Task<ActionResult> Edit(Newsletter newsletter)
+        public async Task<ActionResult> Edit(Newsletter newsletter, int? CategoryId = null ) //ten sam widok 
         {
-            ViewData["produkty"] = await _context.Products.ToListAsync();
+            if (CategoryId != null)
+            {
+                ViewData["produkty"] = await _context.Products.Where(x => x.CategoryId == CategoryId).ToListAsync();
+            }else
+            {
+                ViewData["produkty"] = await _context.Products.ToListAsync();
+            }
+
+
             ViewData["kategorie"] = await _context.Category.ToListAsync();
 
 
-            ViewData["active1"] = "";
-            ViewData["active2"] = "active";
+            ViewData["active1"] = "active";
+            ViewData["active2"] = "";
             ViewData["active3"] = "";
 
             Newsletter newsletter1 = _context.Newsletter.Where(x => x.NewsletterID == newsletter.NewsletterID).FirstOrDefault();
@@ -147,12 +164,12 @@ namespace partner_aluro.Controllers
 
         }
         [HttpPost]
-        public async Task<ActionResult> NewsletterEditOgolne(Newsletter newsletter)
+        public async Task<ActionResult> NewsletterEditOgolne(Newsletter newsletter) //ten sam widok 
         {
             ViewData["produkty"] = await _context.Products.ToListAsync();
             ViewData["kategorie"] = await _context.Category.ToListAsync();
 
-
+            
             ViewData["active1"] = "";
             ViewData["active2"] = "";
             ViewData["active3"] = "active";
@@ -160,6 +177,7 @@ namespace partner_aluro.Controllers
             Newsletter newsletter1 = _context.Newsletter.Where(x => x.NewsletterID == newsletter.NewsletterID).FirstOrDefault();
 
             newsletter1.Nazwa = newsletter.Nazwa;
+            newsletter1.Tytul = newsletter.Tytul;
 
             //ViewData["BodyProduct"] = newsletter.MessagerBody;
 
@@ -194,6 +212,29 @@ namespace partner_aluro.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+
+        [HttpGet]
+        public void SelectCategory(int id, int CatId)
+        {
+            List<Product> produkty = _context.Products.Where(x => x.CategoryId == CatId).ToList();
+            ViewData["produkty"] = produkty;
+            ViewData["kategorie"] = _context.Category.ToListAsync();
+
+
+            ViewData["active1"] = "active";
+            ViewData["active2"] = "";
+            ViewData["active3"] = "";
+
+            //return RedirectToAction(nameof(Edit), new { newsletterId, id });
+
+            //return View(newsletterDB);
+
+            //var test = _context.Products.Where(x => x.CategoryId == id).ToList();
+
+        }
+
+
         // GET: Newsletter/Delete/5
         public ActionResult Delete(int id)
         {
@@ -236,7 +277,7 @@ namespace partner_aluro.Controllers
                 {
                     Body = source,
                     To = newsletter.listaEmail[i].ToString(),
-                    Subject = "Nowa kolekcja."
+                    Subject = newsletter.Tytul
                 };
                 await _emailService.SendEmailAsync(emailDto);
             }

@@ -32,7 +32,6 @@
                         <thead>
                             <tr>
                                 <th>Nazwa</th>
-                                <th>Nazwa</th>
                                 <th>Akcje</th>
                             </tr>
                         </thead>
@@ -41,9 +40,9 @@
                             {
                                 <tr>
                                     <td>@item.Name</td>
-                                    <td>@item.Name</td>
                                     <td>
-                                        przycisk
+                                      @*  <a class="btn btn-success" asp-controller="Newsletter" asp-action="Edit" asp-route-id="@Model.NewsletterID" asp-route-CategoryId="@item.CategoryId">Wybierz</a>*@
+                                        <button class="btn btn-success" onclick="SelectCategory2(@item.CategoryId, @Model.NewsletterID)" role="button">Wybierz</button>
                                     </td>
                                 </tr>
                             }
@@ -69,7 +68,7 @@
                             </tr>
                         </thead>
                             <tbody>
-                                    @foreach (var item in ViewData["produkty"] as List<partner_aluro.Models.Product>)
+                                @foreach (var item in ViewData["produkty"] as List<partner_aluro.Models.Product>)
                                 {
                                 <tr>
                                     <td><img src="~/images/produkty/@item.Symbol/@item.ImageUrl" alt="@item.Name" style="width:30px;height:30px;"></td>

@@ -62,11 +62,11 @@
         <div class="tab-pane @ViewData["active3"]" id="ogolne">
             <div class="row">
                 <div class="col">
-                     <form class="needs-validation" asp-action="NewsletterEditOgolne" asp-route-id="@Model.NewsletterID" asp-controller="Newsletter" class="form-horizontal" method="post" enctype="multipart/form-data">
+                    <form class="needs-validation" asp-action="NewsletterEditOgolne" asp-route-id="@Model.NewsletterID" asp-controller="Newsletter" class="form-horizontal" method="post" enctype="multipart/form-data">
 
                         <div class="row g-0">
-                                    @Html.ValidationSummary()
-                                    @await Html.PartialAsync("_FormNewsletterOgolne")
+                            @Html.ValidationSummary()
+                            @await Html.PartialAsync("_FormNewsletterOgolne")
 
                             <div class="col-md-1">
                                 <button type="submit" class="btn btn-success">Zapisz</button>
@@ -83,6 +83,28 @@
 
 
     @section Scripts {
+
+    <script>
+        function SelectCategory2(CategoryId) {
+
+            alert(CategoryId);
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("SelectCategory", "Newsletter")',
+                data: { id: CategoryId },
+                success: function () {
+                    alert(CategoryId);
+                    //$("#mydiv").load(location.href + " #mydiv");
+                },
+
+                error: function (abc) {
+                    alert(abc.statusText);
+                },
+            });
+        }
+    </script>
+
     <script>
         tinymce.init({
             selector: '#editor2',  // change this value according to your HTML
