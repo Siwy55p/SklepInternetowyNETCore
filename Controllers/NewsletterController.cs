@@ -82,7 +82,24 @@ namespace partner_aluro.Controllers
 
         [HttpGet]
         // GET: Newsletter/Edit/5
-        public async Task<ActionResult> Edit(int id, int? CatId = null)
+        public ActionResult Edit2(int? CatId = null) //ten sam widok
+        {
+            if (CatId != null)
+            {
+                ViewData["produkty"] =  _context.Products.Where(x => x.CategoryId == CatId).ToList();
+            }
+            else
+            {
+                ViewData["produkty"] =  _context.Products.ToList();
+            }
+
+            return View();
+
+        }
+
+        [HttpGet]
+        // GET: Newsletter/Edit/5
+        public async Task<ActionResult> Edit(int id, int? CatId = null) //ten sam widok
         {
             if (CatId != null)
             {
@@ -133,15 +150,9 @@ namespace partner_aluro.Controllers
 
         // POST: Newsletter/Edit/5
         [HttpPost]
-        public async Task<ActionResult> Edit(Newsletter newsletter, int? CategoryId = null ) //ten sam widok 
+        public async Task<ActionResult> Edit(Newsletter newsletter ) //ten sam widok 
         {
-            if (CategoryId != null)
-            {
-                ViewData["produkty"] = await _context.Products.Where(x => x.CategoryId == CategoryId).ToListAsync();
-            }else
-            {
-                ViewData["produkty"] = await _context.Products.ToListAsync();
-            }
+            ViewData["produkty"] = await _context.Products.ToListAsync();
 
 
             ViewData["kategorie"] = await _context.Category.ToListAsync();
@@ -212,27 +223,35 @@ namespace partner_aluro.Controllers
 
             return RedirectToAction(nameof(Index));
         }
-
-
         [HttpGet]
-        public void SelectCategory(int id, int CatId)
+        public IActionResult SelectCategory(int id, int CatId)
         {
-            List<Product> produkty = _context.Products.Where(x => x.CategoryId == CatId).ToList();
-            ViewData["produkty"] = produkty;
-            ViewData["kategorie"] = _context.Category.ToListAsync();
-
-
-            ViewData["active1"] = "active";
-            ViewData["active2"] = "";
-            ViewData["active3"] = "";
-
-            //return RedirectToAction(nameof(Edit), new { newsletterId, id });
-
-            //return View(newsletterDB);
-
-            //var test = _context.Products.Where(x => x.CategoryId == id).ToList();
-
+            var subCategories = _context.Products.Where(x => x.CategoryId == CatId).ToList();
+            return Ok(subCategories);
         }
+
+        //[HttpGet]
+        //public int SelectCategory(int id, int CatId)
+        //{
+        //    List<Product> produkty = _context.Products.Where(x => x.CategoryId == CatId).ToList();
+        //    ViewData["produkty"] = produkty;
+        //    ViewData["kategorie"] = _context.Category.ToListAsync();
+
+
+
+        //    ViewData["active1"] = "active";
+        //    ViewData["active2"] = "";
+        //    ViewData["active3"] = "";
+
+        //    return 10;
+
+        //    //return RedirectToAction(nameof(Edit), new { newsletterId, id });
+
+        //    //return View(newsletterDB);
+
+        //    //var test = _context.Products.Where(x => x.CategoryId == id).ToList();
+
+        //}
 
 
         // GET: Newsletter/Delete/5
