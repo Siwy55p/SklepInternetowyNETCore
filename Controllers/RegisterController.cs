@@ -21,11 +21,14 @@ namespace partner_aluro.Controllers
         //private readonly IEmailSender _emailSender;
         private readonly IEmailService _emailService;
 
-        public RegisterController(RegonService regonService, IEmailService emailService, UserManager<ApplicationUser> userManager)
+        private readonly ApplicationDbContext _context;
+
+        public RegisterController(RegonService regonService, IEmailService emailService, UserManager<ApplicationUser> userManager, ApplicationDbContext context)
         {
             RegonService = regonService;
             _userManager = userManager;
             _emailService = emailService;
+            _context = context; 
         }
 
         public IActionResult Index()
@@ -59,6 +62,26 @@ namespace partner_aluro.Controllers
             return Redirect(Request.Headers["Referer"].ToString());
         }
 
+        //https://localhost:44315/Register/unsubscribe
+
+        //https://localhost:44315/Register/unsubscribe/?Email=marcin@aluro.pl
+        public async Task<IActionResult> Unsubscribe(string Email)
+        {
+            //var user = await _userManager.FindByEmailAsync(Email);
+
+            var user = _context.Users.Where(x => x.UserName == Email).FirstOrDefault();
+            user.Newsletter = false;
+            _context.Users.Update(user);
+            _context.SaveChanges();
+
+            return View();
+        }
+
+        public IActionResult Privacy()
+        {
+            return View();
+        }
+
         public async Task<IActionResult> ResetPassSend(string Email)
         {
             if (ModelState.IsValid)
@@ -87,9 +110,7 @@ namespace partner_aluro.Controllers
                 {
                     Subject = "Reset hasła",
                     To = Email,
-                    Body = $@"<div>
-<p>Proszę zresetuj twoje hasło: <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'> naciskając tutaj.</a>.<p>
-<p>Dziękujemy Zespół Aluro.</p> </div>"
+                    Body = $"<table style=\"background-color: #ececec; font-family: Arial, sans-serif; width: 100%;\">\r\n<tbody>\r\n<tr>\r\n<td>\r\n<table class=\"newsletter-pro-content\" style=\"margin: 1% auto; width: 646px; background-color: rgb(255, 255, 255); height: 549.25px;\" align=\"center\">\r\n<tbody>\r\n<tr style=\"height: 549.25px;\">\r\n<td style=\"height: 549.25px;\">\r\n<table style=\"border-collapse: collapse; width: 100%; height: 402.719px;\" border=\"0\">\r\n<tbody>\r\n<tr style=\"height: 181.391px;\">\r\n<td style=\"text-align: center; height: 181.391px;\">\r\n<p><span style=\"font-family: Arial, Helvetica, sans-serif;\"><img src=\"http://www.partner.aluro.pl/img/cms/log-png.png\" alt=\"\" width=\"358\" height=\"211\"></span></p>\r\n</td>\r\n</tr>\r\n<tr style=\"height: 159.953px;\">\r\n<td style=\"text-align: left; height: 159.953px;\" align=\"center\">\r\n<p style=\"text-align: center;\"><strong><span style=\"font-family: Arial, Helvetica, sans-serif;\">Twoje konto zostało aktywnowane.</span></strong></p>\r\n<p style=\"text-align: center;\"><span style=\"font-family: Arial, Helvetica, sans-serif;\">Proszę zresetuj swoje hasło: <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'> klikacjąc tutaj.</a></p>\r\n</td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n</td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n</td>\r\n</tr>\r\n</tbody>\r\n</table>"
                 };
 
                 _emailService.SendEmailAsync(newClint); //Bardzo specjalnie tak jest jak jest zrobione. Musi tak zostać.

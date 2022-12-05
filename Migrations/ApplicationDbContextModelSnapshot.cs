@@ -634,6 +634,9 @@ namespace partner_aluro.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<string>("ImageNameCompress250x250")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("ImageSliderID")
                         .HasColumnType("int");
 
@@ -661,6 +664,9 @@ namespace partner_aluro.Migrations
 
                     b.Property<string>("path")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("pathImageCompress250x250")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ImageId");

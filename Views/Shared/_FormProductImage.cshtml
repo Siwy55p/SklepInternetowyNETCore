@@ -1,15 +1,15 @@
 ﻿@model partner_aluro.Models.Product
 
-        <div class="row">
+@*        <div class="row">
             <div class="col-md-4">
                     <div class="form-group">
                     <input asp-for="product_Image.ImageFile" accept="images/png,images/jpg,images/jpeg" class="custom-file-input" id="FLFrontImage"
-                           onchange="document.getElementById('FrontImagePrv').src = window.URL.createObjectURL(this.files[0])" /> @*/image/png,image/jpg*@
+                           onchange="document.getElementById('FrontImagePrv').src = window.URL.createObjectURL(this.files[0])" /> @*/image/png,image/jpg
                         <span asp-validation-for="product_Image.ImageFile" class="text-danger"></span>
                     </div>
 
             </div>
-        </div>
+        </div>*@
 
 
         <div class="form-group border">
@@ -26,6 +26,9 @@
                 </div>
 
             </div>
+        </div>
+
+        <div class="row" id="image_preview">
         </div>
 
         @if (Model.Product_Images != null)
@@ -71,7 +74,4 @@
                 </div>
             
         }
-
-        <div class="row" id="image_preview">
-        </div> 
 

@@ -1,5 +1,4 @@
-﻿
-@model partner_aluro.Models.Newsletter
+﻿@model partner_aluro.Models.Newsletter
 
 @{
     ViewData["Title"] = "Dodaj Newsletter";
@@ -7,28 +6,40 @@
 }
 @section LinkStyleHead
     {
-    <link href="~/dashboard/datatables/datatables.min.css" rel="stylesheet" />
+    @*<link href="~/dashboard/datatables/datatables.min.css" rel="stylesheet" />*@
+    <link href="~/css/newsletter/newsletter.css" rel="stylesheet" />
     <script src="~/js/tinymce/tinymce.min.js"></script>
     }
 
-<form class="needs-validation" asp-action="Add" asp-route-id="@Model.NewsletterID" asp-controller="Newsletter" class="form-horizontal" method="post" enctype="multipart/form-data">
-    
-    <div class="row g-0">
-        <div class="col-md-6 border-end">
-            @Html.ValidationSummary()
-            @await Html.PartialAsync("_FormNewsletter")
-        </div>
-        <div class="col-md-6">
-            <button type="submit" class="btn btn-success">Dodaj Newsletter</button> 
-        </div>
-            <div class="col-md-6"> <button id="btnBack" runat="server" text="Back" class="btn btn-primary" onclick="JavaScript: window.history.back(1); return false;">Powrót</button>
-            </div>
+    <div class="row">
+        <div class="col">
+            <form class="needs-validation" asp-action="Add" asp-route-id="@Model.NewsletterID" asp-controller="Newsletter" class="form-horizontal" method="post" enctype="multipart/form-data">
 
+                <div class="row g-0">
+                    <div class="form-group row">
+                        <label asp-for="@Model.NewsletterID" class="col col-form-label text-end">Newsletter ID</label>
+                        <div class="col">
+                            <input asp-for="@Model.NewsletterID" class="form-control" aria-required="true" readonly />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label asp-for="@Model.Nazwa" class="col-sm-4 col-form-label text-end">Nazwa Newsletter </label>
+                        <div class="col-sm-8">
+                            <input asp-for="@Model.Nazwa" class="form-control" aria-required="true" />
+                            <span asp-validation-for="@Model.Nazwa" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-1">
+                        <button type="submit" class="btn btn-success">Dodaj</button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
-</form>
 
-@section Scripts {
 
-    <script src="~/js/tinymcenewsletter.js"></script>
 
-}
+    @section Scripts {
+    
+    }

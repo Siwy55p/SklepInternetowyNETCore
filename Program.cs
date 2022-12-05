@@ -90,6 +90,15 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 
+
+////Accept cookie
+//builder.Services.Configure<CookiePolicyOptions>(options =>
+//{
+//    options.CheckConsentNeeded = context => true;
+//    options.MinimumSameSitePolicy = SameSiteMode.None;
+//});
+
+
 //LANGUAGE
 
 builder.Services.AddSingleton<LanguageService>();
@@ -101,14 +110,15 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
 {
     var supportedCultures = new List<CultureInfo>
     {
-        new CultureInfo("pl"),
+        new CultureInfo("pl-PL"),
         new CultureInfo("en-US"),
         new CultureInfo("de-DE"),
     };
-    options.DefaultRequestCulture = new RequestCulture(culture: "pl", uiCulture: "pl-PL");
+    options.DefaultRequestCulture = new RequestCulture(culture: "pl-PL", uiCulture: "pl-PL");
     options.SupportedCultures = supportedCultures;
     options.SupportedUICultures = supportedCultures;
-    options.RequestCultureProviders.Insert(0, new QueryStringRequestCultureProvider());
+    //options.RequestCultureProviders.Insert(0, new QueryStringRequestCultureProvider());
+    options.RequestCultureProviders = new[] { new CookieRequestCultureProvider() };
 });
 builder.Services.AddMvc()
     .AddViewLocalization()
@@ -162,6 +172,8 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+//app.UseCookiePolicy();
+
 app.UseAuthentication();
 
 app.UseAuthorization();
@@ -190,7 +202,7 @@ app.MapControllerRoute(
 
 
 
-app.UseResponseCaching(); //2. dodatkowo do lwykorzystawiania cache
+//app.UseResponseCaching(); //2. dodatkowo do lwykorzystawiania cache
 
 //app.Use(async (context, next) =>
 //{
@@ -198,7 +210,7 @@ app.UseResponseCaching(); //2. dodatkowo do lwykorzystawiania cache
 //    new Microsoft.Net.Http.Headers.CacheControlHeaderValue()
 //    {
 //        Public = true,
-//        MaxAge = TimeSpan.FromSeconds(60)
+//        MaxAge = TimeSpan.FromSeconds(3600)
 //    };
 //    context.Response.Headers[Microsoft.Net.Http.Headers.HeaderNames.Vary] = new string[] { "Accept-Encoding" };
 //    await next();

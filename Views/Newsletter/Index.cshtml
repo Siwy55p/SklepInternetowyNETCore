@@ -22,8 +22,6 @@
                                 <th>Id</th>
                                 <th>Zaznacz</th>
                                 <th>Nazwa</th>
-                                <th>Emaile</th>
-                                <th>Wiadomosc</th>
                                 <th>Akcje</th>
                             </tr>
                         </thead>
@@ -34,9 +32,6 @@
                                     <td>@newsletter.NewsletterID</td>
                                     <td><input id="takenBefore" type="checkbox" value="@newsletter.NewsletterID" data-toggle="toggle"></td>
                                     <td>@newsletter.Nazwa</td>
-                                    <td>@newsletter.listaEmail</td>
-
-                                    <td>@newsletter.listaEmail</td>
                                     <td>
                                         <a asp-controller="Newsletter" asp-action="Edit" asp-route-id="@newsletter.NewsletterID">Edytuj</a> |
                                         <a asp-controller="Newsletter" asp-action="Delete" asp-route-id="@newsletter.NewsletterID">Usuń</a> |
@@ -45,16 +40,6 @@
                                 </tr>
                             }
                         </tbody>
-                        <tfoot>
-                            <tr>
-                                <th scope="col">Id</th>
-                                <th scope="col">Zaznacz</th>
-                                <th scope="col">Nazwa</th>
-                                <th scope="col">Emaile</th>
-                                <th scope="col">Wiadomosc</th>
-                                <th scope="col">Akcje</th>
-                            </tr>
-                        </tfoot>
                     </table>
                 </div>
             </div>

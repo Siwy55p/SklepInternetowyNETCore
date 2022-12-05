@@ -10,6 +10,7 @@ using System.Reflection.Metadata;
 using partner_aluro.Core;
 using partner_aluro.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace partner_aluro.Controllers
 {
@@ -25,6 +26,14 @@ namespace partner_aluro.Controllers
         [HttpPost]
         public IActionResult SendEmailFromConf(EmailViewModel sends)
         {
+            var builder = new BodyBuilder();
+            using (StreamReader SourceReader = System.IO.File.OpenText("\\templates\\template0.html"))
+            {
+                builder.HtmlBody = SourceReader.ReadToEnd();
+            }
+
+
+
             if (sends is null)
             {
                 throw new ArgumentNullException(nameof(sends));
@@ -37,6 +46,8 @@ namespace partner_aluro.Controllers
         [HttpPost]
         public IActionResult SaveChangeMessageToRegister(EmailViewModel MessageToRegister)
         {
+
+
             Constants.RegisterNewAccoutMessageEmailSubject = MessageToRegister.Register.Subject;
             Constants.RegisterNewAccoutMessageEmail = MessageToRegister.Register.Body;
             return RedirectToAction("Index");

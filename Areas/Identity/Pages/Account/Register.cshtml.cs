@@ -178,6 +178,7 @@ namespace partner_aluro.Areas.Identity.Pages.Account
 
             public bool Newsletter { get; set; }
 
+            [CheckBoxRequired(ErrorMessage = "Proszę zaakceptować Politykę prywatności.")]
             public bool PolitykaPrywatnosci { get; set; }
         }
 
@@ -193,7 +194,21 @@ namespace partner_aluro.Areas.Identity.Pages.Account
 
         }
 
-
+        public class CheckBoxRequired : ValidationAttribute
+        {
+            protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+            {
+                //get the entered value
+                var student = (InputModel)validationContext.ObjectInstance;
+                //Check whether the IsAccepted is selected or not.
+                if (student.PolitykaPrywatnosci == false)
+                {
+                    //if not checked the checkbox, return the error message.
+                    return new ValidationResult(ErrorMessage == null ? "Proszę zaznaczyc checkbox" : ErrorMessage);
+                }
+                return ValidationResult.Success;
+            }
+        }
 
         //[HttpPost]
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
@@ -270,7 +285,12 @@ namespace partner_aluro.Areas.Identity.Pages.Account
                 user.IdProfilDzialalnosci = Input.IdProfildzialalnosci;
 
                 user.Newsletter = true;
-                user.PolitykaPrywatnosci = true;
+
+
+                user.PolitykaPrywatnosci = Input.PolitykaPrywatnosci;
+
+
+
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);

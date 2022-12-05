@@ -82,22 +82,22 @@ namespace partner_aluro.Controllers
                 return NotFound();
             }
             
-            string imageName = "Front_" + product.Symbol + ".jpg";
-            ImageModel front = _imageService.Get(imageName);
-            if (front != null)
-            {
-                product.ImageUrl = front.ImageName;
-            }
+            //string imageName = "Front_" + product.Symbol + ".jpg";
+            //ImageModel front = _imageService.Get(imageName);
+            //if (front != null)
+            //{
+            //    product.ImageUrl = front.ImageName;
+            //}
 
-            int i = 0;
-            i++;
+            //int i = 0;
+            //i++;
 
-            if(product.product_Image.ImageFile != null)
-            {
-                product.ImageUrl = await _imageService.DeleteFrontImage(product);
+            //if(product.product_Image.ImageFile != null)
+            //{
+            //    product.ImageUrl = await _imageService.DeleteFrontImage(product);
 
-                product.ImageUrl = await _imageService.CreateImageAddAsync(product);
-            }
+            //    product.ImageUrl = await _imageService.CreateImageAddAsync(product);
+            //}
 
             var files = HttpContext.Request.Form.Files;
             await _imageService.UploadFilesAsync(files, product);
@@ -117,11 +117,18 @@ namespace partner_aluro.Controllers
                 {
                     if (product.Product_Images[0].fullPath != "" && product.Product_Images[0] != null)
                     {
-                        product.product_Image = product.Product_Images[0];
+                        //product.product_Image = product.Product_Images[0];
                         product.ImageUrl = product.Product_Images[0].ImageName;
                     }
                 }
             }
+
+            //ustaw obrazek glowny ten ktory jest jako pierwszy w tabelce imagePictures
+
+
+            product.ImageUrl = product.Product_Images.OrderBy(x=>x.kolejnosc).FirstOrDefault().ImageName;
+
+            product.Product_Images = product.Product_Images.OrderBy(x => x.kolejnosc).ToList();
 
 
             ModelState.Remove("product_Image.path");
@@ -133,7 +140,7 @@ namespace partner_aluro.Controllers
                 try
                 {
                     _context.Update(product);
-                    await _context.SaveChangesAsync();
+                    _context.SaveChanges();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -287,6 +294,9 @@ namespace partner_aluro.Controllers
             product.Bestseller = true;
             product.ImageUrl = "";
 
+
+
+
             ModelState.Remove("CategoryNavigation");
             ModelState.Remove("CategorySubNavigation");
             ModelState.Remove("product_Images");
@@ -309,9 +319,9 @@ namespace partner_aluro.Controllers
 
             var id = _ProductService.AddProduct(product);//wazne aby przypisac
 
-            product.ImageUrl = await _imageService.CreateImageAddAsync(product);
+            //product.ImageUrl = await _imageService.CreateImageAddAsync(product);
 
-            product.ProductImagesId = product.product_Image.ImageId;
+            //product.ProductImagesId = product.product_Image.ImageId;
 
             //await UploadFile2Async(product);
 
@@ -319,6 +329,15 @@ namespace partner_aluro.Controllers
 
 
             await _imageService.UploadFilesAsync(files, product);
+
+
+
+            product.ImageUrl = product.Product_Images.OrderBy(x => x.kolejnosc).FirstOrDefault().ImageName;
+
+            product.Product_Images = product.Product_Images.OrderBy(x => x.kolejnosc).ToList();
+
+            _context.Update(product);
+            _context.SaveChanges();
 
             //UploadNewFilePicture
             //ImageController.Initialize(_webHostEnvironment);
@@ -361,7 +380,10 @@ namespace partner_aluro.Controllers
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
-            return View(await _ProductService.GetProductId(id));
+            Product product = await _ProductService.GetProductId(id);
+            product.Product_Images = product.Product_Images.OrderBy(x=>x.kolejnosc).ToList();
+
+            return View(product);
         }
 
         [HttpGet]

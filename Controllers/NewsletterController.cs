@@ -5,6 +5,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Build.Execution;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Newtonsoft.Json.Linq;
+using Org.BouncyCastle.Crypto.Macs;
 using partner_aluro.Data;
 using partner_aluro.Models;
 using partner_aluro.Services.Interfaces;
@@ -47,7 +50,12 @@ namespace partner_aluro.Controllers
         public async Task<ActionResult> Add()
         {
             ViewData["produkty"] = await _context.Products.ToListAsync();
+            ViewData["kategorie"] = await _context.Category.ToListAsync();
             Newsletter newsletter = new Newsletter();
+
+            ViewData["active1"] = "active";
+            ViewData["active2"] = "";
+            ViewData["active3"] = "";
 
             newsletter.listaEmail = await _context.Users.Where(x => x.Newsletter == true).Select(x => x.Email).ToListAsync();
 
@@ -57,7 +65,7 @@ namespace partner_aluro.Controllers
         // POST: Newsletter/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> AddAsync(Newsletter newsletter)
+        public async Task<ActionResult> Add(Newsletter newsletter)
         {
 
             ViewData["produkty"] = await _context.Products.ToListAsync();
@@ -79,7 +87,38 @@ namespace partner_aluro.Controllers
             ViewData["kategorie"] = await _context.Category.ToListAsync();
 
             Newsletter newsletter = await _newsletter.GetAsync(id);
-            newsletter.MessagerBody = "";
+
+
+            ViewData["active1"] = "active";
+            ViewData["active2"] = "";
+            ViewData["active3"] = "";
+
+            tab1 = "";
+
+            thead = cthead;
+            tbody = ctbody;
+            tbody2 = ctbody2;
+            tfoot = ctfoot;
+
+            value = "";
+
+            tabelka2 = "" +
+                "<table style=\"padding: 0px; margin-left: auto; margin-right: auto; displey:table;\" >" +
+                    "<thead>\r\n\t" +
+                        "<tr>\r\n\t\t" +
+                            "</tr>\r\n\t" +
+                    "</thead>\r\n\t" +
+                    "<tbody>\r\n\t" +
+                        "<tr>\r\n\t\t" +
+                        "</tr>\r\n\t" +
+                        "<tr>\r\n\t\t" +
+                        "</tr>\r\n\t" +
+                    "</tfoot>\r\n" +
+                "</table>";
+
+
+
+
             return View(newsletter);
         }
 
@@ -89,24 +128,52 @@ namespace partner_aluro.Controllers
         {
             ViewData["produkty"] = await _context.Products.ToListAsync();
             ViewData["kategorie"] = await _context.Category.ToListAsync();
-            
-            Newsletter newsletterDB = await _newsletter.GetAsync(newsletter.NewsletterID);
-            newsletterDB.MessagerBody = newsletter.MessagerBody;
 
-            ViewData["BodyProduct"] = newsletter.MessagerBody;
 
-            _newsletter.Edit(newsletterDB);
+            ViewData["active1"] = "";
+            ViewData["active2"] = "active";
+            ViewData["active3"] = "";
 
-            return RedirectToAction(nameof(Newsletter), newsletterDB);
+            Newsletter newsletter1 = _context.Newsletter.Where(x => x.NewsletterID == newsletter.NewsletterID).FirstOrDefault();
+
+            newsletter1.MessagerBody = newsletter.MessagerBody;
+
+            //ViewData["BodyProduct"] = newsletter.MessagerBody;
+
+            _newsletter.Edit(newsletter1);
+
+
+            return View(newsletter1);
+
+        }
+        [HttpPost]
+        public async Task<ActionResult> NewsletterEditOgolne(Newsletter newsletter)
+        {
+            ViewData["produkty"] = await _context.Products.ToListAsync();
+            ViewData["kategorie"] = await _context.Category.ToListAsync();
+
+
+            ViewData["active1"] = "";
+            ViewData["active2"] = "";
+            ViewData["active3"] = "active";
+
+            Newsletter newsletter1 = _context.Newsletter.Where(x => x.NewsletterID == newsletter.NewsletterID).FirstOrDefault();
+
+            newsletter1.Nazwa = newsletter.Nazwa;
+
+            //ViewData["BodyProduct"] = newsletter.MessagerBody;
+
+            _newsletter.Edit(newsletter1);
+
+
+            return View(newsletter1);
+
         }
 
         [HttpGet]
-        public async Task<ActionResult> Newsletter(Newsletter newsletter)
+        public async Task<ActionResult> Newsletter(int id)
         {
-
-            newsletter.listaEmail = await _context.Users.Where(x => x.Newsletter == true).Select(x => x.Email).ToListAsync();
-            
-
+            Newsletter newsletter = _context.Newsletter.Where(x => x.NewsletterID == id).FirstOrDefault();
 
             return View(newsletter);
         }
@@ -118,7 +185,7 @@ namespace partner_aluro.Controllers
             Newsletter newsletterDB = await _newsletter.GetAsync(newsletter.NewsletterID);
             newsletterDB.contentEmail = newsletter.contentEmail;
 
-
+            newsletterDB.MessagerBody = "";
             _newsletter.Edit(newsletterDB);
 
             ////string content = _context.Newsletter.Where(x => x.NewsletterID == newsletter.NewsletterID).FirstOrDefault().contentEmail;
@@ -135,27 +202,47 @@ namespace partner_aluro.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public static string getBetween(string strSource, string strStart, string strEnd)
+        {
+            if (strSource.Contains(strStart) && strSource.Contains(strEnd))
+            {
+                int Start, End;
+                Start = strSource.IndexOf(strStart, 0) + strStart.Length;
+                End = strSource.IndexOf(strEnd, Start);
+                return strSource.Substring(Start, End - Start);
+            }
+
+            return "";
+        }
+
+        [HttpGet]
         public async Task<ActionResult> SendEmail(int id)
         {
             Newsletter newsletter = await _newsletter.GetAsync(id);
 
-
+            string source = newsletter.contentEmail;
+            //string data = getBetween(source, "[emailstart]", "[emailend]");
 
 
             newsletter.listaEmail = await _context.Users.Where(x => x.Newsletter == true).Select(x => x.Email).ToListAsync();
 
+            //https://localhost:44315/Register/unsubscribe/?Email=marcin@aluro.pl
+            EmailDto emailDto = new EmailDto();
+
             for (int i = 0; i < newsletter.listaEmail.Count(); i++)
             {
-                EmailDto emailDto = new EmailDto()
+                source = source.Replace("[unscribe]", "<a href=\"https://localhost:44315/Register/unsubscribe/?Email=" + newsletter.listaEmail[i].ToString() + "\"> wypisz</a>");
+                emailDto = new EmailDto()
                 {
-                    Body = newsletter.contentEmail,
+                    Body = source,
                     To = newsletter.listaEmail[i].ToString(),
-                    Subject = "Newsletter"
+                    Subject = "Nowa kolekcja."
                 };
                 await _emailService.SendEmailAsync(emailDto);
             }
+            //https://localhost:44315/Register/unsubscribe
 
-            return RedirectToAction(nameof(Index));
+            return View();
         }
 
         public string WstawProdukty(string content)
@@ -201,47 +288,68 @@ namespace partner_aluro.Controllers
                 " ";
 
 
-            string td1 = "<th>  <img src=../../images/produkty/" + produkt.Symbol + "/" + produkt.ImageUrl + " alt = " + produkt.Name + " style='width:200px;'>  </th>\r\n\t";
-            string td2 = "<td>" + produkt.Name + "</td>\r\n\t";
+            string td1 = "<th style=\"margin:0px; padding-left:10px;padding-right:10px; padding-top:0px; padding-bottom:0px; margin: 0px;\" > <div style=\"border:1px solid #b4b4b4;width:200px;height:200px;margin:0px;padding:0px; \"> <img src=../../images/produkty/" + produkt.Symbol + "/" + produkt.ImageUrl + " alt = " + produkt.Name + " style='width:200px;'>  </div></th>\r\n\t";
+            string td2 = "<td style=\"padding-left:10px;padding-right:10px; padding-top:0px; padding-bottom:0px; margin: 0px; text-align: center; \"><div style=\"border:1px solid #b4b4b4;width:200px; height:48px; padding-top: -1px; border-top:0px; margin:0px; background-color: #EBEBEB; \">" + produkt.Name + "</div></td>\r\n\t";
+            string td3 = "<td style=\"padding-left:10px;padding-right:10px; padding-top:0px; padding-bottom:0px; margin: 0px; text-align: center; \"><div style=\"border:1px solid #b4b4b4;width:200px; height:38px; padding-top: -1px; border-top:0px; margin:0px;padding:0px; background-color: #EBEBEB; \">" + produkt.CenaProduktu + "</div></td>\r\n\t";
+
+            thead = thead + td1;
+            tbody = tbody + td2;
+            tbody2 = tbody2 + td3;
+            tfoot = tfoot;
 
 
-                thead = thead + td1;
-                tbody = tbody + td2;
-                //tfoot = tfoot;
-
-
-            string value = thead + tbody + tfoot;
+            value = thead + tbody + tbody2 + tfoot;
             if (ile%3 == 0)
             {
                 thead = cthead;
                 tbody = ctbody;
+                tbody2 = ctbody2;
                 tfoot = ctfoot;
                 tab1 += value;
                 value = "";
             }
 
-            string tabelka = "" +
-                "<table \">\r\n\t" +
+            tabelka2 = "" +
+               "<table style=\"padding: 0px; margin-left: auto; margin-right: auto; displey:table;\" >" +
                     "<thead>\r\n\t" +
-                        "<tr>\r\n\t\t" +
+                        "<tr >" +
                             td1+
                             "</tr>\r\n\t" +
                     "</thead>\r\n\t" +
                     "<tbody>\r\n\t" +
-                        "<tr>\r\n\t\t" +
+                        "<tr >" +
                             td2+
                         "</tr>\r\n\t" +
-                    "</tbody>\r\n" +
+                        "<tr  >\r\n\t\t" +
+                            td3 +
+                        "</tr>\r\n\t" +
+                    "</tfoot>\r\n" +
                 "</table>";
 
 
 
             return tab1 + value;
         }
-        static string thead = "<table \">\r\n\t" +
+
+        public string value;
+
+
+        public string tabelka2 = "" +
+               "<table style=\"padding: 0px; margin-left: auto; margin-right: auto; displey:table;\" >" +
+                    "<thead>\r\n\t" +
+                        "<tr>\r\n\t\t" +
+                            "</tr>\r\n\t" +
+                    "</thead>\r\n\t" +
+                    "<tbody>\r\n\t" +
+                        "<tr>\r\n\t\t" +
+                        "</tr>\r\n\t" +
+                    "</tbody>\r\n" +
+                "</table>";
+
+        static string thead = "<table style=\"padding: 0px; margin-left: auto; margin-right: auto; displey:table;\" >" +
                     "<thead>\r\n\t" +
                         "<tr>\r\n\t\t";
-        const string cthead = "<table \">\r\n\t" +
+        const string cthead = "<table style=\"padding: 0px; margin-left: auto; margin-right: auto; displey:table;\" >" +
                     "<thead>\r\n\t" +
                         "<tr>\r\n\t\t";
 
@@ -254,19 +362,20 @@ namespace partner_aluro.Controllers
                    "<tbody>\r\n\t" +
                        "<tr>\r\n\t\t";
 
+        static string tbody2 = "</tr>\r\n\t" +
+                        "<tr>\r\n\t\t";
+
+        const string ctbody2 = "</tr>\r\n\t" +
+                        "<tr>\r\n\t\t";
+
+
         static string tfoot = "</ tr >\r\n\t" +
-                    "</tbody>\r\n" +
+                    "</tfoot>\r\n" +
                 "</table>";
         const string ctfoot = "</ tr >\r\n\t" +
-                    "</tbody>\r\n" +
+                    "</tfoot>\r\n" +
                 "</table>";
 
-
-        public string tabelka()
-        {
-            string tab = thead + tbody + tfoot;
-            return tab;
-        }
 
 
 

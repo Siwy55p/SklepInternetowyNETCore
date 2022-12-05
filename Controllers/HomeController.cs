@@ -16,7 +16,7 @@ namespace partner_aluro.Controllers
 {
     [Authorize]
     [DefaultBreadcrumb("Home")]
-    [Authorize(Roles = $"{Constants.Roles.Administrator},{Constants.Roles.Manager},{Constants.Roles.User}")]
+    [Authorize(Roles = $"{Constants.Roles.Administrator},{Constants.Roles.Manager},{Constants.Roles.Klient}")]
     public class HomeController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -100,11 +100,6 @@ namespace partner_aluro.Controllers
         [Route("Platnosc-i-dostawa")]
         [HttpGet]
         public IActionResult PlatnoscDostawa()
-        {
-            return View();
-        }
-        [Route("polityka-prywatnosci")]
-        public IActionResult Privacy()
         {
             return View();
         }

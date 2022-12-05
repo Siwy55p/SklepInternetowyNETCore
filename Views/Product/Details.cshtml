@@ -33,6 +33,7 @@
                         <div class="column">
                             <div class="main_image">
                                 @*<a id="myLink" href="~/images/produkty/@Model.Symbol/@Model.ImageUrl" class="glightbox">*@
+                                @*<a id="myLink" href="~/images/produkty/@Model.Symbol/@Model.Product_Images.Where(x=>x.kolejnosc == 0).FirstOrDefault().ImageName" onclick="Open(this)" data-gallery="gallery" class="glightbox">*@
                                 <a id="myLink" href="~/images/produkty/@Model.Symbol/@Model.Product_Images[0].ImageName" onclick="Open(this)" data-gallery="gallery" class="glightbox">
                                     <img class="main_image" id=featured src="~/images/produkty/@Model.Symbol/@Model.Product_Images[0].ImageName">
                                 </a>
@@ -143,14 +144,14 @@
                                 @if (Model.WysokoscProduktu != null)
                                 {
                                 <div class="row">Specyfikacja produktu: </div>
-                                <div class="row">
-                                    <div class="col">Szerokość: @Model.SzerokoscProduktu cm</div>
-                                    <div class="col">Wysokość: @Model.WysokoscProduktu cm</div>
-                                    <div class="col">Głębokość: @Model.GlebokoscProduktu cm</div>
+                                <div class="row p-0 m-0">
+                                    <div class="col p-0 m-0">Szerokość: @Model.SzerokoscProduktu cm</div>
+                                    <div class="col p-0 m-0">Wysokość: @Model.WysokoscProduktu cm</div>
+                                    <div class="col p-0 m-0">Głębokość: @Model.GlebokoscProduktu cm</div>
                                 </div>
 
                                 }
-                                @if(Model.WagaProduktu != null || Model.WagaProduktu >= 1)
+                                @if(Model.WagaProduktu != null && Model.WagaProduktu != 0)
                                 {
                                     <div class="row">
                                         <div class="col">Waga: @Model.WagaProduktu</div>
