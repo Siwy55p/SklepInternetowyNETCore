@@ -11,6 +11,8 @@ namespace partner_aluro.Models
 
         public string? Nazwa { get; set; }
 
+        public string? Tytul { get; set; }
+
         [NotMapped]
         public List<string>? listaEmail { get; set; }
 

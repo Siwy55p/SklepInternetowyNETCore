@@ -1,6 +1,4 @@
-﻿
-
-@{
+﻿@{
     ViewData["Title"] = "Kategoria";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -72,8 +70,6 @@
                                 </ul>
                             </div>
                         </div>
-
-
                     </div>
                 </div>
                 @*PRODKUCTS*@
@@ -98,12 +94,9 @@
                     alert("Nie ma wystarczającej ilości na stanie.");
                     return;
                 }
-
                 if ($(_this).data('lot')) {
                     lot = parseInt($(_this).attr('data-lot'), 10);
                 }
-
-
                 if (qty % lot != 0) {
                     qty = myQty + lot - (qty % lot);
                     $(_this).val(qty);
@@ -125,7 +118,6 @@
                 success: function (result) {
                     $("#mydiv").load(location.href + " #mydiv");
                 },
-
                 error: function (abc) {
                     alert(abc.statusText);
                 },
@@ -135,7 +127,6 @@
 
     <script>
         function ReduceQuantity(ProductId) {
-
             $.ajax({
                 type: "POST",
                 url: '@Url.Action("ReduceQuantity2", "Cart")',
@@ -143,7 +134,6 @@
                 success: function (result) {
                     $("#mydiv").load(location.href + " #mydiv");
                 },
-
                 error: function (abc) {
                     alert(abc.statusText);
                 },
@@ -153,7 +143,6 @@
 
     <script>
         function IncreaseQuantity(ProductId) {
-
             $.ajax({
                 type: "POST",
                 url: '@Url.Action("IncreaseQuantity2", "Cart")',
@@ -161,30 +150,14 @@
                 success: function (result) {
                     $("#mydiv").load(location.href + " #mydiv");
                 },
-
                 error: function (abc) {
                     alert(abc.statusText);
                 },
             });
         }
     </script>
-@*
-    <script>
-        function imposeMinMax(el) {
-            if (el.value != "") {
-                if (parseInt(el.value) < parseInt(el.min)) {
-                    el.value = el.min;
-                }
-                if (parseInt(el.value) > parseInt(el.max)) {
-                    el.value = el.max;
-                }
-            }
-        }
-        </script>*@
-
     <script>
         function RemoveFromCart(ProductId) {
-
             $.ajax({
                 type: "POST",
                 url: '@Url.Action("RemoveFromCart2", "Cart")',
@@ -192,7 +165,6 @@
                 success: function (result) {
                     $("#mydiv").load(location.href + " #mydiv");
                 },
-
                 error: function (abc) {
                     alert(abc.statusText);
                 },

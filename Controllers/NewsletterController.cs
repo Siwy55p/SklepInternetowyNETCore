@@ -24,8 +24,6 @@ namespace partner_aluro.Controllers
 
         public readonly IEmailService _emailService;
 
-
-
         public readonly IWebHostEnvironment _hostEnvironment;
 
         public NewsletterController(INewsletter newsletter, ApplicationDbContext context, IEmailService emailService, IWebHostEnvironment hostEnvironment)
@@ -141,16 +139,21 @@ namespace partner_aluro.Controllers
         {
             Newsletter newsletter = await _newsletter.GetAsync(id);
 
+
+
+
             newsletter.listaEmail = await _context.Users.Where(x => x.Newsletter == true).Select(x => x.Email).ToListAsync();
 
-            EmailDto emailDto = new EmailDto()
+            for (int i = 0; i < newsletter.listaEmail.Count(); i++)
             {
-                Body = newsletter.contentEmail,
-                To = "szuminski.p@gmail.com",
-                Subject = "Newsletter"
-            };
-
-            await _emailService.SendEmailAsync(emailDto);
+                EmailDto emailDto = new EmailDto()
+                {
+                    Body = newsletter.contentEmail,
+                    To = newsletter.listaEmail[i].ToString(),
+                    Subject = "Newsletter"
+                };
+                await _emailService.SendEmailAsync(emailDto);
+            }
 
             return RedirectToAction(nameof(Index));
         }
