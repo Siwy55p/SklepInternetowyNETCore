@@ -376,6 +376,8 @@ namespace partner_aluro.Controllers
             user.IdProfilDzialalnosci = data.User.IdProfilDzialalnosci;
             user.NazwaFirmy = data.User.NazwaFirmy;
 
+            user.Newsletter = true;
+
             user.DataZałożenia = DateTime.Now;
 
             user.Adress1rozliczeniowy = data.User.Adress1rozliczeniowy;
@@ -556,6 +558,18 @@ namespace partner_aluro.Controllers
                     $"override the register page in /Areas/Identity/Pages/Account/Register.cshtml");
             }
         }
+
+
+        public async Task AddToNewsletter(string UserName, bool check)
+        {
+
+            var user = await _signInManager.UserManager.FindByEmailAsync(UserName);
+            user.Newsletter = check;
+            _context.Users.Update(user);
+            _context.SaveChanges();
+
+        }
+
     }
 
 }

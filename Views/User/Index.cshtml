@@ -44,6 +44,7 @@
                                         <th>Data założenia</th>
                                         <th>Imię Nazwisko</th>
                                         <th>Firma</th>
+                                        <th>Newsletter</th>
                                         <th>Email</th>
                                         <th>Edit</th>
                                         <th>Resetuj hasło</th>
@@ -52,15 +53,35 @@
                                 <tbody>
                                     @{
                                         int i = 0;
+                                        bool pokaz = true;
                                     }
+
                                     @foreach (var user in Model)
                                     {
+
+                                        pokaz = true;
+
+                                        var checkBoxId = "chk" + user.UserName;
+
                                         <tr>
                                             <td>@i</td>
+
                                             @{i++;}
+
                                             <td>@user.DataZałożenia</td>
                                             <td>@user.Imie @user.Nazwisko</td>
                                             <td>@user.NazwaFirmy</td>
+                                            <td>
+
+                                                @if (@user.Newsletter == true)
+                                                {
+                                                    <input onclick="AddToNewsletter( '@user.Email' )" type="checkbox" id="@checkBoxId" class="chkclass" checked />
+                                                }else
+                                                {
+                                                    <input onclick="AddToNewsletter( '@user.Email' )" type="checkbox" id="@checkBoxId" class="chkclass" />
+                                                }
+
+                                            </td>
                                             <td>@user.Email</td>
                                             <td>
                                                 <a asp-controller="User" asp-action="Edit" asp-route-id="@user.Id">Edit</a> |
@@ -81,17 +102,6 @@
                                         </tr>
                                     }
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>Id</th>
-                                        <th>Data założenia</th>
-                                        <th>Imię Nazwisko</th>
-                                        <th>Firma</th>
-                                        <th>Email</th>
-                                        <th>Edit</th>
-                                        <th>Resetuj hasło</th>
-                                    </tr>
-                                </tfoot>
                             </table>
                         </div>
                     </div>
@@ -103,6 +113,37 @@
 
 </div>
 @section Scripts {
+
+
+    <script>
+        function AddToNewsletter(UserName) {
+            
+            var check = document.getElementById('chk' + UserName);
+            if (check.checked) {
+                check = true;
+            } else {
+                check = false;
+            }
+
+            alert(check);
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("AddToNewsletter", "User")',
+                data: { UserName: UserName, check: check },
+                success: function (result) {
+
+                },
+
+                error: function (abc) {
+                    alert(abc.statusText);
+                },
+            });
+        }
+    </script>
+
+
+
     <script>
         $(document).ready(function () {
             $('#userTable').DataTable(
@@ -111,4 +152,5 @@
                 });
         });
     </script>
+
 }
