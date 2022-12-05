@@ -80,9 +80,7 @@ namespace partner_aluro.Controllers
 
         }
 
-        [HttpGet]
-        // GET: Newsletter/Edit/5
-        public ActionResult Edit2(int? CatId = null) //ten sam widok
+        public IActionResult Edit2(int? CatId = null) //ten sam widok
         {
             if (CatId != null)
             {
@@ -92,8 +90,7 @@ namespace partner_aluro.Controllers
             {
                 ViewData["produkty"] =  _context.Products.ToList();
             }
-
-            return View();
+            return PartialView("_ParialListProductNewsletter");
 
         }
 
@@ -158,8 +155,8 @@ namespace partner_aluro.Controllers
             ViewData["kategorie"] = await _context.Category.ToListAsync();
 
 
-            ViewData["active1"] = "active";
-            ViewData["active2"] = "";
+            ViewData["active1"] = "";
+            ViewData["active2"] = "active";
             ViewData["active3"] = "";
 
             Newsletter newsletter1 = _context.Newsletter.Where(x => x.NewsletterID == newsletter.NewsletterID).FirstOrDefault();
@@ -332,7 +329,7 @@ namespace partner_aluro.Controllers
 
             }
 
-
+            var baseUri = $"{Request}://{Request.Host}:{Request.Host.Port ?? 80}";
             //string tresc = 
             //    $"<div class='row border=1'>" +
             //    "<div class='mojstyl'>"+
@@ -342,15 +339,15 @@ namespace partner_aluro.Controllers
             //    "<div class='col'>" + produkt.CenaProduktu + "</div>" +
             //    "<div class='col'>" + produkt.Symbol + "</div>" +
             //    "</div>";
-            string tresc =
-                $"<img src=../../images/produkty/" + produkt.Symbol + "/" + produkt.ImageUrl + " alt = " + produkt.Name + " style='width:200px;'>" +
-                " " + produkt.Name + " "  + produkt.CenaProduktu + " " + produkt.Symbol + " " +
-                " ";
+            //string tresc =
+            //    $"<a href=\""+baseUri+"\"><img src=../../images/produkty/" + produkt.Symbol + "/" + produkt.ImageUrl + " alt = " + produkt.Name + " style='width:200px;'>" +
+            //    " " + produkt.Name + " "  + produkt.CenaProduktu + " " + produkt.Symbol + " " +
+            //    "</a> ";
 
 
-            string td1 = "<th style=\"margin:0px; padding-left:10px;padding-right:10px; padding-top:0px; padding-bottom:0px; margin: 0px;\" > <div style=\"border:1px solid #b4b4b4;width:200px;height:200px;margin:0px;padding:0px; \"> <img src=../../images/produkty/" + produkt.Symbol + "/" + produkt.ImageUrl + " alt = " + produkt.Name + " style='width:200px;'>  </div></th>\r\n\t";
+            string td1 = "<th style=\"margin:0px; padding-left:10px;padding-right:10px; padding-top:0px; padding-bottom:0px; margin: 0px;\" > <div style=\"border:1px solid #b4b4b4;width:200px;height:200px;margin:0px;padding:0px; \"> <a href=\"..\\..\\..\\Product\\Detail\\"+produkt.Symbol+"\"> <img src=../../images/produkty/" + produkt.Symbol + "/" + produkt.ImageUrl + " alt = " + produkt.Name + " style='width:200px;'> </a> </div></th>\r\n\t";
             string td2 = "<td style=\"padding-left:10px;padding-right:10px; padding-top:0px; padding-bottom:0px; margin: 0px; text-align: center; \"><div style=\"border:1px solid #b4b4b4;width:200px; height:48px; padding-top: -1px; border-top:0px; margin:0px; background-color: #EBEBEB; \">" + produkt.Name + "</div></td>\r\n\t";
-            string td3 = "<td style=\"padding-left:10px;padding-right:10px; padding-top:0px; padding-bottom:0px; margin: 0px; text-align: center; \"><div style=\"border:1px solid #b4b4b4;width:200px; height:38px; padding-top: -1px; border-top:0px; margin:0px;padding:0px; background-color: #EBEBEB; \">" + produkt.CenaProduktu + "</div></td>\r\n\t";
+            string td3 = "<td style=\"padding-left:10px;padding-right:10px; padding-top:0px; padding-bottom:0px; margin: 0px; text-align: center; \"><div style=\"border:1px solid #b4b4b4;width:200px; height:38px; padding-top: -1px; border-top:0px; margin:0px;padding:0px; background-color: #EBEBEB; \">" + produkt.CenaProduktu + " zł"+"</div></td>\r\n\t";
 
             thead = thead + td1;
             tbody = tbody + td2;

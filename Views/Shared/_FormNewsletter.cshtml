@@ -41,8 +41,11 @@
                                 <tr>
                                     <td>@item.Name</td>
                                     <td>
-                                        @*<a class="btn btn-success" asp-controller="Newsletter" asp-action="Edit2" asp-route-CatId="@item.CategoryId">Wybierz</a>*@
-                                        <button class="btn btn-success" onclick="SelectCategory2(@item.CategoryId, @Model.NewsletterID)" role="button">Wybierz</button>
+                                        @*<div>@Html.ActionLink("MyLink", "Edit2", "Newsletter",new { CatId=item.CategoryId} , new { id = "mylink" })</div>*@
+                                        @*<div>@Html.ActionLink("MyLink", "Edit2", "Newsletter", null, new { id = "mylink" })</div>*@
+                                        @*<a class="btn btn-success" asp-controller="Newsletter" asp-action="Edit2" asp-route-CatId="@item.CategoryId" id="mylink_@item.CategoryId">Wybierz10</a>*@
+                                        <a class="btn btn-success" onclick="SelectCategory2(@item.CategoryId, @Model.NewsletterID)" role="button">Wybierz</a>
+                                        @*<button class="btn btn-success" onclick="SelectCat(@item.CategoryId)" role="button">Wybierz20</button>*@
                                     </td>
                                 </tr>
                             }
@@ -52,8 +55,10 @@
             </div>
         </div>
 
+        <div>@Html.ActionLink("Przycisk", "Edit2", "Newsletter", null, new { id = "mylink" })</div>
 
-        <div class="card" id="mydiv">
+
+        <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="data-table7" style="width: 100%">
@@ -67,7 +72,7 @@
                                 <th>Akcje</th>
                             </tr>
                         </thead>
-                            <tbody>
+                        <tbody style="width: 100%" id="ToDisplayResult">
                                 @foreach (var item in ViewData["produkty"] as List<partner_aluro.Models.Product>)
                                 {
                                 <tr>
