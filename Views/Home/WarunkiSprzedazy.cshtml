@@ -1,4 +1,6 @@
-﻿@{
+﻿@model partner_aluro.Models.Setting
+
+@{
     ViewBag.Title = "Aluro - Strona główna";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -10,7 +12,10 @@
             <div class="row">
                 <div class="row">
 
-                    <p>Ogólne warunki sprzedaży marki ALURO
+
+                    @Model.Regulamin
+
+                    @*<p>Ogólne warunki sprzedaży marki ALURO
                         Sprzedaż marki ALURO odbywa się wyłącznie przez wybrane, autoryzowane sklepy internetowe, galerie, sklepy meblowe.
                     </p>
 
@@ -38,7 +43,7 @@
 
                     <p>Reklamowany towar musi być zapakowany w oryginalne opakowanie z metkami dostawcy bez oznaczeń zamawiającego.</p>
 
-                    <p>Reklamację należy  wysłać do siedziby głównej marki ALURO na koszt własny.</p>
+                    <p>Reklamację należy  wysłać do siedziby głównej marki ALURO na koszt własny.</p>*@
 
                 </div>
             </div>

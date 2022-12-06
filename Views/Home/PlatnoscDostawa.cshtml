@@ -1,4 +1,6 @@
-﻿@{
+﻿@model partner_aluro.Models.Setting
+
+@{
     ViewBag.Title = "Aluro - Strona główna";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -10,14 +12,19 @@
         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-10 col-xxl-8">
             <div class="row">
 
-                Płatności
-                Partner ma możliwość złożenia zamówienia z odroczonym terminem płatności lub gotówką.
 
-                Wymagany termin płatności - 10-30 dni dla partnerów stacjonarnych (z podpisanymi Warunkami Współpracy)
-                * liczony od daty wystawienia faktury VAT
+                @Model.Platnosci
 
+               @* <h4>Płatności</h4>
+                <p>Partner ma możliwość złożenia zamówienia z odroczonym terminem płatności lub gotówką.</p>
+
+                <p>
+                    Wymagany termin płatności - 10-30 dni dla partnerów stacjonarnych (z podpisanymi Warunkami Współpracy)
+                    * liczony od daty wystawienia faktury VAT
+                </p>
+                <p>
                 * warunkiem do uzyskania terminu płatności jest wygenerowany obrót miedzy firmami 20000 zł netto
-
+                </p>
                 Klient zobowiązuje się do terminowej zapłaty należności za zakupiony towar. Za terminową wpłatę uważa się datę wpływu środków na konto dostawcy.
                 W przypadku nie dokonania zapłaty w terminie, zostanie anulowany rabat przyznany do zamówienia i wystawiona faktura korygującą.
 
@@ -48,6 +55,7 @@
 
                 BEZPŁATNA DOSTAWA  JUŻ POWYŻEJ  590 zł  netto
                 Dotyczy dostawy na terenie Polski. Towar dostarczony firmą kurierską należy sprawdzić w obecności kuriera i w razie nieprawidłowości (braki, uszkodzenia, towar niezgodny z zamówieniem) spisać odpowiedni protokół wraz z kurierem. Protokół należy niezwłocznie wysłać mailem na adres kontakt@aluro.pl
+            *@
             </div>
         </div>
     </div>

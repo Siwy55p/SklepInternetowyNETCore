@@ -4,6 +4,10 @@
     ViewData["Title"] = "Ustawienia";
     Layout = "~/Views/Shared/_Dashboard.cshtml";
 }
+@section LinkStyleHead
+{
+    <script src="~/js/tinymce/tinymce.min.js"></script>
+}
 
 
 <form class="needs-validation" asp-action="Edit" asp-route-id="@Model.SettingID" asp-controller="Setting" class="form-horizontal" method="post">
@@ -54,8 +58,124 @@
             </div>
         </div>
 
+        <div class="row">
+                <div class="col">
+                    <div class="form-group row p-2">
+                        <label asp-for="@Model.Platnosci" class="col col-form-label">Tresc o Płatnościach</label>
+                        <textarea asp-for="@Model.Platnosci" id="EdytorSetting"> </textarea>
+                    </div>
+                </div>
+        </div>
+        <div class="row">
+                <div class="col">
+                    <div class="form-group row p-2">
+                        <label asp-for="@Model.Regulamin" class="col col-form-label">Tresc Regulamin</label>
+                        <textarea asp-for="@Model.Regulamin" id="EdytorSetting"> </textarea>
+                    </div>
+                </div>
+        </div>
+
         <div class="col-md-6">
             <button type="submit" class="btn btn-success">Zapisz</button>  <button id="btnBack" runat="server" text="Back" class="btn btn-primary" onclick="JavaScript: window.history.back(1); return false;">Powrót</button>
         </div>
     </div>
 </form>
+
+@section Scripts {
+    <script>
+        tinymce.init({
+            selector: '#EdytorSetting',  // change this value according to your HTML
+            language: 'pl',
+            language_url: 'https://partneralluro.hostingasp.pl/js/tinymce/langs/pl.js',  // site absolute URL
+            /*    document_base_url: system_url,*/
+            relative_urls: false,
+            remove_script_host: false,
+            convert_urls: true,
+            /*content_css: 'css/Newsletter/newsletter.css',*/
+            plugins: 'image code print preview powerpaste casechange importcss tinydrive searchreplace autolink autosave save directionality advcode visualblocks visualchars fullscreen image link media mediaembed template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker imagetools textpattern noneditable help formatpainter permanentpen pageembed charmap tinycomments mentions quickbars linkchecker emoticons advtable export',
+            toolbar: [
+                "undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck",
+                "template image | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat ",
+                "|forecolor backcolor | | addcomment showcomments | spellcheckdialog a11ycheck | align lineheight |",
+                ],
+            image_list: [
+                { title: 'My image', value: '' },
+                { title: 'My image', value: '' }
+            ],
+            templates: [
+                { title: 'Szablon1', description: 'Szablon1', url: '\\templates\\template0.html' },
+                { title: 'Szablon2', description: 'Szablon2', url: '\\templates\\template2.html' }
+            ],
+            images_upload_url: '/upload', // this is the upload target URL - our first endpoint
+            image_list: '/filelist', // the list of the media files, our second endpoint
+            // enable title field in the Image dialog
+            image_title: true,
+            // enable automatic uploads of images represented by blob or data URIs
+            automatic_uploads: true,
+            height: "700",
+            setup: function (editor) {
+
+                editor.ui.registry.addButton('customInsertButton', {
+                    text: 'Wstaw produktyTEST',
+                    onAction: function (_) {
+
+                        editor.insertContent('&nbsp;<strong>It\'s my button!</strong>&nbsp;');
+
+                    }
+                });
+
+                var toTimeHtml = function (date) {
+                    return '<time datetime="' + date.toString() + '">' + date.toDateString() + '</time>';
+                };
+
+                editor.ui.registry.addButton('customDateButton', {
+                    icon: 'insert-time',
+                    tooltip: 'Insert Current Date',
+                    disabled: true,
+                    onAction: function (_) {
+                        editor.insertContent(toTimeHtml(new Date()));
+                    },
+                    onSetup: function (buttonApi) {
+                        var editorEventCallback = function (eventApi) {
+                            buttonApi.setDisabled(eventApi.element.nodeName.toLowerCase() === 'time');
+                        };
+                        editor.on('NodeChange', editorEventCallback);
+
+                        /* onSetup should always return the unbind handlers */
+                        return function (buttonApi) {
+                            editor.off('NodeChange', editorEventCallback);
+                        };
+                    }
+                });
+            },
+            // add custom filepicker only to Image dialog
+            image_caption: true,
+            // add custom filepicker only to Image dialog
+            file_picker_types: 'image',
+            file_picker_callback: function (cb, value, meta) {
+                var input = document.createElement('input');
+                input.setAttribute('type', 'file');
+                input.setAttribute('accept', 'image/*');
+
+                input.onchange = function () {
+                    var file = this.files[0];
+                    var reader = new FileReader();
+
+                    reader.onload = function () {
+                        var id = 'blobid' + (new Date()).getTime();
+                        var blobCache = tinymce.activeEditor.editorUpload.blobCache;
+                        var base64 = reader.result.split(',')[1];
+                        var blobInfo = blobCache.create(id, file, base64);
+                        blobCache.add(blobInfo);
+
+                        // call the callback and populate the Title field with the file name
+                        cb(blobInfo.blobUri(), { title: file.name });
+                    };
+                    reader.readAsDataURL(file);
+                };
+
+                input.click();
+            }
+        });
+    </script>
+}

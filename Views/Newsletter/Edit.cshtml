@@ -11,12 +11,15 @@
     <script src="~/js/tinymce/tinymce.min.js"></script>
     }
 
-    <div class="row">
+
+    @await Html.PartialAsync("_Newsletter")
+
+@*    <div class="row">
 
         <ul class="nav nav-tabs">
-            <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#dodajprodukty">Dodaj produkty</a></li>
-            <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#wiadomosc">Podglad wiadomosci</a></li>
-            <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#ogolne">Ogolne</a></li>
+            <li class="nav-item"><a class="nav-link @ViewData["active1"]" data-bs-toggle="tab" href="#dodajprodukty">Dodaj produkty</a></li>
+            <li class="nav-item"><a class="nav-link @ViewData["active2"]" data-bs-toggle="tab" href="#wiadomosc">Podglad wiadomosci</a></li>
+            <li class="nav-item"><a class="nav-link @ViewData["active3"]" data-bs-toggle="tab" href="#ogolne">Ogolne</a></li>
         </ul>
     </div>
     <div class="tab-content">
@@ -35,7 +38,7 @@
                         </div>
 
                     </div>
-                <button type="submit">
+                <button class="btn btn-success" type="submit">
                     Następny etap
                 </button>
 
@@ -82,45 +85,11 @@
         <button asp-controller="Newsletter" asp-action="SendEmail" asp-route-id="@Model.NewsletterID">Wyslij</button>
 
     </div>
-
+*@
 
 
     @section Scripts {
-@*  <script>
-        $(document).ready(function () {
-            $(document).on("change", "#selectCategroy", function () {
-                var subCat = this;
-                $.ajax({
-                    url: "ReturnJsonSubCategories/?categoryId=" + $(subCat).val(),
-                    type: "GET",
-                    contentType: "application/json; charset=utf-8",
-                    datatype: JSON,
-                    success: function (result) {
-                        var categories = "";
-                        $(result).each(function () {
-                            categories = categories + '<option value="' + this.subCategoryId + '">' + this.name + '</option>'
-                        });
 
-                        var subCateList = $("#selectSubCategroy");
-                        subCateList.empty();
-                        subCateList.append(categories);
-                    },
-                    error: function (data) {
-                        return "Error";
-                    }
-                });
-            });
-        });
-    </script>*@
-
-    <script>
-        $(function () {
-            $('#mylink').click(function () {
-                $('#ToDisplayResult').load(this.href);
-                return false;
-            });
-        });
-    </script>
 
 
     <script>

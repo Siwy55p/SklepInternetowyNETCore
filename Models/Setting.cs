@@ -10,5 +10,11 @@ namespace partner_aluro.Models
         public int? SliderHome2 { get; set; }
         public int? SliderHome3 { get; set; }
 
+
+        public string? Platnosci { get; set; }
+
+
+        public string? Regulamin { get; set; }
+
     }
 }
