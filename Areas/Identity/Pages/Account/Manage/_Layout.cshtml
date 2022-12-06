@@ -1,0 +1,27 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*
+        Layout = "/Areas/Identity/Pages/_Layout.cshtml";
+    }
+}*@
+<div class="row justify-content-center align-items-center">
+    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-10 col-xxl-8">
+        <h5>W tym miejscu możesz sprawdzić wszelkie informacje o Twoim koncie.</h5>
+
+        <div>
+            <hr />
+            <div class="row">
+                <div class="col-md-3">
+                    <partial name="_ManageNav" />
+                </div>
+                <div class="col-md-9">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+}

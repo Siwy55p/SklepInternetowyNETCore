@@ -38,14 +38,16 @@
                                 @language.Getkey("Zarządzaj kontem")
                                 </h6>
                                 <p>
-                                <a href="#!" class="dropdown-item">@language.Getkey("Moje konto")</a>
+                                <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index"
+                                   title="Manage">@language.Getkey("Moje konto")</a>
+
                                 </p>
                                 <p>
                                 <a class="dropdown-item" asp-controller="Order" asp-action="ListaZamowienZalogowanegoUzytkownika">@language.Getkey("Historia zamówień")</a>
                                 </p>
-                                <p>
+                                @*<p>
                                 <a href="#!" class="dropdown-item">@language.Getkey("Moje informacje osobiste")</a>
-                                </p>
+                                </p>*@
                                 <p>
                                 <form id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                                     <button id="logout" type="submit" class="dropdown-item">@language.Getkey("Wyloguj")</button>

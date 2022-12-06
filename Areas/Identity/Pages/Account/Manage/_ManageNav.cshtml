@@ -1,0 +1,12 @@
+﻿@using partner_aluro.Models
+@inject SignInManager<ApplicationUser> SignInManager
+@inject LanguageService language
+
+@{
+    var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
+}
+<ul class="nav navbar-nav">
+    <li class="menu_kat"><a class="kategoria_class_menu @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index"> @language.Getkey("Twój profil")</a></li>
+    <li class="menu_kat"><a class="kategoria_class_menu @ManageNavPages.EmailNavClass(ViewContext)" id="email" asp-page="./Email">@language.Getkey("Email")</a></li>
+    <li class="menu_kat"><a class="kategoria_class_menu @ManageNavPages.ChangePasswordNavClass(ViewContext)" id="change-password" asp-page="./ChangePassword">@language.Getkey("Hasło")</a></li>
+</ul>

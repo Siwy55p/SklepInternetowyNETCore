@@ -85,13 +85,16 @@ a:hover {
         color: #fff;
     }
 /*Nawigacja MainMenuCarusel*/
-
+.row.index0 {
+    z-index: 0;
+}
 
 a.active {
     background-color: #6e1a1a;
     /*background-color: #a11212;*/
     font-size: 15px;
     font-weight: 600;
+    color: white;
 }
 .page-link
 {
