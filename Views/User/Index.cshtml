@@ -113,20 +113,14 @@
 
 </div>
 @section Scripts {
-
-
     <script>
         function AddToNewsletter(UserName) {
-            
             var check = document.getElementById('chk' + UserName);
             if (check.checked) {
                 check = true;
             } else {
                 check = false;
             }
-
-            alert(check);
-
             $.ajax({
                 type: "POST",
                 url: '@Url.Action("AddToNewsletter", "User")',
@@ -142,8 +136,6 @@
         }
     </script>
 
-
-
     <script>
         $(document).ready(function () {
             $('#userTable').DataTable(
@@ -152,5 +144,4 @@
                 });
         });
     </script>
-
 }
