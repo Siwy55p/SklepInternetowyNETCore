@@ -64,13 +64,15 @@
 
                 <div class="form-group">
                     <label asp-for="ImageFile" class="control-label"></label>
-                    <input type="file" asp-for="ImageFile" accept="images/png,images/jpg,images/jpeg" /> @*/image/png,image/jpg*@
+                <input type="file" id="images" asp-for="ImageFile" onchange="preview_images();" accept="images/png,images/jpg,images/jpeg" /> @*/image/png,image/jpg*@
                     <span asp-validation-for="ImageFile" class="text-danger"></span>
                 </div>
 
-            <div class="form-group">
-                <img src="\@Model.path\@Model.ImageName" asp-append-version="true" width="250px" height="250px">
+            <div class="row" id="image_preview">
             </div>
+                <div class="form-group">
+                    <img src="\@Model.path\@Model.ImageName" asp-append-version="true" width="250px" height="250px">
+                </div>
             <div class="form-group">
                 <button id="btnBack" type="submit" class="btn btn-success">Zapisz </button>
                 @*<button id="btnBack" runat="server" text="Back" class="btn btn-primary" onclick="JavaScript: window.history.back(1); return false;">Powrót</button>*@
@@ -89,5 +91,15 @@
 </div>
 
 @section Scripts {
+
+    <script>
+        function preview_images() {
+            var total_file = document.getElementById("images").files.length;
+            for (var i = 0; i < total_file; i++) {
+                $('#image_preview').append("<div class='col-sm-2'><img  style='width: 210px;' src='" + URL.createObjectURL(event.target.files[i]) + "'></div>");
+            }
+        }
+    </script>
+
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
