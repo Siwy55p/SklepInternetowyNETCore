@@ -94,14 +94,16 @@ namespace partner_aluro.Controllers
         [HttpGet]
         public IActionResult WarunkiSprzedazy()
         {
-            return View();
+            Setting setting = _context.Setting.FirstOrDefault();
+            return View(setting);
         }
 
         [Route("Platnosc-i-dostawa")]
         [HttpGet]
         public IActionResult PlatnoscDostawa()
         {
-            return View();
+            Setting setting = _context.Setting.FirstOrDefault();
+            return View(setting);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
