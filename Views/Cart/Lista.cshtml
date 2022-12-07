@@ -1,22 +1,77 @@
 ﻿@model List<partner_aluro.Models.CartItem>
+@*@model IEnumerable<IGrouping<string, CartItem>>*@
+
+@*@model IEnumerable<string CartId, IEnumerable<ApplicationUser> User>*@
 
 @{
     ViewData["Title"] = "Zamowienia";
     Layout = "~/Views/Shared/_Dashboard.cshtml";
 }
 
-<div class="row">
-    <div class="col">ID</div>
-    <div class="col">Product ID</div>
-    <div class="col">Ilosc</div>
-    <div class="col">CartId</div>
+<div class="table-responsive">
+    <table id="CartTableList" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Product</th>
+                <th>Ilosc</th>
+                <th>CartId</th>
+                <th>User</th>
+                <th>Data</th>
+            </tr>
+        </thead>
+        <tbody>
+@*
+            @foreach (var item in Model)
+            {
+                @item.Key
+
+                @foreach (var item2 in item)
+                {
+                    <tr>
+                        <td>@item2.User</td>
+                        <th>Product</th>
+                        <th>Ilosc</th>
+                        <th>CartId</th>
+                        <th>User</th>
+                        <th>Data</th>
+                    </tr>
+                }
+            }
+*@
+            @for (var i = 0; i < @Model.Count(); i++)
+            {
+                <tr>
+                    <td>@Model[i].CartItemId</td>
+                    <td>
+                        <img class="img-thumbnail" src="~/images/produkty/@Model[i].Product.Symbol/@Model[i].Product.ImageUrl" style="width:50px;height:50px;">
+                        @Model[i].Product.Name</td>
+                    <td>@Model[i].Quantity</td>
+                    <td>@Model[i].CartId</td>
+                    <td>@Model[i].User</td>
+                    <td>@Model[i].Data</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
-@for (var i = 0; i < @Model.Count(); i++)
-{
-    <div class="row">
-        <div class="col">@Model[i].Id</div>
-        <div class="col">@Model[i].Product</div>
-        <div class="col">@Model[i].Quantity</div>
-        <div class="col">@Model[i].CartId</div>
-    </div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('#CartTableList').DataTable(
+                {
+                    fixedHeader: {
+                        headerOffset: 56,
+                        header: true,
+                        footer: true
+                    },
+                    "columnDefs": [
+                        { "width": "50px", "targets": 2 }
+                    ],
+                    pageLength: 50,
+                    "order": [[0, 'desc'], [3, 'desc']]
+                });
+        });
+    </script>
 }

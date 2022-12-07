@@ -47,11 +47,10 @@ namespace partner_aluro.Controllers
 
         public async Task<IActionResult> Lista()
         {
-            List<CartItem> lista = _context.CartItems.ToList();
+
+            List<CartItem> lista = _context.CartItems.Include(p => p.Product).Include(u => u.User).ToList();
 
             return View(lista);
-
-            //return View(vm);
         }
 
         public async Task<IActionResult> Index()

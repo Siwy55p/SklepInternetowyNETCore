@@ -87,7 +87,7 @@ builder.Services.AddSingleton<RegonService>();
 builder.Services.AddTransient<MySqlConnection>(_ => new MySqlConnection(connectionPrestashop));
 
 builder.Services.AddControllersWithViews();
-builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>(); //S³uzy do zapisywania sesji np: uzytkownika do sesscion
 
 
 

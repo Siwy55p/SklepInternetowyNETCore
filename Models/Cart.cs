@@ -1,25 +1,32 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using partner_aluro.Data;
 using partner_aluro.Services.Interfaces;
 using partner_aluro.ViewComponents;
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Claims;
 using System.Threading.Tasks.Sources;
+using static iTextSharp.text.pdf.AcroFields;
 
 namespace partner_aluro.Models
 {
     public class Cart
     {
         private readonly ApplicationDbContext _context;
+
         public Cart(ApplicationDbContext context)
         {
             _context = context;
         }
 
         public string Id { get; set; }
+        public string UserId { get; set; }
+
         public List<CartItem> CartItems { get; set; }
+
 
         public static Cart GetCart(IServiceProvider services)
         {
@@ -31,8 +38,10 @@ namespace partner_aluro.Models
             session.SetString("Id", cartId);
 
 
+            var user = services.GetRequiredService<IHttpContextAccessor>().HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            session.SetString("User", user.ToString());
 
-            return new Cart(context) { Id = cartId };
+            return new Cart(context) { Id = cartId, UserId = user };
         }
 
         public CartItem GetCartItem(Product product)
@@ -48,6 +57,7 @@ namespace partner_aluro.Models
 
             product.CenaProduktuDlaUzytkownika = product.CenaProduktu * (1 - (Rabat / 100));
 
+            ApplicationUser user = _context.Users.Where(x => x.Id == UserId).FirstOrDefault();
 
             var cartItem = GetCartItem(product);
 
@@ -58,7 +68,9 @@ namespace partner_aluro.Models
                 {
                     Product = product,
                     Quantity = quantity,
-                    CartId = Id
+                    CartId = Id,
+                    User = user,
+                    Data = DateTime.Now
                 };
 
                 _context.CartItems.Add(cartItem);
