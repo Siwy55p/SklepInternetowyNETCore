@@ -61,40 +61,35 @@
 
                     </div>	
                     <div class="col-md-6">
-                        <div class="">
-                            <div class="d-flex justify-content-between align-items-center">
+                        <div class="p-2">
+                            @*<div class="d-flex justify-content-between align-items-center">*@
+                            <div class="row">
                                 <h4>@language.Getkey(@Model.Name)</h4>
                             </div>
-                            <div class="mt-2 pr-3">
+                            <div class="row">
                                 <p>Symbol: <b>@Model.Symbol</b></p>
                             </div>
                             @if (@Model.KrotkiOpis != null)
                             {
-                                <div class="row p-3">@Html.Raw(@Model.KrotkiOpis)</div>
+                                <div class="row">@Html.Raw(@Model.KrotkiOpis)</div>
                             }
                             @*<div @*style="max-width:460px;" class="row body_product float-end text-end m-1 p-2">*@
                              @{
                                     var Cena_brutto = (decimal)Model.CenaProduktu * (decimal)partner_aluro.Core.Constants.Vat;
 
                                 }
-                        <div class="row">
+                            <div class="row">
                                 <div class="col justify-content-end">
                                     @language.Getkey("CenaHurtowa"): @language.GetCurrently(Model.CenaProduktu, Constants.myNumberFormatInfo).ToString("C", Constants.myNumberFormatInfo) @language.Getkey("(netto)")
                                 </div>
-                                <div class="col">
-
-                                </div>
                             </div>
                             <div class="row">
                                 <div class="col justify-content-end">
-                                    <span class="hide invisible">@language.Getkey("CenaHurtowa"):</span> @language.GetCurrently(@Cena_brutto, Constants.myNumberFormatInfo).ToString("C",Constants.myNumberFormatInfo) <span class="brutto">@language.Getkey("(brutto)")</span>
-                                </div>
-                                <div class="col">
-
+                                    <span class="hide invisible">@language.Getkey("CenaHurtowa"):</span> @language.GetCurrently(@Cena_brutto, Constants.myNumberFormatInfo).ToString("C",Constants.myNumberFormatInfo) @language.Getkey("(brutto)")
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col justify-content-start text-start">
+                                <div class="col">
                                     @if (@Model.CenaProduktuDetal != null)
                                     {
                                         <p>@language.Getkey("CenaDetaliczna"): @language.GetCurrently(@Model.CenaProduktuDetal, Constants.myNumberFormatInfo).ToString("C", Constants.myNumberFormatInfo)</p>
@@ -126,7 +121,7 @@
                             </div>
 
 
-                            <div class="row p-3">
+                            <div class="row">
 
                                 @if (@*Model.CenaPromocyja != null && *@Model.Promocja == true)
                                 {
@@ -143,33 +138,41 @@
 
                                 @if (Model.WysokoscProduktu != null)
                                 {
-                                <div class="row">Specyfikacja produktu: </div>
-                                <div class="row p-0 m-0">
-                                    <div class="col p-0 m-0">Szerokość: @Model.SzerokoscProduktu cm</div>
-                                    <div class="col p-0 m-0">Wysokość: @Model.WysokoscProduktu cm</div>
-                                    <div class="col p-0 m-0">Głębokość: @Model.GlebokoscProduktu cm</div>
+                                <div class="row">
+                                    <div class="col">@language.Getkey("Specyfikacja produktu:") </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">@language.Getkey("Szerokość:") @Model.SzerokoscProduktu cm</div>
+                                    <div class="col">@language.Getkey("Wysokość:") @Model.WysokoscProduktu cm</div>
+                                    <div class="col">@language.Getkey("Głębokość:") @Model.GlebokoscProduktu cm</div>
                                 </div>
 
                                 }
                                 @if(Model.WagaProduktu != null && Model.WagaProduktu != 0)
                                 {
                                     <div class="row">
-                                        <div class="col">Waga: @Model.WagaProduktu</div>
+                                        <div class="col">@language.Getkey("Waga:") @Model.WagaProduktu</div>
                                     </div>
                                 }
 
                                 @if(Model.Pakowanie != null)
                                 {
-                                <div class="row">Pakowanie: @Model.Pakowanie </div>
+                                <div class="row">
+                                    <div class="col">@language.Getkey("Pakowanie:") @Model.Pakowanie </div>
+                                </div>
                                 }
 
                                 @if (Model.Materiał != null)
                                 {
-                                    <div class="row">Materiał: @Model.Materiał </div>
+                                    <div class="row">
+                                        <div class="col">@language.Getkey("Materiał:") @Model.Materiał </div>
+                                    </div>
                                 }
 
 
-                                <div class="row">@Html.Raw(@Model.Description)</div>
+                                <div class="row">
+                                    <div class="col">@Html.Raw(@Model.Description)</div>
+                                </div>
 
                             </div>
 

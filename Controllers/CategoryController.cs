@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using partner_aluro.Core;
 using partner_aluro.Data;
 using partner_aluro.Models;
+using partner_aluro.Resources;
 using partner_aluro.Services.Interfaces;
 using SmartBreadcrumbs.Nodes;
 using X.PagedList;
@@ -21,13 +22,17 @@ namespace partner_aluro.Controllers
 
         private readonly ApplicationDbContext _context;
 
+
+        private readonly LanguageService _language;
+
         private static int Pages = 12;
 
-        public CategoryController(ICategoryService categoryDB, IUnitOfWorkCategory iUnitOfWorkCategory, ApplicationDbContext context)
+        public CategoryController(ICategoryService categoryDB, IUnitOfWorkCategory iUnitOfWorkCategory, ApplicationDbContext context, LanguageService language)
         {
             _categoryService = categoryDB;
             _iUnitOfWorkCategory = iUnitOfWorkCategory;
             _context = context;
+            _language = language;
         }
 
         //public async Task<IActionResult> Index()
