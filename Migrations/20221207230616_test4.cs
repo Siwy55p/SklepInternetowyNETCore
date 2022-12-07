@@ -4,7 +4,7 @@
 
 namespace partner_aluro.Migrations
 {
-    public partial class produw2 : Migration
+    public partial class test4 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

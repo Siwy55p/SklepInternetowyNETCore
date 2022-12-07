@@ -1,5 +1,5 @@
-﻿@model List<partner_aluro.Models.CartItem>
-@*@model IEnumerable<IGrouping<string, CartItem>>*@
+﻿@*@model List<partner_aluro.Models.CartItem>*@
+@model IEnumerable<IGrouping<string, CartItem>>
 
 @*@model IEnumerable<string CartId, IEnumerable<ApplicationUser> User>*@
 
@@ -14,32 +14,28 @@
             <tr>
                 <th>Id</th>
                 <th>Product</th>
-                <th>Ilosc</th>
-                <th>CartId</th>
-                <th>User</th>
-                <th>Data</th>
             </tr>
         </thead>
         <tbody>
-@*
+
+
             @foreach (var item in Model)
             {
-                @item.Key
-
-                @foreach (var item2 in item)
-                {
-                    <tr>
-                        <td>@item2.User</td>
-                        <th>Product</th>
-                        <th>Ilosc</th>
-                        <th>CartId</th>
-                        <th>User</th>
-                        <th>Data</th>
-                    </tr>
-                }
+                <tr>
+                    <td>
+                        @item.Key
+                    </td>
+                    <td>
+                        @foreach (var item2 in item)
+                        {
+                            @item2.User
+                        }
+                    </td>
+                </tr>
+            
             }
-*@
-            @for (var i = 0; i < @Model.Count(); i++)
+
+            @*@for (var i = 0; i < @Model.Count(); i++)
             {
                 <tr>
                     <td>@Model[i].CartItemId</td>
@@ -51,7 +47,7 @@
                     <td>@Model[i].User</td>
                     <td>@Model[i].Data</td>
                 </tr>
-            }
+            }*@
         </tbody>
     </table>
 </div>

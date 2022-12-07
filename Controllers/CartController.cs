@@ -50,13 +50,17 @@ namespace partner_aluro.Controllers
 
             List<CartItem> lista = _context.CartItems.Include(p => p.Product).Include(u => u.User).ToList();
 
+            IEnumerable<IGrouping<string, CartItem>> g = lista.GroupBy(b => b.CartId);
+
+
+
             //lista.GroupBy(x => x.CartId, (x, y) => new
             //{
             //    y.CartId = x.CartId,
 
             //}).ToList();
 
-            return View(lista);
+            return View(g);
         }
 
         public async Task<IActionResult> Index()

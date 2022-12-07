@@ -12,8 +12,8 @@ using partner_aluro.Data;
 namespace partner_aluro.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221127214033_wyma")]
-    partial class wyma
+    [Migration("20221207230616_test4")]
+    partial class test4
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -484,15 +484,18 @@ namespace partner_aluro.Migrations
 
             modelBuilder.Entity("partner_aluro.Models.CartItem", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("CartItemId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CartItemId"), 1L, 1);
 
                     b.Property<string>("CartId")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Data")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
@@ -500,9 +503,14 @@ namespace partner_aluro.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("CartItemId");
 
                     b.HasIndex("ProductId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("CartItems");
                 });
@@ -636,6 +644,9 @@ namespace partner_aluro.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<string>("ImageNameCompress250x250")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("ImageSliderID")
                         .HasColumnType("int");
 
@@ -663,6 +674,9 @@ namespace partner_aluro.Migrations
 
                     b.Property<string>("path")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("pathImageCompress250x250")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ImageId");
@@ -699,6 +713,31 @@ namespace partner_aluro.Migrations
                     b.ToTable("MetodyDostawy");
                 });
 
+            modelBuilder.Entity("partner_aluro.Models.MetodyPlatnosci", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Nazwa")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Opis")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SzczegolowyOpis")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MetodyPlatnosci");
+                });
+
             modelBuilder.Entity("partner_aluro.Models.Newsletter", b =>
                 {
                     b.Property<int>("NewsletterID")
@@ -711,6 +750,12 @@ namespace partner_aluro.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nazwa")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Tytul")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("contentEmail")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("NewsletterID");
@@ -1203,6 +1248,12 @@ namespace partner_aluro.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SettingID"), 1L, 1);
 
+                    b.Property<string>("Platnosci")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Regulamin")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("SliderHome1")
                         .HasColumnType("int");
 
@@ -1235,6 +1286,35 @@ namespace partner_aluro.Migrations
                     b.HasKey("ImageSliderID");
 
                     b.ToTable("Sliders");
+                });
+
+            modelBuilder.Entity("partner_aluro.Models.SMS", b =>
+                {
+                    b.Property<int>("SMSId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SMSId"), 1L, 1);
+
+                    b.Property<string>("apiKey")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("message")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("numbers")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("sender")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("SMSId");
+
+                    b.ToTable("SMS");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -1339,7 +1419,13 @@ namespace partner_aluro.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("partner_aluro.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
                     b.Navigation("Product");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("partner_aluro.Models.ImageModel", b =>

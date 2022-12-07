@@ -6,6 +6,7 @@ using partner_aluro.Data;
 using partner_aluro.Services.Interfaces;
 using partner_aluro.ViewComponents;
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Claims;
 using System.Threading.Tasks.Sources;
@@ -22,10 +23,13 @@ namespace partner_aluro.Models
             _context = context;
         }
 
-        public string Id { get; set; }
+        [Key]
+        public string CartId { get; set; }
         public string UserId { get; set; }
 
-        public List<CartItem> CartItems { get; set; }
+        public string CartsId { get; set; }
+        [ForeignKey(nameof(CartsId))]
+        public virtual List<CartItem> CartItems { get; set; }
 
 
         public static Cart GetCart(IServiceProvider services)
@@ -41,13 +45,13 @@ namespace partner_aluro.Models
             var user = services.GetRequiredService<IHttpContextAccessor>().HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             session.SetString("User", user.ToString());
 
-            return new Cart(context) { Id = cartId, UserId = user };
+            return new Cart(context) { CartsId = cartId, UserId = user };
         }
 
         public CartItem GetCartItem(Product product)
         {
             return _context.CartItems.SingleOrDefault(ci =>
-                ci.Product.ProductId == product.ProductId && ci.CartId == Id);
+                ci.Product.ProductId == product.ProductId && ci.CartId == CartsId);
         }
 
         public void AddToCart(Product product, int quantity)
@@ -68,7 +72,7 @@ namespace partner_aluro.Models
                 {
                     Product = product,
                     Quantity = quantity,
-                    CartId = Id,
+                    CartId = CartsId,
                     User = user,
                     Data = DateTime.Now
                 };
@@ -131,7 +135,7 @@ namespace partner_aluro.Models
         }
         public void ClearCart()
         {
-            var cartItems = _context.CartItems.Where(ci => ci.CartId == Id);
+            var cartItems = _context.CartItems.Where(ci => ci.CartId == CartsId);
 
             _context.CartItems.RemoveRange(cartItems);
 
@@ -140,7 +144,7 @@ namespace partner_aluro.Models
 
         public async Task<List<CartItem>> GetAllCartItemsAsync()
         {
-            return CartItems ??= await _context.CartItems.Where(ci => ci.CartId == Id)
+            return CartItems ??= await _context.CartItems.Where(ci => ci.CartId == CartsId)
                     .Include(ci => ci.Product)
                     .ToListAsync();
         }
@@ -148,13 +152,13 @@ namespace partner_aluro.Models
         public decimal GetCartTotalBrutto()
         {
             decimal CartTotal1 = _context.CartItems
-                .Where(ci => ci.CartId == Id && ci.Product.Promocja == false)
+                .Where(ci => ci.CartId == CartsId && ci.Product.Promocja == false)
                 //.Where(ci=> ci.Product.Promocja == false)
                 .Select(ci => ci.Product.CenaProduktu * ci.Quantity)
                 .Sum();
 
             decimal CartTotal2 = _context.CartItems
-                .Where(ci => ci.CartId == Id && ci.Product.Promocja == true)
+                .Where(ci => ci.CartId == CartsId && ci.Product.Promocja == true)
                 //.Where(ci => ci.Product.Promocja == true)
                 .Select(ci => ci.Product.CenaPromocyja * ci.Quantity)
                 .Sum();
@@ -170,12 +174,12 @@ namespace partner_aluro.Models
         public decimal GetCartTotalNetto()
         {
             decimal CartTotal1 = _context.CartItems
-                .Where(ci => ci.CartId == Id && ci.Product.Promocja == false)
+                .Where(ci => ci.CartId == CartsId && ci.Product.Promocja == false)
                 .Select(ci => ci.Product.CenaProduktu * ci.Quantity)
                 .Sum();
 
             decimal CartTotal2 = _context.CartItems
-                .Where(ci => ci.CartId == Id && ci.Product.Promocja == true)
+                .Where(ci => ci.CartId == CartsId && ci.Product.Promocja == true)
                 .Select(ci => ci.Product.CenaPromocyja * ci.Quantity)
                 .Sum();
 

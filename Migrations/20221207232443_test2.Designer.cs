@@ -12,8 +12,8 @@ using partner_aluro.Data;
 namespace partner_aluro.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221113195957_PromocjaBoolean")]
-    partial class PromocjaBoolean
+    [Migration("20221207232443_test2")]
+    partial class test2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -161,6 +161,91 @@ namespace partner_aluro.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("partner_aluro.Models.AddresPrestashop", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int?>("active")
+                        .HasColumnType("int");
+
+                    b.Property<string>("address1")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("address2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("alias")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("city")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("company")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("date_add")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("date_upd")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("deleted")
+                        .HasColumnType("int");
+
+                    b.Property<string>("dni")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("firstname")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("id_address")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("id_country")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("id_customer")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("id_manufacturer")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("id_state")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("id_supplier")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("id_warehouse")
+                        .HasColumnType("int");
+
+                    b.Property<string>("lastname")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("other")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("phone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("phone_mobile")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("postcode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("vat_number")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AddressPrestashop");
+                });
+
             modelBuilder.Entity("partner_aluro.Models.Adress1rozliczeniowy", b =>
                 {
                     b.Property<int>("Adres1rozliczeniowyId")
@@ -201,7 +286,6 @@ namespace partner_aluro.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Regon")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("StatusNip")
@@ -224,7 +308,6 @@ namespace partner_aluro.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Wojewodztwo")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Adres1rozliczeniowyId");
@@ -254,10 +337,10 @@ namespace partner_aluro.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("KodPocztowy")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Kraj")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Miasto")
@@ -271,6 +354,7 @@ namespace partner_aluro.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Ulica")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserID")
@@ -341,6 +425,9 @@ namespace partner_aluro.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
+                    b.Property<bool?>("Newsletter")
+                        .HasColumnType("bit");
+
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -359,6 +446,9 @@ namespace partner_aluro.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("PolitykaPrywatnosci")
                         .HasColumnType("bit");
 
                     b.Property<string>("SecurityStamp")
@@ -392,17 +482,41 @@ namespace partner_aluro.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("partner_aluro.Models.Cart", b =>
+                {
+                    b.Property<string>("CartId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CartsId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CartId");
+
+                    b.ToTable("Carts");
+                });
+
             modelBuilder.Entity("partner_aluro.Models.CartItem", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("CartItemId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CartItemId"), 1L, 1);
 
                     b.Property<string>("CartId")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CartsId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("Data")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
@@ -410,9 +524,16 @@ namespace partner_aluro.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("CartItemId");
+
+                    b.HasIndex("CartsId");
 
                     b.HasIndex("ProductId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("CartItems");
                 });
@@ -452,6 +573,88 @@ namespace partner_aluro.Migrations
                     b.ToTable("Category");
                 });
 
+            modelBuilder.Entity("partner_aluro.Models.ContactPrestashop", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Idcustommer")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("active")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("birthday")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("company")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("date_add")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("date_upd")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("deleted")
+                        .HasColumnType("int");
+
+                    b.Property<string>("email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("id_default_group")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("id_gender")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("id_id_lang")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("id_risk")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("id_shop")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("id_shop_group")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("is_quest")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("newsletter_date_add")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("note")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("optin")
+                        .HasColumnType("int");
+
+                    b.Property<string>("passwd")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("secure_key")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("website")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ContactsPrestashop");
+                });
+
             modelBuilder.Entity("partner_aluro.Models.ImageModel", b =>
                 {
                     b.Property<int>("ImageId")
@@ -461,7 +664,14 @@ namespace partner_aluro.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ImageId"), 1L, 1);
 
                     b.Property<string>("ImageName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("ImageNameCompress250x250")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ImageSliderID")
+                        .HasColumnType("int");
 
                     b.Property<string>("Opis")
                         .HasColumnType("nvarchar(max)");
@@ -472,20 +682,108 @@ namespace partner_aluro.Migrations
                     b.Property<int?>("ProductImagesId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("SliderIds")
+                        .HasColumnType("int");
+
                     b.Property<string>("Tytul")
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("fullPath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("kolejnosc")
                         .HasColumnType("int");
 
                     b.Property<string>("path")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("pathImageCompress250x250")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ImageId");
 
+                    b.HasIndex("ImageSliderID");
+
                     b.HasIndex("ProductImagesId");
 
                     b.ToTable("Images");
+                });
+
+            modelBuilder.Entity("partner_aluro.Models.MetodyDostawy", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Nazwa")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Opis")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SzczegolowyOpis")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MetodyDostawy");
+                });
+
+            modelBuilder.Entity("partner_aluro.Models.MetodyPlatnosci", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Nazwa")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Opis")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SzczegolowyOpis")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MetodyPlatnosci");
+                });
+
+            modelBuilder.Entity("partner_aluro.Models.Newsletter", b =>
+                {
+                    b.Property<int>("NewsletterID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("NewsletterID"), 1L, 1);
+
+                    b.Property<string>("MessagerBody")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nazwa")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Tytul")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("contentEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("NewsletterID");
+
+                    b.ToTable("Newsletter");
                 });
 
             modelBuilder.Entity("partner_aluro.Models.Order", b =>
@@ -496,6 +794,9 @@ namespace partner_aluro.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<bool>("AdresDostawyInny")
+                        .HasColumnType("bit");
+
                     b.Property<int>("AdressDostawyAdres2dostawyId")
                         .HasColumnType("int");
 
@@ -503,6 +804,9 @@ namespace partner_aluro.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MessageToOrder")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MetodaDostawy")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MetodaPlatnosci")
@@ -516,9 +820,6 @@ namespace partner_aluro.Migrations
 
                     b.Property<decimal?>("RabatZamowienia")
                         .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("SposobDostawy")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("StanZamowienia")
                         .HasColumnType("int");
@@ -587,10 +888,10 @@ namespace partner_aluro.Migrations
                     b.Property<decimal>("CenaProduktu")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<decimal?>("CenaProduktuDetal")
+                    b.Property<decimal>("CenaProduktuDetal")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<decimal?>("CenaPromocyja")
+                    b.Property<decimal>("CenaPromocyja")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime?>("DataDodania")
@@ -634,7 +935,7 @@ namespace partner_aluro.Migrations
                     b.Property<int>("ProductImagesId")
                         .HasColumnType("int");
 
-                    b.Property<bool?>("Promocja")
+                    b.Property<bool>("Promocja")
                         .HasColumnType("bit");
 
                     b.Property<int?>("SubCategoryId")
@@ -699,6 +1000,246 @@ namespace partner_aluro.Migrations
                     b.ToTable("ProductCategory");
                 });
 
+            modelBuilder.Entity("partner_aluro.Models.ProductNazwyPrestashop", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("available_later")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("available_now")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("description_short")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("id_lang")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("id_product")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("id_shop")
+                        .HasColumnType("int");
+
+                    b.Property<string>("link_rewrite")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("meta_description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("meta_keywords")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("meta_title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ProductsNamePrestashop");
+                });
+
+            modelBuilder.Entity("partner_aluro.Models.ProductPrestashop", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<byte?>("active")
+                        .HasColumnType("tinyint");
+
+                    b.Property<decimal?>("additional_shipping_cost")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<byte?>("advanced_stock_management")
+                        .HasColumnType("tinyint");
+
+                    b.Property<string>("available_date")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte?>("available_for_order")
+                        .HasColumnType("tinyint");
+
+                    b.Property<int?>("cache_default_attribute")
+                        .HasColumnType("int");
+
+                    b.Property<byte?>("cache_has_attachments")
+                        .HasColumnType("tinyint");
+
+                    b.Property<byte?>("cache_is_pack")
+                        .HasColumnType("tinyint");
+
+                    b.Property<int?>("condition")
+                        .HasColumnType("int");
+
+                    b.Property<byte?>("customizable")
+                        .HasColumnType("tinyint");
+
+                    b.Property<string>("date_add")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("date_upd")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal?>("depth")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("ean13")
+                        .HasMaxLength(13)
+                        .HasColumnType("nvarchar(13)");
+
+                    b.Property<decimal?>("ecotax")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal?>("height")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int?>("id_category_default")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("id_manufacturer")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("id_product")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("id_product_redirected")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("id_shop_default")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("id_supplier")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("id_tax_rules_group")
+                        .HasColumnType("int");
+
+                    b.Property<byte?>("indexed")
+                        .HasColumnType("tinyint");
+
+                    b.Property<byte?>("is_virtual")
+                        .HasColumnType("tinyint");
+
+                    b.Property<string>("location")
+                        .HasMaxLength(64)
+                        .HasColumnType("nvarchar(64)");
+
+                    b.Property<int?>("minimal_quantity")
+                        .HasColumnType("int");
+
+                    b.Property<byte?>("on_sale")
+                        .HasColumnType("tinyint");
+
+                    b.Property<byte?>("online_only")
+                        .HasColumnType("tinyint");
+
+                    b.Property<int?>("out_of_stock")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("pack_stock_type")
+                        .HasColumnType("int");
+
+                    b.Property<decimal?>("price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int?>("quantity")
+                        .HasColumnType("int");
+
+                    b.Property<byte?>("quantity_discount")
+                        .HasColumnType("tinyint");
+
+                    b.Property<string>("reference")
+                        .HasMaxLength(32)
+                        .HasColumnType("nvarchar(32)");
+
+                    b.Property<byte?>("show_price")
+                        .HasColumnType("tinyint");
+
+                    b.Property<string>("supplier_reference")
+                        .HasMaxLength(32)
+                        .HasColumnType("nvarchar(32)");
+
+                    b.Property<byte?>("text_fields")
+                        .HasColumnType("tinyint");
+
+                    b.Property<decimal?>("unit_price_ratio")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("unity")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("upc")
+                        .HasMaxLength(12)
+                        .HasColumnType("nvarchar(12)");
+
+                    b.Property<byte?>("uploadable_files")
+                        .HasColumnType("tinyint");
+
+                    b.Property<byte?>("visibility")
+                        .HasColumnType("tinyint");
+
+                    b.Property<decimal?>("weight")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal?>("wholesale_price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal?>("width")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ProductsPrestashop");
+                });
+
+            modelBuilder.Entity("partner_aluro.Models.ProductQuantityPrestashop", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+
+                    b.Property<int>("depends_on_stock")
+                        .HasColumnType("int");
+
+                    b.Property<int>("id_product")
+                        .HasColumnType("int");
+
+                    b.Property<int>("id_product_attribute")
+                        .HasColumnType("int");
+
+                    b.Property<int>("id_shop")
+                        .HasColumnType("int");
+
+                    b.Property<int>("id_stock_available")
+                        .HasColumnType("int");
+
+                    b.Property<int>("out_of_stock")
+                        .HasColumnType("int");
+
+                    b.Property<int>("quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.ToTable("ProductsQuantityPrestashop");
+                });
+
             modelBuilder.Entity("partner_aluro.Models.ProfilDzialalnosci", b =>
                 {
                     b.Property<int>("Id")
@@ -720,6 +1261,83 @@ namespace partner_aluro.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ProfileDzialalnosci");
+                });
+
+            modelBuilder.Entity("partner_aluro.Models.Setting", b =>
+                {
+                    b.Property<int>("SettingID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SettingID"), 1L, 1);
+
+                    b.Property<string>("Platnosci")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Regulamin")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("SliderHome1")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SliderHome2")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SliderHome3")
+                        .HasColumnType("int");
+
+                    b.HasKey("SettingID");
+
+                    b.ToTable("Setting");
+                });
+
+            modelBuilder.Entity("partner_aluro.Models.Slider", b =>
+                {
+                    b.Property<int>("ImageSliderID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ImageSliderID"), 1L, 1);
+
+                    b.Property<int?>("IdObrazek")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ImageSliderID");
+
+                    b.ToTable("Sliders");
+                });
+
+            modelBuilder.Entity("partner_aluro.Models.SMS", b =>
+                {
+                    b.Property<int>("SMSId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SMSId"), 1L, 1);
+
+                    b.Property<string>("apiKey")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("message")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("numbers")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("sender")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("SMSId");
+
+                    b.ToTable("SMS");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -818,17 +1436,31 @@ namespace partner_aluro.Migrations
 
             modelBuilder.Entity("partner_aluro.Models.CartItem", b =>
                 {
+                    b.HasOne("partner_aluro.Models.Cart", null)
+                        .WithMany("CartItems")
+                        .HasForeignKey("CartsId");
+
                     b.HasOne("partner_aluro.Models.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("partner_aluro.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
                     b.Navigation("Product");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("partner_aluro.Models.ImageModel", b =>
                 {
+                    b.HasOne("partner_aluro.Models.Slider", null)
+                        .WithMany("ObrazkiDostepneWSliderze")
+                        .HasForeignKey("ImageSliderID");
+
                     b.HasOne("partner_aluro.Models.Product", "Product")
                         .WithMany("Product_Images")
                         .HasForeignKey("ProductImagesId");
@@ -913,6 +1545,11 @@ namespace partner_aluro.Migrations
                     b.Navigation("Orders");
                 });
 
+            modelBuilder.Entity("partner_aluro.Models.Cart", b =>
+                {
+                    b.Navigation("CartItems");
+                });
+
             modelBuilder.Entity("partner_aluro.Models.Category", b =>
                 {
                     b.Navigation("Produkty");
@@ -933,6 +1570,11 @@ namespace partner_aluro.Migrations
             modelBuilder.Entity("partner_aluro.Models.ProfilDzialalnosci", b =>
                 {
                     b.Navigation("UserProfilDzialalnosci");
+                });
+
+            modelBuilder.Entity("partner_aluro.Models.Slider", b =>
+                {
+                    b.Navigation("ObrazkiDostepneWSliderze");
                 });
 #pragma warning restore 612, 618
         }
