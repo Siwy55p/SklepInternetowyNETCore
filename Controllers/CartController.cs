@@ -45,6 +45,14 @@ namespace partner_aluro.Controllers
             return Redirect(returnUrl);
         }
 
+        public async Task<IActionResult> Lista()
+        {
+            List<CartItem> lista = _context.CartItems.ToList();
+
+            return View(lista);
+
+            //return View(vm);
+        }
 
         public async Task<IActionResult> Index()
         {
