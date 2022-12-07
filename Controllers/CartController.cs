@@ -50,6 +50,12 @@ namespace partner_aluro.Controllers
 
             List<CartItem> lista = _context.CartItems.Include(p => p.Product).Include(u => u.User).ToList();
 
+            //lista.GroupBy(x => x.CartId, (x, y) => new
+            //{
+            //    y.CartId = x.CartId,
+
+            //}).ToList();
+
             return View(lista);
         }
 
