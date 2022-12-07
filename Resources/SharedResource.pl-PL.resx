@@ -891,4 +891,25 @@
   <data name="Poszewki" xml:space="preserve">
     <value>Poszewki</value>
   </data>
+  <data name="Głębokość:" xml:space="preserve">
+    <value>Głębokość:</value>
+  </data>
+  <data name="Materiał:" xml:space="preserve">
+    <value>Materiał:</value>
+  </data>
+  <data name="Pakowanie:" xml:space="preserve">
+    <value>Pakowanie:</value>
+  </data>
+  <data name="Produkt jest już niedostępny." xml:space="preserve">
+    <value>Produkt jest już niedostępny.</value>
+  </data>
+  <data name="Specyfikacja produktu:" xml:space="preserve">
+    <value>Specyfikacja produktu:</value>
+  </data>
+  <data name="Szerokość:" xml:space="preserve">
+    <value>Szerokość:</value>
+  </data>
+  <data name="Wysokość:" xml:space="preserve">
+    <value>Wysokość:</value>
+  </data>
 </root>

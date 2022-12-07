@@ -78,7 +78,7 @@
 
                                 }
                         <div class="row">
-                                <div class="col justify-content-end text-end">
+                                <div class="col justify-content-end">
                                     @language.Getkey("CenaHurtowa"): @language.GetCurrently(Model.CenaProduktu, Constants.myNumberFormatInfo).ToString("C", Constants.myNumberFormatInfo) @language.Getkey("(netto)")
                                 </div>
                                 <div class="col">
@@ -86,8 +86,8 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col justify-content-end text-end">
-                                    @language.GetCurrently(@Cena_brutto, Constants.myNumberFormatInfo).ToString("C",Constants.myNumberFormatInfo) <span class="brutto">@language.Getkey("(brutto)")</span>
+                                <div class="col justify-content-end">
+                                    <span class="hide invisible">@language.Getkey("CenaHurtowa"):</span> @language.GetCurrently(@Cena_brutto, Constants.myNumberFormatInfo).ToString("C",Constants.myNumberFormatInfo) <span class="brutto">@language.Getkey("(brutto)")</span>
                                 </div>
                                 <div class="col">
 
@@ -109,7 +109,7 @@
                             <div class="row card-bar-action align-items-center" >
                                     @if(Model.Ilosc <= 0)
                                     {
-                                        <div>Produkt jest już niedostępny.</div>
+                                        <div>@language.Getkey("Produkt jest już niedostępny.")</div>
                                     }
                                     else
                                     {

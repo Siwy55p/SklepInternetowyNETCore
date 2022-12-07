@@ -888,4 +888,25 @@
   <data name="Świeczniki, Lampiony" xml:space="preserve">
     <value>Leuchter, Laternen</value>
   </data>
+  <data name="Głębokość:" xml:space="preserve">
+    <value>Tiefe:</value>
+  </data>
+  <data name="Materiał:" xml:space="preserve">
+    <value>Material:</value>
+  </data>
+  <data name="Pakowanie:" xml:space="preserve">
+    <value>Verpackung:</value>
+  </data>
+  <data name="Produkt jest już niedostępny." xml:space="preserve">
+    <value>Das Produkt ist nicht mehr verfügbar.</value>
+  </data>
+  <data name="Specyfikacja produktu:" xml:space="preserve">
+    <value>Produktspezifikation:</value>
+  </data>
+  <data name="Szerokość:" xml:space="preserve">
+    <value>Breite:</value>
+  </data>
+  <data name="Wysokość:" xml:space="preserve">
+    <value>Höhe:</value>
+  </data>
 </root>
