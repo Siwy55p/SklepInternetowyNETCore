@@ -6,25 +6,38 @@
 }
 
 
+.Category{
+    margin-bottom: 305px;
 
+}
 
 ::-webkit-scrollbar {
     width: 0;
     background: transparent;
 }
 
-::-webkit-scrollbar {
-    width: 0;
-    background: transparent;
+html {
+    position: relative;
+    min-height: 100%;
 }
 
 body {
     /*
     background-color: #eceff1;*/
     /*overflow-y: scroll;*/
+    margin-bottom: 270px;
+
     margin: 0;
     padding: 0;
 }
+.footer {
+    z-index: 1;
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    height: 275px;
+}
+
 
 a {
     color: black;
@@ -367,7 +380,6 @@ a.kategoria_class_menu {
     max-width: 400px;
 }
 /*CartStatus prawe menu zamowienia koniec*/
-
 
 
 .brutto {

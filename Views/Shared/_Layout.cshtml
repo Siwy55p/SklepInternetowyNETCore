@@ -26,7 +26,6 @@
     @RenderSection("LinkStyleHead", required: false)
 </head>
 <body>
-
         @{
             @inject LanguageService language
         }
@@ -52,13 +51,12 @@
         </div>
 
     <!-- Footer -->
-    <footer class="text-center text-lg-start bg-light text-muted">
+    <footer class="footer text-center text-lg-start bg-light text-muted">
        @* <partial name="_CookieConsentPartial" />*@
         @await Html.PartialAsync("_Footer")
 
     </footer>
     <!-- Footer -->
-
     <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js" integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
