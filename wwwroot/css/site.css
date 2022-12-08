@@ -5,11 +5,10 @@
     }
 }
 
-
-.Category{
+.RenderBody {
     margin-bottom: 305px;
-
 }
+
 
 ::-webkit-scrollbar {
     width: 0;
