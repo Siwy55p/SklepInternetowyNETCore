@@ -52,7 +52,11 @@ namespace partner_aluro.Controllers
 
             IEnumerable<IGrouping<string, CartItem>> g = lista.GroupBy(b => b.CartId);
 
-
+            CartOrderViewModel vm = new CartOrderViewModel
+            {
+                cartItems = lista,
+                group = g
+            };
 
             //lista.GroupBy(x => x.CartId, (x, y) => new
             //{
@@ -60,8 +64,32 @@ namespace partner_aluro.Controllers
 
             //}).ToList();
 
-            return View(g);
+            return View(vm);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(string CartId)
+        {
+
+            List<CartItem> lista = _context.CartItems.Include(p => p.Product).Include(u => u.User).ToList();
+
+            IEnumerable<IGrouping<string, CartItem>> g = lista.GroupBy(b => b.CartId);
+
+            CartOrderViewModel vm = new CartOrderViewModel
+            {
+                cartItems = lista,
+                group = g
+            };
+
+            //lista.GroupBy(x => x.CartId, (x, y) => new
+            //{
+            //    y.CartId = x.CartId,
+
+            //}).ToList();
+
+            return View(vm);
+        }
+
 
         public async Task<IActionResult> Index()
         {

@@ -1,5 +1,6 @@
 ﻿@*@model List<partner_aluro.Models.CartItem>*@
-@model IEnumerable<IGrouping<string, CartItem>>
+@*@model IEnumerable<IGrouping<string, CartItem>>*@
+@model partner_aluro.ViewModels.CartOrderViewModel
 
 @*@model IEnumerable<string CartId, IEnumerable<ApplicationUser> User>*@
 
@@ -19,7 +20,7 @@
         <tbody>
 
 
-            @foreach (var item in Model)
+            @foreach (var item in Model.group)
             {
                 <tr>
                     <td>
@@ -30,6 +31,9 @@
                         {
                             @item2.User
                         }
+                    </td>
+                    <td>
+                        <button asp-controller="Cart" asp-action="Details" asp-route-CartID="@item.Key">Więcej</button>
                     </td>
                 </tr>
             

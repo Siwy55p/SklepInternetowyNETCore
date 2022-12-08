@@ -1,0 +1,215 @@
+﻿@model partner_aluro.Models.Order
+
+@{
+    ViewData["Title"] = "Detail";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+<h5>Zamówianie id: #@Model.Id z @Model.User.Imie @Model.User.Nazwisko</h5>
+
+<div class="">
+    Data: <b>@Model.OrderPlaced</b> Razem: <b>@Model.OrderTotal</b>  Produktów: <b>@Model.OrderItems.Count</b> , Status zamówienia: @Model.StanZamowienia
+    <form method="post" asp-controller="Order" asp-route-id="@Model.Id" asp-action="PDFOrder">
+        <label> </label>
+        <input type="submit" value="PDF" />
+    </form>
+</div>
+
+<div class="row">
+    <div class="col border">
+        <div class="row"><p>ZAMÓWIENIE Id:<b>#@Model.Id</b>  Metoda płatności: <b>@Model.MetodaPlatnosci</b> Metoda dostawy:<b>@Model.MetodaDostawy</b> </p>  </div>
+
+        <div class="border"><p> Wiadomosc od Klienta do zamówienia: @Model.Komentarz @Model.MessageToOrder</p></div>
+
+
+
+        @using (Html.BeginForm("ZmienStatus", "Order", FormMethod.Post))
+        {
+            <div class="row align-items-center">
+                <input type="hidden" asp-for="@Model.Id" class="form-control" aria-required="true" />
+                <div class="col">
+                    <label asp-for="@Model.StanZamowienia" class="control-label text-end">Status zamówienia:</label>
+                </div>
+                <div class="col">
+                    <select asp-for="@Model.StanZamowienia" class="form-control" asp-items="(IEnumerable<SelectListItem>)@ViewData["StanyZamowienia"]">
+                    </select>
+                </div>
+                <div class="col">
+                    <input id="Submit" type="submit" value="Aktualizuj status" />
+                </div>
+            </div>
+        }
+
+
+
+    </div>
+    <div class="col border">
+        Klient @Model.User.Imie @Model.User.Nazwisko ; @Model.User.UserName tel: @Model.AdressDostawy.Telefon , @Model.adresRozliczeniowy.Telefon
+
+        <div class="row">
+            <div class="col border">
+                Dane adresowe:<br />
+                <b> e-mail:</b> @Model.User.UserName <br />
+                Konto zarejestrowane: @Model.User.DataZałożenia <br />
+                @Model.User.NazwaFirmy<br />
+
+            </div>
+            <div class="col border">
+
+
+
+                @using (Html.BeginForm("ZapiszNotatke", "Order", FormMethod.Post))
+                {
+
+                    @Html.HiddenFor(h=>Model.Id)
+                    @Html.HiddenFor(h=>Model.User.Id)
+                    @*
+                <label asp-for="@Model.Id" class="form-label">Order ID</label>
+                <input asp-for="@Model.Id" class="form-control" autocomplete="Id" aria-required="true" />
+                *@
+                    <div class="form-group">
+                        <label for="@Model.User.NotatkaOsobista">Notatka osobista</label>
+                        <textarea asp-for="@Model.User.NotatkaOsobista" class="form-control" id="NotatkaOsobista" value="@Model.User.NotatkaOsobista" rows="4" placeholder="notatka"></textarea>
+                    </div>
+                    @* <button asp-controller="Order" asp-action="ZapiszNotatke" value="@Model.User.NotatkaOsobista" class="w-100 btn btn-primary btn-lg" type="submit">Zapisz</button>*@
+                    <input id="Submit" type="submit" value="Zapisz" />
+                    @*<a asp-controller="Order" asp-action="ZapiszNotatke" asp-route-id="UserID=@Model.User.Id">ZapiszNotatke</a>*@
+                }
+            </div>
+        </div>
+
+        <div class="row">
+
+            <ul class="nav nav-tabs">
+                <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#awysylki">Adres wysyłki</a></li>
+                <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#arozliczeniowy">Adres rozliczeniowy</a></li>
+            </ul>
+        </div>
+        <div class="tab-content">
+            <div class="tab-pane active" id="awysylki">
+                <div class="row">
+                    <div class="col">
+                        @*<p>@Model.User.NazwaFirmy</p>*@
+                        <p>
+                            @Model.AdressDostawy.Imie @Model.AdressDostawy.Nazwisko<br />
+                            ul. @Model.AdressDostawy.Ulica<br />
+                            Kod-Pocztowy: @Model.AdressDostawy.KodPocztowy<br />
+                            Miasto: @Model.AdressDostawy.Miasto<br />
+                            @Model.AdressDostawy.Kraj<br />
+                            @Model.AdressDostawy.Telefon
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="arozliczeniowy">
+                <div class="row">
+                    <div class="col">
+                        <p>
+                            @Model.User.NazwaFirmy<br />
+                            ul. @Model.adresRozliczeniowy.Ulica<br />
+                            Kod-pocztowy: @Model.adresRozliczeniowy.KodPocztowy<br />
+                            Miasto: @Model.adresRozliczeniowy.Miasto<br />
+                            @Model.adresRozliczeniowy.Kraj<br />
+                            @Model.adresRozliczeniowy.Telefon<br />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+@if (Model.OrderItems.Count > 0)
+{
+    <div class="row">
+        <div class="col-md-12 mb-3">
+            <div class="card">
+                <div class="card-header">
+                    <span><i class="bi bi-table me-2"></i></span>Pozycje zamówienia
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="example"
+                           class="table table-striped data-table"
+                           style="width: 100%">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Obrazek</th>
+                                    <th>Nazwa produktu</th>
+                                    <th>Symbol</th>
+                                    <th>Cena jednostkowa produktu</th>
+                                    <th>Ilość</th>
+                                    <th>Razem</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.OrderItems)
+                                {
+                                    <tr>
+                                        @{
+
+                                            var Cena_brutto = item.Product.CenaProduktu * partner_aluro.Core.Constants.Vat;
+
+                                            if (/*item.Product.CenaPromocyja != null &&*/ item.Product.Promocja == true)
+                                            {
+                                                Cena_brutto = item.Product.CenaPromocyja * partner_aluro.Core.Constants.Vat;
+                                            }
+
+
+                                            var CenaJednostkowa_netto = item.Product.CenaProduktu;
+                                            if (/*item.Product.CenaPromocyja != null &&*/ item.Product.Promocja == true)
+                                            {
+                                                CenaJednostkowa_netto = item.Product.CenaPromocyja;
+                                            }
+
+
+                                            var CenaJednostkowa_brutto = Cena_brutto;
+
+
+                                            if (partner_aluro.Core.Constants.Rabat >= 0)
+                                            {
+                                                CenaJednostkowa_netto = item.Product.CenaProduktu * (1 - (partner_aluro.Core.Constants.Rabat / 100));
+                                                CenaJednostkowa_brutto = Cena_brutto * (1 - (partner_aluro.Core.Constants.Rabat / 100));
+                                            }
+
+                                            var ProductTotal = CenaJednostkowa_brutto * item.Quantity;
+
+                                            //decimal cenaJednostkowa = item.Product.CenaProduktu * (1 - ((decimal)Model.RabatZamowienia / 100));
+                                            //decimal cenaJednostkowaIlosc = cenaJednostkowa * @item.Quantity;
+                                        }
+                                        <td>@item.Product.ProductId</td>
+                                        <td><img class="img-thumbnail" src="~/images/produkty/@item.Product.Symbol/@item.Product.ImageUrl" alt="@item.Product.Name" style="width:75px;height:75px;"></td>
+                                        <td>@item.Product.Name</td>
+                                        <td>@item.Product.Symbol</td>
+                                        <td>@CenaJednostkowa_brutto.ToString("C")</td>
+                                        <td>@item.Quantity</td>
+                                        <td>@ProductTotal.ToString("C")</td>
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th>Suma:</th>
+                                    <th>@Model.OrderTotal.ToString("C")</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a class="nav-link px-3" asp-area="" asp-controller="Order" asp-action="ListaZamowien"> Wróc do listy</a>
+
+    </div>
+
+}
+
+
