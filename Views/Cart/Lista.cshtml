@@ -29,11 +29,11 @@
                     <td>
                         @foreach (var item2 in item)
                         {
-                            @item2.User
+                            @item2.CartId
                         }
                     </td>
                     <td>
-                        <button asp-controller="Cart" asp-action="Details" asp-route-CartID="@item.Key">Więcej</button>
+                        <a class="btn btn-succes" asp-controller="Cart" asp-action="Details" asp-route-CartID="@item.Key">Więcej</a>
                     </td>
                 </tr>
             

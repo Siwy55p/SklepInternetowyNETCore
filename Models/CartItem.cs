@@ -8,9 +8,5 @@ namespace partner_aluro.Models
         public Product Product { get; set; }
         public int Quantity { get; set; }
         public string CartId { get; set; }
-
-        public ApplicationUser User { get; set; }
-
-        public DateTime Data { get; set; }
     }
 }

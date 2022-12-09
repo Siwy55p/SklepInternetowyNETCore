@@ -48,7 +48,7 @@ namespace partner_aluro.Controllers
         public async Task<IActionResult> Lista()
         {
 
-            List<CartItem> lista = _context.CartItems.Include(p => p.Product).Include(u => u.User).ToList();
+            List<CartItem> lista = _context.CartItems.Include(p => p.Product).ToList();
 
             IEnumerable<IGrouping<string, CartItem>> g = lista.GroupBy(b => b.CartId);
 
@@ -71,12 +71,22 @@ namespace partner_aluro.Controllers
         public async Task<IActionResult> Details(string CartId)
         {
 
-            List<CartItem> lista = _context.CartItems.Include(p => p.Product).Include(u => u.User).ToList();
+            List<CartItem> lista = _context.CartItems.Include(p => p.Product).Where(x=>x.CartId == CartId).ToList();
+
+            Cart cart = new Cart();
+
+            //cart.CartItems = await cart.GetAllCartItemsAsync(CartId);
+            cart.CartsId = CartId;
+            cart.CartItems = lista;
+
+            //cart.RazemBrutto = cart.GetCartTotalBrutto(CartId);
+            //cart.RazemNetto = cart.GetCartTotalNetto(CartId);
 
             IEnumerable<IGrouping<string, CartItem>> g = lista.GroupBy(b => b.CartId);
 
             CartOrderViewModel vm = new CartOrderViewModel
             {
+                Carts = cart,
                 cartItems = lista,
                 group = g
             };

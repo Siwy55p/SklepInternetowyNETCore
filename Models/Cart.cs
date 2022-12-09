@@ -18,6 +18,11 @@ namespace partner_aluro.Models
     {
         private readonly ApplicationDbContext _context;
 
+        public Cart()
+        {
+
+        }
+
         public Cart(ApplicationDbContext context)
         {
             _context = context;
@@ -27,10 +32,16 @@ namespace partner_aluro.Models
         public string CartId { get; set; }
         public string UserId { get; set; }
 
-        public string CartsId { get; set; }
+        public string? CartsId { get; set; }
         [ForeignKey(nameof(CartsId))]
         public virtual List<CartItem> CartItems { get; set; }
 
+        [ForeignKey(nameof(UserId))]
+        public virtual ApplicationUser user { get; set; }
+
+        public decimal RazemNetto { get; set; }
+
+        public decimal RazemBrutto { get; set; }
 
         public static Cart GetCart(IServiceProvider services)
         {
@@ -44,6 +55,7 @@ namespace partner_aluro.Models
 
             var user = services.GetRequiredService<IHttpContextAccessor>().HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             session.SetString("User", user.ToString());
+
 
             return new Cart(context) { CartsId = cartId, UserId = user };
         }
@@ -72,9 +84,7 @@ namespace partner_aluro.Models
                 {
                     Product = product,
                     Quantity = quantity,
-                    CartId = CartsId,
-                    User = user,
-                    Data = DateTime.Now
+                    CartId = CartsId
                 };
 
                 _context.CartItems.Add(cartItem);
@@ -149,6 +159,15 @@ namespace partner_aluro.Models
                     .ToListAsync();
         }
 
+        public async Task<List<CartItem>> GetAllCartItemsAsync(string CartId)
+        {
+            List<CartItem> cartItem = new List<CartItem>();
+
+            return cartItem ??= await _context.CartItems.Where(ci => ci.CartId == CartId)
+                    .Include(ci => ci.Product)
+                    .ToListAsync();
+        }
+
         public decimal GetCartTotalBrutto()
         {
             decimal CartTotal1 = _context.CartItems
@@ -186,6 +205,56 @@ namespace partner_aluro.Models
             decimal CartTotal = CartTotal1 + CartTotal2;
 
             CartTotal = CartTotal * (1 - (Core.Constants.Rabat / 100));
+
+            return CartTotal;
+        }
+
+        public decimal GetCartTotalBrutto(string CartId)
+        {
+
+            decimal CartTotal = 0;
+            decimal CartTotal1 = _context.CartItems
+                .Where(ci => ci.CartId == CartId && ci.Product.Promocja == false)
+                //.Where(ci=> ci.Product.Promocja == false)
+                .Select(ci => ci.Product.CenaProduktu * ci.Quantity)
+                .Sum();
+
+            decimal CartTotal2 = _context.CartItems
+                .Where(ci => ci.CartId == CartId && ci.Product.Promocja == true)
+                //.Where(ci => ci.Product.Promocja == true)
+                .Select(ci => ci.Product.CenaPromocyja * ci.Quantity)
+                .Sum();
+
+            CartTotal = CartTotal1 + CartTotal2;
+
+
+            CartTotal = CartTotal * (1 - (Core.Constants.Rabat / 100));
+
+            CartTotal = CartTotal * Core.Constants.Vat;
+
+            return CartTotal;
+        }
+        public decimal GetCartTotalNetto(string CartId)
+        {
+            CartItem cartExist = new CartItem();
+            cartExist = _context.CartItems.Where(x => x.CartId == CartId).FirstOrDefault();
+            decimal CartTotal = 0;
+            if (cartExist != null)
+            {
+                decimal CartTotal1 = _context.CartItems
+                .Where(ci => ci.CartId == CartId && ci.Product.Promocja == false)
+                .Select(ci => ci.Product.CenaProduktu * ci.Quantity)
+                .Sum();
+
+                decimal CartTotal2 = _context.CartItems
+                    .Where(ci => ci.CartId == CartId && ci.Product.Promocja == true)
+                    .Select(ci => ci.Product.CenaPromocyja * ci.Quantity)
+                    .Sum();
+
+                CartTotal = CartTotal1 + CartTotal2;
+
+                CartTotal = CartTotal * (1 - (Core.Constants.Rabat / 100));
+            }
 
             return CartTotal;
         }

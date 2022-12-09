@@ -1,42 +1,27 @@
-﻿@model partner_aluro.Models.Order
+﻿@model partner_aluro.ViewModels.CartOrderViewModel
 
 @{
     ViewData["Title"] = "Detail";
     Layout = "~/Views/Shared/_Dashboard.cshtml";
 }
 
-<h5>Zamówianie id: #@Model.Id z @Model.User.Imie @Model.User.Nazwisko</h5>
+<h5>Zamówianie id: #@Model.Carts.CartId z </h5>
 
 <div class="">
-    Data: <b>@Model.OrderPlaced</b> Razem: <b>@Model.OrderTotal</b>  Produktów: <b>@Model.OrderItems.Count</b> , Status zamówienia: @Model.StanZamowienia
-    <form method="post" asp-controller="Order" asp-route-id="@Model.Id" asp-action="PDFOrder">
-        <label> </label>
-        <input type="submit" value="PDF" />
-    </form>
+    Data: <b></b> Razem:
+
 </div>
 
 <div class="row">
     <div class="col border">
-        <div class="row"><p>ZAMÓWIENIE Id:<b>#@Model.Id</b>  Metoda płatności: <b>@Model.MetodaPlatnosci</b> Metoda dostawy:<b>@Model.MetodaDostawy</b> </p>  </div>
-
-        <div class="border"><p> Wiadomosc od Klienta do zamówienia: @Model.Komentarz @Model.MessageToOrder</p></div>
+        <div class="row"><p>ZAMÓWIENIE Id:<b>  </div>
 
 
 
         @using (Html.BeginForm("ZmienStatus", "Order", FormMethod.Post))
         {
             <div class="row align-items-center">
-                <input type="hidden" asp-for="@Model.Id" class="form-control" aria-required="true" />
-                <div class="col">
-                    <label asp-for="@Model.StanZamowienia" class="control-label text-end">Status zamówienia:</label>
-                </div>
-                <div class="col">
-                    <select asp-for="@Model.StanZamowienia" class="form-control" asp-items="(IEnumerable<SelectListItem>)@ViewData["StanyZamowienia"]">
-                    </select>
-                </div>
-                <div class="col">
-                    <input id="Submit" type="submit" value="Aktualizuj status" />
-                </div>
+                
             </div>
         }
 
@@ -44,37 +29,18 @@
 
     </div>
     <div class="col border">
-        Klient @Model.User.Imie @Model.User.Nazwisko ; @Model.User.UserName tel: @Model.AdressDostawy.Telefon , @Model.adresRozliczeniowy.Telefon
+        Klient
 
         <div class="row">
             <div class="col border">
-                Dane adresowe:<br />
-                <b> e-mail:</b> @Model.User.UserName <br />
-                Konto zarejestrowane: @Model.User.DataZałożenia <br />
-                @Model.User.NazwaFirmy<br />
+               
 
             </div>
             <div class="col border">
 
 
 
-                @using (Html.BeginForm("ZapiszNotatke", "Order", FormMethod.Post))
-                {
-
-                    @Html.HiddenFor(h=>Model.Id)
-                    @Html.HiddenFor(h=>Model.User.Id)
-                    @*
-                <label asp-for="@Model.Id" class="form-label">Order ID</label>
-                <input asp-for="@Model.Id" class="form-control" autocomplete="Id" aria-required="true" />
-                *@
-                    <div class="form-group">
-                        <label for="@Model.User.NotatkaOsobista">Notatka osobista</label>
-                        <textarea asp-for="@Model.User.NotatkaOsobista" class="form-control" id="NotatkaOsobista" value="@Model.User.NotatkaOsobista" rows="4" placeholder="notatka"></textarea>
-                    </div>
-                    @* <button asp-controller="Order" asp-action="ZapiszNotatke" value="@Model.User.NotatkaOsobista" class="w-100 btn btn-primary btn-lg" type="submit">Zapisz</button>*@
-                    <input id="Submit" type="submit" value="Zapisz" />
-                    @*<a asp-controller="Order" asp-action="ZapiszNotatke" asp-route-id="UserID=@Model.User.Id">ZapiszNotatke</a>*@
-                }
+               
             </div>
         </div>
 
@@ -91,12 +57,7 @@
                     <div class="col">
                         @*<p>@Model.User.NazwaFirmy</p>*@
                         <p>
-                            @Model.AdressDostawy.Imie @Model.AdressDostawy.Nazwisko<br />
-                            ul. @Model.AdressDostawy.Ulica<br />
-                            Kod-Pocztowy: @Model.AdressDostawy.KodPocztowy<br />
-                            Miasto: @Model.AdressDostawy.Miasto<br />
-                            @Model.AdressDostawy.Kraj<br />
-                            @Model.AdressDostawy.Telefon
+                            
                         </p>
                     </div>
                 </div>
@@ -105,12 +66,7 @@
                 <div class="row">
                     <div class="col">
                         <p>
-                            @Model.User.NazwaFirmy<br />
-                            ul. @Model.adresRozliczeniowy.Ulica<br />
-                            Kod-pocztowy: @Model.adresRozliczeniowy.KodPocztowy<br />
-                            Miasto: @Model.adresRozliczeniowy.Miasto<br />
-                            @Model.adresRozliczeniowy.Kraj<br />
-                            @Model.adresRozliczeniowy.Telefon<br />
+                           
                     </div>
                 </div>
             </div>
@@ -121,7 +77,7 @@
 
 
 
-@if (Model.OrderItems.Count > 0)
+@if (Model.Carts.CartItems.Count > 0)
 {
     <div class="row">
         <div class="col-md-12 mb-3">
@@ -146,7 +102,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (var item in Model.OrderItems)
+                                @foreach (var item in Model.Carts.CartItems)
                                 {
                                     <tr>
                                         @{
@@ -198,7 +154,7 @@
                                     <th></th>
                                     <th></th>
                                     <th>Suma:</th>
-                                    <th>@Model.OrderTotal.ToString("C")</th>
+                                    <th>@Model.Carts.GetCartTotalBrutto(Model.Carts.CartId.ToString()).ToString("C")</th>
                                 </tr>
                             </tfoot>
                         </table>

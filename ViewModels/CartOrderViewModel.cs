@@ -12,7 +12,7 @@ namespace partner_aluro.ViewModels
 
         public List<CartItem>? cartItems { get; set; }
 
-        public IEnumerable<IGrouping<string, CartItem>> group { get; set; }
+        public IEnumerable<IGrouping<string, CartItem>>? group { get; set; }
     }
 
 

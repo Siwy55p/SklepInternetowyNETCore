@@ -73,8 +73,9 @@ namespace partner_aluro.Controllers
             var cartItems = await _cart.GetAllCartItemsAsync();
             _cart.CartItems = cartItems;
             ModelState.Remove("Orders.UserID");
+            ModelState.Remove("Orders.group");
 
-            if(CartOrder.Orders.AdresDostawyInny == false)
+            if (CartOrder.Orders.AdresDostawyInny == false)
             {
 
                 ModelState.Remove("Orders.AdressDostawy.Ulica");
