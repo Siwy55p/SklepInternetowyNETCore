@@ -12,7 +12,6 @@ using partner_aluro.Services;
 
 namespace partner_aluro.Controllers
 {
-    [Authorize]
     public class GenerateXMLController : Controller
     {
 
