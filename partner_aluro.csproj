@@ -13,6 +13,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="web.config.bak" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="datatables.net-fixedheader-dt" Version="3.3.1" />
     <PackageReference Include="DeepL.net" Version="1.5.0" />
     <PackageReference Include="iTextSharp" Version="5.5.13.3" />
