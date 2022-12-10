@@ -24,6 +24,8 @@ namespace partner_aluro.Controllers
 
         public readonly ApplicationDbContext _content;
 
+        private static IWebHostEnvironment _hostingEnvironment;
+
         public GenerateXMLController(IWebHostEnvironment hostEnvironment, ApplicationDbContext content, IImageService imageService, IProductService productService)
         {
             _webHostEnvironment = hostEnvironment;
@@ -31,6 +33,21 @@ namespace partner_aluro.Controllers
             _imageService = imageService;
             _productService = productService;   
         }
+
+        public static bool IsInitialized { get; private set; }
+        public static void Initialize(IWebHostEnvironment hostEnvironment)
+        {
+            if (IsInitialized)
+            {
+                //throw new InvalidOperationException("Object already initialized");
+
+            }
+
+            _hostingEnvironment = hostEnvironment;
+            IsInitialized = true;
+        }
+
+
         public static string _webRootPath = "http://partneralluro.hostingasp.pl/";
 
         public static string _adresStrony = "http://partneralluro.hostingasp.pl";
@@ -222,8 +239,15 @@ namespace partner_aluro.Controllers
         public async Task<IActionResult> IndexAsync()
         {
 
+            Initialize(_webHostEnvironment);
+
+
+            if (!IsInitialized)
+                throw new InvalidOperationException("Object is not initialized");
+
+
             //patch root www
-            string webRootPath = _webHostEnvironment.WebRootPath;
+            string webRootPath = _hostingEnvironment.WebRootPath;
 
             var basePath = Path.Combine(webRootPath, "\\modules\\nvn_export_products\\download\\");
 
@@ -245,8 +269,18 @@ namespace partner_aluro.Controllers
         public static string GenerateProductXMLAsync(ApplicationDbContext _content, IWebHostEnvironment _webHostEnvironment)
         {
 
-            ////patch root www
-            string webRootPath = _webHostEnvironment.WebRootPath;
+            Initialize(_webHostEnvironment);
+
+
+            if (!IsInitialized)
+                throw new InvalidOperationException("Object is not initialized");
+
+
+            //patch root www
+            string webRootPath = _hostingEnvironment.WebRootPath;
+
+            //////patch root www
+            //string webRootPath = _webHostEnvironment.WebRootPath;
 
             var produkty = _content.Products.Where(p => p.Ukryty == false).Where(p => p.CategoryNavigation.Aktywny == true).Include(p => p.Product_Images).Include(p => p.CategoryNavigation).OrderBy(p => p.Symbol).ToList();
 
