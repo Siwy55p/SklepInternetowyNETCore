@@ -303,18 +303,20 @@ namespace partner_aluro.Controllers
                 //}
 
 
-                var last = produkty[i].Product_Images.Last();
+
+
+                var last = produkty[i].Product_Images.LastOrDefault();
 
                 foreach (var image in produkty[i].Product_Images)
                 {
                     if (image.Equals(last))
                     {
-                        imagePath += _adresStrony + @"/" + image.path + @"/" + image.ImageName;
+                        imagePath += _adresStrony + @"/" + image.path  + image.ImageName;
 
                     }
                     else
                     {
-                        imagePath += _adresStrony + @"/" + image.path + @"/" + image.ImageName + ", ";
+                        imagePath += _adresStrony + @"/" + image.path  + image.ImageName + ", ";
                     }
                 }
 

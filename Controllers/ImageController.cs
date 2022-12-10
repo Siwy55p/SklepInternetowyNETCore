@@ -82,7 +82,7 @@ namespace partner_aluro.Controllers
 
 
             string wwwRootPath = _webHostEnvironment.WebRootPath;
-            string path = Path.Combine(wwwRootPath + "/images/");
+            string path = Path.Combine(wwwRootPath + @"/img/");
 
             String[] imagesfiles = Directory.GetFiles(path); //get all file from path
             ViewBag.images = imagesfiles;
@@ -135,14 +135,14 @@ namespace partner_aluro.Controllers
                 string fileName = Path.GetFileNameWithoutExtension(imageModel.ImageFile.FileName);
                 string extension = Path.GetExtension(imageModel.ImageFile.FileName);
                 imageModel.ImageName =  fileName = fileName +"_"+ DateTime.Now.ToString("yymmssfff") + extension;
-                string path = Path.Combine(wwwRootPath + "/images/", fileName); 
+                string path = Path.Combine(wwwRootPath + @"/img/", fileName); 
                 using (var fileStream = new FileStream(path, FileMode.Create))
                 {
                     await imageModel.ImageFile.CopyToAsync(fileStream);
                 }
                 //insert record
-                imageModel.path = "images\\";
-                imageModel.fullPath = "images\\" + fileName;
+                imageModel.path = @"img/";
+                imageModel.fullPath = @"img/" + fileName;
                 _context.Add(imageModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -300,10 +300,10 @@ namespace partner_aluro.Controllers
 
 
 
-                            string pathCompresImage = webRootPath + "\\" + path0;
-                            string pathname = pathCompresImage + "\\" + dynamicFileName;
+                            string pathCompresImage = webRootPath + @"/" + path0;
+                            string pathname = pathCompresImage + @"/" + dynamicFileName;
                             string ImageNameCompres = "250x250_" + dynamicFileName;
-                            string pathSaveCompres = pathCompresImage + "\\" + ImageNameCompres;
+                            string pathSaveCompres = pathCompresImage + @"/" + ImageNameCompres;
 
                             string path1 = path0 + ImageNameCompres;
                             //save compres image

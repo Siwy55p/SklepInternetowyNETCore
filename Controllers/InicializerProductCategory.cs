@@ -55,7 +55,7 @@ namespace partner_aluro.Controllers
 
             foreach (var item in listaObrazkow)
             {
-                item.fullPath = item.path + "\\" + item.ImageName;
+                item.fullPath = item.path + @"/" + item.ImageName;
 
                 _context.Update(item);
                 _context.SaveChanges();
@@ -189,6 +189,42 @@ namespace partner_aluro.Controllers
 
         }
 
+        public void ImagePathZnakSpecjalny()
+        {
+            List<ImageModel> images = new List<ImageModel>();
+
+            List<ImageModel> imagines = _context.Images.ToList();
+
+            for (int i = 0; i < imagines.Count(); i++)
+            {
+                ImageModel Image = imagines[i];
+
+                string str1 = Image.path;
+                Image.path = str1.Replace(@"\", @"/");
+
+                string str2 = Image.fullPath;
+                Image.fullPath = str2.Replace(@"\", @"/");
+
+                string str3 = Image.pathImageCompress250x250;
+                Image.pathImageCompress250x250 = str3.Replace(@"\", @"/");
+
+                _context.Images.Update(Image);
+                _context.SaveChanges();
+
+
+                //for (int y = 0; y < imagines.Count(); y++)
+                //{
+                //    if (imagines[y].ImageName == Image.ImageName && imagines[y].ImageId != Image.ImageId)
+                //    {
+                //        _context.Images.Remove(imagines[y]);
+                //        _context.SaveChanges();
+                //    }
+                //}
+
+
+            }
+
+        }
 
         public void ImageNameRemoveIfDuplicate()
         {
@@ -264,9 +300,9 @@ namespace partner_aluro.Controllers
 
 
 
-                    string pathCompresImage = webRootPath + "\\" + path0;
+                    string pathCompresImage = webRootPath + @"/" + path0;
 
-                    string pathname = pathCompresImage + "\\" + dynamicFileName;
+                    string pathname = pathCompresImage + @"/" + dynamicFileName;
                     string ImageNameCompres = "250x250_" + dynamicFileName;
                     string pathSaveCompres = pathCompresImage + ImageNameCompres;
 
