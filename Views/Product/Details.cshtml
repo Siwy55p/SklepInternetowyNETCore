@@ -34,13 +34,13 @@
                             <div class="main_image">
                                 @*<a id="myLink" href="~/images/produkty/@Model.Symbol/@Model.ImageUrl" class="glightbox">*@
                                 @*<a id="myLink" href="~/images/produkty/@Model.Symbol/@Model.Product_Images.Where(x=>x.kolejnosc == 0).FirstOrDefault().ImageName" onclick="Open(this)" data-gallery="gallery" class="glightbox">*@
-                                <a id="myLink" href="~/images/produkty/@Model.Symbol/@Model.Product_Images[0].ImageName" onclick="Open(this)" data-gallery="gallery" class="glightbox">
-                                    <img class="main_image" id=featured src="~/images/produkty/@Model.Symbol/@Model.Product_Images[0].ImageName">
+                                <a id="myLink" href="~/img/p/@Model.Symbol/@Model.Product_Images[0].ImageName" onclick="Open(this)" data-gallery="gallery" class="glightbox">
+                                    <img class="main_image" id=featured src="~/img/p/@Model.Symbol/@Model.Product_Images[0].ImageName">
                                 </a>
                             </div>
 
                             <div id="slide-wrapper">
-                                <img  id="slideLeft" class="arrow" src="~/images/produktslider/arrow-left.png">
+                                <img  id="slideLeft" class="arrow" src="~/img/produktslider/arrow-left.png">
                                 <div id="slider">
                                     @foreach (var img in Model.Product_Images.OrderBy(o=>o.kolejnosc).Select((value, x) => (value,x)) )
                                     {
@@ -48,12 +48,12 @@
                                             var index = @img.x;
                                         
 
-                                        <a href="~/images/produkty/@Model.Symbol/@img.value.ImageName" class="glightbox" data-gallery="gallery">
-                                            <img id="@index" value="@img.value.kolejnosc" class="thumbnail_product" onmouseover="Over(this)" src="~/images/produkty/@Model.Symbol/@img.value.ImageName" alt="@img.value.Product" width="70px">
+                                        <a href="~/img/p/@Model.Symbol/@img.value.ImageName" class="glightbox" data-gallery="gallery">
+                                            <img id="@index" value="@img.value.kolejnosc" class="thumbnail_product" onmouseover="Over(this)" src="~/img/p/@Model.Symbol/@img.value.ImageName" alt="@img.value.Product" width="70px">
                                         </a>
                                     }
                                 </div>
-                                <img id="slideRight" class="arrow" src="~/images/produktslider/arrow-right.png">
+                                <img id="slideRight" class="arrow" src="~/img/produktslider/arrow-right.png">
                             </div>
                         </div>
 
