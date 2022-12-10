@@ -12,6 +12,7 @@ using partner_aluro.Services;
 
 namespace partner_aluro.Controllers
 {
+    [Authorize]
     public class GenerateXMLController : Controller
     {
 
@@ -30,9 +31,9 @@ namespace partner_aluro.Controllers
             _imageService = imageService;
             _productService = productService;   
         }
-        public static string _webRootPath = @"http://partneralluro.hostingasp.pl//";
+        public static string _webRootPath = "http://partneralluro.hostingasp.pl/";
 
-        public static string _adresStrony = @"http://partneralluro.hostingasp.pl";
+        public static string _adresStrony = "http://partneralluro.hostingasp.pl";
 
         //https://partneralluro.hostingasp.pl/modules/nvn_export_products/download/aluro_products_export_ldWd8HWmUY.xml
 
@@ -224,7 +225,7 @@ namespace partner_aluro.Controllers
             //patch root www
             string webRootPath = _webHostEnvironment.WebRootPath;
 
-            var basePath = Path.Combine(webRootPath, @"/modules/nvn_export_products/download/");
+            var basePath = Path.Combine(webRootPath, "\\modules\\nvn_export_products\\download\\");
 
             if (!Directory.Exists(basePath))
             {
@@ -485,7 +486,7 @@ namespace partner_aluro.Controllers
             ////patch root www
             //string webRootPath = _webHostEnvironment.WebRootPath;
 
-            var basePath = Path.Combine(webRootPath, @"/modules/nvn_export_products/download/");
+            var basePath = Path.Combine(webRootPath, "\\modules\\nvn_export_products\\download\\");
 
             if (!Directory.Exists(basePath))
             {
