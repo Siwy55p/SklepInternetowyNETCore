@@ -31,9 +31,9 @@ namespace partner_aluro.Controllers
             _imageService = imageService;
             _productService = productService;   
         }
-        public static string _webRootPath = "http:\\\\partneralluro.hostingasp.pl\\";
+        public static string _webRootPath = @"http://partneralluro.hostingasp.pl//";
 
-        public static string _adresStrony = "http:\\\\partneralluro.hostingasp.pl";
+        public static string _adresStrony = @"http://partneralluro.hostingasp.pl";
 
         //https://partneralluro.hostingasp.pl/modules/nvn_export_products/download/aluro_products_export_ldWd8HWmUY.xml
 
@@ -79,8 +79,8 @@ namespace partner_aluro.Controllers
                     using (WebClient client2 = new WebClient())
                     {
                         string webRootPath = _webHostEnvironment.WebRootPath;
-                        string path0 = "img\\p\\" + produkt.Symbol + "\\";
-                        var uploadsFolder = Path.Combine(webRootPath, "img\\p\\" + produkt.Symbol + "\\");
+                        string path0 = @"img/p/" + produkt.Symbol + @"/";
+                        var uploadsFolder = Path.Combine(webRootPath, @"img/p/" + produkt.Symbol + @"/");
                         if (!Directory.Exists(uploadsFolder))
                         {
                             Directory.CreateDirectory(uploadsFolder);
@@ -225,7 +225,7 @@ namespace partner_aluro.Controllers
             //patch root www
             string webRootPath = _webHostEnvironment.WebRootPath;
 
-            var basePath = Path.Combine(webRootPath, "\\modules\\nvn_export_products\\download\\");
+            var basePath = Path.Combine(webRootPath, @"/modules/nvn_export_products/download/");
 
             if (!Directory.Exists(basePath))
             {
@@ -309,12 +309,12 @@ namespace partner_aluro.Controllers
                 {
                     if (image.Equals(last))
                     {
-                        imagePath += _adresStrony + "\\" + image.path + "\\" + image.ImageName;
+                        imagePath += _adresStrony + @"/" + image.path + @"/" + image.ImageName;
 
                     }
                     else
                     {
-                        imagePath += _adresStrony + "\\" + image.path + "\\" + image.ImageName + ", ";
+                        imagePath += _adresStrony + @"/" + image.path + @"/" + image.ImageName + ", ";
                     }
                 }
 
@@ -484,7 +484,7 @@ namespace partner_aluro.Controllers
             ////patch root www
             //string webRootPath = _webHostEnvironment.WebRootPath;
 
-            var basePath = Path.Combine(webRootPath, "\\modules\\nvn_export_products\\download\\");
+            var basePath = Path.Combine(webRootPath, @"/modules/nvn_export_products/download/");
 
             if (!Directory.Exists(basePath))
             {
@@ -563,8 +563,8 @@ namespace partner_aluro.Controllers
                 for (int i = 1; i <= files.Count; i++)
                 {
                     //Save image to wwwroot/image
-                    string path0 = "img\\p\\";
-                    var uploadsFolder = Path.Combine(webRootPath, "img\\p\\" + product.Symbol);
+                    string path0 = @"img/p/";
+                    var uploadsFolder = Path.Combine(webRootPath, @"img/p/" + product.Symbol);
 
                     if (!Directory.Exists(uploadsFolder))
                     {
