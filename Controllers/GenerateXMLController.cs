@@ -79,8 +79,8 @@ namespace partner_aluro.Controllers
                     using (WebClient client2 = new WebClient())
                     {
                         string webRootPath = _webHostEnvironment.WebRootPath;
-                        string path0 = "images\\produkty\\" + produkt.Symbol + "\\";
-                        var uploadsFolder = Path.Combine(webRootPath, "images\\produkty\\" + produkt.Symbol + "\\");
+                        string path0 = "img\\p\\" + produkt.Symbol + "\\";
+                        var uploadsFolder = Path.Combine(webRootPath, "img\\p\\" + produkt.Symbol + "\\");
                         if (!Directory.Exists(uploadsFolder))
                         {
                             Directory.CreateDirectory(uploadsFolder);
@@ -323,7 +323,7 @@ namespace partner_aluro.Controllers
                 CDataImages = doc.CreateCDataSection(imagePath);
 
                 //images
-                XmlNode imagesNode = doc.CreateElement("images");
+                XmlNode imagesNode = doc.CreateElement("img");
                 imagesNode.AppendChild(CDataImages);
                 productNode.AppendChild(imagesNode);
 
@@ -563,8 +563,8 @@ namespace partner_aluro.Controllers
                 for (int i = 1; i <= files.Count; i++)
                 {
                     //Save image to wwwroot/image
-                    string path0 = "images\\produkty\\";
-                    var uploadsFolder = Path.Combine(webRootPath, "images\\produkty\\" + product.Symbol);
+                    string path0 = "img\\p\\";
+                    var uploadsFolder = Path.Combine(webRootPath, "img\\p\\" + product.Symbol);
 
                     if (!Directory.Exists(uploadsFolder))
                     {
