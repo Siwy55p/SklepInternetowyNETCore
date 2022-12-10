@@ -104,24 +104,24 @@ namespace partner_aluro.Services
                 for (int i = 0; i < files.Count; i++)
                 {
                     //Save image to wwwroot/image
-                    string path0 = "images\\";
+                    string path0 = "img\\";
                     if (product != null)
                     {
-                        path0 = "images\\produkty\\";
+                        path0 = "img\\p\\";
                     }
                     if (slider != null)
                     {
-                        path0 = "images\\SliderHome\\" + slider.ImageSliderID + "\\";
+                        path0 = "img\\SliderHome\\" + slider.ImageSliderID + "\\";
                     }
 
-                    var uploadsFolder = Path.Combine(webRootPath, "images\\");
+                    var uploadsFolder = Path.Combine(webRootPath, "img\\");
                     if (product != null)
                     {
-                        uploadsFolder = Path.Combine(webRootPath, "images\\produkty\\" + product.Symbol);
+                        uploadsFolder = Path.Combine(webRootPath, "img\\p\\" + product.Symbol);
                     }
                     if (slider != null)
                     {
-                        uploadsFolder = Path.Combine(webRootPath, "images\\SliderHome\\" + slider.ImageSliderID);
+                        uploadsFolder = Path.Combine(webRootPath, "img\\SliderHome\\" + slider.ImageSliderID);
                     }
 
                     if (!Directory.Exists(uploadsFolder))

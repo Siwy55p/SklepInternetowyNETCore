@@ -56,13 +56,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\images\logo\logo.jpg" />
+    <None Include="wwwroot\img\logo\logo.jpg" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Migrations\" />
-    <Folder Include="wwwroot\images\produkty\" />
-    <Folder Include="wwwroot\images\SliderHome\" />
     <Folder Include="wwwroot\lib\Nowy folder\" />
     <Folder Include="wwwroot\modules\nvn_export_products\download\" />
     <Folder Include="wwwroot\MyLogs\" />

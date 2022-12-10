@@ -29,7 +29,9 @@ namespace partner_aluro.Controllers
         private readonly IProductCategoryService _productCategoryService;
 
        
-        public ProductController(IProductCategoryService productCategoryService, ApplicationDbContext applicationDbContext, IProductService productService, IUnitOfWorkProduct unitOfWorkProduct, IWebHostEnvironment webHostEnvironment, IImageService imageService)
+        public ProductController(IProductCategoryService productCategoryService, ApplicationDbContext applicationDbContext, 
+            IProductService productService, IUnitOfWorkProduct unitOfWorkProduct, 
+            IWebHostEnvironment webHostEnvironment, IImageService imageService)
         {
             _ProductService = productService;
             _unitOfWorkProduct = unitOfWorkProduct;
@@ -110,7 +112,8 @@ namespace partner_aluro.Controllers
             ////UploadNewFilePicture
 
 
-            if ((product.ImageUrl == null || product.ImageUrl == "") && product.Product_Images != null)  //Jesli nie ma obrazka glownego a jest obrazk [0] jako dodatkowy do wysietlenia , to wybierze ten obrazek i ustaw jako glowny.
+            if ((product.ImageUrl == null || product.ImageUrl == "") && product.Product_Images != null)  
+                //Jesli nie ma obrazka glownego a jest obrazk [0] jako dodatkowy do wysietlenia , to wybierze ten obrazek i ustaw jako glowny.
             {
 
                 if (product.Product_Images.Count >= 1)

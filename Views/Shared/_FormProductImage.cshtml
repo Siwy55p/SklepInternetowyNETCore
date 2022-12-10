@@ -14,7 +14,7 @@
 
         <div class="form-group border">
             <label asp-for="@Model.ImageUrl" class="control-label">Obrazek prezentujacy (front)</label>
-            <img id="FrontImagePrv" src="~/images/produkty/@Model.Symbol/@Model.ImageUrl" alt="Logo image" width="150" height="150" style="border:1px; margin-top:20px; margin-left:120px" />
+            <img id="FrontImagePrv" src="~/img/p/@Model.Symbol/@Model.ImageUrl" alt="Logo image" width="150" height="150" style="border:1px; margin-top:20px; margin-left:120px" />
         </div>
 
         <div class="row">
@@ -51,7 +51,7 @@
                                                 {
                                                 <tr>
                                                     <td>
-                                                            <img src="~/images/produkty/@Model.Symbol/@image.ImageName" alt="Logo image" width="100" height="100" style="border:1px; margin-top:20px;" />
+                                                            <img src="~/img/p/@Model.Symbol/@image.ImageName" alt="Logo image" width="100" height="100" style="border:1px; margin-top:20px;" />
                                                     </td>
                                                         <td>@image.kolejnosc</td>
 
