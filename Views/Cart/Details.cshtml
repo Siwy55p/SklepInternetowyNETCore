@@ -1,11 +1,11 @@
-﻿@model partner_aluro.ViewModels.CartOrderViewModel
+﻿@model partner_aluro.Models.Cart
 
 @{
     ViewData["Title"] = "Detail";
     Layout = "~/Views/Shared/_Dashboard.cshtml";
 }
 
-<h5>Zamówianie id: #@Model.Carts.CartId z </h5>
+<h5>Zamówianie id: # </h5>
 
 <div class="">
     Data: <b></b> Razem:
@@ -15,16 +15,6 @@
 <div class="row">
     <div class="col border">
         <div class="row"><p>ZAMÓWIENIE Id:<b>  </div>
-
-
-
-        @using (Html.BeginForm("ZmienStatus", "Order", FormMethod.Post))
-        {
-            <div class="row align-items-center">
-                
-            </div>
-        }
-
 
 
     </div>
@@ -76,10 +66,10 @@
 </div>
 
 
-@if (@Model.Carts != null)
+@if (@Model.CartItems != null)
 {
 
-    @if (Model.Carts.CartItems.Count > 0)
+    @if (Model.CartItems.Count > 0)
     {
         <div class="row">
             <div class="col-md-12 mb-3">
@@ -105,7 +95,7 @@
                                 </thead>
                                 <tbody>
 
-                                    @foreach (var item in Model.Carts.CartItems)
+                                    @foreach (var item in Model.CartItems)
                                     {
                                         <tr>
                                             @{
@@ -158,7 +148,7 @@
                                         <th></th>
                                         <th>Suma:</th>
                                         <th>
-                                            @Model.Carts.RazemBrutto.ToString();
+                                            @Model.RazemBrutto.ToString();
 
                                             @*@Model.Carts.GetCartTotalBrutto(Model.Carts.CartId.ToString()).ToString("C")*@
                                         
@@ -170,7 +160,7 @@
                     </div>
                 </div>
             </div>
-            <a class="nav-link px-3" asp-area="" asp-controller="Order" asp-action="ListaZamowien"> Wróc do listy</a>
+            <a class="nav-link px-3" asp-area="" asp-controller="Cart" asp-action="Lista"> Wróc do listy</a>
 
         </div>
     }

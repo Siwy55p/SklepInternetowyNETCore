@@ -1,6 +1,6 @@
 ﻿@*@model List<partner_aluro.Models.CartItem>*@
 @*@model IEnumerable<IGrouping<string, CartItem>>*@
-@model partner_aluro.ViewModels.CartOrderViewModel
+@model IEnumerable<partner_aluro.Models.Cart>
 
 @*@model IEnumerable<string CartId, IEnumerable<ApplicationUser> User>*@
 
@@ -17,20 +17,20 @@
                 <th>CartsId</th>
                 <th>Wartość</th>
                 <th>Klient</th>
-                <th>Realizacja</th>
+                <th>Zrealizowane</th>
                 <th>Data</th>
                 <th>Akcja</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model.ListCarts.Select((value,i)=>new { i, value }))
+            @foreach (var item in Model.Select((value,i)=>new { i, value }))
             {
                 <tr>
                     <td>
-                        @item.value.CartId
+                        @item.value.CartaId
                     </td>
                     <td>
-                        @item.value.CartsId
+                        @item.value.CartaId
 
                     </td>
                     <td>
@@ -48,7 +48,7 @@
                         @item.value.dataPowstania
                         </th>
                     <td>
-                        <a class="btn btn-succes" asp-controller="Cart" asp-action="Details" asp-route-CartID="@item.value.CartsId">Więcej</a>
+                        <a class="btn btn-succes" asp-controller="Cart" asp-action="Details" asp-route-CartID="@item.value.CartaId">Więcej</a>
                     </td>
                 </tr>
 

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using partner_aluro.Data;
 
@@ -11,9 +12,10 @@ using partner_aluro.Data;
 namespace partner_aluro.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221211210810_test23")]
+    partial class test23
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -482,13 +484,10 @@ namespace partner_aluro.Migrations
 
             modelBuilder.Entity("partner_aluro.Models.Cart", b =>
                 {
-                    b.Property<int>("CartID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.Property<string>("CartId")
+                        .HasColumnType("nvarchar(450)");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CartID"), 1L, 1);
-
-                    b.Property<string>("CartaId")
+                    b.Property<string>("CartsId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal?>("RazemBrutto")
@@ -506,7 +505,7 @@ namespace partner_aluro.Migrations
                     b.Property<DateTime?>("dataPowstania")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("CartID");
+                    b.HasKey("CartId");
 
                     b.HasIndex("UserId");
 
@@ -521,12 +520,12 @@ namespace partner_aluro.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CartItemId"), 1L, 1);
 
-                    b.Property<string>("CartIds")
+                    b.Property<string>("CartId")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("CartsCartID")
-                        .HasColumnType("int");
+                    b.Property<string>("CartsId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
@@ -536,7 +535,7 @@ namespace partner_aluro.Migrations
 
                     b.HasKey("CartItemId");
 
-                    b.HasIndex("CartsCartID");
+                    b.HasIndex("CartsId");
 
                     b.HasIndex("ProductId");
 
@@ -1450,17 +1449,15 @@ namespace partner_aluro.Migrations
 
             modelBuilder.Entity("partner_aluro.Models.CartItem", b =>
                 {
-                    b.HasOne("partner_aluro.Models.Cart", "Carts")
+                    b.HasOne("partner_aluro.Models.Cart", null)
                         .WithMany("CartItems")
-                        .HasForeignKey("CartsCartID");
+                        .HasForeignKey("CartsId");
 
                     b.HasOne("partner_aluro.Models.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Carts");
 
                     b.Navigation("Product");
                 });

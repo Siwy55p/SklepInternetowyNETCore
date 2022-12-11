@@ -48,95 +48,30 @@ namespace partner_aluro.Controllers
         public async Task<IActionResult> Lista()
         {
 
-            List<CartItem> lista = _context.CartItems.Include(p => p.Product).ToList();
-
-            IEnumerable<IGrouping<string, CartItem>> g = lista.GroupBy(b => b.CartId);
-
-            
-
             List<Cart> listaCart = _context.Carts
                 .Include(x=>x.user)
-                .Include(u=>u.CartItems).ToList();
+                .Include(u=>u.CartItems)
+                .ThenInclude(p => p.Product)
+                .ToList();
 
-
-            for(int i = 0; i < listaCart.Count(); i ++)
+            for(int i = 0; i < listaCart.Count(); i++)
             {
-                listaCart[i].CartItems = _context.CartItems.Where(c => c.CartId == listaCart[i].CartsId).ToList();
+                listaCart[i].RazemBrutto = listaCart[i].GetCartTotalBrutto();
             }
 
-            
-            for (int i = 0; i < listaCart.Count(); i++)
-            {
-                for (int y = 0; y < listaCart[i].CartItems.Count(); y++)
-                {
-
-                    CartItem item = listaCart[i].CartItems[y];
-                    listaCart[i].RazemBrutto += item.Product.CenaProduktu * item.Quantity;
-
-                    listaCart[i].RazemBrutto = listaCart[i].RazemBrutto * (1 - (Core.Constants.Rabat / 100));
-
-                    listaCart[i].RazemBrutto = listaCart[i].RazemBrutto * Core.Constants.Vat;
-                }
-            }
-
-
-            CartOrderViewModel vm = new CartOrderViewModel
-            {
-                ListCarts = listaCart,
-                cartItems = lista,
-                group = g
-            };
-
-
-            //lista.GroupBy(x => x.CartId, (x, y) => new
-            //{
-            //    y.CartId = x.CartId,
-
-            //}).ToList();
-
-            return View(vm);
+            return View(listaCart);
         }
 
         [HttpGet]
         public async Task<IActionResult> Details(string CartId)
         {
+            Cart cart = _context.Carts.Where(x => x.CartaId == CartId)
+                .Include(x => x.user)
+                .Include(c=>c.CartItems)
+                .ThenInclude(p=>p.Product)
+                .FirstOrDefault();
 
-            List<CartItem> lista = _context.CartItems.Include(p => p.Product).Where(x=>x.CartId == CartId).ToList();
-
-            Cart cart = new Cart();
-
-            //cart.CartItems = await cart.GetAllCartItemsAsync(CartId);
-            cart.CartsId = CartId;
-            cart.CartItems = lista;
-
-            //cart.GetCartTotalBrutto(CartId);
-
-            for(int i = 0; i < lista.Count(); i ++)
-            {
-                CartItem item = lista[i];
-                cart.RazemBrutto += item.Product.CenaProduktu * lista[i].Quantity;
-            }
-
-            cart.RazemBrutto = cart.RazemBrutto * (1 - (Core.Constants.Rabat / 100));
-
-            cart.RazemBrutto = cart.RazemBrutto * Core.Constants.Vat;
-
-            IEnumerable<IGrouping<string, CartItem>> g = lista.GroupBy(b => b.CartId);
-
-            CartOrderViewModel vm = new CartOrderViewModel
-            {
-                Carts = cart,
-                cartItems = lista,
-                group = g
-            };
-
-            //lista.GroupBy(x => x.CartId, (x, y) => new
-            //{
-            //    y.CartId = x.CartId,
-
-            //}).ToList();
-
-            return View(vm);
+            return View(cart);
         }
 
 

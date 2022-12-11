@@ -243,7 +243,7 @@ namespace partner_aluro.Controllers
                 CartOrder.Orders = order;
 
                 CreateOrder(CartOrder.Orders);
-                _cart.ClearCart();
+                //_cart.ClearCart();
 
                 EmailDto email = new EmailDto()
                 {
@@ -255,7 +255,7 @@ namespace partner_aluro.Controllers
 
                 _emailService.SendEmailAsync(email);
 
-                var cart = _context.Carts.Where(c => c.CartsId == _cart.CartsId).FirstOrDefault();
+                var cart = _context.Carts.Where(c => c.CartaId == _cart.CartaId).FirstOrDefault();
                 if(cart != null)
                 {
                     cart.Zrealizowane = true;

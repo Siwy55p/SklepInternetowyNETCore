@@ -9,12 +9,6 @@ namespace partner_aluro.ViewModels
         public Cart? Carts { get; set; }
         public Order? Orders { get; set; }
 
-
-        public List<CartItem>? cartItems { get; set; }
-        public List<Cart>? ListCarts { get; set; }
-        public IEnumerable<IGrouping<string, CartItem>>? group { get; set; }
     }
-
-
 
 }

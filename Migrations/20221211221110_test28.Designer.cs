@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using partner_aluro.Data;
 
@@ -11,9 +12,10 @@ using partner_aluro.Data;
 namespace partner_aluro.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221211221110_test28")]
+    partial class test28
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -482,14 +484,8 @@ namespace partner_aluro.Migrations
 
             modelBuilder.Entity("partner_aluro.Models.Cart", b =>
                 {
-                    b.Property<int>("CartID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CartID"), 1L, 1);
-
                     b.Property<string>("CartaId")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<decimal?>("RazemBrutto")
                         .HasColumnType("decimal(18,2)");
@@ -506,7 +502,7 @@ namespace partner_aluro.Migrations
                     b.Property<DateTime?>("dataPowstania")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("CartID");
+                    b.HasKey("CartaId");
 
                     b.HasIndex("UserId");
 
@@ -525,8 +521,8 @@ namespace partner_aluro.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("CartsCartID")
-                        .HasColumnType("int");
+                    b.Property<string>("CartsCartaId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
@@ -536,7 +532,7 @@ namespace partner_aluro.Migrations
 
                     b.HasKey("CartItemId");
 
-                    b.HasIndex("CartsCartID");
+                    b.HasIndex("CartsCartaId");
 
                     b.HasIndex("ProductId");
 
@@ -1452,7 +1448,7 @@ namespace partner_aluro.Migrations
                 {
                     b.HasOne("partner_aluro.Models.Cart", "Carts")
                         .WithMany("CartItems")
-                        .HasForeignKey("CartsCartID");
+                        .HasForeignKey("CartsCartaId");
 
                     b.HasOne("partner_aluro.Models.Product", "Product")
                         .WithMany()
