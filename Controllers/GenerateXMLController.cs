@@ -291,7 +291,7 @@ namespace partner_aluro.Controllers
             //////patch root www
             //string webRootPath = _webHostEnvironment.WebRootPath;
 
-            var produkty = _content.Products.Where(p => p.Ukryty == false).Where(p => p.CategoryNavigation.Aktywny == true).Include(p => p.Product_Images).Include(p => p.CategoryNavigation).OrderBy(p => p.Symbol).ToList();
+            var produkty = _content.Products.Where(p => p.CategoryNavigation.Aktywny == true).Include(p => p.Product_Images).Include(p => p.CategoryNavigation).OrderBy(p => p.Symbol).ToList();
 
             XmlDocument doc = new();
             XmlNode docNode = doc.CreateXmlDeclaration("1.0", "UTF-8", null);
@@ -383,6 +383,9 @@ namespace partner_aluro.Controllers
                 } else if (produkty[i].Ilosc < 8)
                 {
                     CDatastoc = doc.CreateCDataSection(produkty[i].Ilosc.ToString());
+                }else if (produkty[i].Ukryty==true)
+                {
+                    CDatastoc = doc.CreateCDataSection("0");
                 }
 
                 //stock
