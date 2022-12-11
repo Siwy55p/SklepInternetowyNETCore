@@ -9,6 +9,7 @@ using System.Xml.Serialization;
 using partner_aluro.Services.Interfaces;
 using System.Net;
 using partner_aluro.Services;
+using System.Reflection;
 
 namespace partner_aluro.Controllers
 {
@@ -249,7 +250,10 @@ namespace partner_aluro.Controllers
             //patch root www
             string webRootPath = _hostingEnvironment.WebRootPath;
 
-            var basePath = Path.Combine(webRootPath, "\\modules\\nvn_export_products\\download\\");
+            string uploadsFolder = @"/modules/nvn_export_products/download/";
+            string basePath = Path.Combine(webRootPath, uploadsFolder);
+
+            //var basePath = Path.Combine(webRootPath, uploadsFolder);
 
             if (!Directory.Exists(basePath))
             {
@@ -261,23 +265,13 @@ namespace partner_aluro.Controllers
             var newFileName = string.Format("{0}{1}", "aluro_products_export_ldWd8HWmUY", ".xml");
 
 
-            string xml = System.IO.File.ReadAllText(webRootPath + basePath + newFileName, Encoding.UTF8);
+            string xml = System.IO.File.ReadAllText(basePath + newFileName, Encoding.UTF8);
 
             return this.Content(xml, "text/xml");
         }
 
         public static string GenerateProductXMLAsync(ApplicationDbContext _content, IWebHostEnvironment _webHostEnvironment)
         {
-
-            Initialize(_webHostEnvironment);
-
-
-            if (!IsInitialized)
-                throw new InvalidOperationException("Object is not initialized");
-
-
-            //patch root www
-            string webRootPath = _hostingEnvironment.WebRootPath;
 
             //////patch root www
             //string webRootPath = _webHostEnvironment.WebRootPath;
@@ -520,7 +514,21 @@ namespace partner_aluro.Controllers
             ////patch root www
             //string webRootPath = _webHostEnvironment.WebRootPath;
 
-            var basePath = Path.Combine(webRootPath, "\\modules\\nvn_export_products\\download\\");
+
+
+            Initialize(_webHostEnvironment);
+
+            if (!IsInitialized)
+                throw new InvalidOperationException("Object is not initialized");
+
+
+            //patch root www
+            string webRootPath = _hostingEnvironment.WebRootPath;
+
+            string uploadsFolder = @"/modules/nvn_export_products/download/";
+            string basePath = Path.Combine(webRootPath, uploadsFolder);
+
+            //var basePath = Path.Combine(webRootPath, uploadsFolder);
 
             if (!Directory.Exists(basePath))
             {
@@ -534,11 +542,11 @@ namespace partner_aluro.Controllers
 
             //Save
             //XmlTextWriter writer = new XmlTextWriter(webRootPath + basePath + newFileName, null);
-            doc.Save(webRootPath + basePath + newFileName);
+            doc.Save(basePath + newFileName);
             //Save
 
 
-            string xml = System.IO.File.ReadAllText(webRootPath + basePath + newFileName, Encoding.UTF8);
+            string xml = System.IO.File.ReadAllText(basePath + newFileName, Encoding.UTF8);
 
 
             return "Wykonane";
@@ -563,6 +571,13 @@ namespace partner_aluro.Controllers
         [HttpGet]
         public IActionResult Ustawienia()
         {
+
+
+            Initialize(_webHostEnvironment);
+
+            if (!IsInitialized)
+                throw new InvalidOperationException("Object is not initialized");
+
 
             string webRootPath = _webHostEnvironment.WebRootPath;
             _webRootPath = webRootPath;

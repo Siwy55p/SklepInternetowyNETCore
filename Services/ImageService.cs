@@ -104,24 +104,24 @@ namespace partner_aluro.Services
                 for (int i = 0; i < files.Count; i++)
                 {
                     //Save image to wwwroot/image
-                    string path0 = "img\\";
+                    string path0 = @"img/";
                     if (product != null)
                     {
-                        path0 = "img\\p\\";
+                        path0 = @"img/p/";
                     }
                     if (slider != null)
                     {
-                        path0 = "img\\SliderHome\\" + slider.ImageSliderID + "\\";
+                        path0 = @"img/SliderHome/" + slider.ImageSliderID + @"/";
                     }
 
-                    var uploadsFolder = Path.Combine(webRootPath, "img\\");
+                    var uploadsFolder = Path.Combine(webRootPath, @"img/");
                     if (product != null)
                     {
-                        uploadsFolder = Path.Combine(webRootPath, "img\\p\\" + product.Symbol);
+                        uploadsFolder = Path.Combine(webRootPath, @"img/p/" + product.Symbol);
                     }
                     if (slider != null)
                     {
-                        uploadsFolder = Path.Combine(webRootPath, "img\\SliderHome\\" + slider.ImageSliderID);
+                        uploadsFolder = Path.Combine(webRootPath, @"img/SliderHome/" + slider.ImageSliderID);
                     }
 
                     if (!Directory.Exists(uploadsFolder))
@@ -152,9 +152,9 @@ namespace partner_aluro.Services
 
 
                     string pathCompresImage = Path.Combine(webRootPath, uploadsFolder);
-                    string pathname = pathCompresImage +"\\"+ dynamicFileName;
+                    string pathname = pathCompresImage +@"/"+ dynamicFileName;
                     string ImageNameCompres = "250x250_" + dynamicFileName;
-                    string pathSaveCompres = pathCompresImage + "\\" + ImageNameCompres;
+                    string pathSaveCompres = pathCompresImage + @"/" + ImageNameCompres;
                     //save compres image
                     using (MagickImage image = new MagickImage(pathname))
                     {
@@ -182,8 +182,8 @@ namespace partner_aluro.Services
                     {
                         imgModel = new()
                         {
-                            path = path0 + product.Symbol + "\\",
-                            fullPath = path0 + product.Symbol + "\\" + dynamicFileName,
+                            path = path0 + product.Symbol + @"/",
+                            fullPath = path0 + product.Symbol + @"/" + dynamicFileName,
                             kolejnosc = i,
                             Tytul = product.Name,
                             ImageName = dynamicFileName,
@@ -196,8 +196,8 @@ namespace partner_aluro.Services
                     {
                         imgModel = new()
                         {
-                            path = path0 +"\\",
-                            fullPath = path0 + "\\" + dynamicFileName,
+                            path = path0 +@"/",
+                            fullPath = path0 + @"/" + dynamicFileName,
                             kolejnosc = i,
                             Tytul = "sliderHome",
                             ImageName = dynamicFileName,
