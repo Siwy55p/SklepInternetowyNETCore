@@ -579,7 +579,7 @@ namespace partner_aluro.Controllers
                 throw new InvalidOperationException("Object is not initialized");
 
 
-            string webRootPath = _webHostEnvironment.WebRootPath;
+            string webRootPath = _hostingEnvironment.WebRootPath;
             _webRootPath = webRootPath;
 
             GenerateXML generate = new GenerateXML()
