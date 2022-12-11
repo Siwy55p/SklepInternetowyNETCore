@@ -50,7 +50,7 @@ namespace partner_aluro.Controllers
         }
 
 
-        public static string _webRootPath = "http://partneralluro.hostingasp.pl/";
+        public static string _webRootPath = "D:\\HostingSpaces\\siwy55p\\partneralluro.hostingasp.pl\\wwwroot\\wwwroot";
 
         public static string _adresStrony = "http://partneralluro.hostingasp.pl";
 
@@ -252,7 +252,7 @@ namespace partner_aluro.Controllers
             string webRootPath = _hostingEnvironment.WebRootPath;
 
             string uploadsFolder = @"/modules/nvn_export_products/download/";
-            string basePath = Path.Combine(webRootPath, uploadsFolder);
+            string basePath = Path.Combine(_webRootPath, uploadsFolder);
 
             //var basePath = Path.Combine(webRootPath, uploadsFolder);
 
@@ -527,7 +527,7 @@ namespace partner_aluro.Controllers
             string webRootPath = _hostingEnvironment.WebRootPath;
 
             string uploadsFolder = @"/modules/nvn_export_products/download/";
-            string basePath = Path.Combine(webRootPath, uploadsFolder);
+            string basePath = Path.Combine(_webRootPath, uploadsFolder);
 
             //var basePath = Path.Combine(webRootPath, uploadsFolder);
 
@@ -547,7 +547,7 @@ namespace partner_aluro.Controllers
             //Save
 
 
-            string xml = System.IO.File.ReadAllText(_webRootPath + basePath + newFileName, Encoding.UTF8);
+            //string xml = System.IO.File.ReadAllText(_webRootPath + basePath + newFileName, Encoding.UTF8);
 
 
             return "Wykonane";
