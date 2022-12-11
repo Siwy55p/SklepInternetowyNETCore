@@ -4,67 +4,7 @@
     ViewData["Title"] = "Detail";
     Layout = "~/Views/Shared/_Dashboard.cshtml";
 }
-
-<h5>Zamówianie id: # </h5>
-
-<div class="">
-    Data: <b></b> Razem:
-
-</div>
-
-<div class="row">
-    <div class="col border">
-        <div class="row"><p>ZAMÓWIENIE Id:<b>  </div>
-
-
-    </div>
-    <div class="col border">
-        Klient
-
-        <div class="row">
-            <div class="col border">
-               
-
-            </div>
-            <div class="col border">
-
-
-
-               
-            </div>
-        </div>
-
-        <div class="row">
-
-            <ul class="nav nav-tabs">
-                <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#awysylki">Adres wysyłki</a></li>
-                <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#arozliczeniowy">Adres rozliczeniowy</a></li>
-            </ul>
-        </div>
-        <div class="tab-content">
-            <div class="tab-pane active" id="awysylki">
-                <div class="row">
-                    <div class="col">
-                        @*<p>@Model.User.NazwaFirmy</p>*@
-                        <p>
-                            
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="tab-pane" id="arozliczeniowy">
-                <div class="row">
-                    <div class="col">
-                        <p>
-                           
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</div>
-
+<h5>Koszyk ID @Model.CartaId </h5>
 
 @if (@Model.CartItems != null)
 {
