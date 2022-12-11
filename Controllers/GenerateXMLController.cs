@@ -25,7 +25,7 @@ namespace partner_aluro.Controllers
 
         public readonly ApplicationDbContext _content;
 
-        private static IWebHostEnvironment _hostingEnvironment;
+        public static IWebHostEnvironment _hostingEnvironment;
 
         public GenerateXMLController(IWebHostEnvironment hostEnvironment, ApplicationDbContext content, IImageService imageService, IProductService productService)
         {
@@ -265,7 +265,7 @@ namespace partner_aluro.Controllers
             var newFileName = string.Format("{0}{1}", "aluro_products_export_ldWd8HWmUY", ".xml");
 
 
-            string xml = System.IO.File.ReadAllText(basePath + newFileName, Encoding.UTF8);
+            string xml = System.IO.File.ReadAllText(webRootPath + basePath + newFileName, Encoding.UTF8);
 
             return this.Content(xml, "text/xml");
         }
@@ -542,11 +542,11 @@ namespace partner_aluro.Controllers
 
             //Save
             //XmlTextWriter writer = new XmlTextWriter(webRootPath + basePath + newFileName, null);
-            doc.Save(basePath + newFileName);
+            doc.Save(webRootPath + basePath + newFileName);
             //Save
 
 
-            string xml = System.IO.File.ReadAllText(basePath + newFileName, Encoding.UTF8);
+            string xml = System.IO.File.ReadAllText(webRootPath + basePath + newFileName, Encoding.UTF8);
 
 
             return "Wykonane";
