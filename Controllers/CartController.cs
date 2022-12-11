@@ -52,18 +52,37 @@ namespace partner_aluro.Controllers
 
             IEnumerable<IGrouping<string, CartItem>> g = lista.GroupBy(b => b.CartId);
 
+            
 
-            Cart cart = new Cart();
+            List<Cart> listaCart = _context.Carts
+                .Include(x=>x.user)
+                .Include(u=>u.CartItems).ToList();
 
-            for (int i = 0; i < lista.Count(); i++)
+
+            for(int i = 0; i < listaCart.Count(); i ++)
             {
-                CartItem item = lista[i];
-                cart.RazemBrutto += item.Product.CenaProduktu * lista[i].Quantity;
+                listaCart[i].CartItems = _context.CartItems.Where(c => c.CartId == listaCart[i].CartsId).ToList();
+            }
+
+            
+            for (int i = 0; i < listaCart.Count(); i++)
+            {
+                for (int y = 0; y < listaCart[i].CartItems.Count(); y++)
+                {
+
+                    CartItem item = listaCart[i].CartItems[y];
+                    listaCart[i].RazemBrutto += item.Product.CenaProduktu * item.Quantity;
+
+                    listaCart[i].RazemBrutto = listaCart[i].RazemBrutto * (1 - (Core.Constants.Rabat / 100));
+
+                    listaCart[i].RazemBrutto = listaCart[i].RazemBrutto * Core.Constants.Vat;
+                }
             }
 
 
             CartOrderViewModel vm = new CartOrderViewModel
             {
+                ListCarts = listaCart,
                 cartItems = lista,
                 group = g
             };

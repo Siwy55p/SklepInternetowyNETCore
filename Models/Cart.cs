@@ -29,35 +29,87 @@ namespace partner_aluro.Models
         }
 
         [Key]
-        public string CartId { get; set; }
-        public string UserId { get; set; }
+        public string? CartId { get; set; }
+        public string? UserId { get; set; }
 
         public string? CartsId { get; set; }
         [ForeignKey(nameof(CartsId))]
-        public virtual List<CartItem> CartItems { get; set; }
+        public virtual List<CartItem>? CartItems { get; set; }
 
         [ForeignKey(nameof(UserId))]
-        public virtual ApplicationUser user { get; set; }
+        public virtual ApplicationUser? user { get; set; }
 
-        public decimal RazemNetto { get; set; }
+        public DateTime? dataPowstania { get; set; }
 
-        public decimal RazemBrutto { get; set; }
+        public decimal? RazemNetto { get; set; }
+
+        public decimal? RazemBrutto { get; set; }
+
+        public bool? Zrealizowane { get; set; }
 
         public static Cart GetCart(IServiceProvider services)
         {
             ISession session = services.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
 
             var context = services.GetService<ApplicationDbContext>();
-            string cartId = session.GetString("CartsId") ?? Guid.NewGuid().ToString();
+            string cartsId = session.GetString("CartsId") ?? Guid.NewGuid().ToString();
 
-            session.SetString("CartsId", cartId);
+            session.SetString("CartsId", cartsId);
 
 
             var user = services.GetRequiredService<IHttpContextAccessor>().HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             session.SetString("User", user.ToString());
 
+            Cart cart = new Cart(context) { CartsId = cartsId, UserId = user };
 
-            return new Cart(context) { CartsId = cartId, UserId = user };
+            if(context.Carts.Where(x=>x.CartsId == cartsId).Where(u=>u.UserId == user).FirstOrDefault() != null)
+            {
+                Cart koszyk = context.Carts.Where(x => x.CartsId == cartsId).Where(u => u.UserId == user).FirstOrDefault();
+
+                    //Sesja istnieje koszyk aktywny
+                    //zrob cos
+                    if (koszyk.Zrealizowane == false)
+                    {
+                        koszyk.CartItems = context.CartItems.Where(x => x.CartId == cart.CartId).ToList();
+                        context.Carts.Update(koszyk);
+                    }
+
+                    //jesli sesja istnieje i koszyk zrealizowany to utworz nowy koszyk
+                    if (koszyk.Zrealizowane == true)
+                    {
+                        cart.CartId = Guid.NewGuid().ToString();
+                        cart.CartItems = context.CartItems.Where(x=>x.CartId == cart.CartId).ToList();
+                        cart.CartsId = cartsId;
+                        cart.RazemBrutto = 0;
+                        cart.RazemNetto = 0;
+                        cart.dataPowstania = DateTime.Now;
+                        cart.Zrealizowane = false;
+                        context.Carts.Add(cart);
+                    }
+                
+             //   context.Carts.Update(cart);
+            }
+            else if(context.Carts.Where(x => x.CartsId != cartsId).Where(u => u.UserId != user).FirstOrDefault() != null)
+            {
+                Cart koszyk = context.Carts.Where(x => x.CartsId == cartsId).Where(u => u.UserId == user).FirstOrDefault();
+
+
+            }
+            else
+            {
+                cart.CartId = Guid.NewGuid().ToString();
+                cart.CartItems = context.CartItems.Where(x => x.CartId == cart.CartId).ToList();
+                cart.CartsId = cartsId;
+                cart.RazemBrutto = 0;
+                cart.RazemNetto = 0;
+                cart.dataPowstania = DateTime.Now;
+                cart.Zrealizowane = false;
+                context.Carts.Add(cart);
+
+            }
+            context.SaveChanges();
+
+            return cart;
         }
 
         public CartItem GetCartItem(Product product)

@@ -14,15 +14,47 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>CartsId</th>
                 <th>Wartość</th>
                 <th>Klient</th>
+                <th>Realizacja</th>
+                <th>Data</th>
                 <th>Akcja</th>
             </tr>
         </thead>
         <tbody>
+            @foreach (var item in Model.ListCarts.Select((value,i)=>new { i, value }))
+            {
+                <tr>
+                    <td>
+                        @item.value.CartId
+                    </td>
+                    <td>
+                        @item.value.CartsId
 
+                    </td>
+                    <td>
+                        @item.value.RazemBrutto
 
-            @foreach (var item in Model.group)
+                    </td>
+                    <td>
+                        @item.value.user.NazwaFirmy
+
+                    </td>
+                    <td>
+                        @item.value.Zrealizowane
+                    </td>
+                    <th>
+                        @item.value.dataPowstania
+                        </th>
+                    <td>
+                        <a class="btn btn-succes" asp-controller="Cart" asp-action="Details" asp-route-CartID="@item.value.CartsId">Więcej</a>
+                    </td>
+                </tr>
+
+            }
+
+           @* @foreach (var item in Model.group)
             {
                 <tr>
                     <td>
@@ -54,7 +86,7 @@
                     </td>
                 </tr>
             
-            }
+            }*@
 
             @*@for (var i = 0; i < @Model.Count(); i++)
             {

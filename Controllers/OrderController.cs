@@ -255,7 +255,13 @@ namespace partner_aluro.Controllers
 
                 _emailService.SendEmailAsync(email);
 
-
+                var cart = _context.Carts.Where(c => c.CartsId == _cart.CartsId).FirstOrDefault();
+                if(cart != null)
+                {
+                    cart.Zrealizowane = true;
+                    _context.Carts.Update(cart);
+                    _context.SaveChanges();
+                }
 
                 return View("CheckoutComplete", CartOrder.Orders);
             }
