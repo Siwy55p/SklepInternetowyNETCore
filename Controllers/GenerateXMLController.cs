@@ -13,7 +13,7 @@ using System.Reflection;
 
 namespace partner_aluro.Controllers
 {
-    [Authorize]
+    [AllowAnonymous]
     public class GenerateXMLController : Controller
     {
 
