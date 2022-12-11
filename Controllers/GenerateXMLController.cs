@@ -301,7 +301,7 @@ namespace partner_aluro.Controllers
             doc.AppendChild(export_products);
 
 
-            for (int i = 1; i < produkty.Count - 1; i++)
+            for (int i = 0; i < produkty.Count(); i++)
             {
                 XmlNode productNode = doc.CreateElement("product");
                 export_products.AppendChild(productNode);
