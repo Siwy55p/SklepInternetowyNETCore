@@ -50,7 +50,7 @@ namespace partner_aluro.Controllers
         }
 
 
-        public static string _webRootPath = "D:\\HostingSpaces\\siwy55p\\partneralluro.hostingasp.pl\\wwwroot\\wwwroot\\";
+        public static string _webRootPath = "D:\\HostingSpaces\\siwy55p\\partneralluro.hostingasp.pl\\wwwroot\\wwwroot\\";  //Pamiętaj zeby zmienic na prawidłowy adres wchodzac w ustawienia XML 
 
         public static string _adresStrony = "http://partneralluro.hostingasp.pl";
 
