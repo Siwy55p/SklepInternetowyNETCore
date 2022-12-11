@@ -50,7 +50,7 @@ namespace partner_aluro.Controllers
         }
 
 
-        public static string _webRootPath = "D:\\HostingSpaces\\siwy55p\\partneralluro.hostingasp.pl\\wwwroot\\wwwroot";
+        public static string _webRootPath = "D:\\HostingSpaces\\siwy55p\\partneralluro.hostingasp.pl\\wwwroot\\wwwroot\\";
 
         public static string _adresStrony = "http://partneralluro.hostingasp.pl";
 
@@ -256,9 +256,9 @@ namespace partner_aluro.Controllers
 
             //var basePath = Path.Combine(webRootPath, uploadsFolder);
 
-            if (!Directory.Exists(basePath))
+            if (!Directory.Exists(_webRootPath + basePath))
             {
-                Directory.CreateDirectory(basePath);
+                Directory.CreateDirectory(_webRootPath + basePath);
             }
 
             //var newFileName = string.Format("{0}{1}",Guid.NewGuid().ToString("N"),".xml");
@@ -531,9 +531,9 @@ namespace partner_aluro.Controllers
 
             //var basePath = Path.Combine(webRootPath, uploadsFolder);
 
-            if (!Directory.Exists(basePath))
+            if (!Directory.Exists(_webRootPath+basePath))
             {
-                Directory.CreateDirectory(basePath);
+                Directory.CreateDirectory(_webRootPath+basePath);
             }
 
             //var newFileName = string.Format("{0}{1}",Guid.NewGuid().ToString("N"),".xml");
@@ -542,8 +542,9 @@ namespace partner_aluro.Controllers
 
 
             //Save
-            //XmlTextWriter writer = new XmlTextWriter(webRootPath + basePath + newFileName, null);
-            doc.Save(_webRootPath + basePath + newFileName);
+            XmlTextWriter writer = new XmlTextWriter(_webRootPath + basePath + newFileName, null);
+            //doc.Save(_webRootPath + basePath + newFileName);
+            doc.Save(writer);
             //Save
 
 
