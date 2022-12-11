@@ -542,7 +542,7 @@ namespace partner_aluro.Controllers
 
 
             //Save
-            XmlTextWriter writer = new XmlTextWriter(_webRootPath + basePath + newFileName, null);
+            XmlTextWriter writer = new XmlTextWriter(_webRootPath + basePath + newFileName, Encoding.UTF8);
             //doc.Save(_webRootPath + basePath + newFileName);
             doc.Save(writer);
             //Save
