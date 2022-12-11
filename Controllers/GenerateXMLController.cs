@@ -45,6 +45,7 @@ namespace partner_aluro.Controllers
             }
 
             _hostingEnvironment = hostEnvironment;
+            _webRootPath = hostEnvironment.WebRootPath;
             IsInitialized = true;
         }
 
@@ -265,7 +266,7 @@ namespace partner_aluro.Controllers
             var newFileName = string.Format("{0}{1}", "aluro_products_export_ldWd8HWmUY", ".xml");
 
 
-            string xml = System.IO.File.ReadAllText(webRootPath + basePath + newFileName, Encoding.UTF8);
+            string xml = System.IO.File.ReadAllText(_webRootPath + basePath + newFileName, Encoding.UTF8);
 
             return this.Content(xml, "text/xml");
         }
@@ -542,11 +543,11 @@ namespace partner_aluro.Controllers
 
             //Save
             //XmlTextWriter writer = new XmlTextWriter(webRootPath + basePath + newFileName, null);
-            doc.Save(webRootPath + basePath + newFileName);
+            doc.Save(_webRootPath + basePath + newFileName);
             //Save
 
 
-            string xml = System.IO.File.ReadAllText(webRootPath + basePath + newFileName, Encoding.UTF8);
+            string xml = System.IO.File.ReadAllText(_webRootPath + basePath + newFileName, Encoding.UTF8);
 
 
             return "Wykonane";
