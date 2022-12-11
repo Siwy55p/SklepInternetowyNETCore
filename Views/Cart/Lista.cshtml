@@ -14,7 +14,9 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Product</th>
+                <th>Wartość</th>
+                <th>Klient</th>
+                <th>Akcja</th>
             </tr>
         </thead>
         <tbody>
@@ -27,10 +29,25 @@
                         @item.Key
                     </td>
                     <td>
+                        
+                        @{
+                            decimal cena =0; 
+                        }
+
                         @foreach (var item2 in item)
                         {
-                            @item2.CartId
+                           
+                            cena += (decimal)item2.Product.CenaProduktu * item2.Quantity;
+
+
                         }
+
+                        @cena
+
+                    </td>
+                    <td>
+                        Klient
+
                     </td>
                     <td>
                         <a class="btn btn-succes" asp-controller="Cart" asp-action="Details" asp-route-CartID="@item.Key">Więcej</a>

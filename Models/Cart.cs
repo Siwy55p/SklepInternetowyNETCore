@@ -48,9 +48,9 @@ namespace partner_aluro.Models
             ISession session = services.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
 
             var context = services.GetService<ApplicationDbContext>();
-            string cartId = session.GetString("Id") ?? Guid.NewGuid().ToString();
+            string cartId = session.GetString("CartsId") ?? Guid.NewGuid().ToString();
 
-            session.SetString("Id", cartId);
+            session.SetString("CartsId", cartId);
 
 
             var user = services.GetRequiredService<IHttpContextAccessor>().HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
@@ -209,54 +209,5 @@ namespace partner_aluro.Models
             return CartTotal;
         }
 
-        public decimal GetCartTotalBrutto(string CartId)
-        {
-
-            decimal CartTotal = 0;
-            decimal CartTotal1 = _context.CartItems
-                .Where(ci => ci.CartId == CartId && ci.Product.Promocja == false)
-                //.Where(ci=> ci.Product.Promocja == false)
-                .Select(ci => ci.Product.CenaProduktu * ci.Quantity)
-                .Sum();
-
-            decimal CartTotal2 = _context.CartItems
-                .Where(ci => ci.CartId == CartId && ci.Product.Promocja == true)
-                //.Where(ci => ci.Product.Promocja == true)
-                .Select(ci => ci.Product.CenaPromocyja * ci.Quantity)
-                .Sum();
-
-            CartTotal = CartTotal1 + CartTotal2;
-
-
-            CartTotal = CartTotal * (1 - (Core.Constants.Rabat / 100));
-
-            CartTotal = CartTotal * Core.Constants.Vat;
-
-            return CartTotal;
-        }
-        public decimal GetCartTotalNetto(string CartId)
-        {
-            CartItem cartExist = new CartItem();
-            cartExist = _context.CartItems.Where(x => x.CartId == CartId).FirstOrDefault();
-            decimal CartTotal = 0;
-            if (cartExist != null)
-            {
-                decimal CartTotal1 = _context.CartItems
-                .Where(ci => ci.CartId == CartId && ci.Product.Promocja == false)
-                .Select(ci => ci.Product.CenaProduktu * ci.Quantity)
-                .Sum();
-
-                decimal CartTotal2 = _context.CartItems
-                    .Where(ci => ci.CartId == CartId && ci.Product.Promocja == true)
-                    .Select(ci => ci.Product.CenaPromocyja * ci.Quantity)
-                    .Sum();
-
-                CartTotal = CartTotal1 + CartTotal2;
-
-                CartTotal = CartTotal * (1 - (Core.Constants.Rabat / 100));
-            }
-
-            return CartTotal;
-        }
     }
 }
