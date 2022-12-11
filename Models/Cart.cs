@@ -79,7 +79,7 @@ namespace partner_aluro.Models
                     {
                         cart.CartId = Guid.NewGuid().ToString();
                         cart.CartItems = context.CartItems.Where(x=>x.CartId == cart.CartId).ToList();
-                        cart.CartsId = cartsId;
+                        cartsId = Guid.NewGuid().ToString();
                         cart.RazemBrutto = 0;
                         cart.RazemNetto = 0;
                         cart.dataPowstania = DateTime.Now;
@@ -136,7 +136,8 @@ namespace partner_aluro.Models
                 {
                     Product = product,
                     Quantity = quantity,
-                    CartId = CartsId
+                    CartId = CartsId,
+                    CartsId = CartId
                 };
 
                 _context.CartItems.Add(cartItem);
