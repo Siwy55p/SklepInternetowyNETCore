@@ -265,8 +265,22 @@ namespace partner_aluro.Controllers
 
             var newFileName = string.Format("{0}{1}", "aluro_products_export_ldWd8HWmUY", ".xml");
 
+            //string xml = "";
 
-            string xml = System.IO.File.ReadAllText(_webRootPath + basePath + newFileName, Encoding.UTF8);
+            //using (StreamReader streamReader = new StreamReader(_webRootPath + basePath + newFileName, Encoding.UTF8))
+            //{
+            //    string xml = System.IO.File.ReadAllText(streamReader.Vale);
+            //}
+
+                //string xml = System.IO.File.ReadAllText(_webRootPath + basePath + newFileName, Encoding.UTF8);
+
+            string xml = "";
+            using (StreamReader streamReader = new StreamReader(_webRootPath + basePath + newFileName, Encoding.UTF8))
+            {
+                xml = streamReader.ReadToEnd();
+                streamReader.Close();
+                streamReader.Dispose();
+            }
 
             return this.Content(xml, "text/xml");
         }
@@ -519,8 +533,8 @@ namespace partner_aluro.Controllers
 
             Initialize(_webHostEnvironment);
 
-            if (!IsInitialized)
-                throw new InvalidOperationException("Object is not initialized");
+            //if (!IsInitialized)
+            //    throw new InvalidOperationException("Object is not initialized");
 
 
             //patch root www
@@ -540,11 +554,17 @@ namespace partner_aluro.Controllers
 
             var newFileName = string.Format("{0}{1}", "aluro_products_export_ldWd8HWmUY", ".xml");
 
+            using (var writer = XmlTextWriter.Create(_webRootPath + basePath + newFileName))
+            {
+                doc.Save(writer);
+
+                writer.Close();
+                writer.Dispose();
+            }
 
             //Save
-            XmlTextWriter writer = new XmlTextWriter(_webRootPath + basePath + newFileName, Encoding.UTF8);
             //doc.Save(_webRootPath + basePath + newFileName);
-            doc.Save(writer);
+            //doc.Save(writer);
             //Save
 
 
