@@ -20,6 +20,8 @@ using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Mvc.Razor;
 using partner_aluro.Resources;
 using System.Configuration;
+using Microsoft.AspNetCore.Mvc;
+using System.Security.Principal;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DbContextProductionConnection");
@@ -83,6 +85,7 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.R
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 
+
 //IBIRSERVICE REGON NIP SERVICE
 builder.Services.AddTransient<IBIRSearchService>(x => new BIRSearchService(birKey)); //Dodanie klucza do Service BIRSearchService birKy w jsonsetting.json
 builder.Services.AddSingleton<RegonService>();
@@ -92,7 +95,6 @@ builder.Services.AddTransient<MySqlConnection>(_ => new MySqlConnection(connecti
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>(); //S³uzy do zapisywania sesji np: uzytkownika do sesscion
-
 
 
 ////Accept cookie
@@ -124,6 +126,21 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
     //options.RequestCultureProviders.Insert(0, new QueryStringRequestCultureProvider());
     options.RequestCultureProviders = new[] { new CookieRequestCultureProvider() };
 });
+
+
+builder.Services.AddMvc().AddRazorPagesOptions(o => o.Conventions.AddAreaFolderRouteModelConvention("Identity", "/Account/", model =>
+{
+    foreach (var selector in model.Selectors)
+    {
+        var attributeRouteModel = selector.AttributeRouteModel;
+        attributeRouteModel.Order = -1;
+        attributeRouteModel.Template = attributeRouteModel.Template.Remove(0, "Identity/Account/".Length);
+    }
+})
+).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+
+
 builder.Services.AddMvc()
     .AddViewLocalization()
     .AddDataAnnotationsLocalization(options =>

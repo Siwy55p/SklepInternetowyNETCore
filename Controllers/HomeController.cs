@@ -45,9 +45,6 @@ namespace partner_aluro.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            //logika zalogowania
-            if (User.Identity.IsAuthenticated)
-            {
                 //var nowosci = await _context.Products.Where(a => !a.Ukryty).OrderByDescending(a => a.DataDodania).Take(9).ToListAsync();
 
                 //var bestseller = await _context.Products.Where(a => !a.Ukryty).OrderBy(a => Guid.NewGuid()).Take(3).ToListAsync();
@@ -82,11 +79,6 @@ namespace partner_aluro.Controllers
                 var vm = new HomeViewModel() { SliderHome1 = sliderHomes1, SliderHome2 = sliderHomes2, SliderHome3 = sliderHomes3 };
 
                 return View(vm); //zapewnia renderowania widoków 
-            }
-            else
-            {
-                return RedirectToAction("Login", "Account");
-            }
 
         }
 

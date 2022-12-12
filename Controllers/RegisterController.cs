@@ -31,6 +31,13 @@ namespace partner_aluro.Controllers
             _context = context; 
         }
 
+        [Route("Identity/Account/Login")]
+        [Route("pl/logowanie")]
+        public IActionResult LoginRedirect(string ReturnUrl)
+        {
+            return Redirect("/logowanie?ReturnUrl=" + ReturnUrl);
+        }
+
         public IActionResult Index()
         {
             return View();
