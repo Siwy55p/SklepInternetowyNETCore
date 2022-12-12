@@ -5,18 +5,14 @@
     Layout = "~/Views/Shared/_Dashboard.cshtml";
 }
 <h5>Koszyk ID @Model.CartaId </h5>
-
-@if (@Model.CartItems != null)
-{
-
+<div class="card-header">
+    <span><i class="bi bi-table me-2"></i></span>Pozycje koszyka, użytkownik: @Model.user.Email
+</div>
     @if (Model.CartItems.Count > 0)
     {
         <div class="row">
             <div class="col-md-12 mb-3">
                 <div class="card">
-                    <div class="card-header">
-                        <span><i class="bi bi-table me-2"></i></span>Pozycje zamówienia
-                    </div>
                     <div class="card-body">
                         <div class="table-responsive">
                             <table id="example"
@@ -103,6 +99,8 @@
             <a class="nav-link px-3" asp-area="" asp-controller="Cart" asp-action="Lista"> Wróc do listy</a>
 
         </div>
+    }else
+    {
+        <h3 class="text-center">Koszyk jest pusty</h3>
     }
-}
 

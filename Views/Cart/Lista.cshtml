@@ -15,6 +15,7 @@
             <tr>
                 <th>Id</th>
                 <th>CartsId</th>
+                <th>Ilość Produktów</th>
                 <th>Wartość</th>
                 <th>Klient</th>
                 <th>Zrealizowane</th>
@@ -25,16 +26,27 @@
         <tbody>
             @foreach (var item in Model.Select((value,i)=>new { i, value }))
             {
-                <tr>
+                string color = "#dc143c";
+
+                @if(item.value.Zrealizowane == true)
+                {
+                    color = "#6ab170";
+                }
+
+                <tr style="background: @color">
                     <td>
-                        @item.value.CartaId
+                        @item.i
                     </td>
                     <td>
                         @item.value.CartaId
 
                     </td>
                     <td>
-                        @item.value.RazemBrutto
+                        @item.value.CartItems.Count()
+                    </td>
+                    <td>
+                        @item.value.RazemBrutto.ToString("0.00") 
+
 
                     </td>
                     <td>
@@ -48,7 +60,7 @@
                         @item.value.dataPowstania
                         </th>
                     <td>
-                        <a class="btn btn-succes" asp-controller="Cart" asp-action="Details" asp-route-CartID="@item.value.CartaId">Więcej</a>
+                        <a class="btn btn-success" asp-controller="Cart" asp-action="Details" asp-route-CartID="@item.value.CartaId">Więcej</a>
                     </td>
                 </tr>
 

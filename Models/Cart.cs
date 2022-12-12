@@ -41,9 +41,9 @@ namespace partner_aluro.Models
 
         public DateTime? dataPowstania { get; set; }
 
-        public decimal? RazemNetto { get; set; }
+        public decimal RazemNetto { get; set; }
 
-        public decimal? RazemBrutto { get; set; }
+        public decimal RazemBrutto { get; set; }
 
         public bool? Zrealizowane { get; set; }
 
