@@ -27,7 +27,7 @@
         <tbody>
             @foreach (var item in Model.Select((value,i)=>new { i, value }))
             {
-                string color = "#dc143c";
+                string color = "#ffb9b9";
 
                 string wiadomosc = "Koszyk niezrelizowany";
 
@@ -43,7 +43,7 @@
                         @item.i
                     </td>
                     <td>
-                        <span style="background-color:@color">@wiadomosc </span>
+                        <span>@wiadomosc </span>
 
                     </td>
                     <td>
@@ -67,7 +67,7 @@
                     </td>*@
                     <th>
                         @item.value.dataPowstania
-                        </th>
+                    </th>
                     <td>
                         <a class="btn btn-success" asp-controller="Cart" asp-action="Details" asp-route-CartID="@item.value.CartaId">Więcej</a>
                     </td>
