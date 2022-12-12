@@ -18,7 +18,8 @@
                 <th>Ilość Produktów</th>
                 <th>Wartość</th>
                 <th>Klient</th>
-                <th>Zrealizowane</th>
+                <th>Firma</th>
+                @*<th>Zrealizowane</th>*@
                 <th>Data</th>
                 <th>Akcja</th>
             </tr>
@@ -28,34 +29,42 @@
             {
                 string color = "#dc143c";
 
+                string wiadomosc = "Koszyk niezrelizowany";
+
                 @if(item.value.Zrealizowane == true)
                 {
                     color = "#6ab170";
-                }
 
-                <tr style="background: @color">
+                    wiadomosc = "Koszyk zrealizowany";
+                }
+                
+                <tr>
                     <td>
                         @item.i
                     </td>
                     <td>
-                        @item.value.CartaId
+                        <span style="background-color:@color">@wiadomosc </span>
 
                     </td>
                     <td>
                         @item.value.CartItems.Count()
                     </td>
                     <td>
-                        @item.value.RazemBrutto.ToString("0.00") 
+                        <span style="background-color:@color">@item.value.RazemBrutto.ToString("0.00")</span>
 
+
+                    </td>
+                    <td>
+                        @item.value.user.Imie @item.value.user.Nazwisko
 
                     </td>
                     <td>
                         @item.value.user.NazwaFirmy
 
                     </td>
-                    <td>
+                    @*<td>
                         @item.value.Zrealizowane
-                    </td>
+                    </td>*@
                     <th>
                         @item.value.dataPowstania
                         </th>
@@ -63,7 +72,6 @@
                         <a class="btn btn-success" asp-controller="Cart" asp-action="Details" asp-route-CartID="@item.value.CartaId">Więcej</a>
                     </td>
                 </tr>
-
             }
 
            @* @foreach (var item in Model.group)

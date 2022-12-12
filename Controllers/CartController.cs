@@ -67,6 +67,7 @@ namespace partner_aluro.Controllers
         {
             Cart cart = _context.Carts.Where(x => x.CartaId == CartId)
                 .Include(x => x.user)
+                .ThenInclude(u => u.Adress1rozliczeniowy)
                 .Include(c=>c.CartItems)
                 .ThenInclude(p=>p.Product)
                 .FirstOrDefault();

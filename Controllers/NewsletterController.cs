@@ -281,6 +281,7 @@ namespace partner_aluro.Controllers
             //string data = getBetween(source, "[emailstart]", "[emailend]");
 
 
+
             newsletter.listaEmail = await _context.Users.Where(x => x.Newsletter == true).Select(x => x.Email).ToListAsync();
 
             //https://localhost:44315/Register/unsubscribe/?Email=marcin@aluro.pl
@@ -345,7 +346,7 @@ namespace partner_aluro.Controllers
             //    "</a> ";
 
 
-            string td1 = "<th style=\"margin:0px; padding-left:10px;padding-right:10px; padding-top:0px; padding-bottom:0px; margin: 0px;\" > <div style=\"border:1px solid #b4b4b4;width:200px;height:200px;margin:0px;padding:0px; \"> <a href=\"..\\..\\..\\Product\\Detail\\"+produkt.Symbol+"\"> <img src=../../images/produkty/" + produkt.Symbol + "/" + produkt.ImageUrl + " alt = " + produkt.Name + " style='width:200px;'> </a> </div></th>\r\n\t";
+            string td1 = "<th style=\"margin:0px; padding-left:10px;padding-right:10px; padding-top:0px; padding-bottom:0px; margin: 0px;\" > <div style=\"border:1px solid #b4b4b4;width:200px;height:200px;margin:0px;padding:0px; \"> <a href=\"..\\..\\..\\Product\\Detail\\"+produkt.Symbol+"\"> <img src=../../img/p/" + produkt.Symbol + "/" + produkt.ImageUrl + " alt = " + produkt.Name + " style='width:200px;'> </a> </div></th>\r\n\t";
             string td2 = "<td style=\"padding-left:10px;padding-right:10px; padding-top:0px; padding-bottom:0px; margin: 0px; text-align: center; \"><div style=\"border:1px solid #b4b4b4;width:200px; height:48px; padding-top: -1px; border-top:0px; margin:0px; background-color: #EBEBEB; \">" + produkt.Name + "</div></td>\r\n\t";
             string td3 = "<td style=\"padding-left:10px;padding-right:10px; padding-top:0px; padding-bottom:0px; margin: 0px; text-align: center; \"><div style=\"border:1px solid #b4b4b4;width:200px; height:38px; padding-top: -1px; border-top:0px; margin:0px;padding:0px; background-color: #EBEBEB; \">" + produkt.CenaProduktu + " zł"+"</div></td>\r\n\t";
 
@@ -448,12 +449,12 @@ namespace partner_aluro.Controllers
 
             string wwwRootPath = _hostEnvironment.WebRootPath;
 
-            using (var fs = new FileStream(wwwRootPath + $"\\Images\\" + fil.FileName, FileMode.Create))
+            using (var fs = new FileStream(wwwRootPath + $"\\img\\" + fil.FileName, FileMode.Create))
             {
                 fil.CopyTo(fs);
             }
 
-            return Ok(new { location = $"/Images/" + fil.FileName });
+            return Ok(new { location = $"/img/" + fil.FileName });
         }
 
         [HttpGet]
@@ -463,12 +464,12 @@ namespace partner_aluro.Controllers
             var context = HttpContext.Features;
 
             string wwwRootPath = _hostEnvironment.WebRootPath;
-            var files = Directory.GetFiles(wwwRootPath + $"\\Images");
+            var files = Directory.GetFiles(wwwRootPath + $"\\img");
 
             List<Fileinf> res = new List<Fileinf>();
             foreach (var item in files)
             {
-                res.Add(new Fileinf() { title = Path.GetFileName(item), value = $"/Images/" + Path.GetFileName(item) });
+                res.Add(new Fileinf() { title = Path.GetFileName(item), value = $"/img/" + Path.GetFileName(item) });
             }
             return Json(res);
         }
