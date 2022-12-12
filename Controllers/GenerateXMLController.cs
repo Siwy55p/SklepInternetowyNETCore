@@ -161,7 +161,7 @@ namespace partner_aluro.Controllers
 
 
 
-                ////src = "~/images/produkty/@Model.Symbol/@Model.ImageUrl"
+                ////src = "~/img/p/@Model.Symbol/@Model.ImageUrl"
                 //for (int x = 0; x < obj.Product.Count(); x++)
                 ////foreach (var item in obj.Product)
                 //{
@@ -175,8 +175,8 @@ namespace partner_aluro.Controllers
                 //        using (WebClient client2 = new WebClient())
                 //        {
                 //            string webRootPath = _webHostEnvironment.WebRootPath;
-                //            string path0 = "images\\produkty\\" + obj.Product[x].Symbol + "\\";
-                //            var uploadsFolder = Path.Combine(webRootPath, "images\\produkty\\" + obj.Product[x].Symbol+"\\");
+                //            string path0 = "img\\p\\" + obj.Product[x].Symbol + "\\";
+                //            var uploadsFolder = Path.Combine(webRootPath, "img\\p\\" + obj.Product[x].Symbol+"\\");
                 //            if (!Directory.Exists(uploadsFolder))
                 //            {
                 //                Directory.CreateDirectory(uploadsFolder);

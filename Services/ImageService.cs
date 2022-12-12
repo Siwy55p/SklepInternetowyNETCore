@@ -103,7 +103,7 @@ namespace partner_aluro.Services
 
                 for (int i = 0; i < files.Count; i++)
                 {
-                    //Save image to wwwroot/image
+                    //Save image to wwwroot/img
                     string path0 = @"img/";
                     if (product != null)
                     {

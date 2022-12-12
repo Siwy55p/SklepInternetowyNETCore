@@ -3,8 +3,8 @@
 @*        <div class="row">
             <div class="col-md-4">
                     <div class="form-group">
-                    <input asp-for="product_Image.ImageFile" accept="images/png,images/jpg,images/jpeg" class="custom-file-input" id="FLFrontImage"
-                           onchange="document.getElementById('FrontImagePrv').src = window.URL.createObjectURL(this.files[0])" /> @*/image/png,image/jpg
+                    <input asp-for="product_Image.ImageFile" accept="img/png,img/jpg,img/jpeg" class="custom-file-input" id="FLFrontImage"
+                           onchange="document.getElementById('FrontImagePrv').src = window.URL.createObjectURL(this.files[0])" /> @*/img/png,img/jpg
                         <span asp-validation-for="product_Image.ImageFile" class="text-danger"></span>
                     </div>
 

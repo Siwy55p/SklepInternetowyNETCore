@@ -305,16 +305,16 @@ namespace partner_aluro.Controllers
                 write.PageEvent = new PageHeaderFooter();
                 document.Open();
 
-                //Image image = iTextSharp.text.Image.GetInstance("wwwroot/images/logo/AluroLogoPdf_120x60.jpg");
+                //Image image = iTextSharp.text.Image.GetInstance("wwwroot/img/logo/AluroLogoPdf_120x60.jpg");
                 //image.SetAbsolutePosition(200, write.GetVerticalPosition(true));
                 //document.Add(image);
 
-                //Image image3 = iTextSharp.text.Image.GetInstance("wwwroot/images/logo/AluroLogoPdf_120x60.jpg");
+                //Image image3 = iTextSharp.text.Image.GetInstance("wwwroot/img/logo/AluroLogoPdf_120x60.jpg");
                 //image3.SetAbsolutePosition(write.GetVerticalPosition(true),200);
                 //document.Add(image3);
 
 
-                Image image2 = Image.GetInstance("wwwroot/images/logo/Aluro_logo-x-300_2.png");
+                Image image2 = Image.GetInstance("wwwroot/img/logo/Aluro_logo-x-300_2.png");
                 image2.ScaleAbsoluteWidth(150);
                 image2.ScaleAbsoluteHeight(75);
                 image2.SetAbsolutePosition(45, 730);
@@ -603,7 +603,7 @@ namespace partner_aluro.Controllers
 
                     PdfPCell cell_1 = new(new Phrase(item.Id));
 
-                    Image image = Image.GetInstance("wwwroot/images/produkty/" + @item.Product.Symbol + "/" + @item.Product.ImageUrl);
+                    Image image = Image.GetInstance("wwwroot/img/p/" + @item.Product.Symbol + "/" + @item.Product.ImageUrl);
                     image.ScaleAbsoluteWidth(50);
                     image.ScaleAbsoluteHeight(45);
                     PdfPCell cell_2 = new(image);

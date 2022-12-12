@@ -19,7 +19,7 @@
     <div class="thumbnail">
         <a class="product-name link-dark" asp-controller="Product" asp-action="Details" asp-route-id="@Model.ProductId">
             <img class="card-img-top" onerror="this.onerror=null;this.src='../img/noimage.png';" src="~/img/p/@Model.Symbol/@Model.ImageUrl" alt="@Model.Name" >
-           @* <img class="card-img-top" onerror="this.onerror=null;this.src='../images/noimage.png';" src="~/images/produkty/@Model.Symbol/@Model.Product_Images.Where(x=>x.kolejnosc==0).FirstOrDefault().ImageNameCompress250x250" alt="@Model.Name">*@
+           @* <img class="card-img-top" onerror="this.onerror=null;this.src='../iag/noimage.png';" src="~/img/produkty/@Model.Symbol/@Model.Product_Images.Where(x=>x.kolejnosc==0).FirstOrDefault().ImageNameCompress250x250" alt="@Model.Name">*@
         </a>
     </div>
     <div class="row card-bar-action justify-content-center align-items-center">

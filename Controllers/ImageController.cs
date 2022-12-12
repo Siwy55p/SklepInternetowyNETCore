@@ -169,7 +169,7 @@ namespace partner_aluro.Controllers
         //        string extension = Path.GetExtension(product.product_Image.ImageFile.FileName);
         //        product.product_Image.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
                 
-        //        string path = Path.Combine(wwwRootPath + "/Images/produkty", fileName);
+        //        string path = Path.Combine(wwwRootPath + "/img/produkty", fileName);
 
 
 
@@ -179,7 +179,7 @@ namespace partner_aluro.Controllers
         //            await product.product_Image.ImageFile.CopyToAsync(fileStream);
         //        }
 
-        //        //string imagePath = Path.Combine(wwwRootPath, "images");
+        //        //string imagePath = Path.Combine(wwwRootPath, "img");
         //        //string webPFileName = Path.GetFileNameWithoutExtension(product.product_Image.ImageFile.FileName) + ".webp";
         //        //string normalImagePath = Path.Combine(wwwRootPath,imagePath, fileName);
         //        //string webPImagePath = Path.Combine(wwwRootPath, imagePath, webPFileName);
@@ -385,7 +385,7 @@ namespace partner_aluro.Controllers
         {
             var imageModel = await _context.Images.FindAsync(id);
 
-            //delete image from wwwroot/images
+            //delete image from wwwroot/img
             var imagePath = Path.Combine(_webHostEnvironment.WebRootPath, imageModel.path, imageModel.ImageName);
             if (System.IO.File.Exists(imagePath))
                 System.IO.File.Delete(imagePath);
@@ -447,12 +447,12 @@ namespace partner_aluro.Controllers
         //        for (int i = 0; i < files.Count; i++)
         //        {
         //            //Save image to wwwroot/image
-        //            string path0 = "images\\produkty\\";
+        //            string path0 = "img\\p\\";
 
-        //            var uploadsFolder = Path.Combine(webRootPath, "images\\");
+        //            var uploadsFolder = Path.Combine(webRootPath, "img\\");
         //            if (product != null)
         //            {
-        //                uploadsFolder = Path.Combine(webRootPath, "images\\produkty\\" + product.Symbol);
+        //                uploadsFolder = Path.Combine(webRootPath, "img\\p\\" + product.Symbol);
         //            }
 
 
@@ -501,8 +501,8 @@ namespace partner_aluro.Controllers
 
         //    imgModel = new()
         //    {
-        //        path = "images\\",
-        //        fullPath = "\\images\\",
+        //        path = "img\\",
+        //        fullPath = "\\img\\",
         //        kolejnosc = -1,
         //        Tytul = "",
         //        ImageName = ".jpg",

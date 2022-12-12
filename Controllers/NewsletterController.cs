@@ -334,14 +334,14 @@ namespace partner_aluro.Controllers
             //string tresc = 
             //    $"<div class='row border=1'>" +
             //    "<div class='mojstyl'>"+
-            //    $"<img src=../../images/produkty/"+produkt.Symbol + "/" + produkt.ImageUrl + " alt = " + produkt.Name + " style='width:200px;'>" +
+            //    $"<img src=../../img/produkty/"+produkt.Symbol + "/" + produkt.ImageUrl + " alt = " + produkt.Name + " style='width:200px;'>" +
             //    "</div>"+
             //    "<div class='col'>"+ produkt.Name+"</div>"+
             //    "<div class='col'>" + produkt.CenaProduktu + "</div>" +
             //    "<div class='col'>" + produkt.Symbol + "</div>" +
             //    "</div>";
             //string tresc =
-            //    $"<a href=\""+baseUri+"\"><img src=../../images/produkty/" + produkt.Symbol + "/" + produkt.ImageUrl + " alt = " + produkt.Name + " style='width:200px;'>" +
+            //    $"<a href=\""+baseUri+"\"><img src=../../img/produkty/" + produkt.Symbol + "/" + produkt.ImageUrl + " alt = " + produkt.Name + " style='width:200px;'>" +
             //    " " + produkt.Name + " "  + produkt.CenaProduktu + " " + produkt.Symbol + " " +
             //    "</a> ";
 
