@@ -13,6 +13,91 @@
     <button id="btnBack" runat="server" text="Back" class="btn btn-primary" onclick="JavaScript: window.history.back(1); return false;">Powrót</button>
 
 </form>
+
+
+
+@if (@Model != null )
+    {
+        <div class="row">
+            <div class="col-md-12 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="ProductCategoryTable" class="display" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Zaz</th>
+                                        <th>Obrazek</th>
+                                        <th>Symbol</th>
+                                        <th>Nazwa produktu</th>
+                                        <th>Cena produktu</th>
+                                        <th>Cena sprzedazy</th>
+                                        <th>Kategoria</th>
+                                        <th>Ilość</th>
+                                        <th>Ukryte</th>
+                                        <th>Akcje</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var productFormModel in @Model.Produkty)
+                                    {
+                                        <tr>
+                                            <td>@productFormModel.ProductId</td>
+                                            <td><input id="takenBefore" type="checkbox" value="@productFormModel.ProductId" data-toggle="toggle"></td>
+                                            <td><img class="img-thumbnail" src="~/img/p/@productFormModel.Symbol/@productFormModel.ImageUrl" alt="@productFormModel.Name" style="width:75px;height:75px;"></td>
+                                            <td>@productFormModel.Symbol</td>
+
+                                            <td><a asp-controller="Product" asp-action="Edit" asp-route-id="@productFormModel.ProductId">@productFormModel.Name</a></td>
+                                            <td>@productFormModel.CenaProduktu.ToString("C")</td>
+                                            <td>@productFormModel.CenaProduktuDetal</td>
+                                            <td>@productFormModel.CategoryNavigation.Name</td>
+                                            <th>@productFormModel.Ilosc</th>
+                                            <th>
+                                                @if (productFormModel.Ukryty == true)
+                                                {
+                                                    <input type="checkbox" data-toggle="toggle" checked disabled>
+                                                }else
+                                                {
+                                                    <input type="checkbox" data-toggle="toggle" unchecked disabled>
+                                                }
+
+                                            </th>
+                                            <td>
+                                                <a asp-controller="Product" asp-action="Edit" asp-route-id="@productFormModel.ProductId">Edytuj</a> |
+                                                <a asp-controller="Product" asp-action="Delete" asp-route-id="@productFormModel.ProductId">Usuń</a> |
+                                                <a asp-controller="Product" asp-action="Details" asp-route-id="@productFormModel.ProductId">Podgląd</a>
+
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#ProductCategoryTable').DataTable(
+                {
+                    "columnDefs": [
+                        { "width": "50px", "targets": 2 }
+                    ],
+                    pageLength: 50,
+                    "order": [[6, 'desc'], [0, 'desc']]
+                });
+        });
+    </script>
+}
+
+
+
 @*
 @using (Html.BeginForm("Edit", "Category", FormMethod.Post))
 {

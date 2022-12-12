@@ -86,14 +86,18 @@ namespace partner_aluro.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> EditAsync(int id)
+        public async Task<IActionResult> Edit(int id)
         {
-            var kategoria = await _categoryService.GetAsync(id);
+            //var kategoria = await _categoryService.GetAsync(id);
+
+
+            Category kategoria = _context.Category.Include(p => p.Produkty).Where(x=>x.CategoryId == id).FirstOrDefault();
+
             return View(kategoria);
         }
 
         [HttpPost]
-        public async Task<IActionResult> EditAsync(Category data)
+        public async Task<IActionResult> Edit(Category data)
         {
             Category kategoria = await _iUnitOfWorkCategory.Category.GetAsync(data.CategoryId);
 
@@ -101,6 +105,25 @@ namespace partner_aluro.Controllers
             {
                 return NotFound();
             }
+
+
+            List<Category> categories = _context.Category.ToList();
+
+            for(int i = 0; i < categories.Count(); i++)
+            {
+                Category category = categories[i];
+                if(category.ParentId == data.CategoryId && data.ParentId==0)
+                {
+                    kategoria.ChildId = 1;
+                }else if(category.ParentId != 0)
+                {
+                    kategoria.ChildId = 2;
+                }else
+                {
+                    kategoria.ChildId = 0;
+                }
+            }
+
 
             kategoria.Name = data.Name;
             kategoria.Description = data.Description;
