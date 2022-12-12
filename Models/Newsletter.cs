@@ -16,6 +16,9 @@ namespace partner_aluro.Models
         [NotMapped]
         public List<string>? listaEmail { get; set; }
 
+
+        public virtual ICollection<ApplicationUser> Users { get; set; }
+
         public string? MessagerBody { get; set; }
 
         public string? contentEmail { get; set; }

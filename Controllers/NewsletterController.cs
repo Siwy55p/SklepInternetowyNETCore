@@ -275,6 +275,19 @@ namespace partner_aluro.Controllers
         [HttpGet]
         public async Task<ActionResult> SendEmail(int id)
         {
+
+            Newsletter newsletter = _context.Newsletter.Where(x => x.NewsletterID == id).Include(u => u.Users).FirstOrDefault();
+            newsletter.Users = _context.Users.ToList();
+
+            newsletter.listaEmail = await _context.Users.Where(x => x.Newsletter == true).Select(x => x.Email).ToListAsync();
+            string source = newsletter.contentEmail;
+
+            return View(newsletter);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> SendEmailDo(int id)
+        {
             Newsletter newsletter = await _newsletter.GetAsync(id);
 
             string source = newsletter.contentEmail;
@@ -289,7 +302,7 @@ namespace partner_aluro.Controllers
 
             for (int i = 0; i < newsletter.listaEmail.Count(); i++)
             {
-                source = source.Replace("[unscribe]", "<a href=\"https://localhost:44315/Register/unsubscribe/?Email=" + newsletter.listaEmail[i].ToString() + "\"> wypisz</a>");
+                source = source.Replace("[unscribe]", "<a href=\"https://partneralluro.hostingasp.pl/Register/unsubscribe/?Email=" + newsletter.listaEmail[i].ToString() + "\"> wypisz</a>");
                 emailDto = new EmailDto()
                 {
                     Body = source,
@@ -302,6 +315,7 @@ namespace partner_aluro.Controllers
 
             return View();
         }
+
 
         public string WstawProdukty(string content)
         {

@@ -48,11 +48,11 @@ namespace partner_aluro.Controllers
         public async Task<IActionResult> Lista()
         {
 
-            List<Cart> listaCart = _context.Carts
+            List<Cart> listaCart = await _context.Carts
                 .Include(x=>x.user)
                 .Include(u=>u.CartItems)
                 .ThenInclude(p => p.Product)
-                .ToList();
+                .ToListAsync();
 
             for(int i = 0; i < listaCart.Count(); i++)
             {
