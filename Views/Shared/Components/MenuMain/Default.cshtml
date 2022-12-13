@@ -56,9 +56,9 @@
                     </a>
 
 
-                    @if (kategorie.ChildId == 1)
+                    @if (kategorie.ChildId == 1 && Model.Count() >= 1)
                     {
-                    <a class="@pokaz2 rozwin" href="#" role="button" id="@kategorie.CategoryId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-h"></i></a>
+                    <a class="@pokaz2 rozwin" href="#" role="button" id="@kategorie.CategoryId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-arrow-down"></i></a>
                         <ul class="dropdown-menu" style="z-index:2000">
                             @foreach (var kategorie2 in Model)
                             {
@@ -80,9 +80,9 @@
                                 {
                                 <li class="menu_kat" style="width:241px;">
                                     <a class="@activecat2  kategoria_class_menu" href="@Url.Action("Lista1","Category", new {KategoriaId = kategorie2.CategoryId})">
-                                            @language.Getkey(kategorie2.Name)
-                                        </a>
-                                    </li>
+                                        @language.Getkey(kategorie2.Name)
+                                    </a>
+                                </li>
                                 }
 
                             }

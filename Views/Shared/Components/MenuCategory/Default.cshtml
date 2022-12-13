@@ -5,7 +5,7 @@
     <div class="bg-gray text-uppercase p-1">
         <i class="fa fa-list"></i> @language.Getkey("Kategorie")
     </div>
-    <ul class="nav navbar-nav">
+    <ul class="nav navbar" >
         @foreach (var kategorie in Model)
         {
             var activecat = "";
@@ -21,7 +21,7 @@
 
                 @if (kategorie.Aktywny == true)
                 {
-                    <li class="menu_kat">
+                    <li class="menu_kat"  style="width:257px">
                             <a class="@activecat kategoria_class_menu" asp-controller="Category" asp-route-KategoriaId="@kategorie.CategoryId" asp-action="Lista1">
                             @language.Getkey(@kategorie.Name)
                             </a>
@@ -39,12 +39,11 @@
 
                         @if (kategorie2.ParentId == kategorie.CategoryId && kategorie2.ParentId != 0)
                         {
-
-                                <li class="menu_kat">
-                                    <a class="@activecat2 kategoria_class_menu mx-2 px-2" href="@Url.Action("Lista1","Category", new {KategoriaId = kategorie2.CategoryId})">
-                                                @language.Getkey(@kategorie2.Name)
-                                    </a>
-                                </li>
+                            <li class="menu_kat" style="width:257px">
+                            <a class="@activecat2 kategoria_class_menu mx-2 px-2" href="@Url.Action("Lista1","Category", new {KategoriaId = kategorie2.CategoryId})">
+                                @language.Getkey(@kategorie2.Name)
+                            </a>
+                        </li>
                         }
                     }
                 }
