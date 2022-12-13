@@ -112,7 +112,7 @@ namespace partner_aluro.Services
                     if (slider != null)
                     {
 
-                        path0 = @"img/SliderHome/";
+                        path0 = @"img/SliderHome/" + slider.ImageSliderID;
                         //path0 = @"img/SliderHome/" + slider.ImageSliderID + @"/";
                     }
 
