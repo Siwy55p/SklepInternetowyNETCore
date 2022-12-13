@@ -68,6 +68,9 @@ namespace partner_aluro.Controllers
 
             return RedirectToAction("Index");
         }
+
+
+        [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
@@ -78,6 +81,7 @@ namespace partner_aluro.Controllers
         }
 
 
+        [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
         [HttpPost]
         public async Task<IActionResult> Edit(Slider slider)
         {
@@ -88,7 +92,7 @@ namespace partner_aluro.Controllers
             var files = HttpContext.Request.Form.Files;
 
             
-            _imageService.UploadFilesAsync(files,null, slider);
+            await _imageService.UploadFilesAsync(files,null, slider);
 
             //UploadFile2Async(slider);
 

@@ -56,9 +56,16 @@
 
                                             <td><a asp-controller="Product" asp-action="Edit" asp-route-id="@productFormModel.ProductId">@productFormModel.Name</a></td>
                                             <td>@productFormModel.CenaProduktu.ToString("C")</td>
-                                            <td>@productFormModel.CenaProduktuDetal</td>
-                                            <td>@productFormModel.CategoryNavigation.Name</td>
-                                            <th>@productFormModel.Ilosc</th>
+                                            <td>@productFormModel.CenaProduktuDetal.ToString("C")</td>
+                                            <td>
+                                                <select onchange="ChangeCategory(@productFormModel.ProductId, @productFormModel.CategoryId)" id="select_@productFormModel.ProductId" asp-for="@productFormModel.CategoryId" class="form-control" asp-items="(IEnumerable<SelectListItem>)@ViewData["Category"]">
+                                                    @*<option>Select one</option>*@
+                                                </select>
+                                              @*  @productFormModel.CategoryNavigation.Name*@
+                                            </td>
+                                            <th>
+                                                <input onchange="ChangeIlosc(@productFormModel.ProductId)" asp-for="@productFormModel.Ilosc" class="form-control" id="ilosc_@productFormModel.ProductId" aria-required="true" style="width: 130px" />
+                                            </th>
                                             <th>
                                                 @if (productFormModel.Ukryty == true)
                                                 {
@@ -105,9 +112,7 @@
 </div>
 
 @section Scripts{
-
     <script>
-
         $(document).ready(function () {
             $('#ProductTableList').DataTable(
                 {
@@ -123,14 +128,50 @@
                     "order": [[0, 'desc'], [3, 'desc']]
                 });
         });
-
     </script>
-
     <script>
         checkBox = document.getElementById('takenBefore').addEventListener('click', event => {
             if (event.target.checked) {
                 alert("Checkbox checked!");
             }
         });
+    </script>
+    <script>
+        function ChangeCategory(ProduktId, CategoryId) {
+
+            var d = document.getElementById("select_"+ProduktId).value;
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("ChangeCategory", "Product")',
+                data: { ProduktId: ProduktId, KategoriaID: d },
+                success: function (result) {
+
+                },
+
+                error: function (abc) {
+                    alert(abc.statusText);
+                },
+            });
+        }
+    </script>
+    <script>
+        function ChangeIlosc(ProduktId) {
+
+            var d = document.getElementById("ilosc_" + ProduktId).value;
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("ChangeIlosc", "Product")',
+                data: { ProduktId: ProduktId, Ilosc: d },
+                success: function (result) {
+
+                },
+
+                error: function (abc) {
+                    alert(abc.statusText);
+                },
+            });
+        }
     </script>
 }

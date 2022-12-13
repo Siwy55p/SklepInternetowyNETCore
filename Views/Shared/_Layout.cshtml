@@ -81,7 +81,7 @@
     </script>
     <script>
         $(function () {
-            $("#szukanaNazwa").keyup(function (e) {
+            $("#szukanaNazwa").on("keyup change", function (e) {
                 var n = $("#szukanaNazwa").val();
                 $.get("/Category/Lista2?szukanaNazwa=" + n, function (r) {
                     $("#SekcjaListaKategori").html(r);

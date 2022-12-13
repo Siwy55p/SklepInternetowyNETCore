@@ -188,6 +188,22 @@ namespace partner_aluro.Controllers
             }
 
         }
+        public void ChangeCategory(int ProduktId, int KategoriaID)
+        {
+            Product product = _context.Products.Where(x => x.ProductId == ProduktId).FirstOrDefault();
+
+            product.CategoryId = KategoriaID;
+            _context.Products.Update(product);
+            _context.SaveChanges();
+        }
+        public void ChangeIlosc(int ProduktId, int Ilosc)
+        {
+            Product product = _context.Products.Where(x => x.ProductId == ProduktId).FirstOrDefault();
+
+            product.Ilosc = Ilosc;
+            _context.Products.Update(product);
+            _context.SaveChanges();
+        }
         public static void UpdateResourceFile(Hashtable data, String path)
         {
             Hashtable resourceEntries = new Hashtable();

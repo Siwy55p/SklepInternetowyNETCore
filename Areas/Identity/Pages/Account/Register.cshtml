@@ -163,7 +163,7 @@
 
     <script>
         $(function () {
-            $("#floatingInputVAT").keyup(function (e) {
+            $("#floatingInputVAT").on("keyup change", function(e) {
 
                 var Vat = $("#floatingInputVAT").val();
 
