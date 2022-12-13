@@ -136,18 +136,52 @@
                                 }
 
 
-                                @if (Model.WysokoscProduktu != null)
-                                {
-                                <div class="row">
+                                
+                                <div class="row p-0 m-0">
                                     <div class="col">@language.Getkey("Specyfikacja produktu:") </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col">@language.Getkey("Szerokość:") @Model.SzerokoscProduktu cm</div>
-                                    <div class="col">@language.Getkey("Wysokość:") @Model.WysokoscProduktu cm</div>
-                                    <div class="col">@language.Getkey("Głębokość:") @Model.GlebokoscProduktu cm</div>
+                                @if (Model.SzerokoscProduktu != null && Model.SzerokoscProduktu != 0 || Model.WysokoscProduktu != null && Model.WysokoscProduktu != 0 || Model.GlebokoscProduktu != null && Model.GlebokoscProduktu != 0)
+                                {
+                                    <div class="row p-0 m-0">
+                                            <div class="col">@language.Getkey("Wymiary zewnetrzne:")</div>
+                                    </div>
+                                }
+                                <div class="row p-0 m-0">
+                                    @if (Model.SzerokoscProduktu != null && Model.SzerokoscProduktu != 0)
+                                    {
+                                        <div class="col">@language.Getkey("Szerokość:") @Model.SzerokoscProduktu cm</div>
+                                    }
+                                    @if (Model.WysokoscProduktu != null && Model.WysokoscProduktu != 0 )
+                                    {
+                                        <div class="col">@language.Getkey("Wysokość:") @Model.WysokoscProduktu cm</div>
+                                    }
+                                    @if (Model.GlebokoscProduktu != null && Model.GlebokoscProduktu != 0)
+                                    {
+                                        <div class="col">@language.Getkey("Głębokość:") @Model.GlebokoscProduktu cm</div>
+                                    }
                                 </div>
 
+                                @if(Model.SzerokoscWewnetrznaProduktu != null && Model.SzerokoscWewnetrznaProduktu != 0 || Model.WysokoscWewnetrznaProduktu != null && Model.WysokoscWewnetrznaProduktu != 0 || Model.GlebokoscWewnetrznaProduktu != null && Model.GlebokoscWewnetrznaProduktu != 0)
+                                {
+                                    <div class="row p-0 m-0">
+                                            <div class="col">@language.Getkey("Wymiary wewnętrzne:")</div>
+                                    </div>
                                 }
+                                <div class="row p-0 m-0">
+                                    @if (Model.SzerokoscWewnetrznaProduktu != null && Model.SzerokoscWewnetrznaProduktu != 0)
+                                    {
+                                        <div class="col">@language.Getkey("Szerokość:") @Model.SzerokoscWewnetrznaProduktu cm</div>
+                                    }
+                                    @if (Model.WysokoscWewnetrznaProduktu != null && Model.WysokoscWewnetrznaProduktu != 0)
+                                    {
+                                        <div class="col">@language.Getkey("Wysokość:") @Model.WysokoscWewnetrznaProduktu cm</div>
+                                    }
+                                    @if (Model.GlebokoscWewnetrznaProduktu != null && Model.GlebokoscWewnetrznaProduktu != 0)
+                                    {
+                                        <div class="col">@language.Getkey("Głębokość:") @Model.GlebokoscWewnetrznaProduktu cm</div>
+                                    }
+                                </div>
+
                                 @if(Model.WagaProduktu != null && Model.WagaProduktu != 0)
                                 {
                                     <div class="row">
