@@ -111,7 +111,9 @@ namespace partner_aluro.Services
                     }
                     if (slider != null)
                     {
-                        path0 = @"img/SliderHome/" + slider.ImageSliderID + @"/";
+
+                        path0 = @"img/SliderHome/";
+                        //path0 = @"img/SliderHome/" + slider.ImageSliderID + @"/";
                     }
 
                     var uploadsFolder = Path.Combine(webRootPath, @"img/");
@@ -172,6 +174,18 @@ namespace partner_aluro.Services
                     //        //    image.Write("YourFinalImage.jpg");
                     //        //}
 
+                    string pathCompresImage2 = Path.Combine(webRootPath, uploadsFolder);
+                    string pathname2 = pathCompresImage2 + @"/" + dynamicFileName;
+                    string ImageNameCompres2 = "645x410_" + dynamicFileName;
+                    string pathSaveCompres2 = pathCompresImage2 + @"/" + ImageNameCompres2;
+                    //save compres image
+                    using (MagickImage image = new MagickImage(pathname2))
+                    {
+                        image.Format = MagickFormat.WebP; // Get or Set the format of the image.
+                        image.Resize(645, 410); // fit the image into the requested width and height. 
+                        image.Quality = 50; // This is the Compression level.
+                        image.Write(pathSaveCompres2);
+                    }
 
 
 
@@ -189,6 +203,8 @@ namespace partner_aluro.Services
                             ImageName = dynamicFileName,
                             pathImageCompress250x250 = pathSaveCompres,
                             ImageNameCompress250x250 = ImageNameCompres,
+                            pathImageCompress645x410 = pathSaveCompres2,
+                            ImageNameCompress645x410 = ImageNameCompres2,
                             ProductId = product.ProductId
                         };
                     }
@@ -203,10 +219,29 @@ namespace partner_aluro.Services
                             ImageName = dynamicFileName,
                             pathImageCompress250x250 = pathSaveCompres,
                             ImageNameCompress250x250 = ImageNameCompres,
+                            pathImageCompress645x410 = pathSaveCompres2,
+                            ImageNameCompress645x410 = ImageNameCompres2,
                             SliderIds = slider.ImageSliderID,
                             Opis = "slider",
                         };
                     }
+
+                    if(slider == null && product == null)
+                    {
+                        imgModel = new()
+                        {
+                            path = path0 + @"/",
+                            fullPath = path0 + @"/" + dynamicFileName,
+                            kolejnosc = i,
+                            Tytul = "",
+                            ImageName = dynamicFileName,
+                            pathImageCompress250x250 = pathSaveCompres,
+                            ImageNameCompress250x250 = ImageNameCompres,
+                            pathImageCompress645x410 = pathSaveCompres2,
+                            ImageNameCompress645x410 = ImageNameCompres2
+                        };
+                    }
+
 
                     if (product != null)
                     {

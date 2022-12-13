@@ -27,6 +27,10 @@ namespace partner_aluro.Models
         public string? pathImageCompress250x250 { get; set; }
         public string? ImageNameCompress250x250 { get; set; }
 
+
+        public string? pathImageCompress645x410 { get; set; }
+        public string? ImageNameCompress645x410 { get; set; }
+
         [DisplayName("Opis obrazka")]
         public string? Opis { get; set; }
         public int? ProductImagesId { get; set; } //dodatkowy id produktu

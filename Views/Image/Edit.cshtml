@@ -61,7 +61,16 @@
                 <input type="text" id="disabledTextInput" asp-for="pathImageCompress250x250" class="form-control" readonly="readonly" />
                 <span asp-validation-for="pathImageCompress250x250" class="text-danger"></span>
             </div>
-
+            <div class="form-group">
+                <label asp-for="ImageNameCompress645x410" class="control-label"></label>
+                <input type="text" id="disabledTextInput" asp-for="ImageNameCompress645x410" class="form-control" readonly="readonly" />
+                <span asp-validation-for="ImageNameCompress645x410" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="pathImageCompress645x410" class="control-label"></label>
+                <input type="text" id="disabledTextInput" asp-for="pathImageCompress645x410" class="form-control" readonly="readonly" />
+                <span asp-validation-for="pathImageCompress645x410" class="text-danger"></span>
+            </div>
                 <div class="form-group">
                     <label asp-for="ImageFile" class="control-label"></label>
                 <input type="file" id="images" asp-for="ImageFile" onchange="preview_images();" accept="images/png,images/jpg,images/jpeg" /> @*/image/png,image/jpg*@
