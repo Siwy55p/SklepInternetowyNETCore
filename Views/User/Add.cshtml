@@ -21,7 +21,7 @@
 @section Scripts {
     <script>
         $(function () {
-            $("#floatingInputVAT").keyup(function (e) {
+            $("#floatingInputVAT").on("keyup change", (function (e) {
 
                 var Vat = $("#floatingInputVAT").val();
 
@@ -76,7 +76,7 @@
 
     <script>
         $(function () {
-            $("#Email").keyup(function (e) {
+            $("#Email").on("keyup change", function (e) {
 
                 var Email = $("#Email").val();
 
@@ -93,7 +93,7 @@
 
     <script>
         $(function () {
-            $("#Imie").keyup(function (e) {
+            $("#Imie").on("keyup change", function (e) {
 
                 var Imie = $("#Imie").val();
 
@@ -107,7 +107,7 @@
     </script>
     <script>
         $(function () {
-            $("#Nazwisko").keyup(function (e) {
+            $("#Nazwisko").on("keyup change", function (e) {
 
                 var Nazwisko = $("#Nazwisko").val();
 
@@ -120,4 +120,3 @@
         });
     </script>
 }
-
