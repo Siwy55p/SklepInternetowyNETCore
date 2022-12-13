@@ -95,8 +95,8 @@ namespace partner_aluro.Models
                 cart.RazemNetto = 0;
                 cart.dataPowstania = DateTime.Now;
                 cart.Zrealizowane = false;
-                context.Carts.Add(cart);
 
+                    context.Carts.Add(cart);
             }
 
             context.SaveChanges();

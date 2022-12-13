@@ -6,6 +6,7 @@ using partner_aluro.Core;
 using partner_aluro.Data;
 using partner_aluro.Models;
 using partner_aluro.Resources;
+using partner_aluro.Services;
 using partner_aluro.Services.Interfaces;
 using SmartBreadcrumbs.Nodes;
 using X.PagedList;
@@ -92,6 +93,8 @@ namespace partner_aluro.Controllers
 
 
             Category kategoria = _context.Category.Include(p => p.Produkty).Where(x=>x.CategoryId == id).FirstOrDefault();
+
+            ViewData["Category"] = GetCategories();
 
             return View(kategoria);
         }
@@ -458,6 +461,5 @@ namespace partner_aluro.Controllers
             //lstCategories.Insert(0, dmyItem);
             return lstCategories;
         }
-
     }
 }

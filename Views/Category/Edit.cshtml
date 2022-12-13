@@ -51,7 +51,12 @@
                                             <td><a asp-controller="Product" asp-action="Edit" asp-route-id="@productFormModel.ProductId">@productFormModel.Name</a></td>
                                             <td>@productFormModel.CenaProduktu.ToString("C")</td>
                                             <td>@productFormModel.CenaProduktuDetal</td>
-                                            <td>@productFormModel.CategoryNavigation.Name</td>
+                                            <td>
+                                            <select onchange="ChangeCategory(@productFormModel.ProductId, @productFormModel.CategoryId)" id="select_@productFormModel.ProductId" asp-for="@productFormModel.CategoryId" class="form-control" asp-items="(IEnumerable<SelectListItem>)@ViewData["Category"]">
+                                                @*<option>Select one</option>*@
+                                            </select>
+                                            @*  @productFormModel.CategoryNavigation.Name*@
+                                            </td>
                                             <th>@productFormModel.Ilosc</th>
                                             <th>
                                                 @if (productFormModel.Ukryty == true)
@@ -93,6 +98,25 @@
                     "order": [[6, 'desc'], [0, 'desc']]
                 });
         });
+    </script>
+    <script>
+        function ChangeCategory(ProduktId, CategoryId) {
+
+            var d = document.getElementById("select_" + ProduktId).value;
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("ChangeCategory", "Product")',
+                data: { ProduktId: ProduktId, KategoriaID: d },
+                success: function (result) {
+
+                },
+
+                error: function (abc) {
+                    alert(abc.statusText);
+                },
+            });
+        }
     </script>
 }
 
