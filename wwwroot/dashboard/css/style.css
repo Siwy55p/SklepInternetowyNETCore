@@ -2,14 +2,19 @@
 body,
 button {
   font-family: "Inter", sans-serif;
-  font-size: 14px;
+  font-size: 12px;
 }
 :root {
   --offcanvas-width: 200px;
   --topNavbarHeight: 49px;
 }
+
+.form-control {
+    font-size: 12px;
+}
+
 .sidebar-nav {
-  width: var(--offcanvas-width);
+    width: var(--offcanvas-width);
 }
 .sidebar-link {
   display: flex;
