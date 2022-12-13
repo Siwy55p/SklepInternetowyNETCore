@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Dashboard.cshtml";
 }
 
-<form class="needs-validation" asp-action="Edit" asp-controller="Slider" asp-route-slider="@Model" method="post" enctype="multipart/form-data">
+<form class="needs-validation" asp-action="Edit" asp-controller="Slider" method="post" enctype="multipart/form-data">
 
     @await Html.PartialAsync("_FormSlider")
 
