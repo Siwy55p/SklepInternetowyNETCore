@@ -20,6 +20,7 @@ namespace partner_aluro.Models
 
         public int? IdObrazek { get; set; }
 
+
         [ForeignKey(nameof(ImageSliderID))]
         public virtual List<ImageModel>? ObrazkiDostepneWSliderze { get; set; } = new List<ImageModel>();
 

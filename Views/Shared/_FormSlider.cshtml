@@ -31,10 +31,12 @@
     <div class="row">
         <div class="col-md-4">
             <div class="form-group">
-                <label asp-for="@Model.ObrazkiDostepneWSliderze" class="control-label"></label>
-                <input type="file" id="images" onchange="preview_images()" multiple accept="image/jpeg, image/png, image/jpg" />
-                
-                <span asp-validation-for="@Model.ObrazkiDostepneWSliderze" class="text-danger"></span>
+                <label asp-for="@Model.ObrazkiDostepneWSliderze" class="control-label"> Dodaj obrazy: </label>
+
+                <input type="file" asp-for="@Model.ObrazkiDostepneWSliderze" id="images" name="images[]" onchange="preview_images();" multiple accept="image/jpeg, image/png, image/jpg" />
+
+               @* <input type="file" id="images" onchange="preview_images()" multiple accept="image/jpeg, image/png, image/jpg" />
+               *@ @* <span asp-validation-for="@Model.ObrazkiDostepneWSliderze" class="text-danger"></span>*@
             </div>
 
             <div class="row" id="image_preview">
