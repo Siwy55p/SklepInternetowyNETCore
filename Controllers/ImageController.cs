@@ -381,7 +381,7 @@ namespace partner_aluro.Controllers
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
-        public async Task<IActionResult> DeleteConfirmed(int id, string returnUrl)
+        public async Task<IActionResult> Delete(int id, string returnUrl)
         {
             var imageModel = await _context.Images.FindAsync(id);
 
@@ -428,32 +428,34 @@ namespace partner_aluro.Controllers
         }
 
 
-        public void Delete2(int id)
+        public void Delete2(int ImageId)
         {
-            var imageModel = _context.Images.Find(id);
-
-            //delete image from wwwroot/img
-            var imagePath = Path.Combine(_webHostEnvironment.WebRootPath, imageModel.path, imageModel.ImageName);
-            if (System.IO.File.Exists(imagePath))
-                System.IO.File.Delete(imagePath);
-            //delete the record
-
+            var imageModel = _context.Images.Find(ImageId);
 
             if (imageModel != null)
             {
-                _context.Images.Remove(imageModel);
+                //delete image from wwwroot/img
+                var imagePath = Path.Combine(_webHostEnvironment.WebRootPath, imageModel.path, imageModel.ImageName);
+                if (System.IO.File.Exists(imagePath))
+                    System.IO.File.Delete(imagePath);
+                //delete the record
 
-                string webRootPath = _webHostEnvironment.WebRootPath;
-
-                if (imageModel.path != null)
+                if (imageModel != null)
                 {
-                    if (imageModel.fullPath != null)
-                    {
-                        string ExitingFile = Path.Combine(webRootPath, imageModel.path, imageModel.ImageName);
-                        System.IO.File.Delete(ExitingFile);
-                    }
                     _context.Images.Remove(imageModel);
-                    _context.SaveChanges();
+
+                    string webRootPath = _webHostEnvironment.WebRootPath;
+
+                    if (imageModel.path != null)
+                    {
+                        if (imageModel.fullPath != null)
+                        {
+                            string ExitingFile = Path.Combine(webRootPath, imageModel.path, imageModel.ImageName);
+                            System.IO.File.Delete(ExitingFile);
+                        }
+                        _context.Images.Remove(imageModel);
+                        _context.SaveChanges();
+                    }
                 }
             }
         }

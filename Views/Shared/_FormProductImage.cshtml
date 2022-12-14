@@ -58,7 +58,7 @@
 
                                                     <td>
                                             <a asp-action="Edit"   asp-controller="Image" asp-route-id="@image.ImageId">Edit</a> |
-                                            <a asp-action="Delete2" asp-controller="Image" asp-route-id="@image.ImageId">Delete</a>
+                                            <button class="btn btn-success" onclick="DeleteImage(@image.ImageId)">Usuń</button>
                                                     </td>
 
 

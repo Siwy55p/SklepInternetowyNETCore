@@ -20,13 +20,13 @@
                 bool pokaz = true;
             }
 
-
             @for (int i = 0 ; i < @Model.categories.Count(); i++)
             {
-                <input type="hidden" asp-for="@Model.categories[i].Value"/>
+                <div class="row">
                 <input asp-for="categories[i].Selected"/> @Model.categories[i].Text
+                <input type="hidden" asp-for="@Model.categories[i].Value"/>
+                </div>
             }
-
         </div>
         <div class="col-md-4">
             @await Html.PartialAsync("_FormProductImage")

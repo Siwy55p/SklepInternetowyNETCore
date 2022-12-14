@@ -131,4 +131,20 @@
             });
         }
     </script>
+
+    <script>
+        function DeleteImage(ImageId) {
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("Delete2", "Image")',
+                data: { ImageId: ImageId },
+                success: function (result) {
+                },
+                error: function (abc) {
+                    alert(abc.statusText);
+                },
+            });
+        }
+    </script>
 }
