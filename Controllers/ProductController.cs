@@ -84,9 +84,6 @@ namespace partner_aluro.Controllers
             _context.Images.Update(image);
             _context.SaveChanges();
 
-            Id = 2;
-
-
 
         }
 
