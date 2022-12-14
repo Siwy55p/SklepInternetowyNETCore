@@ -23,7 +23,7 @@
     
     <div class="row g-0">
 
-            <div class="col-md-6 border-end">
+        <div class="col-md-6 border-end">
                 @Html.HiddenFor(h=>Model.ProductId)
                 @Html.ValidationSummary()
             @await Html.PartialAsync("_FormProduct")
@@ -79,7 +79,7 @@
             <div class="col-md-6">
                 @await Html.PartialAsync("_FormProductImage")
             </div>
-        </div>
+    </div>
     </form>
 
 @section Scripts {
@@ -112,7 +112,6 @@
     </script>
     <script>
         function AddToKategoria(ProduktId, KategoriaID) {
-
             var check = document.getElementById('chk' + KategoriaID);
             if (check.checked) {
                 check = true;
@@ -120,15 +119,12 @@
                 check = false;
             }
 
-
             $.ajax({
                 type: "POST",
                 url: '@Url.Action("AddToKategoria", "Product")',
                 data: { ProduktId: ProduktId, KategoriaID: KategoriaID, check: check },
                 success: function (result) {
-
                 },
-
                 error: function (abc) {
                     alert(abc.statusText);
                 },

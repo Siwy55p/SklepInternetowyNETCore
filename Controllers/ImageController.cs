@@ -426,13 +426,45 @@ namespace partner_aluro.Controllers
             //await _context.SaveChangesAsync();
             //return RedirectToAction(nameof(Index));
         }
-        
+
+
+        public void Delete2(int id)
+        {
+            var imageModel = _context.Images.Find(id);
+
+            //delete image from wwwroot/img
+            var imagePath = Path.Combine(_webHostEnvironment.WebRootPath, imageModel.path, imageModel.ImageName);
+            if (System.IO.File.Exists(imagePath))
+                System.IO.File.Delete(imagePath);
+            //delete the record
+
+
+            if (imageModel != null)
+            {
+                _context.Images.Remove(imageModel);
+
+                string webRootPath = _webHostEnvironment.WebRootPath;
+
+                if (imageModel.path != null)
+                {
+                    if (imageModel.fullPath != null)
+                    {
+                        string ExitingFile = Path.Combine(webRootPath, imageModel.path, imageModel.ImageName);
+                        System.IO.File.Delete(ExitingFile);
+                    }
+                    _context.Images.Remove(imageModel);
+                    _context.SaveChanges();
+                }
+            }
+        }
+
+
 
         //[ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
         //public static ImageModel UploadFiles(IFormFileCollection files, Product? product = null)
         //{
         //    //var files = HttpContext.Request.Form.Files;
-            
+
 
         //    if (!IsInitialized)
         //        throw new InvalidOperationException("Object is not initialized");

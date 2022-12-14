@@ -168,6 +168,15 @@ namespace partner_aluro.Controllers
             Product product = new Product();
             //product.Cats = _ProductService.GetListCategory();
 
+            var item = _context.Category.Select(x => new SelectListItem()
+            {
+                Text = x.Name,
+                Value = x.CategoryId.ToString()
+            }).ToList();
+
+            product.categories = item;
+
+
             return View(product);
         }
 
@@ -256,12 +265,12 @@ namespace partner_aluro.Controllers
         {
             //ViewBag.Category = GetCategories();
 
+            var courseIds = product.categories.Where(x => x.Selected).Select(y => y.Value);
+
+            
             ViewData["Category"] = GetCategories();
 
             //string NameEn = "Angielska Nazwa";
-
-
-            
 
             //var authKey = $"bbc4aaae-78af-4f5e-37dd-34e29f91a480:fx"; // Replace with your key
             //var translator = new Translator(authKey);
@@ -308,13 +317,8 @@ namespace partner_aluro.Controllers
             //UpdateResourceFile(data3, resxFile3);
             //// KONIEC Dodanie do pliku resx tlumaczenia nazwy produktu Niemiecki
 
-
-
             product.Bestseller = true;
             product.ImageUrl = "";
-
-
-
 
             ModelState.Remove("CategoryNavigation");
             ModelState.Remove("CategorySubNavigation");
@@ -350,11 +354,12 @@ namespace partner_aluro.Controllers
             await _imageService.UploadFilesAsync(files, product);
 
 
+            if ((product.Product_Images != null) && (product.Product_Images.FirstOrDefault() != null))
+            {
+                product.ImageUrl = product.Product_Images.OrderBy(x => x.kolejnosc).FirstOrDefault().ImageName;
 
-            product.ImageUrl = product.Product_Images.OrderBy(x => x.kolejnosc).FirstOrDefault().ImageName;
-
-            product.Product_Images = product.Product_Images.OrderBy(x => x.kolejnosc).ToList();
-
+                product.Product_Images = product.Product_Images.OrderBy(x => x.kolejnosc).ToList();
+            }
             _context.Update(product);
             _context.SaveChanges();
 
@@ -367,25 +372,32 @@ namespace partner_aluro.Controllers
             //_imageService.AddAsync(imgModel);
             //UploadNewFilePicture
 
-
-
             //var id = _ProductService.AddProduct(product);//wazne aby przypisac
             //var produkt = _unitOfWorkProduct.Product.GetProductId(product.ProductId);
             //produkt.ProductImagesId = product.ProductId;
 
             //await _context.SaveChangesAsync();
-
             ProductCategory productCategory = new ProductCategory()
             {
                 ProductID = product.ProductId,
                 CategoryID = product.CategoryId
             };
+
+
             _productCategoryService.AddProductCategoryMultiple(productCategory);
+
+            foreach (var ids in courseIds)
+            {
+
+                productCategory = new ProductCategory()
+                {
+                    ProductID = product.ProductId
+                };
+                _productCategoryService.AddProductCategoryMultiple(productCategory);
+            }
 
 
             return RedirectToAction(nameof(List));
-
-
         }
 
 
@@ -517,25 +529,19 @@ namespace partner_aluro.Controllers
         //private string UploadFile(Product product)
         //{
         //    string uniqueFileName = null;
-
         //    var files = HttpContext.Request.Form.Files;
-
         //    if (files.Count > 0)
         //    {
         //        if (HttpContext.Request.Form.Files[0] != null)
         //        {
         //            var file = HttpContext.Request.Form.Files[0];
-
         //            string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images\\produkty\\" + product.Symbol);
-
         //            if (!Directory.Exists(uploadsFolder))
         //            {
         //                Directory.CreateDirectory(uploadsFolder);
         //            }
         //            //uniqueFileName = "Front" + DateTime.Now.ToString("yymmssfff") + "_" + product.FrontImage.FileName;
-
         //            var extension = Path.GetExtension(files[0].FileName);
-
         //            uniqueFileName = "Front_" + product.Symbol + extension;
         //            string filePath = Path.Combine(uploadsFolder, uniqueFileName);
         //            using (var fileStream = new FileStream(filePath, FileMode.Create))
@@ -544,18 +550,14 @@ namespace partner_aluro.Controllers
         //            }
         //        }
         //    }
-
         //    if (uniqueFileName != null)
         //    {
         //        return uniqueFileName;
         //    }
         //    else
         //    {
-
         //        return uniqueFileName = "Front_" + product.Symbol +".jpg";
-
         //    }
-
         //}
 
         private List<SelectListItem> GetCategories()

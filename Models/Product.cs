@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using partner_aluro.Services.Interfaces;
 using System.Collections;
 using System.ComponentModel.DataAnnotations;
@@ -68,6 +69,9 @@ namespace partner_aluro.Models
         //[NotMapped]
         //public virtual ImageModel? product_Image { get; set; } = new ImageModel();
         ////public IFormFile? FrontImage { get; set; }
+
+        [NotMapped]
+        public IList<SelectListItem>? categories { get; set; }
 
         public virtual List<ProductCategory> Kategorie { get; set; } = new List<ProductCategory>();
 

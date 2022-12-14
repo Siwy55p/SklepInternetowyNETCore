@@ -37,7 +37,7 @@ namespace partner_aluro.Models
 
         [NotMapped]
         [DisplayName("Upload File")]
-        public IFormFile ImageFile { get; set; }  //pojedynczy plik
+        public IFormFile? ImageFile { get; set; }  //pojedynczy plik
 
         public virtual Product? Product { get; set; }
     }

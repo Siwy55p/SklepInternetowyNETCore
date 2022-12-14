@@ -57,8 +57,6 @@
                             </div>
                         </div>
 
-
-
                     </div>	
                     <div class="col-md-6">
                         <div class="p-2">
@@ -74,9 +72,8 @@
                                 <div class="row">@Html.Raw(@Model.KrotkiOpis)</div>
                             }
                             @*<div @*style="max-width:460px;" class="row body_product float-end text-end m-1 p-2">*@
-                             @{
+                                @{
                                     var Cena_brutto = (decimal)Model.CenaProduktu * (decimal)partner_aluro.Core.Constants.Vat;
-
                                 }
                             <div class="row">
                                 <div class="col justify-content-end">
@@ -143,42 +140,42 @@
                                 @if (Model.SzerokoscProduktu != null && Model.SzerokoscProduktu != 0 || Model.WysokoscProduktu != null && Model.WysokoscProduktu != 0 || Model.GlebokoscProduktu != null && Model.GlebokoscProduktu != 0)
                                 {
                                     <div class="row p-0 m-0">
-                                            <div class="col">@language.Getkey("Wymiary zewnetrzne:")</div>
+                                            <div class="col p-0 m-0">@language.Getkey("Wymiary zewnetrzne:")</div>
                                     </div>
                                 }
                                 <div class="row p-0 m-0">
                                     @if (Model.SzerokoscProduktu != null && Model.SzerokoscProduktu != 0)
                                     {
-                                        <div class="col">@language.Getkey("Szerokość:") @Model.SzerokoscProduktu cm.</div>
+                                        <div class="col p-0 m-0">@language.Getkey("Szerokość:") @Model.SzerokoscProduktu cm.</div>
                                     }
                                     @if (Model.WysokoscProduktu != null && Model.WysokoscProduktu != 0 )
                                     {
-                                        <div class="col">@language.Getkey("Wysokość:") @Model.WysokoscProduktu cm.</div>
+                                        <div class="col p-0 m-0">@language.Getkey("Wysokość:") @Model.WysokoscProduktu cm.</div>
                                     }
                                     @if (Model.GlebokoscProduktu != null && Model.GlebokoscProduktu != 0)
                                     {
-                                        <div class="col">@language.Getkey("Głębokość:") @Model.GlebokoscProduktu cm.</div>
+                                        <div class="col p-0 m-0">@language.Getkey("Głębokość:") @Model.GlebokoscProduktu cm.</div>
                                     }
                                 </div>
 
                                 @if(Model.SzerokoscWewnetrznaProduktu != null && Model.SzerokoscWewnetrznaProduktu != 0 || Model.WysokoscWewnetrznaProduktu != null && Model.WysokoscWewnetrznaProduktu != 0 || Model.GlebokoscWewnetrznaProduktu != null && Model.GlebokoscWewnetrznaProduktu != 0)
                                 {
                                     <div class="row p-0 m-0">
-                                            <div class="col">@language.Getkey("Wymiary wewnętrzne:")</div>
+                                            <div class="col p-0 m-0">@language.Getkey("Wymiary wewnętrzne:")</div>
                                     </div>
                                 }
                                 <div class="row p-0 m-0">
                                     @if (Model.SzerokoscWewnetrznaProduktu != null && Model.SzerokoscWewnetrznaProduktu != 0)
                                     {
-                                        <div class="col">@language.Getkey("Szerokość:") @Model.SzerokoscWewnetrznaProduktu cm.</div>
+                                        <div class="col p-0 m-0">@language.Getkey("Szerokość:") @Model.SzerokoscWewnetrznaProduktu cm.</div>
                                     }
                                     @if (Model.WysokoscWewnetrznaProduktu != null && Model.WysokoscWewnetrznaProduktu != 0)
                                     {
-                                        <div class="col">@language.Getkey("Wysokość:") @Model.WysokoscWewnetrznaProduktu cm.</div>
+                                        <div class="col p-0 m-0">@language.Getkey("Wysokość:") @Model.WysokoscWewnetrznaProduktu cm.</div>
                                     }
                                     @if (Model.GlebokoscWewnetrznaProduktu != null && Model.GlebokoscWewnetrznaProduktu != 0)
                                     {
-                                        <div class="col">@language.Getkey("Głębokość:") @Model.GlebokoscWewnetrznaProduktu cm.</div>
+                                        <div class="col p-0 m-0">@language.Getkey("Głębokość:") @Model.GlebokoscWewnetrznaProduktu cm.</div>
                                     }
                                 </div>
 

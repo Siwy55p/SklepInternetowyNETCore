@@ -29,9 +29,7 @@
         </div>
         <div class="form-group row p-2">
             <label asp-for="@Model.KrotkiOpis" class="col-sm-4 col-form-label">Krótki opis</label>
-    <textarea asp-for="@Model.KrotkiOpis" id="#textarea" class="form-control" rows="2"></textarea>
-          
-        
+            <textarea asp-for="@Model.KrotkiOpis" id="#textarea" class="form-control" rows="2"></textarea>
         </div>
 
         <div class="form-group row">
@@ -94,7 +92,6 @@
             <input asp-for="@Model.GlebokoscProduktu" type="text" class="form-control" aria-label="Głębokość produktu" placeholder="Głębokość produktu">
             <label asp-for="@Model.WysokoscProduktu" class="col-sm-2 col-form-label text-end">Wysokość:</label>
             <input asp-for="@Model.WysokoscProduktu" type="text" class="form-control" aria-label="Wysokość produktu" placeholder="Wysokość produktu">
-            
         </div>
         <div class="input-group">
             Wymiary wewnętrzne:
@@ -104,13 +101,12 @@
             <input asp-for="@Model.GlebokoscWewnetrznaProduktu" type="text" class="form-control" aria-label="Głębokość produktu" placeholder="Głębokość wew. produktu">
             <label asp-for="@Model.WysokoscWewnetrznaProduktu" class="col-sm-2 col-form-label text-end">Wysokość:</label>
             <input asp-for="@Model.WysokoscWewnetrznaProduktu" type="text" class="form-control" aria-label="Wysokość produktu" placeholder="Wysokość wew. produktu">
-
         </div>
 
         <div class="form-group row">
             <label asp-for="@Model.WagaProduktu:" class="col-sm-3 col-form-label text-end">Waga Produktu:</label>
             <div class="col-sm-2">
-        <input asp-for="@Model.WagaProduktu" class="form-control" aria-required="true" placeholder="Waga produktu" />
+                <input asp-for="@Model.WagaProduktu" class="form-control" aria-required="true" placeholder="Waga produktu" />
                 <span asp-validation-for="@Model.WagaProduktu" class="text-danger">
                 </span>
             </div>
@@ -137,33 +133,33 @@
 
         <div class="form-group">
             <label asp-for="@Model.CategoryId" class="control-label">Kategoria Główna:</label>
-    <select asp-for="@Model.CategoryId" class="form-control" asp-items="(IEnumerable<SelectListItem>)@ViewData["Category"]">
+            <select asp-for="@Model.CategoryId" class="form-control" asp-items="(IEnumerable<SelectListItem>)@ViewData["Category"]">
                 @*<option>Select one</option>*@
             </select>
         </div>
         <div class="form-group row">
             <label asp-for="@Model.Description" class="col-sm-4 col-form-label">Opis produktu</label>
-    <textarea asp-for="@Model.Description" id="#textarea" class="form-control" rows="3"></textarea>
+            <textarea asp-for="@Model.Description" id="#textarea" class="form-control" rows="3"></textarea>
         </div>
 
-<div class="form-group row">
-    <label asp-for="@Model.DataDodania" class="col-sm-3 col-form-label text-end">DataDodania: </label>
-    <div class="col-sm-4">
-        <input asp-for="@Model.DataDodania" class="form-control" aria-required="true" placeholder="Materiał" readonly="readonly" />
-        <span asp-validation-for="@Model.DataDodania" class="text-danger">
-        </span>
-    </div>
-</div>
+        <div class="form-group row">
+            <label asp-for="@Model.DataDodania" class="col-sm-3 col-form-label text-end">DataDodania: </label>
+            <div class="col-sm-4">
+                <input asp-for="@Model.DataDodania" class="form-control" aria-required="true" placeholder="Materiał" readonly="readonly" />
+                <span asp-validation-for="@Model.DataDodania" class="text-danger">
+                </span>
+            </div>
+        </div>
 
 
 
         <h4 class="mb-2">Widoczność</h4>
         <div class="form-group row border">
             <label class="radio-inline">
-                @Html.RadioButtonFor(model => model.Ukryty , true)Wyłączone
+                @Html.RadioButtonFor(model => model.Ukryty , true) Wyłączone
             </label>
             <label class="radio-inline">
-                @Html.RadioButtonFor(model => model.Ukryty , false)Włączone
+                @Html.RadioButtonFor(model => model.Ukryty , false) Włączone
             </label>
         </div>
 @*

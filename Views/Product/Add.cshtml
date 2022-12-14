@@ -15,6 +15,26 @@
             @Html.HiddenFor(h=>Model.ProductId)
             @Html.ValidationSummary()
             @await Html.PartialAsync("_FormProduct")
+        
+            @{
+                bool pokaz = true;
+            }
+
+
+            @for (int i = 0 ; i < @Model.categories.Count(); i++)
+            {
+                <input type="hidden" asp-for="@Model.categories[i].Value"/>
+                <input asp-for="categories[i].Selected"/> @Model.categories[i].Text
+            }
+
+
+            @* @foreach (var names in (IEnumerable<SelectListItem>)@ViewData["Category"])
+            {*@
+            <select asp-for="@Model.Kategorie." asp-items="@ViewData["Category"] as IEnumerable<SelectListItem>"
+                    class="form-control" multiple="multiple">
+                    <option value="">Please choose book language</option>
+                </select>
+            @*}*@
         </div>
         <div class="col-md-6">
             @await Html.PartialAsync("_FormProductImage")
@@ -63,7 +83,7 @@
 
         });
     </script>
-*@
+    *@
 
 
 }
