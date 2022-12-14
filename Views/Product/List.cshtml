@@ -58,13 +58,13 @@
                                             <td>@productFormModel.CenaProduktu.ToString("C")</td>
                                             <td>@productFormModel.CenaProduktuDetal.ToString("C")</td>
                                             <td>
-                                                <select onchange="ChangeCategory(@productFormModel.ProductId, @productFormModel.CategoryId)" id="select_@productFormModel.ProductId" asp-for="@productFormModel.CategoryId" class="form-control" asp-items="(IEnumerable<SelectListItem>)@ViewData["Category"]">
+                                                <select onchange="ChangeCategory(@productFormModel.ProductId, @productFormModel.CategoryId)" id="select_@productFormModel.ProductId" asp-for="@productFormModel.CategoryId" asp-items="(IEnumerable<SelectListItem>)@ViewData["Category"]">
                                                     @*<option>Select one</option>*@
                                                 </select>
                                               @*  @productFormModel.CategoryNavigation.Name*@
                                             </td>
                                             <th>
-                                                <input onchange="ChangeIlosc(@productFormModel.ProductId)" asp-for="@productFormModel.Ilosc" class="form-control" id="ilosc_@productFormModel.ProductId" aria-required="true" style="max-width: 110px" />
+                                                <input onchange="ChangeIlosc(@productFormModel.ProductId)" asp-for="@productFormModel.Ilosc" id="ilosc_@productFormModel.ProductId" aria-required="true" style="max-width: 80px" />
                                             </th>
                                             <th>
                                                 @if (productFormModel.Ukryty == true)
@@ -85,21 +85,6 @@
                                         </tr>
                                     }
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th scope="col">Id</th>
-                                        <th scope="col">Zaz</th>
-                                        <th scope="col">Obrazek</th>
-                                        <th scope="col">Symbol</th>
-                                        <th scope="col">Nazwa produktu</th>
-                                        <th scope="col">Cena produktu</th>
-                                        <th scope="col">Cena sprzedazy</th>
-                                        <th scope="col">Kategoria</th>
-                                        <th scope="col">Ilość</th>
-                                        <th scope="col">Ukryte</th>
-                                        <th scope="col">Akcje</th>
-                                    </tr>
-                                </tfoot>
                             </table>
                         </div>
                     </div>

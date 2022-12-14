@@ -41,8 +41,9 @@
                         <table id="ProductEditImage" class="display" style="width:100%">
                                         <thead>
                                             <tr>
+                                                <th>Lp.</th>
                                                 <th>Obrazek</th>
-                                                <th>Kolejnosc</th>
+                                                <th>id</th>
                                                 <th>Akcje</th>
                                             </tr>
                                         </thead>
@@ -51,9 +52,12 @@
                                                 {
                                                 <tr>
                                                     <td>
+                                            @image.kolejnosc
+                                                    </td>
+                                                    <td>
                                                             <img src="~/img/p/@Model.Symbol/@image.ImageName" alt="Logo image" width="100" height="100" style="border:1px; margin-top:20px;" />
                                                     </td>
-                                                        <td>@image.kolejnosc</td>
+                                        <td>@image.ImageId</td>
 
 
                                                     <td>

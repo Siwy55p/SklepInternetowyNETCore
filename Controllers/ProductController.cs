@@ -67,6 +67,29 @@ namespace partner_aluro.Controllers
             return View(produkt);
         }
 
+        //public void UpdateRow(Product model, int Id, int fromPosition, int toPosition)
+        //{
+
+        //        var ProductImageList = model.Product_Images.ToList();
+        //        model.Product_Images.First(c => c.kolejnosc == Id).kolejnosc = toPosition;
+
+        //}
+
+        [HttpPost]
+        public void UpdateRow(int ImageId, int kolejnosc , int Id, int oldPosition, int newPosition)
+        {
+            ImageModel image = _context.Images.Where(x => x.ImageId == ImageId).FirstOrDefault();
+
+            image.kolejnosc = newPosition;
+            _context.Images.Update(image);
+            _context.SaveChanges();
+
+            Id = 2;
+
+
+
+        }
+
 
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
         [HttpPost]
