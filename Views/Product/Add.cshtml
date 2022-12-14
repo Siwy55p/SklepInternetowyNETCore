@@ -11,7 +11,7 @@
 
 <form class="needs-validation" asp-action="Add" asp-route-id="@Model.ProductId" asp-controller="Product" class="form-horizontal" method="post" enctype="multipart/form-data">
     <div class="row g-0">
-        <div class="col-md-6 border-end">
+        <div class="col-md-8 border-end">
             @Html.HiddenFor(h=>Model.ProductId)
             @Html.ValidationSummary()
             @await Html.PartialAsync("_FormProduct")
@@ -27,16 +27,8 @@
                 <input asp-for="categories[i].Selected"/> @Model.categories[i].Text
             }
 
-
-            @* @foreach (var names in (IEnumerable<SelectListItem>)@ViewData["Category"])
-            {*@
-            <select asp-for="@Model.Kategorie." asp-items="@ViewData["Category"] as IEnumerable<SelectListItem>"
-                    class="form-control" multiple="multiple">
-                    <option value="">Please choose book language</option>
-                </select>
-            @*}*@
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
             @await Html.PartialAsync("_FormProductImage")
             <button type="submit" class="btn btn-success">Dodaj produkt</button>  <button id="btnBack" runat="server" text="Back" class="btn btn-primary" onclick="JavaScript: window.history.back(1); return false;">Powrót</button>
         </div>

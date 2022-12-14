@@ -34,9 +34,12 @@
                             <div class="main_image">
                                 @*<a id="myLink" href="~/img/produkty/@Model.Symbol/@Model.ImageUrl" class="glightbox">*@
                                 @*<a id="myLink" href="~/img/produkty/@Model.Symbol/@Model.Product_Images.Where(x=>x.kolejnosc == 0).FirstOrDefault().ImageName" onclick="Open(this)" data-gallery="gallery" class="glightbox">*@
-                                <a id="myLink" href="~/img/p/@Model.Symbol/@Model.Product_Images[0].ImageName" onclick="Open(this)" data-gallery="gallery" class="glightbox">
-                                    <img class="main_image" id=featured src="~/img/p/@Model.Symbol/@Model.Product_Images[0].ImageName">
-                                </a>
+                                    @if(Model.Product_Images.Count() > 0)
+                                    {
+                                        <a id="myLink" href="~/img/p/@Model.Symbol/@Model.Product_Images[0].ImageName" onclick="Open(this)" data-gallery="gallery" class="glightbox">
+                                            <img class="main_image" id=featured src="~/img/p/@Model.Symbol/@Model.Product_Images[0].ImageName">
+                                        </a>
+                                    }
                             </div>
 
                             <div id="slide-wrapper">

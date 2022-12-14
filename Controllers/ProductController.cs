@@ -128,11 +128,12 @@ namespace partner_aluro.Controllers
 
             //ustaw obrazek glowny ten ktory jest jako pierwszy w tabelce imagePictures
 
+            if (product.Product_Images.FirstOrDefault() != null)
+            {
+                product.ImageUrl = product.Product_Images.OrderBy(x => x.kolejnosc).FirstOrDefault().ImageName;
 
-            product.ImageUrl = product.Product_Images.OrderBy(x=>x.kolejnosc).FirstOrDefault().ImageName;
-
-            product.Product_Images = product.Product_Images.OrderBy(x => x.kolejnosc).ToList();
-
+                product.Product_Images = product.Product_Images.OrderBy(x => x.kolejnosc).ToList();
+            }
 
             ModelState.Remove("product_Image.path");
             ModelState.Remove("product_Image.ImageName");
@@ -391,7 +392,8 @@ namespace partner_aluro.Controllers
 
                 productCategory = new ProductCategory()
                 {
-                    ProductID = product.ProductId
+                    ProductID = product.ProductId,
+                    CategoryID = Int32.Parse(ids)
                 };
                 _productCategoryService.AddProductCategoryMultiple(productCategory);
             }

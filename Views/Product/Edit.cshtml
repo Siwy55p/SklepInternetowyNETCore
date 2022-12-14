@@ -23,7 +23,7 @@
     
     <div class="row g-0">
 
-        <div class="col-md-6 border-end">
+        <div class="col-md-8 border-end">
                 @Html.HiddenFor(h=>Model.ProductId)
                 @Html.ValidationSummary()
             @await Html.PartialAsync("_FormProduct")
@@ -76,7 +76,7 @@
 
 
         </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
                 @await Html.PartialAsync("_FormProductImage")
             </div>
     </div>
