@@ -161,7 +161,7 @@ namespace partner_aluro.Controllers
 
         //TUTAJ WYSWIETLAM STRONE PODSTAWOWĄ DLA WYSWIETLENIA PRODUKTOW Z ID KATEGORIA
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public async Task<IActionResult> Lista1(int KategoriaId, int? page, string? szukanaNazwa, int? Sort = 1) //Link do wyswietlania po wyborze kategorii
+        public async Task<IActionResult> Lista1(int KategoriaId, int? page, string? szukanaNazwa, int? Sort) //Link do wyswietlania po wyborze kategorii
         {
 
 
@@ -234,7 +234,7 @@ namespace partner_aluro.Controllers
 
         //TUTAJ WYSWIETLAM STRONE PODSTAWOWĄ DLA WYSWIETLENIA PRODUKTOW Z ID KATEGORIA szukanaNazwa
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public async Task<IActionResult> Lista(int? page, string? szukanaNazwa, int? Sort = 1) //Link do wyswietlania po wyborze kategorii
+        public async Task<IActionResult> Lista(int? page, string? szukanaNazwa, int? Sort) //Link do wyswietlania po wyborze kategorii
         {
             //var products = _cart.GetAllCartItems();
 
@@ -384,7 +384,7 @@ namespace partner_aluro.Controllers
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public async Task<IActionResult> Lista2(int? page, string? szukanaNazwa, int? Sort = 1) //Link do wyswietlania po wyborze kategorii TO JEST TYLKO KONTENER
+        public async Task<IActionResult> Lista2(int? page, string? szukanaNazwa, int? Sort) //Link do wyswietlania po wyborze kategorii TO JEST TYLKO KONTENER
         {
             //var products = _cart.GetAllCartItems();
 
@@ -392,7 +392,6 @@ namespace partner_aluro.Controllers
             ViewData["BreadcrumbNode"] = categoryPage;
             ViewData["Title"] = szukanaNazwa;
             ViewData["szukanaNazwa"] = szukanaNazwa;
-
 
             ViewData["Sort"] = Sort;
 
