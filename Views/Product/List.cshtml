@@ -51,7 +51,7 @@
                                         <tr>
                                             <td>@productFormModel.ProductId</td>
                                             <td><input id="takenBefore" type="checkbox" value="@productFormModel.ProductId" data-toggle="toggle"></td>
-                                            <td><img class="img-thumbnail" src="~/img/p/@productFormModel.Symbol/@productFormModel.ImageUrl" alt="@productFormModel.Name" style="width:75px;height:75px;"></td>
+                                            <td><img class="img-thumbnail" src="~/img/p/@productFormModel.Symbol/250x250_@productFormModel.ImageUrl" alt="@productFormModel.Name" style="width:75px;height:75px;"></td>
                                             <td>@productFormModel.Symbol</td>
 
                                             <td><a asp-controller="Product" asp-action="Edit" asp-route-id="@productFormModel.ProductId">@productFormModel.Name</a></td>
