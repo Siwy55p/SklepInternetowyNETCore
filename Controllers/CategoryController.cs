@@ -20,10 +20,7 @@ namespace partner_aluro.Controllers
     {
         private readonly ICategoryService _categoryService;
         private readonly IUnitOfWorkCategory _iUnitOfWorkCategory;
-
         private readonly ApplicationDbContext _context;
-
-
         private readonly LanguageService _language;
 
         private static int Pages = 12;
