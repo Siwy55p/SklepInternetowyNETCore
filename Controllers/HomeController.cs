@@ -11,6 +11,9 @@ using System.Data;
 using System.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
+using ServiceReference2;
+using NuGet.Protocol.Plugins;
+using System.ServiceModel;
 
 namespace partner_aluro.Controllers
 {
@@ -45,29 +48,42 @@ namespace partner_aluro.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-                //var nowosci = await _context.Products.Where(a => !a.Ukryty).OrderByDescending(a => a.DataDodania).Take(9).ToListAsync();
+            //var nowosci = await _context.Products.Where(a => !a.Ukryty).OrderByDescending(a => a.DataDodania).Take(9).ToListAsync();
 
-                //var bestseller = await _context.Products.Where(a => !a.Ukryty).OrderBy(a => Guid.NewGuid()).Take(3).ToListAsync();
-                ////Category category = new Category { Name = "Kategoria1", Description = "Opis kategoria", NazwaPlikuIkony = "ikona.png" };
-                ////_context.Add(category);
-                ////_context.SaveChanges();
-
-
-                //if(Core.Constants.SliderHome1 == null || Core.Constants.SliderHome1 == 0)
-                //{
-                //    Core.Constants.SliderHome1 = 9;
-                //}
-                //if (Core.Constants.SliderHome2 == null || Core.Constants.SliderHome2 == 0)
-                //{
-                //    Core.Constants.SliderHome2 = 10;
-                //}
-                //if (Core.Constants.SliderHome3 == null || Core.Constants.SliderHome3 == 0)
-                //{
-                //    Core.Constants.SliderHome3 = 11;
-                //}
+            //var bestseller = await _context.Products.Where(a => !a.Ukryty).OrderBy(a => Guid.NewGuid()).Take(3).ToListAsync();
+            ////Category category = new Category { Name = "Kategoria1", Description = "Opis kategoria", NazwaPlikuIkony = "ikona.png" };
+            ////_context.Add(category);
+            ////_context.SaveChanges();
 
 
-                int SliderHome1= _setting.GetSliderHome1(1);
+            //if(Core.Constants.SliderHome1 == null || Core.Constants.SliderHome1 == 0)
+            //{
+            //    Core.Constants.SliderHome1 = 9;
+            //}
+            //if (Core.Constants.SliderHome2 == null || Core.Constants.SliderHome2 == 0)
+            //{
+            //    Core.Constants.SliderHome2 = 10;
+            //}
+            //if (Core.Constants.SliderHome3 == null || Core.Constants.SliderHome3 == 0)
+            //{
+            //    Core.Constants.SliderHome3 = 11;
+            //}
+            //try
+            //{
+
+            try
+            {
+                TerytWs1.CzyZalogowanyRequest request = new TerytWs1.CzyZalogowanyRequest();
+                var proxy = new ChannelFactory<TerytWs1.ITerytWs1>("custom");
+                proxy.Credentials.UserName.UserName = "szuminski.p";
+                proxy.Credentials.UserName.Password = "sgj1EpTwz";
+                var result = proxy.CreateChannel();
+                var test = result.CzyZalogowany(request);
+            }
+            catch (Exception ex) { }
+
+
+            int SliderHome1= _setting.GetSliderHome1(1);
                 int SliderHome2 = _setting.GetSliderHome2(1);
                 int SliderHome3 = _setting.GetSliderHome3(1);
 

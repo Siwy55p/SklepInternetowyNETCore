@@ -1,0 +1,18 @@
+{
+  "ExtendedData": {
+    "inputs": [
+      "https://uslugaterytws1.stat.gov.pl/wsdl/terytws1.wsdl"
+    ],
+    "collectionTypes": [
+      "System.Array",
+      "System.Collections.Generic.Dictionary`2"
+    ],
+    "messageContract": true,
+    "namespaceMappings": [
+      "*, TerytWs1"
+    ],
+    "sync": true,
+    "targetFramework": "net6.0",
+    "typeReuseMode": "None"
+  }
+}

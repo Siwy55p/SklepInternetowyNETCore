@@ -22,6 +22,7 @@ using partner_aluro.Resources;
 using System.Configuration;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Principal;
+using ServiceReference2;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DbContextProductionConnection");
@@ -89,6 +90,7 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.R
 //IBIRSERVICE REGON NIP SERVICE
 builder.Services.AddTransient<IBIRSearchService>(x => new BIRSearchService(birKey)); //Dodanie klucza do Service BIRSearchService birKy w jsonsetting.json
 builder.Services.AddSingleton<RegonService>();
+
 
 //builder.Services.AddTransient<MySqlConnection>(_ => new MySqlConnection(Configuration["ConnectionString:Prestashop"]) ));
 builder.Services.AddTransient<MySqlConnection>(_ => new MySqlConnection(connectionPrestashop));
@@ -312,5 +314,6 @@ void AddScoped()
 
     builder.Services.AddScoped<ISetting, SettingService>();
     builder.Services.AddScoped<ISMS, SMSService>();
+
 
 }
