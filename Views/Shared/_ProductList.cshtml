@@ -10,7 +10,7 @@
         </div>
     }
     @*ViewData["OnePageOfProducts"]*@
-@Html.PagedListPager( (IPagedList)ViewData["OnePageOfProducts"], page => Url.Action("Lista", "Category", new { page = page, szukanaNazwa=ViewData["szukanaNazwa"] } )
+@Html.PagedListPager( (IPagedList)ViewData["OnePageOfProducts"], page => Url.Action("Lista", "Category", new { page = page, szukanaNazwa=ViewData["szukanaNazwa"], Sort=ViewData["Sort"] } )
 ,
 new X.PagedList.Web.Common.PagedListRenderOptions{
     DisplayEllipsesWhenNotShowingAllPageNumbers = false,

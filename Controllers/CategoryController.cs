@@ -164,7 +164,10 @@ namespace partner_aluro.Controllers
         public async Task<IActionResult> Lista1(int KategoriaId, int? page, string? szukanaNazwa, int? Sort) //Link do wyswietlania po wyborze kategorii
         {
 
-
+            if(Sort == null)
+            {
+                Sort = 1;
+            }
             //KategoriaId = 3;
 
             List<Product> produkty = await _context.ProductCategory.Where(x => x.CategoryID == KategoriaId).Include(x=>x.Product).Where(x => x.Product.Ukryty == false).Select(p=>p.Product).ToListAsync();
@@ -237,6 +240,11 @@ namespace partner_aluro.Controllers
         public async Task<IActionResult> Lista(int? page, string? szukanaNazwa, int? Sort) //Link do wyswietlania po wyborze kategorii
         {
             //var products = _cart.GetAllCartItems();
+
+            if (Sort == null)
+            {
+                Sort = 1;
+            }
 
             var categoryPage = new MvcBreadcrumbNode("Kategoria", "Home", szukanaNazwa);
             ViewData["BreadcrumbNode"] = categoryPage;
