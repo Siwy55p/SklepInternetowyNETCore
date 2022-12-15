@@ -33,7 +33,7 @@
                                 <thead>
                                     <tr>
                                         <th>Id</th>
-                                        <th>Zaz</th>
+                                        <th></th>
                                         <th>Obrazek</th>
                                         <th>Symbol</th>
                                         <th>Nazwa produktu</th>
@@ -64,7 +64,7 @@
                                               @*  @productFormModel.CategoryNavigation.Name*@
                                             </td>
                                             <th>
-                                                <input onchange="ChangeIlosc(@productFormModel.ProductId)" asp-for="@productFormModel.Ilosc" id="ilosc_@productFormModel.ProductId" aria-required="true" style="max-width: 80px" />
+                                                <input onchange="ChangeIlosc(@productFormModel.ProductId)" asp-for="@productFormModel.Ilosc" id="ilosc_@productFormModel.ProductId" aria-required="true" style="max-width: 70px" />
                                             </th>
                                             <th>
                                                 @if (productFormModel.Ukryty == true)

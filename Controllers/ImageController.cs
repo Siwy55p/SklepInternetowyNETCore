@@ -430,6 +430,9 @@ namespace partner_aluro.Controllers
         [HttpGet]
         public IActionResult Delete2(int ImageId, string returnUrl)
         {
+            ViewData["returnUrl"] = Request.Headers["Referer"].ToString();
+            returnUrl = Request.Headers["Referer"].ToString();
+
             var imageModel = _context.Images.Find(ImageId);
 
             if (imageModel != null)

@@ -161,6 +161,15 @@ namespace partner_aluro.Controllers
             return Task.CompletedTask;
         }
 
+        [HttpPost]
+        public void UpdateRow(int ImageId, int kolejnosc, int Id, int oldPosition, int newPosition)
+        {
+            ImageModel image = _context.Images.Where(x => x.ImageId == ImageId).FirstOrDefault();
+
+            image.kolejnosc = newPosition;
+            _context.Images.Update(image);
+            _context.SaveChanges();
+        }
 
     }
 
