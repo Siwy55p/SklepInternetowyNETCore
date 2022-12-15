@@ -37,6 +37,12 @@ body {
     height: 275px;
 }
 
+/*ProductName ProductCart product name*/
+a.text-decoration-none.link-dark.product_name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
 a {
     color: black;
