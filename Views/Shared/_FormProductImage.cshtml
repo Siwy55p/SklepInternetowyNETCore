@@ -38,7 +38,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="table-responsive">
-                        <table id="ProductEditImage" class="display" style="width:100%">
+                                    <table id="ProductEditImage" class="display" style="width:100%">
                                         <thead>
                                             <tr>
                                                 <th>Lp.</th>
@@ -52,20 +52,18 @@
                                                 {
                                                 <tr>
                                                     <td>
-                                            @image.kolejnosc
+                                                        @image.kolejnosc
                                                     </td>
                                                     <td>
-                                                            <img src="~/img/p/@Model.Symbol/@image.ImageName" alt="Logo image" width="100" height="100" style="border:1px; margin-top:20px;" />
+                                                        <img src="~/img/p/@Model.Symbol/@image.ImageName" alt="Logo image" width="100" height="100" style="border:1px; margin-top:20px;" />
                                                     </td>
-                                        <td>@image.ImageId</td>
-
-
                                                     <td>
-                                            <a asp-action="Edit"   asp-controller="Image" asp-route-id="@image.ImageId">Edit</a> |
-                                            <a class="btn btn-success" asp-controller="Image" asp-action="Delete2" asp-route-ImageId="@image.ImageId" asp-route-returnUrl="@ViewData["returnUrl"]">Usuń</a>
+                                                        @image.ImageId
                                                     </td>
-
-
+                                                    <td>
+                                                        <a asp-action="Edit"   asp-controller="Image" asp-route-id="@image.ImageId">Edit</a> |
+                                                        <a class="btn btn-success" asp-controller="Image" asp-action="Delete2" asp-route-ImageId="@image.ImageId" asp-route-returnUrl="@ViewData["returnUrl"]">Usuń</a>
+                                                    </td>
                                                 </tr>
                                                 }
                                         </tbody>
@@ -75,6 +73,4 @@
                         </div>
                     </div>
                 </div>
-            
         }
-

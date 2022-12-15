@@ -4,6 +4,12 @@
     Layout = "~/Views/Shared/_Dashboard.cshtml";
 }
 
+@section LinkStyleHead
+    {
+    <script src="https://cdn.datatables.net/rowreorder/1.3.1/css/rowReorder.dataTables.min.css"></script>
+    <script src="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css"></script>
+    }
+
 <form class="needs-validation" asp-action="Edit" asp-controller="Slider" method="post" enctype="multipart/form-data">
 
     @await Html.PartialAsync("_FormSlider")
@@ -14,14 +20,47 @@
 
 
 @section Scripts {
-    <script>
-        $(document).ready(function () {
-            $('#SliderTable').DataTable(
-                {
-                    "order": [[0, 'desc']]
+    <script src="https://cdn.datatables.net/rowreorder/1.3.1/js/dataTables.rowReorder.min.js"></script>
+
+    <script type="text/javascript">
+        var table = $('#SliderTable').DataTable({
+            rowReorder: {
+                selector: 'tr'
+            },
+            columnDefs: [
+                { targets: 2, visible: false }
+            ],
+            select: true
+        });
+
+        $('#SliderTable').on('row-reorder.dt', function (dragEvent, data, nodes) {
+
+            for (var i = 0, ien = data.length; i < ien; i++) {
+
+                var rowData = table.row(data[i].node).data();
+
+                var Id = i;
+                var oldPosition = data[i].oldPosition;
+                var newPosition = data[i].newPosition;
+
+
+                $.ajax({
+                    type: "POST",
+                    cache: false,
+                    url: '@Url.Action("UpdateRow", "Slider")',
+                    data: { ImageId: rowData[2], kolejnosc: rowData[0], Id: rowData.id, oldPosition: oldPosition, newPosition: newPosition },
+                    success: function (result) {
+
+                        $("#SliderTable").ajax.reload(null, false);
+                    },
+                    error: function (abc) {
+                        alert(abc.statusText);
+                    },
                 });
+            }
         });
     </script>
+
     <script>
         function preview_images() {
             var total_file = document.getElementById("images").files.length;
