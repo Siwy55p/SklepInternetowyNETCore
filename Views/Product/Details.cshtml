@@ -76,8 +76,8 @@
                             }
                             @*<div @*style="max-width:460px;" class="row body_product float-end text-end m-1 p-2">*@
                             @{
-                                var Cena_netto  = (decimal)Model.CenaProduktuBrutto * (decimal)partner_aluro.Core.Constants.Vat;
-                                var Cena_brutto = (decimal)Model.CenaProduktuBrutto;
+                                var Cena_netto  = Model.CenaProduktuBrutto / partner_aluro.Core.Constants.Vat;
+                                var Cena_brutto = Model.CenaProduktuBrutto;
                                 }
                             <div class="row">
                                 <div class="col justify-content-end">

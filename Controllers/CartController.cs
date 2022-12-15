@@ -95,7 +95,7 @@ namespace partner_aluro.Controllers
         [HttpGet]
         public async Task<IActionResult> ZlozZamowienie()
         {
-            ViewBag.returnUrl = Request.Headers["Referer"].ToString();
+            ViewData["returnUrl"] = Request.Headers["Referer"].ToString();
             var returnUrl = Request.Headers["Referer"].ToString();
 
             //ViewData["MetodyPlatnosci"] = OrderController.GetMetodyPlatnosci();

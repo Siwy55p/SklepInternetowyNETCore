@@ -50,7 +50,9 @@
             </div>
         </div>
         @{
-            var Cena_brutto = Model.CenaProduktuBrutto * partner_aluro.Core.Constants.Vat;
+            var Cena_brutto = Model.CenaProduktuBrutto;
+            var Cena_netto = Model.CenaProduktuBrutto / partner_aluro.Core.Constants.Vat;
+
 
             var CenaJednostkowa = Cena_brutto * (1 - (partner_aluro.Core.Constants.Rabat / 100));
 
@@ -71,7 +73,7 @@
 
         }
         <div class="float-end text-end">
-            @language.Getkey("CenaHurtowa"): @language.GetCurrently(@cena_produktu, Constants.myNumberFormatInfo).ToString("C",Constants.myNumberFormatInfo) @language.Getkey("(netto)")
+            @language.Getkey("CenaHurtowa"): @language.GetCurrently(@Cena_netto, Constants.myNumberFormatInfo).ToString("C",Constants.myNumberFormatInfo) @language.Getkey("(netto)")
 
 
         </div>

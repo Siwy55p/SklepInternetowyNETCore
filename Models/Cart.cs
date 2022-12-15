@@ -230,7 +230,7 @@ namespace partner_aluro.Models
 
             CartTotal = CartTotal * (1 - (Core.Constants.Rabat / 100));
 
-            CartTotal = CartTotal * Core.Constants.Vat;
+            //CartTotal = CartTotal * Core.Constants.Vat;
 
             return CartTotal;
         }
@@ -249,6 +249,8 @@ namespace partner_aluro.Models
             decimal CartTotal = CartTotal1 + CartTotal2;
 
             CartTotal = CartTotal * (1 - (Core.Constants.Rabat / 100));
+
+            CartTotal = CartTotal / Core.Constants.Vat;
 
             return CartTotal;
         }
