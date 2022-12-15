@@ -715,7 +715,7 @@ namespace partner_aluro.Controllers
                 write.Close();
                 var constant = ms.ToArray();
 
-                return File(constant, "application/vnd", "Firstpdf.pdf");
+                return File(constant, "application/vnd", order.Id+order.User.NazwaFirmy+".pdf");
 
             }
         }
@@ -735,10 +735,10 @@ namespace partner_aluro.Controllers
                 item.Product.CenaProduktuDlaUzytkownika = item.Product.CenaProduktuBrutto * (1 - (Core.Constants.Rabat / 100));
 
 
-                var Cena_brutto = (decimal)item.Product.CenaProduktuBrutto * (decimal)partner_aluro.Core.Constants.Vat;
+                var Cena_brutto = (decimal)item.Product.CenaProduktuBrutto;
                 if (item.Product.Promocja == true && item.Product.CenaPromocyja != null)
                 {
-                    Cena_brutto = (decimal)item.Product.CenaPromocyja * (decimal)partner_aluro.Core.Constants.Vat;
+                    Cena_brutto = (decimal)item.Product.CenaPromocyja;
                 }
 
                 var CenaJednostkowa = Cena_brutto * (1 - (partner_aluro.Core.Constants.Rabat / 100));

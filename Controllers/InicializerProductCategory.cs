@@ -49,6 +49,32 @@ namespace partner_aluro.Controllers
             return View(produktyMultipleCategory);
         }
 
+        public IActionResult EAN13Init()
+        {
+            var listaprozPresta = _context.ProductsPrestashop.ToList();
+
+            List<Product> produkty = _context.Products.ToList();
+
+            for(int x = 0; x <listaprozPresta.Count; x++)
+            {
+
+                for(int y = 0; y < produkty.Count(); y++)
+                {
+                    var symbol = listaprozPresta[x].reference;
+                    if (produkty[y].Symbol == symbol)
+                    {
+                        produkty[y].EAN13 = listaprozPresta[x].ean13;
+                        _context.Products.Update(produkty[y]);
+                        _context.SaveChanges();
+                    }
+                }
+
+            }
+
+
+            return View();
+        }
+
         public IActionResult PathImageAsync()
         {
             IEnumerable<ImageModel> listaObrazkow =  _context.Images.Where(x => x.fullPath == null).ToList();

@@ -147,15 +147,15 @@
                                     <tr>
                                         @{
 
-                                            var Cena_brutto = item.Product.CenaProduktuBrutto * partner_aluro.Core.Constants.Vat;
+                                            var Cena_brutto = item.Product.CenaProduktuBrutto;
 
                                             if (/*item.Product.CenaPromocyja != null &&*/ item.Product.Promocja == true)
                                             {
-                                                Cena_brutto = item.Product.CenaPromocyja * partner_aluro.Core.Constants.Vat;
+                                                Cena_brutto = item.Product.CenaPromocyja;
                                             }
 
 
-                                            var CenaJednostkowa_netto = item.Product.CenaProduktuBrutto;
+                                            var CenaJednostkowa_netto = item.Product.CenaProduktuBrutto / partner_aluro.Core.Constants.Vat;
                                             if (/*item.Product.CenaPromocyja != null &&*/ item.Product.Promocja == true)
                                             {
                                                 CenaJednostkowa_netto = item.Product.CenaPromocyja;
@@ -167,7 +167,7 @@
 
                                             if (partner_aluro.Core.Constants.Rabat >= 0)
                                             {
-                                                CenaJednostkowa_netto = item.Product.CenaProduktuBrutto * (1 - (partner_aluro.Core.Constants.Rabat / 100));
+                                                CenaJednostkowa_netto = ((item.Product.CenaProduktuBrutto / partner_aluro.Core.Constants.Vat) * (1 - (partner_aluro.Core.Constants.Rabat / 100)));
                                                 CenaJednostkowa_brutto = Cena_brutto * (1 - (partner_aluro.Core.Constants.Rabat / 100));
                                             }
 
