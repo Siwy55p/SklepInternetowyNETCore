@@ -13,6 +13,14 @@
     background-color: #f9ffe5;
 }
 
+
+/*ProductName ProductCart product name*/ 
+a.text-decoration-none.link-dark.produkt_name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 #img {
     width: 17px;
     border: none;

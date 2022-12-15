@@ -36,14 +36,6 @@ span.hide {
 }
 /*Prduct page ciag dalszy*/
 
-
-.produkt_name {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-
 #content-wrapper {
     display: flex;
     flex-wrap: wrap;
