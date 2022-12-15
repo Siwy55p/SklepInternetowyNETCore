@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using DeepL;
 using System.Resources.NetStandard;
 using System.Collections;
+using System.Globalization;
 
 namespace partner_aluro.Controllers
 {
@@ -51,10 +52,14 @@ namespace partner_aluro.Controllers
         }
 
         [HttpPost]
-        public int CenaNetto(int CenaBrutto)
+        public string CenaNetto(decimal CenaBrutto)
         {
+            decimal Cena_netto = CenaBrutto / partner_aluro.Core.Constants.Vat;
+            Cena_netto = decimal.Round(Cena_netto, 2, MidpointRounding.AwayFromZero);
 
-            return 1;
+            Cena_netto = Convert.ToDecimal(Cena_netto, CultureInfo.GetCultureInfo("pl-PL"));
+            Cena_netto.ToString("#.##");
+            return Cena_netto.ToString("#.##");
         }
 
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
