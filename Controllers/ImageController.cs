@@ -427,8 +427,8 @@ namespace partner_aluro.Controllers
             //return RedirectToAction(nameof(Index));
         }
 
-
-        public void Delete2(int ImageId)
+        [HttpGet]
+        public IActionResult Delete2(int ImageId, string returnUrl)
         {
             var imageModel = _context.Images.Find(ImageId);
 
@@ -455,9 +455,11 @@ namespace partner_aluro.Controllers
                         }
                         _context.Images.Remove(imageModel);
                         _context.SaveChanges();
+                        return Redirect(returnUrl);
                     }
                 }
             }
+            return Redirect(returnUrl);
         }
 
 

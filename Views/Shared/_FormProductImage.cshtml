@@ -14,7 +14,7 @@
 
         <div class="form-group border">
             <label asp-for="@Model.ImageUrl" class="control-label">Obrazek prezentujacy (front)</label>
-            <img id="FrontImagePrv" src="~/img/p/@Model.Symbol/@Model.ImageUrl" alt="Logo image" width="150" height="150" style="border:1px; margin-top:20px; margin-left:120px" />
+            <img id="FrontImagePrv" src="~/img/p/@Model.Symbol/@Model.ImageUrl" alt="picture" width="150" height="150" style="border:1px; margin-top:20px; margin-left:120px" />
         </div>
 
         <div class="row">
@@ -62,7 +62,7 @@
 
                                                     <td>
                                             <a asp-action="Edit"   asp-controller="Image" asp-route-id="@image.ImageId">Edit</a> |
-                                            <button class="btn btn-success" onclick="DeleteImage(@image.ImageId)">Usuń</button>
+                                            <a class="btn btn-success" asp-controller="Image" asp-action="Delete2" asp-route-ImageId="@image.ImageId" asp-route-returnUrl="@ViewData["returnUrl"]">Usuń</a>
                                                     </td>
 
 
