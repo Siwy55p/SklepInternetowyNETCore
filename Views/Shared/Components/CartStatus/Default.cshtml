@@ -54,7 +54,7 @@
             <div class="col border border-top-0 text-center wrapper">
                 <p class="text-max text-wrap text-break">
                     @item.Product.Symbol <br>
-                    <a class="text-black" asp-controller="Product" asp-action="Details" asp-route-id="@item.Product.ProductId">@language.Getkey(@item.Product.Name)</a><br>
+                    <a class="text-black link-dark" asp-controller="Product" asp-action="Details" asp-route-id="@item.Product.ProductId">@language.Getkey(@item.Product.Name)</a><br>
                     @language.GetCurrently(@CenaJednostkowa_brutto, Constants.myNumberFormatInfo).ToString("C",Constants.myNumberFormatInfo)
                 </p>
             </div>
