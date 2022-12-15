@@ -16,7 +16,7 @@
 <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
     <div class="row justify-content-center align-items-center">
         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-10 col-xxl-8">
-            <div class="card">	
+            <div class="card">
                 <div class="row g-0">
                         @if (User.IsInRole("Administrator") || User.IsInRole("Manager"))
                         {
@@ -24,7 +24,7 @@
                         }
 
                     @{
-                        var CenaJednostkowa = Model.CenaProduktu * (1 - (partner_aluro.Core.Constants.Rabat / 100));
+                        var CenaJednostkowa = Model.CenaProduktuBrutto;
                     }
 
 
@@ -62,7 +62,7 @@
 
                     </div>	
                     <div class="col-md-6">
-                        <div class="p-2">
+                        <div class="ps-2 px-0">
                             @*<div class="d-flex justify-content-between align-items-center">*@
                             <div class="row">
                                 <h4>@language.Getkey(@Model.Name)</h4>
@@ -75,12 +75,13 @@
                                 <div class="row">@Html.Raw(@Model.KrotkiOpis)</div>
                             }
                             @*<div @*style="max-width:460px;" class="row body_product float-end text-end m-1 p-2">*@
-                                @{
-                                    var Cena_brutto = (decimal)Model.CenaProduktu * (decimal)partner_aluro.Core.Constants.Vat;
+                            @{
+                                var Cena_netto  = (decimal)Model.CenaProduktuBrutto * (decimal)partner_aluro.Core.Constants.Vat;
+                                var Cena_brutto = (decimal)Model.CenaProduktuBrutto;
                                 }
                             <div class="row">
                                 <div class="col justify-content-end">
-                                    @language.Getkey("CenaHurtowa"): @language.GetCurrently(Model.CenaProduktu, Constants.myNumberFormatInfo).ToString("C", Constants.myNumberFormatInfo) @language.Getkey("(netto)")
+                                    @language.Getkey("CenaHurtowa"): @language.GetCurrently(@Cena_netto, Constants.myNumberFormatInfo).ToString("C", Constants.myNumberFormatInfo) @language.Getkey("(netto)")
                                 </div>
                             </div>
                             <div class="row">
@@ -125,12 +126,12 @@
 
                                 @if (@*Model.CenaPromocyja != null && *@Model.Promocja == true)
                                 {
-                                    decimal ProcentPromocji = (decimal)(1 - (Model.CenaPromocyja / Model.CenaProduktu)) * 100;
+                                    decimal ProcentPromocji = (decimal)(1 - (Model.CenaPromocyja / Model.CenaProduktuBrutto)) * 100;
 
 
                                     <div class="sale" >@ProcentPromocji.ToString("##.") %</div>
 
-                                    <span class="text-decoration-line-through">@Model.CenaProduktu.ToString("C")</span><br />
+                                    <span class="text-decoration-line-through">@Model.CenaProduktuBrutto.ToString("C")</span><br />
                                     <span>@Model.CenaPromocyja.ToString("C")</span>
                                     <div class="h2 text-danger">PROMOCJA: @ProcentPromocji.ToString(".##") %</div>
                                 }
@@ -143,42 +144,42 @@
                                 @if (Model.SzerokoscProduktu != null && Model.SzerokoscProduktu != 0 || Model.WysokoscProduktu != null && Model.WysokoscProduktu != 0 || Model.GlebokoscProduktu != null && Model.GlebokoscProduktu != 0)
                                 {
                                     <div class="row">
-                                            <div class="col pl-3 m-0">@language.Getkey("Wymiary zewnetrzne:")</div>
+                                            <div class="col pl-3 pr-0 m-0">@language.Getkey("Wymiary zewnetrzne:")</div>
                                     </div>
                                 }
-                                <div class="row">
+                                <div class="row ps-2 px-0">
                                     @if (Model.SzerokoscProduktu != null && Model.SzerokoscProduktu != 0)
                                     {
-                                        <div class="col pl-3 m-0">@language.Getkey("Szerokość:") @Model.SzerokoscProduktu cm.</div>
-                                    }
-                                    @if (Model.WysokoscProduktu != null && Model.WysokoscProduktu != 0 )
-                                    {
-                                        <div class="col pl-3 m-0">@language.Getkey("Wysokość:") @Model.WysokoscProduktu cm.</div>
+                                        <div class="col ps-3 px-0 m-0">@language.Getkey("Szerokość:") @Model.SzerokoscProduktu cm.</div>
                                     }
                                     @if (Model.GlebokoscProduktu != null && Model.GlebokoscProduktu != 0)
                                     {
-                                        <div class="col pl-3 m-0">@language.Getkey("Głębokość:") @Model.GlebokoscProduktu cm.</div>
+                                        <div class="col ps-3 px-0 m-0">@language.Getkey("Głębokość:") @Model.GlebokoscProduktu cm.</div>
+                                    }
+                                    @if (Model.WysokoscProduktu != null && Model.WysokoscProduktu != 0 )
+                                    {
+                                        <div class="col ps-3 px-0 m-0">@language.Getkey("Wysokość:") @Model.WysokoscProduktu cm.</div>
                                     }
                                 </div>
 
                                 @if(Model.SzerokoscWewnetrznaProduktu != null && Model.SzerokoscWewnetrznaProduktu != 0 || Model.WysokoscWewnetrznaProduktu != null && Model.WysokoscWewnetrznaProduktu != 0 || Model.GlebokoscWewnetrznaProduktu != null && Model.GlebokoscWewnetrznaProduktu != 0)
                                 {
-                                    <div class="row p-0 m-0">
-                                            <div class="col pl-3 m-0">@language.Getkey("Wymiary wewnętrzne:")</div>
+                                    <div class="row">
+                                           <div class="col pl-3 pr-0 m-0"> @language.Getkey("Wymiary wewnętrzne:") </div>
                                     </div>
                                 }
-                                <div class="row p-0 m-0">
+                                <div class="row ps-2">
                                     @if (Model.SzerokoscWewnetrznaProduktu != null && Model.SzerokoscWewnetrznaProduktu != 0)
                                     {
-                                        <div class="col pl-3 m-0">@language.Getkey("Szerokość:") @Model.SzerokoscWewnetrznaProduktu cm.</div>
-                                    }
-                                    @if (Model.WysokoscWewnetrznaProduktu != null && Model.WysokoscWewnetrznaProduktu != 0)
-                                    {
-                                        <div class="col pl-3 m-0">@language.Getkey("Wysokość:") @Model.WysokoscWewnetrznaProduktu cm.</div>
+                                        <div class="col ps-3 px-0  m-0">@language.Getkey("Szerokość:") @Model.SzerokoscWewnetrznaProduktu cm.</div>
                                     }
                                     @if (Model.GlebokoscWewnetrznaProduktu != null && Model.GlebokoscWewnetrznaProduktu != 0)
                                     {
-                                        <div class="col pl-3 m-0">@language.Getkey("Głębokość:") @Model.GlebokoscWewnetrznaProduktu cm.</div>
+                                        <div class="col ps-3 px-0  m-0">@language.Getkey("Głębokość:") @Model.GlebokoscWewnetrznaProduktu cm.</div>
+                                    }
+                                    @if (Model.WysokoscWewnetrznaProduktu != null && Model.WysokoscWewnetrznaProduktu != 0)
+                                    {
+                                        <div class="col ps-3 px-0  m-0">@language.Getkey("Wysokość:") @Model.WysokoscWewnetrznaProduktu cm.</div>
                                     }
                                 </div>
 

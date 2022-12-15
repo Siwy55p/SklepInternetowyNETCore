@@ -33,11 +33,11 @@ namespace partner_aluro.Data
 
             var produkty = new List<Product>
             {
-                new Product { Name="Donica1", Description="Opis Donica1", CenaProduktu=283, DataDodania=DateTime.Now, Bestseller= true},
-                new Product { Name="Donica2", Description="Opis Donica2", CenaProduktu=20, DataDodania=DateTime.Now, Bestseller= true},
-                new Product { Name="Donica3", Description="Opis Donica3", CenaProduktu=200, DataDodania=DateTime.Now, Bestseller= true},
-                new Product { Name="Donica4", Description="Opis Donica4", CenaProduktu=90, DataDodania=DateTime.Now, Bestseller= true},
-                new Product { Name="Donica5", Description="Opis Donica5", CenaProduktu=70, DataDodania=DateTime.Now, Bestseller= true},
+                new Product { Name="Donica1", Description="Opis Donica1", CenaProduktuBrutto=283, DataDodania=DateTime.Now, Bestseller= true},
+                new Product { Name="Donica2", Description="Opis Donica2", CenaProduktuBrutto=20, DataDodania=DateTime.Now, Bestseller= true},
+                new Product { Name="Donica3", Description="Opis Donica3", CenaProduktuBrutto=200, DataDodania=DateTime.Now, Bestseller= true},
+                new Product { Name="Donica4", Description="Opis Donica4", CenaProduktuBrutto=90, DataDodania=DateTime.Now, Bestseller= true},
+                new Product { Name="Donica5", Description="Opis Donica5", CenaProduktuBrutto=70, DataDodania=DateTime.Now, Bestseller= true},
             };
 
             produkty.ForEach(k=>context.Products.Add(k));

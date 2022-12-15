@@ -351,18 +351,18 @@ namespace partner_aluro.Controllers
             //    $"<img src=../../img/produkty/"+produkt.Symbol + "/" + produkt.ImageUrl + " alt = " + produkt.Name + " style='width:200px;'>" +
             //    "</div>"+
             //    "<div class='col'>"+ produkt.Name+"</div>"+
-            //    "<div class='col'>" + produkt.CenaProduktu + "</div>" +
+            //    "<div class='col'>" + produkt.CenaProduktuBrutto + "</div>" +
             //    "<div class='col'>" + produkt.Symbol + "</div>" +
             //    "</div>";
             //string tresc =
             //    $"<a href=\""+baseUri+"\"><img src=../../img/produkty/" + produkt.Symbol + "/" + produkt.ImageUrl + " alt = " + produkt.Name + " style='width:200px;'>" +
-            //    " " + produkt.Name + " "  + produkt.CenaProduktu + " " + produkt.Symbol + " " +
+            //    " " + produkt.Name + " "  + produkt.CenaProduktuBrutto + " " + produkt.Symbol + " " +
             //    "</a> ";
 
 
             string td1 = "<th style=\"margin:0px; padding-left:10px;padding-right:10px; padding-top:0px; padding-bottom:0px; margin: 0px;\" > <div style=\"border:1px solid #b4b4b4;width:200px;height:200px;margin:0px;padding:0px; \"> <a href=\"..\\..\\..\\Product\\Detail\\"+produkt.Symbol+"\"> <img src=../../img/p/" + produkt.Symbol + "/" + produkt.ImageUrl + " alt = " + produkt.Name + " style='width:200px;'> </a> </div></th>\r\n\t";
             string td2 = "<td style=\"padding-left:10px;padding-right:10px; padding-top:0px; padding-bottom:0px; margin: 0px; text-align: center; \"><div style=\"border:1px solid #b4b4b4;width:200px; height:48px; padding-top: -1px; border-top:0px; margin:0px; background-color: #EBEBEB; \">" + produkt.Name + "</div></td>\r\n\t";
-            string td3 = "<td style=\"padding-left:10px;padding-right:10px; padding-top:0px; padding-bottom:0px; margin: 0px; text-align: center; \"><div style=\"border:1px solid #b4b4b4;width:200px; height:38px; padding-top: -1px; border-top:0px; margin:0px;padding:0px; background-color: #EBEBEB; \">" + produkt.CenaProduktu + " zł"+"</div></td>\r\n\t";
+            string td3 = "<td style=\"padding-left:10px;padding-right:10px; padding-top:0px; padding-bottom:0px; margin: 0px; text-align: center; \"><div style=\"border:1px solid #b4b4b4;width:200px; height:38px; padding-top: -1px; border-top:0px; margin:0px;padding:0px; background-color: #EBEBEB; \">" + produkt.CenaProduktuBrutto + " zł"+"</div></td>\r\n\t";
 
             thead = thead + td1;
             tbody = tbody + td2;

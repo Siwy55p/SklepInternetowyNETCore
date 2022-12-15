@@ -41,10 +41,18 @@
             </div>
         </div>
         <div class="form-group row">
-            <label asp-for="@Model.CenaProduktu" class="col-sm-3 col-form-label text-end">Cena produktu hurt (netto) </label>
+            <label asp-for="@Model.CenaProduktuNetto" class="col-sm-3 col-form-label text-end">Cena produktu hurt (netto) </label>
                 <div class="col-sm-4">
-                <input asp-for="@Model.CenaProduktu" class="form-control" aria-required="true" placeholder="Cena produktu" />
-                <span asp-validation-for="@Model.CenaProduktu" class="text-danger">
+                <input asp-for="@Model.CenaProduktuNetto" class="form-control" aria-required="true" placeholder="Cena produktu (netto)" />
+                <span asp-validation-for="@Model.CenaProduktuNetto" class="text-danger">
+                </span>
+                </div>
+        </div>
+        <div class="form-group row">
+            <label asp-for="@Model.CenaProduktuBrutto" class="col-sm-3 col-form-label text-end">Cena produktu hurt (brutto) </label>
+                <div class="col-sm-4">
+                <input asp-for="@Model.CenaProduktuBrutto" class="form-control" aria-required="true" placeholder="Cena produktu (brutto)" />
+                <span asp-validation-for="@Model.CenaProduktuBrutto" class="text-danger">
                 </span>
                 </div>
         </div>
@@ -145,7 +153,7 @@
         <div class="form-group row">
             <label asp-for="@Model.DataDodania" class="col-sm-3 col-form-label text-end">DataDodania: </label>
             <div class="col-sm-4">
-                <input asp-for="@Model.DataDodania" class="form-control" aria-required="true" placeholder="Materiał" readonly="readonly" />
+                <input asp-for="@Model.DataDodania" class="form-control" aria-required="true" placeholder="Materiał" />
                 <span asp-validation-for="@Model.DataDodania" class="text-danger">
                 </span>
             </div>

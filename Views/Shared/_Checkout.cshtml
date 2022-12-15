@@ -47,7 +47,7 @@
                                     zmienna = "bg-white";
                                 }
 
-                                var Cena_brutto = item.Product.CenaProduktu * partner_aluro.Core.Constants.Vat;
+                                var Cena_brutto = item.Product.CenaProduktuBrutto * partner_aluro.Core.Constants.Vat;
                                 @if (item.Product.Promocja == true /*&& item.Product.CenaPromocyja != null*/)
                                 {
 
@@ -57,7 +57,7 @@
 
 
 
-                                var CenaJednostkowa_netto = item.Product.CenaProduktu;
+                                var CenaJednostkowa_netto = item.Product.CenaProduktuBrutto;
                                 @if (item.Product.Promocja == true /*&& item.Product.CenaPromocyja != null*/)
                                 {
 
@@ -72,7 +72,7 @@
 
                                 if (partner_aluro.Core.Constants.Rabat >= 0)
                                 {
-                                    CenaJednostkowa_netto = item.Product.CenaProduktu * (1 - (partner_aluro.Core.Constants.Rabat / 100));
+                                    CenaJednostkowa_netto = item.Product.CenaProduktuBrutto * (1 - (partner_aluro.Core.Constants.Rabat / 100));
                                     CenaJednostkowa_brutto = Cena_brutto * (1 - (partner_aluro.Core.Constants.Rabat / 100));
                                 }
                                 else if (item.Product.Promocja == true /*&& item.Product.CenaPromocyja != null*/)

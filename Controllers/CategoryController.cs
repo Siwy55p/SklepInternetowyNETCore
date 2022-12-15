@@ -164,7 +164,7 @@ namespace partner_aluro.Controllers
 
         //TUTAJ WYSWIETLAM STRONE PODSTAWOWĄ DLA WYSWIETLENIA PRODUKTOW Z ID KATEGORIA
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public async Task<IActionResult> Lista1(int KategoriaId, int? page, string? szukanaNazwa, int? Sort) //Link do wyswietlania po wyborze kategorii
+        public async Task<IActionResult> Lista1(int KategoriaId, int? page, string? szukanaNazwa, int? Sort = 1) //Link do wyswietlania po wyborze kategorii
         {
 
 
@@ -198,19 +198,25 @@ namespace partner_aluro.Controllers
             switch (Sort)
             {
                 case 1:
-                    onePageOfProducts = produkty.OrderBy(p => p.Name).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
+                    onePageOfProducts = produkty.OrderByDescending(p => p.DataDodania).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
                     break;
                 case 2:
-                    onePageOfProducts = produkty.OrderByDescending(p => p.Name).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
+                    onePageOfProducts = produkty.OrderBy(p => p.DataDodania).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
                     break;
                 case 3:
-                    onePageOfProducts = produkty.OrderBy(p => p.Symbol).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
+                    onePageOfProducts = produkty.OrderBy(p => p.Name).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
                     break;
                 case 4:
+                    onePageOfProducts = produkty.OrderByDescending(p => p.Name).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
+                    break;
+                case 5:
+                    onePageOfProducts = produkty.OrderBy(p => p.Symbol).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
+                    break;
+                case 6:
                     onePageOfProducts = produkty.OrderByDescending(p => p.Symbol).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
                     break;
                 default:
-                    onePageOfProducts = produkty.OrderByDescending(p => p.Symbol).ToPagedList(pageNumber, Pages);
+                    onePageOfProducts = produkty.OrderByDescending(p => p.DataDodania).ToPagedList(pageNumber, Pages);
                     break;
             }
 
@@ -231,7 +237,7 @@ namespace partner_aluro.Controllers
 
         //TUTAJ WYSWIETLAM STRONE PODSTAWOWĄ DLA WYSWIETLENIA PRODUKTOW Z ID KATEGORIA szukanaNazwa
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public async Task<IActionResult> Lista(int? page, string? szukanaNazwa, int? Sort) //Link do wyswietlania po wyborze kategorii
+        public async Task<IActionResult> Lista(int? page, string? szukanaNazwa, int? Sort = 1) //Link do wyswietlania po wyborze kategorii
         {
             //var products = _cart.GetAllCartItems();
 
@@ -250,22 +256,29 @@ namespace partner_aluro.Controllers
                 var pageNumber = page ?? 1; // if no page was specified in the querystring, default to the first page (1)
                 var onePageOfProducts = produkty.ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
 
-                
-                switch(Sort)
+
+                switch (Sort)
                 {
                     case 1:
-                        onePageOfProducts = produkty.OrderBy(p => p.Name).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
+                        onePageOfProducts = produkty.OrderByDescending(p => p.DataDodania).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
                         break;
                     case 2:
-                        onePageOfProducts = produkty.OrderByDescending(p => p.Name).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
+                        onePageOfProducts = produkty.OrderBy(p => p.DataDodania).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
                         break;
                     case 3:
-                        onePageOfProducts = produkty.OrderBy(p => p.Symbol).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
+                        onePageOfProducts = produkty.OrderBy(p => p.Name).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
                         break;
                     case 4:
+                        onePageOfProducts = produkty.OrderByDescending(p => p.Name).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
+                        break;
+                    case 5:
+                        onePageOfProducts = produkty.OrderBy(p => p.Symbol).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
+                        break;
+                    case 6:
                         onePageOfProducts = produkty.OrderByDescending(p => p.Symbol).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
                         break;
                     default:
+                        onePageOfProducts = produkty.OrderByDescending(p => p.DataDodania).ToPagedList(pageNumber, Pages);
                         break;
                 }
 
@@ -298,18 +311,25 @@ namespace partner_aluro.Controllers
                         switch (Sort)
                         {
                             case 1:
-                                onePageOfProducts = produkty.OrderBy(p => p.Name).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
+                                onePageOfProducts = produkty.OrderByDescending(p => p.DataDodania).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
                                 break;
                             case 2:
-                                onePageOfProducts = produkty.OrderByDescending(p => p.Name).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
+                                onePageOfProducts = produkty.OrderBy(p => p.DataDodania).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
                                 break;
                             case 3:
-                                onePageOfProducts = produkty.OrderBy(p => p.Symbol).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
+                                onePageOfProducts = produkty.OrderBy(p => p.Name).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
                                 break;
                             case 4:
+                                onePageOfProducts = produkty.OrderByDescending(p => p.Name).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
+                                break;
+                            case 5:
+                                onePageOfProducts = produkty.OrderBy(p => p.Symbol).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
+                                break;
+                            case 6:
                                 onePageOfProducts = produkty.OrderByDescending(p => p.Symbol).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
                                 break;
                             default:
+                                onePageOfProducts = produkty.OrderByDescending(p => p.DataDodania).ToPagedList(pageNumber, Pages);
                                 break;
                         }
 
@@ -325,28 +345,35 @@ namespace partner_aluro.Controllers
                 }
                 else
                 {
-                    produkty2 = await _context.ProductCategory.Where(x => x.CategoryID == a.CategoryId).Select(x => x.Product).ToListAsync();
+                    produkty2 = await _context.ProductCategory.Where(x => x.CategoryID == a.CategoryId).Where(x=>x.Product.Ukryty == false).Select(x => x.Product).ToListAsync();
 
 
                     var pageNumber = page ?? 1; // if no page was specified in the querystring, default to the first page (1)
 
                     var onePageOfProducts = produkty2.ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
-                    
+
                     switch (Sort)
                     {
                         case 1:
-                            onePageOfProducts = produkty2.OrderBy(p => p.Name).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
+                            onePageOfProducts = produkty2.OrderByDescending(p => p.DataDodania).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
                             break;
                         case 2:
-                            onePageOfProducts = produkty2.OrderByDescending(p => p.Name).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
+                            onePageOfProducts = produkty2.OrderBy(p => p.DataDodania).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
                             break;
                         case 3:
-                            onePageOfProducts = produkty2.OrderBy(p => p.Symbol).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
+                            onePageOfProducts = produkty2.OrderBy(p => p.Name).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
                             break;
                         case 4:
+                            onePageOfProducts = produkty2.OrderByDescending(p => p.Name).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
+                            break;
+                        case 5:
+                            onePageOfProducts = produkty2.OrderBy(p => p.Symbol).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
+                            break;
+                        case 6:
                             onePageOfProducts = produkty2.OrderByDescending(p => p.Symbol).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
                             break;
                         default:
+                            onePageOfProducts = produkty2.OrderByDescending(p => p.DataDodania).ToPagedList(pageNumber, Pages);
                             break;
                     }
                     ViewData["OnePageOfProducts"] = onePageOfProducts;
@@ -360,7 +387,7 @@ namespace partner_aluro.Controllers
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public async Task<IActionResult> Lista2(int? page, string? szukanaNazwa, int? Sort) //Link do wyswietlania po wyborze kategorii TO JEST TYLKO KONTENER
+        public async Task<IActionResult> Lista2(int? page, string? szukanaNazwa, int? Sort = 1) //Link do wyswietlania po wyborze kategorii TO JEST TYLKO KONTENER
         {
             //var products = _cart.GetAllCartItems();
 
@@ -369,6 +396,9 @@ namespace partner_aluro.Controllers
             ViewData["Title"] = szukanaNazwa;
             ViewData["szukanaNazwa"] = szukanaNazwa;
 
+
+            ViewData["Sort"] = Sort;
+
             List<Product> produkty = await Szukanie(szukanaNazwa);
             var pageNumber = page ?? 1; // if no page was specified in the querystring, default to the first page (1)
             var onePageOfProducts = produkty.ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
@@ -376,18 +406,25 @@ namespace partner_aluro.Controllers
             switch (Sort)
             {
                 case 1:
-                    onePageOfProducts = produkty.OrderBy(p => p.Name).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
+                    onePageOfProducts = produkty.OrderByDescending(p => p.DataDodania).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
                     break;
                 case 2:
-                    onePageOfProducts = produkty.OrderByDescending(p => p.Name).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
+                    onePageOfProducts = produkty.OrderBy(p => p.DataDodania).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
                     break;
                 case 3:
-                    onePageOfProducts = produkty.OrderBy(p => p.Symbol).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
+                    onePageOfProducts = produkty.OrderBy(p => p.Name).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
                     break;
                 case 4:
+                    onePageOfProducts = produkty.OrderByDescending(p => p.Name).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
+                    break;
+                case 5:
+                    onePageOfProducts = produkty.OrderBy(p => p.Symbol).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
+                    break;
+                case 6:
                     onePageOfProducts = produkty.OrderByDescending(p => p.Symbol).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
                     break;
                 default:
+                    onePageOfProducts = produkty.OrderByDescending(p => p.DataDodania).ToPagedList(pageNumber, Pages);
                     break;
             }
 

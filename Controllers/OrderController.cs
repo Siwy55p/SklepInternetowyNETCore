@@ -598,7 +598,7 @@ namespace partner_aluro.Controllers
 
                 foreach (var item in order.OrderItems)
                 {
-                    decimal cenaJednostkowa = item.Product.CenaProduktu * (1 - ((decimal)order.RabatZamowienia / 100));
+                    decimal cenaJednostkowa = item.Product.CenaProduktuBrutto * (1 - ((decimal)order.RabatZamowienia / 100));
                     decimal cenaJednostkowaIlosc = cenaJednostkowa * @item.Quantity;
 
                     PdfPCell cell_1 = new(new Phrase(item.Id));
@@ -732,10 +732,10 @@ namespace partner_aluro.Controllers
             {
                 _productService.ZmiejszIloscProductIdAsync(item.Product.ProductId, item.Quantity);
 
-                item.Product.CenaProduktuDlaUzytkownika = item.Product.CenaProduktu * (1 - (Core.Constants.Rabat / 100));
+                item.Product.CenaProduktuDlaUzytkownika = item.Product.CenaProduktuBrutto * (1 - (Core.Constants.Rabat / 100));
 
 
-                var Cena_brutto = (decimal)item.Product.CenaProduktu * (decimal)partner_aluro.Core.Constants.Vat;
+                var Cena_brutto = (decimal)item.Product.CenaProduktuBrutto * (decimal)partner_aluro.Core.Constants.Vat;
                 if (item.Product.Promocja == true && item.Product.CenaPromocyja != null)
                 {
                     Cena_brutto = (decimal)item.Product.CenaPromocyja * (decimal)partner_aluro.Core.Constants.Vat;
@@ -754,7 +754,7 @@ namespace partner_aluro.Controllers
                     OrderId = order.Id,
                     //Cena = (int)(item.Product.CenaProduktuDlaUzytkownika * item.Quantity)
                     Cena = (int)ProductTotal
-                    //Cena = (int)(item.Product.CenaProduktu * item.Quantity)
+                    //Cena = (int)(item.Product.CenaProduktuBrutto * item.Quantity)
                 };
 
                 order.OrderItems.Add(orderItem);

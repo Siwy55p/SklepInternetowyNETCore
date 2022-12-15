@@ -115,7 +115,7 @@ namespace partner_aluro.Models
 
             var Rabat = Core.Constants.Rabat;
 
-            product.CenaProduktuDlaUzytkownika = product.CenaProduktu * (1 - (Rabat / 100));
+            product.CenaProduktuDlaUzytkownika = product.CenaProduktuBrutto * (1 - (Rabat / 100));
 
             ApplicationUser user = _context.Users.Where(x => x.Id == UserId).FirstOrDefault();
 
@@ -217,7 +217,7 @@ namespace partner_aluro.Models
             decimal CartTotal1 = _context.CartItems
                 .Where(ci => ci.CartIds == CartaId && ci.Product.Promocja == false)
                 //.Where(ci=> ci.Product.Promocja == false)
-                .Select(ci => ci.Product.CenaProduktu * ci.Quantity)
+                .Select(ci => ci.Product.CenaProduktuBrutto * ci.Quantity)
                 .Sum();
 
             decimal CartTotal2 = _context.CartItems
@@ -238,7 +238,7 @@ namespace partner_aluro.Models
         {
             decimal CartTotal1 = _context.CartItems
                 .Where(ci => ci.CartIds == CartaId && ci.Product.Promocja == false)
-                .Select(ci => ci.Product.CenaProduktu * ci.Quantity)
+                .Select(ci => ci.Product.CenaProduktuBrutto * ci.Quantity)
                 .Sum();
 
             decimal CartTotal2 = _context.CartItems

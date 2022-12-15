@@ -46,7 +46,7 @@ namespace partner_aluro.Core
         public static decimal Eur = (decimal)4.69;
         public static decimal Zloty = (decimal)1;
 
-        public static decimal Vat = (decimal)1.23;
+        public static decimal Vat = (decimal)0.23;
 
         public static string UserId;
 

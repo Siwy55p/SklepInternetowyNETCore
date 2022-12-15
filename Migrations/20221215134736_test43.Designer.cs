@@ -12,8 +12,8 @@ using partner_aluro.Data;
 namespace partner_aluro.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221208194421_test5")]
-    partial class test5
+    [Migration("20221215134736_test43")]
+    partial class test43
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -428,6 +428,9 @@ namespace partner_aluro.Migrations
                     b.Property<bool?>("Newsletter")
                         .HasColumnType("bit");
 
+                    b.Property<int?>("NewsletterID")
+                        .HasColumnType("int");
+
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -471,6 +474,8 @@ namespace partner_aluro.Migrations
 
                     b.HasIndex("IdUser");
 
+                    b.HasIndex("NewsletterID");
+
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 
@@ -484,18 +489,31 @@ namespace partner_aluro.Migrations
 
             modelBuilder.Entity("partner_aluro.Models.Cart", b =>
                 {
-                    b.Property<string>("CartId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("CartID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<string>("CartsId")
-                        .IsRequired()
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CartID"), 1L, 1);
+
+                    b.Property<string>("CartaId")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<decimal>("RazemBrutto")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("RazemNetto")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<string>("UserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("CartId");
+                    b.Property<bool?>("Zrealizowane")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("dataPowstania")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("CartID");
 
                     b.HasIndex("UserId");
 
@@ -510,15 +528,12 @@ namespace partner_aluro.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CartItemId"), 1L, 1);
 
-                    b.Property<string>("CartId")
+                    b.Property<string>("CartIds")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CartsId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("Data")
-                        .HasColumnType("datetime2");
+                    b.Property<int?>("CartsCartID")
+                        .HasColumnType("int");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
@@ -526,16 +541,11 @@ namespace partner_aluro.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("CartItemId");
 
-                    b.HasIndex("CartsId");
+                    b.HasIndex("CartsCartID");
 
                     b.HasIndex("ProductId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("CartItems");
                 });
@@ -672,6 +682,9 @@ namespace partner_aluro.Migrations
                     b.Property<string>("ImageNameCompress250x250")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ImageNameCompress645x410")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("ImageSliderID")
                         .HasColumnType("int");
 
@@ -702,6 +715,9 @@ namespace partner_aluro.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("pathImageCompress250x250")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("pathImageCompress645x410")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ImageId");
@@ -891,6 +907,9 @@ namespace partner_aluro.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("CenaProduktuDetal")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("CenaProduktuNetto")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("CenaPromocyja")
@@ -1429,6 +1448,10 @@ namespace partner_aluro.Migrations
                         .WithMany("UserProfilDzialalnosci")
                         .HasForeignKey("IdUser");
 
+                    b.HasOne("partner_aluro.Models.Newsletter", null)
+                        .WithMany("Users")
+                        .HasForeignKey("NewsletterID");
+
                     b.Navigation("Adress1rozliczeniowy");
 
                     b.Navigation("Adress2dostawy");
@@ -1440,18 +1463,16 @@ namespace partner_aluro.Migrations
                 {
                     b.HasOne("partner_aluro.Models.ApplicationUser", "user")
                         .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("user");
                 });
 
             modelBuilder.Entity("partner_aluro.Models.CartItem", b =>
                 {
-                    b.HasOne("partner_aluro.Models.Cart", null)
+                    b.HasOne("partner_aluro.Models.Cart", "Carts")
                         .WithMany("CartItems")
-                        .HasForeignKey("CartsId");
+                        .HasForeignKey("CartsCartID");
 
                     b.HasOne("partner_aluro.Models.Product", "Product")
                         .WithMany()
@@ -1459,13 +1480,9 @@ namespace partner_aluro.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("partner_aluro.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
+                    b.Navigation("Carts");
 
                     b.Navigation("Product");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("partner_aluro.Models.ImageModel", b =>
@@ -1566,6 +1583,11 @@ namespace partner_aluro.Migrations
             modelBuilder.Entity("partner_aluro.Models.Category", b =>
                 {
                     b.Navigation("Produkty");
+                });
+
+            modelBuilder.Entity("partner_aluro.Models.Newsletter", b =>
+                {
+                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("partner_aluro.Models.Order", b =>

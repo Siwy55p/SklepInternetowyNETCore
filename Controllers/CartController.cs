@@ -107,7 +107,7 @@ namespace partner_aluro.Controllers
 
             //foreach (var product in products)
             //{
-            //    product.Product.CenaProduktuDlaUzytkownika = product.Product.CenaProduktu * (1 - (Core.Constants.Rabat / 100));
+            //    product.Product.CenaProduktuDlaUzytkownika = product.Product.CenaProduktuBrutto * (1 - (Core.Constants.Rabat / 100));
             //}
 
 

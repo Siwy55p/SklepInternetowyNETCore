@@ -36,7 +36,8 @@ namespace partner_aluro.Models
         public string? NazwaPlikuObrazka { get; set; }
 
         [Required(ErrorMessage = "Cena Produktu jest wymagana")]
-        public decimal CenaProduktu { get; set; }
+        public decimal CenaProduktuBrutto { get; set; }  // Cena Producktu (wczesniej netto) nazwa CenaProduktu
+        public decimal CenaProduktuNetto { get; set; }
 
         [NotMapped]
         public decimal CenaProduktuDlaUzytkownika { get; set; }

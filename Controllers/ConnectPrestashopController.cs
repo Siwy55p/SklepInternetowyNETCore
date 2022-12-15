@@ -77,7 +77,7 @@ namespace partner_aluro.Controllers
                         //produkt wystepuje i trzeba zaktualizowac dane
                         produkt.EAN13 = listaproduktowDostepnychZPresty[i].ean13;
                         produkt.Ilosc = _productQuantityPrestashop.iloscProduktu((int)listaproduktowDostepnychZPresty[i].id_product);
-                        produkt.CenaProduktu = (decimal)listaproduktowDostepnychZPresty[i].price;
+                        produkt.CenaProduktuBrutto = (decimal)listaproduktowDostepnychZPresty[i].price;
                         produkt.CenaProduktuDetal = (decimal)listaproduktowDostepnychZPresty[i].wholesale_price;
                         produkt.SzerokoscProduktu = (decimal)listaproduktowDostepnychZPresty[i].width;
                         produkt.WysokoscProduktu = (decimal)listaproduktowDostepnychZPresty[i].height;
@@ -98,7 +98,7 @@ namespace partner_aluro.Controllers
                         product.Description = _productNazwyPrestashop.DlugiOpisProduktu((int)listaproduktowDostepnychZPresty[i].id_product);
 
                         product.DataDodania = DateTime.Parse(listaproduktowDostepnychZPresty[i].date_add);
-                        product.CenaProduktu = (decimal)listaproduktowDostepnychZPresty[i].price;
+                        product.CenaProduktuBrutto = (decimal)listaproduktowDostepnychZPresty[i].price;
                         product.Pakowanie = "";
                         product.Materiał = "";
                         product.Ilosc = _productQuantityPrestashop.iloscProduktu((int)listaproduktowDostepnychZPresty[i].id_product);

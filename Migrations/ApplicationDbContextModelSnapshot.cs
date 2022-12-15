@@ -901,10 +901,13 @@ namespace partner_aluro.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("CenaProduktu")
+                    b.Property<decimal>("CenaProduktuBrutto")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("CenaProduktuDetal")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("CenaProduktuNetto")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("CenaPromocyja")

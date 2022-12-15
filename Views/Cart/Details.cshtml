@@ -36,7 +36,7 @@
                                         <tr>
                                             @{
 
-                                                var Cena_brutto = item.Product.CenaProduktu * partner_aluro.Core.Constants.Vat;
+                                                var Cena_brutto = item.Product.CenaProduktuBrutto * partner_aluro.Core.Constants.Vat;
 
                                                 if (/*item.Product.CenaPromocyja != null &&*/ item.Product.Promocja == true)
                                                 {
@@ -44,7 +44,7 @@
                                                 }
 
 
-                                                var CenaJednostkowa_netto = item.Product.CenaProduktu;
+                                                var CenaJednostkowa_netto = item.Product.CenaProduktuBrutto;
                                                 if (/*item.Product.CenaPromocyja != null &&*/ item.Product.Promocja == true)
                                                 {
                                                     CenaJednostkowa_netto = item.Product.CenaPromocyja;
@@ -56,13 +56,13 @@
 
                                                 if (partner_aluro.Core.Constants.Rabat >= 0)
                                                 {
-                                                    CenaJednostkowa_netto = item.Product.CenaProduktu * (1 - (partner_aluro.Core.Constants.Rabat / 100));
+                                                    CenaJednostkowa_netto = item.Product.CenaProduktuBrutto * (1 - (partner_aluro.Core.Constants.Rabat / 100));
                                                     CenaJednostkowa_brutto = Cena_brutto * (1 - (partner_aluro.Core.Constants.Rabat / 100));
                                                 }
 
                                                 var ProductTotal = CenaJednostkowa_brutto * item.Quantity;
 
-                                                //decimal cenaJednostkowa = item.Product.CenaProduktu * (1 - ((decimal)Model.RabatZamowienia / 100));
+                                                //decimal cenaJednostkowa = item.Product.CenaProduktuBrutto * (1 - ((decimal)Model.RabatZamowienia / 100));
                                                 //decimal cenaJednostkowaIlosc = cenaJednostkowa * @item.Quantity;
                                             }
                                             <td>@item.Product.ProductId</td>
