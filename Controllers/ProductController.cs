@@ -50,7 +50,12 @@ namespace partner_aluro.Controllers
             return View(await _ProductService.GetProductList());
         }
 
+        [HttpPost]
+        public int CenaNetto(int CenaBrutto)
+        {
 
+            return 1;
+        }
 
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
         [HttpGet]
