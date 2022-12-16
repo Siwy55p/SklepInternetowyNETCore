@@ -46,8 +46,8 @@
                                         <th>Firma</th>
                                         <th>Newsletter</th>
                                         <th>Email</th>
-                                        <th>Edit</th>
-                                        <th>Resetuj hasło</th>
+                                        <th>Aktywny</th>
+                                        <th>Akcje</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -84,11 +84,16 @@
                                             </td>
                                             <td>@user.Email</td>
                                             <td>
-                                                <a asp-controller="User" asp-action="Edit" asp-route-id="@user.Id">Edit</a> |
-
+                                                 @if (@user.Aktywny == true)
+                                                {
+                                                    <input type="checkbox" checked disabled />
+                                                }else
+                                                {
+                                                    <input type="checkbox" disabled />
+                                                }
                                             </td>
                                             <td>
-                                                <a asp-controller="User" asp-action="ResetPasswordUser" asp-route-id="@user.Id" asp-route-email="@user.Email">Resetuj hasło</a>
+                                                <a asp-controller="User" asp-action="Edit" asp-route-id="@user.Id">Edytuj</a> |  <a asp-controller="User" asp-action="ResetPasswordUser" asp-route-id="@user.Id" asp-route-email="@user.Email">Resetuj hasło</a>
                                             </td>
                                             @*<td>
                                                 @Html.HiddenFor(h=>user.Id);  @*potrzebne do funkcji usuniecia user

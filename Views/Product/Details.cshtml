@@ -18,10 +18,10 @@
         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-10 col-xxl-8">
             <div class="card">
                 <div class="row g-0">
-                        @if (User.IsInRole("Administrator") || User.IsInRole("Manager"))
-                        {
-                            <a asp-controller="Product" asp-action="Edit" asp-route-id="@Model.ProductId" class="text-end">Edytuj</a>
-                        }
+                    @if (User.IsInRole("Administrator") || User.IsInRole("Manager"))
+                    {
+                        <a asp-controller="Product" asp-action="Edit" asp-route-id="@Model.ProductId" class="text-end">Edytuj</a>
+                    }
 
                     @{
                         var CenaJednostkowa = Model.CenaProduktuBrutto;
@@ -34,22 +34,25 @@
                             <div class="main_image">
                                 @*<a id="myLink" href="~/img/produkty/@Model.Symbol/@Model.ImageUrl" class="glightbox">*@
                                 @*<a id="myLink" href="~/img/produkty/@Model.Symbol/@Model.Product_Images.Where(x=>x.kolejnosc == 0).FirstOrDefault().ImageName" onclick="Open(this)" data-gallery="gallery" class="glightbox">*@
-                                    @if(Model.Product_Images.Count() > 0)
-                                    {
-                                        <a id="myLink" href="~/img/p/@Model.Symbol/@Model.Product_Images[0].ImageName" onclick="Open(this)">
-                                            <img class="main_image" id=featured src="~/img/p/@Model.Symbol/@Model.Product_Images[0].ImageName">
-                                        </a>
-                                    }
+                                @if (Model.Product_Images.Count() > 0)
+                                {
+                                    <a id="myLink" href="~/img/p/@Model.Symbol/@Model.Product_Images[0].ImageName" onclick="Open(this)" data-gallery="gallery" class="glightbox">
+                                        <img class="main_image" id=featured src="~/img/p/@Model.Symbol/@Model.Product_Images[0].ImageName">
+                                    </a>
+                                }
                             </div>
 
                             <div id="slide-wrapper">
                                 <img id="slideLeft" class="arrow" src="~/img/produktslider/arrow-left.png">
                                 <div id="slider">
-                                    @foreach (var img in Model.Product_Images.OrderBy(o=>o.kolejnosc).Select((value, x) => (value,x)) )
+                                    @foreach (var img in Model.Product_Images.OrderBy(o => o.kolejnosc).Select((value, x) => (value, x)))
                                     {
+
                                         var index = @img.x;
-                                        <a href="~/img/p/@Model.Symbol/@Model.Product_Images[index].ImageName" class="glightbox" data-gallery="gallery">
-                                            <img id="@index" value="@img.value.kolejnosc" class="thumbnail_product" onmouseover="Over(this)" src="~/img/p/@Model.Symbol/@Model.Product_Images[index].ImageName" alt="@img.value.Product" width="70px">
+
+
+                                        <a href="~/img/p/@Model.Symbol/@img.value.ImageName" class="glightbox" data-gallery="gallery">
+                                            <img id="@index" value="@img.value.kolejnosc" class="thumbnail_product" onmouseover="Over(this)" src="~/img/p/@Model.Symbol/@img.value.ImageName" alt="@img.value.Product" width="70px">
                                         </a>
                                     }
                                 </div>
@@ -57,7 +60,7 @@
                             </div>
                         </div>
 
-                    </div>	
+                    </div>
                     <div class="col-md-6">
                         <div class="ps-2 px-0">
                             @*<div class="d-flex justify-content-between align-items-center">*@
@@ -73,9 +76,9 @@
                             }
                             @*<div @*style="max-width:460px;" class="row body_product float-end text-end m-1 p-2">*@
                             @{
-                                var Cena_netto  = Model.CenaProduktuBrutto / partner_aluro.Core.Constants.Vat;
+                                var Cena_netto = Model.CenaProduktuBrutto / partner_aluro.Core.Constants.Vat;
                                 var Cena_brutto = Model.CenaProduktuBrutto;
-                                }
+                            }
                             <div class="row">
                                 <div class="col justify-content-end">
                                     @language.Getkey("CenaHurtowa"): @language.GetCurrently(@Cena_netto, Constants.myNumberFormatInfo).ToString("C", Constants.myNumberFormatInfo) @language.Getkey("(netto)")
@@ -94,18 +97,17 @@
                                     }
                                 </div>
                                 <div class="col">
-
                                 </div>
                             </div>
 
 
-                            <div class="row card-bar-action align-items-center" >
-                                    @if(Model.Ilosc <= 0)
-                                    {
-                                        <div>@language.Getkey("Produkt jest już niedostępny.")</div>
-                                    }
-                                    else
-                                    {
+                            <div class="row card-bar-action align-items-center">
+                                @if (Model.Ilosc <= 0)
+                                {
+                                    <div>@language.Getkey("Produkt jest już niedostępny.")</div>
+                                }
+                                else
+                                {
                                     <div class="col-2">
                                         @language.Getkey("Ilość"):
                                     </div>
@@ -115,7 +117,7 @@
                                     <div class="col">
                                         <button value="@Model.ProductId" onclick="AddToCart(@Model.ProductId)" class="btn btn-success" data-bs-target="offcanvas" role="button">@language.Getkey("Dodaj do zamowienia")</button>
                                     </div>
-                                    }
+                                }
                             </div>
 
 
@@ -126,72 +128,87 @@
                                     decimal ProcentPromocji = (decimal)(1 - (Model.CenaPromocyja / Model.CenaProduktuBrutto)) * 100;
 
 
-                                    <div class="sale" >@ProcentPromocji.ToString("##.") %</div>
+                                    <div class="sale">@ProcentPromocji.ToString("##.") %</div>
 
-                                    <span class="text-decoration-line-through">@Model.CenaProduktuBrutto.ToString("C")</span><br />
+                                    <span class="text-decoration-line-through">@Model.CenaProduktuBrutto.ToString("C")</span>
+
+                                    <br />
                                     <span>@Model.CenaPromocyja.ToString("C")</span>
                                     <div class="h2 text-danger">PROMOCJA: @ProcentPromocji.ToString(".##") %</div>
                                 }
 
 
-                                
+
                                 <div class="row">
                                     <div class="col">@language.Getkey("Specyfikacja produktu:") </div>
                                 </div>
                                 @if (Model.SzerokoscProduktu != null && Model.SzerokoscProduktu != 0 || Model.WysokoscProduktu != null && Model.WysokoscProduktu != 0 || Model.GlebokoscProduktu != null && Model.GlebokoscProduktu != 0)
                                 {
                                     <div class="row">
-                                            <div class="col pl-3 pr-0 m-0">@language.Getkey("Wymiary zewnetrzne:")</div>
+                                        <div class="col pl-3 pr-0 m-0">@language.Getkey("Wymiary zewnetrzne:")</div>
                                     </div>
                                 }
                                 <div class="row ps-2 px-0">
+                                    <div class="col ps-3 px-0 m-0">
                                     @if (Model.SzerokoscProduktu != null && Model.SzerokoscProduktu != 0)
                                     {
-                                        <div class="col ps-3 px-0 m-0">@language.Getkey("Szerokość:") @Model.SzerokoscProduktu cm.</div>
+                                        <span>@language.Getkey("Szerokość:") @Model.SzerokoscProduktu cm.</span>
+
                                     }
+                                    </div>
+                                    <div class="col ps-3 px-0 m-0">
                                     @if (Model.GlebokoscProduktu != null && Model.GlebokoscProduktu != 0)
                                     {
-                                        <div class="col ps-3 px-0 m-0">@language.Getkey("Głębokość:") @Model.GlebokoscProduktu cm.</div>
+                                            <span>@language.Getkey("Głębokość:") @Model.GlebokoscProduktu cm.</span>
                                     }
-                                    @if (Model.WysokoscProduktu != null && Model.WysokoscProduktu != 0 )
+                                    </div>
+                                    <div class="col ps-3 px-0 m-0">
+                                    @if (Model.WysokoscProduktu != null && Model.WysokoscProduktu != 0)
                                     {
-                                        <div class="col ps-3 px-0 m-0">@language.Getkey("Wysokość:") @Model.WysokoscProduktu cm.</div>
+                                            <span>@language.Getkey("Wysokość:") @Model.WysokoscProduktu cm.</span>
                                     }
+                                    </div>
                                 </div>
 
-                                @if(Model.SzerokoscWewnetrznaProduktu != null && Model.SzerokoscWewnetrznaProduktu != 0 || Model.WysokoscWewnetrznaProduktu != null && Model.WysokoscWewnetrznaProduktu != 0 || Model.GlebokoscWewnetrznaProduktu != null && Model.GlebokoscWewnetrznaProduktu != 0)
+                                @if (Model.SzerokoscWewnetrznaProduktu != null && Model.SzerokoscWewnetrznaProduktu != 0 || Model.WysokoscWewnetrznaProduktu != null && Model.WysokoscWewnetrznaProduktu != 0 || Model.GlebokoscWewnetrznaProduktu != null && Model.GlebokoscWewnetrznaProduktu != 0)
                                 {
                                     <div class="row">
-                                           <div class="col pl-3 pr-0 m-0"> @language.Getkey("Wymiary wewnętrzne:") </div>
+                                        <div class="col pl-3 pr-0 m-0"> @language.Getkey("Wymiary wewnętrzne:") </div>
                                     </div>
                                 }
                                 <div class="row ps-2">
+                                    <div class="col ps-3 px-0  m-0">
                                     @if (Model.SzerokoscWewnetrznaProduktu != null && Model.SzerokoscWewnetrznaProduktu != 0)
                                     {
-                                        <div class="col ps-3 px-0  m-0">@language.Getkey("Szerokość:") @Model.SzerokoscWewnetrznaProduktu cm.</div>
+                                            <span>@language.Getkey("Szerokość:") @Model.SzerokoscWewnetrznaProduktu cm.</span>
                                     }
-                                    @if (Model.GlebokoscWewnetrznaProduktu != null && Model.GlebokoscWewnetrznaProduktu != 0)
-                                    {
-                                        <div class="col ps-3 px-0  m-0">@language.Getkey("Głębokość:") @Model.GlebokoscWewnetrznaProduktu cm.</div>
-                                    }
+                                    </div>
+                                    <div class="col ps-3 px-0 m-0">
+                                        @if (Model.GlebokoscWewnetrznaProduktu != null && Model.GlebokoscWewnetrznaProduktu != 0)
+                                        {
+                                            <span>@language.Getkey("Głębokość:") @Model.GlebokoscWewnetrznaProduktu cm.</span>
+                                        }
+                                    </div>
+                                    <div class="col ps-3 px-0  m-0">
                                     @if (Model.WysokoscWewnetrznaProduktu != null && Model.WysokoscWewnetrznaProduktu != 0)
                                     {
-                                        <div class="col ps-3 px-0  m-0">@language.Getkey("Wysokość:") @Model.WysokoscWewnetrznaProduktu cm.</div>
+                                        <span>@language.Getkey("Wysokość:") @Model.WysokoscWewnetrznaProduktu cm.</span>
                                     }
+                                    </div>
                                 </div>
 
-                                @if(Model.WagaProduktu != null && Model.WagaProduktu != 0)
+                                @if (Model.WagaProduktu != null && Model.WagaProduktu != 0)
                                 {
                                     <div class="row">
                                         <div class="col">@language.Getkey("Waga:") @Model.WagaProduktu kg.</div>
                                     </div>
                                 }
 
-                                @if(Model.Pakowanie != null)
+                                @if (Model.Pakowanie != null)
                                 {
-                                <div class="row">
-                                    <div class="col">@language.Getkey("Pakowanie:") @Model.Pakowanie </div>
-                                </div>
+                                    <div class="row">
+                                        <div class="col">@language.Getkey("Pakowanie:") @Model.Pakowanie </div>
+                                    </div>
                                 }
 
                                 @if (Model.Materiał != null)
@@ -209,11 +226,11 @@
                             </div>
 
                             @*<div class="buttons d-flex flex-row mt-5 gap-3">
-                                <button class="btn btn-outline-dark">Dodaj do zamówienia</button>
+                            <button class="btn btn-outline-dark">Dodaj do zamówienia</button>
                             </div>*@
-                        </div>	
-                    </div>	
-                </div> 
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -257,6 +274,18 @@
     </script>
 
     <script>
+        function Open(elem) {
+
+
+            //var s= document.getElementById(variable).id;
+
+
+            //lightbox.settings.startAt = s;
+            //alert(s);
+        }
+
+    </script>
+    <script>
         function Over(elem) {
 
             var value2 = elem.value;
@@ -271,63 +300,46 @@
         const lightbox = GLightbox({
             touchNavigation: true,
             loop: false,
-            autoplayVideos: trueGLightbox
+            autoplayVideos: true
         });
     </script>
-
-    
-    <script>
-        function Open(elem) {
-            var value2 = elem.value;
-            var id2 = elem.id;
-            var num = parseInt(id2, 10) + 1
-            lightbox.openAt(num);
-
-        }
-         const lightbox = GLightbox({
-            touchNavigation: true,
-            loop: false,
-            autoplayVideos: trueGLightbox
-        });
-    </script>
-
 
     <script type="text/javascript">
-		let thumbnails = document.getElementsByClassName('thumbnail_product');
+        let thumbnails = document.getElementsByClassName('thumbnail_product');
 
-		let activeImages = document.getElementsByClassName('active');
+        let activeImages = document.getElementsByClassName('active');
 
-		for (var i=0; i < thumbnails.length; i++){
+        for (var i = 0; i < thumbnails.length; i++) {
 
-			thumbnails[i].addEventListener('mouseover', function(){
-				console.log(activeImages);
+            thumbnails[i].addEventListener('mouseover', function () {
+                console.log(activeImages);
 
 
-				if (activeImages.length > 0){
-					activeImages[0].classList.remove('active');
-				}
-				
+                if (activeImages.length > 0) {
+                    activeImages[0].classList.remove('active');
+                }
 
-				this.classList.add('active')
-				document.getElementById('featured').src = this.src;
+
+                this.classList.add('active')
+                document.getElementById('featured').src = this.src;
 
             })
-		}
+        }
 
 
-		let buttonRight = document.getElementById('slideRight');
-		let buttonLeft = document.getElementById('slideLeft');
+        let buttonRight = document.getElementById('slideRight');
+        let buttonLeft = document.getElementById('slideLeft');
 
-		buttonLeft.addEventListener('click', function(){
-			document.getElementById('slider').scrollLeft -= 180
-		})
+        buttonLeft.addEventListener('click', function () {
+            document.getElementById('slider').scrollLeft -= 180
+        })
 
-		buttonRight.addEventListener('click', function(){
-			document.getElementById('slider').scrollLeft += 180
-		})
+        buttonRight.addEventListener('click', function () {
+            document.getElementById('slider').scrollLeft += 180
+        })
 
 
-	</script>
+    </script>
 
     <script>
         function AddToCart(ProductId) {

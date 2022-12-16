@@ -180,6 +180,7 @@ namespace partner_aluro.Controllers
             {
                 if (rolesToAdd[i] == "Klient")
                 {
+                    user.Aktywny = true;
                     //powiadomienie ze konto zostalo aktywowane wyslanie emaila do uzytkownika
                     var code = await _signInManager.UserManager.GeneratePasswordResetTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
@@ -210,6 +211,7 @@ namespace partner_aluro.Controllers
             {
                 if (rolesToDelete[i] == "Klient")
                 {
+                    user.Aktywny = false;
                     //powiadomienie ze konto uzytkownika zostalo zablokowane wiec wysylam email do uzytkownika z informacja o tym
                     var code = await _signInManager.UserManager.GeneratePasswordResetTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));

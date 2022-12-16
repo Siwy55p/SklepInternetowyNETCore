@@ -44,19 +44,19 @@
                                             
                                         @if (order.StanZamowienia == StanZamowienia.Nowe)
                                         {
-                                            <td><span style="background-color: #49814e">@order.StanZamowienia<span></td>
+                                            <td><span style="background-color: #49814e">Nowe<span></td>
                                         }else if (order.StanZamowienia == StanZamowienia.Wrealizacji)
                                         {
-                                            <td><span style="background: #ff8c00">@order.StanZamowienia<span></td>
+                                            <td><span style="background: #ff8c00">W realizacji<span></td>
                                         }else if (order.StanZamowienia == StanZamowienia.Zrealizowane)
                                         {
                                             <td><span style="background: #6ab170">@order.StanZamowienia<span></td>
                                         }else if (order.StanZamowienia == StanZamowienia.Anulowane)
                                         {
-                                            <td><span style="background: #dc143c">@order.StanZamowienia</span></td>
+                                            <td><span style="background: #dc143c">Anulowane</span></td>
                                         }else if (order.StanZamowienia == StanZamowienia.Wysłane)
                                         {
-                                            <td><span style="background: #8a2be2">@order.StanZamowienia</span></td>
+                                            <td><span style="background: #8a2be2">Wysłane</span></td>
                                         }else
                                         {
                                             <td>@order.StanZamowienia</td>

@@ -216,13 +216,11 @@ namespace partner_aluro.Models
         {
             decimal CartTotal1 = _context.CartItems
                 .Where(ci => ci.CartIds == CartaId && ci.Product.Promocja == false)
-                //.Where(ci=> ci.Product.Promocja == false)
                 .Select(ci => ci.Product.CenaProduktuBrutto * ci.Quantity)
                 .Sum();
 
             decimal CartTotal2 = _context.CartItems
                 .Where(ci => ci.CartIds == CartaId && ci.Product.Promocja == true)
-                //.Where(ci => ci.Product.Promocja == true)
                 .Select(ci => ci.Product.CenaPromocyja * ci.Quantity)
                 .Sum();
 
