@@ -98,6 +98,9 @@ namespace partner_aluro.Controllers
 
         }
 
+
+
+
         [Route("Ogolne-warunki-sprzedazy")]
         [HttpGet]
         public IActionResult WarunkiSprzedazy()

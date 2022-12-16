@@ -53,6 +53,34 @@ namespace partner_aluro.Controllers
             _emailService = emailService;
         }
 
+
+        protected string GenerateID()
+        {
+            string alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            string small_alphabets = "abcdefghijklmnopqrstuvwxyz";
+            string numbers = "1234567890";
+
+            string characters = numbers;
+
+                characters += alphabets + small_alphabets + numbers;
+
+            int length = 10;
+            string id = string.Empty;
+            for (int i = 0; i < length; i++)
+            {
+                string character = string.Empty;
+                do
+                {
+                    int index = new Random().Next(0, characters.Length);
+                    character = characters.ToCharArray()[index].ToString();
+                } while (id.IndexOf(character) != -1);
+                id += character;
+            }
+            return  id;
+        }
+
+
+
         [HttpGet]
         public IActionResult Checkout()
         {
@@ -238,7 +266,7 @@ namespace partner_aluro.Controllers
                     MetodaPlatnosci = CartOrder.Orders.MetodaPlatnosci
 
                 };
-
+                order.NrZamowienia = GenerateID();
 
                 CartOrder.Orders = order;
 
@@ -269,7 +297,8 @@ namespace partner_aluro.Controllers
                     "Komentarz/wiadomosc do zamówienia: " + order.Komentarz + " " + order.MessageToOrder + "<br>" +
                     "Kontakt: " + user.Email+ " " + user.Adress1rozliczeniowy.Telefon + "<br>" +
                     "Wartość zamówienia: " + order.OrderTotal + "<br>" +
-                    "Zamówienie" + order.Id + "<br>"
+                    "Zamówienie" + order.Id + "<br>" +
+                    "Zamówienie" + order.NrZamowienia + "<br>"
                     ;
 
                 string Product = "";
@@ -310,6 +339,8 @@ namespace partner_aluro.Controllers
                     _context.Carts.Update(cart);
                     _context.SaveChanges();
                 }
+
+
 
                 return View("CheckoutComplete", CartOrder.Orders);
             }
