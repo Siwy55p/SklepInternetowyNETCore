@@ -36,8 +36,8 @@
                                 @*<a id="myLink" href="~/img/produkty/@Model.Symbol/@Model.Product_Images.Where(x=>x.kolejnosc == 0).FirstOrDefault().ImageName" onclick="Open(this)" data-gallery="gallery" class="glightbox">*@
                                 @if (Model.Product_Images.Count() > 0)
                                 {
-                                    <a id="myLink" href="~/img/p/@Model.Symbol/@Model.Product_Images[0].ImageName" onclick="Open(this)" data-gallery="gallery" class="glightbox">
-                                        <img class="main_image" id=featured src="~/img/p/@Model.Symbol/@Model.Product_Images[0].ImageName">
+                                    <a id="myLink" onclick="Open(this)">
+                                        <img  class="main_image" id=featured src="~/img/p/@Model.Symbol/@Model.Product_Images[0].ImageName">
                                     </a>
                                 }
                             </div>
@@ -81,12 +81,12 @@
                             }
                             <div class="row">
                                 <div class="col justify-content-end">
-                                    @language.Getkey("CenaHurtowa"): @language.GetCurrently(@Cena_netto, Constants.myNumberFormatInfo).ToString("C", Constants.myNumberFormatInfo) @language.Getkey("(netto)")
+                                    @language.Getkey("CenaHurtowa"):  @language.GetCurrently(@Cena_netto, Constants.myNumberFormatInfo).ToString("C", Constants.myNumberFormatInfo) @language.Getkey("(netto)")
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col justify-content-end">
-                                    <span class="hide invisible">@language.Getkey("CenaHurtowa"):</span> @language.GetCurrently(@Cena_brutto, Constants.myNumberFormatInfo).ToString("C",Constants.myNumberFormatInfo) @language.Getkey("(brutto)")
+                                    <span class="hide invisible">@language.Getkey("CenaHurtowa"): </span> @language.GetCurrently(@Cena_brutto, Constants.myNumberFormatInfo).ToString("C",Constants.myNumberFormatInfo) @language.Getkey("(brutto)")
                                 </div>
                             </div>
                             <div class="row">
@@ -153,19 +153,18 @@
                                     @if (Model.SzerokoscProduktu != null && Model.SzerokoscProduktu != 0)
                                     {
                                         <span>@language.Getkey("Szerokość:") @Model.SzerokoscProduktu cm.</span>
-
                                     }
                                     </div>
                                     <div class="col ps-3 px-0 m-0">
                                     @if (Model.GlebokoscProduktu != null && Model.GlebokoscProduktu != 0)
                                     {
-                                            <span>@language.Getkey("Głębokość:") @Model.GlebokoscProduktu cm.</span>
+                                        <span>@language.Getkey("Głębokość:") @Model.GlebokoscProduktu cm.</span>
                                     }
                                     </div>
                                     <div class="col ps-3 px-0 m-0">
                                     @if (Model.WysokoscProduktu != null && Model.WysokoscProduktu != 0)
                                     {
-                                            <span>@language.Getkey("Wysokość:") @Model.WysokoscProduktu cm.</span>
+                                        <span>@language.Getkey("Wysokość:") @Model.WysokoscProduktu cm.</span>
                                     }
                                     </div>
                                 </div>
@@ -176,12 +175,12 @@
                                         <div class="col pl-3 pr-0 m-0"> @language.Getkey("Wymiary wewnętrzne:") </div>
                                     </div>
                                 }
-                                <div class="row ps-2">
-                                    <div class="col ps-3 px-0  m-0">
-                                    @if (Model.SzerokoscWewnetrznaProduktu != null && Model.SzerokoscWewnetrznaProduktu != 0)
-                                    {
+                                <div class="row ps-2 px-0">
+                                    <div class="col ps-3 px-0 m-0">
+                                        @if (Model.SzerokoscWewnetrznaProduktu != null && Model.SzerokoscWewnetrznaProduktu != 0)
+                                        {
                                             <span>@language.Getkey("Szerokość:") @Model.SzerokoscWewnetrznaProduktu cm.</span>
-                                    }
+                                        }
                                     </div>
                                     <div class="col ps-3 px-0 m-0">
                                         @if (Model.GlebokoscWewnetrznaProduktu != null && Model.GlebokoscWewnetrznaProduktu != 0)
@@ -189,11 +188,11 @@
                                             <span>@language.Getkey("Głębokość:") @Model.GlebokoscWewnetrznaProduktu cm.</span>
                                         }
                                     </div>
-                                    <div class="col ps-3 px-0  m-0">
-                                    @if (Model.WysokoscWewnetrznaProduktu != null && Model.WysokoscWewnetrznaProduktu != 0)
-                                    {
-                                        <span>@language.Getkey("Wysokość:") @Model.WysokoscWewnetrznaProduktu cm.</span>
-                                    }
+                                    <div class="col ps-3 px-0 m-0">
+                                        @if (Model.WysokoscWewnetrznaProduktu != null && Model.WysokoscWewnetrznaProduktu != 0)
+                                        {
+                                            <span>@language.Getkey("Wysokość:") @Model.WysokoscWewnetrznaProduktu cm.</span>
+                                        }
                                     </div>
                                 </div>
 
@@ -276,7 +275,8 @@
     <script>
         function Open(elem) {
 
-
+            alert('test');
+            lightbox.open();
             //var s= document.getElementById(variable).id;
 
 
