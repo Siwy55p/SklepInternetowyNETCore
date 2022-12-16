@@ -34,6 +34,14 @@ namespace partner_aluro.Controllers
         private readonly ISetting _setting;
 
         //Kontrolery odzoruwuja widoki , sluza do generowania róznych treści
+
+//        uzytkownik czy jest aktywny
+//Details
+//Tworzenie Excela z produktow
+
+//flaga
+
+
         public HomeController(ISliderService sliderService, IStringLocalizer<HomeController> localizer,ApplicationDbContext context,ILogger<HomeController> logger, RegonService regonService, ISetting setting)
         {
             _logger = logger;
