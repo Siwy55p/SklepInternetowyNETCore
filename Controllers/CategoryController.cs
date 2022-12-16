@@ -201,18 +201,15 @@ namespace partner_aluro.Controllers
                     onePageOfProducts = produkty.OrderByDescending(p => p.DataDodania).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
                     break;
                 case 2:
-                    onePageOfProducts = produkty.OrderBy(p => p.DataDodania).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
-                    break;
-                case 3:
                     onePageOfProducts = produkty.OrderBy(p => p.Name).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
                     break;
-                case 4:
+                case 3:
                     onePageOfProducts = produkty.OrderByDescending(p => p.Name).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
                     break;
-                case 5:
+                case 4:
                     onePageOfProducts = produkty.OrderBy(p => p.Symbol).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
                     break;
-                case 6:
+                case 5:
                     onePageOfProducts = produkty.OrderByDescending(p => p.Symbol).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
                     break;
                 default:
@@ -268,18 +265,15 @@ namespace partner_aluro.Controllers
                         onePageOfProducts = produkty.OrderByDescending(p => p.DataDodania).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
                         break;
                     case 2:
-                        onePageOfProducts = produkty.OrderBy(p => p.DataDodania).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
-                        break;
-                    case 3:
                         onePageOfProducts = produkty.OrderBy(p => p.Name).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
                         break;
-                    case 4:
+                    case 3:
                         onePageOfProducts = produkty.OrderByDescending(p => p.Name).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
                         break;
-                    case 5:
+                    case 4:
                         onePageOfProducts = produkty.OrderBy(p => p.Symbol).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
                         break;
-                    case 6:
+                    case 5:
                         onePageOfProducts = produkty.OrderByDescending(p => p.Symbol).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
                         break;
                     default:
@@ -319,18 +313,15 @@ namespace partner_aluro.Controllers
                                 onePageOfProducts = produkty.OrderByDescending(p => p.DataDodania).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
                                 break;
                             case 2:
-                                onePageOfProducts = produkty.OrderBy(p => p.DataDodania).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
-                                break;
-                            case 3:
                                 onePageOfProducts = produkty.OrderBy(p => p.Name).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
                                 break;
-                            case 4:
+                            case 3:
                                 onePageOfProducts = produkty.OrderByDescending(p => p.Name).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
                                 break;
-                            case 5:
+                            case 4:
                                 onePageOfProducts = produkty.OrderBy(p => p.Symbol).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
                                 break;
-                            case 6:
+                            case 5:
                                 onePageOfProducts = produkty.OrderByDescending(p => p.Symbol).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
                                 break;
                             default:
@@ -363,18 +354,15 @@ namespace partner_aluro.Controllers
                             onePageOfProducts = produkty2.OrderByDescending(p => p.DataDodania).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
                             break;
                         case 2:
-                            onePageOfProducts = produkty2.OrderBy(p => p.DataDodania).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
-                            break;
-                        case 3:
                             onePageOfProducts = produkty2.OrderBy(p => p.Name).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
                             break;
-                        case 4:
+                        case 3:
                             onePageOfProducts = produkty2.OrderByDescending(p => p.Name).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
                             break;
-                        case 5:
+                        case 4:
                             onePageOfProducts = produkty2.OrderBy(p => p.Symbol).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
                             break;
-                        case 6:
+                        case 5:
                             onePageOfProducts = produkty2.OrderByDescending(p => p.Symbol).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
                             break;
                         default:
@@ -413,18 +401,15 @@ namespace partner_aluro.Controllers
                     onePageOfProducts = produkty.OrderByDescending(p => p.DataDodania).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
                     break;
                 case 2:
-                    onePageOfProducts = produkty.OrderBy(p => p.DataDodania).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
-                    break;
-                case 3:
                     onePageOfProducts = produkty.OrderBy(p => p.Name).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
                     break;
-                case 4:
+                case 3:
                     onePageOfProducts = produkty.OrderByDescending(p => p.Name).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
                     break;
-                case 5:
+                case 4:
                     onePageOfProducts = produkty.OrderBy(p => p.Symbol).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
                     break;
-                case 6:
+                case 5:
                     onePageOfProducts = produkty.OrderByDescending(p => p.Symbol).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
                     break;
                 default:
