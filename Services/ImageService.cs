@@ -194,11 +194,17 @@ namespace partner_aluro.Services
                     //add product Image for new product
                     if (product != null)
                     {
+                        int ilosc = 0;
+                        if (product.Product_Images.Count() > 0)
+                        {
+                            ilosc = product.Product_Images.Count();
+                        }
+
                         imgModel = new()
                         {
                             path = path0 + product.Symbol + @"/",
                             fullPath = path0 + product.Symbol + @"/" + dynamicFileName,
-                            kolejnosc = i,
+                            kolejnosc = ilosc+i,
                             Tytul = product.Name,
                             ImageName = dynamicFileName,
                             pathImageCompress250x250 = pathSaveCompres,
@@ -210,11 +216,17 @@ namespace partner_aluro.Services
                     }
                     if (slider != null)
                     {
+                        int ilosc = 0;
+                        if (slider.ObrazkiDostepneWSliderze.Count() > 0)
+                        {
+                            ilosc = slider.ObrazkiDostepneWSliderze.Count();
+                        }
+
                         imgModel = new()
                         {
                             path = path0 +@"/",
                             fullPath = path0 + @"/" + dynamicFileName,
-                            kolejnosc = i,
+                            kolejnosc = ilosc+i,
                             Tytul = "sliderHome",
                             ImageName = dynamicFileName,
                             pathImageCompress250x250 = pathSaveCompres,
@@ -228,6 +240,7 @@ namespace partner_aluro.Services
 
                     if(slider == null && product == null)
                     {
+
                         imgModel = new()
                         {
                             path = path0 + @"/",
