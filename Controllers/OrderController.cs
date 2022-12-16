@@ -252,8 +252,56 @@ namespace partner_aluro.Controllers
                     Body = $"<h1> Dziękujemy za założenie zamówienia.</h1>Potwierdzenie zamówienia <br/>Twoje zamówienie zostało przyjęte.<br/>Po skompletowaniu Twojego zamówienia otrzymasz email z kosztem dostawy i łączną sumą do zapłaty.<br/>W razie pytań lub wątpliwości, prosimy o kontakt z naszą obsługą klienta.<br/>"
 
                 };
-
                 _emailService.SendEmailAsync(email);
+
+
+                string text2 = $"Nowe zamówienie na platformie Aluro<br>"+
+                    "Zamówienie: " + order.Id + " Metoda płatności: " +order.MetodaPlatnosci+" , Metoda dostawy: " + order.MetodaDostawy+ "<br>"+
+                    "Data złożenia zamówienia: " + order.OrderPlaced + "<br>" +
+                    "Nazwa firmy: " + user.NazwaFirmy + "<br>" +
+                    "Imie Nazwisko: " + user.Imie + " " + user.Nazwisko + "<br>" +
+                    "Adres rozliczeniowy: <br>" +
+                    "Adres: " + OrderAdres1.KodPocztowy + " " + OrderAdres1.Miasto + " <br>" +
+                    "Ulica: " + OrderAdres1.Ulica + "<br>" +
+                    "Adres dostawy: <br>" +
+                    "Adres: " + OrderAdres2.KodPocztowy + " " + OrderAdres2.Miasto + "<br>" +
+                    "Ulica: " + OrderAdres2.Ulica + "<br>" +
+                    "Komentarz/wiadomosc do zamówienia: " + order.Komentarz + " " + order.MessageToOrder + "<br>" +
+                    "Kontakt: " + user.Email+ " " + user.Adress1rozliczeniowy.Telefon + "<br>" +
+                    "Wartość zamówienia: " + order.OrderTotal + "<br>" +
+                    "Zamówienie" + order.Id + "<br>"
+                    ;
+
+                string Product = "";
+                for(int i = 0; i < order.OrderItems.Count(); i ++)
+                {
+                    Product = order.OrderItems[i].Product.Symbol.ToString() + " <br>";
+                    text2 = text2+Product;
+                }
+
+                EmailDto emailDzialTechniczny1 = new EmailDto()
+                {
+                    To = "marcin@aluro.pl",
+                    Subject = "Pojawiło się nowe zamówienie na platformie Aluro.",
+                    Body = text2
+                };
+                EmailDto emailDzialTechniczny2 = new EmailDto()
+                {
+                    To = "marcin@aluro.pl",
+                    Subject = "Pojawiło się nowe zamówienie na platformie Aluro.",
+                    Body = text2
+                };
+
+                EmailDto emailDzialTechniczny3 = new EmailDto()
+                {
+                    To = "szuminski.p@gmail.com",
+                    Subject = "Pojawiło się nowe zamówienie na platformie Aluro.",
+                    Body = text2
+                };
+                _emailService.SendEmailAsync(emailDzialTechniczny1);
+                _emailService.SendEmailAsync(emailDzialTechniczny2);
+                _emailService.SendEmailAsync(emailDzialTechniczny3);
+
 
                 var cart = _context.Carts.Where(c => c.CartaId == _cart.CartaId).FirstOrDefault();
                 if(cart != null)

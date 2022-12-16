@@ -320,16 +320,39 @@ namespace partner_aluro.Areas.Identity.Pages.Account
                     await _emailService.SendEmailAsync(newClint); //Bardzo specjalnie tak jest jak jest zrobione. Musi tak zostać.
 
 
-                    string text2 = $"Nowy uzytkownik, zarejestrował się do Aluro. Czeka za weryfikacją.";
+                    string text2 = $"Nowy uzytkownik zarejestrował się do platformy Aluro i czeka za weryfikacją." +
+                        "<br>Pan/Pani: " + @user.Imie + " " + user.Nazwisko + "<br>" +
+                        "<br>Email: " + @user.Email + "<br>" +
+                    "<br>Telefon: " + adres1.Telefon + "<br>" +
+                        "<br> DANE ROZLICZENIOWE FIRMY <br>" +
+                        "<br>Nazwa firmy: " + @user.NazwaFirmy + "<br>" +
+                    "<br>NIP: " + @adres1.Vat + "<br>" +
+                    "<br>Regon: " + @adres1.Regon + "<br>" +
+                    "<br>Ulica: " + @adres1.Ulica + "<br>" +
+                    "<br>Miasto: " + @adres1.Miasto + "<br>" +
+                    "<br>Kod pocztowy: " + @adres1.KodPocztowy + "<br>";
 
-                    EmailDto newClintDzialTechniczny = new EmailDto()
+                    EmailDto newClintDzialTechniczny1 = new EmailDto()
                     {
                         Subject = "Nowy użytkownik, do werfikacji",
                         To = "aluro@aluro.pl",
                         Body = text2,
                     };
-
-                    await _emailService.SendEmailAsync(newClintDzialTechniczny); //Bardzo specjalnie tak jest jak jest zrobione. Musi tak zostać.
+                    EmailDto newClintDzialTechniczny2 = new EmailDto()
+                    {
+                        Subject = "Nowy użytkownik, do werfikacji",
+                        To = "marcin@aluro.pl",
+                        Body = text2,
+                    };
+                    EmailDto newClintDzialTechniczny3 = new EmailDto()
+                    {
+                        Subject = "Nowy użytkownik, do werfikacji",
+                        To = "mariusz@aluro.pl",
+                        Body = text2,
+                    };
+                    await _emailService.SendEmailAsync(newClintDzialTechniczny1); //Bardzo specjalnie tak jest jak jest zrobione. Musi tak zostać.
+                    await _emailService.SendEmailAsync(newClintDzialTechniczny2);
+                    await _emailService.SendEmailAsync(newClintDzialTechniczny3);
 
                     //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     //code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
