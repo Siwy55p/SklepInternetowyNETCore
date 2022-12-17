@@ -148,20 +148,22 @@
                                         <div class="col pl-3 pr-0 m-0">@language.Getkey("Wymiary zewnetrzne:")</div>
                                     </div>
                                 }
+
+
+
                                 <div class="row ps-2 px-0">
                                     <div class="col ps-3 px-0 m-0">
+
+
+
                                     @if (Model.SzerokoscProduktu != null && Model.SzerokoscProduktu != 0)
                                     {
                                         <span>@language.Getkey("Szerokość:") @Model.SzerokoscProduktu cm.</span>
                                     }
-                                    </div>
-                                    <div class="col ps-3 px-0 m-0">
                                     @if (Model.GlebokoscProduktu != null && Model.GlebokoscProduktu != 0)
                                     {
                                         <span>@language.Getkey("Głębokość:") @Model.GlebokoscProduktu cm.</span>
                                     }
-                                    </div>
-                                    <div class="col ps-3 px-0 m-0">
                                     @if (Model.WysokoscProduktu != null && Model.WysokoscProduktu != 0)
                                     {
                                         <span>@language.Getkey("Wysokość:") @Model.WysokoscProduktu cm.</span>
@@ -181,14 +183,10 @@
                                         {
                                             <span>@language.Getkey("Szerokość:") @Model.SzerokoscWewnetrznaProduktu cm.</span>
                                         }
-                                    </div>
-                                    <div class="col ps-3 px-0 m-0">
                                         @if (Model.GlebokoscWewnetrznaProduktu != null && Model.GlebokoscWewnetrznaProduktu != 0)
                                         {
                                             <span>@language.Getkey("Głębokość:") @Model.GlebokoscWewnetrznaProduktu cm.</span>
                                         }
-                                    </div>
-                                    <div class="col ps-3 px-0 m-0">
                                         @if (Model.WysokoscWewnetrznaProduktu != null && Model.WysokoscWewnetrznaProduktu != 0)
                                         {
                                             <span>@language.Getkey("Wysokość:") @Model.WysokoscWewnetrznaProduktu cm.</span>

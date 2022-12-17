@@ -37,6 +37,29 @@
 
 @section Scripts {
     <script>
+        $(function () {
+            $("#CenaBrutto").on("keyup change", function (e) {
+
+                var CenaBrutto = $("#CenaBrutto").val();
+
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("CenaNetto","Product")',
+                    data: { CenaBrutto: CenaBrutto },
+                    success: function (result) {
+                        document.getElementById("CenaNetto").value = result;
+                    },
+
+                    error: function (abc) {
+                        alert(abc.statusText);
+                    },
+                });
+
+            });
+        });
+    </script>
+
+    <script>
         $(document).ready(function () {
             $('#ProductAddTable').DataTable(
                 {
@@ -44,8 +67,6 @@
                 });
         });
     </script>
-
-
     <script src="~/js/tinymceproduct.js"></script>
     <script>
         function preview_images() {
