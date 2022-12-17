@@ -174,7 +174,7 @@ namespace partner_aluro.Controllers
 
             user.Adress1rozliczeniowy = data.User.Adress1rozliczeniowy;
             user.Adress2dostawy = data.User.Adress2dostawy;
-            _unitOfWork.User.UpdateUser(user);
+            
 
             for (int i = 0; i < rolesToAdd.Count(); i++)
             {
@@ -237,6 +237,8 @@ namespace partner_aluro.Controllers
                     _emailService.SendEmailAsync(newClint); //Bardzo specjalnie tak jest jak jest zrobione. Musi tak zostać.
                 }
             }
+
+            _unitOfWork.User.UpdateUser(user);
 
             //_userRepository.UpdateUser(user);
 

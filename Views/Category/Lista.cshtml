@@ -62,11 +62,21 @@
                                 }
 
                                 <ul class="dropdown-menu text-decoration-none">
-                                    <li class="@activecat1 kategoria_class_menu ">@Html.ActionLink(language.Getkey("Najnowsze"), "Lista", "Category", new { page = 1, szukanaNazwa=ViewData["szukanaNazwa"], sort=1 } )</li>
-                                    <li class="@activecat2 kategoria_class_menu ">@Html.ActionLink(language.Getkey("Alfabetycznie od A do Z"), "Lista", "Category", new { page = 1, szukanaNazwa=ViewData["szukanaNazwa"], sort=2 } )</li>
-                                    <li class="@activecat3 kategoria_class_menu ">@Html.ActionLink(language.Getkey("Alfabetycznie od Z do A"), "Lista", "Category", new { page = 1, szukanaNazwa=ViewData["szukanaNazwa"], sort=3 } )</li>
-                                    <li class="@activecat4 kategoria_class_menu ">@Html.ActionLink(language.Getkey("Symbol od najmniejszej do największej"), "Lista", "Category", new { page = 1, szukanaNazwa=ViewData["szukanaNazwa"], sort=4 } )</li>
-                                    <li class="@activecat5 kategoria_class_menu ">@Html.ActionLink(language.Getkey("Symbol od największej do najmniejszej"), "Lista", "Category", new { page = 1, szukanaNazwa=ViewData["szukanaNazwa"], sort=5 } )</li>
+                                    <li class="@activecat1 menu_kat kategoria_class_menu ">
+                                        @Html.ActionLink(language.Getkey("Najnowsze"), "Lista", "Category", new { page = 1, szukanaNazwa=ViewData["szukanaNazwa"], sort=1 } )
+                                    </li>
+                                    <li class="@activecat2 menu_kat kategoria_class_menu ">
+                                        @Html.ActionLink(language.Getkey("Alfabetycznie od A do Z"), "Lista", "Category", new { page = 1, szukanaNazwa=ViewData["szukanaNazwa"], sort=2 } )
+                                    </li>
+                                    <li class="@activecat3 menu_kat kategoria_class_menu ">
+                                        @Html.ActionLink(language.Getkey("Alfabetycznie od Z do A"), "Lista", "Category", new { page = 1, szukanaNazwa=ViewData["szukanaNazwa"], sort=3 } )
+                                    </li>
+                                    <li class="@activecat4 menu_kat kategoria_class_menu ">
+                                        @Html.ActionLink(language.Getkey("Symbol od najmniejszej do największej"), "Lista", "Category", new { page = 1, szukanaNazwa=ViewData["szukanaNazwa"], sort=4 } )
+                                    </li>
+                                    <li class="@activecat5 menu_kat kategoria_class_menu ">
+                                        @Html.ActionLink(language.Getkey("Symbol od największej do najmniejszej"), "Lista", "Category", new { page = 1, szukanaNazwa=ViewData["szukanaNazwa"], sort=5 } )
+                                    </li>
                                 </ul>
                             </div>
                         </div>
