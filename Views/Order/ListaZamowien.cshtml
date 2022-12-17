@@ -21,6 +21,27 @@
 
 
 @section Scripts {
+
+    <script>
+    function ChangeStanZamowienia(Id, StanZamowienia) {
+
+        var d = document.getElementById("select_" + Id).value;
+
+            $.ajax({
+                type: "POST",
+            url: '@Url.Action("ChangeStanZamowienia", "Order")',
+            data: { Id: Id, StanZamowienia: d },
+                success: function (result) {
+
+                },
+
+                error: function (abc) {
+                    alert(abc.statusText);
+                },
+            });
+        }
+    </script>
+
     <script>
     $(document).ready(function () {
     $('#myTable').DataTable(

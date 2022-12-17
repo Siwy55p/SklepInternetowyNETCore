@@ -6,7 +6,8 @@
 using System;
 using System.Xml.Serialization;
 using System.Collections.Generic;
-namespace partner_aluro
+
+namespace partner_aluro.Models
 {
     [XmlRoot(ElementName = "product")]
     public class ProductXML

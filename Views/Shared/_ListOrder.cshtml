@@ -42,6 +42,15 @@
                                             <td>@order.User.NazwaFirmy</td>
                                         }
                                             
+
+                                        <td>
+                                                <select onchange="ChangeStanZamowienia(@order.Id, @order.StanZamowienia)" id="select_@order.Id" asp-for="@order.StanZamowienia" asp-items="(IEnumerable<SelectListItem>)@ViewData["StanZamowienia"]">
+                                                    @*<option>Select one</option>*@
+                                                </select>
+                                              @*  @productFormModel.CategoryNavigation.Name*@
+                                            </td>
+
+@*
                                         @if (order.StanZamowienia == StanZamowienia.Nowe)
                                         {
                                             <td><span style="background-color: #49814e">Nowe<span></td>
@@ -60,7 +69,7 @@
                                         }else
                                         {
                                             <td>@order.StanZamowienia</td>
-                                        }
+                                        }*@
 
                                         @if (User.IsInRole("Administrator") || User.IsInRole("Manager"))
                                         {

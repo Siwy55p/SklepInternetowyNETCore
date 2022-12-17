@@ -3,7 +3,7 @@
     public class OrderItem
     {
         public int Id { get; set; }
-        public int Quantity { get; set; }
+        public decimal Quantity { get; set; }
         public int Cena { get; set; }
 
         public int OrderId { get; set; }

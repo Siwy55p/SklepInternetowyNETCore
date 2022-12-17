@@ -93,7 +93,7 @@ namespace partner_aluro.Services
             return _context.Category.Find(name).CategoryId;
         }
 
-        public void ZmiejszIloscProductIdAsync(int ProductId, int ile)
+        public void ZmiejszIloscProductIdAsync(int ProductId, decimal ile)
         {
             Product product = _context.Products.FirstOrDefault(x => x.ProductId == ProductId);
             product.Ilosc -= ile;

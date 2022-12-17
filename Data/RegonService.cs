@@ -1,5 +1,5 @@
 ﻿using partner_aluro.Models;
-using partner_aluro;
+using partner_aluro.Services.Interfaces;
 
 namespace partner_aluro.Data
 {

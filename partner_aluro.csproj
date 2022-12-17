@@ -19,7 +19,8 @@
   <ItemGroup>
     <PackageReference Include="datatables.net-fixedheader-dt" Version="3.3.1" />
     <PackageReference Include="DeepL.net" Version="1.5.0" />
-    <PackageReference Include="iTextSharp" Version="5.5.13.3" />
+    <PackageReference Include="itext7" Version="7.2.4" />
+    <PackageReference Include="iTextSharp" Version="5.5.13" />
     <PackageReference Include="jQuery" Version="3.6.1" />
     <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="12.2.1" />
     <PackageReference Include="MailKit" Version="3.4.2" />
@@ -102,18 +103,17 @@
 
   <ItemGroup>
     <EmbeddedResource Update="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\SharedResource.de-DE.resx">
       <SubType>Designer</SubType>
-      <LastGenOutput>SharedResource.en-US.Designer.cs</LastGenOutput>
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\SharedResource.en-US.resx">
       <SubType>Designer</SubType>
       <LastGenOutput>SharedResource.en-US.Designer.cs</LastGenOutput>
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\SharedResource.pl-PL.resx">
       <LastGenOutput>SharedResource.en-US.Designer.cs</LastGenOutput>

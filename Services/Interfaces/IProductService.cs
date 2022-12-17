@@ -16,7 +16,7 @@ namespace partner_aluro.Services.Interfaces
 
         ICollection<Category> GetCategory();
 
-        void ZmiejszIloscProductIdAsync(int ProductId, int ile);   /*MUSI ZOSTAC VOID*/
+        void ZmiejszIloscProductIdAsync(int ProductId, decimal ile);   /*MUSI ZOSTAC VOID*/
 
         int DeleteProductId(int id);
 

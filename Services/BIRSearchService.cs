@@ -1,4 +1,5 @@
 ﻿using partner_aluro.Models;
+using partner_aluro.Services.Interfaces;
 using ServiceReference;
 using System.Collections;
 using System.ServiceModel;
@@ -7,7 +8,7 @@ using System.Xml.Linq;
 using System.Xml.Serialization;
 using WcfCoreMtomEncoder;
 
-namespace partner_aluro
+namespace partner_aluro.Services
 {
     public class BIRSearchService : IBIRSearchService
     {
@@ -44,7 +45,7 @@ namespace partner_aluro
                 Regon = regonId
             };
 
-            return await GetSearchResultModelAsync<DanePodmiotu>(searchParameters);        
+            return await GetSearchResultModelAsync<DanePodmiotu>(searchParameters);
         }
 
         /// <summary>
@@ -92,7 +93,7 @@ namespace partner_aluro
                 var error = DeserializeXMLElement<ErrorModel>(item);
 
                 _ = errorsList.Add(error);
-                
+
             }
 
             if (property != null) property.SetValue(model, errorsList, null);

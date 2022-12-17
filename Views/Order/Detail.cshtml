@@ -4,10 +4,10 @@
     Layout = "~/Views/Shared/_Dashboard.cshtml";
 }
 
-<h5>Zamówianie id: #@Model.Id z @Model.User.Imie @Model.User.Nazwisko</h5>
+<h5>Zamówianie Nr:#@Model.NrZamowienia  id: @Model.Id z @Model.User.Imie @Model.User.Nazwisko</h5>
 
 <div class="">
-    Data: <b>@Model.OrderPlaced</b> Razem: <b>@Model.OrderTotal</b>  Produktów: <b>@Model.OrderItems.Count</b> , Status zamówienia: @Model.StanZamowienia 
+    Data: <b>@Model.OrderPlaced</b> Razem: <b>@Model.OrderTotal</b>  Produktów: <b>@Model.OrderItems.Count</b> , Status zamówienia: <b>@Model.StanZamowienia</b>
     <form method="post" asp-controller="Order" asp-route-id="@Model.Id" asp-action="PDFOrder">
         <label> </label>
         <input type="submit" value="PDF"/>
@@ -16,7 +16,7 @@
 
 <div class="row">
     <div class="col border">
-        <div class="row"><p>ZAMÓWIENIE Id:<b>#@Model.Id</b>  Metoda płatności: <b>@Model.MetodaPlatnosci</b> Metoda dostawy:<b>@Model.MetodaDostawy</b> </p>  </div>
+        <div class="row"><p>ZAMÓWIENIE Nr:<b>@Model.NrZamowienia</b> Id:<b>#@Model.Id</b>  Metoda płatności: <b>@Model.MetodaPlatnosci</b> Metoda dostawy:<b>@Model.MetodaDostawy</b> </p>  </div>
 
         <div class="border"><p> Wiadomosc od Klienta do zamówienia: @Model.Komentarz @Model.MessageToOrder</p></div>
 
@@ -30,7 +30,7 @@
                 <label asp-for="@Model.StanZamowienia" class="control-label text-end">Status zamówienia:</label>
             </div>
             <div class="col">
-                    <select asp-for="@Model.StanZamowienia" class="form-control" asp-items="(IEnumerable<SelectListItem>)@ViewData["StanyZamowienia"]">
+                    <select asp-for="@Model.StanZamowienia" asp-items="(IEnumerable<SelectListItem>)@ViewData["StanyZamowienia"]">
                 </select>
             </div>
             <div class="col">

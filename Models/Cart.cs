@@ -139,10 +139,10 @@ namespace partner_aluro.Models
             }
             _context.SaveChanges();
         }
-        public int ReduceQuantity(Product product)
+        public decimal ReduceQuantity(Product product)
         {
             var cartItem = GetCartItem(product);
-            var remainingQuantity = 0;
+            decimal remainingQuantity = 0;
 
             if (cartItem != null)
             {
@@ -160,10 +160,10 @@ namespace partner_aluro.Models
             return remainingQuantity;
         }
 
-        public int IncreaseQuantity(Product product)
+        public decimal IncreaseQuantity(Product product)
         {
             var cartItem = GetCartItem(product);
-            var remainingQuantity = 0;
+            decimal remainingQuantity = 0;
 
             if (cartItem != null)
             {

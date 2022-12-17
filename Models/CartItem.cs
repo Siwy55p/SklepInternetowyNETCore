@@ -8,7 +8,7 @@ namespace partner_aluro.Models
         [Key]
         public int CartItemId { get; set; }
         public Product Product { get; set; }
-        public int Quantity { get; set; }
+        public decimal Quantity { get; set; }
         public string CartIds { get; set; }
 
         //[ForeignKey("CartId")]

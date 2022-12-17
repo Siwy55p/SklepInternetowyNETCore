@@ -1,4 +1,5 @@
-﻿using iTextSharp.text;
+﻿
+using iTextSharp.text;
 using iTextSharp.text.pdf;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -64,7 +65,7 @@ namespace partner_aluro.Controllers
 
                 characters += alphabets + small_alphabets + numbers;
 
-            int length = 10;
+            int length = 5;
             string id = string.Empty;
             for (int i = 0; i < length; i++)
             {
@@ -316,7 +317,7 @@ namespace partner_aluro.Controllers
                 };
                 EmailDto emailDzialTechniczny2 = new EmailDto()
                 {
-                    To = "marcin@aluro.pl",
+                    To = "mariusz@aluro.pl",
                     Subject = "Pojawiło się nowe zamówienie na platformie Aluro.",
                     Body = text2
                 };
@@ -327,8 +328,8 @@ namespace partner_aluro.Controllers
                     Subject = "Pojawiło się nowe zamówienie na platformie Aluro.",
                     Body = text2
                 };
-                _emailService.SendEmailAsync(emailDzialTechniczny1);
-                _emailService.SendEmailAsync(emailDzialTechniczny2);
+                //_emailService.SendEmailAsync(emailDzialTechniczny1);
+                //_emailService.SendEmailAsync(emailDzialTechniczny2);
                 _emailService.SendEmailAsync(emailDzialTechniczny3);
 
 
@@ -378,8 +379,9 @@ namespace partner_aluro.Controllers
 
 
 
+                Document document = new Document();
 
-                Document document = new(PageSize.A4, 25, 25, 30, 30);
+                //Document document = new Document(PageSize.A4, 25, 25, 30, 30);
                 PdfWriter write = PdfWriter.GetInstance(document, ms);
                 write.PageEvent = new PageHeaderFooter();
                 document.Open();
@@ -414,7 +416,7 @@ namespace partner_aluro.Controllers
                 document.Add(para1);
 
 
-                Paragraph para2 = new("ID # " + order.Id, new Font(Font.FontFamily.HELVETICA, 20, Font.BOLD))
+                Paragraph para2 = new("ID # " + order.NrZamowienia, new Font(Font.FontFamily.HELVETICA, 20, Font.BOLD))
                 {
                     Alignment = Element.ALIGN_RIGHT,
                     SpacingAfter = 40
@@ -850,6 +852,7 @@ namespace partner_aluro.Controllers
         [Authorize(Roles = $"{Constants.Roles.Administrator},{Constants.Roles.Manager}")]
         public async Task<IActionResult> ListaZamowien() // To jest widok listy zamowien w panelu dashoboards
         {
+            @ViewData["StanZamowienia"] = GetStanyZamowienia();
             List<Order> orders = await _orderService.ListOrdersAll();
 
             return View(orders);
@@ -932,23 +935,18 @@ namespace partner_aluro.Controllers
 
             return lstStanZamowien;
         }
-
-
-        //public static List<SelectListItem> GetMetodyPlatnosci()
+        //private List<SelectListItem> GetStanyZamowienia()
         //{
-        //    var lstMetodyPlatnosci = new List<SelectListItem>();
+        //    var StanyZamowienia = new List<SelectListItem>();
 
-        //    foreach (MetodaPlatnosci suit in (MetodaPlatnosci[])Enum.GetValues(typeof(MetodaPlatnosci)))
+        //    StanyZamowienia = Enum.GetValues(typeof(StanZamowienia)).Cast<StanZamowienia>().Select(v => new SelectListItem
         //    {
-        //        var dmyItemA = new SelectListItem()
-        //        {
-        //            Value = suit.ToString(),
-        //            Text = suit.ToString()
-        //        };
-        //        lstMetodyPlatnosci.Insert(0, dmyItemA);
-        //    }
+        //        Value = ((int)v).ToString(),
+        //        Text = v.ToString()
+        //    }).ToList();
 
-        //    return lstMetodyPlatnosci;
+
+        //    return StanyZamowienia;
         //}
 
     }
