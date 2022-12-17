@@ -21,7 +21,9 @@
     Dodaj produkt
     </a>
 
-
+    <a asp-controller="Excel" asp-action="GenerateExcel" class="btn btn-success" px-3">
+    Excel
+    </a>
     @if (@Model != null && @Model.Any())
     {
         <div class="row">
