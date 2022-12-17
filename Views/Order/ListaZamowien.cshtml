@@ -25,16 +25,15 @@
     <script>
     function ChangeStanZamowienia(Id, StanZamowienia) {
 
-        var d = document.getElementById("select_" + Id).value;
+
+        var stanZamowienia = document.getElementById("select_" + Id).value;
 
             $.ajax({
                 type: "POST",
             url: '@Url.Action("ChangeStanZamowienia", "Order")',
-            data: { Id: Id, StanZamowienia: d },
+            data: { Id: Id, stanZamowienia: stanZamowienia },
                 success: function (result) {
-
                 },
-
                 error: function (abc) {
                     alert(abc.statusText);
                 },

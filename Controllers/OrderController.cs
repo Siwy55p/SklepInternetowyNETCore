@@ -935,6 +935,33 @@ namespace partner_aluro.Controllers
 
             return lstStanZamowien;
         }
+
+        [HttpPost]
+        public void ChangeStanZamowienia(int Id, string stanZamowienia)
+        {
+            //Wyslij e mail do klienta
+
+            Order orders = _context.Orders.Find(Id);
+            //orders.StanZamowienia = order.StanZamowienia;
+
+                foreach (StanZamowienia suit in (StanZamowienia[])Enum.GetValues(typeof(StanZamowienia)))
+                {
+                if (suit.ToString() == stanZamowienia)
+                {
+                    orders.StanZamowienia = suit;
+                    break;
+                }
+
+                string b = "2";
+                }
+
+            _context.Orders.Update(orders);
+            _context.SaveChanges();
+            int i = 0;
+            i++;
+
+        }
+
         //private List<SelectListItem> GetStanyZamowienia()
         //{
         //    var StanyZamowienia = new List<SelectListItem>();

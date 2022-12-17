@@ -44,7 +44,7 @@
                                             
 
                                         <td>
-                                                <select onchange="ChangeStanZamowienia(@order.Id, @order.StanZamowienia)" id="select_@order.Id" asp-for="@order.StanZamowienia" asp-items="(IEnumerable<SelectListItem>)@ViewData["StanZamowienia"]">
+                                                <select onchange="ChangeStanZamowienia(@order.Id, '@order.StanZamowienia.ToString()')" id="select_@order.Id" asp-for="@order.StanZamowienia" asp-items="(IEnumerable<SelectListItem>)@ViewData["StanZamowienia"]">
                                                     @*<option>Select one</option>*@
                                                 </select>
                                               @*  @productFormModel.CategoryNavigation.Name*@

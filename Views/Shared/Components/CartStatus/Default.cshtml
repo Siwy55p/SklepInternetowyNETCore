@@ -60,7 +60,7 @@
             </div>
             <div class="col border border-top-0 text-center" style="max-width: 75px; width:75px">
                 <a onclick="ReduceQuantity(@item.Product.ProductId)"><i class="fa-solid fa-minus"></i></a>
-                @item.Quantity
+                @item.Quantity.ToString("0.###########################")
                 <a onclick="IncreaseQuantity(@item.Product.ProductId, @item.Quantity)"><i class="fa-solid fa-plus"></i></a>
             </div>
             <div class="col border border-top-0 text-center" style="max-width: 60px">
