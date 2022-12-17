@@ -139,7 +139,7 @@ builder.Services.AddMvc().AddRazorPagesOptions(o => o.Conventions.AddAreaFolderR
         attributeRouteModel.Template = attributeRouteModel.Template.Remove(0, "Identity/Account/".Length);
     }
 })
-).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+).SetCompatibilityVersion(version: CompatibilityVersion.Version_2_1);
 
 
 
