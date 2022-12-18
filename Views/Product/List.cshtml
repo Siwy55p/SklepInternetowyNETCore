@@ -15,14 +15,14 @@
 *@
 
 <div>
-    <h1 class="display-4">Lista produktów</h1>
+    <h1 class="display-4">Produkty</h1>
     
     <a asp-controller="Product" asp-action="Add" class="btn btn-success" px-3">
-    Dodaj produkt
+        Dodaj nowy produkt
     </a>
 
     <a asp-controller="Excel" asp-action="GenerateExcel" class="btn btn-success" px-3">
-    Utworz oferte
+        Stwórz ofertę
     </a>
     @if (@Model != null && @Model.Any())
     {
@@ -36,11 +36,12 @@
                                     <tr>
                                         <th>Id</th>
                                         <th></th>
-                                        <th>Obrazek</th>
+                                        <th>Obraz</th>
                                         <th>Symbol</th>
                                         <th>Nazwa produktu</th>
                                         <th>Cena produktu (brutto)</th>
                                         <th>Cena detaliczna</th>
+                                        <th>Kategoria</th>
                                         <th>Kategoria</th>
                                         <th>Ilość</th>
                                         <th>Ukryte</th>
@@ -55,15 +56,15 @@
                                             <td><input id="chkP_@productFormModel.ProductId" onchange="TakeProduct(@productFormModel.ProductId)" type="checkbox" value="@productFormModel.ProductId" data-toggle="toggle"></td>
                                             <td><img class="img-thumbnail" src="~/img/p/@productFormModel.Symbol/250x250_@productFormModel.ImageUrl" alt="@productFormModel.Name" style="width:75px;height:75px;"></td>
                                             <td>@productFormModel.Symbol</td>
-
                                             <td><a asp-controller="Product" asp-action="Edit" asp-route-id="@productFormModel.ProductId">@productFormModel.Name</a></td>
                                             <td>@productFormModel.CenaProduktuBrutto.ToString("C")</td>
                                             <td>@productFormModel.CenaProduktuDetal.ToString("C")</td>
                                             <td>
+                                                @productFormModel.CategoryNavigation.Name
+                                            </td>
+                                            <td>
                                                 <select onchange="ChangeCategory(@productFormModel.ProductId, @productFormModel.CategoryId)" id="select_@productFormModel.ProductId" asp-for="@productFormModel.CategoryId" asp-items="(IEnumerable<SelectListItem>)@ViewData["Category"]">
-                                                    @*<option>Select one</option>*@
                                                 </select>
-                                              @*  @productFormModel.CategoryNavigation.Name*@
                                             </td>
                                             <th>
                                                 @{
@@ -79,17 +80,31 @@
                                                 {
                                                     <input type="checkbox" data-toggle="toggle" unchecked disabled>
                                                 }
-
                                             </th>
                                             <td>
                                                 <a asp-controller="Product" asp-action="Edit" asp-route-id="@productFormModel.ProductId">Edytuj</a> |
                                                 <a asp-controller="Product" asp-action="Delete" asp-route-id="@productFormModel.ProductId">Usuń</a> |
                                                 <a asp-controller="Product" asp-action="Details" asp-route-id="@productFormModel.ProductId">Podgląd</a>
-
                                             </td>
                                         </tr>
                                     }
                                 </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td>Id</td>
+                                        <td></td>
+                                        <td>Obraz</td>
+                                        <th>Symbol</th>
+                                        <th>Nazwa produktu</th>
+                                        <td>Cena produktu (brutto)</td>
+                                        <td>Cena detaliczna</td>
+                                        <th>Kategoria</th>
+                                        <td>Kategoria</td>
+                                        <td>Ilość</td>
+                                        <td>Ukryte</td>
+                                        <td>Akcje</td>
+                                    </tr>
+                                </tfoot>
                             </table>
                         </div>
                     </div>
@@ -104,19 +119,40 @@
 @section Scripts{
     <script>
         $(document).ready(function () {
-            $('#ProductTableList').DataTable(
-                {
-                    fixedHeader: {
-                        headerOffset: 56,
-                        header: true,
-                        footer: true
-                    },
-                    "columnDefs": [
-                        { "width": "50px", "targets": 2 }
-                    ],
-                    pageLength: 50,
-                    "order": [[0, 'desc'], [3, 'desc']]
-                });
+
+            $('#ProductTableList tfoot th').each(function () {
+                var title = $(this).text();
+                $(this).html('<input type="text" class="'+title+'" placeholder="Szukaj ' + title + '" />');
+            });
+
+            var table = $('#ProductTableList').DataTable({
+                initComplete: function () {
+                    // Apply the search
+                    this.api()
+                        .columns()
+                        .every(function () {
+                            var that = this;
+
+                            $('input', this.footer()).on('keyup change clear', function () {
+                                if (that.search() !== this.value) {
+                                    that.search(this.value).draw();
+                                }
+                            });
+                        });
+                },
+                fixedHeader: {
+                    headerOffset: 56,
+                    header: true,
+                    footer: true
+                },
+                "columnDefs": [
+                    { "width": "50px", "targets": 2 },
+                    { "width": "20px", "targets": 3}
+                ],
+                pageLength: 50,
+                "order": [[0, 'desc'], [3, 'desc']]
+            });
+            $('#ProductTableList input').addClass('tableInput');
         });
     </script>
     <script>

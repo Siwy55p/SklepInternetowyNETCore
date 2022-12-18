@@ -15,6 +15,12 @@
     background: transparent;
 }
 
+
+.tableInput {
+    width: 20px;
+}
+
+
 html {
     position: relative;
     min-height: 100%;
