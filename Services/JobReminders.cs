@@ -32,7 +32,7 @@ namespace partner_aluro.Services
             // use your dbContext
             // This is my job... Do some Api requests and save to the Db
 
-            string test = GenerateXMLController.GenerateProductXMLAsync(dbContext, _webHostEnvironment);
+            string test = GenerateXMLController.GenerateProductXML(dbContext, _webHostEnvironment);
             string www = _webHostEnvironment.WebRootPath;
             string NameProdukt = dbContext.Products.Where(x => x.ProductId == 123).Select(x => x.Name).ToString();
             Common.Logs($"JobReminders at "+ test + " www: "+www +" Produkt: " + NameProdukt+ " Data: "  + DateTime.Now.ToString("dd-mm-yyyy hh:mm:ss"), " JobReminders " + DateTime.Now.ToString("hhmmss"));

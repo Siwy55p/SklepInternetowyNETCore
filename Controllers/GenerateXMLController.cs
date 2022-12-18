@@ -8,8 +8,6 @@ using Microsoft.AspNetCore.Authorization;
 using System.Xml.Serialization;
 using partner_aluro.Services.Interfaces;
 using System.Net;
-using partner_aluro.Services;
-using System.Reflection;
 
 namespace partner_aluro.Controllers
 {
@@ -152,13 +150,7 @@ namespace partner_aluro.Controllers
                         await _imageService.AddAsync(imgModel);
 
                     }
-
                 }
-
-
-
-
-
 
 
                 ////src = "~/img/p/@Model.Symbol/@Model.ImageUrl"
@@ -236,9 +228,84 @@ namespace partner_aluro.Controllers
             return View();
         }
 
+        public async Task<IActionResult> DeserializeXMLMaterial()
+        {
+            string url = "http://www.partner.aluro.pl/modules/nvn_export_products/download/aluro_products_export_ldWd8HWmUY.xml";
+
+            var filepath = url;
+            ProductXML produkt = new ProductXML();
+            using (var client = new HttpClient())
+            {
+
+                var content = await client.GetStreamAsync(url);
+                //var contents = await client.GetStreamAsync("http://www.partner.aluro.pl/modules/nvn_export_products/download/aluro_products_export_ldWd8HWmUY.xml");
+
+                XmlSerializer serializer = new XmlSerializer(typeof(Export_products));
+                Export_products obj = (Export_products)serializer.Deserialize(content);
+
+
+
+                //1215 w Images Mozna usuwac
+                char[] delimiterChars = { ',' };
+
+
+
+                for(int x = 0; x < obj.Product.Count(); x++)
+                {
+
+                    produkt = obj.Product[x];
+
+
+                    string text = produkt.Cechy;
+                    string[] words = text.Split(delimiterChars);
+
+
+                    for (int i = 0; i < words.Count(); i++)
+                    {
+                        string textes = words[i];
+
+
+                        //if(textes.Contains("Pakowanie:"))
+                        //{
+                        //    textes = textes.Replace("Pakowanie:", string.Empty);
+                        //    Product produktA = _content.Products.Where(x => x.Symbol == produkt.Symbol).FirstOrDefault();
+                        //    if (produktA != null)
+                        //    {
+                        //        produktA.Pakowanie = textes;
+                        //        _content.Products.Update(produktA);
+                        //        _content.SaveChanges();
+                        //    }
+
+                        //}
+
+                        if (textes.Contains("Materiał:"))
+                        {
+                            textes = textes.Replace("Materiał:", string.Empty);
+                            Product produktA = _content.Products.Where(x => x.Symbol == produkt.Symbol).FirstOrDefault();
+                            if (produktA != null)
+                            {
+                                produktA.Materiał = textes;
+                                _content.Products.Update(produktA);
+                                _content.SaveChanges();
+                            }
+
+                        }
+
+                        string ilosc = textes;
+
+                    }
+
+                }
+
+            }
+            return View(produkt);
+        }
+
+
+
 
         [Route("modules/nvn_export_products/download/")]
-        public async Task<IActionResult> IndexAsync()
+        public async Task<IActionResult> Index()
         {
 
             Initialize(_webHostEnvironment);
@@ -284,8 +351,13 @@ namespace partner_aluro.Controllers
 
             return this.Content(xml, "text/xml");
         }
+        public IActionResult GenerujRecznie()
+        {
+            GenerateProductXML(_content, _webHostEnvironment);
+            return View();
+        }
 
-        public static string GenerateProductXMLAsync(ApplicationDbContext _content, IWebHostEnvironment _webHostEnvironment)
+        public static string GenerateProductXML(ApplicationDbContext _content, IWebHostEnvironment _webHostEnvironment)
         {
 
             //////patch root www
@@ -368,7 +440,7 @@ namespace partner_aluro.Controllers
                 CDataImages = doc.CreateCDataSection(imagePath);
 
                 //images
-                XmlNode imagesNode = doc.CreateElement("img");
+                XmlNode imagesNode = doc.CreateElement("images");
                 imagesNode.AppendChild(CDataImages);
                 productNode.AppendChild(imagesNode);
 
@@ -512,20 +584,26 @@ namespace partner_aluro.Controllers
 
 
 
-                //Cechy CHECHY
+                //Cechy CECHY
                 string cechy = "";
                 string Wymiar_wewnętrzny = "Wymiar_wewnętrzny: ";
 
-                if (produkty[i].Materiał != "")
+                if (produkty[i].Pakowanie != null)
                 {
-                    cechy += "Materiał: " + produkty[i].Materiał + "";
+                    cechy += "Pakowanie:" + produkty[i].Pakowanie + ", ";
+                }
+                if (produkty[i].Materiał != null)
+                {
+                    cechy += "Materiał:" + produkty[i].Materiał + "";
                 }
 
                 XmlCDataSection CDataCechy;
                 CDataCechy = doc.CreateCDataSection(cechy);
                 //cechy
+                //WagaProduktu
                 XmlNode cechyNode = doc.CreateElement("cechy");
                 cechyNode.AppendChild(CDataCechy);
+                productNode.AppendChild(cechyNode);
 
             }
 
