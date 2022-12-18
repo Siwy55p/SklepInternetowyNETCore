@@ -244,6 +244,37 @@ namespace partner_aluro.Controllers
             _context.Products.Update(product);
             _context.SaveChanges();
         }
+
+        [HttpPost]
+        public void TakeProduct(int ProduktId, bool check)
+        {
+            ExcelController.Initialize();
+
+            Product product = _context.Products.Where(x => x.ProductId == ProduktId).FirstOrDefault();
+
+            Product find = ExcelController.produkty.Where(x=>x.ProductId == ProduktId).FirstOrDefault();
+            //logika check or uncheck
+            if (check)
+            {
+                if (find != null)
+                {
+                    //produktu jest jest dodany
+                }else
+                {
+                    ExcelController.produkty.Add(product);
+                }
+
+            }
+            else
+            {
+                if(find != null)
+                {
+                    ExcelController.produkty.Remove(product);
+                }
+            }
+
+
+        }
         public static void UpdateResourceFile(Hashtable data, String path)
         {
             Hashtable resourceEntries = new Hashtable();
@@ -436,6 +467,9 @@ namespace partner_aluro.Controllers
         [HttpGet]
         public async Task<IActionResult> List()
         {
+            ExcelController.Initialize(false);
+            ExcelController.Initialize();
+
             ViewData["Category"] = GetCategories();
             return View(await _ProductService.GetProductList());
         }

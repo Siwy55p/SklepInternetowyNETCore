@@ -52,7 +52,7 @@
                                     {
                                         <tr>
                                             <td>@productFormModel.ProductId</td>
-                                            <td><input id="takenBefore" type="checkbox" value="@productFormModel.ProductId" data-toggle="toggle"></td>
+                                            <td><input id="chkP_@productFormModel.ProductId" onchange="TakeProduct(@productFormModel.ProductId)" type="checkbox" value="@productFormModel.ProductId" data-toggle="toggle"></td>
                                             <td><img class="img-thumbnail" src="~/img/p/@productFormModel.Symbol/250x250_@productFormModel.ImageUrl" alt="@productFormModel.Name" style="width:75px;height:75px;"></td>
                                             <td>@productFormModel.Symbol</td>
 
@@ -120,13 +120,6 @@
         });
     </script>
     <script>
-        checkBox = document.getElementById('takenBefore').addEventListener('click', event => {
-            if (event.target.checked) {
-                alert("Checkbox checked!");
-            }
-        });
-    </script>
-    <script>
         function ChangeCategory(ProduktId, CategoryId) {
 
             var d = document.getElementById("select_"+ProduktId).value;
@@ -135,6 +128,39 @@
                 type: "POST",
                 url: '@Url.Action("ChangeCategory", "Product")',
                 data: { ProduktId: ProduktId, KategoriaID: d },
+                success: function (result) {
+
+                },
+
+                error: function (abc) {
+                    alert(abc.statusText);
+                },
+            });
+        }
+    </script>
+    <script>
+        function TakeProduct(ProduktId) {
+
+            var d = document.getElementById("ilosc_" + ProduktId).value;
+
+            var check = document.getElementById('chkP_' + ProduktId);
+            if (check.checked) {
+                check = true;
+            } else {
+                check = false;
+            }
+
+                //checkBox = document.getElementById('takenBefore').addEventListener('click', event => {
+                //    if (event.target.checked) {
+                //        alert("Checkbox checked!");
+                //    }
+                //});
+
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("TakeProduct", "Product")',
+                data: { ProduktId: ProduktId, check: check },
                 success: function (result) {
 
                 },

@@ -1,7 +1,5 @@
 ﻿using ClosedXML.Excel;
-
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using partner_aluro.Data;
 using partner_aluro.Models;
 using System.Drawing;
@@ -14,11 +12,31 @@ namespace partner_aluro.Controllers
 
         public readonly IWebHostEnvironment _webHostEnvironment;
 
+        static public List<Product> produkty;
 
         public ExcelController(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
             _webHostEnvironment = webHostEnvironment;
+            
+        }
+
+        public static bool IsInitialized { get; private set; }
+        public static void Initialize()
+        {
+            if (IsInitialized)
+            {
+                //throw new InvalidOperationException("Object already initialized");
+            }
+            else
+            {
+                produkty = new List<Product>();
+                IsInitialized = true;
+            }
+        }
+        public static void Initialize(bool change)
+        {
+            IsInitialized = change;
         }
 
         public IActionResult Index()
@@ -40,7 +58,7 @@ namespace partner_aluro.Controllers
 
             var col1 = ws.Column("A");
             col1.Style.Fill.BackgroundColor = XLColor.White;
-            col1.Width = 35;
+            col1.Width = 26;
             col1.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
             col1.Style.Alignment.Vertical = XLAlignmentVerticalValues.Center;
             var col2 = ws.Column("B");
@@ -55,26 +73,31 @@ namespace partner_aluro.Controllers
             col3.Style.Alignment.Vertical = XLAlignmentVerticalValues.Center;
             col3.Width = 45;
             var col4 = ws.Column("D");
+            col4.Width = 13;
             col4.Style.Alignment.WrapText = true;
             col4.Style.Fill.BackgroundColor = XLColor.White;
             col4.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
             col4.Style.Alignment.Vertical = XLAlignmentVerticalValues.Center;
             var col5 = ws.Column("E");
+            col5.Width = 13;
             col5.Style.Alignment.WrapText = true;
             col5.Style.Fill.BackgroundColor = XLColor.White;
             col5.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
             col5.Style.Alignment.Vertical = XLAlignmentVerticalValues.Center;
             var col6 = ws.Column("F");
+            col6.Width = 13;
             col6.Style.Alignment.WrapText = true;
             col6.Style.Fill.BackgroundColor = XLColor.White;
             col6.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
             col6.Style.Alignment.Vertical = XLAlignmentVerticalValues.Center;
             var col7 = ws.Column("G");
+            col7.Width = 14;
             col7.Style.Alignment.WrapText = true;
             col7.Style.Fill.BackgroundColor = XLColor.White;
             col7.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
             col7.Style.Alignment.Vertical = XLAlignmentVerticalValues.Center;
             var col8 = ws.Column("H");
+            col8.Width = 13;
             col8.Style.Alignment.WrapText = true;
             col8.Style.Fill.BackgroundColor = XLColor.White;
             col8.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
@@ -119,21 +142,28 @@ namespace partner_aluro.Controllers
             row1.Height = 100;
 
             var imagePath = @"wwwroot\img\logo\logo_excel.jpg";
-            var image = ws.AddPicture(imagePath)
+            var image = ws.Pictures.Add(imagePath)
                 .MoveTo(ws.Cell("A1"));
             //.Scale(0.5);
 
-            ws.Cell("F1").Value = "Tel. kom.: (+48 61) 694 160 741 \r\ne-mail: marcin@aluro.pl \r\n   Www.aluro.pl";
+            image.GetOffset(ClosedXML.Excel.Drawings.XLMarkerPosition.TopLeft);
+
+            ws.Cell("F1").Value = "Tel. kom.: (+48 61) 694 160 741 \r\ne-mail: marcin@aluro.pl \r\n www.aluro.pl";
             ws.Range("F1:H1").Row(1).Merge();
 
             ws.Cell("C1").Value = "Zamówienie powyżej 2000 zł netto -10%\r\nDarmowa dostawa już od 590 zł netto\r\n(na terenie Polski)";
+            ws.Cell("C1").Style.Font.Bold = true;
 
             ws.Range("A2:B2").Row(1).Merge();
             ws.Cell("A2").Value = "WYBRANY ASORTYMENT";
+            ws.Cell("A2").Style.Font.Bold = true;
+            ws.Cell("A2").Style.Font.FontSize = 16;
             ws.Cell("C2").Value = "Zamawiający:";
+            ws.Cell("C2").Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Left;
 
             ws.Cell("A3").Value = "ZDJĘCIE";
             ws.Cell("A3").Style.Alignment.WrapText = true;
+            ws.Cell("A3").Style.Font.Bold = true;
             ws.Cell("A3").Style.Border.TopBorder = XLBorderStyleValues.Thick;
             ws.Cell("A3").Style.Border.LeftBorder = XLBorderStyleValues.Thick;
             ws.Cell("A3").Style.Border.RightBorder = XLBorderStyleValues.Thick;
@@ -141,70 +171,75 @@ namespace partner_aluro.Controllers
 
             ws.Cell("B3").Value = "Symbol";
             ws.Cell("B3").Style.Alignment.WrapText = true;
+            ws.Cell("B3").Style.Font.Bold = true;
             ws.Cell("B3").Style.Border.TopBorder = XLBorderStyleValues.Thick;
             ws.Cell("B3").Style.Border.LeftBorder = XLBorderStyleValues.Thick;
             ws.Cell("B3").Style.Border.RightBorder = XLBorderStyleValues.Thick;
             ws.Cell("B3").Style.Border.BottomBorder = XLBorderStyleValues.Thick;
             ws.Cell("C3").Value = "Nazwa Towaru";
             ws.Cell("C3").Style.Alignment.WrapText = true;
+            ws.Cell("C3").Style.Font.Bold = true;
             ws.Cell("C3").Style.Border.TopBorder = XLBorderStyleValues.Thick;
             ws.Cell("C3").Style.Border.LeftBorder = XLBorderStyleValues.Thick;
             ws.Cell("C3").Style.Border.RightBorder = XLBorderStyleValues.Thick;
             ws.Cell("C3").Style.Border.BottomBorder = XLBorderStyleValues.Thick;
             ws.Cell("D3").Value = "STARA CENA Brutto";
             ws.Cell("D3").Style.Alignment.WrapText = true;
+            ws.Cell("D3").Style.Font.Bold = true;
             ws.Cell("D3").Style.Border.TopBorder = XLBorderStyleValues.Thick;
             ws.Cell("D3").Style.Border.LeftBorder = XLBorderStyleValues.Thick;
             ws.Cell("D3").Style.Border.RightBorder = XLBorderStyleValues.Thick;
             ws.Cell("D3").Style.Border.BottomBorder = XLBorderStyleValues.Thick;
             ws.Cell("E3").Value = "NOWA CENA Brutto";
             ws.Cell("E3").Style.Alignment.WrapText = true;
+            ws.Cell("E3").Style.Font.Bold = true;
             ws.Cell("E3").Style.Border.TopBorder = XLBorderStyleValues.Thick;
             ws.Cell("E3").Style.Border.LeftBorder = XLBorderStyleValues.Thick;
             ws.Cell("E3").Style.Border.RightBorder = XLBorderStyleValues.Thick;
             ws.Cell("E3").Style.Border.BottomBorder = XLBorderStyleValues.Thick;
             ws.Cell("F3").Value = "PAKOWANIE";
             ws.Cell("F3").Style.Alignment.WrapText = true;
+            ws.Cell("F3").Style.Font.Bold = true;
             ws.Cell("F3").Style.Border.TopBorder = XLBorderStyleValues.Thick;
             ws.Cell("F3").Style.Border.LeftBorder = XLBorderStyleValues.Thick;
             ws.Cell("F3").Style.Border.RightBorder = XLBorderStyleValues.Thick;
             ws.Cell("F3").Style.Border.BottomBorder = XLBorderStyleValues.Thick;
             ws.Cell("G3").Value = "ILOŚC ZAMAWIANA [szt]";
             ws.Cell("G3").Style.Alignment.WrapText = true;
+            ws.Cell("G3").Style.Font.Bold = true;
             ws.Cell("G3").Style.Border.TopBorder = XLBorderStyleValues.Thick;
             ws.Cell("G3").Style.Border.LeftBorder = XLBorderStyleValues.Thick;
             ws.Cell("G3").Style.Border.RightBorder = XLBorderStyleValues.Thick;
             ws.Cell("G3").Style.Border.BottomBorder = XLBorderStyleValues.Thick;
             ws.Cell("H3").Value = "WARTOŚĆ POZYCJI BRUTTO";
             ws.Cell("H3").Style.Alignment.WrapText = true;
+            ws.Cell("H3").Style.Font.Bold = true;
             ws.Cell("H3").Style.Border.TopBorder = XLBorderStyleValues.Thick;
             ws.Cell("H3").Style.Border.LeftBorder = XLBorderStyleValues.Thick;
             ws.Cell("H3").Style.Border.RightBorder = XLBorderStyleValues.Thick;
             ws.Cell("H3").Style.Border.BottomBorder = XLBorderStyleValues.Thick;
 
-            List<Product> produkty = _context.Products.Where(x => x.Ukryty == false).Include(x => x.Product_Images).ToList();
+            //List<Product> produkty = _context.Products.Where(x => x.Ukryty == false).Include(x => x.Product_Images).ToList();
 
             int row = 4;
             for (int i = 0; i < produkty.Count(); i++)
             {
 
                 var rowP = ws.Row(row);
-                rowP.Height = 96;
+                rowP.Height = 142;
 
                 var imagePathProduct = @"wwwroot\img\p\"+produkty[i].Symbol+@"\"+ produkty[i].ImageUrl;
                 if (System.IO.File.Exists(imagePathProduct))
                 {
                     int iColumnWidth = (int)(ws.Column(1).Width - 1) * 7 + 12; // To convert column width in pixel unit.
 
-                    int xOffset = (iColumnWidth - 100) / 2;
-                    int yOffset = 5;
+
+                    int xOffset = (iColumnWidth - 170) / 2;
+                    int yOffset = 2;
                     var imageProduct = ws.AddPicture(imagePathProduct)
                         .MoveTo(ws.Cell("A" + row), new Point(xOffset, yOffset))
-                        
-                        .WithSize(100,100);
+                        .WithSize(170, 170);
                     //.Scale(0.5);
-
-
                     imageProduct.MoveTo(ws.Cell("A" + row), new Point(xOffset, yOffset));
                 }
                 ws.Cell("A" + row).Style.Border.TopBorder = XLBorderStyleValues.Thin;
@@ -272,6 +307,7 @@ namespace partner_aluro.Controllers
 
             string fileName = "Excel1.xlsx";
             string path = uploadsFolder + "\\" + fileName;
+            
             workbook.SaveAs(path);
 
             return View();
