@@ -350,7 +350,7 @@ namespace partner_aluro.Controllers
 
             //Dodanie do pliku resx tlumaczenia nazwy produktu
             string webRootPath = _webHostEnvironment.ContentRootPath;
-            string resxFile1 = webRootPath + "\\Resources\\SharedResource.pl-PL.resx";
+            string resxFile1 = webRootPath + "\\wwwroot\\Resources\\SharedResource.pl-PL.resx";
 
             Dictionary<string, string> dict1 = new Dictionary<string, string>();
             dict1.Add(product.Name, product.Name);
@@ -358,7 +358,7 @@ namespace partner_aluro.Controllers
             UpdateResourceFile(data1, resxFile1);
             // KONIEC Dodanie do pliku resx tlumaczenia nazwy produktu
             //Dodanie do pliku resx tlumaczenia nazwy produktu
-            string resxFile2 = webRootPath + "\\Resources\\SharedResource.en-US.resx";
+            string resxFile2 = webRootPath + "\\wwwroot\\Resources\\SharedResource.en-US.resx";
 
             Dictionary<string, string> dict2 = new Dictionary<string, string>();
             dict2.Add(product.Name, NameDE);
@@ -367,7 +367,7 @@ namespace partner_aluro.Controllers
             // KONIEC Dodanie do pliku resx tlumaczenia nazwy produktu
 
             //Dodanie do pliku resx tlumaczenia nazwy produktu
-            string resxFile3 = webRootPath + "\\Resources\\SharedResource.de-DE.resx";
+            string resxFile3 = webRootPath + "\\wwwroot\\Resources\\SharedResource.de-DE.resx";
 
             Dictionary<string, string> dict3 = new Dictionary<string, string>();
             dict3.Add(product.Name, NameDE);
