@@ -153,12 +153,9 @@ namespace partner_aluro.Controllers
 
             image.GetOffset(ClosedXML.Excel.Drawings.XLMarkerPosition.TopLeft);
 
-            ws.Cell("F1").Value = "Tel. kom.: (+48 61) 694 160 741 \r\ne-mail: marcin@aluro.pl \r\n www.aluro.pl";
+            ws.Cell("E1").Value = "Tel. kom.: (+48 61) 694 160 741 \r\ne-mail: marcin@aluro.pl \r\n www.aluro.pl";
 
             ws.Range("E1:G1").Row(1).Merge();
-
-            ws.Cell("F1").Value += "Bold";
-            ws.Cell("F1").Style.Font.Bold = true;
 
             DateTime AktualnaData = DateTime.Now;
             ws.Cell("C1").Value = "Oferta z dnia: " + AktualnaData.ToString("dd.MM.yyyy");
@@ -203,7 +200,7 @@ namespace partner_aluro.Controllers
             //ws.Cell("D3").Style.Border.LeftBorder = XLBorderStyleValues.Thick;
             //ws.Cell("D3").Style.Border.RightBorder = XLBorderStyleValues.Thick;
             //ws.Cell("D3").Style.Border.BottomBorder = XLBorderStyleValues.Thick;
-            ws.Cell("D3").Value = "NOWA CENA Brutto";
+            ws.Cell("D3").Value = "NOWA HURTOWA Brutto";
             ws.Cell("D3").Style.Alignment.WrapText = true;
             ws.Cell("D3").Style.Font.Bold = true;
             ws.Cell("D3").Style.Font.FontSize = 10;
@@ -303,7 +300,7 @@ namespace partner_aluro.Controllers
                 ws.Cell("F" + row).Style.Border.BottomBorder = XLBorderStyleValues.Thin;
 
 
-                ws.Cell("G" + row).FormulaA1 = "=G" + row + "*E" + row + "";
+                ws.Cell("G" + row).FormulaA1 = "=D" + row + "*F" + row + "";
                 ws.Cell("G" + row).Style.NumberFormat.Format = "0.00 zł";
                 ws.Cell("G" + row).DataType = XLDataType.Number;
                 ws.Cell("G" + row).Style.Border.TopBorder = XLBorderStyleValues.Thin;
