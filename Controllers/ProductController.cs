@@ -330,50 +330,50 @@ namespace partner_aluro.Controllers
 
             //string NameEn = "Angielska Nazwa";
 
-            //var authKey = $"bbc4aaae-78af-4f5e-37dd-34e29f91a480:fx"; // Replace with your key
-            //var translator = new Translator(authKey);
+            var authKey = $"bbc4aaae-78af-4f5e-37dd-34e29f91a480:fx"; // Replace with your key
+            var translator = new Translator(authKey);
 
-            //string NameEn = product.Name.ToString();
-            //string NameDE = product.Name.ToString();
+            string NameEn = product.Name.ToString();
+            string NameDE = product.Name.ToString();
 
-            //var translatedText1 = await translator.TranslateTextAsync(
-            //  NameEn,
-            //  "PL",
-            //  "en-US");
-            //NameEn = translatedText1.Text;
+            var translatedText1 = await translator.TranslateTextAsync(
+              NameEn,
+              "PL",
+              "en-US");
+            NameEn = translatedText1.Text;
 
-            //var translatedText2 = await translator.TranslateTextAsync(
-            //  NameDE,
-            //  "PL",
-            //  "DE");
-            //NameDE = translatedText2.Text;
+            var translatedText2 = await translator.TranslateTextAsync(
+              NameDE,
+              "PL",
+              "DE");
+            NameDE = translatedText2.Text;
 
-            ////Dodanie do pliku resx tlumaczenia nazwy produktu
-            //string webRootPath = _webHostEnvironment.ContentRootPath;
-            //string resxFile1 = webRootPath+ "\\Resources\\SharedResource.pl-PL.resx";
+            //Dodanie do pliku resx tlumaczenia nazwy produktu
+            string webRootPath = _webHostEnvironment.ContentRootPath;
+            string resxFile1 = webRootPath + "\\Resources\\SharedResource.pl-PL.resx";
 
-            //Dictionary<string, string> dict1 = new Dictionary<string, string>();
-            //dict1.Add(product.Name, product.Name);
-            //Hashtable data1 = new Hashtable(dict1);
-            //UpdateResourceFile(data1, resxFile1);
-            //// KONIEC Dodanie do pliku resx tlumaczenia nazwy produktu
-            ////Dodanie do pliku resx tlumaczenia nazwy produktu
-            //string resxFile2 = webRootPath + "\\Resources\\SharedResource.en-US.resx";
+            Dictionary<string, string> dict1 = new Dictionary<string, string>();
+            dict1.Add(product.Name, product.Name);
+            Hashtable data1 = new Hashtable(dict1);
+            UpdateResourceFile(data1, resxFile1);
+            // KONIEC Dodanie do pliku resx tlumaczenia nazwy produktu
+            //Dodanie do pliku resx tlumaczenia nazwy produktu
+            string resxFile2 = webRootPath + "\\Resources\\SharedResource.en-US.resx";
 
-            //Dictionary<string, string> dict2 = new Dictionary<string, string>();
-            //dict2.Add(product.Name, NameDE);
-            //Hashtable data2 = new Hashtable(dict2);
-            //UpdateResourceFile(data2, resxFile2);
-            //// KONIEC Dodanie do pliku resx tlumaczenia nazwy produktu
+            Dictionary<string, string> dict2 = new Dictionary<string, string>();
+            dict2.Add(product.Name, NameDE);
+            Hashtable data2 = new Hashtable(dict2);
+            UpdateResourceFile(data2, resxFile2);
+            // KONIEC Dodanie do pliku resx tlumaczenia nazwy produktu
 
-            ////Dodanie do pliku resx tlumaczenia nazwy produktu
-            //string resxFile3 = webRootPath + "\\Resources\\SharedResource.de-DE.resx";
+            //Dodanie do pliku resx tlumaczenia nazwy produktu
+            string resxFile3 = webRootPath + "\\Resources\\SharedResource.de-DE.resx";
 
-            //Dictionary<string, string> dict3 = new Dictionary<string, string>();
-            //dict3.Add(product.Name, NameDE);
-            //Hashtable data3 = new Hashtable(dict3);
-            //UpdateResourceFile(data3, resxFile3);
-            //// KONIEC Dodanie do pliku resx tlumaczenia nazwy produktu Niemiecki
+            Dictionary<string, string> dict3 = new Dictionary<string, string>();
+            dict3.Add(product.Name, NameDE);
+            Hashtable data3 = new Hashtable(dict3);
+            UpdateResourceFile(data3, resxFile3);
+            // KONIEC Dodanie do pliku resx tlumaczenia nazwy produktu Niemiecki
 
             product.Bestseller = true;
             product.ImageUrl = "";
