@@ -16,15 +16,14 @@
             @Html.ValidationSummary()
             @await Html.PartialAsync("_FormProduct")
         
-            @{
-                bool pokaz = true;
-            }
 
             @for (int i = 0 ; i < @Model.categories.Count(); i++)
             {
                 <div class="row">
-                <input asp-for="categories[i].Selected"/> @Model.categories[i].Text
-                <input type="hidden" asp-for="@Model.categories[i].Value"/>
+                    <div class="col">
+                        <input asp-for="categories[i].Selected"/>@Model.categories[i].Text
+                        <input type="hidden" asp-for="@Model.categories[i].Value"/>
+                    </div>
                 </div>
             }
         </div>

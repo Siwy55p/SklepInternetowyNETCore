@@ -95,17 +95,14 @@
                             <span>Slider</span> 
                         </a>
                     </li>
-                    
                     <li>
                         <a href="@Url.Action("Index","Newsletter")" class="nav-link px-3">
                             <span>Newsletter</span>
                         </a>
                     </li>
-                    
                     <li>
-                        <a class="nav-link px-3" asp-area="" asp-controller="Order" asp-action="ListaZamowien">Zamówienia</a>
+                        <a class="nav-link px-3" asp-area="" asp-controller="Order" asp-action="ListaZamowien">Zamówienia @await Component.InvokeAsync("OrderStatus")</a>
                     </li>
-                    
                     <li>
                         <a href="@Url.Action("Lista","Cart")" class="nav-link px-3">
                             <span>Koszyki</span>

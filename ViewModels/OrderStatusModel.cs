@@ -2,8 +2,8 @@
 
 namespace partner_aluro.ViewModels
 {
-    public class CartStatusModel
+    public class OrderStatusModel
     {
-        public Cart Cart { get; set; }
+        public List<Order> Orders { get; set; }
     }
 }
