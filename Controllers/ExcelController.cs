@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using partner_aluro.Data;
 using partner_aluro.Models;
+using System.Data;
 using System.Drawing;
 
 namespace partner_aluro.Controllers
@@ -141,6 +142,9 @@ namespace partner_aluro.Controllers
 
             var row1 = ws.Row(1);
             row1.Height = 100;
+            var row2 = ws.Row(2);
+            var row3 = ws.Row(3);
+            row3.Height = 50;
 
             var imagePath = @"wwwroot\img\logo\logo_excel.jpg";
             var image = ws.Pictures.Add(imagePath)
@@ -150,13 +154,18 @@ namespace partner_aluro.Controllers
             image.GetOffset(ClosedXML.Excel.Drawings.XLMarkerPosition.TopLeft);
 
             ws.Cell("F1").Value = "Tel. kom.: (+48 61) 694 160 741 \r\ne-mail: marcin@aluro.pl \r\n www.aluro.pl";
-            ws.Range("F1:H1").Row(1).Merge();
 
-            ws.Cell("C1").Value = "Zamówienie powyżej 2000 zł netto -10%\r\nDarmowa dostawa już od 590 zł netto\r\n(na terenie Polski)";
+            ws.Range("E1:G1").Row(1).Merge();
+
+            ws.Cell("F1").Value += "Bold";
+            ws.Cell("F1").Style.Font.Bold = true;
+
+            DateTime AktualnaData = DateTime.Now;
+            ws.Cell("C1").Value = "Oferta z dnia: " + AktualnaData.ToString("dd.MM.yyyy");
             ws.Cell("C1").Style.Font.Bold = true;
 
             ws.Range("A2:B2").Row(1).Merge();
-            ws.Cell("A2").Value = "WYBRANY ASORTYMENT";
+            ws.Cell("A2").Value = "";
             ws.Cell("A2").Style.Font.Bold = true;
             ws.Cell("A2").Style.Font.FontSize = 16;
             ws.Cell("C2").Value = "Zamawiający: ";
@@ -186,7 +195,15 @@ namespace partner_aluro.Controllers
             ws.Cell("C3").Style.Border.LeftBorder = XLBorderStyleValues.Thick;
             ws.Cell("C3").Style.Border.RightBorder = XLBorderStyleValues.Thick;
             ws.Cell("C3").Style.Border.BottomBorder = XLBorderStyleValues.Thick;
-            ws.Cell("D3").Value = "STARA CENA Brutto";
+            //ws.Cell("D3").Value = "STARA CENA Brutto";
+            //ws.Cell("D3").Style.Alignment.WrapText = true;
+            //ws.Cell("D3").Style.Font.Bold = true;
+            //ws.Cell("D3").Style.Font.FontSize = 10;
+            //ws.Cell("D3").Style.Border.TopBorder = XLBorderStyleValues.Thick;
+            //ws.Cell("D3").Style.Border.LeftBorder = XLBorderStyleValues.Thick;
+            //ws.Cell("D3").Style.Border.RightBorder = XLBorderStyleValues.Thick;
+            //ws.Cell("D3").Style.Border.BottomBorder = XLBorderStyleValues.Thick;
+            ws.Cell("D3").Value = "NOWA CENA Brutto";
             ws.Cell("D3").Style.Alignment.WrapText = true;
             ws.Cell("D3").Style.Font.Bold = true;
             ws.Cell("D3").Style.Font.FontSize = 10;
@@ -194,7 +211,7 @@ namespace partner_aluro.Controllers
             ws.Cell("D3").Style.Border.LeftBorder = XLBorderStyleValues.Thick;
             ws.Cell("D3").Style.Border.RightBorder = XLBorderStyleValues.Thick;
             ws.Cell("D3").Style.Border.BottomBorder = XLBorderStyleValues.Thick;
-            ws.Cell("E3").Value = "NOWA CENA Brutto";
+            ws.Cell("E3").Value = "PAKOWANIE";
             ws.Cell("E3").Style.Alignment.WrapText = true;
             ws.Cell("E3").Style.Font.Bold = true;
             ws.Cell("E3").Style.Font.FontSize = 10;
@@ -202,7 +219,7 @@ namespace partner_aluro.Controllers
             ws.Cell("E3").Style.Border.LeftBorder = XLBorderStyleValues.Thick;
             ws.Cell("E3").Style.Border.RightBorder = XLBorderStyleValues.Thick;
             ws.Cell("E3").Style.Border.BottomBorder = XLBorderStyleValues.Thick;
-            ws.Cell("F3").Value = "PAKOWANIE";
+            ws.Cell("F3").Value = "ILOŚC ZAMAWIANA [szt]";
             ws.Cell("F3").Style.Alignment.WrapText = true;
             ws.Cell("F3").Style.Font.Bold = true;
             ws.Cell("F3").Style.Font.FontSize = 10;
@@ -210,7 +227,7 @@ namespace partner_aluro.Controllers
             ws.Cell("F3").Style.Border.LeftBorder = XLBorderStyleValues.Thick;
             ws.Cell("F3").Style.Border.RightBorder = XLBorderStyleValues.Thick;
             ws.Cell("F3").Style.Border.BottomBorder = XLBorderStyleValues.Thick;
-            ws.Cell("G3").Value = "ILOŚC ZAMAWIANA [szt]";
+            ws.Cell("G3").Value = "WARTOŚĆ POZYCJI BRUTTO";
             ws.Cell("G3").Style.Alignment.WrapText = true;
             ws.Cell("G3").Style.Font.Bold = true;
             ws.Cell("G3").Style.Font.FontSize = 10;
@@ -218,14 +235,6 @@ namespace partner_aluro.Controllers
             ws.Cell("G3").Style.Border.LeftBorder = XLBorderStyleValues.Thick;
             ws.Cell("G3").Style.Border.RightBorder = XLBorderStyleValues.Thick;
             ws.Cell("G3").Style.Border.BottomBorder = XLBorderStyleValues.Thick;
-            ws.Cell("H3").Value = "WARTOŚĆ POZYCJI BRUTTO";
-            ws.Cell("H3").Style.Alignment.WrapText = true;
-            ws.Cell("H3").Style.Font.Bold = true;
-            ws.Cell("H3").Style.Font.FontSize = 10;
-            ws.Cell("H3").Style.Border.TopBorder = XLBorderStyleValues.Thick;
-            ws.Cell("H3").Style.Border.LeftBorder = XLBorderStyleValues.Thick;
-            ws.Cell("H3").Style.Border.RightBorder = XLBorderStyleValues.Thick;
-            ws.Cell("H3").Style.Border.BottomBorder = XLBorderStyleValues.Thick;
 
             //List<Product> produkty = _context.Products.Where(x => x.Ukryty == false).Include(x => x.Product_Images).ToList();
 
@@ -267,39 +276,39 @@ namespace partner_aluro.Controllers
                 ws.Cell("C" + row).Style.Border.RightBorder = XLBorderStyleValues.Thin;
                 ws.Cell("C" + row).Style.Border.BottomBorder = XLBorderStyleValues.Thin;
 
-                ws.Cell("D"+row).Value = "";
+                //ws.Cell("D"+row).Value = "";
+                //ws.Cell("D" + row).Style.Border.TopBorder = XLBorderStyleValues.Thin;
+                //ws.Cell("D" + row).Style.Border.LeftBorder = XLBorderStyleValues.Thin;
+                //ws.Cell("D" + row).Style.Border.RightBorder = XLBorderStyleValues.Thin;
+                //ws.Cell("D" + row).Style.Border.BottomBorder = XLBorderStyleValues.Thin;
+
+                ws.Cell("D"+row).Value = produkty[i].CenaProduktuBrutto + " zł";
+                ws.Cell("D" + row).Style.Font.Bold = true;
+                ws.Cell("D" + row).Style.Font.FontSize = 14;
                 ws.Cell("D" + row).Style.Border.TopBorder = XLBorderStyleValues.Thin;
                 ws.Cell("D" + row).Style.Border.LeftBorder = XLBorderStyleValues.Thin;
                 ws.Cell("D" + row).Style.Border.RightBorder = XLBorderStyleValues.Thin;
                 ws.Cell("D" + row).Style.Border.BottomBorder = XLBorderStyleValues.Thin;
 
-                ws.Cell("E"+row).Value = produkty[i].CenaProduktuBrutto + " zł";
-                ws.Cell("E" + row).Style.Font.Bold = true;
-                ws.Cell("E" + row).Style.Font.FontSize = 14;
+                ws.Cell("E"+row).Value = produkty[i].Pakowanie;
                 ws.Cell("E" + row).Style.Border.TopBorder = XLBorderStyleValues.Thin;
                 ws.Cell("E" + row).Style.Border.LeftBorder = XLBorderStyleValues.Thin;
                 ws.Cell("E" + row).Style.Border.RightBorder = XLBorderStyleValues.Thin;
                 ws.Cell("E" + row).Style.Border.BottomBorder = XLBorderStyleValues.Thin;
 
-                ws.Cell("F"+row).Value = produkty[i].Pakowanie;
+                ws.Cell("F"+row).Value = "";
                 ws.Cell("F" + row).Style.Border.TopBorder = XLBorderStyleValues.Thin;
                 ws.Cell("F" + row).Style.Border.LeftBorder = XLBorderStyleValues.Thin;
                 ws.Cell("F" + row).Style.Border.RightBorder = XLBorderStyleValues.Thin;
                 ws.Cell("F" + row).Style.Border.BottomBorder = XLBorderStyleValues.Thin;
 
-                ws.Cell("G"+row).Value = "";
+
+                ws.Cell("G" + row).FormulaA1 = "=G" + row + "*E" + row + "";
+                ws.Cell("G" + row).Style.NumberFormat.Format = "0.00 zł";
+                ws.Cell("G" + row).DataType = XLDataType.Number;
                 ws.Cell("G" + row).Style.Border.TopBorder = XLBorderStyleValues.Thin;
                 ws.Cell("G" + row).Style.Border.LeftBorder = XLBorderStyleValues.Thin;
-                ws.Cell("G" + row).Style.Border.RightBorder = XLBorderStyleValues.Thin;
-                ws.Cell("G" + row).Style.Border.BottomBorder = XLBorderStyleValues.Thin;
-
-
-                ws.Cell("H" + row).FormulaA1 = "=G" + row + "*E" + row + "";
-                ws.Cell("H" + row).Style.NumberFormat.Format = "0.00 zł";
-                ws.Cell("H" + row).DataType = XLDataType.Number;
-                ws.Cell("H" + row).Style.Border.TopBorder = XLBorderStyleValues.Thin;
-                ws.Cell("H" + row).Style.Border.LeftBorder = XLBorderStyleValues.Thin;
-                ws.Cell("H" + row).Style.Border.RightBorder = XLBorderStyleValues.Thick;
+                ws.Cell("G" + row).Style.Border.RightBorder = XLBorderStyleValues.Thick;
 
                 row++;
                 int ostatni = row - 4;
@@ -311,9 +320,8 @@ namespace partner_aluro.Controllers
                     ws.Cell("B" + (row-1)).Style.Border.BottomBorder = XLBorderStyleValues.Thick;
                     ws.Cell("C" + (row-1)).Style.Border.BottomBorder = XLBorderStyleValues.Thick;
                     ws.Cell("D" + (row-1)).Style.Border.BottomBorder = XLBorderStyleValues.Thick;
-                    ws.Cell("E" + (row - 1)).Style.Border.BottomBorder = XLBorderStyleValues.Thick;
+                    ws.Cell("E" + (row-1)).Style.Border.BottomBorder = XLBorderStyleValues.Thick;
                     ws.Cell("F" + (row-1)).Style.Border.BottomBorder = XLBorderStyleValues.Thick;
-                    ws.Cell("H" + (row-1)).Style.Border.BottomBorder = XLBorderStyleValues.Thick;
                 }
                 else
                 {
@@ -322,14 +330,17 @@ namespace partner_aluro.Controllers
 
 
             }
-            ws.Cell("H" + row).FormulaA1 = "=SUM(H" + 4 + ":H" + (row-1) + ")";
-            ws.Cell("H" + row).Style.NumberFormat.Format = "0.00 zł";
-            ws.Cell("H" + row).DataType = XLDataType.Number;
-            ws.Cell("H" + row).Style.Border.TopBorder = XLBorderStyleValues.Thick;
-            ws.Cell("H" + row).Style.Border.LeftBorder = XLBorderStyleValues.Thick;
-            ws.Cell("H" + row).Style.Border.RightBorder = XLBorderStyleValues.Thick;
-            ws.Cell("H" + row).Style.Border.BottomBorder = XLBorderStyleValues.Thick;
-            ws.Cell("G" + row).Value = "WARTOŚĆ ZAMÓWIENIA";
+
+            var Lastrow = ws.Row(row);
+            Lastrow.Height = 30;
+            ws.Cell("F" + row).Value = "WARTOŚĆ ZAMÓWIENIA";
+            ws.Cell("F" + row).Style.Border.TopBorder = XLBorderStyleValues.Thick;
+            ws.Cell("F" + row).Style.Border.LeftBorder = XLBorderStyleValues.Thick;
+            ws.Cell("F" + row).Style.Border.RightBorder = XLBorderStyleValues.Thick;
+            ws.Cell("F" + row).Style.Border.BottomBorder = XLBorderStyleValues.Thick;
+            ws.Cell("G" + row).FormulaA1 = "=SUM(G" + 4 + ":G" + (row-1) + ")";
+            ws.Cell("G" + row).Style.NumberFormat.Format = "0.00 zł";
+            ws.Cell("G" + row).DataType = XLDataType.Number;
             ws.Cell("G" + row).Style.Border.TopBorder = XLBorderStyleValues.Thick;
             ws.Cell("G" + row).Style.Border.LeftBorder = XLBorderStyleValues.Thick;
             ws.Cell("G" + row).Style.Border.RightBorder = XLBorderStyleValues.Thick;

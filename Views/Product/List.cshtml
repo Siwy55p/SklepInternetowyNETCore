@@ -126,6 +126,7 @@
             });
 
             var table = $('#ProductTableList').DataTable({
+                responsive: true,
                 initComplete: function () {
                     // Apply the search
                     this.api()
