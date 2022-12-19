@@ -16,8 +16,8 @@ using Quartz.Impl;
 using Microsoft.AspNetCore.Localization;
 using System.Globalization;
 using Microsoft.Extensions.Options;
-using partner_aluro.Resources;
 using Microsoft.AspNetCore.Mvc;
+using partner_aluro.wwwroot.Resources;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DbContextProductionConnection");
@@ -107,7 +107,7 @@ builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>(); //S³
 builder.Services.AddSingleton<LanguageService>();
 builder.Services.AddLocalization(options=>
     {
-        options.ResourcesPath = "Resources";
+        options.ResourcesPath = "wwwroot/Resources";
     });
 builder.Services.Configure<RequestLocalizationOptions>(options =>
 {

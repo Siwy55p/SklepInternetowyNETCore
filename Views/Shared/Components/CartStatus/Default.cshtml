@@ -1,13 +1,13 @@
 ﻿@model partner_aluro.ViewModels.CartStatusModel
-@inject LanguageService language
 
 @using Microsoft.AspNetCore.Identity;
 @using partner_aluro.ViewComponents;
 @using partner_aluro.Models;
 @using partner_aluro.Core;
 @using System.Globalization;
-@using partner_aluro.Resources;
+@using partner_aluro.wwwroot.Resources;
 @inject Cart _cart
+@inject LanguageService language
 
 @if(Model.Cart.CartItems.Count > 0)
 {

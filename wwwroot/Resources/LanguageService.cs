@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Reflection;
 
-namespace partner_aluro.Resources
+namespace partner_aluro.wwwroot.Resources
 {
     public class LanguageService
     {
@@ -53,7 +53,7 @@ namespace partner_aluro.Resources
             {
                 value = value / Core.Constants.Eur;
             }
-            
+
             return value;
         }
         public decimal GetCurrently(decimal value, CultureInfo myNumberFormatInfo)

@@ -12,7 +12,7 @@ using System.Security.Claims;
 using partner_aluro.Services.Interfaces;
 using Microsoft.Extensions.Localization;
 using System.Reflection;
-using partner_aluro.Resources;
+using partner_aluro.wwwroot.Resources;
 
 namespace partner_aluro.Areas.Identity.Pages.Account
 {

@@ -1,4 +1,4 @@
-﻿namespace partner_aluro.Resources
+﻿namespace partner_aluro.wwwroot.Resources
 {
     /// <summary>
     /// Dummy class to group shared resources

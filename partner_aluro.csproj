@@ -13,7 +13,28 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="wwwroot\Resources\LanguageService.cs" />
+    <Compile Include="wwwroot\Resources\SharedResource.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="web.config.bak" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="wwwroot\Resources\SharedResource.de-DE.resx">
+      <SubType>Designer</SubType>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="wwwroot\Resources\SharedResource.en-US.resx">
+      <SubType>Designer</SubType>
+      <LastGenOutput>SharedResource.en-US.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="wwwroot\Resources\SharedResource.pl-PL.resx">
+      <LastGenOutput>SharedResource.en-US.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
@@ -79,21 +100,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Resources\SharedResource.de-DE.Designer.cs">
-      <DependentUpon>SharedResource.de-DE.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-    <Compile Update="Resources\SharedResource.pl-POL.Designer.cs">
-      <DependentUpon>SharedResource.pl-POL.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-    <Compile Update="Resources\SharedResource.en-US.Designer.cs">
-      <DependentUpon>SharedResource.en-US.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -107,23 +113,6 @@
     <EmbeddedResource Update="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\SharedResource.de-DE.resx">
-      <SubType>Designer</SubType>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\SharedResource.en-US.resx">
-      <SubType>Designer</SubType>
-      <LastGenOutput>SharedResource.en-US.Designer.cs</LastGenOutput>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\SharedResource.pl-PL.resx">
-      <LastGenOutput>SharedResource.en-US.Designer.cs</LastGenOutput>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\SharedResource.pl-POL.resx">
-      <LastGenOutput>SharedResource.pl-POL.Designer.cs</LastGenOutput>
-      <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
   </ItemGroup>
 
