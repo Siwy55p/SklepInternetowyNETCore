@@ -103,7 +103,7 @@
         <div class="input-group">
             Wymiary zewnętrzne:
             <label asp-for="@Model.SzerokoscProduktu" class="col-sm-2 p-0 m-0 col-form-label text-end">Szerokość:</label>
-    <input asp-for="@Model.SzerokoscProduktu" type="text" class="form-control p-0 m-0" aria-label="Szerokość produktu" placeholder="Szerokość produktu">
+            <input asp-for="@Model.SzerokoscProduktu" type="text" class="form-control p-0 m-0" aria-label="Szerokość produktu" placeholder="Szerokość produktu">
             <label asp-for="@Model.GlebokoscProduktu" class="col-sm-2 p-0 m-0 col-form-label text-end">Głębokość:</label>
             <input asp-for="@Model.GlebokoscProduktu" type="text" class="form-control p-0 m-0" aria-label="Głębokość produktu" placeholder="Głębokość produktu">
             <label asp-for="@Model.WysokoscProduktu" class="col-sm-2 p-0 m-0 col-form-label text-end">Wysokość:</label>
@@ -130,6 +130,8 @@
         <hr />
         <div class="form-group">
             <label asp-for="@Model.Promocja" class="col-sm-3 col-form-label text-end">Cena promocyjna: </label>
+            <input asp-for="@Model.NazwaPromocyjna" type="text" class="form-control p-0 m-0" placeholder="promocyjna">
+
             Tak @Html.RadioButtonFor(model => model.Promocja, "True", Model.Promocja == true ? new { Checked = "checked" } : null)
             Nie @Html.RadioButtonFor(model => model.Promocja, "False", Model.Promocja == false ? new { Checked = "unchecked" } : null)
             <span asp-validation-for="@Model.Promocja" class="text-danger"></span>

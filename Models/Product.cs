@@ -46,6 +46,7 @@ namespace partner_aluro.Models
         public bool Promocja { get; set; } = false;
 
         public string? Pakowanie { get; set; }
+        public string? NazwaPromocyjna { get; set; }
 
         public string? Materiał { get; set; }
         public decimal Ilosc { get; set; }
