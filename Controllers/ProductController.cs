@@ -199,14 +199,13 @@ namespace partner_aluro.Controllers
             Product product = new Product();
             //product.Cats = _ProductService.GetListCategory();
 
-            var item = _context.Category.Select(x => new SelectListItem()
-            {
-                Text = x.Name,
-                Value = x.CategoryId.ToString()
-            }).ToList();
+                var item = _context.Category.Select(x => new SelectListItem()
+                {
+                    Text = x.Name,
+                    Value = x.CategoryId.ToString()
+                }).ToList();
 
-            product.categories = item;
-
+                product.categories = item;
 
             return View(product);
         }
@@ -396,9 +395,16 @@ namespace partner_aluro.Controllers
             ModelState.Remove("product_Image.path");
             if (!ModelState.IsValid)
             {
+                product.categories = null;
 
-                ViewData["Category"] = GetCategories();
-                ViewData["returnUrl"] = Request.Headers["Referer"].ToString();
+                var item = _context.Category.Select(x => new SelectListItem()
+                {
+                    Text = x.Name,
+                    Value = x.CategoryId.ToString()
+                }).ToList();
+
+                product.categories = item;
+
                 return View(product);
 
             }
