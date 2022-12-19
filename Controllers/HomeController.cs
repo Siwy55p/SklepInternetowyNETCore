@@ -35,11 +35,11 @@ namespace partner_aluro.Controllers
 
         //Kontrolery odzoruwuja widoki , sluza do generowania róznych treści
 
-//        uzytkownik czy jest aktywny
-//Details
-//Tworzenie Excela z produktow
+        //        uzytkownik czy jest aktywny
+        //Details
+        //Tworzenie Excela z produktow
 
-//flaga
+        //flaga
 
 
         public HomeController(ISliderService sliderService, IStringLocalizer<HomeController> localizer,ApplicationDbContext context,ILogger<HomeController> logger, RegonService regonService, ISetting setting)
