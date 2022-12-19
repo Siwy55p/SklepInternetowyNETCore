@@ -319,8 +319,6 @@ namespace partner_aluro.Controllers
 
         }
 
-
-
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
         [HttpPost]
         public async Task<IActionResult> Add(Product product)
@@ -329,7 +327,6 @@ namespace partner_aluro.Controllers
 
             var courseIds = product.categories.Where(x => x.Selected).Select(y => y.Value);
 
-            
             ViewData["Category"] = GetCategories();
 
             //string NameEn = "Angielska Nazwa";
@@ -399,7 +396,11 @@ namespace partner_aluro.Controllers
             ModelState.Remove("product_Image.path");
             if (!ModelState.IsValid)
             {
+
+                ViewData["Category"] = GetCategories();
+                ViewData["returnUrl"] = Request.Headers["Referer"].ToString();
                 return View(product);
+
             }
 
             var id = _ProductService.AddProduct(product);//wazne aby przypisac
