@@ -453,7 +453,7 @@ namespace partner_aluro.Controllers
             };
 
 
-            _productCategoryService.AddProductCategoryMultiple(productCategory);
+            //_productCategoryService.AddProductCategoryMultiple(productCategory);
 
             foreach (var ids in courseIds)
             {
