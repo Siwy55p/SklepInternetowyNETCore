@@ -110,9 +110,20 @@ namespace partner_aluro.Controllers
                     ViewData["returnUrl"] = powrot;
                 }
 
-            }
+            }else if(ViewData["returnUrl"] == null)
+            {
+                string a = Request.Headers["Referer"].ToString();
+                if(a.Contains("ZlozZamowienie"))
+                {
+                    ViewData["returnUrl"] = powrot;
+                }else
+                {
+                    powrot = a;
+                    ViewData["returnUrl"] = a;
+                }
 
-            //ViewData["MetodyPlatnosci"] = OrderController.GetMetodyPlatnosci();
+            }
+                //ViewData["MetodyPlatnosci"] = OrderController.GetMetodyPlatnosci();
             ViewData["MetodyPlatnosci"] = _context.MetodyPlatnosci.ToList();
             ViewData["MetodyDostawy"] = _context.MetodyDostawy.ToList();
 
