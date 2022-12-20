@@ -117,24 +117,39 @@
             </div>
         </div>
         <hr />
-        <h4 class="mb-2">Wymiary</h4>
+        <h5 class="mb-2">Wymiary zew.</h5>
         <div class="input-group">
-            Wymiary zewnętrzne:
-            <label asp-for="@Model.SzerokoscProduktu" class="col-sm-2 p-0 m-0 col-form-label text-end">Szerokość:</label>
-            <input asp-for="@Model.SzerokoscProduktu" type="text" class="form-control p-0 m-0" aria-label="Szerokość produktu" placeholder="Szerokość produktu">
-            <label asp-for="@Model.GlebokoscProduktu" class="col-sm-2 p-0 m-0 col-form-label text-end">Głębokość:</label>
-            <input asp-for="@Model.GlebokoscProduktu" type="text" class="form-control p-0 m-0" aria-label="Głębokość produktu" placeholder="Głębokość produktu">
-            <label asp-for="@Model.WysokoscProduktu" class="col-sm-2 p-0 m-0 col-form-label text-end">Wysokość:</label>
-            <input asp-for="@Model.WysokoscProduktu" type="text" class="form-control p-0 m-0" aria-label="Wysokość produktu" placeholder="Wysokość produktu">
+            <div class="row">
+                <div class="col">
+                    <label asp-for="@Model.SzerokoscProduktu" class="col-sm-2 p-0 m-0 col-form-label text-end">Szerokość:</label>
+                    <input asp-for="@Model.SzerokoscProduktu" type="text" class="form-control p-0 m-0" aria-label="Szerokość produktu">
+                </div>
+                <div class="col">
+                    <label asp-for="@Model.GlebokoscProduktu" class="col-sm-2 p-0 m-0 col-form-label text-end">Głębokość:</label>
+                    <input asp-for="@Model.GlebokoscProduktu" type="text" class="form-control p-0 m-0" aria-label="Głębokość produktu">
+                </div>
+                <div class="col">
+                    <label asp-for="@Model.WysokoscProduktu" class="col-sm-2 p-0 m-0 col-form-label text-end">Wysokość:</label>
+                    <input asp-for="@Model.WysokoscProduktu" type="text" class="form-control p-0 m-0" aria-label="Wysokość produktu">
+                </div>
+            </div>
         </div>
+        <h5 class="mb-2">Wymiary wew.</h5>
         <div class="input-group">
-            Wymiary wewnętrzne:
-            <label asp-for="@Model.SzerokoscWewnetrznaProduktu" class="col-sm-2 p-0 m-0 col-form-label text-end">Szerokość:</label>
-            <input asp-for="@Model.SzerokoscWewnetrznaProduktu" type="text" class="form-control p-0 m-0" aria-label="Szerokość produktu" placeholder="Szerokość wew. produktu">
-            <label asp-for="@Model.GlebokoscWewnetrznaProduktu" class="col-sm-2 p-0 m-0 col-form-label text-end">Głębokość:</label>
-            <input asp-for="@Model.GlebokoscWewnetrznaProduktu" type="text"  class="form-control p-0 m-0" aria-label="Głębokość produktu" placeholder="Głębokość wew. produktu">
-            <label asp-for="@Model.WysokoscWewnetrznaProduktu" class="col-sm-2 p-0 m-0 col-form-label text-end">Wysokość:</label>
-            <input asp-for="@Model.WysokoscWewnetrznaProduktu" type="text" class="form-control p-0 m-0" aria-label="Wysokość produktu" placeholder="Wysokość wew. produktu">
+            <div class="row">
+                <div class="col">
+                    <label asp-for="@Model.SzerokoscWewnetrznaProduktu" class="col-sm-2 p-0 m-0 col-form-label text-end">Szerokość:</label>
+                    <input asp-for="@Model.SzerokoscWewnetrznaProduktu" type="text" class="form-control p-0 m-0" aria-label="Szerokość produktu">
+                </div>
+                <div class="col">
+                    <label asp-for="@Model.GlebokoscWewnetrznaProduktu" class="col-sm-2 p-0 m-0 col-form-label text-end">Głębokość:</label>
+                    <input asp-for="@Model.GlebokoscWewnetrznaProduktu" type="text" class="form-control p-0 m-0" aria-label="Głębokość produktu">
+                </div>
+                <div class="col">
+                    <label asp-for="@Model.WysokoscWewnetrznaProduktu" class="col-sm-2 p-0 m-0 col-form-label text-end">Wysokość:</label>
+                    <input asp-for="@Model.WysokoscWewnetrznaProduktu" type="text" class="form-control p-0 m-0" aria-label="Wysokość produktu">
+                </div>
+            </div>
         </div>
 
         <div class="form-group row">
