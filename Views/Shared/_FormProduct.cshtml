@@ -49,17 +49,35 @@
             </div>
         </div>
         <div class="form-group row">
+
+            @{
+        string zmiennaCenaProduktuBrutto = "";
+            }
+            @if (@Model.CenaProduktuBrutto!=0)
+            {
+        zmiennaCenaProduktuBrutto = @Model.CenaProduktuBrutto.ToString();
+            }
+
             <label asp-for="@Model.CenaProduktuBrutto" class="col-sm-3 col-form-label text-end">Cena produktu hurt (brutto) </label>
                 <div class="col-sm-4">
-        <input asp-for="@Model.CenaProduktuBrutto" class="form-control" aria-required="true" id="CenaBrutto" placeholder="Cena produktu (brutto)" />
+        <input asp-for="@Model.CenaProduktuBrutto" class="form-control" aria-required="true" id="CenaBrutto" placeholder="Cena produktu (brutto)" value="@zmiennaCenaProduktuBrutto" />
                 <span asp-validation-for="@Model.CenaProduktuBrutto" class="text-danger">
                 </span>
                 </div>
         </div>
+
+            @{
+                string zmiennaCenaProduktuDetal = "";
+            }
+            @if (@Model.CenaProduktuBrutto != 0)
+            {
+                zmiennaCenaProduktuDetal = @Model.CenaProduktuDetal.ToString();
+            }
+
         <div class="form-group row">
             <label asp-for="@Model.CenaProduktuDetal" class="col-sm-3 col-form-label text-end">Cena detaliczna: </label>
                 <div class="col-sm-4">
-                <input asp-for="@Model.CenaProduktuDetal" class="form-control" aria-required="true" placeholder="Cena detaliczna produktu" />
+                <input asp-for="@Model.CenaProduktuDetal" class="form-control" aria-required="true" placeholder="Cena detaliczna produktu" value="@zmiennaCenaProduktuDetal" />
                 <span asp-validation-for="@Model.CenaProduktuDetal" class="text-danger">
                 </span>
                 </div>

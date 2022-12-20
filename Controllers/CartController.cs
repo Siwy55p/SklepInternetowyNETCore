@@ -85,18 +85,32 @@ namespace partner_aluro.Controllers
             ViewData["MetodyDostawy"] = _context.MetodyDostawy.ToList();
 
 
-            var returnUrl = Request.Headers["Referer"].ToString();
+            var returnUrls = Request.Headers["Referer"].ToString();
 
-            return Redirect(returnUrl);
+            return Redirect(returnUrls);
 
             //return View(vm);
         }
-
+        static string powrot = "";
         [HttpGet]
         public async Task<IActionResult> ZlozZamowienie()
         {
-            ViewData["returnUrl"] = Request.Headers["Referer"].ToString();
-            var returnUrl = Request.Headers["Referer"].ToString();
+
+            if (ViewData["returnUrl"] != null)
+            {
+                string sprawdz = ViewData["returnUrl"].ToString();
+                if (sprawdz != "partneralluro.hostingasp.pl/Cart/ZlozZamowienie")
+                {
+
+                    ViewData["returnUrl"] = Request.Headers["Referer"].ToString();
+                    powrot = ViewData["returnUrl"].ToString();
+                }
+                else
+                {
+                    ViewData["returnUrl"] = powrot;
+                }
+
+            }
 
             //ViewData["MetodyPlatnosci"] = OrderController.GetMetodyPlatnosci();
             ViewData["MetodyPlatnosci"] = _context.MetodyPlatnosci.ToList();

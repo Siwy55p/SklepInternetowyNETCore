@@ -143,8 +143,12 @@
                             <button class="btn btn-success float-right mr-5" type="submit" name="returnUrl" value="@ViewBag.returnUrl"><i class="fa-solid fa-angles-right"></i>Powrót</button>
                         </form>*@
 
+                    @if (ViewData["returnUrl"] != null)
+                    {
+                        <a href="@ViewData["returnUrl"]">Powrót</a>
+                        }
                     <button id="btnBack" runat="server" text="Back" class="btn btn-primary" onclick="JavaScript: window.history.back(1); return false;">@language.Getkey("Powrót do sklepu")</button>
-                    <a class="a-cleanup" asp-controller="Cart" asp-action="ClearCart"><div class="btn btn-success float-right mr-5"><i class="fa-solid fa-trash-can"> </i> @language.Getkey("Wyczyść zamówienie")</div></a>
+                    <a class="a-cleanup end" asp-controller="Cart" asp-action="ClearCart"><div class="btn btn-success float-right mr-5"><i class="fa-solid fa-trash-can"> </i> @language.Getkey("Wyczyść zamówienie")</div></a>
                 }
                 else
                 {
