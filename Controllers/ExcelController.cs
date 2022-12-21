@@ -200,7 +200,7 @@ namespace partner_aluro.Controllers
             //ws.Cell("D3").Style.Border.LeftBorder = XLBorderStyleValues.Thick;
             //ws.Cell("D3").Style.Border.RightBorder = XLBorderStyleValues.Thick;
             //ws.Cell("D3").Style.Border.BottomBorder = XLBorderStyleValues.Thick;
-            ws.Cell("D3").Value = "NOWA HURTOWA Brutto";
+            ws.Cell("D3").Value = "CENA HURTOWA Brutto";
             ws.Cell("D3").Style.Alignment.WrapText = true;
             ws.Cell("D3").Style.Font.Bold = true;
             ws.Cell("D3").Style.Font.FontSize = 10;
