@@ -363,7 +363,7 @@ namespace partner_aluro.Controllers
             //////patch root www
             //string webRootPath = _webHostEnvironment.WebRootPath;
 
-            var produkty = _content.Products.Where(p => p.CategoryNavigation.Aktywny == true).Include(p => p.Product_Images).Include(p => p.CategoryNavigation).OrderBy(p => p.Symbol).ToList();
+            var produkty = _content.Products.Include(p => p.Product_Images).Include(p => p.CategoryNavigation).OrderBy(p => p.Symbol).ToList();
 
             XmlDocument doc = new();
             XmlNode docNode = doc.CreateXmlDeclaration("1.0", "UTF-8", null);
@@ -454,7 +454,9 @@ namespace partner_aluro.Controllers
                     CDatastoc = doc.CreateCDataSection("8");
                 } else if (produkty[i].Ilosc < 8)
                 {
-                    CDatastoc = doc.CreateCDataSection(produkty[i].Ilosc.ToString());
+                    int ile = Decimal.ToInt32(produkty[i].Ilosc);
+
+                    CDatastoc = doc.CreateCDataSection(ile.ToString());
                 }else if (produkty[i].Ukryty==true)
                 {
                     CDatastoc = doc.CreateCDataSection("0");
