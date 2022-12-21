@@ -85,16 +85,24 @@
 
         <div class="form-group row">
 
-                @{
-                    int ile = Decimal.ToInt32(Model.Ilosc);
-                }
 
              <label asp-for="@Model.Ilosc" class="col-sm-3 col-form-label text-end">Ilość: </label>
                 <div class="col-sm-4">
 
 
+                @{
+                    int ile = Decimal.ToInt32(Model.Ilosc);
+                }
 
-        <input asp-for="@Model.Ilosc" value="@ile" class="form-control" aria-required="true" />
+                @{
+                    string zmiennaIlosc = "";
+                }
+                @if (@Model.Ilosc != 0)
+                {
+                    zmiennaIlosc = @Model.Ilosc.ToString();
+                }
+
+        <input asp-for="@Model.Ilosc" value="@ile" class="form-control" aria-required="true" value="@zmiennaIlosc" />
                 <span asp-validation-for="@Model.Ilosc" class="text-danger">
                 </span>
                 </div>
