@@ -45,9 +45,11 @@ namespace partner_aluro.Services
 
         public async Task<List<Product>> GetProductList()
         {
-            var applicationDbContext = _context.Products.Include(p => p.CategoryNavigation);
-            var list = await applicationDbContext.ToListAsync();
-
+            List<Product> list = await _context.Products
+                .Include(p => p.CategoryNavigation)
+                .Include(p => p.Product_Images)
+                .ToListAsync();
+            
             return list;
         }
 

@@ -6,7 +6,7 @@ namespace partner_aluro.Services.Interfaces
     {
         Task<List<ImageModel>> ListImageAsync();
 
-        Task AddAsync(ImageModel imgModel);
+        Task<int> AddAsync(ImageModel imgModel);
 
         //Task<string> CreateImageAddAsync(ImageModel imageModel);
         //Task<string> CreateImageAddAsync(Product product);

@@ -65,6 +65,7 @@ namespace partner_aluro.Models
         public bool Ukryty { get; set; } = false;
 
         public string? ImageUrl { get; set; }
+        public string? pathImageUrl250x250 { get; set; }
 
         //To jest obrazek glowny ktory usuwam
         //[Display(Name = "Obrazek główny")]

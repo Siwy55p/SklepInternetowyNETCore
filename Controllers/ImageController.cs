@@ -13,6 +13,8 @@ using System.Drawing;
 using System.Net;
 using ImageMagick;
 using System.IO;
+using static NuGet.Packaging.PackagingConstants;
+using System.Linq;
 
 namespace partner_aluro.Controllers
 {
@@ -37,45 +39,86 @@ namespace partner_aluro.Controllers
         // GET: Image
         public async Task<IActionResult> Index()
         {
-            //List<ImageModel> lista1 = await _context.Images.ToListAsync();
 
-            //for (int i = 0; i < lista2.Count(); i++)
-            //{
-
-            //    var img = _context.Images.Where(x => x.ImageId == lista2[i].ImageId).FirstOrDefault();
-            //    if (img != null)
-            //    { 
-            //    _context.Images.Remove(img);
-            //    _context.SaveChanges();
-            //    }
-            //}
-            //List<ImageModel> lista = await _context.Images.ToListAsync();
-
-            //for (int i = 0; i < lista.Count; i++)
-            //{
-
-            //    string sz = lista[i].path;
-            //    if (sz[sz.Length - 1] == '\\')
-            //    {
-            //    }
-            //    else
-            //    {
-            //        //lista[i].path = lista[i].path + '\\';
-            //        ImageModel image = await _context.Images.Where(x => x.ImageId == lista[i].ImageId).FirstOrDefaultAsync();
-            //        image.path = image.path + '\\';
-            //        _context.Update(image);
-            //        _context.SaveChanges();
-            //    }
-
-            //}
-            //return View(lista2);
-
-
-            //await _context.Images.OrderByDescending(x => x.ImageId).Take(1000).ToListAsync();
-
-            //List<ImageModel> lista = _context.Images.TakeLast(100).ToList();
             return View(await _context.Images.OrderByDescending(x => x.ImageId).Take(1000).ToListAsync());
         }
+
+
+        public IActionResult zmianaNazwy()
+        {
+
+
+
+
+            //List<Product> products = _context.Products.ToList();
+            //for(int i = 99; i < products.Count(); i++)
+            //{
+            //    string nazwaObrazka = products[i].ImageUrl;
+            //    if (_context.Images.Where(x => x.ImageName == nazwaObrazka).FirstOrDefault() != null)
+            //    {
+            //        products[i].ProductImagesId = _context.Images.Where(x => x.ImageName == nazwaObrazka).FirstOrDefault().ImageId;
+            //        products[i].pathImageUrl250x250 = _context.Images.Where(x => x.ImageName == nazwaObrazka).FirstOrDefault().pathImageCompress250x250;
+            //    }
+            //}
+
+
+            List<ImageModel> listaWszystkich = _context.Images.ToList();
+
+            string webRootPath = _webHostEnvironment.WebRootPath;
+
+            for (int i = 0; i < 2; i++)
+            {
+                ImageModel img = listaWszystkich[i];
+
+                int IdImage = img.ImageId;
+
+
+
+                string IdImageString = IdImage.ToString();
+                char[] charArr = IdImageString.ToCharArray();
+
+                string path = img.path.ToString();
+                string path0 = img.path.ToString();
+
+                string Folders = "";
+                string uploadsFolder = Path.Combine(webRootPath, @"img/");
+                for (int c = 0; c < charArr.Length; c++)
+                {
+                    Folders += charArr[c] + "/";
+                }
+                path0 += Folders;
+                if (path0.Contains("img/p/"))
+                {
+                    uploadsFolder = Path.Combine(webRootPath, @"img/p/");
+                }
+                if (path0.Contains("img/SliderHome/"))
+                {
+                    uploadsFolder = Path.Combine(webRootPath, @"img/SliderHome/");
+                }
+
+                uploadsFolder += Folders;
+
+                if (!Directory.Exists(uploadsFolder))
+                {
+                    Directory.CreateDirectory(uploadsFolder);
+                }
+
+                string sourceFile = img.fullPath;
+                string destinationFile = path0;
+
+                // To move a file or folder to a new location:
+                System.IO.File.Move(sourceFile, destinationFile);
+
+                //// To move an entire directory. To programmatically modify or combine
+                //// path strings, use the System.IO.Path class.
+                //System.IO.Directory.Move(@"C:\Users\Public\public\test\", @"C:\Users\Public\private");
+
+
+            }
+
+            return View();
+        }
+
         public async Task<IActionResult> GetFileServer()
         {
             //String path = Server.MapPath("~/images/"); // get the server path images folder
@@ -149,86 +192,6 @@ namespace partner_aluro.Controllers
             }
             return View(imageModel);
         }
-
-
-        //usuniecie funkcji dodwanie glownego obrazku
-        // POST: Product/CreateImageProductFront
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task <IActionResult> CreateImageProductFront(Product product)
-        //{
-        //    ModelState.Remove("Product");
-
-        //    if (ModelState.IsValid)
-        //    {
-        //        //Sabe image to wwwroot/image
-        //        string wwwRootPath = _webHostEnvironment.WebRootPath;
-        //        string fileName = Path.GetFileNameWithoutExtension(product.product_Image.ImageFile.FileName);
-        //        string extension = Path.GetExtension(product.product_Image.ImageFile.FileName);
-        //        product.product_Image.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                
-        //        string path = Path.Combine(wwwRootPath + "/img/produkty", fileName);
-
-
-
-        //        //save image in orginal format
-        //        using (var fileStream = new FileStream(path, FileMode.Create))
-        //        {
-        //            await product.product_Image.ImageFile.CopyToAsync(fileStream);
-        //        }
-
-        //        //string imagePath = Path.Combine(wwwRootPath, "img");
-        //        //string webPFileName = Path.GetFileNameWithoutExtension(product.product_Image.ImageFile.FileName) + ".webp";
-        //        //string normalImagePath = Path.Combine(wwwRootPath,imagePath, fileName);
-        //        //string webPImagePath = Path.Combine(wwwRootPath, imagePath, webPFileName);
-
-        //        //using (var webPimageFileStream = new FileStream(webPFileName, FileMode.Create))
-        //        //{
-        //        //    using (ImageFactory imageFactory = new ImageFactory(preserveExifData: false)
-        //        //    {
-        //        //        imageFactory.Load(product.product_Image.ImageFile.FileName.OpenReadStream())
-        //        //        .Format(new webPFortma())
-        //        //        .Quality(100)
-        //        //        .Save(webPFileName);
-        //        //    }
-        //        //}
-
-
-        //        using (MagickImage image = new MagickImage(path))
-        //        {
-        //            image.Format = image.Format; // Get or Set the format of the image.
-        //            image.Resize(40, 40); // fit the image into the requested width and height. 
-        //            image.Quality = 100; // This is the Compression level.
-        //            image.Write(path);
-        //        }
-
-        //        //using (MagickImage image = new MagickImage(@"YourImage.jpg"))
-        //        //{
-        //        //    image.Format = image.Format; // Get or Set the format of the image.
-        //        //    image.Resize(40, 40); // fit the image into the requested width and height. 
-        //        //    image.Quality = 10; // This is the Compression level.
-        //        //    image.Write("YourFinalImage.jpg");
-        //        //}
-
-
-        //        //insert record
-
-        //        //migajace
-        //        //przenika
-
-
-
-        //        _context.Add(product.product_Image);
-        //        await _context.SaveChangesAsync();
-
-        //        return RedirectToAction("Add", "Product", new { Product = product });
-        //        //return RedirectToAction(nameof(Index));
-        //    }
-        //    return RedirectToAction("Add", "Product", new { Product = product });
-        //    //return View(product.product_Image);
-        //}
 
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
         // GET: Image/Edit/5
@@ -464,94 +427,6 @@ namespace partner_aluro.Controllers
             }
             return Redirect(returnUrl);
         }
-
-
-
-        //[ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
-        //public static ImageModel UploadFiles(IFormFileCollection files, Product? product = null)
-        //{
-        //    //var files = HttpContext.Request.Form.Files;
-
-
-        //    if (!IsInitialized)
-        //        throw new InvalidOperationException("Object is not initialized");
-
-        //    //var path = Path.Combine(_hostingEnvironment.WebRootPath, "uploads");
-        //    ImageModel imgModel = new ImageModel();  // sprawdz czy istnieje.
-
-        //    if (files.Count > 0) //To oznacza ze frontowy obrazek został dodany
-        //    {
-        //        string webRootPath = _hostingEnvironment.WebRootPath;
-
-        //        for (int i = 0; i < files.Count; i++)
-        //        {
-        //            //Save image to wwwroot/image
-        //            string path0 = "img\\p\\";
-
-        //            var uploadsFolder = Path.Combine(webRootPath, "img\\");
-        //            if (product != null)
-        //            {
-        //                uploadsFolder = Path.Combine(webRootPath, "img\\p\\" + product.Symbol);
-        //            }
-
-
-        //            if (!Directory.Exists(uploadsFolder))
-        //            {
-        //                Directory.CreateDirectory(uploadsFolder);
-        //            }
-
-        //            FileInfo fileInfo = new FileInfo(files[i].FileName);
-
-        //            var extension = Path.GetExtension(files[i].FileName);
-        //            var dynamicFileName = fileInfo.Name + extension;
-
-
-        //            if (product != null)
-        //            {
-        //                dynamicFileName = product.Symbol + "_" + i + "_" + extension;
-        //            }
-
-
-        //            using (var filesStream = new FileStream(Path.Combine(uploadsFolder, dynamicFileName), FileMode.Create))
-        //            {
-        //                files[i].CopyTo(filesStream);
-        //            }
-
-        //            //add product Image for new product
-        //            imgModel = new()
-        //            {
-        //                path = path0 + product.Symbol + "\\",
-        //                fullPath = path0 + product.Symbol + "\\" + dynamicFileName,
-        //                kolejnosc = i,
-        //                Tytul = product.Name,
-        //                ImageName = dynamicFileName,
-        //                //ProductId = product.ProductId
-        //            };
-
-        //            if (product != null)
-        //            {
-        //                product.Product_Images.Add(imgModel);
-        //            }
-
-        //            //_imageService.AddAsync(imgModel);
-        //        }
-        //        return imgModel;
-        //    }
-
-        //    imgModel = new()
-        //    {
-        //        path = "img\\",
-        //        fullPath = "\\img\\",
-        //        kolejnosc = -1,
-        //        Tytul = "",
-        //        ImageName = ".jpg",
-        //        //ProductId = product.ProductId
-        //    };
-        //    return imgModel;
-
-
-
-        //}
 
 
 

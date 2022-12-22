@@ -428,7 +428,13 @@ namespace partner_aluro.Controllers
                 product.ImageUrl = product.Product_Images.OrderBy(x => x.kolejnosc).FirstOrDefault().ImageName;
 
                 product.Product_Images = product.Product_Images.OrderBy(x => x.kolejnosc).ToList();
+
+                product.ProductImagesId = product.Product_Images.FirstOrDefault().ImageId;
+
+
+                product.pathImageUrl250x250 = product.Product_Images.FirstOrDefault().pathImageCompress250x250;
             }
+
             _context.Update(product);
             _context.SaveChanges();
 
@@ -478,7 +484,8 @@ namespace partner_aluro.Controllers
             ExcelController.Initialize();
 
             ViewData["Category"] = GetCategories();
-            return View(await _ProductService.GetProductList());
+            List<Product> produkty = await _ProductService.GetProductList();
+            return View(produkty);
         }
 
         [HttpGet]
@@ -496,7 +503,7 @@ namespace partner_aluro.Controllers
             Product product = _context.Products.Find(id);
 
             //delete image from wwwroot/images
-            var PathProduct = Path.Combine(_webHostEnvironment.WebRootPath + "\\images\\produkty\\" + product.Symbol);
+            var PathProduct = Path.Combine(_webHostEnvironment.WebRootPath + "\\img\\p\\" + product.Symbol);
 
             if (System.IO.Directory.Exists(PathProduct))
                 System.IO.Directory.Delete(PathProduct, true);

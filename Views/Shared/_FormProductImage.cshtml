@@ -12,65 +12,76 @@
         </div>*@
 
 
-        <div class="form-group border">
-            <label asp-for="@Model.ImageUrl" class="control-label">Obrazek prezentujacy (front)</label>
-            <img id="FrontImagePrv" src="~/img/p/@Model.Symbol/@Model.ImageUrl" alt="picture" width="150" height="150" style="border:1px; margin-top:20px; margin-left:120px" />
-        </div>
+<div class="form-group border">
+    <label asp-for="@Model.ImageUrl" class="control-label">Obrazek prezentujacy (front)</label>
 
-        <div class="row">
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label asp-for="@Model.Product_Images" class="control-label"></label>
-                    <input type="file" asp-for="@Model.Product_Images" id="images" name="images[]" onchange="preview_images();" multiple accept="image/jpeg, image/png, image/jpg" />
+    @if (Model.Product_Images != null && @Model.Product_Images.Count() > 0)
+    {
+        <img id="FrontImagePrv" src="~/@Model.Product_Images.FirstOrDefault().pathImageCompress250x250" width="150" height="150" style="border:1px; margin-top:20px; margin-left:120px">
+    }
+    @*<img id="FrontImagePrv" src="~/img/p/@Model.Symbol/@Model.ImageUrl" alt="picture" width="150" height="150" style="border:1px; margin-top:20px; margin-left:120px" />*@
+
+
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label asp-for="@Model.Product_Images" class="control-label"></label>
+            <input type="file" asp-for="@Model.Product_Images" id="images" name="images[]" onchange="preview_images();" multiple accept="image/jpeg, image/png, image/jpg" />
             <span asp-validation-for="@Model.Product_Images" class="text-danger"></span>
-                </div>
-
-            </div>
         </div>
 
-        <div class="row" id="image_preview">
-        </div>
+    </div>
+</div>
 
-        @if (Model.Product_Images != null)
-        {
-                <div class="row">
-                    <div class="col-md-12 mb-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table id="ProductEditImage" class="display" style="width:100%">
-                                        <thead>
-                                            <tr>
-                                                <th>Lp.</th>
-                                                <th>Obrazek</th>
-                                                <th>id</th>
-                                                <th>Akcje</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                @foreach (var image in Model.Product_Images)
-                                                {
-                                                <tr>
-                                                    <td>
-                                                        @image.kolejnosc
-                                                    </td>
-                                                    <td>
-                                                        <img src="~/img/p/@Model.Symbol/@image.ImageName" alt="Logo image" width="100" height="100" style="border:1px; margin-top:20px;" />
-                                                    </td>
-                                                    <td>
-                                                        @image.ImageId
-                                                    </td>
-                                                    <td>
-                                                        <a asp-action="Edit"   asp-controller="Image" asp-route-id="@image.ImageId">Edit</a> |
-                                                        <a class="btn btn-success" asp-controller="Image" asp-action="Delete2" asp-route-ImageId="@image.ImageId" asp-route-returnUrl="@ViewData["returnUrl"]">Usuń</a>
-                                                    </td>
-                                                </tr>
-                                                }
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
+<div class="row" id="image_preview">
+</div>
+
+@if (Model.Product_Images != null)
+{
+    <div class="row">
+        <div class="col-md-12 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="ProductEditImage" class="display" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>Lp.</th>
+                                    <th>Obrazek</th>
+                                    <th>id</th>
+                                    <th>Akcje</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var image in Model.Product_Images)
+                                {
+                                    <tr>
+                                        <td>
+                                            @image.kolejnosc
+                                        </td>
+                                        <td>
+                                            @if (image != null)
+                                            {
+                                                <img src="~/@image.fullPath" width="100" height="100" style="border:1px; margin-top:20px;" />
+                                            }
+                                            @*<img src="~/img/p/@Model.Symbol/@image.ImageName" alt="Logo image" width="100" height="100" style="border:1px; margin-top:20px;" />*@
+                                        </td>
+                                        <td>
+                                            @image.ImageId
+                                        </td>
+                                        <td>
+                                            <a asp-action="Edit" asp-controller="Image" asp-route-id="@image.ImageId">Edit</a> |
+                                            <a class="btn btn-success" asp-controller="Image" asp-action="Delete2" asp-route-ImageId="@image.ImageId" asp-route-returnUrl="@ViewData["returnUrl"]">Usuń</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-        }
+            </div>
+        </div>
+    </div>
+}

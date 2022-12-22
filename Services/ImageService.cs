@@ -40,49 +40,6 @@ namespace partner_aluro.Services
             IsInitialized = true;
         }
 
-
-        //Obrazek prezentujacy
-        //public async Task<string> CreateImageAddAsync(ImageModel imageModel)
-        //{
-        //    string komunikat = "1";
-
-        //    if (imageModel.ImageFile != null)
-        //    {
-        //        //Save image to wwwroot/image
-        //        string wwwRootPath = _webHostEnvironment.WebRootPath;
-        //        string fileName = Path.GetFileNameWithoutExtension(imageModel.ImageFile.FileName);
-        //        string extension = Path.GetExtension(imageModel.ImageFile.FileName);
-        //        imageModel.ImageName = fileName + extension;
-        //        string path = Path.Combine(wwwRootPath + "/Images/", fileName);
-        //        using (var fileStream = new FileStream(path, FileMode.Create))
-        //        {
-        //            await imageModel.ImageFile.CopyToAsync(fileStream);
-        //        }
-        //        //insert record
-        //        imageModel.fullPath = path + "\\" + fileName + extension;
-        //        imageModel.path = path;
-
-
-
-        //        var image = _context.Images.Where(x => x.ImageName == imageModel.ImageName).FirstOrDefault();
-        //        if (image != null)
-        //        {
-        //            _context.Images.Update(image);
-        //        }
-        //        else
-        //        {
-        //            _context.Add(imageModel);
-        //            await _context.SaveChangesAsync();
-        //        }
-
-        //        return wwwRootPath;
-        //    }
-
-        //    return komunikat;
-        //}
-
-
-
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
         public async Task UploadFilesAsync(IFormFileCollection files, Product? product = null, Slider? slider = null)
         {
@@ -95,7 +52,10 @@ namespace partner_aluro.Services
                 throw new InvalidOperationException("Object is not initialized");
 
             //var path = Path.Combine(_hostingEnvironment.WebRootPath, "uploads");
-            ImageModel imgModel = new ImageModel();  // sprawdz czy istnieje.
+            //ImageModel imgModel = new ImageModel();  // sprawdz czy istnieje.
+
+            
+
 
             if (files.Count > 0) //To oznacza ze frontowy obrazek został dodany
             {
@@ -103,6 +63,12 @@ namespace partner_aluro.Services
 
                 for (int i = 0; i < files.Count; i++)
                 {
+
+                    ImageModel imgModel = new ImageModel();  //Dodanie do bazy rekodu w ktorym bedzie znajdował sie obraz
+                    int IdImage = await AddAsync(imgModel);
+
+                    imgModel = _context.Images.Find(IdImage);
+
                     //Save image to wwwroot/img
                     string path0 = @"img/";
                     if (product != null)
@@ -111,20 +77,28 @@ namespace partner_aluro.Services
                     }
                     if (slider != null)
                     {
-
-                        path0 = @"img/SliderHome/" + slider.ImageSliderID;
-                        //path0 = @"img/SliderHome/" + slider.ImageSliderID + @"/";
+                        path0 = @"img/SliderHome/";
                     }
 
-                    var uploadsFolder = Path.Combine(webRootPath, @"img/");
+                    string IdImageString = IdImage.ToString();
+                    char[] charArr = IdImageString.ToCharArray();
+
+                    string Folders = "";
+                    string uploadsFolder = Path.Combine(webRootPath, @"img/");
+                    for(int c = 0; c < charArr.Length; c++)
+                    {
+                        Folders += charArr[c] + "/";
+                    }
+                    path0 += Folders;
                     if (product != null)
                     {
-                        uploadsFolder = Path.Combine(webRootPath, @"img/p/" + product.Symbol);
+                        uploadsFolder = Path.Combine(webRootPath, @"img/p/");
                     }
                     if (slider != null)
                     {
-                        uploadsFolder = Path.Combine(webRootPath, @"img/SliderHome/" + slider.ImageSliderID);
+                        uploadsFolder = Path.Combine(webRootPath, @"img/SliderHome/");
                     }
+                    uploadsFolder += Folders;
 
                     if (!Directory.Exists(uploadsFolder))
                     {
@@ -134,17 +108,17 @@ namespace partner_aluro.Services
                     FileInfo fileInfo = new FileInfo(files[i].FileName);
 
                     var extension = Path.GetExtension(files[i].FileName);
-                    var dynamicFileName = fileInfo.Name + extension;
+                    var dynamicFileName = IdImageString + extension;
 
 
-                    if (product != null)
-                    {
-                        dynamicFileName = product.Symbol + "_" + i + "_" + DateTime.Now.ToString("mm_ss") + extension;
-                    }
-                    if (slider != null)
-                    {
-                        dynamicFileName = "slider" + i + "_" + DateTime.Now.ToString("mm_ss") + extension;
-                    }
+                    //if (product != null)
+                    //{
+                    //    dynamicFileName = product.Symbol + "_" + i + "_" + DateTime.Now.ToString("mm_ss") + extension;
+                    //}
+                    //if (slider != null)
+                    //{
+                    //    dynamicFileName = "slider" + i + "_" + DateTime.Now.ToString("mm_ss") + extension;
+                    //}
 
                     //save orginal image
                     using (var filesStream = new FileStream(Path.Combine(uploadsFolder, dynamicFileName), FileMode.Create))
@@ -198,21 +172,35 @@ namespace partner_aluro.Services
                         if (product.Product_Images.Count() > 0)
                         {
                             ilosc = product.Product_Images.Count();
+                            ilosc++;
                         }
 
-                        imgModel = new()
-                        {
-                            path = path0 + product.Symbol + @"/",
-                            fullPath = path0 + product.Symbol + @"/" + dynamicFileName,
-                            kolejnosc = ilosc+i,
-                            Tytul = product.Name,
-                            ImageName = dynamicFileName,
-                            pathImageCompress250x250 = pathSaveCompres,
-                            ImageNameCompress250x250 = ImageNameCompres,
-                            pathImageCompress645x410 = pathSaveCompres2,
-                            ImageNameCompress645x410 = ImageNameCompres2,
-                            ProductId = product.ProductId
-                        };
+                        imgModel.path = path0;
+                        imgModel.fullPath = path0 + dynamicFileName;
+                        imgModel.kolejnosc = ilosc + i;
+                        imgModel.Tytul = product.Name;
+                        imgModel.ImageName = dynamicFileName;
+                        imgModel.pathImageCompress250x250 = path0 + ImageNameCompres;
+                        imgModel.ImageNameCompress250x250 = ImageNameCompres;
+                        imgModel.pathImageCompress645x410 = path0 + ImageNameCompres2;
+                        imgModel.ImageNameCompress645x410 = ImageNameCompres2;
+                        imgModel.ProductId = product.ProductId;
+                        imgModel.Opis = product.Symbol;
+
+
+                        //imgModel = new()
+                        //{
+                        //    path = path0 + product.Symbol + @"/",
+                        //    fullPath = path0 + product.Symbol + @"/" + dynamicFileName,
+                        //    kolejnosc = ilosc+i,
+                        //    Tytul = product.Name,
+                        //    ImageName = dynamicFileName,
+                        //    pathImageCompress250x250 = pathSaveCompres,
+                        //    ImageNameCompress250x250 = ImageNameCompres,
+                        //    pathImageCompress645x410 = pathSaveCompres2,
+                        //    ImageNameCompress645x410 = ImageNameCompres2,
+                        //    ProductId = product.ProductId
+                        //};
                     }
                     if (slider != null)
                     {
@@ -220,39 +208,51 @@ namespace partner_aluro.Services
                         if (slider.ObrazkiDostepneWSliderze.Count() > 0)
                         {
                             ilosc = slider.ObrazkiDostepneWSliderze.Count();
+                            ilosc++;
                         }
 
-                        imgModel = new()
-                        {
-                            path = path0 +@"/",
-                            fullPath = path0 + @"/" + dynamicFileName,
-                            kolejnosc = ilosc+i,
-                            Tytul = "sliderHome",
-                            ImageName = dynamicFileName,
-                            pathImageCompress250x250 = pathSaveCompres,
-                            ImageNameCompress250x250 = ImageNameCompres,
-                            pathImageCompress645x410 = pathSaveCompres2,
-                            ImageNameCompress645x410 = ImageNameCompres2,
-                            SliderIds = slider.ImageSliderID,
-                            Opis = "slider",
-                        };
+                        imgModel.path = path0;
+                        imgModel.fullPath = path0 + dynamicFileName;
+                        imgModel.kolejnosc = ilosc + i;
+                        imgModel.Tytul = "sliderHome";
+                        imgModel.ImageName = dynamicFileName;
+                        imgModel.pathImageCompress250x250 = path0 + ImageNameCompres;
+                        imgModel.ImageNameCompress250x250 = ImageNameCompres;
+                        imgModel.pathImageCompress645x410 = path0 + ImageNameCompres2;
+                        imgModel.ImageNameCompress645x410 = ImageNameCompres2;
+                        imgModel.SliderIds = slider.ImageSliderID;
+                        imgModel.Opis = "slider";
+                        
+                        //imgModel = new()
+                        //{
+                        //    path = path0 +@"/",
+                        //    fullPath = path0 + @"/" + dynamicFileName,
+                        //    kolejnosc = ilosc+i,
+                        //    Tytul = "sliderHome",
+                        //    ImageName = dynamicFileName,
+                        //    pathImageCompress250x250 = pathSaveCompres,
+                        //    ImageNameCompress250x250 = ImageNameCompres,
+                        //    pathImageCompress645x410 = pathSaveCompres2,
+                        //    ImageNameCompress645x410 = ImageNameCompres2,
+                        //    SliderIds = slider.ImageSliderID,
+                        //    Opis = "slider",
+                        //};
                     }
 
                     if(slider == null && product == null)
                     {
 
-                        imgModel = new()
-                        {
-                            path = path0 + @"/",
-                            fullPath = path0 + @"/" + dynamicFileName,
-                            kolejnosc = i,
-                            Tytul = "",
-                            ImageName = dynamicFileName,
-                            pathImageCompress250x250 = pathSaveCompres,
-                            ImageNameCompress250x250 = ImageNameCompres,
-                            pathImageCompress645x410 = pathSaveCompres2,
-                            ImageNameCompress645x410 = ImageNameCompres2
-                        };
+                        imgModel.path = path0;
+                        imgModel.fullPath = path0 + dynamicFileName;
+                        imgModel.kolejnosc = i;
+                        imgModel.Tytul = "";
+                        imgModel.ImageName = dynamicFileName;
+                        imgModel.pathImageCompress250x250 = path0 + ImageNameCompres;
+                        imgModel.ImageNameCompress250x250 = ImageNameCompres;
+                        imgModel.pathImageCompress645x410 = path0 + ImageNameCompres2;
+                        imgModel.ImageNameCompress645x410 = ImageNameCompres2;
+
+
                     }
 
 
@@ -266,7 +266,9 @@ namespace partner_aluro.Services
                         //product.Product_Images.Add(imgModel);
                     }
 
-                    await AddAsync(imgModel);
+                    _context.Images.Update(imgModel);
+
+                    //await AddAsync(imgModel);
                 }
 
             }
@@ -312,73 +314,12 @@ namespace partner_aluro.Services
             return "";
         }
 
-
-        //public async Task<string> CreateImageAddAsync(Product product) //Dodaj obrazek Front przy dodawaniu produktu
-        //{
-        //    string uniqueFileName = "";
-
-        //    if (product.product_Image.ImageFile != null)
-        //    {
-
-        //        //Save image to wwwroot/image
-        //        string webRootPath = _webHostEnvironment.WebRootPath;
-        //        string path0 = "images\\produkty\\";
-        //        var uploadsFolder = Path.Combine(webRootPath, "images\\produkty\\" + product.Symbol);
-
-        //        if (!Directory.Exists(uploadsFolder))
-        //        {
-        //            Directory.CreateDirectory(uploadsFolder);
-        //        }
-
-        //        var extension = Path.GetExtension(product.product_Image.ImageFile.FileName);
-
-        //        uniqueFileName = "Front_" + product.Symbol + extension;
-        //        string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-
-
-        //        string fileName = Path.GetFileNameWithoutExtension(product.product_Image.ImageFile.FileName);
-        //        //string extension = Path.GetExtension(product.product_Image.ImageFile.FileName);
-        //        //product.product_Image.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-        //        //string path = Path.Combine(wwwRootPath + "/Images/", fileName);
-        //        using (var fileStream = new FileStream(filePath, FileMode.Create))
-        //        {
-        //            await product.product_Image.ImageFile.CopyToAsync(fileStream);
-        //        }
-        //        //insert record
-        //        product.product_Image.path = path0 + product.Symbol +"\\";
-        //        product.product_Image.kolejnosc = 0;
-        //        product.product_Image.ProductId = product.ProductId;
-        //        product.product_Image.Tytul = product.Name;
-        //        product.product_Image.ProductImagesId = product.ProductId;
-        //        product.product_Image.ImageName = uniqueFileName;
-
-        //        product.product_Image.fullPath = path0 + product.Symbol + "\\" + uniqueFileName;
-
-
-        //        var image = _context.Images.Where(x => x.ImageName == product.product_Image.ImageName).FirstOrDefault();
-        //        if (image != null)
-        //        {
-        //            _context.Images.Update(image);
-        //        }
-        //        else
-        //        {
-        //            _context.Add(product.product_Image);
-        //            await _context.SaveChangesAsync();
-        //        }
-
-
-        //        return uniqueFileName;
-        //    }
-
-        //    return uniqueFileName;
-        //}
-
         public async Task<List<ImageModel>> ListImageAsync()
         {
             return await _context.Images.ToListAsync();
         }
 
-        public async Task AddAsync(ImageModel imgModel)
+        public async Task<int> AddAsync(ImageModel imgModel)
         {
             ImageModel imgExist = await _context.Images.Where(x => x.ImageName == imgModel.ImageName).FirstOrDefaultAsync();
 
@@ -387,12 +328,20 @@ namespace partner_aluro.Services
                 //To zamien i zrob update
                 _context.Update(imgModel);
                 await _context.SaveChangesAsync();
+
+                return imgModel.ImageId;
             }
             else
             {
+                imgModel.path = "";
+                imgModel.fullPath = "";
+                imgModel.ImageName = "";
+
                 //Nieistenie wiec dodaj nowy rekord do bazy
                 _context.Images.Add(imgModel);
                 _context.SaveChanges();
+
+                return imgModel.ImageId;
             }
         }
 
