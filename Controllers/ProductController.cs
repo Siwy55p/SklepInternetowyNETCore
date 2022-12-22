@@ -152,6 +152,8 @@ namespace partner_aluro.Controllers
                     {
                         //product.product_Image = product.Product_Images[0];
                         product.ImageUrl = product.Product_Images[0].ImageName;
+                        product.pathImageUrl250x250 = product.Product_Images[0].pathImageCompress250x250;
+                        product.ProductImagesId = product.Product_Images[0].ImageId;
                     }
                 }
             }
@@ -163,6 +165,9 @@ namespace partner_aluro.Controllers
                 product.ImageUrl = product.Product_Images.OrderBy(x => x.kolejnosc).FirstOrDefault().ImageName;
 
                 product.Product_Images = product.Product_Images.OrderBy(x => x.kolejnosc).ToList();
+
+                product.pathImageUrl250x250 = product.Product_Images[0].pathImageCompress250x250;
+                product.ProductImagesId = product.Product_Images[0].ImageId;
             }
 
             ModelState.Remove("product_Image.path");

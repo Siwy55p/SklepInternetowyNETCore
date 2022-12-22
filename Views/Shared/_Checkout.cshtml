@@ -87,7 +87,7 @@
                             }
 
                             <div class="col border border-top-0" style="max-width: 75px; width:75px">
-                                <img src="~/img/p/@item.Product.Symbol/@item.Product.ImageUrl"  style="height: 4em">
+                                <img src="~/@item.Product.pathImageUrl250x250"  style="height: 4em">
                             </div>
                             <div class="col border border-top-0 text-center d-none d-sm-none d-md-none d-lg-block text-wrap text-break" style="width: 10%">
                                 <a class="text-black" asp-controller="Product" asp-action="Details" asp-route-id="@item.Product.ProductId">@language.Getkey(@item.Product.Name)</a>

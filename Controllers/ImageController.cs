@@ -44,8 +44,66 @@ namespace partner_aluro.Controllers
             return View(await _context.Images.OrderByDescending(x => x.ImageId).Take(1000).ToListAsync());
         }
 
+        public IActionResult zmianaNazwy2()
+        {
 
-        public IActionResult zmianaNazwy()
+
+            List<ImageModel> listaWszystkich = _context.Images.ToList();
+
+            string webRootPath = _webHostEnvironment.WebRootPath;
+
+            for (int i = 5446; i < 5459; i++)
+            {
+                ImageModel img = listaWszystkich[i];
+
+                string pathPrawidlowy = img.pathImageCompress645x410;
+                string sciezkaDobra = pathPrawidlowy.Replace("645x410_", "");
+
+                img.path = sciezkaDobra;
+
+
+                string ImageName1 = img.ImageNameCompress645x410;
+                string PrawidloweImageName = ImageName1.Replace("645x410_", "");
+                img.ImageName = PrawidloweImageName;
+
+                img.fullPath = sciezkaDobra;
+
+                string name = PrawidloweImageName;
+                img.path = img.path.Replace(name, "");
+                _context.Images.Update(img);
+                _context.SaveChanges();
+            }
+
+
+
+            //List<Product> products = _context.Products.ToList();
+            //for (int i = 0; i < products.Count(); i++)
+            //{
+            //    int ImageId = products[i].ProductImagesId;
+            //    if (_context.Images.Where(x => x.ImageId == ImageId).FirstOrDefault() != null)
+            //    {
+            //        products[i].pathImageUrl250x250 = _context.Images.Where(x => x.ImageId == ImageId).FirstOrDefault().pathImageCompress250x250;
+            //    }
+            //}
+
+
+
+            //List<Product> products = _context.Products.ToList();
+            //for (int i = 0; i < products.Count(); i++)
+            //{
+            //    string nazwaObrazka = products[i].ImageUrl;
+            //    if (_context.Images.Where(x => x.ImageName == nazwaObrazka).FirstOrDefault() != null)
+            //    {
+            //        products[i].ProductImagesId = _context.Images.Where(x => x.ImageName == nazwaObrazka).FirstOrDefault().ImageId;
+            //        products[i].pathImageUrl250x250 = _context.Images.Where(x => x.ImageName == nazwaObrazka).FirstOrDefault().pathImageCompress250x250;
+            //    }
+            //}
+
+            return View();
+
+        }
+
+            public IActionResult zmianaNazwy()
         {
 
 
@@ -67,7 +125,7 @@ namespace partner_aluro.Controllers
 
             string webRootPath = _webHostEnvironment.WebRootPath;
 
-            for (int i = 3000; i < 5604; i++)
+            for (int i = 5357; i < 5603; i++)
             {
                 ImageModel img = listaWszystkich[i];
 
@@ -113,8 +171,12 @@ namespace partner_aluro.Controllers
                 _context.Images.Update(img);
                 _context.SaveChanges();
 
-                
-                string sourceFile = Path.Combine(webRootPath, img.fullPath);
+                string sciezka2 = img.ImageNameCompress645x410.ToString();
+                string staraSciezka = sciezka2.Replace("645x410_", ""); //nazwa pliku
+
+                string sciezka = @"\img\p\" + staraSciezka;
+
+                string sourceFile = Path.Combine(webRootPath, sciezka);
                 
                 string destinationFile = Path.Combine(uploadsFolder,img.ImageName);
 

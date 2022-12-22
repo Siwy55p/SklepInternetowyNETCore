@@ -17,7 +17,7 @@
 
     @if (Model.Product_Images != null && @Model.Product_Images.Count() > 0)
     {
-        <img id="FrontImagePrv" src="~/@Model.Product_Images.FirstOrDefault().pathImageCompress250x250" width="150" height="150" style="border:1px; margin-top:20px; margin-left:120px">
+        <img id="FrontImagePrv" src="~/@Model.pathImageUrl250x250" width="150" height="150" style="border:1px; margin-top:20px; margin-left:120px">
     }
     @*<img id="FrontImagePrv" src="~/img/p/@Model.Symbol/@Model.ImageUrl" alt="picture" width="150" height="150" style="border:1px; margin-top:20px; margin-left:120px" />*@
 
@@ -64,7 +64,7 @@
                                         <td>
                                             @if (image != null)
                                             {
-                                                <img src="~/@image.fullPath" width="100" height="100" style="border:1px; margin-top:20px;" />
+                                                <img src="~/@image.pathImageCompress250x250" width="100" height="100" style="border:1px; margin-top:20px;" />
                                             }
                                             @*<img src="~/img/p/@Model.Symbol/@image.ImageName" alt="Logo image" width="100" height="100" style="border:1px; margin-top:20px;" />*@
                                         </td>

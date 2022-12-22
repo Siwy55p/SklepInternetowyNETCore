@@ -26,7 +26,7 @@
                 <img class="card-img-top" onerror="this.onerror=null;this.src='../img/noimage.png';" src="~/@Model.Product_Images.FirstOrDefault().pathImageCompress250x250" alt="@Model.Name">
             }
 
-            @*<img class="card-img-top" onerror="this.onerror=null;this.src='../img/noimage.png';" src="~/img/p/@Model.Symbol/250x250_@Model.ImageUrl" alt="@Model.Name" >*@
+            <img class="card-img-top" onerror="this.onerror=null;this.src='../img/noimage.png';" src="~/@Model.pathImageUrl250x250" alt="@Model.Name" >
            @* <img class="card-img-top" onerror="this.onerror=null;this.src='../iag/noimage.png';" src="~/img/produkty/@Model.Symbol/@Model.Product_Images.Where(x=>x.kolejnosc==0).FirstOrDefault().ImageNameCompress250x250" alt="@Model.Name">*@
         </a>
     </div>

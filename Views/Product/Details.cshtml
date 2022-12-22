@@ -37,7 +37,7 @@
                                 @if (Model.Product_Images.Count() > 0)
                                 {
                                     <a id="myLink" onclick="Open(this)">
-                                        <img  class="main_image" id=featured src="~/img/p/@Model.Symbol/@Model.Product_Images[0].ImageName">
+                                        <img  class="main_image" id=featured src="~/@Model.Product_Images[0].pathImageCompress250x250" >
                                     </a>
                                 }
                             </div>
@@ -51,8 +51,8 @@
                                         var index = @img.x;
 
 
-                                        <a href="~/img/p/@Model.Symbol/@img.value.ImageName" class="glightbox" data-gallery="gallery">
-                                            <img id="@index" value="@img.value.kolejnosc" class="thumbnail_product" onmouseover="Over(this)" src="~/img/p/@Model.Symbol/@img.value.ImageName" alt="@img.value.Product" width="70px">
+                                        <a href="~/@img.value.pathImageCompress250x250" class="glightbox" data-gallery="gallery">
+                                            <img id="@index" value="@img.value.kolejnosc" class="thumbnail_product" onmouseover="Over(this)" src="~/@img.value.pathImageCompress250x250" alt="@img.value.Product" width="70px">
                                         </a>
                                     }
                                 </div>
