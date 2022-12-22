@@ -12,6 +12,7 @@ using System.Drawing.Imaging;
 using System.Drawing;
 using System.Net;
 using ImageMagick;
+
 using System.IO;
 using static NuGet.Packaging.PackagingConstants;
 using System.Linq;
@@ -66,7 +67,7 @@ namespace partner_aluro.Controllers
 
             string webRootPath = _webHostEnvironment.WebRootPath;
 
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < 200; i++)
             {
                 ImageModel img = listaWszystkich[i];
 
@@ -86,15 +87,20 @@ namespace partner_aluro.Controllers
                 {
                     Folders += charArr[c] + "/";
                 }
-                path0 += Folders;
+
                 if (path0.Contains("img/p/"))
                 {
                     uploadsFolder = Path.Combine(webRootPath, @"img/p/");
+                    path0 = @"img/p/";
                 }
                 if (path0.Contains("img/SliderHome/"))
                 {
                     uploadsFolder = Path.Combine(webRootPath, @"img/SliderHome/");
+                    path0 = @"img/SliderHome/";
                 }
+
+                path0 += Folders;
+
 
                 uploadsFolder += Folders;
 
@@ -102,16 +108,45 @@ namespace partner_aluro.Controllers
                 {
                     Directory.CreateDirectory(uploadsFolder);
                 }
+                img.ImageName = IdImageString +".jpg";
+                img.path = path0;
+                _context.Images.Update(img);
+                _context.SaveChanges();
 
-                string sourceFile = img.fullPath;
-                string destinationFile = path0;
+                
+                string sourceFile = Path.Combine(webRootPath, img.fullPath);
+                
+                string destinationFile = Path.Combine(uploadsFolder,img.ImageName);
 
-                // To move a file or folder to a new location:
-                System.IO.File.Move(sourceFile, destinationFile);
+                img.fullPath = path0 + img.ImageName;
 
+                
+
+                if (System.IO.File.Exists(sourceFile))
+                {
+                    // To move a file or folder to a new location:
+                    System.IO.File.Move(sourceFile, destinationFile);
+                }
                 //// To move an entire directory. To programmatically modify or combine
                 //// path strings, use the System.IO.Path class.
                 //System.IO.Directory.Move(@"C:\Users\Public\public\test\", @"C:\Users\Public\private");
+
+
+                string sourceFile2 = Path.Combine(webRootPath, img.pathImageCompress250x250);
+
+                img.ImageNameCompress250x250 = "250x250_" + IdImageString + ".jpg";
+                string destinationFile2 = Path.Combine(uploadsFolder, img.ImageNameCompress250x250);
+
+
+                if (System.IO.File.Exists(sourceFile2))
+                {
+                    // To move a file or folder to a new location:
+                    System.IO.File.Move(sourceFile2, destinationFile2);
+
+                    img.pathImageCompress250x250 = path0 + img.ImageNameCompress250x250;
+                }
+
+
 
 
             }
