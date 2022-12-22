@@ -67,7 +67,7 @@ namespace partner_aluro.Controllers
 
             string webRootPath = _webHostEnvironment.WebRootPath;
 
-            for (int i = 0; i < 200; i++)
+            for (int i = 3000; i < 5604; i++)
             {
                 ImageModel img = listaWszystkich[i];
 
