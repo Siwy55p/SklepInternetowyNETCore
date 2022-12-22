@@ -125,96 +125,69 @@ namespace partner_aluro.Controllers
 
             string webRootPath = _webHostEnvironment.WebRootPath;
 
-            for (int i = 5357; i < 5603; i++)
-            {
-                ImageModel img = listaWszystkich[i];
-
-                int IdImage = img.ImageId;
-
-
-
-                string IdImageString = IdImage.ToString();
-                char[] charArr = IdImageString.ToCharArray();
-
-                string path = img.path.ToString();
-                string path0 = img.path.ToString();
-
-                string Folders = "";
-                string uploadsFolder = Path.Combine(webRootPath, @"img/");
-                for (int c = 0; c < charArr.Length; c++)
+                for (int i = 5361; i < 5596; i++)
                 {
-                    Folders += charArr[c] + "/";
-                }
+                    ImageModel img = listaWszystkich[i];
 
-                if (path0.Contains("img/p/"))
-                {
-                    uploadsFolder = Path.Combine(webRootPath, @"img/p/");
-                    path0 = @"img/p/";
-                }
-                if (path0.Contains("img/SliderHome/"))
-                {
-                    uploadsFolder = Path.Combine(webRootPath, @"img/SliderHome/");
-                    path0 = @"img/SliderHome/";
-                }
+                    int IdImage = img.ImageId;
 
-                path0 += Folders;
+                    string slider = img.path;
+
+                    if (!slider.Contains("SliderHome")) // jesli to nie jest slider to rob to co na dole
+                    {
 
 
-                uploadsFolder += Folders;
+                        string IdImageString = IdImage.ToString();
+                        char[] charArr = IdImageString.ToCharArray();
 
-                if (!Directory.Exists(uploadsFolder))
-                {
-                    Directory.CreateDirectory(uploadsFolder);
-                }
-                img.ImageName = IdImageString +".jpg";
-                img.path = path0;
-                _context.Images.Update(img);
-                _context.SaveChanges();
+                        string path = img.path.ToString();
+                        string path0 = img.path.ToString();
 
-                string sciezka2 = img.ImageNameCompress645x410.ToString();
-                string staraSciezka = sciezka2.Replace("645x410_", ""); //nazwa pliku
+                        _context.Images.Update(img);
+                        _context.SaveChanges();
 
-                string sciezka = @"\img\p\" + staraSciezka;
+                        string sciezka2 = img.pathImageCompress645x410.ToString();
+                        string staraSciezka = sciezka2.Replace("645x410_", ""); //path pliku
 
-                string sourceFile = Path.Combine(webRootPath, sciezka);
+                        string sourceFile = Path.Combine(webRootPath, staraSciezka);
                 
-                string destinationFile = Path.Combine(uploadsFolder,img.ImageName);
+                        string destinationFile = Path.Combine(webRootPath,path0, img.ImageName);
 
-                img.fullPath = path0 + img.ImageName;
+                        img.fullPath = path0 + img.ImageName;
 
                 
 
-                if (System.IO.File.Exists(sourceFile))
-                {
-                    // To move a file or folder to a new location:
-                    System.IO.File.Move(sourceFile, destinationFile);
+                        if (System.IO.File.Exists(sourceFile))
+                        {
+                            // To move a file or folder to a new location:
+                            System.IO.File.Move(sourceFile, destinationFile);
+                        }
+                        //// To move an entire directory. To programmatically modify or combine
+                        //// path strings, use the System.IO.Path class.
+                        //System.IO.Directory.Move(@"C:\Users\Public\public\test\", @"C:\Users\Public\private");
+
+
+                        //string sourceFile2 = Path.Combine(webRootPath, img.pathImageCompress250x250);
+
+                        //img.ImageNameCompress250x250 = "250x250_" + IdImageString + ".jpg";
+                        //string destinationFile2 = Path.Combine(uploadsFolder, img.ImageNameCompress250x250);
+
+
+                        //if (System.IO.File.Exists(sourceFile2))
+                        //{
+                        //    // To move a file or folder to a new location:
+                        //    System.IO.File.Move(sourceFile2, destinationFile2);
+
+                        //    img.pathImageCompress250x250 = path0 + img.ImageNameCompress250x250;
+                        //}
+
+                    }
+
+
                 }
-                //// To move an entire directory. To programmatically modify or combine
-                //// path strings, use the System.IO.Path class.
-                //System.IO.Directory.Move(@"C:\Users\Public\public\test\", @"C:\Users\Public\private");
-
-
-                string sourceFile2 = Path.Combine(webRootPath, img.pathImageCompress250x250);
-
-                img.ImageNameCompress250x250 = "250x250_" + IdImageString + ".jpg";
-                string destinationFile2 = Path.Combine(uploadsFolder, img.ImageNameCompress250x250);
-
-
-                if (System.IO.File.Exists(sourceFile2))
-                {
-                    // To move a file or folder to a new location:
-                    System.IO.File.Move(sourceFile2, destinationFile2);
-
-                    img.pathImageCompress250x250 = path0 + img.ImageNameCompress250x250;
-                }
-
-
-
-
-            }
 
             return View();
-        }
+            }
 
         public async Task<IActionResult> GetFileServer()
         {

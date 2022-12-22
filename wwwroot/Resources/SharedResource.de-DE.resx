@@ -58,829 +58,829 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Ozdoba szkl.GULIA bombka z gwiazdką_Aluro" xml:space="preserve">
-    <value>Glaskugel GULIA mit Stern_Aluro</value>
-  </data>
-  <data name="Stół kawowy SAVIR_Aluro" xml:space="preserve">
-    <value>Couchtisch SAVIR_Aluro</value>
-  </data>
-  <data name="Bombki szklane RICA 3 sztuki- multikolor_Aluro" xml:space="preserve">
-    <value>RICA Glaskugeln 3 Stück- mehrfarbig_Aluro</value>
-  </data>
-  <data name="Konsola AMAX_Aluro" xml:space="preserve">
-    <value>AMAX_Aluro-Konsole</value>
-  </data>
-  <data name="Osłonka metal.na stojaku ALVRA_Aluro" xml:space="preserve">
-    <value>Metallgehäuse auf Ständer ALVRA_Aluro</value>
-  </data>
-  <data name="Alfabetycznie od Z do A" xml:space="preserve">
-    <value>Alphabetisch von Z bis A</value>
-  </data>
-  <data name="Donica MIDAXI white&amp;copper L_Aluro" xml:space="preserve">
-    <value>MIDAXI weiß&amp;kupfer Topf L_Aluro</value>
-  </data>
-  <data name="Stolik/Pomocnik FOSIL_Aluro" xml:space="preserve">
-    <value>Tabelle/Tisch FOSIL_Aluro</value>
-  </data>
-  <data name="Świecznik ażurowy FULTON_Aluro L" xml:space="preserve">
-    <value>Durchbrochener Kerzenhalter FULTON_Aluro L</value>
-  </data>
-  <data name="Latarnia MORATO złota XXL_Aluro" xml:space="preserve">
-    <value>MORATO Gold-Laterne XXL_Aluro</value>
-  </data>
-  <data name="Kod pocztowy" xml:space="preserve">
-    <value>PLZ</value>
-  </data>
-  <data name="Zegar ścienny KIRAN_Aluro" xml:space="preserve">
-    <value>Wanduhr KIRAN_Aluro</value>
-  </data>
-  <data name="Doniczka,osłonka CARMINO - XL_Aluro" xml:space="preserve">
-    <value>Blumentopf, Gehäuse CARMINO - XL_Aluro</value>
-  </data>
-  <data name="Postument Kiron_Aluro" xml:space="preserve">
-    <value>Sockel Kiron_Aluro</value>
-  </data>
-  <data name="Wazon ALAMA ręcznie malowany_Aluro" xml:space="preserve">
-    <value>ALAMA handbemalte Vase_Aluro</value>
-  </data>
-  <data name="Wazon DALMIRA artistic style L_Aluro" xml:space="preserve">
-    <value>DALMIRA künstlerischen Stil Vase L_Aluro</value>
-  </data>
-  <data name="netto" xml:space="preserve">
-    <value>Netz</value>
-  </data>
-  <data name="Osłonka, donica FRISA - M_Aluro" xml:space="preserve">
-    <value>FRISA Gehäuse, Blumentopf - M_Aluro</value>
-  </data>
-  <data name="Doniczka,osłonka ANTERO okrągła_Aluro XL" xml:space="preserve">
-    <value>Runder ANTERO Blumentopf_Aluro XL</value>
-  </data>
-  <data name="Lampion-świecznik LAKIN-loft_Aluro" xml:space="preserve">
-    <value>Laternen-Kerzenhalter LAKIN-loft_Aluro</value>
-  </data>
-  <data name="Dodatki do wnętrz" xml:space="preserve">
-    <value>Innenausstattung</value>
-  </data>
-  <data name="Baza zdjęć produktów aluro" xml:space="preserve">
-    <value>Fotodatenbank von aluro Produkten</value>
-  </data>
-  <data name="las" xml:space="preserve">
-    <value>Wald</value>
-  </data>
-  <data name="Produkt jest już niedostępny." xml:space="preserve">
-    <value>Das Produkt ist nicht mehr verfügbar.</value>
-  </data>
-  <data name="Osłonka, donica KUSTON - HISTORY_Aluro" xml:space="preserve">
-    <value>Kabinett, Blumentopf KUSTON - HISTORY_Aluro</value>
-  </data>
-  <data name="Lampion szklany FEBO_Aluro" xml:space="preserve">
-    <value>Glaslaterne FEBO_Aluro</value>
-  </data>
-  <data name="kot" xml:space="preserve">
-    <value>Katze</value>
-  </data>
-  <data name="Integracja XML" xml:space="preserve">
-    <value>XML-Integration</value>
-  </data>
-  <data name="Poszewki" xml:space="preserve">
-    <value>Kissenbezüge</value>
-  </data>
-  <data name="Komoda 4-drzwiowa NAFIR_Aluro" xml:space="preserve">
-    <value>4-türige Truhe NAFIR_Aluro</value>
-  </data>
-  <data name="Gotówka odbiór w Bogucinie ul. Gnieźnieńska 159" xml:space="preserve">
-    <value>Bargeldabholung in Bogucin ul. Gnesen 159</value>
-  </data>
-  <data name="Adres dostawy" xml:space="preserve">
-    <value>Lieferadresse</value>
-  </data>
-  <data name="Roślina szt.- kwiat zimowy_Aluro" xml:space="preserve">
-    <value>Pflanzenteile-Winterblume_Aluro</value>
-  </data>
-  <data name="Abażur z tkaniny brązowy Aluro L" xml:space="preserve">
-    <value>Abażur z tkaniny brązowy Aluro L</value>
-  </data>
-  <data name="Panele ścienne, lustra, zegary" xml:space="preserve">
-    <value>Wandpaneele, Spiegel, Uhren</value>
-  </data>
-  <data name="ProduktNiedostępny" xml:space="preserve">
-    <value>Dieses Produkt ist nicht länger verfügbar</value>
-  </data>
-  <data name="(brutto)" xml:space="preserve">
-    <value>inkl. Steuer.</value>
-  </data>
-  <data name="Materiał:" xml:space="preserve">
-    <value>Material:</value>
-  </data>
-  <data name="Nowa Kolekcja 2022" xml:space="preserve">
-    <value>Neue Kollektion 2022</value>
-  </data>
-  <data name="Specyfikacja produktu:" xml:space="preserve">
-    <value>Produktspezifikation:</value>
-  </data>
-  <data name="Historia zamówień" xml:space="preserve">
-    <value>die Geschichte der Bestellungen</value>
-  </data>
-  <data name="Wieloryb - figura dekoracyjna_Aluro" xml:space="preserve">
-    <value>Wal - Dekofigur_Aluro</value>
-  </data>
-  <data name="Osłonka na stojaku FIBER_aluro" xml:space="preserve">
-    <value>FIBER_aluro Standgehäuse</value>
-  </data>
-  <data name="Bombka szklana GIO_Aluro" xml:space="preserve">
-    <value>Glaskugel GIO_Aluro</value>
-  </data>
-  <data name="Choinka MIILTON - drewno mango_Aluro" xml:space="preserve">
-    <value>MIILTON Weihnachtsbaum - Mangoholz_Aluro</value>
-  </data>
-  <data name="Wysokość:" xml:space="preserve">
-    <value>Höhe:</value>
-  </data>
-  <data name="zapamietaj mnie" xml:space="preserve">
-    <value>Erinnere dich an mich</value>
-  </data>
-  <data name="Konsola FOSIL_Aluro" xml:space="preserve">
-    <value>FOSIL_Aluro-Konsole</value>
-  </data>
-  <data name="Lampa stołowa JIKARA wiklinowa_Aluro" xml:space="preserve">
-    <value>JIKARA Geflecht-Tischlampe_Aluro</value>
-  </data>
-  <data name="Wiadomość do zamówienia." xml:space="preserve">
-    <value>Nachricht bestellen.</value>
-  </data>
-  <data name="Symbol od największej do najmniejszej" xml:space="preserve">
-    <value>Symbol vom größten zum kleinsten</value>
-  </data>
-  <data name="Lampion szklany VIVO_Aluro" xml:space="preserve">
-    <value>Glaslaterne VIVO_Aluro</value>
-  </data>
-  <data name="Konsola ORSO_Aluro" xml:space="preserve">
-    <value>ORSO_Aluro-Konsole</value>
-  </data>
-  <data name="test453" xml:space="preserve">
-    <value>test453</value>
-  </data>
-  <data name="Osłonka, donica GOLDI - XL_Aluro" xml:space="preserve">
-    <value>GOLDI Gehäuse, Blumentopf - XL_Aluro</value>
-  </data>
-  <data name="Roślina sztuczna - krwawnik dziki_Aluro" xml:space="preserve">
-    <value>Künstliche Pflanze - Wilde Schafgarbe_Aluro</value>
-  </data>
-  <data name="Stolik BASE_ALURO" xml:space="preserve">
-    <value>Tabelle BASE_ALURO</value>
-  </data>
-  <data name="Usuń" xml:space="preserve">
-    <value>Löschen</value>
-  </data>
-  <data name="Krzesło tapicerowane PICADO blue_Aluro" xml:space="preserve">
-    <value>PICADO gepolsterter Stuhl blau_Aluro</value>
-  </data>
-  <data name="Świecznik choinka MILTON_Aluro" xml:space="preserve">
-    <value>Weihnachtsbaum-Kronleuchter MILTON_Aluro</value>
-  </data>
-  <data name="Powtórz hasło" xml:space="preserve">
-    <value>Passwort wiederholen</value>
-  </data>
-  <data name="Nowości" xml:space="preserve">
-    <value>Nachrichten</value>
-  </data>
-  <data name="Alfabetycznie od A do Z" xml:space="preserve">
-    <value>Alphabetisch von A bis Z</value>
-  </data>
-  <data name="Osłonka, donica FRISA - XXL_Aluro" xml:space="preserve">
-    <value>FRISA Gehäuse, Blumentopf - XXL_Aluro</value>
-  </data>
-  <data name="test spacja w symbol" xml:space="preserve">
-    <value>Prüfbereich im Symbol</value>
-  </data>
-  <data name="Wazon DALMIRA artistic style XL_Aluro" xml:space="preserve">
-    <value>DALMIRA künstlerischen Stil Vase XL_Aluro</value>
-  </data>
-  <data name="Wyloguj" xml:space="preserve">
-    <value>Ausloggen</value>
-  </data>
-  <data name="STWÓRZ KONTO" xml:space="preserve">
-    <value>EIN KONTO ERSTELLEN</value>
-  </data>
-  <data name="Wazon OROMEO ręcznie malowany_Aluro XL" xml:space="preserve">
-    <value>OROMEO handbemalte Vase_Aluro XL</value>
-  </data>
-  <data name="Osłonka, donica LERICI - XXL_Aluro" xml:space="preserve">
-    <value>LERICI Gehäuse, Blumentopf - XXL_Aluro</value>
-  </data>
-  <data name="Roślina sztuczna - gałązki złote_Aluro" xml:space="preserve">
-    <value>Künstliche Pflanze - goldene Zweige_Aluro</value>
-  </data>
-  <data name="Lampion FLOBI wiklina i sznurek - L_Aluro" xml:space="preserve">
-    <value>FLOBI Laterne aus Weide und Schnur - L_Aluro</value>
-  </data>
-  <data name="Powrót do sklepu" xml:space="preserve">
-    <value>Kehre zum Geschäft zurück</value>
-  </data>
-  <data name="Wazon, lampion szklany CARLA - L_Aluro" xml:space="preserve">
-    <value>Vase, Glaslaterne CARLA - L_Aluro</value>
-  </data>
-  <data name="Donice i Osłonki" xml:space="preserve">
-    <value>Töpfe und Deckel</value>
-  </data>
-  <data name="Ozdoba wisząca SPLIT sznurki_Aluro" xml:space="preserve">
-    <value>SPLIT string Anhänger Ornament_Aluro</value>
-  </data>
-  <data name="Szyszka FLAR_Aluro XL" xml:space="preserve">
-    <value>FLAR_Aluro-Kegel XL</value>
-  </data>
-  <data name="Osłonka, donica CARLA - XL_Aluro" xml:space="preserve">
-    <value>Kutte, Topf CARLA - XL_Aluro</value>
-  </data>
-  <data name="Osłonka, donica LERICI - XL_Aluro" xml:space="preserve">
-    <value>LERICI Gehäuse, Blumentopf - XL_Aluro</value>
-  </data>
-  <data name="Płatność i dostawa" xml:space="preserve">
-    <value>Zahlungs-und Lieferbedingungen</value>
+  <data name="Miasto" xml:space="preserve">
+    <value>Stadt</value>
   </data>
   <data name="test" xml:space="preserve">
     <value>Test</value>
   </data>
-  <data name="Witaj" xml:space="preserve">
-    <value>Hallo</value>
-  </data>
-  <data name="Lampion metalowy MANON_Aluro L" xml:space="preserve">
-    <value>Metall-Laterne MANON_Aluro L</value>
-  </data>
-  <data name="Imię" xml:space="preserve">
-    <value>Name</value>
-  </data>
-  <data name="Wazon niebieski FELIZ_Aluro" xml:space="preserve">
-    <value>Blaue Vase FELIZ_Aluro</value>
+  <data name="Roślina szt. - gałązka białej orchidei_Aluro" xml:space="preserve">
+    <value>Pflanze Stk. - Zweig der weißen Orchidee_Aluro</value>
   </data>
   <data name="Lampion PALAS szklano-metalowy - XXL_Aluro" xml:space="preserve">
     <value>PALAS Glas- und Metall-Laterne - XXL_Aluro</value>
   </data>
-  <data name="test56" xml:space="preserve">
-    <value>test56</value>
-  </data>
-  <data name="Razem (netto)" xml:space="preserve">
-    <value>Gesamt</value>
-  </data>
-  <data name="Świecznik ażurowy FULTON_Aluro XL" xml:space="preserve">
-    <value>Durchbrochener Kerzenhalter FULTON_Aluro XL</value>
-  </data>
-  <data name="Twoja cena po rabacie" xml:space="preserve">
-    <value>Ihr reduzierter Preis</value>
-  </data>
-  <data name="Zaloguj się" xml:space="preserve">
-    <value>Einloggen</value>
-  </data>
-  <data name="Samochód zielony XL_Aluro" xml:space="preserve">
-    <value>Auto grün XL_Aluro</value>
-  </data>
-  <data name="Sortuj" xml:space="preserve">
-    <value>Sortieren</value>
-  </data>
-  <data name="Wazon MIDAXI white&amp;copper XL_Aluro" xml:space="preserve">
-    <value>MIDAXI Vase weiß&amp;kupfer XL_Aluro</value>
-  </data>
-  <data name="Wazon ANKLE_Aluro M" xml:space="preserve">
-    <value>Vase ANKLE_Aluro M</value>
-  </data>
-  <data name="Osłonka, donica CARLA - XXL_Aluro" xml:space="preserve">
-    <value>Kutte, Topf CARLA - XXL_Aluro</value>
-  </data>
-  <data name="Wyczyść zamówienie" xml:space="preserve">
-    <value>Klare Reihenfolge</value>
-  </data>
-  <data name="Świąteczka Kolekcja" xml:space="preserve">
-    <value>Weihnachtskollektion</value>
-  </data>
-  <data name="dom" xml:space="preserve">
-    <value>Startseite</value>
-  </data>
-  <data name="Lampion na nodze ATEX_Aluro" xml:space="preserve">
-    <value>Laterne auf einem Bein ATEX_Aluro</value>
-  </data>
-  <data name="CenaDetaliczna" xml:space="preserve">
-    <value>Endverbraucherpreis</value>
-  </data>
-  <data name="Roślina sztuczna -róża miedziana Aluro" xml:space="preserve">
-    <value>Künstliche Pflanze - Kupferrose Aluro</value>
-  </data>
-  <data name="Rośliny sztuczne" xml:space="preserve">
-    <value>Künstliche Pflanzen</value>
-  </data>
-  <data name="Osłonka z jelonkami GILBO XL_Aluro" xml:space="preserve">
-    <value>GILBO-Hirschdarm XL_Aluro</value>
-  </data>
-  <data name="Stolik kawowy ORSO_Aluro" xml:space="preserve">
-    <value>Couchtisch ORSO_Aluro</value>
-  </data>
-  <data name="Ulica" xml:space="preserve">
-    <value>Straße</value>
-  </data>
-  <data name="Serce mozaikowe wiszące - L_Aluro" xml:space="preserve">
-    <value>Hängendes Mosaikherz - L_Aluro</value>
-  </data>
-  <data name="Język" xml:space="preserve">
-    <value>Sprache wählen</value>
-  </data>
-  <data name="Symbol od najmniejszej do największej" xml:space="preserve">
-    <value>Symbol vom kleinsten zum größten</value>
-  </data>
-  <data name="Wartość (brutto)" xml:space="preserve">
-    <value>Bruttowert</value>
-  </data>
-  <data name="Nowa Kolekcja" xml:space="preserve">
-    <value>Neue Kollektion</value>
-  </data>
-  <data name="Płatność" xml:space="preserve">
-    <value>Zahlung</value>
-  </data>
-  <data name="Roślina sztuczna - głązka zimowa_Aluro" xml:space="preserve">
-    <value>Künstliche Pflanze - Winterling_Aluro</value>
-  </data>
-  <data name="Wazon metalowy SOLCO złoty_Aluro" xml:space="preserve">
-    <value>Metallvase SOLCO gold_Aluro</value>
-  </data>
-  <data name="test57" xml:space="preserve">
-    <value>test57</value>
-  </data>
-  <data name="Wazon OROMEO ręcznie malowany_Aluro L" xml:space="preserve">
-    <value>OROMEO handbemalte Vase_Aluro L</value>
-  </data>
-  <data name="Choinka metalowa biała vintage &amp; style XL_Aluro" xml:space="preserve">
-    <value>Metall Weihnachtsbaum weiß Vintage &amp; Stil XL_Aluro</value>
-  </data>
-  <data name="(netto)" xml:space="preserve">
-    <value>MwSt. exkl.</value>
-  </data>
-  <data name="Kategorie" xml:space="preserve">
-    <value>Kategorien</value>
-  </data>
-  <data name="Ważne informacje" xml:space="preserve">
-    <value>Wichtige Informationen</value>
-  </data>
-  <data name="Świeczniki, Lampiony" xml:space="preserve">
-    <value>Leuchter, Laternen</value>
-  </data>
-  <data name="Osłonka,donica CARLA - M_Aluro" xml:space="preserve">
-    <value>Kutte,Topf CARLA - M_Aluro</value>
-  </data>
-  <data name="Kraj" xml:space="preserve">
-    <value>Land</value>
-  </data>
-  <data name="Wszelkie prawa zastrzeżone." xml:space="preserve">
-    <value>Alle Rechte vorbehalten.</value>
-  </data>
-  <data name="Meble" xml:space="preserve">
-    <value>Möbel</value>
-  </data>
-  <data name="Lampy stołowe" xml:space="preserve">
-    <value>Tischlampen</value>
-  </data>
-  <data name="Roślina sztuczna - palma w doniczce_Aluro" xml:space="preserve">
-    <value>Künstliche Pflanze - Palme im Topf_Aluro</value>
-  </data>
-  <data name="PROFIL DZIAŁALNOŚCI" xml:space="preserve">
-    <value>GESCHÄFTSPROFIL</value>
-  </data>
-  <data name="Przelew" xml:space="preserve">
-    <value>Transfer</value>
-  </data>
-  <data name="Fotel metalowy ABRO_Aluro" xml:space="preserve">
-    <value>Metall-Sessel ABRO_Aluro</value>
-  </data>
-  <data name="Koszyk jest pusty" xml:space="preserve">
-    <value>Korb ist leer</value>
-  </data>
-  <data name="Lampy wiszące" xml:space="preserve">
-    <value>Hängelampen</value>
-  </data>
-  <data name="Stolik kawowy FOSIL_Aluro" xml:space="preserve">
-    <value>Couchtisch FOSIL_Aluro</value>
-  </data>
-  <data name="Produkt Bez kategori Test" xml:space="preserve">
-    <value>Produkt nicht in Kategorie Test</value>
-  </data>
-  <data name="Stół DANTE_Aluro" xml:space="preserve">
-    <value>Tabelle DANTE_Aluro</value>
-  </data>
-  <data name="Lampion srebrny BONTA_Aluro" xml:space="preserve">
-    <value>Silberne Laterne BONTA_Aluro</value>
-  </data>
-  <data name="Lampion FLOBI wiklina i sznurek - XL_Aluro" xml:space="preserve">
-    <value>FLOBI Weidenruten- und Schnurlaterne - XL_Aluro</value>
-  </data>
-  <data name="Ozdoba szkl. BRISK gwiazdka 3 wzory_Aluro" xml:space="preserve">
-    <value>BRISK Stern Glas Ornament 3 Designs_Aluro</value>
-  </data>
   <data name="Pojemnik - bomboniera ASURA - L_Aluro" xml:space="preserve">
     <value>ASURA Behälter - Pralinenschachtel - L_Aluro</value>
-  </data>
-  <data name="CenaHurtowa" xml:space="preserve">
-    <value>Großhandelspreis</value>
-  </data>
-  <data name="test76" xml:space="preserve">
-    <value>test76</value>
-  </data>
-  <data name="test54" xml:space="preserve">
-    <value>test54</value>
-  </data>
-  <data name="test2" xml:space="preserve">
-    <value>test2</value>
-  </data>
-  <data name="Roślina sztuczna - asparagus copper_Aluro" xml:space="preserve">
-    <value>Künstliche Pflanze - Spargel Kupfer_Aluro</value>
-  </data>
-  <data name="Makrama sznurkowa KITTIRI - rama metal_Aluro" xml:space="preserve">
-    <value>KITTIRI Schnur Makramee - Metallrahmen_Aluro</value>
-  </data>
-  <data name="Lampa wisząca FRILL_Aluro" xml:space="preserve">
-    <value>Lampa wisząca FRILL_Aluro</value>
-  </data>
-  <data name="Roślina sztuczna -wierzba płacząca srebrna_Aluro" xml:space="preserve">
-    <value>Künstliche Pflanze - Trauerweide silber_Aluro</value>
-  </data>
-  <data name="Lampa wisząca HERMES_Aluro" xml:space="preserve">
-    <value>Lampa wisząca HERMES_Aluro</value>
-  </data>
-  <data name="Ilość" xml:space="preserve">
-    <value>Menge</value>
-  </data>
-  <data name="Lampa wisząca kula FIORE_Aluro" xml:space="preserve">
-    <value>Lampa wisząca kula FIORE_Aluro</value>
-  </data>
-  <data name="Lampa wisząca GAURI_Aluro" xml:space="preserve">
-    <value>GAURI_Aluro Pendelleuchte</value>
-  </data>
-  <data name="Zamówienie" xml:space="preserve">
-    <value>in der Woche</value>
-  </data>
-  <data name="Lustro salonowe TEVOR antique style gold_Aluro" xml:space="preserve">
-    <value>Loungespiegel TEVOR antik Stil gold_Aluro</value>
-  </data>
-  <data name="Gazon, doniczka LAZURITE ocean blue_Aluro XL" xml:space="preserve">
-    <value>Gazon, Blumentopf LAZURITE ozeanblau_Aluro XL</value>
-  </data>
-  <data name="Lampion wiszący SILO z wkład. szklanym_Aluro" xml:space="preserve">
-    <value>Hängelaterne SILO mit Glaseinsatz_Aluro</value>
-  </data>
-  <data name="Osłonka prostokątna SHELO_Aluro" xml:space="preserve">
-    <value>Rechteckiges Gehäuse SHELO_Aluro</value>
-  </data>
-  <data name="Pojemnik - bomboniera ASURA - XL_Aluro" xml:space="preserve">
-    <value>ASURA Pralinenschachtel - XL_Aluro</value>
-  </data>
-  <data name="Latarnia metal. TIMBA czarno-srebrna XL_Aluro" xml:space="preserve">
-    <value>Metall-Laterne. TIMBA schwarz und silber XL_Aluro</value>
-  </data>
-  <data name="Stolik/Pomocnik AMAX_Aluro" xml:space="preserve">
-    <value>AMAX_Aluro Tisch/Ständer</value>
-  </data>
-  <data name="Konsola meblowa TABER" xml:space="preserve">
-    <value>TABER Möbelkonsole</value>
-  </data>
-  <data name="Resetuj hasło" xml:space="preserve">
-    <value>Passwort zurücksetzen</value>
-  </data>
-  <data name="Utwórz nowe konto" xml:space="preserve">
-    <value>Neuen Account erstellen</value>
-  </data>
-  <data name="Wazon,osłonka ARKET_Aluro" xml:space="preserve">
-    <value>Vase,Gehäuse ARKET_Aluro</value>
-  </data>
-  <data name="Makrama ścienna TANDRA_Aluro" xml:space="preserve">
-    <value>Wandmakramee TANDRA_Aluro</value>
-  </data>
-  <data name="Wielbłąd dromader - figura metalowa_Aluro XL" xml:space="preserve">
-    <value>Dromader Kamel - Metallfigur_Aluro XL</value>
-  </data>
-  <data name="Latarnia metal. TIMBA złota XL_Aluro" xml:space="preserve">
-    <value>Metall-Laterne. TIMBA gold XL_Aluro</value>
-  </data>
-  <data name="Dodaj do zamowienia" xml:space="preserve">
-    <value>Zur Bestellung hinzufügen</value>
-  </data>
-  <data name="Osłonka, donica LERICI - L_Aluro" xml:space="preserve">
-    <value>LERICI Gehäuse, Blumentopf - L_Aluro</value>
-  </data>
-  <data name="Konsola MOLDE_Aluro" xml:space="preserve">
-    <value>MOLDE_Aluro-Konsole</value>
-  </data>
-  <data name="Wazon ANKLE_Aluro S" xml:space="preserve">
-    <value>Vase ANKLE_Aluro S</value>
-  </data>
-  <data name="Roślina sztuczna - owoce głogu złote_Aluro" xml:space="preserve">
-    <value>Künstliche Pflanze - goldene Weißdornfrucht_Aluro</value>
-  </data>
-  <data name="Informacje" xml:space="preserve">
-    <value>Information</value>
-  </data>
-  <data name="Lampion szklany MITO_Aluro" xml:space="preserve">
-    <value>Glaslaterne MITO_Aluro</value>
-  </data>
-  <data name="Ogólne warunki sprzedaży" xml:space="preserve">
-    <value>Allgemeine Verkaufsbedingungen</value>
-  </data>
-  <data name="Polski" xml:space="preserve">
-    <value>Polieren</value>
-  </data>
-  <data name="Świecznik srebrny IZARO L_Aluro" xml:space="preserve">
-    <value>IZARO Silber Kerzenhalter L_Aluro</value>
-  </data>
-  <data name="Roślina szt. - gałązka białej orchidei_Aluro" xml:space="preserve">
-    <value>Pflanze Stk. - Zweig der weißen Orchidee_Aluro</value>
-  </data>
-  <data name="Abażur z tkaniny taupe Aluro L" xml:space="preserve">
-    <value>Abażur z tkaniny taupe Aluro L</value>
-  </data>
-  <data name="Twoje zamówienie" xml:space="preserve">
-    <value>Deine Bestellung</value>
-  </data>
-  <data name="Oświetlenie" xml:space="preserve">
-    <value>Beleuchtung</value>
-  </data>
-  <data name="Potrzebujesz pomocy? Zadzwoń" xml:space="preserve">
-    <value>Sie benötigen Hilfe? Anruf</value>
-  </data>
-  <data name="Moje konto" xml:space="preserve">
-    <value>Mein Konto</value>
-  </data>
-  <data name="Samochód zielony XXL_Aluro" xml:space="preserve">
-    <value>Auto grün XXL_Aluro</value>
-  </data>
-  <data name="Osłonka MADELIA_Aluro" xml:space="preserve">
-    <value>MADELIA_Alurogehäuse</value>
-  </data>
-  <data name="w tygodniu" xml:space="preserve">
-    <value>in der Woche</value>
-  </data>
-  <data name="Osłonka, donica FRISA - XL_Aluro" xml:space="preserve">
-    <value>FRISA Gehäuse, Blumentopf - XL_Aluro</value>
-  </data>
-  <data name="Adresy" xml:space="preserve">
-    <value>Adressen</value>
-  </data>
-  <data name="Misa ALAMA ręcznie malowana_Aluro" xml:space="preserve">
-    <value>ALAMA handbemalte Schalel_Aluro</value>
-  </data>
-  <data name="Świecznik TOZZI 5-ramienny_Aluro" xml:space="preserve">
-    <value>TOZZI 5-Arm-Kerzenhalter_Aluro</value>
-  </data>
-  <data name="Karta kredytowa" xml:space="preserve">
-    <value>Kreditkarte</value>
-  </data>
-  <data name="Pakowanie:" xml:space="preserve">
-    <value>Verpackung:</value>
-  </data>
-  <data name="Stół FILIPPE 240x95x76_Aluro" xml:space="preserve">
-    <value>FILIPPE Tisch 240x95x76_Aluro</value>
-  </data>
-  <data name="Wazon kremowy VINCE_Aluro" xml:space="preserve">
-    <value>VINCE_Aluro cremefarbene Vase</value>
-  </data>
-  <data name="Abażury" xml:space="preserve">
-    <value>Lampenschirme</value>
-  </data>
-  <data name="Roślina sztuczna - patrinia złota_Aluro" xml:space="preserve">
-    <value>Künstliche Pflanze - gold patrinia_Aluro</value>
-  </data>
-  <data name="Stolik/Pomocnik ORSO_Aluro" xml:space="preserve">
-    <value>ORSO_Aluro Tabelle/Hilfsmittel</value>
-  </data>
-  <data name="DANE ROZLICZENIOWE FIRMY" xml:space="preserve">
-    <value>RECHNUNGSINFORMATIONEN DES UNTERNEHMENS</value>
-  </data>
-  <data name="Gazon, doniczka LAZURITE ocean blue_Aluro L" xml:space="preserve">
-    <value>Gazon, Blumentopf LAZURITE ozeanblau_Aluro L</value>
-  </data>
-  <data name="Samochód bordowy L_Aluro" xml:space="preserve">
-    <value>Kastanienbraunes Auto L_Aluro</value>
-  </data>
-  <data name="Szerokość:" xml:space="preserve">
-    <value>Breite:</value>
-  </data>
-  <data name="Adres rozliczeniowy" xml:space="preserve">
-    <value>Rechnungsadresse</value>
-  </data>
-  <data name="Szklarenka BERTONI Aluro" xml:space="preserve">
-    <value>Gewächshaus BERTONI Aluro</value>
-  </data>
-  <data name="Doniczka,osłonka ANTERO okrągła_Aluro XXL" xml:space="preserve">
-    <value>Runder ANTERO Blumentopf, Gehäuse_Aluro XXL</value>
-  </data>
-  <data name="Bombka szkl.DUTTON 3 wzory_Aluro" xml:space="preserve">
-    <value>DUTTON Glaskugel 3 Motive_Aluro</value>
-  </data>
-  <data name="Głębokość:" xml:space="preserve">
-    <value>Tiefe:</value>
-  </data>
-  <data name="Miasto" xml:space="preserve">
-    <value>Stadt</value>
-  </data>
-  <data name="Osłonka - misa KIERA kpl-2szt złote_Aluro" xml:space="preserve">
-    <value>Kutte - Schale KIERA kpl-2pcs gold_Aluro</value>
-  </data>
-  <data name="Niemiecki" xml:space="preserve">
-    <value>Deutsch</value>
-  </data>
-  <data name="Zapomniałeś hasło?" xml:space="preserve">
-    <value>Haben Sie Ihr Passwort vergessen?</value>
-  </data>
-  <data name="Roślina szt. - gałązka białej hortensji_Aluro" xml:space="preserve">
-    <value>Pflanze Stk. - Zweig der weißen Hortensie_Aluro</value>
-  </data>
-  <data name="Świecznik- lampion BAXTER_Aluro L" xml:space="preserve">
-    <value>Kronleuchter-Lampe BAXTER_Aluro L</value>
-  </data>
-  <data name="Wielbłąd dromader- figura metalowa_Aluro L" xml:space="preserve">
-    <value>Dromader Kamel - Metallfigur_Aluro L</value>
-  </data>
-  <data name="Donica MIDAXI white&amp;copper XL_Aluro" xml:space="preserve">
-    <value>MIDAXI weiß&amp;kupfer XL Topf_Aluro</value>
-  </data>
-  <data name="Angielski" xml:space="preserve">
-    <value>Englisch</value>
-  </data>
-  <data name="Osłonka z jelonkami GILBO M_Aluro" xml:space="preserve">
-    <value>GILBO-Hirschdarm M_Aluro</value>
-  </data>
-  <data name="Roślina sztuczna - asparagus gold_Aluro" xml:space="preserve">
-    <value>Künstliche Pflanze - Spargel gold_Aluro</value>
-  </data>
-  <data name="Moje informacje osobiste" xml:space="preserve">
-    <value>Meine persönlichen Informationen</value>
-  </data>
-  <data name="Świecznik FLAR_Aluro L" xml:space="preserve">
-    <value>Kronleuchter FLAR_Aluro L</value>
-  </data>
-  <data name="Wazony, misy, tace" xml:space="preserve">
-    <value>Vasen, Schalen, Tabletts</value>
-  </data>
-  <data name="Samochód bordowy XL_Aluro" xml:space="preserve">
-    <value>Auto kastanienbraun XL_Aluro</value>
-  </data>
-  <data name="Lustro industrialne JEROLD_Aluro" xml:space="preserve">
-    <value>Industriespiegel JEROLD_Aluro</value>
-  </data>
-  <data name="Świecznik metalowy ESTILO złoty_Aluro" xml:space="preserve">
-    <value>Metall-Kerzenhalter ESTILO gold_Aluro</value>
-  </data>
-  <data name="Inne dodatki" xml:space="preserve">
-    <value>Andere Extras</value>
-  </data>
-  <data name="Ptak drewniany- hand made from recycling_Aluro" xml:space="preserve">
-    <value>Vogel aus Holz - handgefertigt aus Recycling_Aluro</value>
-  </data>
-  <data name="Abażur do lamp z tkaniny Aluro XL" xml:space="preserve">
-    <value>Abażur do lamp z tkaniny Aluro XL</value>
-  </data>
-  <data name="Stół FILIPPE 190x95x76_Aluro" xml:space="preserve">
-    <value>FILIPPE Tisch 190x95x76_Aluro</value>
-  </data>
-  <data name="Adress dostawy inny niż Adres rozliczeniowy" xml:space="preserve">
-    <value>Lieferadresse abweichend von Rechnungsadresse</value>
-  </data>
-  <data name="Bombka szklana PANDIRA cristal-silver_Aluro" xml:space="preserve">
-    <value>Glaskugel PANDIRA kristall-silber_Aluro</value>
-  </data>
-  <data name="Osłonka z jelonkami GILBO L_Aluro" xml:space="preserve">
-    <value>GILBO-Hirschdarm L_Aluro</value>
-  </data>
-  <data name="Pojemnik MIDAXI white&amp;copper XXL_Aluro" xml:space="preserve">
-    <value>MIDAXI weiß&amp;kupfer XXL Behälter_Aluro</value>
-  </data>
-  <data name="Szukaj" xml:space="preserve">
-    <value>Suche...</value>
-  </data>
-  <data name="Regał 5-półkowy FOSIL_Aluro" xml:space="preserve">
-    <value>Bücherregal mit 5 Regalen FOSIL_Aluro</value>
-  </data>
-  <data name="Wazon ANKLE_Aluro L" xml:space="preserve">
-    <value>Vase ANKLE_Aluro L</value>
-  </data>
-  <data name="Komoda FENDI_Aluro" xml:space="preserve">
-    <value>FENDI_Aluro Kommode</value>
-  </data>
-  <data name="wilk" xml:space="preserve">
-    <value>wolf</value>
-  </data>
-  <data name="Stolik-pomocnik kpl-3szt ORSINO_Aluro" xml:space="preserve">
-    <value>Helfer-Tabelle kpl-3pcs ORSINO_Aluro</value>
-  </data>
-  <data name="Samochód zielony L_Aluro" xml:space="preserve">
-    <value>Auto grün L_Aluro</value>
-  </data>
-  <data name="Świecznik FLAR_Aluro XL" xml:space="preserve">
-    <value>FLAR_Aluro XL Kerzenhalter</value>
-  </data>
-  <data name="Hasło" xml:space="preserve">
-    <value>Passwort</value>
-  </data>
-  <data name="Złóż zamówienie" xml:space="preserve">
-    <value>Senden Sie Ihre Bestellung ab</value>
-  </data>
-  <data name="Obelisk dekoracyjny LALIS_Aluro" xml:space="preserve">
-    <value>Dekorativer Obelisk LALIS_Aluro</value>
-  </data>
-  <data name="Kolumna KUMI_ALURO" xml:space="preserve">
-    <value>Spalte KUMI_ALURO</value>
-  </data>
-  <data name="Zarządzaj kontem" xml:space="preserve">
-    <value>Verwalten Sie Ihr Konto</value>
-  </data>
-  <data name="Nazwisko" xml:space="preserve">
-    <value>Nachname</value>
-  </data>
-  <data name="Witryna loft HATTIE_Aluro" xml:space="preserve">
-    <value>HATTIE_Aluro-Loft-Schrank</value>
-  </data>
-  <data name="Stolik okolicznościowy MALOV_Aluro" xml:space="preserve">
-    <value>Beistelltisch MALOV_Aluro</value>
-  </data>
-  <data name="Lampion ażurowy KEVORI owalny XL_Aluro" xml:space="preserve">
-    <value>Durchbrochene Laterne KEVORI oval XL_Aluro</value>
-  </data>
-  <data name="Test01" xml:space="preserve">
-    <value>Test01</value>
-  </data>
-  <data name="Sofa Charlie Chaplin MAZINE Aluro" xml:space="preserve">
-    <value>Charlie Chaplin MAZINE Sofa Aluro</value>
-  </data>
-  <data name="godz. otwarcia" xml:space="preserve">
-    <value>Zeit. Öffnung</value>
-  </data>
-  <data name="test22" xml:space="preserve">
-    <value>test22</value>
-  </data>
-  <data name="Produkt" xml:space="preserve">
-    <value>Produkt</value>
-  </data>
-  <data name="Bombka szklana PANDIRA cristal-white_Aluro" xml:space="preserve">
-    <value>Glaskugel PANDIRA kristall-weiß_Aluro</value>
-  </data>
-  <data name="Świecznik- lampion BAXTER_Aluro XL" xml:space="preserve">
-    <value>Kronleuchter-Lampe BAXTER_Aluro XL</value>
   </data>
   <data name="Roślina szt.- zimowa gałąź modrzewia_Aluro" xml:space="preserve">
     <value>Pflanzenteile - Winterzweig der Lärche_Aluro</value>
   </data>
-  <data name="Szyszka FLAR_Aluro L" xml:space="preserve">
-    <value>FLAR_Aluro-Kegel L</value>
+  <data name="Osłonka, donica FRISA - M_Aluro" xml:space="preserve">
+    <value>FRISA Gehäuse, Blumentopf - M_Aluro</value>
   </data>
-  <data name="Cena jednostkowa" xml:space="preserve">
-    <value>Stückpreis</value>
+  <data name="Lampy wiszące" xml:space="preserve">
+    <value>Hängelampen</value>
   </data>
-  <data name="Konsola, pomocnik HODIE_Aluro" xml:space="preserve">
-    <value>HODIE_Aluro Konsole, Hilfsmittel</value>
+  <data name="Roślina sztuczna -róża miedziana Aluro" xml:space="preserve">
+    <value>Künstliche Pflanze - Kupferrose Aluro</value>
   </data>
-  <data name="Donica MIDAXI white&amp;copper XXL_Aluro" xml:space="preserve">
-    <value>MIDAXI Topf weiß&amp;kupfer XXL_Aluro</value>
+  <data name="Stolik kawowy ORSO_Aluro" xml:space="preserve">
+    <value>Couchtisch ORSO_Aluro</value>
   </data>
-  <data name="droga" xml:space="preserve">
-    <value>Straße</value>
+  <data name="Osłonka, donica CARLA - XXL_Aluro" xml:space="preserve">
+    <value>Kutte, Topf CARLA - XXL_Aluro</value>
   </data>
-  <data name="Wazon DALMIRA artistic style XXL_Aluro" xml:space="preserve">
-    <value>DALMIRA künstlerischen Stil Vase XXL_Aluro</value>
+  <data name="Świecznik srebrny IZARO L_Aluro" xml:space="preserve">
+    <value>IZARO Silber Kerzenhalter L_Aluro</value>
   </data>
-  <data name="Osłonka, donica FRISA - L_Aluro" xml:space="preserve">
-    <value>FRISA Gehäuse, Blumentopf - L_Aluro</value>
+  <data name="Fotel metalowy ABRO_Aluro" xml:space="preserve">
+    <value>Metall-Sessel ABRO_Aluro</value>
   </data>
-  <data name="Świecznik srebrny VIRA L_Aluro" xml:space="preserve">
-    <value>Silberner Kerzenhalter VIRA L_Aluro</value>
+  <data name="Konsola ORSO_Aluro" xml:space="preserve">
+    <value>ORSO_Aluro-Konsole</value>
   </data>
-  <data name="Osłonka, misa LAKO_Aluro" xml:space="preserve">
-    <value>Kutte, Schale LAKO_Aluro</value>
+  <data name="Dodaj do zamowienia" xml:space="preserve">
+    <value>Zur Bestellung hinzufügen</value>
   </data>
-  <data name="Nazwa produktu" xml:space="preserve">
-    <value>Produktname</value>
+  <data name="Samochód bordowy L_Aluro" xml:space="preserve">
+    <value>Kastanienbraunes Auto L_Aluro</value>
   </data>
-  <data name="test21" xml:space="preserve">
-    <value>test21</value>
+  <data name="Nowa Kolekcja" xml:space="preserve">
+    <value>Neue Kollektion</value>
   </data>
-  <data name="Stolik-pomocnik KINOX_Aluro" xml:space="preserve">
-    <value>Hilfstabelle KINOX_Aluro</value>
+  <data name="Lampion wiszący SILO z wkład. szklanym_Aluro" xml:space="preserve">
+    <value>Hängelaterne SILO mit Glaseinsatz_Aluro</value>
   </data>
-  <data name="Osłonka, donica MARTISA - XL_Aluro" xml:space="preserve">
-    <value>MARTISA Gehäuse, Blumentopf - XL_Aluro</value>
+  <data name="Powrót do sklepu" xml:space="preserve">
+    <value>Kehre zum Geschäft zurück</value>
   </data>
-  <data name="Razem" xml:space="preserve">
-    <value>Zusammen</value>
+  <data name="test spacja w symbol" xml:space="preserve">
+    <value>Prüfbereich im Symbol</value>
   </data>
-  <data name="Stolik GIDO_ALURO" xml:space="preserve">
-    <value>Tabelle GIDO_ALURO</value>
+  <data name="Moje informacje osobiste" xml:space="preserve">
+    <value>Meine persönlichen Informationen</value>
+  </data>
+  <data name="Obelisk dekoracyjny LALIS_Aluro" xml:space="preserve">
+    <value>Dekorativer Obelisk LALIS_Aluro</value>
+  </data>
+  <data name="Roślina sztuczna - patrinia złota_Aluro" xml:space="preserve">
+    <value>Künstliche Pflanze - gold patrinia_Aluro</value>
+  </data>
+  <data name="Informacje" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="Nazwa Firmy" xml:space="preserve">
+    <value>Name der Firma</value>
+  </data>
+  <data name="Rośliny sztuczne" xml:space="preserve">
+    <value>Künstliche Pflanzen</value>
+  </data>
+  <data name="Świecznik choinka MILTON_Aluro" xml:space="preserve">
+    <value>Weihnachtsbaum-Kronleuchter MILTON_Aluro</value>
   </data>
   <data name="Wybierz profil działalności." xml:space="preserve">
     <value>Wählen Sie ein Unternehmensprofil aus.</value>
   </data>
+  <data name="Płatność" xml:space="preserve">
+    <value>Zahlung</value>
+  </data>
+  <data name="Lampion FLOBI wiklina i sznurek - L_Aluro" xml:space="preserve">
+    <value>FLOBI Laterne aus Weide und Schnur - L_Aluro</value>
+  </data>
+  <data name="Osłonka - misa KIERA kpl-2szt złote_Aluro" xml:space="preserve">
+    <value>Kutte - Schale KIERA kpl-2pcs gold_Aluro</value>
+  </data>
+  <data name="Zamówienie" xml:space="preserve">
+    <value>in der Woche</value>
+  </data>
+  <data name="Twoja cena po rabacie" xml:space="preserve">
+    <value>Ihr reduzierter Preis</value>
+  </data>
+  <data name="Lampa wisząca HERMES_Aluro" xml:space="preserve">
+    <value>Lampa wisząca HERMES_Aluro</value>
+  </data>
+  <data name="Baza zdjęć produktów aluro" xml:space="preserve">
+    <value>Fotodatenbank von aluro Produkten</value>
+  </data>
+  <data name="Osłonka,donica CARLA - M_Aluro" xml:space="preserve">
+    <value>Kutte,Topf CARLA - M_Aluro</value>
+  </data>
+  <data name="Latarnia metal. TIMBA złota XL_Aluro" xml:space="preserve">
+    <value>Metall-Laterne. TIMBA gold XL_Aluro</value>
+  </data>
+  <data name="Donica MIDAXI white&amp;copper L_Aluro" xml:space="preserve">
+    <value>MIDAXI weiß&amp;kupfer Topf L_Aluro</value>
+  </data>
+  <data name="Osłonka z jelonkami GILBO L_Aluro" xml:space="preserve">
+    <value>GILBO-Hirschdarm L_Aluro</value>
+  </data>
+  <data name="Stolik BASE_ALURO" xml:space="preserve">
+    <value>Tabelle BASE_ALURO</value>
+  </data>
+  <data name="Witaj" xml:space="preserve">
+    <value>Hallo</value>
+  </data>
+  <data name="Witryna loft HATTIE_Aluro" xml:space="preserve">
+    <value>HATTIE_Aluro-Loft-Schrank</value>
+  </data>
+  <data name="Wazon ANKLE_Aluro S" xml:space="preserve">
+    <value>Vase ANKLE_Aluro S</value>
+  </data>
+  <data name="Utwórz nowe konto" xml:space="preserve">
+    <value>Neuen Account erstellen</value>
+  </data>
+  <data name="Alfabetycznie od A do Z" xml:space="preserve">
+    <value>Alphabetisch von A bis Z</value>
+  </data>
+  <data name="Samochód bordowy XL_Aluro" xml:space="preserve">
+    <value>Auto kastanienbraun XL_Aluro</value>
+  </data>
+  <data name="Roślina sztuczna - asparagus copper_Aluro" xml:space="preserve">
+    <value>Künstliche Pflanze - Spargel Kupfer_Aluro</value>
+  </data>
+  <data name="Wazon DALMIRA artistic style XL_Aluro" xml:space="preserve">
+    <value>DALMIRA künstlerischen Stil Vase XL_Aluro</value>
+  </data>
+  <data name="Niemiecki" xml:space="preserve">
+    <value>Deutsch</value>
+  </data>
+  <data name="Komoda 4-drzwiowa NAFIR_Aluro" xml:space="preserve">
+    <value>4-türige Truhe NAFIR_Aluro</value>
+  </data>
+  <data name="Lampa wisząca FRILL_Aluro" xml:space="preserve">
+    <value>Lampa wisząca FRILL_Aluro</value>
+  </data>
+  <data name="Świecznik srebrny VIRA L_Aluro" xml:space="preserve">
+    <value>Silberner Kerzenhalter VIRA L_Aluro</value>
+  </data>
+  <data name="Ptak drewniany- hand made from recycling_Aluro" xml:space="preserve">
+    <value>Vogel aus Holz - handgefertigt aus Recycling_Aluro</value>
+  </data>
+  <data name="Choinka MIILTON - drewno mango_Aluro" xml:space="preserve">
+    <value>MIILTON Weihnachtsbaum - Mangoholz_Aluro</value>
+  </data>
+  <data name="Lustro salonowe TEVOR antique style gold_Aluro" xml:space="preserve">
+    <value>Loungespiegel TEVOR antik Stil gold_Aluro</value>
+  </data>
+  <data name="Konsola FOSIL_Aluro" xml:space="preserve">
+    <value>FOSIL_Aluro-Konsole</value>
+  </data>
+  <data name="Nowa Kolekcja 2022" xml:space="preserve">
+    <value>Neue Kollektion 2022</value>
+  </data>
+  <data name="Twoje zamówienie" xml:space="preserve">
+    <value>Deine Bestellung</value>
+  </data>
+  <data name="Meble" xml:space="preserve">
+    <value>Möbel</value>
+  </data>
+  <data name="Złóż zamówienie" xml:space="preserve">
+    <value>Senden Sie Ihre Bestellung ab</value>
+  </data>
+  <data name="Abażur z tkaniny taupe Aluro L" xml:space="preserve">
+    <value>Abażur z tkaniny taupe Aluro L</value>
+  </data>
+  <data name="Ozdoba wisząca SPLIT sznurki_Aluro" xml:space="preserve">
+    <value>SPLIT string Anhänger Ornament_Aluro</value>
+  </data>
+  <data name="Adres dostawy" xml:space="preserve">
+    <value>Lieferadresse</value>
+  </data>
+  <data name="Konsola meblowa TABER" xml:space="preserve">
+    <value>TABER Möbelkonsole</value>
+  </data>
+  <data name="Bombki szklane RICA 3 sztuki- multikolor_Aluro" xml:space="preserve">
+    <value>RICA Glaskugeln 3 Stück- mehrfarbig_Aluro</value>
+  </data>
+  <data name="Wazon DALMIRA artistic style XXL_Aluro" xml:space="preserve">
+    <value>DALMIRA künstlerischen Stil Vase XXL_Aluro</value>
+  </data>
+  <data name="Roślina szt.- kwiat zimowy_Aluro" xml:space="preserve">
+    <value>Pflanzenteile-Winterblume_Aluro</value>
+  </data>
+  <data name="Gotówka odbiór w Bogucinie ul. Gnieźnieńska 159" xml:space="preserve">
+    <value>Bargeldabholung in Bogucin ul. Gnesen 159</value>
+  </data>
+  <data name="Postument Kiron_Aluro" xml:space="preserve">
+    <value>Sockel Kiron_Aluro</value>
+  </data>
+  <data name="Zarządzaj kontem" xml:space="preserve">
+    <value>Verwalten Sie Ihr Konto</value>
+  </data>
+  <data name="Świecznik- lampion BAXTER_Aluro L" xml:space="preserve">
+    <value>Kronleuchter-Lampe BAXTER_Aluro L</value>
+  </data>
+  <data name="Razem" xml:space="preserve">
+    <value>Zusammen</value>
+  </data>
+  <data name="Razem (netto)" xml:space="preserve">
+    <value>Gesamt</value>
+  </data>
+  <data name="Wszelkie prawa zastrzeżone." xml:space="preserve">
+    <value>Alle Rechte vorbehalten.</value>
+  </data>
+  <data name="Osłonka, donica KUSTON - HISTORY_Aluro" xml:space="preserve">
+    <value>Kabinett, Blumentopf KUSTON - HISTORY_Aluro</value>
+  </data>
+  <data name="Donica MIDAXI white&amp;copper XL_Aluro" xml:space="preserve">
+    <value>MIDAXI weiß&amp;kupfer XL Topf_Aluro</value>
+  </data>
+  <data name="zapamietaj mnie" xml:space="preserve">
+    <value>Erinnere dich an mich</value>
+  </data>
+  <data name="Samochód zielony XXL_Aluro" xml:space="preserve">
+    <value>Auto grün XXL_Aluro</value>
+  </data>
+  <data name="Stół FILIPPE 240x95x76_Aluro" xml:space="preserve">
+    <value>FILIPPE Tisch 240x95x76_Aluro</value>
+  </data>
+  <data name="Roślina sztuczna - owoce głogu złote_Aluro" xml:space="preserve">
+    <value>Künstliche Pflanze - goldene Weißdornfrucht_Aluro</value>
+  </data>
+  <data name="Świecznik TOZZI 5-ramienny_Aluro" xml:space="preserve">
+    <value>TOZZI 5-Arm-Kerzenhalter_Aluro</value>
+  </data>
+  <data name="Stół kawowy SAVIR_Aluro" xml:space="preserve">
+    <value>Couchtisch SAVIR_Aluro</value>
+  </data>
+  <data name="Świecznik FLAR_Aluro L" xml:space="preserve">
+    <value>Kronleuchter FLAR_Aluro L</value>
+  </data>
+  <data name="Stolik-pomocnik kpl-3szt ORSINO_Aluro" xml:space="preserve">
+    <value>Helfer-Tabelle kpl-3pcs ORSINO_Aluro</value>
+  </data>
+  <data name="Wyloguj" xml:space="preserve">
+    <value>Ausloggen</value>
+  </data>
+  <data name="Wazon DALMIRA artistic style L_Aluro" xml:space="preserve">
+    <value>DALMIRA künstlerischen Stil Vase L_Aluro</value>
+  </data>
+  <data name="dom" xml:space="preserve">
+    <value>Startseite</value>
+  </data>
+  <data name="Świecznik ażurowy FULTON_Aluro XL" xml:space="preserve">
+    <value>Durchbrochener Kerzenhalter FULTON_Aluro XL</value>
+  </data>
+  <data name="Osłonka, donica FRISA - XL_Aluro" xml:space="preserve">
+    <value>FRISA Gehäuse, Blumentopf - XL_Aluro</value>
+  </data>
+  <data name="Abażury" xml:space="preserve">
+    <value>Lampenschirme</value>
+  </data>
+  <data name="Osłonka, donica LERICI - XL_Aluro" xml:space="preserve">
+    <value>LERICI Gehäuse, Blumentopf - XL_Aluro</value>
+  </data>
+  <data name="Kod pocztowy" xml:space="preserve">
+    <value>PLZ</value>
+  </data>
+  <data name="Angielski" xml:space="preserve">
+    <value>Englisch</value>
+  </data>
+  <data name="Stół FILIPPE 190x95x76_Aluro" xml:space="preserve">
+    <value>FILIPPE Tisch 190x95x76_Aluro</value>
+  </data>
+  <data name="DANE ROZLICZENIOWE FIRMY" xml:space="preserve">
+    <value>RECHNUNGSINFORMATIONEN DES UNTERNEHMENS</value>
+  </data>
+  <data name="Roślina sztuczna - asparagus gold_Aluro" xml:space="preserve">
+    <value>Künstliche Pflanze - Spargel gold_Aluro</value>
+  </data>
+  <data name="Adres rozliczeniowy" xml:space="preserve">
+    <value>Rechnungsadresse</value>
+  </data>
+  <data name="Roślina sztuczna - głązka zimowa_Aluro" xml:space="preserve">
+    <value>Künstliche Pflanze - Winterling_Aluro</value>
+  </data>
+  <data name="Roślina szt. - gałązka białej hortensji_Aluro" xml:space="preserve">
+    <value>Pflanze Stk. - Zweig der weißen Hortensie_Aluro</value>
+  </data>
+  <data name="Lampion ażurowy KEVORI owalny XL_Aluro" xml:space="preserve">
+    <value>Durchbrochene Laterne KEVORI oval XL_Aluro</value>
+  </data>
+  <data name="Lampion szklany VIVO_Aluro" xml:space="preserve">
+    <value>Glaslaterne VIVO_Aluro</value>
+  </data>
+  <data name="Test01" xml:space="preserve">
+    <value>Test01</value>
+  </data>
+  <data name="Szyszka FLAR_Aluro XL" xml:space="preserve">
+    <value>FLAR_Aluro-Kegel XL</value>
+  </data>
+  <data name="test2" xml:space="preserve">
+    <value>test2</value>
+  </data>
+  <data name="Wazon kremowy VINCE_Aluro" xml:space="preserve">
+    <value>VINCE_Aluro cremefarbene Vase</value>
+  </data>
+  <data name="Osłonka, misa LAKO_Aluro" xml:space="preserve">
+    <value>Kutte, Schale LAKO_Aluro</value>
+  </data>
+  <data name="Gazon, doniczka LAZURITE ocean blue_Aluro XL" xml:space="preserve">
+    <value>Gazon, Blumentopf LAZURITE ozeanblau_Aluro XL</value>
+  </data>
+  <data name="Pojemnik - bomboniera ASURA - XL_Aluro" xml:space="preserve">
+    <value>ASURA Pralinenschachtel - XL_Aluro</value>
+  </data>
+  <data name="Koszyk jest pusty" xml:space="preserve">
+    <value>Korb ist leer</value>
+  </data>
+  <data name="Roślina sztuczna - krwawnik dziki_Aluro" xml:space="preserve">
+    <value>Künstliche Pflanze - Wilde Schafgarbe_Aluro</value>
+  </data>
+  <data name="Wazon OROMEO ręcznie malowany_Aluro XL" xml:space="preserve">
+    <value>OROMEO handbemalte Vase_Aluro XL</value>
+  </data>
+  <data name="droga" xml:space="preserve">
+    <value>Straße</value>
+  </data>
+  <data name="Produkt jest już niedostępny." xml:space="preserve">
+    <value>Das Produkt ist nicht mehr verfügbar.</value>
+  </data>
+  <data name="Lampy stołowe" xml:space="preserve">
+    <value>Tischlampen</value>
+  </data>
+  <data name="Pakowanie:" xml:space="preserve">
+    <value>Verpackung:</value>
+  </data>
+  <data name="Osłonka z jelonkami GILBO M_Aluro" xml:space="preserve">
+    <value>GILBO-Hirschdarm M_Aluro</value>
+  </data>
+  <data name="Materiał:" xml:space="preserve">
+    <value>Material:</value>
+  </data>
+  <data name="Ogólne warunki sprzedaży" xml:space="preserve">
+    <value>Allgemeine Verkaufsbedingungen</value>
+  </data>
+  <data name="Głębokość:" xml:space="preserve">
+    <value>Tiefe:</value>
+  </data>
+  <data name="Doniczka,osłonka ANTERO okrągła_Aluro XXL" xml:space="preserve">
+    <value>Runder ANTERO Blumentopf, Gehäuse_Aluro XXL</value>
+  </data>
+  <data name="Wazon OROMEO ręcznie malowany_Aluro L" xml:space="preserve">
+    <value>OROMEO handbemalte Vase_Aluro L</value>
+  </data>
+  <data name="netto" xml:space="preserve">
+    <value>Netz</value>
+  </data>
+  <data name="Świeczniki, Lampiony" xml:space="preserve">
+    <value>Leuchter, Laternen</value>
+  </data>
+  <data name="Imię" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Integracja XML" xml:space="preserve">
+    <value>XML-Integration</value>
+  </data>
+  <data name="Nazwisko" xml:space="preserve">
+    <value>Nachname</value>
+  </data>
+  <data name="Lustro industrialne JEROLD_Aluro" xml:space="preserve">
+    <value>Industriespiegel JEROLD_Aluro</value>
+  </data>
+  <data name="Inne dodatki" xml:space="preserve">
+    <value>Andere Extras</value>
+  </data>
+  <data name="Doniczka,osłonka ANTERO okrągła_Aluro XL" xml:space="preserve">
+    <value>Runder ANTERO Blumentopf_Aluro XL</value>
+  </data>
+  <data name="Cena jednostkowa" xml:space="preserve">
+    <value>Stückpreis</value>
+  </data>
+  <data name="Oświetlenie" xml:space="preserve">
+    <value>Beleuchtung</value>
+  </data>
+  <data name="Osłonka MADELIA_Aluro" xml:space="preserve">
+    <value>MADELIA_Alurogehäuse</value>
+  </data>
+  <data name="Bombka szklana GIO_Aluro" xml:space="preserve">
+    <value>Glaskugel GIO_Aluro</value>
+  </data>
+  <data name="Stolik kawowy FOSIL_Aluro" xml:space="preserve">
+    <value>Couchtisch FOSIL_Aluro</value>
+  </data>
+  <data name="Resetuj hasło" xml:space="preserve">
+    <value>Passwort zurücksetzen</value>
+  </data>
+  <data name="Roślina sztuczna -wierzba płacząca srebrna_Aluro" xml:space="preserve">
+    <value>Künstliche Pflanze - Trauerweide silber_Aluro</value>
+  </data>
+  <data name="Osłonka na stojaku FIBER_aluro" xml:space="preserve">
+    <value>FIBER_aluro Standgehäuse</value>
+  </data>
+  <data name="Wieloryb - figura dekoracyjna_Aluro" xml:space="preserve">
+    <value>Wal - Dekofigur_Aluro</value>
+  </data>
+  <data name="Stolik/Pomocnik AMAX_Aluro" xml:space="preserve">
+    <value>AMAX_Aluro Tisch/Ständer</value>
+  </data>
+  <data name="Polski" xml:space="preserve">
+    <value>Polieren</value>
+  </data>
+  <data name="Produkt Bez kategori Test" xml:space="preserve">
+    <value>Produkt nicht in Kategorie Test</value>
+  </data>
+  <data name="Stolik-pomocnik KINOX_Aluro" xml:space="preserve">
+    <value>Hilfstabelle KINOX_Aluro</value>
+  </data>
+  <data name="Potrzebujesz pomocy? Zadzwoń" xml:space="preserve">
+    <value>Sie benötigen Hilfe? Anruf</value>
+  </data>
+  <data name="Wysokość:" xml:space="preserve">
+    <value>Höhe:</value>
+  </data>
+  <data name="w tygodniu" xml:space="preserve">
+    <value>in der Woche</value>
+  </data>
+  <data name="(brutto)" xml:space="preserve">
+    <value>inkl. Steuer.</value>
+  </data>
+  <data name="Adress dostawy inny niż Adres rozliczeniowy" xml:space="preserve">
+    <value>Lieferadresse abweichend von Rechnungsadresse</value>
+  </data>
+  <data name="Lampion szklany MITO_Aluro" xml:space="preserve">
+    <value>Glaslaterne MITO_Aluro</value>
+  </data>
+  <data name="ProduktNiedostępny" xml:space="preserve">
+    <value>Dieses Produkt ist nicht länger verfügbar</value>
+  </data>
+  <data name="Nazwa produktu" xml:space="preserve">
+    <value>Produktname</value>
+  </data>
+  <data name="Poszewki" xml:space="preserve">
+    <value>Kissenbezüge</value>
+  </data>
+  <data name="Gazon, doniczka LAZURITE ocean blue_Aluro L" xml:space="preserve">
+    <value>Gazon, Blumentopf LAZURITE ozeanblau_Aluro L</value>
+  </data>
+  <data name="Karta kredytowa" xml:space="preserve">
+    <value>Kreditkarte</value>
+  </data>
+  <data name="Stolik/Pomocnik ORSO_Aluro" xml:space="preserve">
+    <value>ORSO_Aluro Tabelle/Hilfsmittel</value>
+  </data>
+  <data name="Zapomniałeś hasło?" xml:space="preserve">
+    <value>Haben Sie Ihr Passwort vergessen?</value>
+  </data>
+  <data name="Wazon ANKLE_Aluro M" xml:space="preserve">
+    <value>Vase ANKLE_Aluro M</value>
+  </data>
+  <data name="Świecznik ażurowy FULTON_Aluro L" xml:space="preserve">
+    <value>Durchbrochener Kerzenhalter FULTON_Aluro L</value>
+  </data>
+  <data name="Doniczka,osłonka CARMINO - XL_Aluro" xml:space="preserve">
+    <value>Blumentopf, Gehäuse CARMINO - XL_Aluro</value>
+  </data>
+  <data name="Osłonka, donica FRISA - XXL_Aluro" xml:space="preserve">
+    <value>FRISA Gehäuse, Blumentopf - XXL_Aluro</value>
+  </data>
+  <data name="Lampion szklany FEBO_Aluro" xml:space="preserve">
+    <value>Glaslaterne FEBO_Aluro</value>
+  </data>
+  <data name="Moje konto" xml:space="preserve">
+    <value>Mein Konto</value>
+  </data>
+  <data name="Osłonka, donica MARTISA - XL_Aluro" xml:space="preserve">
+    <value>MARTISA Gehäuse, Blumentopf - XL_Aluro</value>
+  </data>
+  <data name="CenaDetaliczna" xml:space="preserve">
+    <value>Endverbraucherpreis</value>
+  </data>
+  <data name="Krzesło tapicerowane PICADO blue_Aluro" xml:space="preserve">
+    <value>PICADO gepolsterter Stuhl blau_Aluro</value>
+  </data>
+  <data name="Osłonka, donica CARLA - XL_Aluro" xml:space="preserve">
+    <value>Kutte, Topf CARLA - XL_Aluro</value>
+  </data>
+  <data name="Ozdoba szkl. BRISK gwiazdka 3 wzory_Aluro" xml:space="preserve">
+    <value>BRISK Stern Glas Ornament 3 Designs_Aluro</value>
+  </data>
+  <data name="Ulica" xml:space="preserve">
+    <value>Straße</value>
+  </data>
+  <data name="Kraj" xml:space="preserve">
+    <value>Land</value>
+  </data>
+  <data name="Wazony, misy, tace" xml:space="preserve">
+    <value>Vasen, Schalen, Tabletts</value>
+  </data>
+  <data name="Usuń" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="Szklarenka BERTONI Aluro" xml:space="preserve">
+    <value>Gewächshaus BERTONI Aluro</value>
+  </data>
+  <data name="test21" xml:space="preserve">
+    <value>test21</value>
+  </data>
+  <data name="Szukaj" xml:space="preserve">
+    <value>Suche...</value>
+  </data>
+  <data name="kot" xml:space="preserve">
+    <value>Katze</value>
+  </data>
+  <data name="Świąteczka Kolekcja" xml:space="preserve">
+    <value>Weihnachtskollektion</value>
+  </data>
+  <data name="CenaHurtowa" xml:space="preserve">
+    <value>Großhandelspreis</value>
+  </data>
+  <data name="Makrama ścienna TANDRA_Aluro" xml:space="preserve">
+    <value>Wandmakramee TANDRA_Aluro</value>
+  </data>
+  <data name="Konsola MOLDE_Aluro" xml:space="preserve">
+    <value>MOLDE_Aluro-Konsole</value>
+  </data>
+  <data name="Roślina sztuczna - palma w doniczce_Aluro" xml:space="preserve">
+    <value>Künstliche Pflanze - Palme im Topf_Aluro</value>
+  </data>
+  <data name="Komoda FENDI_Aluro" xml:space="preserve">
+    <value>FENDI_Aluro Kommode</value>
+  </data>
+  <data name="Wazon,osłonka ARKET_Aluro" xml:space="preserve">
+    <value>Vase,Gehäuse ARKET_Aluro</value>
+  </data>
+  <data name="Przelew" xml:space="preserve">
+    <value>Transfer</value>
+  </data>
+  <data name="Lampa stołowa JIKARA wiklinowa_Aluro" xml:space="preserve">
+    <value>JIKARA Geflecht-Tischlampe_Aluro</value>
+  </data>
+  <data name="Wazon ANKLE_Aluro L" xml:space="preserve">
+    <value>Vase ANKLE_Aluro L</value>
+  </data>
+  <data name="Stolik/Pomocnik FOSIL_Aluro" xml:space="preserve">
+    <value>Tabelle/Tisch FOSIL_Aluro</value>
+  </data>
+  <data name="Lampa wisząca kula FIORE_Aluro" xml:space="preserve">
+    <value>Lampa wisząca kula FIORE_Aluro</value>
+  </data>
+  <data name="Szerokość:" xml:space="preserve">
+    <value>Breite:</value>
+  </data>
+  <data name="Nowości" xml:space="preserve">
+    <value>Nachrichten</value>
+  </data>
+  <data name="Specyfikacja produktu:" xml:space="preserve">
+    <value>Produktspezifikation:</value>
+  </data>
+  <data name="Kolumna KUMI_ALURO" xml:space="preserve">
+    <value>Spalte KUMI_ALURO</value>
+  </data>
+  <data name="Symbol od najmniejszej do największej" xml:space="preserve">
+    <value>Symbol vom kleinsten zum größten</value>
+  </data>
+  <data name="Wazon MIDAXI white&amp;copper XL_Aluro" xml:space="preserve">
+    <value>MIDAXI Vase weiß&amp;kupfer XL_Aluro</value>
+  </data>
+  <data name="Choinka metalowa biała vintage &amp; style XL_Aluro" xml:space="preserve">
+    <value>Metall Weihnachtsbaum weiß Vintage &amp; Stil XL_Aluro</value>
+  </data>
+  <data name="Wartość (brutto)" xml:space="preserve">
+    <value>Bruttowert</value>
+  </data>
+  <data name="Wazon niebieski FELIZ_Aluro" xml:space="preserve">
+    <value>Blaue Vase FELIZ_Aluro</value>
+  </data>
+  <data name="Regał 5-półkowy FOSIL_Aluro" xml:space="preserve">
+    <value>Bücherregal mit 5 Regalen FOSIL_Aluro</value>
+  </data>
   <data name="Lampa wisząca TAKALI_Aluro" xml:space="preserve">
     <value>Hängeleuchte TAKALI_Aluro</value>
   </data>
-  <data name="Telefon" xml:space="preserve">
-    <value>Telefon</value>
+  <data name="godz. otwarcia" xml:space="preserve">
+    <value>Zeit. Öffnung</value>
+  </data>
+  <data name="Samochód zielony L_Aluro" xml:space="preserve">
+    <value>Auto grün L_Aluro</value>
+  </data>
+  <data name="Osłonka, donica LERICI - XXL_Aluro" xml:space="preserve">
+    <value>LERICI Gehäuse, Blumentopf - XXL_Aluro</value>
+  </data>
+  <data name="Wielbłąd dromader - figura metalowa_Aluro XL" xml:space="preserve">
+    <value>Dromader Kamel - Metallfigur_Aluro XL</value>
+  </data>
+  <data name="Lampion metalowy MANON_Aluro L" xml:space="preserve">
+    <value>Metall-Laterne MANON_Aluro L</value>
+  </data>
+  <data name="Stolik okolicznościowy MALOV_Aluro" xml:space="preserve">
+    <value>Beistelltisch MALOV_Aluro</value>
+  </data>
+  <data name="test453" xml:space="preserve">
+    <value>test453</value>
+  </data>
+  <data name="Donice i Osłonki" xml:space="preserve">
+    <value>Töpfe und Deckel</value>
+  </data>
+  <data name="Świecznik metalowy ESTILO złoty_Aluro" xml:space="preserve">
+    <value>Metall-Kerzenhalter ESTILO gold_Aluro</value>
+  </data>
+  <data name="wilk" xml:space="preserve">
+    <value>wolf</value>
+  </data>
+  <data name="Abażur do lamp z tkaniny Aluro XL" xml:space="preserve">
+    <value>Abażur do lamp z tkaniny Aluro XL</value>
+  </data>
+  <data name="Sofa Charlie Chaplin MAZINE Aluro" xml:space="preserve">
+    <value>Charlie Chaplin MAZINE Sofa Aluro</value>
+  </data>
+  <data name="test54" xml:space="preserve">
+    <value>test54</value>
+  </data>
+  <data name="Osłonka metal.na stojaku ALVRA_Aluro" xml:space="preserve">
+    <value>Metallgehäuse auf Ständer ALVRA_Aluro</value>
+  </data>
+  <data name="Latarnia metal. TIMBA czarno-srebrna XL_Aluro" xml:space="preserve">
+    <value>Metall-Laterne. TIMBA schwarz und silber XL_Aluro</value>
+  </data>
+  <data name="Płatność i dostawa" xml:space="preserve">
+    <value>Zahlungs-und Lieferbedingungen</value>
+  </data>
+  <data name="Szyszka FLAR_Aluro L" xml:space="preserve">
+    <value>FLAR_Aluro-Kegel L</value>
   </data>
   <data name="Bombka szklana PANORA 3 wzory_Aluro" xml:space="preserve">
     <value>PANORA Glaskugel 3 Motive_Aluro</value>
   </data>
-  <data name="Nazwa Firmy" xml:space="preserve">
-    <value>Name der Firma</value>
+  <data name="PROFIL DZIAŁALNOŚCI" xml:space="preserve">
+    <value>GESCHÄFTSPROFIL</value>
+  </data>
+  <data name="Produkt" xml:space="preserve">
+    <value>Produkt</value>
+  </data>
+  <data name="Lampion FLOBI wiklina i sznurek - XL_Aluro" xml:space="preserve">
+    <value>FLOBI Weidenruten- und Schnurlaterne - XL_Aluro</value>
+  </data>
+  <data name="Pojemnik MIDAXI white&amp;copper XXL_Aluro" xml:space="preserve">
+    <value>MIDAXI weiß&amp;kupfer XXL Behälter_Aluro</value>
+  </data>
+  <data name="Historia zamówień" xml:space="preserve">
+    <value>die Geschichte der Bestellungen</value>
+  </data>
+  <data name="Zaloguj się" xml:space="preserve">
+    <value>Einloggen</value>
+  </data>
+  <data name="Język" xml:space="preserve">
+    <value>Sprache wählen</value>
+  </data>
+  <data name="Bombka szklana PANDIRA cristal-white_Aluro" xml:space="preserve">
+    <value>Glaskugel PANDIRA kristall-weiß_Aluro</value>
+  </data>
+  <data name="Stół DANTE_Aluro" xml:space="preserve">
+    <value>Tabelle DANTE_Aluro</value>
+  </data>
+  <data name="Panele ścienne, lustra, zegary" xml:space="preserve">
+    <value>Wandpaneele, Spiegel, Uhren</value>
+  </data>
+  <data name="Bombka szkl.DUTTON 3 wzory_Aluro" xml:space="preserve">
+    <value>DUTTON Glaskugel 3 Motive_Aluro</value>
+  </data>
+  <data name="Ilość" xml:space="preserve">
+    <value>Menge</value>
+  </data>
+  <data name="Sortuj" xml:space="preserve">
+    <value>Sortieren</value>
+  </data>
+  <data name="Stolik GIDO_ALURO" xml:space="preserve">
+    <value>Tabelle GIDO_ALURO</value>
+  </data>
+  <data name="Wyczyść zamówienie" xml:space="preserve">
+    <value>Klare Reihenfolge</value>
+  </data>
+  <data name="Osłonka prostokątna SHELO_Aluro" xml:space="preserve">
+    <value>Rechteckiges Gehäuse SHELO_Aluro</value>
+  </data>
+  <data name="Wielbłąd dromader- figura metalowa_Aluro L" xml:space="preserve">
+    <value>Dromader Kamel - Metallfigur_Aluro L</value>
+  </data>
+  <data name="Osłonka z jelonkami GILBO XL_Aluro" xml:space="preserve">
+    <value>GILBO-Hirschdarm XL_Aluro</value>
+  </data>
+  <data name="(netto)" xml:space="preserve">
+    <value>MwSt. exkl.</value>
+  </data>
+  <data name="Osłonka, donica LERICI - L_Aluro" xml:space="preserve">
+    <value>LERICI Gehäuse, Blumentopf - L_Aluro</value>
+  </data>
+  <data name="Świecznik- lampion BAXTER_Aluro XL" xml:space="preserve">
+    <value>Kronleuchter-Lampe BAXTER_Aluro XL</value>
+  </data>
+  <data name="las" xml:space="preserve">
+    <value>Wald</value>
+  </data>
+  <data name="STWÓRZ KONTO" xml:space="preserve">
+    <value>EIN KONTO ERSTELLEN</value>
+  </data>
+  <data name="Powtórz hasło" xml:space="preserve">
+    <value>Passwort wiederholen</value>
+  </data>
+  <data name="Wazon ALAMA ręcznie malowany_Aluro" xml:space="preserve">
+    <value>ALAMA handbemalte Vase_Aluro</value>
+  </data>
+  <data name="Telefon" xml:space="preserve">
+    <value>Telefon</value>
+  </data>
+  <data name="Bombka szklana PANDIRA cristal-silver_Aluro" xml:space="preserve">
+    <value>Glaskugel PANDIRA kristall-silber_Aluro</value>
+  </data>
+  <data name="Donica MIDAXI white&amp;copper XXL_Aluro" xml:space="preserve">
+    <value>MIDAXI Topf weiß&amp;kupfer XXL_Aluro</value>
+  </data>
+  <data name="Konsola, pomocnik HODIE_Aluro" xml:space="preserve">
+    <value>HODIE_Aluro Konsole, Hilfsmittel</value>
+  </data>
+  <data name="Alfabetycznie od Z do A" xml:space="preserve">
+    <value>Alphabetisch von Z bis A</value>
+  </data>
+  <data name="Ważne informacje" xml:space="preserve">
+    <value>Wichtige Informationen</value>
+  </data>
+  <data name="Symbol od największej do najmniejszej" xml:space="preserve">
+    <value>Symbol vom größten zum kleinsten</value>
+  </data>
+  <data name="Makrama sznurkowa KITTIRI - rama metal_Aluro" xml:space="preserve">
+    <value>KITTIRI Schnur Makramee - Metallrahmen_Aluro</value>
+  </data>
+  <data name="Serce mozaikowe wiszące - L_Aluro" xml:space="preserve">
+    <value>Hängendes Mosaikherz - L_Aluro</value>
+  </data>
+  <data name="Samochód zielony XL_Aluro" xml:space="preserve">
+    <value>Auto grün XL_Aluro</value>
+  </data>
+  <data name="Osłonka, donica FRISA - L_Aluro" xml:space="preserve">
+    <value>FRISA Gehäuse, Blumentopf - L_Aluro</value>
+  </data>
+  <data name="Latarnia MORATO złota XXL_Aluro" xml:space="preserve">
+    <value>MORATO Gold-Laterne XXL_Aluro</value>
+  </data>
+  <data name="Świecznik FLAR_Aluro XL" xml:space="preserve">
+    <value>FLAR_Aluro XL Kerzenhalter</value>
+  </data>
+  <data name="test22" xml:space="preserve">
+    <value>test22</value>
+  </data>
+  <data name="Wazon metalowy SOLCO złoty_Aluro" xml:space="preserve">
+    <value>Metallvase SOLCO gold_Aluro</value>
+  </data>
+  <data name="Hasło" xml:space="preserve">
+    <value>Passwort</value>
+  </data>
+  <data name="Roślina sztuczna - gałązki złote_Aluro" xml:space="preserve">
+    <value>Künstliche Pflanze - goldene Zweige_Aluro</value>
+  </data>
+  <data name="Wazon, lampion szklany CARLA - L_Aluro" xml:space="preserve">
+    <value>Vase, Glaslaterne CARLA - L_Aluro</value>
+  </data>
+  <data name="Konsola AMAX_Aluro" xml:space="preserve">
+    <value>AMAX_Aluro-Konsole</value>
+  </data>
+  <data name="test56" xml:space="preserve">
+    <value>test56</value>
+  </data>
+  <data name="Lampion-świecznik LAKIN-loft_Aluro" xml:space="preserve">
+    <value>Laternen-Kerzenhalter LAKIN-loft_Aluro</value>
+  </data>
+  <data name="test76" xml:space="preserve">
+    <value>test76</value>
+  </data>
+  <data name="Dodatki do wnętrz" xml:space="preserve">
+    <value>Innenausstattung</value>
+  </data>
+  <data name="test57" xml:space="preserve">
+    <value>test57</value>
+  </data>
+  <data name="Kategorie" xml:space="preserve">
+    <value>Kategorien</value>
+  </data>
+  <data name="Wiadomość do zamówienia." xml:space="preserve">
+    <value>Nachricht bestellen.</value>
+  </data>
+  <data name="Osłonka, donica GOLDI - XL_Aluro" xml:space="preserve">
+    <value>GOLDI Gehäuse, Blumentopf - XL_Aluro</value>
+  </data>
+  <data name="Ozdoba szkl.GULIA bombka z gwiazdką_Aluro" xml:space="preserve">
+    <value>Glaskugel GULIA mit Stern_Aluro</value>
+  </data>
+  <data name="Lampion srebrny BONTA_Aluro" xml:space="preserve">
+    <value>Silberne Laterne BONTA_Aluro</value>
+  </data>
+  <data name="Lampion na nodze ATEX_Aluro" xml:space="preserve">
+    <value>Laterne auf einem Bein ATEX_Aluro</value>
+  </data>
+  <data name="Abażur z tkaniny brązowy Aluro L" xml:space="preserve">
+    <value>Abażur z tkaniny brązowy Aluro L</value>
+  </data>
+  <data name="Zegar ścienny KIRAN_Aluro" xml:space="preserve">
+    <value>Wanduhr KIRAN_Aluro</value>
+  </data>
+  <data name="Misa ALAMA ręcznie malowana_Aluro" xml:space="preserve">
+    <value>ALAMA handbemalte Schalel_Aluro</value>
+  </data>
+  <data name="Adresy" xml:space="preserve">
+    <value>Adressen</value>
+  </data>
+  <data name="Lampa wisząca GAURI_Aluro" xml:space="preserve">
+    <value>GAURI_Aluro Pendelleuchte</value>
   </data>
 </root>

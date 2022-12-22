@@ -25,10 +25,10 @@ namespace partner_aluro.Services
                 _context.ProductCategory.Remove(productCategor[i]);
                 _context.SaveChanges();
             }
-
-
-
-            _context.Products.Remove(product);
+            product.Ilosc = 0;
+            product.CategoryId = 28;
+            
+            _context.Products.Update(product);
             _context.SaveChanges();
             return id;
         }
@@ -47,6 +47,7 @@ namespace partner_aluro.Services
         {
             List<Product> list = await _context.Products
                 .Include(p => p.CategoryNavigation)
+                .Where(p=>p.CategoryNavigation.Aktywny == true)
                 .Include(p => p.Product_Images)
                 .ToListAsync();
             

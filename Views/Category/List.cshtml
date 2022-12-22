@@ -48,7 +48,12 @@
                                             {
                                                 
                                                 <div>Nie można usuwać</div>
-                                            }else
+                                            }else if (cat.CategoryId == 28)
+                                            {
+
+                                                <div>Nie można usuwać</div>
+                                            }
+                                            else
                                             {
                                                 <a asp-controller="Category" asp-action="Delete" asp-route-id="@cat.CategoryId">Usuń</a>
                                             }

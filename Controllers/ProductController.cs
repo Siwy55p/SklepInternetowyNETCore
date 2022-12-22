@@ -507,12 +507,12 @@ namespace partner_aluro.Controllers
         {
             Product product = _context.Products.Find(id);
 
-            //delete image from wwwroot/images
-            var PathProduct = Path.Combine(_webHostEnvironment.WebRootPath + "\\img\\p\\" + product.Symbol);
+            ////delete image from wwwroot/images
+            //var PathProduct = Path.Combine(_webHostEnvironment.WebRootPath + "\\img\\p\\" + product.Symbol);
 
-            if (System.IO.Directory.Exists(PathProduct))
-                System.IO.Directory.Delete(PathProduct, true);
-            //delete tge record
+            //if (System.IO.Directory.Exists(PathProduct))
+            //    System.IO.Directory.Delete(PathProduct, true);
+            ////delete tge record
 
             _ProductService.DeleteProductId(id);
             return RedirectToAction("List");

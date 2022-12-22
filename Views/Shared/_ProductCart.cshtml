@@ -15,7 +15,7 @@
     {   
             decimal ProcentPromocji = (1 - (Model.CenaPromocyja / Model.CenaProduktuBrutto)) * 100;
 
-        <div class="sale">@ProcentPromocji.ToString("##.") %</div>
+        <div class="sale">- @ProcentPromocji.ToString("##.") %</div>
     }
 
     <div class="thumbnail">
@@ -85,10 +85,20 @@
 
 
         </div>
-        <div class="float-end text-end">
-            @language.GetCurrently(@Cena_brutto, Constants.myNumberFormatInfo).ToString("C",Constants.myNumberFormatInfo) <span class="brutto">@language.Getkey("(brutto)")</span>
-        </div>
-
+        @if (Model.CenaPromocyja != 0 && Model.CenaPromocyja != 0)
+        {
+            <div class="float-end text-end">
+                <span class="text-decoration-line-through">@language.GetCurrently(@Cena_brutto, Constants.myNumberFormatInfo).ToString("C",Constants.myNumberFormatInfo) </span> <span class="text-end">@language.GetCurrently(@Model.CenaPromocyja, Constants.myNumberFormatInfo).ToString("C",Constants.myNumberFormatInfo)</span> <span class="brutto">@language.Getkey("(brutto)")</span>
+            </div>
+          @*  <div class="float-end text-end">
+                @language.GetCurrently(@Model.CenaPromocyja, Constants.myNumberFormatInfo).ToString("C",Constants.myNumberFormatInfo) <span class="brutto">@language.Getkey("(brutto)")</span>
+            </div>*@
+        }else
+        {
+            <div class="float-end text-end">
+                @language.GetCurrently(@Cena_brutto, Constants.myNumberFormatInfo).ToString("C",Constants.myNumberFormatInfo) <span class="brutto">@language.Getkey("(brutto)")</span>
+            </div>
+        }
         @if (partner_aluro.Core.Constants.Rabat != 0 && partner_aluro.Core.Constants.Rabat >= 0)
         {
             <div class="float-end text-end">@language.Getkey("Twoja cena po rabacie"): @language.GetCurrently(@CenaJednostkowa, Constants.myNumberFormatInfo).ToString("C",Constants.myNumberFormatInfo)) </div>
