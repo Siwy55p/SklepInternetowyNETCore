@@ -42,7 +42,7 @@ builder.Services.AddSingleton<JobReminders>();
 //builder.Services.AddSingleton(new MyJob(type: typeof(JobReminders), expression: "59/0 0/1 * 1/1 * ? *"));  //Every 30min
 //builder.Services.AddSingleton(new MyJob(type: typeof(JobReminders), expression: "0 15 10 * * ?")); //Every Uruchamiaj codziennie o 10:15" />
 //builder.Services.AddSingleton(new MyJob(type: typeof(JobReminders), expression: "0 15 12 * * ?")); //Every Uruchamiaj codziennie o 12:15" />
-builder.Services.AddSingleton(new MyJob(type: typeof(JobReminders), expression: "0 10 1 * * ?")); //Every Uruchamiaj codziennie o 1:10 w nocy" />
+builder.Services.AddSingleton(new MyJob(type: typeof(JobReminders), expression: "0 0 1 * * ?")); // Codziennie o 1 w nocy" />
 
 
 builder.Services.AddDistributedMemoryCache();

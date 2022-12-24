@@ -75,11 +75,6 @@ namespace partner_aluro.Services
                     {
                         path0 = @"img/p/";
                     }
-                    if (slider != null)
-                    {
-                        path0 = @"img/SliderHome/";
-                    }
-
                     string IdImageString = IdImage.ToString();
                     char[] charArr = IdImageString.ToCharArray();
 
@@ -90,15 +85,23 @@ namespace partner_aluro.Services
                         Folders += charArr[c] + "/";
                     }
                     path0 += Folders;
+
+
+                    if (slider != null)
+                    {
+                        path0 = @"img/SliderHome/" + slider.ImageSliderID;
+                        //path0 = @"img/SliderHome/" + slider.ImageSliderID + @"/";
+                    }
                     if (product != null)
                     {
                         uploadsFolder = Path.Combine(webRootPath, @"img/p/");
+
+                        uploadsFolder += Folders;
                     }
                     if (slider != null)
                     {
-                        uploadsFolder = Path.Combine(webRootPath, @"img/SliderHome/");
+                        uploadsFolder = Path.Combine(webRootPath, @"img/SliderHome/" + slider.ImageSliderID);
                     }
-                    uploadsFolder += Folders;
 
                     if (!Directory.Exists(uploadsFolder))
                     {
@@ -115,10 +118,10 @@ namespace partner_aluro.Services
                     //{
                     //    dynamicFileName = product.Symbol + "_" + i + "_" + DateTime.Now.ToString("mm_ss") + extension;
                     //}
-                    //if (slider != null)
-                    //{
-                    //    dynamicFileName = "slider" + i + "_" + DateTime.Now.ToString("mm_ss") + extension;
-                    //}
+                    if (slider != null)
+                    {
+                        dynamicFileName = "slider" + i + "_" + DateTime.Now.ToString("mm_ss") + extension;
+                    }
 
                     //save orginal image
                     using (var filesStream = new FileStream(Path.Combine(uploadsFolder, dynamicFileName), FileMode.Create))
@@ -186,21 +189,6 @@ namespace partner_aluro.Services
                         imgModel.ImageNameCompress645x410 = ImageNameCompres2;
                         imgModel.ProductId = product.ProductId;
                         imgModel.Opis = product.Symbol;
-
-
-                        //imgModel = new()
-                        //{
-                        //    path = path0 + product.Symbol + @"/",
-                        //    fullPath = path0 + product.Symbol + @"/" + dynamicFileName,
-                        //    kolejnosc = ilosc+i,
-                        //    Tytul = product.Name,
-                        //    ImageName = dynamicFileName,
-                        //    pathImageCompress250x250 = pathSaveCompres,
-                        //    ImageNameCompress250x250 = ImageNameCompres,
-                        //    pathImageCompress645x410 = pathSaveCompres2,
-                        //    ImageNameCompress645x410 = ImageNameCompres2,
-                        //    ProductId = product.ProductId
-                        //};
                     }
                     if (slider != null)
                     {
@@ -211,8 +199,8 @@ namespace partner_aluro.Services
                             ilosc++;
                         }
 
-                        imgModel.path = path0;
-                        imgModel.fullPath = path0 + dynamicFileName;
+                        imgModel.path = path0 + @"/";
+                        imgModel.fullPath = path0 + @"/" + dynamicFileName;
                         imgModel.kolejnosc = ilosc + i;
                         imgModel.Tytul = "sliderHome";
                         imgModel.ImageName = dynamicFileName;
@@ -222,21 +210,6 @@ namespace partner_aluro.Services
                         imgModel.ImageNameCompress645x410 = ImageNameCompres2;
                         imgModel.SliderIds = slider.ImageSliderID;
                         imgModel.Opis = "slider";
-                        
-                        //imgModel = new()
-                        //{
-                        //    path = path0 +@"/",
-                        //    fullPath = path0 + @"/" + dynamicFileName,
-                        //    kolejnosc = ilosc+i,
-                        //    Tytul = "sliderHome",
-                        //    ImageName = dynamicFileName,
-                        //    pathImageCompress250x250 = pathSaveCompres,
-                        //    ImageNameCompress250x250 = ImageNameCompres,
-                        //    pathImageCompress645x410 = pathSaveCompres2,
-                        //    ImageNameCompress645x410 = ImageNameCompres2,
-                        //    SliderIds = slider.ImageSliderID,
-                        //    Opis = "slider",
-                        //};
                     }
 
                     if(slider == null && product == null)
