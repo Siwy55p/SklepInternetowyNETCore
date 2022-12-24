@@ -424,16 +424,13 @@ namespace partner_aluro.Controllers
 
                 foreach (var image in produkty[i].Product_Images)
                 {
-                    if (System.IO.File.Exists(image.path))
+                    if (image.Equals(last))
                     {
-                        if (image.Equals(last))
-                        {
-                            imagePath += _adresStrony + @"/" + image.path + image.ImageName;
-                        }
-                        else
-                        {
-                            imagePath += _adresStrony + @"/" + image.path + image.ImageName + ", ";
-                        }
+                        imagePath += _adresStrony + @"/" + image.path + image.ImageName;
+                    }
+                    else
+                    {
+                        imagePath += _adresStrony + @"/" + image.path + image.ImageName + ", ";
                     }
                 }
 
