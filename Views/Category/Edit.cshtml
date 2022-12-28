@@ -70,7 +70,7 @@
                                             </th>
                                             <td>
                                                 <a asp-controller="Product" asp-action="Edit" asp-route-id="@productFormModel.ProductId">Edytuj</a> |
-                                                @*<a asp-controller="Product" asp-action="Delete" asp-route-id="@productFormModel.ProductId">Usuń</a> |*@
+                                            <a asp-controller="Product" asp-action="DeletePermanentlyProductId" asp-route-id="@productFormModel.ProductId">Usuń</a> |
                                                 <a asp-controller="Product" asp-action="Details" asp-route-id="@productFormModel.ProductId">Podgląd</a>
 
                                             </td>

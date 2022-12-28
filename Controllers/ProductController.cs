@@ -518,6 +518,28 @@ namespace partner_aluro.Controllers
             return RedirectToAction("List");
         }
 
+
+        public int DeletePermanentlyProductId(int id)
+        {
+            var product = _context.Products.Find(id);
+
+
+            List<ProductCategory> productCategor = _context.ProductCategory.Where(x => x.ProductID == id).ToList();
+            for (int i = 0; i < productCategor.Count; i++)
+            {
+                _context.ProductCategory.Remove(productCategor[i]);
+                _context.SaveChanges();
+            }
+            product.Ilosc = 0;
+            product.CategoryId = 28;
+
+            _context.Products.Remove(product);
+            _context.SaveChanges();
+
+            return id;
+        }
+
+
         //[ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
         //private async Task UploadFile2Async(Product product)
         //{

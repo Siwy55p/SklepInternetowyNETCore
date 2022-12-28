@@ -93,24 +93,53 @@ namespace partner_aluro.Controllers
             return View(vm);
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> Delete(string id)
-        //{
-        //    ApplicationUser user = await _signInManager.UserManager.FindByIdAsync(id);
-        //    if (user != null)
-        //    {
-        //        //_adress1RozliczeniowyService.Delete(user.Adress1rozliczeniowyId);
-        //        //_adress2DostawyService.DeleteUserId(user.Id);
-        //        IdentityResult result = await _signInManager.UserManager.DeleteAsync(user);
-        //            if (result.Succeeded)
-        //            return RedirectToAction("Index");
-        //        else
-        //            Errors(result);
-        //    }
-        //    else
-        //        ModelState.AddModelError("", "User Not Found");
-        //    return View("Index");
-        //}
+
+        public async Task<IActionResult> Delete(string id)
+        {
+            ApplicationUser user = await _signInManager.UserManager.FindByIdAsync(id);
+            if (user != null)
+            {
+                //_adress1RozliczeniowyService.Delete(user.Adress1rozliczeniowyId);
+                //_adress2DostawyService.DeleteUserId(user.Id);
+                if (user.Adress1rozliczeniowyId != null)
+                {
+                    Adress1rozliczeniowy adress1 = _context.Adress1rozliczeniowy.Where(x => x.Adres1rozliczeniowyId == user.Adress1rozliczeniowyId).FirstOrDefault();
+                    _context.Adress1rozliczeniowy.Remove(adress1);
+                    _context.SaveChanges();
+                }
+                var existAdress1 = _context.Adress1rozliczeniowy.Where(x => x.UserID == id);
+                if(existAdress1 !=null)
+                {
+                    Adress1rozliczeniowy adress1Remove = _context.Adress1rozliczeniowy.Where(x => x.UserID == id).FirstOrDefault();
+                    _context.Adress1rozliczeniowy.Remove(adress1Remove);
+                }
+
+                if (user.Adress2dostawyId != null)
+                {
+                    Adress2dostawy adress2 = _context.Adress2dostawy.Where(x => x.Adres2dostawyId == user.Adress2dostawyId).FirstOrDefault();
+                    _context.Adress2dostawy.Remove(adress2);
+                    _context.SaveChanges();
+                }
+
+                var existAdress2dostawt = _context.Adress2dostawy.Where(x => x.UserID == id);
+                if (existAdress2dostawt != null)
+                {
+                    Adress2dostawy adres2Dostawy = _context.Adress2dostawy.Where(x => x.UserID == id).FirstOrDefault();
+                    _context.Adress2dostawy.Remove(adres2Dostawy);
+                }
+
+
+
+                IdentityResult result = await _signInManager.UserManager.DeleteAsync(user);
+                if (result.Succeeded)
+                    return RedirectToAction("Index");
+                else
+                    Errors(result);
+            }
+            else
+                ModelState.AddModelError("", "User Not Found");
+            return View("Index");
+        }
 
 
         [HttpPost]

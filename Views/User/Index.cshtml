@@ -40,7 +40,6 @@
                             <table id="userTable" class="display" style="width: 100%">
                                 <thead>
                                     <tr>
-                                        <th>Id</th>
                                         <th>Data założenia</th>
                                         <th>Imię Nazwisko</th>
                                         <th>Firma</th>
@@ -64,9 +63,6 @@
                                         var checkBoxId = "chk" + user.UserName;
 
                                         <tr>
-                                            <td>@i</td>
-
-                                            @{i++;}
 
                                             <td>@user.DataZałożenia</td>
                                             <td>@user.Imie @user.Nazwisko</td>
@@ -93,7 +89,8 @@
                                                 }
                                             </td>
                                             <td>
-                                                <a asp-controller="User" asp-action="Edit" asp-route-id="@user.Id">Edytuj</a> |  <a asp-controller="User" asp-action="ResetPasswordUser" asp-route-id="@user.Id" asp-route-email="@user.Email">Resetuj hasło</a>
+                                                <a asp-controller="User" asp-action="Edit" asp-route-id="@user.Id">Edytuj</a> |  <a asp-controller="User" asp-action="ResetPasswordUser" asp-route-id="@user.Id" asp-route-email="@user.Email">Resetuj hasło</a> |
+                                                <a asp-controller="User" asp-action="Delete" asp-route-id="@user.Id">Usuń</a>
                                             </td>
                                             @*<td>
                                                 @Html.HiddenFor(h=>user.Id);  @*potrzebne do funkcji usuniecia user
@@ -145,6 +142,7 @@
         $(document).ready(function () {
             $('#userTable').DataTable(
                 {
+                    "pageLength": 50,
                     "order": [[0, 'desc']]
                 });
         });
