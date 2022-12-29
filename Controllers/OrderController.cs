@@ -314,7 +314,7 @@ namespace partner_aluro.Controllers
                 foreach(var item in order.OrderItems)
                 {
 
-                    ProductList += "<td>" + @item.Product.ProductId + "</td><td><img src=\"~/@Model.pathImageUrl250x250\" style=\"width:75px;height:75px;\"></td>" +
+                    ProductList += "<td>" + @item.Product.ProductId + "</td><td><img src=\"~/"+@item.Product.pathImageUrl250x250+"\" style=\"width:75px;height:75px;\"></td>" +
 
                         "<td>"+@item.Product.Name+"</td>" +
                         "<td>"+@item.Product.Symbol+"</td>" +
@@ -703,7 +703,7 @@ namespace partner_aluro.Controllers
 
                     PdfPCell cell_1 = new(new Phrase(item.Id));
 
-                    Image image = Image.GetInstance("wwwroot/" + @item.Product.pathImageUrl250x250);
+                    Image image = Image.GetInstance(@item.Product.pathImageUrl250x250);
                     image.ScaleAbsoluteWidth(50);
                     image.ScaleAbsoluteHeight(45);
                     PdfPCell cell_2 = new(image);
