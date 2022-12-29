@@ -6,7 +6,7 @@
         @Html.HiddenFor(h=>Model.User.Id)
         
         <div class="mb-3">
-            <label asp-for="@Model.User.Adress1rozliczeniowy.Vat" >NIP</label>
+            <label asp-for="@Model.User.Adress1rozliczeniowy.Vat">NIP</label>
             <input asp-for="@Model.User.Adress1rozliczeniowy.Vat" class="form-control" id="floatingInputVAT" placeholder="Nr NIP" value="@Model.User.Adress1rozliczeniowy.Vat" required />
             <span asp-validation-for="@Model.User.Adress1rozliczeniowy.Vat" class="text-danger"></span>
         </div>
