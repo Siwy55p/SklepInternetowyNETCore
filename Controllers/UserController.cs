@@ -97,6 +97,7 @@ namespace partner_aluro.Controllers
         public async Task<IActionResult> Delete(string id)
         {
             ApplicationUser user = await _signInManager.UserManager.FindByIdAsync(id);
+            
             if (user != null)
             {
                 //_adress1RozliczeniowyService.Delete(user.Adress1rozliczeniowyId);
@@ -107,11 +108,12 @@ namespace partner_aluro.Controllers
                     _context.Adress1rozliczeniowy.Remove(adress1);
                     _context.SaveChanges();
                 }
-                var existAdress1 = _context.Adress1rozliczeniowy.Where(x => x.UserID == id);
+                var existAdress1 = _context.Adress1rozliczeniowy.Where(x => x.UserID == id).FirstOrDefault();
                 if(existAdress1 !=null)
                 {
-                    Adress1rozliczeniowy adress1Remove = _context.Adress1rozliczeniowy.Where(x => x.UserID == id).FirstOrDefault();
-                    _context.Adress1rozliczeniowy.Remove(adress1Remove);
+                    //Adress1rozliczeniowy adress1Remove = _context.Adress1rozliczeniowy.Where(x => x.UserID == id).FirstOrDefault();
+                    _context.Adress1rozliczeniowy.Remove(existAdress1);
+                    _context.SaveChanges();
                 }
 
                 if (user.Adress2dostawyId != null)
@@ -121,11 +123,12 @@ namespace partner_aluro.Controllers
                     _context.SaveChanges();
                 }
 
-                var existAdress2dostawt = _context.Adress2dostawy.Where(x => x.UserID == id);
+                var existAdress2dostawt = _context.Adress2dostawy.Where(x => x.UserID == id).FirstOrDefault();
                 if (existAdress2dostawt != null)
                 {
-                    Adress2dostawy adres2Dostawy = _context.Adress2dostawy.Where(x => x.UserID == id).FirstOrDefault();
-                    _context.Adress2dostawy.Remove(adres2Dostawy);
+                    //Adress2dostawy adres2Dostawy = _context.Adress2dostawy.Where(x => x.UserID == id).FirstOrDefault();
+                    _context.Adress2dostawy.Remove(existAdress2dostawt);
+                    _context.SaveChanges();
                 }
 
 

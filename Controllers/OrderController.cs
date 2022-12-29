@@ -1,4 +1,5 @@
 ﻿
+using iText.IO.Image;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using Microsoft.AspNetCore.Authorization;
@@ -414,6 +415,7 @@ namespace partner_aluro.Controllers
                 //document.Add(image3);
 
 
+
                 Image image2 = Image.GetInstance("wwwroot/img/logo/Aluro_logo-x-300_2.png");
                 image2.ScaleAbsoluteWidth(150);
                 image2.ScaleAbsoluteHeight(75);
@@ -702,11 +704,45 @@ namespace partner_aluro.Controllers
                     decimal cenaJednostkowaIlosc = cenaJednostkowa * @item.Quantity;
 
                     PdfPCell cell_1 = new(new Phrase(item.Id));
+                    PdfPCell cell_2 = new();
+                    //partneralluro.hostingasp.pl / wwwroot / wwwroot / img / p / 4
+                    string path = "";
 
-                    Image image = Image.GetInstance(@item.Product.pathImageUrl250x250);
-                    image.ScaleAbsoluteWidth(50);
-                    image.ScaleAbsoluteHeight(45);
-                    PdfPCell cell_2 = new(image);
+
+                    var imageProduct = _context.Images.Where(x => x.ImageId == item.Product.ProductImagesId).FirstOrDefault();
+                    if (imageProduct != null)
+                    {
+
+                        path = "wwwroot/" + imageProduct.path + imageProduct.ImageName;
+                        if (System.IO.File.Exists(path))
+                        {
+
+                            iTextSharp.text.Image img = iTextSharp.text.Image.GetInstance(path);
+                            img.ScaleAbsoluteWidth(50);
+                            img.ScaleAbsoluteHeight(45);
+                            cell_2 = new(img);
+                        }
+                    }
+                    //document.Add(pic);
+
+
+                    //// Creating an ImageData object 
+                    //String imageFile = "C:/itextExamples/javafxLogo.jpg";
+                    //ImageData data = ImageDataFactory.Create(imageFile);
+
+                    //Image images = new Image(data);
+
+                    //image.setWidth(pdfDocument.getDefaultPageSize().getWidth() - 50);
+                    //image.setAutoScaleHeight(true);
+
+
+                    //Image image3 = Image.GetInstance("wwwroot/img/logo/Aluro_logo-x-300_2.png");
+
+                    //string paths =  item.Product.pathImageUrl250x250;
+                    //Image image = Image.GetInstance("https://partneralluro.hostingasp.pl/" + paths+"");
+                    //img.ScaleAbsoluteWidth(50);
+                    //img.ScaleAbsoluteHeight(45);
+                    //PdfPCell cell_2 = new(img);
                     PdfPCell cell_3 = new(new Phrase(item.Product.Name, regular));
                     PdfPCell cell_4 = new(new Phrase(item.Product.Symbol, regular));
                     PdfPCell cell_5 = new(new Phrase(item.Quantity.ToString(), regular));
