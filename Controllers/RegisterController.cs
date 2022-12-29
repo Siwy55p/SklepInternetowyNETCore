@@ -28,14 +28,15 @@ namespace partner_aluro.Controllers
             RegonService = regonService;
             _userManager = userManager;
             _emailService = emailService;
-            _context = context; 
+            _context = context;
         }
-
-        [Route("Identity/Account/Login")]
+        [Route("Login")]
+        [Route("Identity/Account")]
+        [Route("logowanie")]
         [Route("pl/logowanie")]
         public IActionResult LoginRedirect(string ReturnUrl)
         {
-            return Redirect("/logowanie?ReturnUrl=" + ReturnUrl);
+            return Redirect("Identity/Account/Login?ReturnUrl=" + ReturnUrl);
         }
 
         public IActionResult Index()

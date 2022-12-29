@@ -32,7 +32,7 @@ namespace partner_aluro.Controllers
                 builder.HtmlBody = SourceReader.ReadToEnd();
             }
 
-
+            
 
             if (sends is null)
             {

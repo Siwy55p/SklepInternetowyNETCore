@@ -313,7 +313,8 @@ namespace partner_aluro.Controllers
                 string ProductList = "";
                 foreach(var item in order.OrderItems)
                 {
-                    ProductList += "<td>" + @item.Product.ProductId + "</td><td><img src=\"~/img/p/@item.Product.Symbol/@item.Product.ImageUrl\" style=\"width:75px;height:75px;\"></td>" +
+
+                    ProductList += "<td>" + @item.Product.ProductId + "</td><td><img src=\"~/@Model.pathImageUrl250x250\" style=\"width:75px;height:75px;\"></td>" +
 
                         "<td>"+@item.Product.Name+"</td>" +
                         "<td>"+@item.Product.Symbol+"</td>" +
@@ -594,8 +595,8 @@ namespace partner_aluro.Controllers
 
 
 
-                string text6_1 = " " + "\n";
-                string text6_3 = "\n";
+                string text6_1 = "NIP: " + order.adresRozliczeniowy.Vat +"\n";
+                string text6_3 = "Email: " + order.User.Email + "\n";
                 //Paragraph para1 = new Paragraph("Data zamówienia: " + order.OrderPlaced, bold);
 
                 Chunk c6_1 = new(text6_1, bold);
@@ -702,7 +703,7 @@ namespace partner_aluro.Controllers
 
                     PdfPCell cell_1 = new(new Phrase(item.Id));
 
-                    Image image = Image.GetInstance("wwwroot/img/p/" + @item.Product.Symbol + "/" + @item.Product.ImageUrl);
+                    Image image = Image.GetInstance("wwwroot/" + @item.Product.pathImageUrl250x250);
                     image.ScaleAbsoluteWidth(50);
                     image.ScaleAbsoluteHeight(45);
                     PdfPCell cell_2 = new(image);
