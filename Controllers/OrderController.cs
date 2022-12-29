@@ -301,7 +301,6 @@ namespace partner_aluro.Controllers
                     "Wartość zamówienia: " + order.OrderTotal + " zł<br>" +
                     "Zamówienie ID:#" + order.NrZamowienia + "<br>"+
                     "<table style=\"border:1px solid black\"><thead><tr><th>Id</th>" +
-                    "<th>Obraz</th>"+
                     "<th>Nazwa produktu</th>"+
                     "<th>Symbol</th>"+
                     "<th>Cena jednostkowa produktu</th>"+
@@ -315,17 +314,18 @@ namespace partner_aluro.Controllers
                 foreach(var item in order.OrderItems)
                 {
 
-                    ProductList += "<td>" + @item.Product.ProductId + "</td><td><img src=\"~/"+@item.Product.pathImageUrl250x250+"\" style=\"width:75px;height:75px;\"></td>" +
+                    ProductList += "<tr>" +
 
                         "<td>"+@item.Product.Name+"</td>" +
                         "<td>"+@item.Product.Symbol+"</td>" +
                         "<td>"+ @item.Product.Name + "</td>" +
                         "<td>"+@item.Quantity+"</td>" +
-                        "<td>"+ @item.Product.Name +"</td>";
+                        "<td>"+ @item.Product.Name +"</td>"+
+                        "</tr>";
 
                 }
 
-                string endEmail = "</tbody<tfoot><tr><th></th><th></th><th></th><th></th><th></th><th>Suma:</th><th>"+order.OrderTotal+"</th></tr></tfoot></table>";
+                string endEmail = "</tbody<tfoot><tr><th></th><th></th><th></th><th></th><th>Suma:</th><th>"+order.OrderTotal+"</th></tr></tfoot></table>";
 
 
                 string emailMessage = startEmail + ProductList + endEmail;
