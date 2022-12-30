@@ -397,8 +397,6 @@ namespace partner_aluro.Controllers
                 Font bold = new(BaseFont.CreateFont(@"wwwroot\css\font\arial.ttf", BaseFont.CP1250, true), 10, Font.BOLD);
                 Font regular = new(BaseFont.CreateFont(@"wwwroot\css\font\arial.ttf", BaseFont.CP1250, true), 10);
 
-
-
                 Document document = new Document();
 
                 //Document document = new Document(PageSize.A4, 25, 25, 30, 30);
