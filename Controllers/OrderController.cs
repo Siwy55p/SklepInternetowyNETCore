@@ -887,7 +887,7 @@ namespace partner_aluro.Controllers
                     ProductId = item.Product.ProductId,
                     OrderId = order.Id,
                     //Cena = (int)(item.Product.CenaProduktuDlaUzytkownika * item.Quantity)
-                    Cena = (int)ProductTotal
+                    Cena = ProductTotal
                     //Cena = (int)(item.Product.CenaProduktuBrutto * item.Quantity)
                 };
 

@@ -4,7 +4,7 @@
     {
         public int Id { get; set; }
         public decimal Quantity { get; set; }
-        public int Cena { get; set; }
+        public decimal Cena { get; set; }
 
         public int OrderId { get; set; }
         public int ProductId { get; set; }

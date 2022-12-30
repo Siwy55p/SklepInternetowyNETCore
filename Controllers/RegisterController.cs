@@ -41,7 +41,7 @@ namespace partner_aluro.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return Redirect("Identity/Account/Login?ReturnUrl=" + "");
         }
 
         public IActionResult ChangeLanguage(string culture)

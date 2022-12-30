@@ -11,7 +11,7 @@ namespace partner_aluro.Models
         public int Id { get; set; }
         public string? NrZamowienia { get; set; }
         public List<OrderItem> OrderItems { get; set; } = new();
-        public int OrderTotal { get; set; }
+        public decimal OrderTotal { get; set; }
         public DateTime OrderPlaced { get; set; }
 
         public string? MessageToOrder { get; set; }
