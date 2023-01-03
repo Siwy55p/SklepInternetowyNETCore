@@ -242,7 +242,15 @@ namespace partner_aluro.Controllers
                 var rowP = ws.Row(row);
                 rowP.Height = 130;
 
-                var imagePathProduct = @"wwwroot\img\p\"+produkty[i].Symbol+@"\"+ produkty[i].ImageUrl;
+                //var imagePathProduct = @"wwwroot\img\p\"+produkty[i].Symbol+@"\"+ produkty[i].ImageUrl;
+                var imagePathProduct = "";
+                var images = _context.Images.Where(x=>x.ImageId == produkty[i].ProductImagesId).FirstOrDefault();
+                if(images!=null)
+                {
+                    imagePathProduct = @"wwwroot\" + images.path + images.ImageName;
+                }
+
+                //var imagePathProduct = @"wwwroot\img\" + produkty[i].Product_Images[0].path + @"\" + produkty[i].Product_Images[0].ImageName;
                 if (System.IO.File.Exists(imagePathProduct))
                 {
                     int iColumnWidth = (int)(ws.Column(1).Width - 1) * 7 + 12; // To convert column width in pixel unit.

@@ -33,12 +33,16 @@ namespace partner_aluro.Controllers
         [Route("Login")]
         [Route("Identity/Account")]
         [Route("logowanie")]
-        [Route("pl/logowanie")]
         public IActionResult LoginRedirect(string ReturnUrl)
         {
             return Redirect("Identity/Account/Login?ReturnUrl=" + ReturnUrl);
         }
-
+        [Route("pl/logowanie")]
+        [Route("en/logowanie")]
+        public IActionResult LoginRedirect2(string ReturnUrl)
+        {
+            return Redirect("../Identity/Account/Login?ReturnUrl=" + ReturnUrl);
+        }
         public IActionResult Index()
         {
             return Redirect("Identity/Account/Login?ReturnUrl=" + "");

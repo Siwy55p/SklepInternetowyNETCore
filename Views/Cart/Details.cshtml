@@ -10,63 +10,69 @@
 </div>
     @if (Model.CartItems.Count > 0)
     {
-        <div class="row">
-            <div class="col-md-12 mb-3">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table id="example"
+    <div class="row">
+        <div class="col-md-12 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="example"
                            class="table table-striped data-table"
                            style="width: 100%">
-                                <thead>
-                                    <tr>
-                                        <th>Id</th>
-                                        <th>Obraz</th>
-                                        <th>Nazwa produktu</th>
-                                        <th>Symbol</th>
-                                        <th>Cena jednostkowa produktu</th>
-                                        <th>Ilość</th>
-                                        <th>Razem</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Obraz</th>
+                                    <td>Pozostała ilość</td>
+                                    <th>Nazwa produktu</th>
+                                    <th>Symbol</th>
+                                    <th>Cena jednostkowa produktu</th>
+                                    <th>Ilość</th>
+                                    <th>Razem</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @{
+                                    decimal RazemBrutto = 0;
+                                }
 
                                     @foreach (var item in Model.CartItems)
                                     {
                                         <tr>
-                                            @{
+                                        @{
 
-                                                var Cena_brutto = item.Product.CenaProduktuBrutto * partner_aluro.Core.Constants.Vat;
+                                            decimal Cena_brutto = item.Product.CenaProduktuBrutto;
 
-                                                if (/*item.Product.CenaPromocyja != null &&*/ item.Product.Promocja == true)
-                                                {
-                                                    Cena_brutto = item.Product.CenaPromocyja * partner_aluro.Core.Constants.Vat;
-                                                }
-
-
-                                                var CenaJednostkowa_netto = item.Product.CenaProduktuBrutto;
-                                                if (/*item.Product.CenaPromocyja != null &&*/ item.Product.Promocja == true)
-                                                {
-                                                    CenaJednostkowa_netto = item.Product.CenaPromocyja;
-                                                }
+                                            if (/*item.Product.CenaPromocyja != null &&*/ item.Product.Promocja == true)
+                                            {
+                                                Cena_brutto = item.Product.CenaPromocyja;
+                                            }
 
 
-                                                var CenaJednostkowa_brutto = Cena_brutto;
+                                            decimal CenaJednostkowa_netto = item.Product.CenaProduktuBrutto;
+                                            if (/*item.Product.CenaPromocyja != null &&*/ item.Product.Promocja == true)
+                                            {
+                                                CenaJednostkowa_netto = item.Product.CenaPromocyja;
+                                            }
 
 
-                                                if (partner_aluro.Core.Constants.Rabat >= 0)
-                                                {
-                                                    CenaJednostkowa_netto = item.Product.CenaProduktuBrutto * (1 - (partner_aluro.Core.Constants.Rabat / 100));
-                                                    CenaJednostkowa_brutto = Cena_brutto * (1 - (partner_aluro.Core.Constants.Rabat / 100));
-                                                }
+                                            decimal CenaJednostkowa_brutto = Cena_brutto;
 
-                                                var ProductTotal = CenaJednostkowa_brutto * item.Quantity;
 
-                                                //decimal cenaJednostkowa = item.Product.CenaProduktuBrutto * (1 - ((decimal)Model.RabatZamowienia / 100));
+                                            if (partner_aluro.Core.Constants.Rabat >= 0)
+                                            {
+                                                CenaJednostkowa_netto = item.Product.CenaProduktuBrutto * (1 - (partner_aluro.Core.Constants.Rabat / 100));
+                                                CenaJednostkowa_brutto = Cena_brutto * (1 - (partner_aluro.Core.Constants.Rabat / 100));
+                                            }
+
+                                            decimal ProductTotal = CenaJednostkowa_brutto * item.Quantity;
+                                            RazemBrutto = RazemBrutto + ProductTotal;
+                                            //decimal cenaJednostkowa = item.Product.CenaProduktuBrutto * (1 - ((decimal)Model.RabatZamowienia / 100));
                                                 //decimal cenaJednostkowaIlosc = cenaJednostkowa * @item.Quantity;
                                             }
                                             <td>@item.Product.ProductId</td>
                                             <td><img class="img-thumbnail" src="~/@item.Product.pathImageUrl250x250" alt="@item.Product.Name" style="width:75px;height:75px;"></td>
+                                        <td>@item.Product.Ilosc.ToString("0.###########################")</td>
                                             <td>@item.Product.Name</td>
                                             <td>@item.Product.Symbol</td>
                                             <td>@CenaJednostkowa_brutto.ToString("C")</td>
@@ -82,10 +88,10 @@
                                         <th></th>
                                         <th></th>
                                         <th></th>
+                                        <th></th>
                                         <th>Suma:</th>
                                         <th>
-                                            @Model.RazemBrutto.ToString();
-
+                                            @RazemBrutto.ToString("C")
                                             @*@Model.Carts.GetCartTotalBrutto(Model.Carts.CartId.ToString()).ToString("C")*@
                                         
                                         </th>

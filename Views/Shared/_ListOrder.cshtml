@@ -12,8 +12,8 @@
                                     <th>Id</th>
                                     <th>Wartość zamówienia</th>
                                     <th>Data zamówienia</th>
-                                <th>Metoda płatności</th>
-                                <th>Metoda dostawy</th>
+                                    <th>Metoda płatności</th>
+                                    <th>Metoda dostawy</th>
                                     @if (User.IsInRole("Administrator") || User.IsInRole("Manager"))
                                     {
                                         <th>Klient</th>
@@ -71,10 +71,37 @@
                                             <td>@order.StanZamowienia</td>
                                         }*@
 
+                                    @{
+                                        var color ="";
+                                    }
+
+                                    @if (order.StanZamowienia == StanZamowienia.Wrealizacji)
+                                    {
+                                        color = "#ff8c00";
+                                    }
+                                    else if (order.StanZamowienia == StanZamowienia.Nowe)
+                                    {
+                                        color = "#88ac8b";
+                                    }
+                                    else if (order.StanZamowienia == StanZamowienia.Zrealizowane)
+                                    {
+                                        color = "#6ab170";
+                                    }
+                                    else if (order.StanZamowienia == StanZamowienia.Anulowane)
+                                    {
+                                        color = "#dc143c";
+                                    }
+                                    else if(order.StanZamowienia == StanZamowienia.Wysłane)
+                                    {
+                                        color = "#ca9ef2";
+                                    }
+
                                         @if (User.IsInRole("Administrator") || User.IsInRole("Manager"))
                                         {
-                                            <td>
-                                            <a asp-controller="Order" asp-action="Detail" asp-route-id="@order.Id">Podgląd</a>
+                                        <td class="font-weight-bold">
+
+
+                                            <a asp-controller="Order" asp-action="Detail" asp-route-id="@order.Id" class="text-dark font-weight-bold" style=" font-weight: bold; background-color: @color">Podgląd</a>
                                             </td>
 
                                         <td>
