@@ -76,7 +76,15 @@
                                 @foreach (var item in ViewData["produkty"] as List<partner_aluro.Models.Product>)
                                 {
                                 <tr>
-                                    <td><img src="~/img/p/@item.Symbol/@item.ImageUrl" alt="@item.Name" style="width:30px;height:30px;"></td>
+                                    <td>
+
+                                        @if (item.Product_Images != null && item.Product_Images.Count() > 0)
+                                        {
+                                            <img class="card-img-top" onerror="this.onerror=null;this.src='../img/noimage.png';" src="~/@item.Product_Images.FirstOrDefault().pathImageCompress250x250" style="width:30px;height:30px;">
+                                        }
+
+
+                                    </td>
                                     <td><div id="Nazwa_@item.ProductId">@item.Name</div></td> 
                                     <td>@item.Symbol</td>
                                     <td><b>@item.CenaProduktuBrutto.ToString("C")</b></td>

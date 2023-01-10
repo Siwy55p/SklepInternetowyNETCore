@@ -68,7 +68,7 @@ builder.Services.AddBreadcrumbs(Assembly.GetExecutingAssembly(), options =>
 builder.Services.AddDbContext<ApplicationDbContext>(builder =>
 {
 
-    builder.UseSqlServer(@"Data Source=mssql4.webio.pl,2401;Database=siwy55p_siwy55p;Uid=siwy55p_siwy55p;Password=Siiwy1a2!3!4!5!;TrustServerCertificate=True", o =>
+    builder.UseSqlServer(@"Data Source=mssql4.webio.pl,2401;Database=siwy55p_siwy55p;Uid=siwy55p_siwy55p;Password=Siiwy1a2!3!4!5!;TrustServerCertificate=true", o =>
     {
         o.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null);
     }); //connection string
