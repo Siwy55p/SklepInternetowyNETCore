@@ -17,7 +17,12 @@
                     @foreach (var item in ViewData["produkty"] as List<partner_aluro.Models.Product>)
                     {
                         <tr>
-                            <td><img src="~/img/p/@item.Symbol/@item.ImageUrl" alt="@item.Name" style="width:30px;height:30px;"></td>
+                            <td>
+                                @if (@item.pathImageUrl250x250 != null)
+                                {
+                                    <img class="card-img-top" src="~/@item.pathImageUrl250x250" style="width:30px;height:30px;">
+                                }
+                            </td>
                             <td><div id="Nazwa_@item.ProductId">@item.Name</div></td>
                             <td>@item.Symbol</td>
                             <td><b>@item.CenaProduktuBrutto.ToString("C")</b></td>

@@ -104,6 +104,7 @@ Nesletter zostanie wysyłany do uzytkowników z aktywną subskrypcją.
         $(document).ready(function () {
             $('#userTable').DataTable(
                 {
+                    pageLength: 100,
                     "order": [[0, 'desc']]
                 });
         });

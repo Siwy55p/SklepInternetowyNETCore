@@ -54,10 +54,7 @@
                 </div>
             </div>
         </div>
-
-        <div>@Html.ActionLink("Przycisk", "Edit2", "Newsletter", null, new { id = "mylink" })</div>
-
-
+        @*<div>@Html.ActionLink("Przycisk", "Edit2", "Newsletter", null, new { id = "mylink" })</div>*@
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
@@ -77,10 +74,9 @@
                                 {
                                 <tr>
                                     <td>
-
-                                        @if (item.Product_Images != null && item.Product_Images.Count() > 0)
+                                        @if (@item.pathImageUrl250x250 != null)
                                         {
-                                            <img class="card-img-top" onerror="this.onerror=null;this.src='../img/noimage.png';" src="~/@item.Product_Images.FirstOrDefault().pathImageCompress250x250" style="width:30px;height:30px;">
+                                            <img class="card-img-top" src="~/@item.pathImageUrl250x250" style="width:30px;height:30px;">
                                         }
 
 

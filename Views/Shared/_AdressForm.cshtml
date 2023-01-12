@@ -108,11 +108,20 @@
                 <span asp-validation-for="@Model.Orders.AdressDostawy.Nazwisko" class="text-danger"></span>
                 </div>
             </div>
-            <div class="mb-3">
-            <label asp-for="@Model.Orders.AdressDostawy.Email">Email</label>
-            @Html.TextBoxFor(m => m.Orders.AdressDostawy.Email, new {@class="form-control", Value=String.Format("{0:d}", Model.Orders.AdressDostawy.Email)  })
-            <span asp-validation-for="@Model.Orders.AdressDostawy.Email" class="text-danger"></span>
+
+        <div class="row">
+
+            <div class="col-md-6 mb-3">
+                <label asp-for="@Model.Orders.AdressDostawy.Email">Email</label>
+                @Html.TextBoxFor(m => m.Orders.AdressDostawy.Email, new {@class="form-control", Value=String.Format("{0:d}", Model.Orders.AdressDostawy.Email)  })
+                <span asp-validation-for="@Model.Orders.AdressDostawy.Email" class="text-danger"></span>
             </div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="@Model.Orders.AdressDostawy.Telefon">@language.Getkey("Nr kontatowy do adresu dostawy")</label>
+                @Html.TextBoxFor(m => m.Orders.AdressDostawy.Telefon, new {id="KrajAdress2",@class="form-control", Value=String.Format("{0:d}", Model.Orders.AdressDostawy.Telefon)  })
+                <span asp-validation-for="@Model.Orders.AdressDostawy.Telefon" class="text-danger"></span>
+            </div>
+        </div>
 
             <div class="mb-3">
             <label asp-for="@Model.Orders.AdressDostawy">@language.Getkey("Ulica")</label>
