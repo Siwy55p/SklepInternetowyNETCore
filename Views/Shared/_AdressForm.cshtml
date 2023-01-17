@@ -118,7 +118,7 @@
             </div>
             <div class="col-md-6 mb-3">
                 <label asp-for="@Model.Orders.AdressDostawy.Telefon">@language.Getkey("Nr kontatowy do adresu dostawy")</label>
-                @Html.TextBoxFor(m => m.Orders.AdressDostawy.Telefon, new {id="KrajAdress2",@class="form-control", Value=String.Format("{0:d}", Model.Orders.AdressDostawy.Telefon)  })
+                @Html.TextBoxFor(m => m.Orders.AdressDostawy.Telefon, new {@class="form-control", Value=String.Format("{0:d}", Model.Orders.AdressDostawy.Telefon)  })
                 <span asp-validation-for="@Model.Orders.AdressDostawy.Telefon" class="text-danger"></span>
             </div>
         </div>

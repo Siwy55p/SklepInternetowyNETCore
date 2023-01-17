@@ -361,7 +361,7 @@ namespace partner_aluro.Controllers
 
 
             string td1 = "<th style=\"margin:0px; padding-left:10px;padding-right:10px; padding-top:0px; padding-bottom:0px; margin: 0px;\" > <div style=\"border:1px solid #b4b4b4;width:200px;height:200px;margin:0px;padding:0px; \"> <a href=\"..\\..\\..\\Product\\Detail\\"+produkt.Symbol+"\"> " +
-            "<img src=../../"+ produkt.pathImageUrl250x250 + " alt=" + produkt.Name + " style='width:200px;'> </a> </div></th>\r\n\t";
+            "<img src=../../"+ produkt.pathImageUrl250x250 + " alt=" + produkt.Name +" style='width:200px;'> </a> </div></th>\r\n\t";
             //"<img src=../../img/p/" + produkt.Symbol + "/" + produkt.ImageUrl + " alt=" + produkt.Name + " style='width:200px;'> </a> </div></th>\r\n\t";
             string td2 = "<td style=\"padding-left:10px;padding-right:10px; padding-top:0px; padding-bottom:0px; margin: 0px; text-align: center; \"><div style=\"border:1px solid #b4b4b4;width:200px; height:48px; padding-top: -1px; border-top:0px; margin:0px; background-color: #EBEBEB; \">" + produkt.Name + "</div></td>\r\n\t";
             string td3 = "<td style=\"padding-left:10px;padding-right:10px; padding-top:0px; padding-bottom:0px; margin: 0px; text-align: center; \"><div style=\"border:1px solid #b4b4b4;width:200px; height:38px; padding-top: -1px; border-top:0px; margin:0px;padding:0px; background-color: #EBEBEB; \">" + produkt.CenaProduktuBrutto + " zł"+"</div></td>\r\n\t";
