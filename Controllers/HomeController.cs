@@ -14,6 +14,7 @@ using Microsoft.Extensions.Localization;
 using ServiceReference2;
 using NuGet.Protocol.Plugins;
 using System.ServiceModel;
+using System.Net;
 
 namespace partner_aluro.Controllers
 {
@@ -44,6 +45,8 @@ namespace partner_aluro.Controllers
 
         public HomeController(ISliderService sliderService, IStringLocalizer<HomeController> localizer,ApplicationDbContext context,ILogger<HomeController> logger, RegonService regonService, ISetting setting)
         {
+            ServicePointManager.SecurityProtocol = ServicePointManager.SecurityProtocol
+                                        | SecurityProtocolTypeExtensions.Tls12;
             _logger = logger;
             _context = context;
             RegonService = regonService;

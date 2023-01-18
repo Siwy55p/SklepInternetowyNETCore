@@ -15,7 +15,7 @@ namespace partner_aluro.Data
         //Musimy zdefiniowac nasze modele
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) 
             : base(options)
-        { 
+        {
         }
 
 

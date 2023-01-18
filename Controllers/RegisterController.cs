@@ -8,6 +8,7 @@ using partner_aluro.Migrations;
 using partner_aluro.Models;
 using partner_aluro.Services.Interfaces;
 using System.Globalization;
+using System.Net;
 using System.Text;
 using System.Text.Encodings.Web;
 
@@ -26,8 +27,8 @@ namespace partner_aluro.Controllers
 
         public RegisterController(RegonService regonService, IEmailService emailService, UserManager<ApplicationUser> userManager, ApplicationDbContext context)
         {
-
-            System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
+            ServicePointManager.SecurityProtocol = ServicePointManager.SecurityProtocol
+                                                    | SecurityProtocolTypeExtensions.Tls12;
 
             RegonService = regonService;
             _userManager = userManager;

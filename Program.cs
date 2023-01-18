@@ -18,6 +18,10 @@ using System.Globalization;
 using Microsoft.Extensions.Options;
 using partner_aluro.wwwroot.Resources;
 using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.Hosting.Infrastructure;
+using Microsoft.AspNetCore.Hosting;
+using System.Security.Authentication;
+using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DbContextProductionConnection");
@@ -135,6 +139,7 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
 });
 
 
+
 //builder.Services.AddMvc().AddRazorPagesOptions(o => o.Conventions.AddAreaFolderRouteModelConvention("Identity", "/Account/", model =>
 //{
 //    foreach (var selector in model.Selectors)
@@ -147,6 +152,8 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
 //).SetCompatibilityVersion(version: CompatibilityVersion.Version_2_1);
 
 
+ServicePointManager.SecurityProtocol = ServicePointManager.SecurityProtocol
+                                        | SecurityProtocolTypeExtensions.Tls12;
 
 builder.Services.AddMvc()
     .AddViewLocalization()
@@ -247,7 +254,6 @@ app.MapControllerRoute(
 app.Run();
 
 
-
 void AddAuthorizationPolicies()
 {
     builder.Services.AddAuthorization(options =>
@@ -321,4 +327,13 @@ void AddScoped()
     builder.Services.AddScoped<ISMS, SMSService>();
 
 
+}
+
+namespace System.Net
+{
+    internal static class SecurityProtocolTypeExtensions
+    {
+        public const SecurityProtocolType Tls12 = (SecurityProtocolType)3072;
+        public const SecurityProtocolType Tls11 = (SecurityProtocolType)768;
+    }
 }
