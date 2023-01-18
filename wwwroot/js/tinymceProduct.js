@@ -3,10 +3,12 @@ tinymce.init({
     language: 'pl',
     language_url: 'https://partneralluro.hostingasp.pl/js/tinymce/langs/pl.js',  // site absolute URL
     relative_urls: true,
+    tinydrive_token_provider: '7jymcsfhr21jkg9tegltt4mduk03g8tkuk3zgof7cwr9i3i5',
     document_base_url: 'https://partneralluro.hostingasp.pl/',
-    plugins: 'textcolor anchor autolink charmap codesample emoticons image link lists | media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage tinycomments tableofcontents footnotes mergetags autocorrect',
+    promotion: false,
+    plugins: 'textcolor anchor autolink charmap codesample emoticons image link lists | media searchreplace table visualblocks wordcount tinymcespellchecker permanentpen powerpaste advtable advcode editimage tinycomments tableofcontents footnotes mergetags',
     toolbar: ["undo redo | blocks fontfamily fontsize | bold italic underline strikethrough",
-"|forecolor backcolor | | addcomment showcomments | spellcheckdialog a11ycheck | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat",
+"|forecolor backcolor | | addcomment showcomments | spellcheckdialog a11ycheck | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat",
         "| link image media table mergetags |"],
     tinycomments_mode: 'embedded'
 });

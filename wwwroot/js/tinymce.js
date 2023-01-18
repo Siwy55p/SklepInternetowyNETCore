@@ -3,9 +3,12 @@ tinymce.init({
     language: 'pl',
     language_url: 'https://partneralluro.hostingasp.pl/js/tinymce/langs/pl.js',  // site absolute URL
     relative_urls: true,
+    promotion: false,
     document_base_url: 'https://partneralluro.hostingasp.pl/',
     plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage tinycomments tableofcontents footnotes mergetags autocorrect',
-    toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+    toolbar: ["undo redo | blocks fontfamily fontsize | bold italic underline strikethrough",
+        "|forecolor backcolor | | addcomment showcomments | spellcheckdialog a11ycheck | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat",
+        "| link image media table mergetags |"],
     tinycomments_mode: 'embedded'
 });
 
@@ -17,6 +20,7 @@ tinymce.init({
     /*    document_base_url: system_url,*/
     relative_urls: false,
     remove_script_host: false,
+    promotion: false,
     convert_urls: true,
     content_css: 'css/Newsletter/newsletter.css',
     plugins: 'image anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage tableofcontents footnotes mergetags autocorrect image code',

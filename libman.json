@@ -17,6 +17,10 @@
     {
       "library": "datatables-fixedheader@3.3.1",
       "destination": "wwwroot/lib/datatables-fixedheader/"
+    },
+    {
+      "library": "tinymce@6.3.1",
+      "destination": "wwwroot/tinymce/"
     }
   ]
 }

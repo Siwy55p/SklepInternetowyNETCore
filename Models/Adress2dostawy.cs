@@ -5,8 +5,6 @@ namespace partner_aluro.Models
 {
     public class Adress2dostawy
     {
-
-        [Required]
         [Key] //Entity inkrementacja po ID
         public int Adres2dostawyId { get; set; }
 
@@ -32,8 +30,5 @@ namespace partner_aluro.Models
 
         [ForeignKey("UserID")]
         public virtual ApplicationUser? ApplicationUser { get; set; }
-
-
-
     }
 }

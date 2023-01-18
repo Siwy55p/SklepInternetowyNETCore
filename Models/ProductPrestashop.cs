@@ -27,15 +27,23 @@ namespace partner_aluro.Models
 
         [StringLength(12, ErrorMessage = "upc Max Length is 12")]
         public string? upc { get; set; }
+
+        [Column(TypeName = "decimal(18,2)")]
         public decimal? ecotax { get; set; }
         public int? quantity { get; set; }
         public int? minimal_quantity { get; set; }
+        [Column(TypeName = "decimal(18,2)")]
         public decimal? price { get; set; }
+        [Column(TypeName = "decimal(18,2)")]
         public decimal? wholesale_price { get; set; }
 
         [StringLength(255, ErrorMessage = "unity Max Length is 255")]
         public string? unity { get; set; }
+
+        [Column(TypeName = "decimal(18,2)")]
         public decimal? unit_price_ratio { get; set; }
+
+        [Column(TypeName = "decimal(18,2)")]
         public decimal? additional_shipping_cost { get; set; }
         [StringLength(32, ErrorMessage = "reference Max Length is 32")]
         public string? reference { get; set; }
@@ -43,9 +51,17 @@ namespace partner_aluro.Models
         public string? supplier_reference { get; set; }
         [StringLength(64, ErrorMessage = "location Max Length is 64")]
         public string? location { get; set; }
+
+        [Column(TypeName = "decimal(18,2)")]
         public decimal? width { get; set; }
+
+        [Column(TypeName = "decimal(18,2)")]
         public decimal? height { get; set; }
+
+        [Column(TypeName = "decimal(18,2)")]
         public decimal? depth { get; set; }
+
+        [Column(TypeName = "decimal(18,2)")]
         public decimal? weight { get; set; }
 
         public int? out_of_stock { get; set; }

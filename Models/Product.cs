@@ -36,12 +36,16 @@ namespace partner_aluro.Models
         public string? NazwaPlikuObrazka { get; set; }
 
         [Required(ErrorMessage = "Cena Produktu jest wymagana")]
+        [Column(TypeName = "decimal(18,2)")]
         public decimal CenaProduktuBrutto { get; set; }  // Cena Producktu (wczesniej netto) nazwa CenaProduktu
+        [Column(TypeName = "decimal(18,2)")]
         public decimal CenaProduktuNetto { get; set; }
 
         [NotMapped]
+        [Column(TypeName = "decimal(18,2)")]
         public decimal CenaProduktuDlaUzytkownika { get; set; }
 
+        [Column(TypeName = "decimal(18,2)")]
         public decimal CenaPromocyja { get; set; } //Cena promocyjna
         public bool Promocja { get; set; } = false;
 
@@ -49,16 +53,25 @@ namespace partner_aluro.Models
         public string? NazwaPromocyjna { get; set; }
 
         public string? Materiał { get; set; }
+        [Column(TypeName = "decimal(18,2)")]
         public decimal Ilosc { get; set; }
 
+        [Column(TypeName = "decimal(18,2)")]
         public decimal CenaProduktuDetal { get; set; }
+        [Column(TypeName = "decimal(18,2)")]
         public decimal? WagaProduktu { get; set; }
+        [Column(TypeName = "decimal(18,2)")]
         public decimal? SzerokoscProduktu { get; set; }
+        [Column(TypeName = "decimal(18,2)")]
         public decimal? WysokoscProduktu { get; set; }
+        [Column(TypeName = "decimal(18,2)")]
         public decimal? GlebokoscProduktu { get; set; }
 
+        [Column(TypeName = "decimal(18,2)")]
         public decimal? SzerokoscWewnetrznaProduktu { get; set; }
+        [Column(TypeName = "decimal(18,2)")]
         public decimal? WysokoscWewnetrznaProduktu { get; set; }
+        [Column(TypeName = "decimal(18,2)")]
         public decimal? GlebokoscWewnetrznaProduktu { get; set; }
 
         public bool Bestseller { get; set; }

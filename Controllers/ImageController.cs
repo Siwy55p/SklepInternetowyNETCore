@@ -291,7 +291,7 @@ namespace partner_aluro.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
-        public async Task<IActionResult> Edit(int id, ImageModel imageModel, string returnUrl)
+        public IActionResult Edit(int id, ImageModel imageModel, string returnUrl)
         {
 
             //ViewData["returnUrl"] = Request.Headers["Referer"].ToString();
@@ -351,10 +351,10 @@ namespace partner_aluro.Controllers
                             imageModel = _context.Images.Where(x => x.ImageId == imageModel.ImageId).FirstOrDefault();
 
 
-                                imageModel.ImageNameCompress250x250 = ImageNameCompres;
+                            imageModel.ImageNameCompress250x250 = ImageNameCompres;
 
 
-                                imageModel.pathImageCompress250x250 = path1;
+                            imageModel.pathImageCompress250x250 = path1;
 
 
                             _imageService.Update(imageModel);

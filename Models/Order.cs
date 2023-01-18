@@ -11,11 +11,14 @@ namespace partner_aluro.Models
         public int Id { get; set; }
         public string? NrZamowienia { get; set; }
         public List<OrderItem> OrderItems { get; set; } = new();
+
+        [Column(TypeName = "decimal(18,2)")]
         public decimal OrderTotal { get; set; }
         public DateTime OrderPlaced { get; set; }
 
         public string? MessageToOrder { get; set; }
 
+        [Column(TypeName = "decimal(18,2)")]
         public decimal? RabatZamowienia { get; set; }
 
         public string UserID { get; set; }

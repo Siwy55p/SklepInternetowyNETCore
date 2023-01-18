@@ -8,6 +8,8 @@ namespace partner_aluro.Models
         [Key]
         public int CartItemId { get; set; }
         public Product Product { get; set; }
+
+        [Column(TypeName = "decimal(18,2)")]
         public decimal Quantity { get; set; }
         public string CartIds { get; set; }
 

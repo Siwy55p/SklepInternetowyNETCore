@@ -310,7 +310,7 @@ namespace partner_aluro.Controllers
 
                 ws.Cell("G" + row).FormulaA1 = "=D" + row + "*F" + row + "";
                 ws.Cell("G" + row).Style.NumberFormat.Format = "0.00 zł";
-                ws.Cell("G" + row).DataType = XLDataType.Number;
+                //ws.Cell("G" + row).DataType = XLDataType.Number;
                 ws.Cell("G" + row).Style.Border.TopBorder = XLBorderStyleValues.Thin;
                 ws.Cell("G" + row).Style.Border.LeftBorder = XLBorderStyleValues.Thin;
                 ws.Cell("G" + row).Style.Border.RightBorder = XLBorderStyleValues.Thick;
@@ -345,7 +345,7 @@ namespace partner_aluro.Controllers
             ws.Cell("F" + row).Style.Border.BottomBorder = XLBorderStyleValues.Thick;
             ws.Cell("G" + row).FormulaA1 = "=SUM(G" + 4 + ":G" + (row-1) + ")";
             ws.Cell("G" + row).Style.NumberFormat.Format = "0.00 zł";
-            ws.Cell("G" + row).DataType = XLDataType.Number;
+            //ws.Cell("G" + row).DataType = XLDataType.Number;   //PO AKTUALIZACJI
             ws.Cell("G" + row).Style.Border.TopBorder = XLBorderStyleValues.Thick;
             ws.Cell("G" + row).Style.Border.LeftBorder = XLBorderStyleValues.Thick;
             ws.Cell("G" + row).Style.Border.RightBorder = XLBorderStyleValues.Thick;

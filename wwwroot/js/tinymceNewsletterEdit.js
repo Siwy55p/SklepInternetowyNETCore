@@ -1,19 +1,18 @@
 
-
 tinymce.init({
     selector: '#editorNewsletter2',
     language: 'pl',
     language_url: 'https://partneralluro.hostingasp.pl/js/tinymce/langs/pl.js',  // site absolute URL
+    tinydrive_token_provider: '7jymcsfhr21jkg9tegltt4mduk03g8tkuk3zgof7cwr9i3i5',
     /*    document_base_url: system_url,*/
     relative_urls: false,
+    promotion: false,
     remove_script_host: false,
     convert_urls: true,
     /*content_css: 'css/Newsletter/newsletter.css',*/
     plugins: 'image code template print preview powerpaste casechange importcss tinydrive searchreplace autolink autosave save directionality advcode visualblocks visualchars fullscreen image link media mediaembed template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker imagetools textpattern noneditable help formatpainter permanentpen pageembed charmap tinycomments mentions quickbars linkchecker emoticons advtable export',
-    toolbar: [
-        "undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck",
-        "template image | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat ",
-        "|forecolor backcolor | | addcomment showcomments | spellcheckdialog a11ycheck | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat",
+    toolbar: ["undo redo | blocks fontfamily fontsize | bold italic underline strikethrough",
+        "|forecolor backcolor | | addcomment showcomments | spellcheckdialog a11ycheck | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat",
         "| link image media table mergetags |"],
     image_list: [
         { title: 'My image', value: '' },

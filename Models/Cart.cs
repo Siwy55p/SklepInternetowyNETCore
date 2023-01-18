@@ -41,8 +41,10 @@ namespace partner_aluro.Models
 
         public DateTime? dataPowstania { get; set; }
 
+        [Column(TypeName = "decimal(18,2)")]
         public decimal RazemNetto { get; set; }
 
+        [Column(TypeName = "decimal(18,2)")]
         public decimal RazemBrutto { get; set; }
 
         public bool? Zrealizowane { get; set; }

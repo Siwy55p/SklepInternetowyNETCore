@@ -9,8 +9,6 @@ namespace partner_aluro.Models
     public class Adress1rozliczeniowy
     {
         
-
-        [Required]
         [Key] //Entity inkrementacja po ID
         public int Adres1rozliczeniowyId { get; set; }
 

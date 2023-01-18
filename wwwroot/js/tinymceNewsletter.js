@@ -1,6 +1,7 @@
 tinymce.init({
     selector: '#editor2',  // change this value according to your HTML
     plugin: 'a_tinymce_plugin',
+    promotion: false,
     a_plugin_option: true,
     a_configuration_option: 400
 });

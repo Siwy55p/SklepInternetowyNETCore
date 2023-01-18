@@ -16,6 +16,6 @@ namespace partner_aluro.Models
 
         [ForeignKey(nameof(IdUser))]
         [Display(Name = "Twój profil działalności")]
-        public virtual List<ApplicationUser> UserProfilDzialalnosci { get; set; }
+        public virtual List<ApplicationUser>? UserProfilDzialalnosci { get; set; }
     }
 }
