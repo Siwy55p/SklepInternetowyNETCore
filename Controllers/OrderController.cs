@@ -874,7 +874,7 @@ namespace partner_aluro.Controllers
 
 
                 var Cena_brutto = (decimal)item.Product.CenaProduktuBrutto;
-                if (item.Product.Promocja == true && item.Product.CenaPromocyja != null)
+                if (item.Product.Promocja == true && item.Product.CenaPromocyja != 0)
                 {
                     Cena_brutto = (decimal)item.Product.CenaPromocyja;
                 }
@@ -1009,7 +1009,7 @@ namespace partner_aluro.Controllers
                     break;
                 }
 
-                string b = "2";
+
                 }
 
             _context.Orders.Update(orders);

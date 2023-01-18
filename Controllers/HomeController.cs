@@ -79,16 +79,16 @@ namespace partner_aluro.Controllers
             //try
             //{
 
-            try
-            {
-                TerytWs1.CzyZalogowanyRequest request = new TerytWs1.CzyZalogowanyRequest();
-                var proxy = new ChannelFactory<TerytWs1.ITerytWs1>("custom");
-                proxy.Credentials.UserName.UserName = "szuminski.p";
-                proxy.Credentials.UserName.Password = "sgj1EpTwz";
-                var result = proxy.CreateChannel();
-                var test = result.CzyZalogowany(request);
-            }
-            catch (Exception ex) { }
+            //try
+            //{
+            //    TerytWs1.CzyZalogowanyRequest request = new TerytWs1.CzyZalogowanyRequest();
+            //    var proxy = new ChannelFactory<TerytWs1.ITerytWs1>("custom");
+            //    proxy.Credentials.UserName.UserName = "szuminski.p";
+            //    proxy.Credentials.UserName.Password = "sgj1EpTwz";
+            //    var result = proxy.CreateChannel();
+            //    var test = result.CzyZalogowany(request);
+            //}
+            //catch (Exception ex) { }
 
 
             int SliderHome1= _setting.GetSliderHome1(1);

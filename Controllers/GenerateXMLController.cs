@@ -225,7 +225,7 @@ namespace partner_aluro.Controllers
 
 
 
-            return View();
+            //return View();
         }
 
         public async Task<IActionResult> DeserializeXMLMaterial()
@@ -587,7 +587,7 @@ namespace partner_aluro.Controllers
 
                 //Cechy CECHY
                 string cechy = "";
-                string Wymiar_wewnętrzny = "Wymiar_wewnętrzny: ";
+                //string Wymiar_wewnętrzny = "Wymiar_wewnętrzny: ";
 
                 if (produkty[i].Pakowanie != null)
                 {

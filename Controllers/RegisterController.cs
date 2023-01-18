@@ -21,10 +21,14 @@ namespace partner_aluro.Controllers
         //private readonly IEmailSender _emailSender;
         private readonly IEmailService _emailService;
 
+
         private readonly ApplicationDbContext _context;
 
         public RegisterController(RegonService regonService, IEmailService emailService, UserManager<ApplicationUser> userManager, ApplicationDbContext context)
         {
+
+            System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
+
             RegonService = regonService;
             _userManager = userManager;
             _emailService = emailService;
@@ -226,10 +230,10 @@ namespace partner_aluro.Controllers
             var Miasto1 = "";
             var KodPocztowy1 = "";
 
-            var Ulica2 = "";
-            var Kraj2 = "";
-            var Miasto2 = "";
-            var KodPocztowy2 = "";
+            //var Ulica2 = "";
+            //var Kraj2 = "";
+            //var Miasto2 = "";
+            //var KodPocztowy2 = "";
 
             if (_model.Errors.Count > 0)
             {

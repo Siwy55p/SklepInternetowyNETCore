@@ -87,9 +87,9 @@ namespace partner_aluro.Controllers
                 _context.SaveChanges();
 
             }
-            int i = 0;
-            i++;
-            string test="";
+            //int i = 0;
+            //i++;
+            //string test="";
 
             return View(listaObrazkow);
         }

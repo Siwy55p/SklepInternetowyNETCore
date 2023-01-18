@@ -16,8 +16,8 @@ using Quartz.Impl;
 using Microsoft.AspNetCore.Localization;
 using System.Globalization;
 using Microsoft.Extensions.Options;
-using Microsoft.AspNetCore.Mvc;
 using partner_aluro.wwwroot.Resources;
+using Microsoft.AspNetCore.DataProtection;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DbContextProductionConnection");
@@ -44,6 +44,10 @@ builder.Services.AddSingleton<JobReminders>();
 //builder.Services.AddSingleton(new MyJob(type: typeof(JobReminders), expression: "0 15 12 * * ?")); //Every Uruchamiaj codziennie o 12:15" />
 builder.Services.AddSingleton(new MyJob(type: typeof(JobReminders), expression: "0 0 1 * * ?")); // Codziennie o 1 w nocy" />
 
+builder.Services.AddDataProtection()
+    .SetDefaultKeyLifetime(TimeSpan.FromDays(14))
+    .SetApplicationName("partner_aluro")
+    .DisableAutomaticKeyGeneration();
 
 builder.Services.AddDistributedMemoryCache();
 
@@ -71,6 +75,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(builder =>
     builder.UseSqlServer(@"Data Source=mssql4.webio.pl,2401;Database=siwy55p_siwy55p;Uid=siwy55p_siwy55p;Password=Siiwy1a2!3!4!5!;TrustServerCertificate=true", o =>
     {
         o.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null);
+        
     }); //connection string
     //builder.UseSqlServer(connectionString); //connection string localbase
 
@@ -80,6 +85,7 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options => {
     options.SignIn.RequireConfirmedAccount = false;
     options.Password.RequireNonAlphanumeric = false;
     options.Password.RequireDigit = false;
+    
 })
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
