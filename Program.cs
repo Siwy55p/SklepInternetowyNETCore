@@ -47,7 +47,7 @@ builder.Services.AddSingleton(new MyJob(type: typeof(JobReminders), expression: 
 builder.Services.AddDataProtection()
     .SetDefaultKeyLifetime(TimeSpan.FromDays(14))
     .SetApplicationName("partner_aluro")
-    .DisableAutomaticKeyGeneration();
+    .PersistKeysToFileSystem(new DirectoryInfo(@"wwwroot\server\share\directory\"));
 
 builder.Services.AddDistributedMemoryCache();
 

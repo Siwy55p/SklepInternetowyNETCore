@@ -93,6 +93,7 @@
     <Folder Include="wwwroot\lib\Nowy folder\" />
     <Folder Include="wwwroot\modules\nvn_export_products\download\" />
     <Folder Include="wwwroot\MyLogs\" />
+    <Folder Include="wwwroot\server\share\directory\" />
   </ItemGroup>
 
   <ItemGroup>

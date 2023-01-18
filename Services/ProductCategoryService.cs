@@ -36,7 +36,9 @@ namespace partner_aluro.Services
         public void DeleteProductCategoryMultiple(int ProduktID, int KategoriaID)
         {
 
+#pragma warning disable CS8600 // Konwertowanie literału null lub możliwej wartości null na nienullowalny typ.
             ProductCategory productCategor = _context.ProductCategory.Where(x => x.ProductID == ProduktID).Where(y => y.CategoryID == KategoriaID).FirstOrDefault();
+#pragma warning restore CS8600 // Konwertowanie literału null lub możliwej wartości null na nienullowalny typ.
 
             _context.ProductCategory.Remove(productCategor);
 
