@@ -6,6 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>partner_aluro</RootNamespace>
     <UserSecretsId>3c907900-4a39-4981-9d00-cdd776248efe</UserSecretsId>
+	  <NoWarn>$(NoWarn);NU1701</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
