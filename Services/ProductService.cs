@@ -38,6 +38,7 @@ namespace partner_aluro.Services
         public async Task<Product> GetProductId(int? id)
         {
             var product = await _context.Products
+                .AsNoTracking()
                 .Include(p => p.CategoryNavigation)
                 .Include(p => p.Product_Images)
                 .FirstOrDefaultAsync(m => m.ProductId == id);
@@ -48,6 +49,7 @@ namespace partner_aluro.Services
         public async Task<List<Product>> GetProductList()
         {
             List<Product> list = await _context.Products
+                .AsNoTracking()
                 .Include(p => p.CategoryNavigation)
                 .Where(p=>p.CategoryNavigation.Aktywny == true)
                 .Include(p => p.Product_Images)
@@ -90,7 +92,9 @@ namespace partner_aluro.Services
 
         public ICollection<Category> GetCategory()
         {
-            return _context.Category.ToList();
+            return _context.Category
+                .AsNoTracking()
+                .ToList();
         }
 
         public int GetCategoryName(string name)
