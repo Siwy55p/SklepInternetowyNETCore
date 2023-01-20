@@ -15,7 +15,6 @@ namespace partner_aluro.Models
         [Key]
         public int ProductId { get; set; }
         public int CategoryId { get; set; }
-        public int? SubCategoryId { get; set; }
         public int ProductImagesId { get; set; }
 
         public string? EAN13 { get; set; }
@@ -80,12 +79,6 @@ namespace partner_aluro.Models
         public string? ImageUrl { get; set; }
         public string? pathImageUrl250x250 { get; set; }
 
-        //To jest obrazek glowny ktory usuwam
-        //[Display(Name = "Obrazek główny")]
-        //[NotMapped]
-        //public virtual ImageModel? product_Image { get; set; } = new ImageModel();
-        ////public IFormFile? FrontImage { get; set; }
-
         [NotMapped]
         public IList<SelectListItem>? categories { get; set; }
 
@@ -98,7 +91,6 @@ namespace partner_aluro.Models
 
         [ForeignKey(nameof(ProductImagesId))]
         public virtual List<ImageModel>? Product_Images { get; set; } = new List<ImageModel>();
-
 
     }
 }
