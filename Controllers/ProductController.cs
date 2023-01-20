@@ -491,6 +491,7 @@ namespace partner_aluro.Controllers
             ViewData["Category"] = GetCategories();
             List<Product> produkty = await _ProductService.GetProductList();
             return View(produkty);
+
         }
 
         [HttpGet]
