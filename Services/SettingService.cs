@@ -42,19 +42,19 @@ namespace partner_aluro.Services
 
         public int GetSliderHome1(int SettingID)
         {
-            int SliderHome1 = (int)_context.Setting.Where(x => x.SettingID == SettingID).FirstOrDefault().SliderHome1;
+            int SliderHome1 = _context.Setting.Where(x => x.SettingID == SettingID).FirstOrDefault().SliderHome1;
             return SliderHome1;
         }
 
         public int GetSliderHome2(int SettingID)
         {
-            int SliderHome2 = (int)_context.Setting.Where(x => x.SettingID == SettingID).FirstOrDefault().SliderHome2;
+            int SliderHome2 = _context.Setting.Where(x => x.SettingID == SettingID).FirstOrDefault().SliderHome2;
             return SliderHome2;
         }
 
         public int GetSliderHome3(int SettingID)
         {
-            int SliderHome3 = (int)_context.Setting.Where(x => x.SettingID == SettingID).FirstOrDefault().SliderHome3;
+            int SliderHome3 = _context.Setting.Where(x => x.SettingID == SettingID).FirstOrDefault().SliderHome3;
             return SliderHome3;
         }
 

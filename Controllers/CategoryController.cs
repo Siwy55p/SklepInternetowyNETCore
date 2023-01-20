@@ -170,7 +170,7 @@ namespace partner_aluro.Controllers
             }
             //KategoriaId = 3;
 
-            List<Product> produkty = await _context.ProductCategory.Where(x => x.CategoryID == KategoriaId).Include(x=>x.Product).Where(x => x.Product.Ukryty == false).Select(p=>p.Product).ToListAsync();
+            List<Product> produkty = await _context.ProductCategory.AsNoTracking().Where(x => x.CategoryID == KategoriaId).Include(x=>x.Product).Where(x => x.Product.Ukryty == false).Select(p=>p.Product).ToListAsync();
             
             //var products = _cart.GetAllCartItems();
 
@@ -254,7 +254,7 @@ namespace partner_aluro.Controllers
             if (szukanaNazwa == null || szukanaNazwa == "")
             {
                 szukanaNazwa = "";
-                List<Product> produkty = await _context.Products.Where(x => x.Ukryty == false).ToListAsync();
+                List<Product> produkty = await _context.Products.AsNoTracking().Where(x => x.Ukryty == false).ToListAsync();
                 var pageNumber = page ?? 1; // if no page was specified in the querystring, default to the first page (1)
                 var onePageOfProducts = produkty.ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
 
@@ -289,7 +289,7 @@ namespace partner_aluro.Controllers
             else
             {
                 List<Product> produkty2 = new List<Product>();
-                Category a = _context.Category.Where(x => x.Name == szukanaNazwa).FirstOrDefault();
+                Category a = _context.Category.AsNoTracking().Where(x => x.Name == szukanaNazwa).FirstOrDefault();
                 if (a == null)
                 {
                     produkty2 = await _context.Products.Where(x => x.Ukryty == false).Where(x => x.CategoryNavigation.Name == szukanaNazwa).ToListAsync();
@@ -341,7 +341,7 @@ namespace partner_aluro.Controllers
                 }
                 else
                 {
-                    produkty2 = await _context.ProductCategory.Where(x => x.CategoryID == a.CategoryId).Where(x=>x.Product.Ukryty == false).Select(x => x.Product).ToListAsync();
+                    produkty2 = await _context.ProductCategory.AsNoTracking().Where(x => x.CategoryID == a.CategoryId).Where(x=>x.Product.Ukryty == false).Select(x => x.Product).ToListAsync();
 
 
                     var pageNumber = page ?? 1; // if no page was specified in the querystring, default to the first page (1)
@@ -432,7 +432,7 @@ namespace partner_aluro.Controllers
 
 
 
-            List<PInfo> WyszukaneNazwyProdukow = await _context.Products.Where(x => x.Ukryty== false).Select(p => new PInfo{ Name = p.Name.ToLower(), Symbol = p.Symbol.ToString().ToLower() }).ToListAsync(); // tworze liste nazw (puste)
+            List<PInfo> WyszukaneNazwyProdukow = await _context.Products.AsNoTracking().Where(x => x.Ukryty== false).Select(p => new PInfo{ Name = p.Name.ToLower(), Symbol = p.Symbol.ToString().ToLower() }).ToListAsync(); // tworze liste nazw (puste)
 
             //List<string> WyszukaneSymbolowProdukow = await _context.Products.Where(x => x.Ukryty == false).Select(p => p.Symbol.ToLower()).ToListAsync(); // tworze liste nazw Symbolów wszystkie tylko symbole
 

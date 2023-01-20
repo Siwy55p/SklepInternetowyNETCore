@@ -1,21 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 using partner_aluro.Data;
 using partner_aluro.Models;
-using partner_aluro.Services;
 using partner_aluro.Services.Interfaces;
-using System.Drawing.Imaging;
-using System.Drawing;
-using System.Net;
 using ImageMagick;
-
-using System.IO;
-using static NuGet.Packaging.PackagingConstants;
-using System.Linq;
 
 namespace partner_aluro.Controllers
 {
@@ -25,7 +14,6 @@ namespace partner_aluro.Controllers
         private readonly ApplicationDbContext _context;
 
         public readonly IWebHostEnvironment _webHostEnvironment;
-
 
         public readonly IImageService _imageService;
 
@@ -41,7 +29,7 @@ namespace partner_aluro.Controllers
         public async Task<IActionResult> Index()
         {
 
-            return View(await _context.Images.OrderByDescending(x => x.ImageId).Take(1000).ToListAsync());
+            return View(await _context.Images.AsNoTracking().OrderByDescending(x => x.ImageId).Take(1000).ToListAsync());
         }
 
         public IActionResult zmianaNazwy2()

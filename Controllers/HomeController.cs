@@ -30,7 +30,7 @@ namespace partner_aluro.Controllers
 
         private readonly ISliderService _sliderService;
 
-        private readonly IStringLocalizer<HomeController> _localizer;
+        //private readonly IStringLocalizer<HomeController> _localizer;
 
         private readonly ISetting _setting;
 
@@ -43,7 +43,7 @@ namespace partner_aluro.Controllers
         //flaga
 
 
-        public HomeController(ISliderService sliderService, IStringLocalizer<HomeController> localizer,ApplicationDbContext context,ILogger<HomeController> logger, RegonService regonService, ISetting setting)
+        public HomeController(ISliderService sliderService,ApplicationDbContext context,ILogger<HomeController> logger, RegonService regonService, ISetting setting)
         {
             ServicePointManager.SecurityProtocol = ServicePointManager.SecurityProtocol
                                         | SecurityProtocolTypeExtensions.Tls12;
@@ -51,7 +51,6 @@ namespace partner_aluro.Controllers
             _context = context;
             RegonService = regonService;
             _sliderService = sliderService;
-            _localizer = localizer;
 
             _setting = setting;
         }
@@ -59,58 +58,18 @@ namespace partner_aluro.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            //var nowosci = await _context.Products.Where(a => !a.Ukryty).OrderByDescending(a => a.DataDodania).Take(9).ToListAsync();
+            int Setting = 1;
 
-            //var bestseller = await _context.Products.Where(a => !a.Ukryty).OrderBy(a => Guid.NewGuid()).Take(3).ToListAsync();
-            ////Category category = new Category { Name = "Kategoria1", Description = "Opis kategoria", NazwaPlikuIkony = "ikona.png" };
-            ////_context.Add(category);
-            ////_context.SaveChanges();
+            Slider sliderHomes1 = await _sliderService.GetAsync(_setting.GetSliderHome1(Setting)); //Id slider
+            Slider sliderHomes2 = await _sliderService.GetAsync(_setting.GetSliderHome2(Setting)); //Id slider
+            Slider sliderHomes3 = await _sliderService.GetAsync(_setting.GetSliderHome3(Setting)); //Id slider
 
+            //zainicjuj view model
+            var vm = new HomeViewModel() { SliderHome1 = sliderHomes1, SliderHome2 = sliderHomes2, SliderHome3 = sliderHomes3 };
 
-            //if(Core.Constants.SliderHome1 == null || Core.Constants.SliderHome1 == 0)
-            //{
-            //    Core.Constants.SliderHome1 = 9;
-            //}
-            //if (Core.Constants.SliderHome2 == null || Core.Constants.SliderHome2 == 0)
-            //{
-            //    Core.Constants.SliderHome2 = 10;
-            //}
-            //if (Core.Constants.SliderHome3 == null || Core.Constants.SliderHome3 == 0)
-            //{
-            //    Core.Constants.SliderHome3 = 11;
-            //}
-            //try
-            //{
-
-            //try
-            //{
-            //    TerytWs1.CzyZalogowanyRequest request = new TerytWs1.CzyZalogowanyRequest();
-            //    var proxy = new ChannelFactory<TerytWs1.ITerytWs1>("custom");
-            //    proxy.Credentials.UserName.UserName = "szuminski.p";
-            //    proxy.Credentials.UserName.Password = "sgj1EpTwz";
-            //    var result = proxy.CreateChannel();
-            //    var test = result.CzyZalogowany(request);
-            //}
-            //catch (Exception ex) { }
-
-
-            int SliderHome1= _setting.GetSliderHome1(1);
-                int SliderHome2 = _setting.GetSliderHome2(1);
-                int SliderHome3 = _setting.GetSliderHome3(1);
-
-                Slider sliderHomes1 = await _sliderService.GetAsync(SliderHome1); //Id slider
-                Slider sliderHomes2 = await _sliderService.GetAsync(SliderHome2); //Id slider
-                Slider sliderHomes3 = await _sliderService.GetAsync(SliderHome3); //Id slider
-
-                //zainicjuj view model
-                var vm = new HomeViewModel() { SliderHome1 = sliderHomes1, SliderHome2 = sliderHomes2, SliderHome3 = sliderHomes3 };
-
-                return View(vm); //zapewnia renderowania widoków 
+            return View(vm); //zapewnia renderowania widoków 
 
         }
-
-
-
 
         [Route("Ogolne-warunki-sprzedazy")]
         [HttpGet]
