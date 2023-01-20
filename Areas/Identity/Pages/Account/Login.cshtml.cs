@@ -13,6 +13,8 @@ using partner_aluro.Services.Interfaces;
 using Microsoft.Extensions.Localization;
 using System.Reflection;
 using partner_aluro.wwwroot.Resources;
+using partner_aluro.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace partner_aluro.Areas.Identity.Pages.Account
 {
@@ -22,10 +24,14 @@ namespace partner_aluro.Areas.Identity.Pages.Account
         private readonly ILogger<LoginModel> _logger;
         private readonly IProfildzialalnosciService _profildzialalnosciService;
 
+        private readonly ApplicationDbContext _context;
+
         private readonly IStringLocalizer _identityLocalizer;
 
-        public LoginModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginModel> logger, IProfildzialalnosciService profildzialalnosciService , IStringLocalizerFactory factory)
+        public LoginModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginModel> logger, IProfildzialalnosciService profildzialalnosciService , IStringLocalizerFactory factory, ApplicationDbContext context)
         {
+            _context = context;
+
             _signInManager = signInManager;
             _logger = logger;
 
@@ -135,12 +141,15 @@ namespace partner_aluro.Areas.Identity.Pages.Account
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 //var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
 
+                //var user = await _context.Users.Where(x => x.Email == Input.Email).FirstOrDefaultAsync();
                 var user = await _signInManager.UserManager.FindByNameAsync(Input.Email);
                 if(user == null)
                 {
                     ModelState.TryAddModelError(string.Empty, "Nieprawidłowy e-mail");
                     return Page();
                 }
+
+
                 var result = await _signInManager.CheckPasswordSignInAsync(user, Input.Password, false);
                 if(result.Succeeded)
                 {
@@ -165,14 +174,14 @@ namespace partner_aluro.Areas.Identity.Pages.Account
                     Core.Constants.UserId = user.Id; //Pobierz uzytkownika
                     Core.Constants.Rabat = _profildzialalnosciService.GetRabat(Core.Constants.UserId);
 
-                    _logger.LogInformation("ApplicationUser zalogował się");
+                    _logger.LogInformation("ApplicationUser"+ user.Email +" zalogował się");
                     return Redirect("/Home/Index");
                 }
 
-                if (result.RequiresTwoFactor)
-                {
-                    return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
-                }
+                //if (result.RequiresTwoFactor)
+                //{
+                //    return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
+                //}
                 if (result.IsLockedOut)
                 {
 

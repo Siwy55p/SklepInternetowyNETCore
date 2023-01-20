@@ -66,7 +66,7 @@ namespace partner_aluro.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, ProfilDzialalnosci profilDzialalnosci)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return View(profilDzialalnosci);
             }

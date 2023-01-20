@@ -6,7 +6,7 @@ namespace partner_aluro.Models;
 
 public class ApplicationUser : IdentityUser
 {
-    public int? IdProfilDzialalnosci { get; set; }
+    public int IdProfilDzialalnosci { get; set; }
     [Required]
     public string Imie { get; set; }
 
@@ -18,10 +18,10 @@ public class ApplicationUser : IdentityUser
     public int? Adress1rozliczeniowyId { get; set; }
     public int? Adress2dostawyId { get; set; }
 
-    [ForeignKey(nameof(Adress1rozliczeniowyId))]
+    //[ForeignKey(nameof(Adress1rozliczeniowyId))]
     public virtual Adress1rozliczeniowy? Adress1rozliczeniowy { get; set; }
 
-    [ForeignKey(nameof(Adress2dostawyId))]
+    //[ForeignKey(nameof(Adress2dostawyId))]
     public virtual Adress2dostawy? Adress2dostawy { get; set; }
 
     public string? NotatkaOsobista { get; set; }
@@ -34,7 +34,7 @@ public class ApplicationUser : IdentityUser
 
 
     [Display(Name = "Profil działalności")]
-    [ForeignKey(nameof(IdProfilDzialalnosci))]
+    //[ForeignKey(nameof(IdProfilDzialalnosci))]
     public virtual ProfilDzialalnosci? ProfilDzialalnosci { get; set; }
 }
 public class ApplicationRole : IdentityRole

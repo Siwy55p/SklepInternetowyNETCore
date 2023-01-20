@@ -27,8 +27,8 @@ namespace partner_aluro.Controllers
 
         public RegisterController(RegonService regonService, IEmailService emailService, UserManager<ApplicationUser> userManager, ApplicationDbContext context)
         {
-            ServicePointManager.SecurityProtocol = ServicePointManager.SecurityProtocol
-                                                    | SecurityProtocolTypeExtensions.Tls12;
+            //ServicePointManager.SecurityProtocol = ServicePointManager.SecurityProtocol
+            //                                        | SecurityProtocolTypeExtensions.Tls12;
 
             RegonService = regonService;
             _userManager = userManager;
