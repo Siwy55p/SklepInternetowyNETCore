@@ -140,13 +140,13 @@ namespace partner_aluro.Areas.Identity.Pages.Account
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 //var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
-                var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
-                if (result.Succeeded)
-                {
+                //var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+                //if (result.Succeeded)
+                //{
 
-                    _logger.LogInformation("ApplicationUser zalogował się");
-                    return Redirect("/Home/Index");
-                }
+                //    _logger.LogInformation("ApplicationUser zalogował się");
+                //    return Redirect("/Home/Index");
+                //}
 
                 //var user = await _context.Users.Where(x => x.Email == Input.Email).FirstOrDefaultAsync();
                 var user = await _signInManager.UserManager.FindByNameAsync(Input.Email);
@@ -157,7 +157,7 @@ namespace partner_aluro.Areas.Identity.Pages.Account
                 }
 
 
-                //var result = await _signInManager.CheckPasswordSignInAsync(user, Input.Password, false);
+                var result = await _signInManager.CheckPasswordSignInAsync(user, Input.Password, false);
                 if(result.Succeeded)
                 {
                     var claims = new List<Claim>
