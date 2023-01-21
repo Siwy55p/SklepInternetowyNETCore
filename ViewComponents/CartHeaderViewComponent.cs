@@ -18,10 +18,10 @@ namespace partner_aluro.ViewComponents
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            CartHeader model = new CartHeader();
-
-            model.CartCount = await _context.CartItems.Where(ci => ci.CartIds == _cart.CartaId)
-                    .CountAsync();
+            CartHeader model = new CartHeader
+            {
+                CartCount = await _context.CartItems.Where(ci => ci.CartIds == _cart.CartaId).CountAsync()
+            };
 
             return View(model);
         }

@@ -78,8 +78,10 @@ namespace partner_aluro.Controllers
 
         public async Task<IActionResult> Index()
         {
-            _cart.CartItems = await _cart.GetAllCartItemsAsync();
-
+            if(_cart.CartItems == null)
+            {
+                _cart.CartItems = await _cart.GetAllCartItemsAsync();
+            }
             //ViewData["MetodyPlatnosci"] = OrderController.GetMetodyPlatnosci();
             ViewData["MetodyPlatnosci"] = _context.MetodyPlatnosci.ToList();
             ViewData["MetodyDostawy"] = _context.MetodyDostawy.ToList();

@@ -11,20 +11,11 @@ namespace partner_aluro.ViewComponents
     {
         private readonly ApplicationDbContext _context;
         private readonly Cart _cart;
-        private readonly IProfildzialalnosciService _profildzialalnosciService;
 
-        private readonly IHttpContextAccessor _httpContextAccessor;
-
-        private readonly UserManager<ApplicationUser> _userManager;
-
-        public CartStatusViewComponent(Cart cart, ApplicationDbContext applicationDbContext, UserManager<ApplicationUser> userManager, IHttpContextAccessor httpContextAccessor, IProfildzialalnosciService profildzialalnosciService)
+        public CartStatusViewComponent(Cart cart, ApplicationDbContext applicationDbContext)
         {
             _cart = cart;
             _context = applicationDbContext;
-
-            _userManager = userManager;
-            _httpContextAccessor = httpContextAccessor;
-            _profildzialalnosciService = profildzialalnosciService;
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
@@ -34,15 +25,6 @@ namespace partner_aluro.ViewComponents
 
             model.Cart = _cart;
 
-            //model.User = _userManager.GetUserAsync(Request.HttpContext.User).Result;
-
-            //int idProfil = 0;
-            //if (model.User.IdProfilDzialalnosci != null)
-            //{
-            //    idProfil = (int)model.User.IdProfilDzialalnosci;
-            //}
-
-            //model.User.ProfilDzialalnosci = _profildzialalnosciService.GetProfil(idProfil);
 
             return View(model);
         }

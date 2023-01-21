@@ -210,6 +210,7 @@ namespace partner_aluro.Models
             List<CartItem> cartItem = new List<CartItem>();
 
             return cartItem ??= await _context.CartItems.Where(ci => ci.CartIds == CartId)
+                    .AsNoTracking()
                     .Include(ci => ci.Product)
                     .ToListAsync();
         }
