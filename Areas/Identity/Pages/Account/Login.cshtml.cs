@@ -15,7 +15,6 @@ using System.Reflection;
 using partner_aluro.wwwroot.Resources;
 using partner_aluro.Data;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity.UI;
 
 namespace partner_aluro.Areas.Identity.Pages.Account
 {
@@ -29,7 +28,7 @@ namespace partner_aluro.Areas.Identity.Pages.Account
 
         private readonly IStringLocalizer _identityLocalizer;
 
-        public LoginModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginModel> logger, IProfildzialalnosciService profildzialalnosciService , IStringLocalizerFactory factory, ApplicationDbContext context)
+        public LoginModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginModel> logger, IProfildzialalnosciService profildzialalnosciService, IStringLocalizerFactory factory, ApplicationDbContext context)
         {
             _context = context;
 
@@ -133,6 +132,7 @@ namespace partner_aluro.Areas.Identity.Pages.Account
         {
             returnUrl ??= Url.Content("~/");
 
+
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
             if (ModelState.IsValid)
@@ -140,17 +140,10 @@ namespace partner_aluro.Areas.Identity.Pages.Account
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 //var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
-                //var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
-                //if (result.Succeeded)
-                //{
-
-                //    _logger.LogInformation("ApplicationUser zalogował się");
-                //    return Redirect("/Home/Index");
-                //}
 
                 //var user = await _context.Users.Where(x => x.Email == Input.Email).FirstOrDefaultAsync();
                 var user = await _signInManager.UserManager.FindByNameAsync(Input.Email);
-                if(user == null)
+                if (user == null)
                 {
                     ModelState.TryAddModelError(string.Empty, "Nieprawidłowy e-mail");
                     return Page();
@@ -158,7 +151,7 @@ namespace partner_aluro.Areas.Identity.Pages.Account
 
 
                 var result = await _signInManager.CheckPasswordSignInAsync(user, Input.Password, false);
-                if(result.Succeeded)
+                if (result.Succeeded)
                 {
                     var claims = new List<Claim>
                     {
@@ -168,7 +161,7 @@ namespace partner_aluro.Areas.Identity.Pages.Account
 
                     var roles = await _signInManager.UserManager.GetRolesAsync(user);
 
-                    if(roles.Any())
+                    if (roles.Any())
                     {
                         //Manager
                         var roleClaim = string.Join(",", roles);
@@ -176,12 +169,12 @@ namespace partner_aluro.Areas.Identity.Pages.Account
                     }
 
 
-                    await _signInManager.SignInWithClaimsAsync(user, Input.RememberMe, claims );
+                    await _signInManager.SignInWithClaimsAsync(user, Input.RememberMe, claims);
 
                     Core.Constants.UserId = user.Id; //Pobierz uzytkownika
                     Core.Constants.Rabat = _profildzialalnosciService.GetRabat(Core.Constants.UserId);
 
-                    _logger.LogInformation("ApplicationUser"+ user.Email +" zalogował się");
+                    _logger.LogInformation("ApplicationUser" + user.Email + " zalogował się");
                     return Redirect("/Home/Index");
                 }
 
