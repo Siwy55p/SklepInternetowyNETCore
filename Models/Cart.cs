@@ -131,7 +131,7 @@ namespace partner_aluro.Models
                     Quantity = quantity,
                     CartIds = CartaId,
                     Carts = _context.Carts.Where(x => x.CartaId == CartaId).FirstOrDefault()
-            };
+                };
 
                 _context.CartItems.Add(cartItem);
             }
