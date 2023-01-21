@@ -91,10 +91,7 @@
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    @if (@Model.CenaProduktuDetal != null)
-                                    {
-                                        <p>@language.Getkey("CenaDetaliczna"): @language.GetCurrently(@Model.CenaProduktuDetal, Constants.myNumberFormatInfo).ToString("C", Constants.myNumberFormatInfo)</p>
-                                    }
+                                    <p>@language.Getkey("CenaDetaliczna"): @language.GetCurrently(@Model.CenaProduktuDetal, Constants.myNumberFormatInfo).ToString("C", Constants.myNumberFormatInfo)</p>
                                 </div>
                                 <div class="col">
                                 </div>

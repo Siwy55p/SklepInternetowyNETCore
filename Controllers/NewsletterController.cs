@@ -199,7 +199,7 @@ namespace partner_aluro.Controllers
         [HttpGet]
         public async Task<ActionResult> Newsletter(int id)
         {
-            Newsletter newsletter = _context.Newsletter.Where(x => x.NewsletterID == id).FirstOrDefault();
+            Newsletter newsletter = await _context.Newsletter.Where(x => x.NewsletterID == id).FirstOrDefaultAsync();
 
             return View(newsletter);
         }

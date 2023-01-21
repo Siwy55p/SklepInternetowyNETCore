@@ -1,8 +1,7 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using partner_aluro.Data;
 using partner_aluro.Models;
-using partner_aluro.Services.Interfaces;
 using partner_aluro.ViewModels;
 
 namespace partner_aluro.ViewComponents
@@ -12,30 +11,17 @@ namespace partner_aluro.ViewComponents
         private readonly ApplicationDbContext _context;
         private readonly Cart _cart;
 
-        public CartHeaderViewComponent(Cart cart, ApplicationDbContext applicationDbContext, UserManager<ApplicationUser> userManager, IHttpContextAccessor httpContextAccessor, IProfildzialalnosciService profildzialalnosciService)
+        public CartHeaderViewComponent(Cart cart, ApplicationDbContext applicationDbContext)
         {
             _cart = cart;
             _context = applicationDbContext;
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            CartStatusModel model = new CartStatusModel();
+            CartHeader model = new CartHeader();
 
-            var products = await _cart.GetAllCartItemsAsync();
-            _cart.CartItems = products;
-
-
-            model.Cart = _cart;
-
-            //model.User = _userManager.GetUserAsync(Request.HttpContext.User).Result;
-
-            //int idProfil = 0;
-            //if (model.User.IdProfilDzialalnosci != null)
-            //{
-            //    idProfil = (int)model.User.IdProfilDzialalnosci;
-            //}
-
-            //model.User.ProfilDzialalnosci = _profildzialalnosciService.GetProfil(idProfil);
+            model.CartCount = await _context.CartItems.Where(ci => ci.CartIds == _cart.CartaId)
+                    .CountAsync();
 
             return View(model);
         }

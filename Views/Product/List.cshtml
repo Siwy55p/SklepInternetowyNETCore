@@ -26,11 +26,13 @@
     </a>
     @if (@Model != null && @Model.Any())
     {
-        <div class="row">
+        @*<div class="row">
             <div class="col-md-12 mb-3">
                 <div class="card">
-                    <div class="card-body">
+    <div class="card-body">*@
+
                         <div class="table-responsive">
+
                             <table id="ProductTableList" class="display" style="width:100%">
                                 <thead>
                                     <tr>
@@ -42,7 +44,6 @@
                                         <th>Cena produktu (brutto)</th>
                                         <th>Cena detaliczna</th>
                                         <th>Kategoria</th>
-                                        <th>Wybierz kategorie</th>
                                         <th>Ilość</th>
                                         <th>Ukryte</th>
                                         <th>Akcje</th>
@@ -51,27 +52,24 @@
                                 <tbody>
                                     @foreach (var productFormModel in Model)
                                     {
-                                        <tr>
+                                        <tr id="@productFormModel.ProductId">
                                             <td>@productFormModel.ProductId</td>
-                                            <td><input id="chkP_@productFormModel.ProductId" onchange="TakeProduct(@productFormModel.ProductId)" type="checkbox" value="@productFormModel.ProductId" data-toggle="toggle"></td>
-
+                                            <td><input id="chkP_@productFormModel.ProductId" onchange="ChangeCheck(@productFormModel.ProductId)" type="checkbox" value="@productFormModel.ProductId" data-toggle="toggle"></td>
 
                                             <td>
-
                                                 @if(@productFormModel.Product_Images != null && @productFormModel.Product_Images.Count() > 0)
                                                 {
                                                     <img class="img-thumbnail" src="~/@productFormModel.Product_Images.FirstOrDefault().pathImageCompress250x250" style="width:70px;height:70px;">
                                                 }
                                             </td>
 
-
                                             <td>@productFormModel.Symbol</td>
                                             <td><a asp-controller="Product" asp-action="Edit" asp-route-id="@productFormModel.ProductId">@productFormModel.Name</a></td>
                                             <td>@productFormModel.CenaProduktuBrutto.ToString("C")</td>
                                             <td>@productFormModel.CenaProduktuDetal.ToString("C")</td>
-                                            <td>
+                                            @*<td>
                                                 @productFormModel.CategoryNavigation.Name
-                                            </td>
+                                            </td>*@
                                             <td>
                                                 <select onchange="ChangeCategory(@productFormModel.ProductId, @productFormModel.CategoryId)" id="select_@productFormModel.ProductId" asp-for="@productFormModel.CategoryId" asp-items="(IEnumerable<SelectListItem>)@ViewData["Category"]">
                                                 </select>
@@ -104,12 +102,11 @@
                                         <td>Id</td>
                                         <td></td>
                                         <td>Obraz</td>
-                                        <th>Symbol</th>
+                                        <td>Symbol</td>
                                         <th>Nazwa produktu</th>
                                         <td>Cena produktu (brutto)</td>
                                         <td>Cena detaliczna</td>
-                                        <th>Kategoria</th>
-                                        <td>Wybierz kategorie</td>
+                                        <td>Kategoria</td>
                                         <td>Ilość</td>
                                         <td>Ukryte</td>
                                         <td>Akcje</td>
@@ -117,10 +114,10 @@
                                 </tfoot>
                             </table>
                         </div>
-                    </div>
+        @* </div>
                 </div>
             </div>
-        </div>
+        </div>*@
 
     }
 
@@ -129,10 +126,9 @@
 @section Scripts{
     <script>
         $(document).ready(function () {
-
             $('#ProductTableList tfoot th').each(function () {
                 var title = $(this).text();
-                $(this).html('<input type="text" class="'+title+'" placeholder="Szukaj ' + title + '" />');
+                $(this).html('<input type="text" class="'+title+'" placeholder="Szukaj po' + title + '" />');
             });
 
             var table = $('#ProductTableList').DataTable({
@@ -143,7 +139,6 @@
                         .columns()
                         .every(function () {
                             var that = this;
-
                             $('input', this.footer()).on('keyup change clear', function () {
                                 if (that.search() !== this.value) {
                                     that.search(this.value).draw();
@@ -156,13 +151,119 @@
                     header: true,
                     footer: true
                 },
+                dom: 'lBfrtip',
+                select: true,
+                buttons: [
+                    {
+                        text: 'Zaznacz/Odznacz wszystkie',
+                        action: function () {
+                            table.rows({page: 'current'}).select()
+
+                            var count = table.rows( { selected: true } ).count();
+
+                            var data = table.rows( { selected: true } ).data();
+
+                            for (var i = 0; i < count; i++) {
+                                var selectRow = table.row(':eq('+i+')').select();
+                                var ProduktId = selectRow.id();
+
+                                var check = document.getElementById('chkP_' + ProduktId);
+
+                                if (check.checked == true) {
+                                    check.checked = false;
+                                    check = false;
+                                }else{
+                                    check.checked = true;
+                                    check = true;
+                                }
+                                
+                                $.ajax({
+                                type: "POST",
+                                url: '@Url.Action("TakeProductId", "Product")',
+                                data: { ProduktId: ProduktId },
+                                success: function (result) {
+                                },
+                                error: function (abc) {
+                                    alert("Error czasem tak bywa. :)");
+                                },
+                                });
+                            }
+                        }
+                    }
+                ],
+                "language": {
+                    "lengthMenu": "Wyświetl _MENU_ produktów na strone.",
+                    "zeroRecords": "Nic nie znaleziono-sory Gregory",
+                    "info": "Wyświetl stronę nr _PAGE_ / _PAGES_",
+                    "infoEmpty": "Brak wyników",
+                    "infoFiltered": "(filtered from _MAX_ total records)"
+                },
+                lengthMenu: [
+                    [10, 25, 50, -1],
+                    [10, 25, 50, 'All'],
+                ],
                 "columnDefs": [
-                    { "width": "50px", "targets": 2 },
-                    { "width": "20px", "targets": 3}
+                    { "width": "7px", "targets": 0 },
+                    { "width": "7px", "targets": 1 },
+                    { "width": "20px", "targets": 2 },
+                    { "width": "20px", "targets": 3 }
                 ],
                 pageLength: 50,
                 "order": [[0, 'desc'], [3, 'desc']]
             });
+
+            $('#ProductTableList tbody').on('click', 'tr', function () {
+                $(this).toggleClass('selected');
+
+                var ProduktId = $(this).attr("id");
+
+                var check = document.getElementById('chkP_' + ProduktId);
+
+                if (check.checked == true) {
+                    check.checked = false;
+                    check = false;
+                }else{
+                    check.checked = true;
+                    check = true;
+                }
+
+                    $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("TakeProduct", "Product")',
+                    data: { ProduktId: ProduktId, check: check },
+                    success: function (result) {
+
+                    },
+
+                    error: function (abc) {
+                        alert(abc.statusText);
+                    },
+                    });
+
+
+                //$.ajax({
+                //    type: "POST",
+                //    url: '@Url.Action("TakeProduct", "Product")',
+                //    data: { ProduktId: ProduktId, check: check },
+                //    success: function (result) {
+
+                //    },
+
+                //    error: function (abc) {
+                //        alert(abc.statusText);
+                //    },
+                //});
+
+
+                //alert(table.rows('.selected').data().length + ' row(s) selected' + ProduktId);
+            });
+
+            $('#Zaznacz').click(function () {
+                alert(table.rows('.selected').data().length + ' row(s) selected');
+
+            });
+
+
         });
     </script>
     <script>
@@ -185,36 +286,58 @@
         }
     </script>
     <script>
-        function TakeProduct(ProduktId) {
+        function ChangeCheck(ProduktId) {
 
-            var d = document.getElementById("ilosc_" + ProduktId).value;
+
 
             var check = document.getElementById('chkP_' + ProduktId);
-            if (check.checked) {
-                check = true;
-            } else {
+            //if (check.checked) {
+            //    check = true;
+            //}else {
+            //    check = false;
+            //}
+
+
+            if (check.checked == true) {
+                check.checked = false;
                 check = false;
+            } else {
+                check.checked = true;
+                check = true;
             }
+
+            $.ajax({
+            type: "POST",
+            url: '@Url.Action("TakeProduct", "Product")',
+            data: { ProduktId: ProduktId, check: check },
+            success: function (result) {
+
+            },
+
+            error: function (abc) {
+                alert(abc.statusText);
+            },
+            });
 
                 //checkBox = document.getElementById('takenBefore').addEventListener('click', event => {
                 //    if (event.target.checked) {
                 //        alert("Checkbox checked!");
                 //    }
                 //});
+            //alert(table.rows('.selected').data().length + ' row(s) selected');
 
+            //$.ajax({
+            //    type: "POST",
+            //    url: '@Url.Action("TakeProduct", "Product")',
+            //    data: { ProduktId: ProduktId, check: check },
+            //    success: function (result) {
 
-            $.ajax({
-                type: "POST",
-                url: '@Url.Action("TakeProduct", "Product")',
-                data: { ProduktId: ProduktId, check: check },
-                success: function (result) {
+            //    },
 
-                },
-
-                error: function (abc) {
-                    alert(abc.statusText);
-                },
-            });
+            //    error: function (abc) {
+            //        alert(abc.statusText);
+            //    },
+            //});
         }
     </script>
     <script>

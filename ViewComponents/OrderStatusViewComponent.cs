@@ -20,7 +20,7 @@ namespace partner_aluro.ViewComponents
         {
             OrderStatusModel model = new OrderStatusModel();
 
-            model.Orders = await _context.Orders.Where(x => x.StanZamowienia == StanZamowienia.Nowe).ToListAsync();
+            model.OrderStatusNew = await _context.Orders.Where(x => x.StanZamowienia == StanZamowienia.Nowe).CountAsync();
 
 
             return View(model);

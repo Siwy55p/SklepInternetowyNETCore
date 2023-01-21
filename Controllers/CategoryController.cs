@@ -77,7 +77,7 @@ namespace partner_aluro.Controllers
                 category.ChildId = 0;
             }
             //logika zapisania kategorii do bazy.
-            _categoryService.AddSave(category);
+            await _categoryService.AddSave(category);
 
             return RedirectToAction("List");
 
@@ -89,7 +89,7 @@ namespace partner_aluro.Controllers
             //var kategoria = await _categoryService.GetAsync(id);
 
 
-            Category kategoria = _context.Category.Include(p => p.Produkty).Where(x=>x.CategoryId == id).FirstOrDefault();
+            Category kategoria = await _context.Category.Include(p => p.Produkty).Where(x=>x.CategoryId == id).FirstOrDefaultAsync();
 
             ViewData["Category"] = GetCategories();
 

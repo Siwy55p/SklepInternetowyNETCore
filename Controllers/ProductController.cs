@@ -256,14 +256,15 @@ namespace partner_aluro.Controllers
 
             Product product = _context.Products.Where(x => x.ProductId == ProduktId).FirstOrDefault();
 
-            Product find = ExcelController.produkty.Where(x=>x.ProductId == ProduktId).FirstOrDefault();
+            Product find = ExcelController.produkty.Where(x => x.ProductId == ProduktId).FirstOrDefault();
             //logika check or uncheck
             if (check)
             {
                 if (find != null)
                 {
                     //produktu jest jest dodany
-                }else
+                }
+                else
                 {
                     ExcelController.produkty.Add(product);
                 }
@@ -271,14 +272,40 @@ namespace partner_aluro.Controllers
             }
             else
             {
-                if(find != null)
+                ExcelController.produkty.Remove(product);
+                if (find != null)
                 {
-                    ExcelController.produkty.Remove(product);
+                    ExcelController.produkty.Remove(find);
                 }
             }
+        }
 
+        [HttpPost]
+        public void TakeProductId(int ProduktId)
+        {
+            ExcelController.Initialize();
+
+            Product product = _context.Products.Where(x => x.ProductId == ProduktId).FirstOrDefault();
+
+            Product find = ExcelController.produkty.Where(x => x.ProductId == ProduktId).FirstOrDefault();
+            //logika check or uncheck
+            if (find != null)
+            {
+                //produktu jest jest dodany
+            }
+            else
+            {
+                ExcelController.produkty.Add(product);
+            }
+
+            //if (find != null)
+            //{
+            //    ExcelController.produkty.Remove(product);
+            //}
 
         }
+
+
         public static void UpdateResourceFile(Hashtable data, String path)
         {
             Hashtable resourceEntries = new Hashtable();
