@@ -1,9 +1,7 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using partner_aluro.Data;
 using partner_aluro.Models;
-using partner_aluro.Services.Interfaces;
 using partner_aluro.ViewModels;
 
 namespace partner_aluro.ViewComponents
@@ -18,11 +16,10 @@ namespace partner_aluro.ViewComponents
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            OrderStatusModel model = new OrderStatusModel();
-
-            model.OrderStatusNew = await _context.Orders.Where(x => x.StanZamowienia == StanZamowienia.Nowe).CountAsync();
-
-
+            OrderStatusModel model = new OrderStatusModel()
+            {
+                OrderStatusNew = await _context.Orders.Where(x => x.StanZamowienia == StanZamowienia.Nowe).CountAsync()
+            };
             return View(model);
         }
     }

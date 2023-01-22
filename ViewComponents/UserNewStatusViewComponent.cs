@@ -1,28 +1,24 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using partner_aluro.Data;
-using partner_aluro.Models;
 using partner_aluro.ViewModels;
 
 namespace partner_aluro.ViewComponents
 {
-    public class CartHeaderViewComponent : ViewComponent
+    public class UserNewStatusViewComponent : ViewComponent
     {
         private readonly ApplicationDbContext _context;
-        private readonly Cart _cart;
 
-        public CartHeaderViewComponent(Cart cart, ApplicationDbContext context)
+        public UserNewStatusViewComponent(ApplicationDbContext context)
         {
-            _cart = cart;
             _context = context;
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            CartHeader model = new CartHeader
+            UserNewStatusModel model = new UserNewStatusModel()
             {
-                CartCount = await _context.CartItems.Where(ci => ci.CartIds == _cart.CartaId).CountAsync()
+                UserNewStatus = await _context.Users.Where(x => x.Nowy == true).CountAsync()
             };
-
             return View(model);
         }
     }

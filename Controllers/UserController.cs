@@ -206,7 +206,7 @@ namespace partner_aluro.Controllers
 
             user.Adress1rozliczeniowy = data.User.Adress1rozliczeniowy;
             user.Adress2dostawy = data.User.Adress2dostawy;
-            
+            user.Nowy = false;
 
             for (int i = 0; i < rolesToAdd.Count(); i++)
             {
@@ -299,7 +299,7 @@ namespace partner_aluro.Controllers
 
             user.Adress1rozliczeniowy = adres1;
             user.Adress2dostawy = adres2;
-
+            user.Nowy = true;
             var roles = _unitOfWork.Role.GetRoles();
 
             var userRoles = await _signInManager.UserManager.GetRolesAsync(user);
@@ -414,6 +414,7 @@ namespace partner_aluro.Controllers
 
             user.Newsletter = true;
 
+            user.Nowy = true;
             user.DataZałożenia = DateTime.Now;
 
             user.Adress1rozliczeniowy = data.User.Adress1rozliczeniowy;

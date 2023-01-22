@@ -8,19 +8,16 @@ namespace partner_aluro.ViewComponents
     {
         private readonly ApplicationDbContext _context;
 
-        //private readonly CategorySubCategory cat;
         public MenuMainViewComponent(ApplicationDbContext context)
         {
             _context = context;
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            //var resul = await _context.Category.ToListAsync();
-
             var resul = await _context.Category
+                .AsNoTracking()
                 .OrderBy(c => c.kolejnosc)
                 .ToListAsync();
-            //cat.SubCategory = await _context.SubCategory.ToListAsync();
             return View(resul);
         }
 

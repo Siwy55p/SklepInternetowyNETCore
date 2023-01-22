@@ -117,7 +117,7 @@
                     <li>
                         <a asp-controller="User" asp-action="Index" class="nav-link px-3 sidebar-link>
                             <span class="me-2"><i class="bi bi-user-fill"></i></span>
-                            <span>Użytkownicy</span>
+                            <span>Użytkownicy</span> @await Component.InvokeAsync("UserNewStatus")
                         </a>
                     </li>
                     <li>

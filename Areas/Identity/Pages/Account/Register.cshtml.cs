@@ -282,6 +282,7 @@ namespace partner_aluro.Areas.Identity.Pages.Account
 
 
                 user.DataZałożenia = DateTime.Now;
+                user.Nowy = true;
                 user.IdProfilDzialalnosci = Input.IdProfildzialalnosci;
 
                 user.Newsletter = true;

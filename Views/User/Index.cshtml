@@ -64,7 +64,7 @@
 
                                         <tr>
 
-                                            <td>@user.DataZałożenia</td>
+                                            <td>@user.DataZałożenia.ToString("yyyy-MM-dd HH:mm:ss")</td>
                                             <td>@user.Imie @user.Nazwisko</td>
                                             <td>@user.NazwaFirmy</td>
                                             <td>
@@ -142,7 +142,7 @@
         $(document).ready(function () {
             $('#userTable').DataTable(
                 {
-                    "pageLength": 50,
+                    "pageLength": 100,
                     "order": [[0, 'desc']]
                 });
         });

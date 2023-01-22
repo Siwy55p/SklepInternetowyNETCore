@@ -1,19 +1,25 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using partner_aluro.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using partner_aluro.Data;
+using partner_aluro.Models;
 
 namespace partner_aluro.ViewComponents
 {
     public class ProduktListViewComponent : ViewComponent
     {
-        private readonly IProductService _productService;
-        public ProduktListViewComponent(IProductService productService)
+        private readonly ApplicationDbContext _context;
+        public ProduktListViewComponent(ApplicationDbContext context)
         {
-            _productService = productService;
+            _context = context;
         }
 
-        public IViewComponentResult Invoke()
+        public async Task<IViewComponentResult> InvokeAsync()
         {
-            return View(_productService.GetProductList());
+            List<Product> list = await _context.Products
+                .AsNoTracking()
+                .ToListAsync();
+
+            return View(list);
         }
     }
 }
