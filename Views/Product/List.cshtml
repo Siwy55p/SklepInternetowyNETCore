@@ -57,10 +57,7 @@
                                             <td><input id="chkP_@productFormModel.ProductId" onchange="ChangeCheck(@productFormModel.ProductId)" type="checkbox" value="@productFormModel.ProductId" data-toggle="toggle"></td>
 
                                             <td>
-                                                @if(@productFormModel.Product_Images != null && @productFormModel.Product_Images.Count() > 0)
-                                                {
-                                                    <img class="img-thumbnail" src="~/@productFormModel.Product_Images.FirstOrDefault().pathImageCompress250x250" style="width:70px;height:70px;">
-                                                }
+                                                <img class="img-thumbnail" src="~/@productFormModel.pathImageUrl250x250" style="width:70px;height:70px;">
                                             </td>
 
                                             <td>@productFormModel.Symbol</td>

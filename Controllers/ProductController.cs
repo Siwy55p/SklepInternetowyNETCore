@@ -46,10 +46,10 @@ namespace partner_aluro.Controllers
             
         }
 
-        public async Task<IActionResult> Index()
-        {
-            return View(await _ProductService.GetProductList());
-        }
+        //public async Task<IActionResult> Index()
+        //{
+        //    return View(await _ProductService.GetProductList());
+        //}
 
         [HttpPost]
         public string CenaNetto(decimal CenaBrutto)
@@ -516,7 +516,12 @@ namespace partner_aluro.Controllers
             ExcelController.Initialize();
 
             ViewData["Category"] = GetCategories();
-            List<Product> produkty = await _ProductService.GetProductList();
+            List<Product> produkty = await _context.Products
+                .AsNoTracking()
+                .Include(p => p.CategoryNavigation)
+                .Where(p => p.CategoryNavigation.Aktywny == true)
+                .ToListAsync();
+            
             return View(produkty);
 
         }
