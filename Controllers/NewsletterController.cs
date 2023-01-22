@@ -41,7 +41,6 @@ namespace partner_aluro.Controllers
         public async Task<ActionResult> Index()
         {
             var listaNewsletter =  await _context.Newsletter.ToListAsync();
-            
 
             return View(listaNewsletter);
         }

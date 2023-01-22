@@ -6,92 +6,12 @@
 }
 @section LinkStyleHead
     {
-    @*<link href="~/dashboard/datatables/datatables.min.css" rel="stylesheet" />*@
-    <link href="~/css/newsletter/newsletter.css" rel="stylesheet" />
-    <script src="~/js/tinymce/tinymce.min.js"></script>
+        <link href="~/css/newsletter/newsletter.css" rel="stylesheet" />
+        <script src="~/js/tinymce/tinymce.min.js"></script>
     }
-
-
     @await Html.PartialAsync("_Newsletter")
 
-@*    <div class="row">
-
-        <ul class="nav nav-tabs">
-            <li class="nav-item"><a class="nav-link @ViewData["active1"]" data-bs-toggle="tab" href="#dodajprodukty">Dodaj produkty</a></li>
-            <li class="nav-item"><a class="nav-link @ViewData["active2"]" data-bs-toggle="tab" href="#wiadomosc">Podglad wiadomosci</a></li>
-            <li class="nav-item"><a class="nav-link @ViewData["active3"]" data-bs-toggle="tab" href="#ogolne">Ogolne</a></li>
-        </ul>
-    </div>
-    <div class="tab-content">
-           <div class="tab-pane @ViewData["active1"]" id="dodajprodukty">
-               <form class="needs-validation" asp-action="Edit" asp-route-id="@Model.NewsletterID" asp-controller="Newsletter" class="form-horizontal" method="post" enctype="multipart/form-data">
-
-                    <div class="row">
-                        <div class="col">
-                            <div class="row g-0">
-                        <div class="col-md-12 border-end" id="mydiv">
-                                        @Html.ValidationSummary()
-                                        @await Html.PartialAsync("_FormNewsletter")
-                                    </div>
-                            </div>
-                            
-                        </div>
-
-                    </div>
-                <button class="btn btn-success" type="submit">
-                    Następny etap
-                </button>
-
-
-                </form>
-            </div>
-            <div class="tab-pane @ViewData["active2"]" id="wiadomosc">
-                <div class="row">
-                    <div class="col">
-
-
-                        <form class="needs-validation" asp-action="NewsletterEdit" asp-route-id="@Model.NewsletterID" asp-controller="Newsletter" class="form-horizontal" method="post" enctype="multipart/form-data">
-         
-                            <div class="row g-0">
-                                <div class="col-md-12 border-end">
-                                    @Html.ValidationSummary()
-                                    @await Html.PartialAsync("_FormNewsletterView")
-                                </div>
-                                <div class="col-md-1">
-                                    <button type="submit" class="btn btn-success">Zapisz</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        <div class="tab-pane @ViewData["active3"]" id="ogolne">
-            <div class="row">
-                <div class="col">
-                    <form class="needs-validation" asp-action="NewsletterEditOgolne" asp-route-id="@Model.NewsletterID" asp-controller="Newsletter" class="form-horizontal" method="post" enctype="multipart/form-data">
-
-                        <div class="row g-0">
-                                    @Html.ValidationSummary()
-                                    @await Html.PartialAsync("_FormNewsletterOgolne")
-
-                            <div class="col-md-1">
-                                <button type="submit" class="btn btn-success">Zapisz</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <button asp-controller="Newsletter" asp-action="SendEmail" asp-route-id="@Model.NewsletterID">Wyslij</button>
-
-    </div>
-*@
-
-
     @section Scripts {
-
-
-
     <script>
         function SelectCat(CategoryId) {
             $.ajax({
@@ -109,7 +29,6 @@
 
         }
     </script>
-
 
      <script>
         function SelectCategory2(CategoryId, newsleterId) {

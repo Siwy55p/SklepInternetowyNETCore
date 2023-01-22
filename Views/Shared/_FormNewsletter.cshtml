@@ -1,12 +1,5 @@
 ﻿@model partner_aluro.Models.Newsletter
 
-<div class="form-group row">
-
-    <label asp-for="@Model.NewsletterID" class="col col-form-label text-end">Newsletter ID</label>
-    <div class="col">
-        <input asp-for="@Model.NewsletterID" class="form-control" aria-required="true" readonly />
-    </div>
-</div>
 <div class="form-group row d-none">
     <label asp-for="@Model.Nazwa" class="col-sm-4 col-form-label text-end">Nazwa Newsletter </label>
     <div class="col-sm-8">
@@ -22,6 +15,10 @@
                 @*<label asp-for="@Model.MessagerBody" class="col col-form-label">Wiadomość e-mail</label>*@
                 <textarea asp-for="@Model.MessagerBody" id="editor2"> </textarea>
             </div>
+
+            <button class="btn btn-success" type="submit">
+                Następny etap
+            </button>
         </div>
     </div>
     <div class="col-md-6 m-0 p-0">
@@ -97,3 +94,12 @@
         </div>
     </div>
 </div>
+
+<div class="form-group row">
+
+    <label asp-for="@Model.NewsletterID" class="col col-form-label text-end">Newsletter ID</label>
+    <div class="col">
+        <input asp-for="@Model.NewsletterID" class="form-control" aria-required="true" readonly />
+    </div>
+</div>
+
