@@ -40,7 +40,7 @@
                 
                 <tr>
                     <td>
-                        @item.i
+                        @item.value.CartaId
                     </td>
                     <td>
                         <span>@wiadomosc </span>
@@ -50,7 +50,7 @@
                         @item.value.CartItems.Count()
                     </td>
                     <td>
-                        <span style="background-color:@color">@item.value.RazemBrutto.ToString("0.00")</span>
+                       <span style="background-color:@color">@item.value.RazemBrutto.ToString("0.00")</span>
 
 
                     </td>
@@ -66,7 +66,7 @@
                         @item.value.Zrealizowane
                     </td>*@
                     <th>
-                        @item.value.dataPowstania
+                        @item.value.dataPowstania.ToString("yyyy-MM-dd HH:mm:ss")
                     </th>
                     <td>
                         <a class="btn btn-success" asp-controller="Cart" asp-action="Details" asp-route-CartID="@item.value.CartaId">Więcej</a>
@@ -139,7 +139,7 @@
                         { "width": "50px", "targets": 2 }
                     ],
                     pageLength: 50,
-                    "order": [[0, 'desc'], [3, 'desc']]
+                    "order": [6, 'desc']
                 });
         });
     </script>

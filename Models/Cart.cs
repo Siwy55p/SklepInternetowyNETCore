@@ -29,8 +29,12 @@ namespace partner_aluro.Models
             _context = context;
         }
 
+
+
         [Key]
         public int CartID { get; set; }
+
+        public int Id { get; set; }
 
         public string? CartaId { get; set; }
         public string? UserId { get; set; }
@@ -39,7 +43,7 @@ namespace partner_aluro.Models
         [ForeignKey(nameof(UserId))]
         public virtual ApplicationUser? user { get; set; }
 
-        public DateTime? dataPowstania { get; set; }
+        public DateTime dataPowstania { get; set; }
 
         [Column(TypeName = "decimal(18,2)")]
         public decimal RazemNetto { get; set; }
@@ -63,8 +67,12 @@ namespace partner_aluro.Models
             session.SetString("User", user.ToString());
 
             Cart cart = new Cart();
+            cart.dataPowstania = DateTime.Now;
 
-            var existCart2 = context.Carts.Where(x => x.UserId == user).FirstOrDefault(); // istneije juz taka sesja wiec nie dodwaj jej do bazy tylko zrob update
+            var existCart2 = context.Carts
+                .Where(x => x.UserId == user)
+                .OrderBy(x=>x.CartID)
+                .LastOrDefault(); // istneije juz taka sesja wiec nie dodwaj jej do bazy tylko zrob update
 
             var existCart = context.Carts.Where(x => x.CartaId == cartsId).FirstOrDefault(); // istneije juz taka sesja wiec nie dodwaj jej do bazy tylko zrob update
             if(existCart2 != null)
@@ -81,13 +89,27 @@ namespace partner_aluro.Models
                     cart.dataPowstania = DateTime.Now;
                     cart.Zrealizowane = false;
                     context.Carts.Add(cart);
+                    context.SaveChanges();
                 }
 
 
                 //jesli nie jest zrealizowana
                 if (existCart2.Zrealizowane == false)
                 {
-                    cart = context.Carts.Where(x => x.UserId == user).FirstOrDefault();
+                    //cart = context.Carts.Where(x => x.UserId == user).FirstOrDefault();
+                    cart = existCart2;
+
+                    //cart = context.Carts
+                    //   .Include(x => x.user)
+                    //   .Include(u => u.CartItems)
+                    //   .ThenInclude(p => p.Product)
+                    //   .Where(x => x.UserId == user)
+                    //   .FirstOrDefault();
+
+                    cart.dataPowstania = DateTime.Now;
+                    cart.RazemBrutto = cart.GetCartTotalBrutto();
+                    context.Carts.Update(cart);
+                    context.SaveChanges();
                 }
 
             }

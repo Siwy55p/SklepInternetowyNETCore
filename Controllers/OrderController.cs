@@ -357,13 +357,21 @@ namespace partner_aluro.Controllers
                 _emailService.SendEmailAsync(emailDzialTechniczny3);
 
 
-                var cart = _context.Carts.Where(c => c.CartaId == _cart.CartaId).FirstOrDefault();
-                if(cart != null)
-                {
-                    cart.Zrealizowane = true;
-                    _context.Carts.Update(cart);
+                //var cart = _context.Carts.Where(c => c.CartaId == _cart.CartaId).FirstOrDefault();
+                //var cart = _context.Carts.Where(x => x.UserId == user.Id).FirstOrDefault();
+                //var cart = _context.Carts
+                //.Where(x => x.UserId == user.Id)
+                //.Where(x => x.CartaId == _cart.CartaId)
+                //.FirstOrDefault();
+
+                //if (cart != null)
+                //{
+                    _cart.Zrealizowane = true;
+                    //_cart.ClearCart();
+                    
+                    _context.Carts.Update(_cart);
                     _context.SaveChanges();
-                }
+                //}
 
 
 
