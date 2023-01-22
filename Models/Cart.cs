@@ -64,11 +64,13 @@ namespace partner_aluro.Models
 
             Cart cart = new Cart();
 
+            var existCart2 = context.Carts.Where(x => x.UserId == user).FirstOrDefault(); // istneije juz taka sesja wiec nie dodwaj jej do bazy tylko zrob update
+
             var existCart = context.Carts.Where(x => x.CartaId == cartsId).FirstOrDefault(); // istneije juz taka sesja wiec nie dodwaj jej do bazy tylko zrob update
-            if(existCart != null)
+            if(existCart2 != null)
             {
                 //jesli jest zrealizowana to utworz nowa Carte
-                if(existCart.Zrealizowane == true)
+                if(existCart2.Zrealizowane == true)
                 {
                     cartsId = Guid.NewGuid().ToString();
                     session.SetString("CartsId", cartsId);
@@ -83,9 +85,9 @@ namespace partner_aluro.Models
 
 
                 //jesli nie jest zrealizowana
-                if (existCart.Zrealizowane == false)
+                if (existCart2.Zrealizowane == false)
                 {
-                    cart = context.Carts.Where(x => x.CartaId == cartsId).FirstOrDefault();
+                    cart = context.Carts.Where(x => x.UserId == user).FirstOrDefault();
                 }
 
             }

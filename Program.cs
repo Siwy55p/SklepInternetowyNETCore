@@ -59,7 +59,7 @@ builder.Services.AddSession(options =>
 {
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
-    //options.IdleTimeout = TimeSpan.FromSeconds(10);
+    options.IdleTimeout = TimeSpan.FromSeconds(360);
 });
 
 builder.Services.AddResponseCaching(x => x.MaximumBodySize = 1024); //1. dodatkowo do lwykorzystawiania cache
