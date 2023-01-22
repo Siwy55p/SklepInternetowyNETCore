@@ -49,14 +49,21 @@ namespace partner_aluro.Controllers
         {
 
             List<Cart> listaCart = await _context.Carts
-                .Include(x=>x.user)
-                .Include(u=>u.CartItems)
+                .Include(x => x.user)
+                .Include(u => u.CartItems)
                 .ThenInclude(p => p.Product)
+                .Where(x => x.user.UserName != "szuminski.p@gmail.com")
+                .Where(x => x.CartItems.Count >= 1)
                 .ToListAsync();
 
-            for(int i = 0; i < listaCart.Count(); i++)
+            for (int i = 0; i < listaCart.Count(); i++)
             {
-                listaCart[i].RazemBrutto = listaCart[i].GetCartTotalBrutto();
+                if (listaCart[i].RazemBrutto == 0)
+                {
+                    listaCart[i].RazemBrutto = listaCart[i].GetCartTotalBrutto();
+                    _context.Carts.Update(listaCart[i]);
+                    _context.SaveChanges();
+                }
             }
 
             return View(listaCart);
