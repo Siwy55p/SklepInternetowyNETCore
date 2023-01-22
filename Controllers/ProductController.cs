@@ -132,7 +132,7 @@ namespace partner_aluro.Controllers
             //}
 
             var files = HttpContext.Request.Form.Files;
-            await _imageService.UploadFilesAsync(files, product);
+            _imageService.UploadFiles(files, product);
             ////UploadNewFilePicture
             //ImageController.Initialize(_webHostEnvironment);
             //ImageModel imgModel = new ImageModel();
@@ -452,7 +452,7 @@ namespace partner_aluro.Controllers
             var files = HttpContext.Request.Form.Files;
 
 
-            await _imageService.UploadFilesAsync(files, product);
+            _imageService.UploadFiles(files, product);
 
 
             if ((product.Product_Images != null) && (product.Product_Images.FirstOrDefault() != null))

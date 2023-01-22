@@ -22,6 +22,13 @@ namespace partner_aluro.Services
             _context.Orders.Add(order);
             _context.SaveChanges();
         }
+
+        public int CountZamowien()
+        {
+            int Count = _context.Orders.Where(x => x.StanZamowienia == StanZamowienia.Nowe).Count();
+            return Count;
+        }
+
         public OrderItem GetItem(int id)
         {
             var orderItem = _context.OrderItems.Find(id);

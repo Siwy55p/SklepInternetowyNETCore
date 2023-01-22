@@ -2,23 +2,25 @@
 using Microsoft.EntityFrameworkCore;
 using partner_aluro.Data;
 using partner_aluro.Models;
+using partner_aluro.Services;
+using partner_aluro.Services.Interfaces;
 using partner_aluro.ViewModels;
 
 namespace partner_aluro.ViewComponents
 {
     public class OrderStatusViewComponent : ViewComponent
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IOrderStatusService _orderStatusService;
 
-        public OrderStatusViewComponent(ApplicationDbContext context)
+        public OrderStatusViewComponent(IOrderStatusService orderStatusService)
         {
-            _context = context;
+            _orderStatusService = orderStatusService;
         }
-        public async Task<IViewComponentResult> InvokeAsync()
+        public IViewComponentResult Invoke()
         {
             OrderStatusModel model = new OrderStatusModel()
             {
-                OrderStatusNew = await _context.Orders.Where(x => x.StanZamowienia == StanZamowienia.Nowe).CountAsync()
+                OrderStatusNew = _orderStatusService.CountZamowien()
             };
             return View(model);
         }

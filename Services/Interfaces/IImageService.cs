@@ -6,7 +6,7 @@ namespace partner_aluro.Services.Interfaces
     {
         Task<List<ImageModel>> ListImageAsync();
 
-        Task<int> AddAsync(ImageModel imgModel);
+        int AddAsync(ImageModel imgModel);
 
         //Task<string> CreateImageAddAsync(ImageModel imageModel);
         //Task<string> CreateImageAddAsync(Product product);
@@ -19,7 +19,7 @@ namespace partner_aluro.Services.Interfaces
 
         void Update(ImageModel imageModel);
 
-        Task UploadFilesAsync(IFormFileCollection files, Product? product = null, Slider? slider = null);
+        void UploadFiles(IFormFileCollection files, Product? product = null, Slider? slider = null);
 
     }
 }

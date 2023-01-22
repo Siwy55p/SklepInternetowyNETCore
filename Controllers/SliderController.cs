@@ -60,11 +60,11 @@ namespace partner_aluro.Controllers
             //Slider sliders =await _sliderService.GetAsync(slider.ImageSliderID);
 
             var files = HttpContext.Request.Form.Files;
-            _imageService.UploadFilesAsync(files);
+            _imageService.UploadFiles(files);
 
             //UploadFile2Async(slider);
 
-            await _sliderService.EditSliderAsync(slider);
+            _sliderService.EditSlider(slider);
 
             return RedirectToAction("Index");
         }
@@ -75,9 +75,9 @@ namespace partner_aluro.Controllers
         public async Task<IActionResult> Edit(int id)
         {
 
-            Slider sliders = await _sliderService.GetAsync(id);
+            Slider slider = await _sliderService.GetAsync(id);
 
-            return View(sliders);
+            return View(slider);
         }
 
 
@@ -92,11 +92,11 @@ namespace partner_aluro.Controllers
             var files = HttpContext.Request.Form.Files;
 
             
-            await _imageService.UploadFilesAsync(files,null, slider);
+            _imageService.UploadFiles(files,null, slider);
 
             //UploadFile2Async(slider);
 
-            await _sliderService.EditSliderAsync(slider);
+            _sliderService.EditSlider(slider);
 
 
             return RedirectToAction("Index");

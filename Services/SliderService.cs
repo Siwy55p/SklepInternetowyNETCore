@@ -29,10 +29,10 @@ namespace partner_aluro.Services
 
         }
 
-        public async Task EditSliderAsync(Slider slider)
+        public void EditSlider(Slider slider)
         {
             _context.Update(slider);
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
         public async Task<Slider> GetAsync(int id)
         {

@@ -76,7 +76,7 @@ builder.Services.AddBreadcrumbs(Assembly.GetExecutingAssembly(), options =>
 builder.Services.AddDbContext<ApplicationDbContext>(builder =>
 {
 
-    builder.UseSqlServer(@"Data Source=mssql4.webio.pl,2401;Database=siwy55p_siwy55p;Uid=siwy55p_siwy55p;Password=Siiwy1a2!3!4!5!;TrustServerCertificate=true", o =>
+    builder.UseSqlServer(@"Data Source=mssql4.webio.pl,2401;Database=siwy55p_siwy55p;Uid=siwy55p_siwy55p;Password=Siiwy1a2!3!4!5!;TrustServerCertificate=true;MultipleActiveResultSets=True;", o =>
     {
         o.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null);
         
@@ -322,6 +322,8 @@ void AddScoped()
     builder.Services.AddScoped<IProductNazwyPrestashop, ProductNazwyPrestashopService>();
 
     builder.Services.AddScoped<IProductQuantityPrestashop, ProductQuantityPrestashopService>();
+
+    builder.Services.AddScoped<IOrderStatusService, OrderStatusService>();
 
     builder.Services.AddScoped<ISetting, SettingService>();
     builder.Services.AddScoped<ISMS, SMSService>();

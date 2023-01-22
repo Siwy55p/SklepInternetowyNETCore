@@ -133,7 +133,7 @@ namespace partner_aluro.Controllers
                             cont.Product_Images.Add(imgModel);
                             await _productService.UpdateAsync(cont);
 
-                            await _imageService.AddAsync(imgModel);
+                            _imageService.AddAsync(imgModel);
                         }
                         else
                         {
@@ -147,7 +147,7 @@ namespace partner_aluro.Controllers
                                 ImageName = dynamicFileName
                             };
                         }
-                        await _imageService.AddAsync(imgModel);
+                        _imageService.AddAsync(imgModel);
 
                     }
                 }
@@ -746,7 +746,7 @@ namespace partner_aluro.Controllers
 
                     product.Product_Images.Add(imgModel);
 
-                    await _imageService.AddAsync(imgModel);
+                    _imageService.AddAsync(imgModel);
 
                 }
             }

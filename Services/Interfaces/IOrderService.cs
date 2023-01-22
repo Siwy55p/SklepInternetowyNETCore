@@ -12,6 +12,7 @@ namespace partner_aluro.Services.Interfaces
 
         List<Order> ListOrdersUser(string UserID);
 
+        int CountZamowien();
         void Add(Order order);
         Task<Order> GetOrder(int id);
 

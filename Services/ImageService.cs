@@ -41,7 +41,7 @@ namespace partner_aluro.Services
         }
 
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
-        public async Task UploadFilesAsync(IFormFileCollection files, Product? product = null, Slider? slider = null)
+        public void UploadFiles(IFormFileCollection files, Product? product = null, Slider? slider = null)
         {
             //var files = HttpContext.Request.Form.Files;
 
@@ -61,11 +61,11 @@ namespace partner_aluro.Services
             {
                 string webRootPath = _hostingEnvironment.WebRootPath;
 
-                for (int i = 0; i < files.Count; i++)
+                foreach(var item in files.Select((value, i)=> new {i, value}))
                 {
 
                     ImageModel imgModel = new ImageModel();  //Dodanie do bazy rekodu w ktorym bedzie znajdował sie obraz
-                    int IdImage = await AddAsync(imgModel);
+                    int IdImage = AddAsync(imgModel);
 
                     imgModel = _context.Images.Find(IdImage);
 
@@ -108,9 +108,9 @@ namespace partner_aluro.Services
                         Directory.CreateDirectory(uploadsFolder);
                     }
 
-                    FileInfo fileInfo = new FileInfo(files[i].FileName);
+                    FileInfo fileInfo = new FileInfo(files[item.i].FileName);
 
-                    var extension = Path.GetExtension(files[i].FileName);
+                    var extension = Path.GetExtension(files[item.i].FileName);
                     var dynamicFileName = IdImageString + extension;
 
 
@@ -120,13 +120,13 @@ namespace partner_aluro.Services
                     //}
                     if (slider != null)
                     {
-                        dynamicFileName = "slider" + i + "_" + DateTime.Now.ToString("mm_ss") + extension;
+                        dynamicFileName = "slider" + item.i + "_" + DateTime.Now.ToString("mm_ss") + extension;
                     }
 
                     //save orginal image
                     using (var filesStream = new FileStream(Path.Combine(uploadsFolder, dynamicFileName), FileMode.Create))
                     {
-                        files[i].CopyTo(filesStream);
+                        files[item.i].CopyTo(filesStream);
                     }
 
 
@@ -165,9 +165,6 @@ namespace partner_aluro.Services
                     }
 
 
-
-
-
                     //add product Image for new product
                     if (product != null)
                     {
@@ -180,7 +177,7 @@ namespace partner_aluro.Services
 
                         imgModel.path = path0;
                         imgModel.fullPath = path0 + dynamicFileName;
-                        imgModel.kolejnosc = ilosc + i;
+                        imgModel.kolejnosc = ilosc + item.i;
                         imgModel.Tytul = product.Name;
                         imgModel.ImageName = dynamicFileName;
                         imgModel.pathImageCompress250x250 = path0 + ImageNameCompres;
@@ -201,12 +198,12 @@ namespace partner_aluro.Services
 
                         imgModel.path = path0 + @"/";
                         imgModel.fullPath = path0 + @"/" + dynamicFileName;
-                        imgModel.kolejnosc = ilosc + i;
+                        imgModel.kolejnosc = ilosc + item.i;
                         imgModel.Tytul = "sliderHome";
                         imgModel.ImageName = dynamicFileName;
-                        imgModel.pathImageCompress250x250 = path0 + ImageNameCompres;
+                        imgModel.pathImageCompress250x250 = path0 + @"/" + ImageNameCompres;
                         imgModel.ImageNameCompress250x250 = ImageNameCompres;
-                        imgModel.pathImageCompress645x410 = path0 + ImageNameCompres2;
+                        imgModel.pathImageCompress645x410 = path0 + @"/" + ImageNameCompres2;
                         imgModel.ImageNameCompress645x410 = ImageNameCompres2;
                         imgModel.SliderIds = slider.ImageSliderID;
                         imgModel.Opis = "slider";
@@ -217,7 +214,7 @@ namespace partner_aluro.Services
 
                         imgModel.path = path0;
                         imgModel.fullPath = path0 + dynamicFileName;
-                        imgModel.kolejnosc = i;
+                        imgModel.kolejnosc = item.i;
                         imgModel.Tytul = "";
                         imgModel.ImageName = dynamicFileName;
                         imgModel.pathImageCompress250x250 = path0 + ImageNameCompres;
@@ -292,15 +289,15 @@ namespace partner_aluro.Services
             return await _context.Images.ToListAsync();
         }
 
-        public async Task<int> AddAsync(ImageModel imgModel)
+        public int AddAsync(ImageModel imgModel)
         {
-            ImageModel imgExist = await _context.Images.Where(x => x.ImageName == imgModel.ImageName).FirstOrDefaultAsync();
+            ImageModel imgExist = _context.Images.Where(x => x.ImageName == imgModel.ImageName).FirstOrDefault();
 
             if (imgExist != null)
             {
                 //To zamien i zrob update
                 _context.Update(imgModel);
-                await _context.SaveChangesAsync();
+                _context.SaveChanges();
 
                 return imgModel.ImageId;
             }

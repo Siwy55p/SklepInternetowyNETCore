@@ -6,7 +6,7 @@ namespace partner_aluro.Services.Interfaces
     {
         void AddSlider(Slider slider);
 
-        Task EditSliderAsync(Slider slider);
+        void EditSlider(Slider slider);
 
 
         void DeleteSlider(int id);
