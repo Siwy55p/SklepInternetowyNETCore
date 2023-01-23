@@ -453,14 +453,14 @@ namespace partner_aluro.Controllers
                     Paragraph para2 = new("ID #" + order.NrZamowienia, new Font(Font.FontFamily.HELVETICA, 20, Font.BOLD))
                     {
                         Alignment = Element.ALIGN_RIGHT,
-                        SpacingAfter = 10
+                        SpacingAfter = 8
                     };
                     document.Add(para2);
 
                     Paragraph para2_1 = new(order.MetodaDostawy, regular)
                     {
                         Alignment = Element.ALIGN_RIGHT,
-                        SpacingAfter = 20
+                        SpacingAfter = 15
                     };
                     document.Add(para2_1);
 
