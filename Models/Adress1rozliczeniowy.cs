@@ -19,6 +19,7 @@ namespace partner_aluro.Models
         public string Kraj { get; set; }
 
         [Required(ErrorMessage = "Pole Ulica jest wymagane")]
+        [StringLength(255, MinimumLength = 4)]
         public string Ulica { get; set; }
 
         [Display(Name = "Nr Nieruchomości")]

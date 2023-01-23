@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using partner_aluro.Data;
 using partner_aluro.Models;
 using partner_aluro.Services.Interfaces;
+using X.PagedList;
 
 namespace partner_aluro.Controllers
 {
@@ -22,7 +23,7 @@ namespace partner_aluro.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            List<MetodyDostawy> metodyDostawy =  _context.MetodyDostawy.ToList();
+            List<MetodyDostawy> metodyDostawy = await _context.MetodyDostawy.ToListAsync();
             return View(metodyDostawy);
         }
         [HttpGet]

@@ -10,16 +10,18 @@ namespace partner_aluro.Models
 
         public string? Imie { get; set; }
         public string? Nazwisko { get; set; }
+        public string? NazwaFirmy { get; set; }
         public string? Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Pole Ulica jest wymagane, lub nazwa ulicy jest za krótka.")]
+        [StringLength(255, MinimumLength = 2)]
         public string? Ulica { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Pole Miasto jest wymagane")]
         public string? Miasto { get; set; }
         public string? Kraj { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Kod-pocztowy jest wymagany")]
         public string? KodPocztowy { get; set; }
 
         public string? Telefon { get; set; }
