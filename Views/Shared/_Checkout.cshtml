@@ -81,11 +81,11 @@
 
                             }
 
-                            <div class="col border border-top-0" style="max-width: 75px; width:75px">
-                                <img src="~/@item.Product.pathImageUrl250x250"  style="height: 4em">
+                            <div class="col border border-top-0" style="max-width: 75px; width:75px; margin:0px; padding:0px;">
+                                <img src="~/@item.Product.pathImageUrl250x250" style="max-width: 70px; width: 70px; max-height: 70px; object-fit: cover;">
                             </div>
                             <div class="col border border-top-0 text-center d-none d-sm-none d-md-none d-lg-block text-wrap text-break" style="width: 10%">
-                                <a class="text-black" asp-controller="Product" asp-action="Details" asp-route-id="@item.Product.ProductId">@language.Getkey(@item.Product.Name)</a>
+                                <a class="link-dark text-black" asp-controller="Product" asp-action="Details" asp-route-id="@item.Product.ProductId">@language.Getkey(@item.Product.Name)</a>
                             </div>
                             <div class="col border border-top-0 d-none d-sm-none d-md-none d-lg-block text-center">
                                 <span class="pozycja">@item.Product.Symbol </span>

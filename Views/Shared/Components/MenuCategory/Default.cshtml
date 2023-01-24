@@ -29,7 +29,7 @@
 
                     @foreach (var kategorie2 in Model)
                     {
-                        if (@kategorie2.Name == ViewData["szukanaNazwa"])
+                        if (@kategorie2.Name == ViewData["szukanaNazwa"].ToString())
                         {
                             activecat2 = "activecat";
                         }else
