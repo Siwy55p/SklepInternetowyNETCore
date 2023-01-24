@@ -62,19 +62,17 @@
                         <ul class="dropdown-menu" style="z-index:2000">
                             @foreach (var kategorie2 in Model)
                             {
-
-
-                                if (@kategorie2.Name == ViewData["szukanaNazwa"].ToString())
+                                if (ViewData["szukanaNazwa"] != null)
                                 {
-                                    activecat2 = "activecat2";
+                                    if (@kategorie2.Name == ViewData["szukanaNazwa"].ToString())
+                                    {
+                                        activecat2 = "activecat2";
+                                    }
+                                    else
+                                    {
+                                        activecat2 = "";
+                                    }
                                 }
-                                else
-                                {
-                                    activecat2 = "";
-                                }
-
-
-
 
                                 @if (kategorie2.ParentId == kategorie.CategoryId)
                                 {

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using partner_aluro.Core;
 using partner_aluro.Core.Repositories;
 using partner_aluro.Data;
@@ -98,7 +99,6 @@ namespace partner_aluro.Controllers
             //ViewData["MetodyPlatnosci"] = GetMetodyPlatnosci();
             ViewData["MetodyPlatnosci"] = _context.MetodyPlatnosci.ToList();
             ViewData["MetodyDostawy"] = _context.MetodyDostawy.ToList();
-
 
             var cartItems = await _cart.GetAllCartItemsAsync();
             _cart.CartItems = cartItems;
@@ -282,14 +282,14 @@ namespace partner_aluro.Controllers
                 EmailDto email = new EmailDto()
                 {
                     To = user.Email,
-                    Subject = "Dziękujemy za złożenie zamówienia. Nr:" + order.NrZamowienia + "",
+                    Subject = "Dziękujemy za złożenie zamówienia. Nr: #" + order.NrZamowienia + "",
                     Body = $"<h1> Dziękujemy za założenie zamówienia.</h1>Potwierdzenie zamówienia <br/>Twoje zamówienie zostało przyjęte.<br/>Po skompletowaniu Twojego zamówienia otrzymasz email z kosztem dostawy i łączną sumą do zapłaty.<br/>W razie pytań lub wątpliwości, prosimy o kontakt z naszą obsługą klienta.<br/>" +
                     "Sposób dostawy: <b>" + order.MetodaDostawy + "</b>, metoda płatności: <b>" + order.MetodaPlatnosci + "</b>"
                 };
                 _emailService.SendEmailAsync(email);
 
 
-                string startEmail = $"Nowe zamówienie na platformie Aluro Nr:"+ order.NrZamowienia + "<br>"+
+                string startEmail = $"Nowe zamówienie na platformie Aluro Nr: #" + order.NrZamowienia + "<br>"+
                     "Zamówienie Nr: <b>" + order.NrZamowienia + "</b>, Metoda płatności: <b>" +order.MetodaPlatnosci+"</b> , Metoda dostawy: <b>" + order.MetodaDostawy+ "</b><br>"+
                     "Data złożenia zamówienia: <b>" + order.OrderPlaced + "</b><br>" +
                     "Nazwa firmy: <b>" + user.NazwaFirmy + "<b/><br>" +
@@ -352,8 +352,8 @@ namespace partner_aluro.Controllers
                     Subject = "Nowe zamówienie! " + order.Id + ":" + user.Imie + " " + user.Nazwisko + " " + user.NazwaFirmy + "",
                     Body = emailMessage
                 };
-                //_emailService.SendEmailAsync(emailDzialTechniczny1);
-                //_emailService.SendEmailAsync(emailDzialTechniczny2);
+                _emailService.SendEmailAsync(emailDzialTechniczny1);
+                _emailService.SendEmailAsync(emailDzialTechniczny2);
                 _emailService.SendEmailAsync(emailDzialTechniczny3);
 
 
@@ -1015,6 +1015,31 @@ namespace partner_aluro.Controllers
             }
 
             return lstStanZamowien;
+        }
+
+        [HttpPost]
+        public void ChangeIlosc(int ProduktId, int Ilosc, int OrderID)
+        {
+            Order order = _context.Orders.Where(x => x.Id == OrderID).Include(oi => oi.OrderItems).ThenInclude(p=>p.Product).FirstOrDefault();
+
+            OrderItem oi = order.OrderItems.Where(p => p.ProductId == ProduktId).First();
+
+
+            order.OrderTotal -= oi.Cena;
+
+            oi.Quantity = Ilosc;
+            oi.Cena = Ilosc * oi.Product.CenaProduktuBrutto;
+            order.OrderTotal += oi.Cena;
+
+            _context.Orders.Update(order);
+            _context.SaveChanges();
+
+            //return OrderID;
+            //Product product = _context.Products.Where(x => x.ProductId == ProduktId).FirstOrDefault();
+
+            //product.Ilosc = Ilosc;
+            //_context.Products.Update(product); 1 804,50
+            //_context.SaveChanges();
         }
 
         [HttpPost]

@@ -119,15 +119,13 @@
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 
 
-
 @if (Model.OrderItems.Count > 0)
 {
-    <div class="row">
+    <div class="row" id="zamowienie" name="zamowienie">
         <div class="col-md-12 mb-3">
             <div class="card">
                 <div class="card-header">
@@ -191,7 +189,12 @@
                                         <td>@item.Product.Name</td>
                                         <td>@item.Product.Symbol</td>
                                         <td>@CenaJednostkowa_brutto.ToString("C")</td>
-                                        <td>@item.Quantity.ToString("0.###########################")</td>
+
+                                        <td>
+                                            <input onchange="ChangeIlosc(@item.Product.ProductId, @Model.Id)" asp-for="@item.Quantity" id="ilosc_@item.Product.ProductId" aria-required="true" style="max-width: 70px" />
+                                            @item.Quantity.ToString("0.###########################")
+                                        </td>
+
                                         <td>@ProductTotal.ToString("C")</td>
                                     </tr>
                                 }
@@ -214,9 +217,25 @@
             </div>
         </div>
         <a class="nav-link px-3" asp-area="" asp-controller="Order" asp-action="ListaZamowien"> Wróc do listy</a>
-
     </div>
-
 }
 
+<script>
+    function ChangeIlosc(ProduktId, OrderID) {
+        var Ilosc = document.getElementById("ilosc_" + ProduktId).value;
 
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("ChangeIlosc", "Order")',
+            data: { ProduktId: ProduktId, Ilosc: Ilosc, OrderID: OrderID },
+            //data: { ProduktId: ProduktId, Ilosc: Ilosc, OrderID: OrderID },
+            success: function (result) {
+                $("#zamowienie").load(location.href + " #zamowienie");
+            },
+
+            error: function (abc) {
+                alert(abc.statusText);
+            },
+        });
+    }
+</script>
