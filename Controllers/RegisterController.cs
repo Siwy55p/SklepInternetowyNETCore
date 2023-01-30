@@ -7,10 +7,12 @@ using partner_aluro.Data;
 using partner_aluro.Migrations;
 using partner_aluro.Models;
 using partner_aluro.Services.Interfaces;
+using System.Drawing;
 using System.Globalization;
 using System.Net;
 using System.Text;
 using System.Text.Encodings.Web;
+using System.Text.RegularExpressions;
 
 namespace partner_aluro.Controllers
 {
@@ -148,20 +150,45 @@ namespace partner_aluro.Controllers
         public async Task<List<string>> SprawdzNIPAsync(string? Vat = null)
         {
             var komunikat = "Brak danych";
+            var Regon = "";
+            var Wojewodztwo1 = "";
+            var Powiat1 = "";
+            var Ulica1 = "";
             var nazwa_firmy = "Nie znaleziono takiej firmy";
+            var Kraj1 = "Polska";
             var adres = "";
-            var miasto = "";
-            var kod_pocztowy = "";
+            var Miasto1 = "";
+            var KodPocztowy1 = "";
+
+
+            //document.getElementById("komunikat").value = result[0];
+            //document.getElementById("NazwaFirmy").value = result[1];
+            //document.getElementById("adres").value = result[2];
+            //document.getElementById("miasto").value = result[3];
+            //document.getElementById("kod_pocztowy").value = result[4];
+
 
             EuropeanVatInformation companyEuropa = EuropeanVatInformation.Get(Vat);
 
-            if(companyEuropa != null)
+            if (companyEuropa != null)
             {
+                string SplitAdres = companyEuropa.Address;
+
+                string[] AdresSplit = SplitAdres.Split("\n");
+                string ulicaS = AdresSplit[0].ToString();
+                string kod_pocztowyS = AdresSplit[1].ToString();
+                string krajE = AdresSplit[2].ToString();
+
+                string KodPocztowyZagraniczny = new String(kod_pocztowyS.Where(Char.IsDigit).ToArray());
+                var MiastoS = new String(kod_pocztowyS.Where(Char.IsLetter).ToArray());
+
                 komunikat = "Aktywne";
+                Regon = companyEuropa.VatNumber;
                 nazwa_firmy = companyEuropa.Name;
-                adres = companyEuropa.Address;
-                miasto = companyEuropa.CountryCode;
-                kod_pocztowy = "";
+                adres = ulicaS;
+                Kraj1 = companyEuropa.CountryCode + " " + krajE;
+                Miasto1 = MiastoS.ToString();
+                KodPocztowy1 = KodPocztowyZagraniczny;
 
 
                 List<string> list1 = new List<string>();
@@ -169,44 +196,56 @@ namespace partner_aluro.Controllers
                 list1.Add(komunikat);
                 list1.Add(nazwa_firmy);
                 list1.Add(adres);
-                list1.Add(miasto);
-                list1.Add(kod_pocztowy);
-
+                list1.Add(Miasto1);
+                list1.Add(KodPocztowy1);
 
                 return list1;
+            }else
+            { 
+                CompanyModel _model = new CompanyModel();
+
+                _model.Vat = Vat;
+                _model = await RegonService.GetCompanyDataByNipAsync(_model.Vat);
+
+                komunikat = "Brak danych";
+                nazwa_firmy = "Nie znaleziono takiej firmy";
+                adres = "";
+                Miasto1 = "";
+                KodPocztowy1 = "";
+
+                if (_model.Errors.Count > 0)
+                {
+                    komunikat = _model.Errors[0].ErrorMessagePl;
+
+                }
+                else
+                {
+                    Regon = _model.Regon;
+                    Wojewodztwo1 = _model.Wojewodztwo;
+                    nazwa_firmy = _model.Name;
+                    adres = _model.Ulica;
+                    Miasto1 = _model.Miejscowosc;
+                    KodPocztowy1 = _model.KodPocztowy;
+                }
             }
-
-            CompanyModel _model = new CompanyModel();
-
-            _model.Vat = Vat;
-            _model = await RegonService.GetCompanyDataByNipAsync(_model.Vat);
-
-            komunikat = "Brak danych";
-            nazwa_firmy = "Nie znaleziono takiej firmy";
-            adres = "";
-            miasto = "";
-            kod_pocztowy = "";
-
-            if (_model.Errors.Count > 0)
-            {
-                komunikat = _model.Errors[0].ErrorMessagePl;
-
-            }
-            else
-            {
-                nazwa_firmy = _model.Name;
-                adres = _model.Address;
-                miasto = _model.Miejscowosc;
-                kod_pocztowy = _model.KodPocztowy;
-            }
-
             List<string> list = new List<string>();
 
             list.Add(komunikat);
             list.Add(nazwa_firmy);
             list.Add(adres);
-            list.Add(miasto);
-            list.Add(kod_pocztowy);
+            list.Add(Miasto1);
+            list.Add(KodPocztowy1);
+            
+            //list.Add(Regon);
+            //list.Add(Wojewodztwo1);
+            //list.Add(Powiat1);
+            //list.Add(Ulica1);
+            //list.Add(komunikat);
+            //list.Add(nazwa_firmy);
+            //list.Add(adres);
+            //list.Add(Kraj1);
+            //list.Add(Miasto1);
+            //list.Add(KodPocztowy1);
 
 
             return list;

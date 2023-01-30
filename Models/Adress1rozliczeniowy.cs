@@ -29,8 +29,8 @@ namespace partner_aluro.Models
         public string? NrLokalu { get; set; }
 
 
-        [Required(ErrorMessage = "Pole kod-pocztowy jest wymagane")]
-        [StringLength(7)]
+        //[Required(ErrorMessage = "Pole kod-pocztowy jest wymagane")]
+        //[StringLength(8,MinimumLength=5)]
         public string? KodPocztowy { get; set; }
 
 
