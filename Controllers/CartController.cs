@@ -54,6 +54,8 @@ namespace partner_aluro.Controllers
                 .Include(u => u.CartItems)
                 .ThenInclude(p => p.Product)
                 .Where(x => x.CartItems.Count >= 1)
+                .Where(u => u.user.UserName != "szuminski.p@gmail.com")
+                .Where(u => u.user.UserName != "piotr@pierrot.pl")
                 .ToListAsync();
 
 

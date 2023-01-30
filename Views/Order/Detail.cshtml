@@ -184,14 +184,18 @@
                                             //decimal cenaJednostkowaIlosc = cenaJednostkowa * @item.Quantity;
                                         }
                                         <td>@item.Product.ProductId</td>
-                                        <td><img class="img-thumbnail" src="~/@item.Product.pathImageUrl250x250" alt="@item.Product.Name" style="width:75px;height:75px;"></td>
+                                        <td><img class="img-thumbnail" src="~/@item.Product.pathImageUrl250x250" alt="@item.Product.Name" style="object-fit: cover;width:75px;height:75px;"></td>
                                         <td>@item.Product.Ilosc.ToString("0.###########################")</td>
                                         <td>@item.Product.Name</td>
                                         <td>@item.Product.Symbol</td>
                                         <td>@CenaJednostkowa_brutto.ToString("C")</td>
 
                                         <td>
-                                            <input onchange="ChangeIlosc(@item.Product.ProductId, @Model.Id)" asp-for="@item.Quantity" id="ilosc_@item.Product.ProductId" aria-required="true" style="max-width: 70px" />
+                                            @{
+                                                int ile = Decimal.ToInt32(item.Quantity);
+                                            }
+
+                                            <input onchange="ChangeIlosc(@item.Product.ProductId, @Model.Id)" asp-for="@ile" id="ilosc_@item.Product.ProductId" aria-required="true" style="max-width: 70px" />
                                             @item.Quantity.ToString("0.###########################")
                                         </td>
 
