@@ -19,10 +19,19 @@ Następnie w zależności czy jest większe lub mniejsze od liczby 8 to wypełni
 albo faktyczny stanem ilość gdy jest mniejszy od 8 albo jeśli ilość jest większa 8 to wpisuje liczbę 8.<br />
 Warunek nie uwzględniał przypadku, gdy ilość produktu równa się dokładnie 8. Wtedy domyślnie brał domyślną ilość czyli 0.<br />
 - Problem zlokalizowany i problem poprawiony. <br />
-- Dlaczego włosy łonowe są kręconę, a nie proste?<br />
 <br />
+if (produkty[i].Ilosc > 8)<br />
+CDatastoc = doc.CreateCDataSection("8");
 <br />
-- żeby nie kuły w oczy.<br />
+else if (produkty[i].Ilosc <= 8)
+<br />
+int ile = Decimal.ToInt32(produkty[i].Ilosc);
+<br />
+CDatastoc = doc.CreateCDataSection(ile.ToString());
+<br />
+else if (produkty[i].Ukryty==true)
+<br />
+CDatastoc = doc.CreateCDataSection("0");
 <br />
 
 <b>30.01.2023</b><br />
