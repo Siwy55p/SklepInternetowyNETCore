@@ -256,8 +256,10 @@ namespace partner_aluro.Controllers
 
             CompanyModel _model = new CompanyModel();
 
+            
             _model.Vat = Vat;
             _model = await RegonService.GetCompanyDataByNipAsync(_model.Vat);
+
 
             var komunikat = "Brak danych";
             var NazwaFirmy = "Nie znaleziono takiej firmy";
@@ -266,7 +268,7 @@ namespace partner_aluro.Controllers
             var Wojewodztwo1 = "";
             var Powiat1 = "";
             var Ulica1 = "";
-            var Kraj1 = "";
+            var Kraj1 = "Polska";
             var Miasto1 = "";
             var KodPocztowy1 = "";
 
@@ -278,9 +280,9 @@ namespace partner_aluro.Controllers
             if (_model.Errors.Count > 0)
             {
                 komunikat = _model.Errors[0].ErrorMessagePl;
-
             }
-            else
+
+            if (_model != null && _model.Errors.Count < 0)
             {
                 Regon = _model.Regon;
                 Wojewodztwo1 = _model.Wojewodztwo;
@@ -295,6 +297,33 @@ namespace partner_aluro.Controllers
                 KodPocztowy1 = _model.KodPocztowy;
             }
 
+            EuropeanVatInformation companyEuropa = EuropeanVatInformation.Get(Vat);
+
+            if (companyEuropa != null)
+            {
+                string SplitAdres = companyEuropa.Address;
+
+                string[] AdresSplit = SplitAdres.Split("\n");
+                string ulicaS = AdresSplit[0].ToString();
+                string kod_pocztowyS = AdresSplit[1].ToString();
+                string krajE = AdresSplit[2].ToString();
+
+                string KodPocztowyZagraniczny = new String(kod_pocztowyS.Where(Char.IsDigit).ToArray());
+                var MiastoS = new String(kod_pocztowyS.Where(Char.IsLetter).ToArray());
+
+                Regon = companyEuropa.VatNumber;
+                Wojewodztwo1 = companyEuropa.CountryCode;
+
+                NazwaFirmy = companyEuropa.Name;
+                Regon = companyEuropa.VatNumber;
+                Wojewodztwo1 = companyEuropa.CountryCode;
+                Powiat1 = companyEuropa.CountryCode;
+                Ulica1 = ulicaS;
+                Kraj1 = krajE;
+                Miasto1 = MiastoS;
+                KodPocztowy1 = KodPocztowyZagraniczny;
+            }
+                
             List<string> list = new List<string>();
 
             list.Add(komunikat);

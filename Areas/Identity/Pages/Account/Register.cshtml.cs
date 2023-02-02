@@ -24,6 +24,7 @@ using partner_aluro.Models;
 using partner_aluro.Services;
 using partner_aluro.Services.Interfaces;
 using System.Text.RegularExpressions;
+using System.Drawing;
 
 
 namespace partner_aluro.Areas.Identity.Pages.Account
@@ -244,41 +245,106 @@ namespace partner_aluro.Areas.Identity.Pages.Account
                 user.Nazwisko = Input.Nazwisko;
 
                 Adress1rozliczeniowy adres1 = new Adress1rozliczeniowy();
-                adres1.NrNieruchomosci = _model.NrNieruchomosci;
-                adres1.NrLokalu = _model.NrLokalu;
-                adres1.Vat = _model.Vat;
-                adres1.Miasto = _model.Miejscowosc;
-                adres1.Ulica = _model.Ulica;
-                adres1.KodPocztowy = _model.KodPocztowy;
-                adres1.Wojewodztwo = _model.Wojewodztwo;
-                adres1.Kraj = "Polska";
-                adres1.Powiat = _model.Powiat;
-                adres1.Gmina = _model.Gmina;
-                adres1.StatusNip = _model.StatusNip;
-                adres1.Regon = _model.Regon;
-                adres1.Telefon = Input.Telefon1;
-                adres1.Adres1UserID = user.Id;
+                if (_model != null && _model.Errors.Count() < 1)
+                {
+                    adres1.NrNieruchomosci = _model.NrNieruchomosci;
+                    adres1.NrLokalu = _model.NrLokalu;
+                    adres1.Vat = _model.Vat;
+                    adres1.Miasto = _model.Miejscowosc;
+                    adres1.Ulica = _model.Ulica;
+                    adres1.KodPocztowy = _model.KodPocztowy;
+                    adres1.Wojewodztwo = _model.Wojewodztwo;
+                    adres1.Kraj = "Polska";
+                    adres1.Powiat = _model.Powiat;
+                    adres1.Gmina = _model.Gmina;
+                    adres1.StatusNip = _model.StatusNip;
+                    adres1.Regon = _model.Regon;
+                    adres1.Telefon = Input.Telefon1;
+                    adres1.Adres1UserID = user.Id;
+                }
+
 
                 Adress2dostawy adres2 = new Adress2dostawy();
-                adres2.Imie = Input.Imie;
-                adres2.Nazwisko = Input.Nazwisko;
-                adres2.Email = Input.Email;
-                adres2.Miasto = _model.Miejscowosc;
-                adres2.Ulica = _model.Ulica;
-                adres2.KodPocztowy = _model.KodPocztowy;
-                adres2.Telefon = Input.Telefon1;
-                adres2.Kraj = "Polska";
-                adres2.Adres2UserID = user.Id;
+                if (_model != null && _model.Errors.Count() < 1)
+                {
+                    adres2.Imie = Input.Imie;
+                    adres2.Nazwisko = Input.Nazwisko;
+                    adres2.Email = Input.Email;
+                    adres2.Miasto = _model.Miejscowosc;
+                    adres2.Ulica = _model.Ulica;
+                    adres2.KodPocztowy = _model.KodPocztowy;
+                    adres2.Telefon = Input.Telefon1;
+                    adres2.Kraj = "Polska";
+                    adres2.Adres2UserID = user.Id;
+                }
+
+
+                EuropeanVatInformation companyEuropa = EuropeanVatInformation.Get(Input.NIP);
+
+                if (companyEuropa != null)
+                {
+                    string SplitAdres = companyEuropa.Address;
+
+                    string[] AdresSplit = SplitAdres.Split("\n");
+                    string ulicaS = AdresSplit[0].ToString();
+                    string kod_pocztowyS = AdresSplit[1].ToString();
+                    string krajE = AdresSplit[2].ToString();
+
+                    string KodPocztowyZagraniczny = new String(kod_pocztowyS.Where(Char.IsDigit).ToArray());
+                    var MiastoS = new String(kod_pocztowyS.Where(Char.IsLetter).ToArray());
+
+                    adres1.NrNieruchomosci = "";
+                    adres1.NrLokalu = "";
+                    adres1.Vat = Input.NIP;
+                    adres1.Miasto = MiastoS;
+                    adres1.Ulica = ulicaS;
+                    adres1.KodPocztowy = KodPocztowyZagraniczny;
+                    adres1.Wojewodztwo = companyEuropa.CountryCode;
+                    adres1.Kraj = krajE;
+                    adres1.Powiat = companyEuropa.CountryCode;
+                    adres1.Gmina = companyEuropa.CountryCode;
+                    adres1.StatusNip = Input.NIP;
+                    adres1.Regon = Input.NIP;
+                    adres1.Telefon = Input.Telefon1;
+                    adres1.Adres1UserID = user.Id;
+
+                    //Regon = companyEuropa.VatNumber;
+                    //nazwa_firmy = companyEuropa.Name;
+                    //adres = ulicaS;
+                    //Kraj1 = companyEuropa.CountryCode + " " + krajE;
+                    //Miasto1 = MiastoS.ToString();
+                    //KodPocztowy1 = KodPocztowyZagraniczny;
+
+                    adres2.Imie = Input.Imie;
+                    adres2.Nazwisko = Input.Nazwisko;
+                    adres2.Email = Input.Email;
+                    adres2.Miasto = MiastoS;
+                    adres2.Ulica = ulicaS;
+                    adres2.KodPocztowy = KodPocztowyZagraniczny;
+                    adres2.Telefon = Input.Telefon1;
+                    adres2.Kraj = krajE;
+                    adres2.Adres2UserID = user.Id;
+                }
+
 
                 user.Adress1rozliczeniowy = adres1;
                 user.Adress2dostawy = adres2;
 
                 Input.NazwaFirmy = _model.Name;
-                user.NazwaFirmy = _model.Name;
-                Input.Kraj = "Polska";
-                Input.Miasto = _model.Miejscowosc;
-                Input.Ulica = _model.Ulica;
-                Input.KodPocztowy1 = _model.KodPocztowy;
+                if (_model != null && _model.Errors.Count() < 1)
+                {
+                    user.NazwaFirmy = _model.Name;
+                    Input.Kraj = "Polska";
+                }
+                if (companyEuropa != null)
+                {
+                    user.NazwaFirmy = companyEuropa.Name;
+                    Input.Kraj = companyEuropa.CountryCode;
+                }
+
+                //Input.Miasto = _model.Miejscowosc;
+                //Input.Ulica = _model.Ulica;
+                //Input.KodPocztowy1 = _model.KodPocztowy;
 
 
                 user.DataZałożenia = DateTime.Now;
@@ -289,9 +355,6 @@ namespace partner_aluro.Areas.Identity.Pages.Account
 
 
                 user.PolitykaPrywatnosci = Input.PolitykaPrywatnosci;
-
-
-
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);

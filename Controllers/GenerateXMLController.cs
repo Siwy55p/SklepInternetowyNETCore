@@ -451,7 +451,7 @@ namespace partner_aluro.Controllers
                 if (produkty[i].Ilosc > 8)
                 {
                     CDatastoc = doc.CreateCDataSection("8");
-                } else if (produkty[i].Ilosc < 8)
+                } else if (produkty[i].Ilosc <= 8)
                 {
                     int ile = Decimal.ToInt32(produkty[i].Ilosc);
 
