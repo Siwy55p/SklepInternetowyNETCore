@@ -4,7 +4,27 @@
     Layout = "~/Views/Shared/_Dashboard.cshtml";
 }
 
+
+
+
 <h1>Intranet - twoje zaplecze</h1>
+<b>02.02.2023</b>
+<br />
+- Analiza błedu ilościowy generowany w XML<br />
+- Po analizie kodu wynikło że: dla produktu poniżej ilość 8 generuje się ilość taka jaka ona faktycznie jest wpisana w bazie danych, <br />
+a powyżej 8, xml generuje wpisując dla danego produktu iloś 8 (dla pojedynczego przykładu czyt. produktu). <br />
+Domyślnie dla pojedynczego produktu domyśłnie w pliku xml nadawana jest wartość 0.<br />
+Następuje sprawdzana jest ilość produktu jaka jest wpisana w bazie danych.<br>
+Następnie w zależności czy jest większe lub mniejsze od liczby 8 to wypełnia się<br />
+albo faktyczny stanem ilość gdy jest mniejszy od 8 albo jeśli ilość jest większa 8 to wpisuje liczbę 8.<br />
+Warunek nie uwzględniał przypadku, gdy ilość produktu równa się dokładnie 8. Wtedy domyślnie brał domyślną ilość czyli 0.<br />
+- Problem zlokalizowany i problem poprawiony. <br />
+- Dlaczego włosy łonowe są kręconę, a nie proste?<br />
+<br />
+<br />
+- żeby nie kuły w oczy.<br />
+<br />
+
 <b>30.01.2023</b><br />
 - Wyszukiwanie po zagranicznym Nr firmy w Systemie <br />
 -Klient zagraniczny może się zarejestrować <br />
