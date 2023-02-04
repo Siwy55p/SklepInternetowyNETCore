@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.Serialization;
 
 namespace partner_aluro.Models
 {
@@ -47,6 +48,7 @@ namespace partner_aluro.Models
 
 
     }
+
     //public enum MetodaPlatnosci
     //{
     //    Przelew,
@@ -56,11 +58,20 @@ namespace partner_aluro.Models
 
     public enum StanZamowienia
     {
+        [Display(Name = "Anulowane")]
+        [EnumMember(Value = "Anulowane")]
         Anulowane,
+        [Display(Name = "Nowe")]
+        [EnumMember(Value = "Nowe")]
         Nowe,
         [Display(Name = "W realizacji")]
+        [EnumMember(Value = "W realizacji")]
         Wrealizacji,
+        [Display(Name = "Zrealizowane")]
+        [EnumMember(Value = "Zrealizowane")]
         Zrealizowane,
+        [Display(Name = "Wysłane")]
+        [EnumMember(Value = "Wysłane")]
         Wysłane
     }
 }

@@ -15,7 +15,7 @@
 *@
 
 <div>
-    <h1 class="display-4">Produkty</h1>
+    <h3>Produkty</h3>
     
     <a asp-controller="Product" asp-action="Add" class="btn btn-success" px-3">
         Dodaj nowy produkt
@@ -70,9 +70,13 @@
                                                 @productFormModel.CategoryNavigation.Name
                                             </td>*@
                                             <td>
-                                                <select onchange="ChangeCategory(@productFormModel.ProductId, @productFormModel.CategoryId)" id="select_@productFormModel.ProductId" style="width:180px;" asp-for="@productFormModel.CategoryId" asp-items="(IEnumerable<SelectListItem>)@ViewData["Category"]">
-                                                </select>
+                                                @productFormModel.CategoryNavigation.Name
+                                                
+                        <select onchange="ChangeCategory(@productFormModel.ProductId, @productFormModel.CategoryId)" id="select_@productFormModel.ProductId" style="width:180px;" asp-for="@productFormModel.CategoryId" asp-items="(IEnumerable<SelectListItem>)@ViewData["Category"]">
+                        </select>
+                    
                                             </td>
+                    
                                             <th>
                                                 @{
                                                     int ile = Decimal.ToInt32(productFormModel.Ilosc);
@@ -105,7 +109,7 @@
                                         <th>Nazwa produktu</th>
                                         <td>Cena produktu (brutto)</td>
                                         <td>Cena detaliczna</td>
-                                        <td>Kategoria</td>
+                                        <th>Kategoria</th>
                                         <td>Ilość</td>
                                         <td>Ukryte</td>
                                         <td>Akcje</td>
@@ -125,7 +129,7 @@
         $(document).ready(function () {
             $('#ProductTableList tfoot th').each(function () {
                 var title = $(this).text();
-                $(this).html('<input type="text" class="'+title+'" placeholder="Szukaj po' + title + '" />');
+                $(this).html('<input type="text" class="'+title+'" placeholder="Szukaj po ' + title + '" />');
             });
 
             var table = $('#ProductTableList').DataTable({

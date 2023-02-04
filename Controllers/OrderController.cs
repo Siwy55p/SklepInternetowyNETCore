@@ -13,7 +13,7 @@ using partner_aluro.Data;
 using partner_aluro.Models;
 using partner_aluro.Services.Interfaces;
 using partner_aluro.ViewModels;
-
+using System.ComponentModel.DataAnnotations;
 
 namespace partner_aluro.Controllers
 {
@@ -292,7 +292,7 @@ namespace partner_aluro.Controllers
                 string startEmail = $"Nowe zamówienie na platformie Aluro Nr: #" + order.NrZamowienia + "<br>"+
                     "Zamówienie Nr: <b>" + order.NrZamowienia + "</b>, Metoda płatności: <b>" +order.MetodaPlatnosci+"</b> , Metoda dostawy: <b>" + order.MetodaDostawy+ "</b><br>"+
                     "Data złożenia zamówienia: <b>" + order.OrderPlaced + "</b><br>" +
-                    "Nazwa firmy: <b>" + user.NazwaFirmy + "<b/><br>" +
+                    "Nazwa firmy: <b>" + user.NazwaFirmy + "</b><br>" +
                     "Imie Nazwisko: <b>" + user.Imie + " " + user.Nazwisko + "</b><br>" +
                     "Adres rozliczeniowy: <br>" +
                     "" + OrderAdres1.KodPocztowy + " " + OrderAdres1.Miasto + " <br>" +
@@ -307,7 +307,7 @@ namespace partner_aluro.Controllers
                     "Zamówienie ID:#" + order.NrZamowienia + "<br>"+
                     "<table style=\"border:1px solid black\"><thead><tr><th>Nazwa produktu</th>" +
                     "<th>Symbol</th>" +
-                    "<th>Cena jednostkowa produktu</th>" +
+                    "<th>Cena jed. pro.</th>" +
                     "<th>Ilość</th>" +
                     "<th>Razem</th>"+
                     "</tr>"+
@@ -322,9 +322,9 @@ namespace partner_aluro.Controllers
 
                         "<td>"+@item.Product.Name+"</td>" +
                         "<td>"+@item.Product.Symbol+"</td>" +
-                        "<td>"+ @item.Cena + "</td>" +
-                        "<td>"+@item.Quantity+"</td>" +
-                        "<td>"+ (@item.Cena*@item.Quantity).ToString() + "</td>"+
+                        "<td>"+ @item.Cena.ToString("0.00") + "</td>" +
+                        "<td>"+@item.Quantity.ToString("#") + "</td>" +
+                        "<td>"+ (@item.Cena*@item.Quantity).ToString("0.00") + "</td>"+
                         "</tr>";
 
                 }
@@ -1072,12 +1072,24 @@ namespace partner_aluro.Controllers
 
             foreach (StanZamowienia suit in (StanZamowienia[])Enum.GetValues(typeof(StanZamowienia)))
             {
-                var dmyItemA = new SelectListItem()
+                if (suit == StanZamowienia.Wrealizacji)
                 {
-                    Value = suit.ToString(),
-                    Text = suit.ToString()
-                };
-                lstStanZamowien.Insert(0, dmyItemA);
+                    var dmyItemA = new SelectListItem()
+                    {
+                        Value = suit.ToString(),
+                        Text = "W realizacji"
+                    };
+                    lstStanZamowien.Insert(0, dmyItemA);
+                }
+                else
+                {
+                    var dmyItemA = new SelectListItem()
+                    {
+                        Value = suit.ToString(),
+                        Text = suit.ToString()
+                    };
+                    lstStanZamowien.Insert(0, dmyItemA);
+                }
             }
 
             return lstStanZamowien;
