@@ -887,6 +887,8 @@ namespace partner_aluro.Controllers
         {
             order.OrderPlaced = DateTime.Now;
 
+            order.ByloAnulowane = false;
+
             var cartItems = _cart.CartItems;
 
 
@@ -927,6 +929,7 @@ namespace partner_aluro.Controllers
             order.RabatZamowienia = Core.Constants.Rabat;
             order.StanZamowienia = StanZamowienia.Nowe;
 
+            order.ByloAnulowane = false;
             _orderService.Add(order);
         }
 
@@ -951,14 +954,82 @@ namespace partner_aluro.Controllers
         [HttpPost]
         public async Task<IActionResult> ZmienStatusAsync(Order order)
         {
+
             //Wyslij e mail do klienta
             int id = order.Id;
 
             Order orders = await _unitOfWorkOrder.OrderService.GetOrder(id);
             orders.StanZamowienia = order.StanZamowienia;
+
+            if (orders.StanZamowienia == StanZamowienia.Anulowane && orders.ByloAnulowane == false)
+            {
+                AnulowanieZamowieniaZmienStanyProduktow(orders.Id);
+                orders.ByloAnulowane = true;
+            }
+            else if(orders.StanZamowienia != StanZamowienia.Anulowane && orders.ByloAnulowane == true)
+            {
+                PrzywrocenieZamowieniaZmienStanyProduktow(orders.Id);
+                orders.ByloAnulowane = false;
+            }
+
             _unitOfWorkOrder.OrderService.Update(orders);
 
             return RedirectToAction("Detail", new { id = id });
+        }
+
+        //Dodanie ilosc do stanu z anulowanego zamowienia
+        public void AnulowanieZamowieniaZmienStanyProduktow(int OrderId)
+        {
+            Order orders = _context.Orders.Where(x=>x.Id == OrderId).Include(i=>i.OrderItems).FirstOrDefault();
+            for(int i = 0; i < orders.OrderItems.Count(); i++) 
+            { 
+                Product product = _context.Products.Where(x=>x.ProductId == orders.OrderItems[i].ProductId).FirstOrDefault();
+                product.Ilosc += orders.OrderItems[i].Quantity;
+                _context.Products.Update(product);
+                _context.SaveChanges();
+            }
+        }
+
+        //Dodanie ilosc do stanu z anulowanego zamowienia
+        public void PrzywrocenieZamowieniaZmienStanyProduktow(int OrderId)
+        {
+            Order orders = _context.Orders.Where(x => x.Id == OrderId).Include(i => i.OrderItems).FirstOrDefault();
+            for (int i = 0; i < orders.OrderItems.Count(); i++)
+            {
+                Product product = _context.Products.Where(x => x.ProductId == orders.OrderItems[i].ProductId).FirstOrDefault();
+                product.Ilosc -= orders.OrderItems[i].Quantity;
+                _context.Products.Update(product);
+                _context.SaveChanges();
+            }
+        }
+
+        [HttpPost]
+        public void ChangeStanZamowienia(int Id, string stanZamowienia)
+        {
+            Order orders = _context.Orders.Where(x=>x.Id == Id).FirstOrDefault();
+            //orders.StanZamowienia = order.StanZamowienia;
+
+            foreach (StanZamowienia suit in (StanZamowienia[])Enum.GetValues(typeof(StanZamowienia)))
+            {
+                if (suit.ToString() == stanZamowienia)
+                {
+                    orders.StanZamowienia = suit;
+                }
+            }
+
+            if (orders.StanZamowienia == StanZamowienia.Anulowane && orders.ByloAnulowane == false)
+            {
+                AnulowanieZamowieniaZmienStanyProduktow(orders.Id);
+                orders.ByloAnulowane = true;
+            }
+            else if (orders.StanZamowienia != StanZamowienia.Anulowane && orders.ByloAnulowane == true)
+            {
+                PrzywrocenieZamowieniaZmienStanyProduktow(orders.Id);
+                orders.ByloAnulowane = false;
+            }
+
+            _context.Orders.Update(orders);
+            _context.SaveChanges();
         }
 
         [HttpGet]
@@ -974,11 +1045,6 @@ namespace partner_aluro.Controllers
             order.OrderItems = orderItems;
 
             ViewData["StanyZamowienia"] = GetStanyZamowienia();
-
-            //var adres1 = _orderService.GetUserAdress1(order.UserID);
-            //var adres2 = _orderService.GetUserAdress2(order.UserID);
-            //order.User.Adress1rozliczeniowy = adres1;
-            //order.User.Adress2dostawy = adres2;
 
             return View(order);
         }
@@ -1034,53 +1100,7 @@ namespace partner_aluro.Controllers
             _context.Orders.Update(order);
             _context.SaveChanges();
 
-            //return OrderID;
-            //Product product = _context.Products.Where(x => x.ProductId == ProduktId).FirstOrDefault();
-
-            //product.Ilosc = Ilosc;
-            //_context.Products.Update(product); 1 804,50
-            //_context.SaveChanges();
         }
-
-        [HttpPost]
-        public void ChangeStanZamowienia(int Id, string stanZamowienia)
-        {
-            //Wyslij e mail do klienta
-
-            Order orders = _context.Orders.Find(Id);
-            //orders.StanZamowienia = order.StanZamowienia;
-
-                foreach (StanZamowienia suit in (StanZamowienia[])Enum.GetValues(typeof(StanZamowienia)))
-                {
-                if (suit.ToString() == stanZamowienia)
-                {
-                    orders.StanZamowienia = suit;
-                    break;
-                }
-
-
-                }
-
-            _context.Orders.Update(orders);
-            _context.SaveChanges();
-            int i = 0;
-            i++;
-
-        }
-
-        //private List<SelectListItem> GetStanyZamowienia()
-        //{
-        //    var StanyZamowienia = new List<SelectListItem>();
-
-        //    StanyZamowienia = Enum.GetValues(typeof(StanZamowienia)).Cast<StanZamowienia>().Select(v => new SelectListItem
-        //    {
-        //        Value = ((int)v).ToString(),
-        //        Text = v.ToString()
-        //    }).ToList();
-
-
-        //    return StanyZamowienia;
-        //}
 
     }
 

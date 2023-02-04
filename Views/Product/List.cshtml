@@ -24,8 +24,10 @@
     <a asp-controller="Excel" asp-action="GenerateExcel" class="btn btn-success" px-3">
         Stwórz ofertę
     </a>
-    @if (@Model != null && @Model.Any())
-    {
+
+</div>
+@*    @if (@Model != null && @Model.Any())
+    {*@
         @*<div class="row">
             <div class="col-md-12 mb-3">
                 <div class="card">
@@ -33,7 +35,7 @@
 
                         <div class="table-responsive">
 
-                            <table id="ProductTableList" class="display" style="width:100%">
+                            <table id="ProductTableList" class="display" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
                                         <th>Id</th>
@@ -68,14 +70,14 @@
                                                 @productFormModel.CategoryNavigation.Name
                                             </td>*@
                                             <td>
-                                                <select onchange="ChangeCategory(@productFormModel.ProductId, @productFormModel.CategoryId)" id="select_@productFormModel.ProductId" asp-for="@productFormModel.CategoryId" asp-items="(IEnumerable<SelectListItem>)@ViewData["Category"]">
+                                                <select onchange="ChangeCategory(@productFormModel.ProductId, @productFormModel.CategoryId)" id="select_@productFormModel.ProductId" style="width:180px;" asp-for="@productFormModel.CategoryId" asp-items="(IEnumerable<SelectListItem>)@ViewData["Category"]">
                                                 </select>
                                             </td>
                                             <th>
                                                 @{
                                                     int ile = Decimal.ToInt32(productFormModel.Ilosc);
                                                 }
-                                                <input onchange="ChangeIlosc(@productFormModel.ProductId)" asp-for="@ile" id="ilosc_@productFormModel.ProductId" aria-required="true" style="max-width: 70px" />
+                                                <input onchange="ChangeIlosc(@productFormModel.ProductId)" asp-for="@ile" id="ilosc_@productFormModel.ProductId" aria-required="true" style="max-width: 50px" />
                                             </th>
                                             <th>
                                                 @if (productFormModel.Ukryty == true)
@@ -115,10 +117,8 @@
                 </div>
             </div>
         </div>*@
-
-    }
-
-</div>
+@*
+    }*@
 
 @section Scripts{
     <script>
@@ -143,6 +143,10 @@
                             });
                         });
                 },
+                scrollY: "490px",
+                scrollX: true,
+                scrollCollapse: true,
+                paging: false,
                 fixedHeader: {
                     headerOffset: 56,
                     header: true,
@@ -188,23 +192,29 @@
                         }
                     }
                 ],
-                "language": {
-                    "lengthMenu": "Wyświetl _MENU_ produktów na strone.",
-                    "zeroRecords": "Nic nie znaleziono-sory Gregory",
-                    "info": "Wyświetl stronę nr _PAGE_ / _PAGES_",
-                    "infoEmpty": "Brak wyników",
-                    "infoFiltered": "(filtered from _MAX_ total records)"
-                },
+                //"language": {
+                //    "lengthMenu": "Wyświetl _MENU_ produktów na strone.",
+                //    "zeroRecords": "Nic nie znaleziono-sory Gregory",
+                //    "info": "Wyświetl stronę nr _PAGE_ / _PAGES_",
+                //    "infoEmpty": "Brak wyników",
+                //    "infoFiltered": "(filtered from _MAX_ total records)"
+                //},
                 lengthMenu: [
                     [10, 25, 50, -1],
                     [10, 25, 50, 'All'],
                 ],
-                "columnDefs": [
-                    { "width": "7px", "targets": 0 },
-                    { "width": "7px", "targets": 1 },
-                    { "width": "20px", "targets": 2 },
-                    { "width": "20px", "targets": 3 }
-                ],
+                //"columnDefs": [
+                //    { "width": "2px", "targets": 0 },
+                //    { "width": "2px", "targets": 1 },
+                //    { "width": "18px", "targets": 2 },
+                //    { "width": "18px", "targets": 3 },
+                //    { "width": "18px", "targets": 4 },
+                //    { "width": "18px", "targets": 5 },
+                //    { "width": "18px", "targets": 6 },
+                //    { "width": "5px", "targets": 7 },
+                //    { "width": "10px", "targets": 8 }
+                //],
+                fixedColumns: true,
                 pageLength: 50,
                 "order": [[0, 'desc'], [3, 'desc']]
             });

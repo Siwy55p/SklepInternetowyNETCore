@@ -35,6 +35,7 @@ namespace partner_aluro.Services
             string test = GenerateXMLController.GenerateProductXML(dbContext, _webHostEnvironment);
             string www = _webHostEnvironment.WebRootPath;
             string NameProdukt = dbContext.Products.Where(x => x.ProductId == 123).Select(x => x.Name).ToString();
+            NameProdukt += dbContext.Products.Where(x => x.ProductId == 123).FirstOrDefault().Name;
             Common.Logs($"JobReminders at "+ test + " www: "+www +" Produkt: " + NameProdukt+ " Data: "  + DateTime.Now.ToString("dd-mm-yyyy hh:mm:ss"), " JobReminders " + DateTime.Now.ToString("hhmmss"));
             return Task.CompletedTask;
         }

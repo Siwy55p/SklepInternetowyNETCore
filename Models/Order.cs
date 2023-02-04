@@ -16,6 +16,8 @@ namespace partner_aluro.Models
         public decimal OrderTotal { get; set; }
         public DateTime OrderPlaced { get; set; }
 
+        public bool? ByloAnulowane { get; set; }
+
         public string? MessageToOrder { get; set; }
 
         [Column(TypeName = "decimal(18,2)")]
