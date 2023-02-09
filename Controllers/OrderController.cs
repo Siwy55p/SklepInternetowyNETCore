@@ -283,7 +283,7 @@ namespace partner_aluro.Controllers
                 {
                     To = user.Email,
                     Subject = "Dziękujemy za złożenie zamówienia. Nr: #" + order.NrZamowienia + "",
-                    Body = $"<h1> Dziękujemy za założenie zamówienia.</h1>Potwierdzenie zamówienia <br/>Twoje zamówienie zostało przyjęte.<br/>Po skompletowaniu Twojego zamówienia otrzymasz email z kosztem dostawy i łączną sumą do zapłaty.<br/>W razie pytań lub wątpliwości, prosimy o kontakt z naszą obsługą klienta.<br/>" +
+                    Body = $"<h1> Dziękujemy za złożenie zamówienia.</h1>Potwierdzenie zamówienia <br/>Twoje zamówienie zostało przyjęte.<br/>Po skompletowaniu Twojego zamówienia otrzymasz email z kosztem dostawy i łączną sumą do zapłaty.<br/>W razie pytań lub wątpliwości, prosimy o kontakt z naszą obsługą klienta.<br/>" +
                     "Sposób dostawy: <b>" + order.MetodaDostawy + "</b>, metoda płatności: <b>" + order.MetodaPlatnosci + "</b>"
                 };
                 _emailService.SendEmailAsync(email);
@@ -848,16 +848,12 @@ namespace partner_aluro.Controllers
                     }
                     document.Add(table3);
 
-
-
                     PdfPTable table4 = new(1);
 
                     table4.SpacingBefore = 30;
 
                     table4.TotalWidth = 500f;
                     table4.LockedWidth = true;
-
-
 
                     PdfPCell cell1_tab4 = new(new Phrase("Wiadomość: " + order.Komentarz, bold));
                     cell1_tab4.Border = Rectangle.BOTTOM_BORDER | Rectangle.TOP_BORDER;
@@ -870,7 +866,6 @@ namespace partner_aluro.Controllers
 
                     document.Add(table4);
 
-
                     document.Close();
                     write.Close();
                     var constant = ms.ToArray();
@@ -882,7 +877,6 @@ namespace partner_aluro.Controllers
             
         }
 
-
         public void CreateOrder(Order order)
         {
             order.OrderPlaced = DateTime.Now;
@@ -891,13 +885,11 @@ namespace partner_aluro.Controllers
 
             var cartItems = _cart.CartItems;
 
-
             foreach (var item in cartItems)
             {
                 _productService.ZmiejszIloscProductIdAsync(item.Product.ProductId, item.Quantity);
 
                 item.Product.CenaProduktuDlaUzytkownika = item.Product.CenaProduktuBrutto * (1 - (Core.Constants.Rabat / 100));
-
 
                 var Cena_brutto = (decimal)item.Product.CenaProduktuBrutto;
                 if (item.Product.Promocja == true && item.Product.CenaPromocyja != 0)
@@ -908,8 +900,6 @@ namespace partner_aluro.Controllers
                 var CenaJednostkowa = Cena_brutto * (1 - (partner_aluro.Core.Constants.Rabat / 100));
 
                 var ProductTotal = CenaJednostkowa * item.Quantity;
-
-
 
                 var orderItem = new OrderItem()
                 {

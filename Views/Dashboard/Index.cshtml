@@ -4,13 +4,39 @@
     Layout = "~/Views/Shared/_Dashboard.cshtml";
 }
 
-<b>04.02.2023</b>
-- Jesli anulujemy zamowienie stan produktow wroci do ilosci takiej jakiej byly<br />
-- Chyba udalo sie w Liscie Produktow uporac problem ze scrolowanem daje wam do testowania. <br />
-- Platforma sie rozwija. Nadaje jej wersje 1.0.0 <br />
-
-
 <h1>Intranet - twoje zaplecze</h1>
+
+
+<b>04.02.2023</b>
+-Poprawiana literowka w email </br>
+ foreach (PInfo NazwaProduktu in WyszukaneNazwyProdukow) </br>
+                { </br>
+                    if (NazwaProduktu.Name.Contains(szukanaNazwa) || NazwaProduktu.Symbol.Contains(szukanaNazwa)) // jesli jakas nazwa jest w liscie  </br>
+                    { </br>
+                        WyszukaneProduktyLowerName.Add(WszystkieProdukty.Find(x => x.Name.ToLower() == NazwaProduktu.Name)); </br>
+                    }</br>
+                }</br>
+                </br>
+                -Czyli z uwagi na fakt ze nie zablokowałem możliwosci powtarzajacych sie nazw produktów, a napisałem że jak nazwa produktu równa się nazwa produktu to dodaj produkt do <br />
+                wyniku wyszukiwania<br /> 
+                ale równiez jest jak widać .Find czyli ten który znajduje sie jako pierwszy.<br />
+                długo tłumaczyć. <br />
+                w każdym razie tu jest rozwiazanie <br>
+                WyszukaneProduktyLowerName.Add(WszystkieProdukty.Find(x => x.Symbol.ToLower() == NazwaProduktu.Symbol));<br /> 
+                Zmieniłem po sylbolu<br />
+                z uwagi ze symbole nie moga się powtarzać wtedy wynik wyszukiwania bedzie prawidłowy pomimo powtarzającej się nazwy produktu w asortymencie<br />
+                <br /> 
+                -blokada dodawania sztucznej ilosci w bocznym panelu zamówienia <br />
+
+
+
+<b>04.02.2023</b>
+- Jesli anulujemy zamowienie stan produktow wroci do ilosci takiej jakiej byly
+<br />
+- Chyba udalo sie w Liscie Produktow uporac problem ze scrolowanem daje wam do testowania.
+<br />
+- Platforma sie rozwija. Nadaje jej wersje 1.0.0
+<br />
 <b>02.02.2023</b>
 <br />
 - Analiza błedu ilościowy generowany w XML<br />

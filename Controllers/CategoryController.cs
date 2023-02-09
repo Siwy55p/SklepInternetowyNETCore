@@ -289,12 +289,12 @@ namespace partner_aluro.Controllers
             else
             {
                 List<Product> produkty2 = new List<Product>();
-                Category a = _context.Category.AsNoTracking().Where(x => x.Name == szukanaNazwa).FirstOrDefault();
+                Category a = _context.Category.AsNoTracking().Where(x => x.Name == szukanaNazwa ).FirstOrDefault();
                 if (a == null)
                 {
-                    produkty2 = await _context.Products.Where(x => x.Ukryty == false).Where(x => x.CategoryNavigation.Name == szukanaNazwa).ToListAsync();
+                    produkty2 = await _context.Products.Where( x => x.Ukryty == false ).Where(x => x.CategoryNavigation.Name == szukanaNazwa || x.SzukanaNazwa == szukanaNazwa).ToListAsync();
 
-                    if (szukanaNazwa != null && szukanaNazwa.Length >= 1)
+                    if (szukanaNazwa != null && szukanaNazwa.Length >= 1 && produkty2.Count == 0 || produkty2 == null)
                     {
                         List<Product> produkty = (List<Product>)await Szukanie(szukanaNazwa);
 
@@ -336,6 +336,34 @@ namespace partner_aluro.Controllers
                     }
                     else
                     {
+
+                        var pageNumber = page ?? 1; // if no page was specified in the querystring, default to the first page (1)
+
+                        var onePageOfProducts = produkty2.ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
+                        
+                        switch (Sort)
+                        {
+                            case 1:
+                                onePageOfProducts = produkty2.OrderByDescending(p => p.DataDodania).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
+                                break;
+                            case 2:
+                                onePageOfProducts = produkty2.OrderBy(p => p.Name).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
+                                break;
+                            case 3:
+                                onePageOfProducts = produkty2.OrderByDescending(p => p.Name).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
+                                break;
+                            case 4:
+                                onePageOfProducts = produkty2.OrderBy(p => p.Symbol).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
+                                break;
+                            case 5:
+                                onePageOfProducts = produkty2.OrderByDescending(p => p.Symbol).ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
+                                break;
+                            default:
+                                onePageOfProducts = produkty2.OrderByDescending(p => p.DataDodania).ToPagedList(pageNumber, Pages);
+                                break;
+                        }
+
+                        ViewData["OnePageOfProducts"] = onePageOfProducts;
                         return View(produkty2);
                     }
                 }
@@ -430,13 +458,10 @@ namespace partner_aluro.Controllers
         {
             List<Product> WszystkieProdukty = await _context.Products.Where(x => x.Ukryty == false).ToListAsync();
 
-
-
-            List<PInfo> WyszukaneNazwyProdukow = await _context.Products.AsNoTracking().Where(x => x.Ukryty== false).Select(p => new PInfo{ Name = p.Name.ToLower(), Symbol = p.Symbol.ToString().ToLower() }).ToListAsync(); // tworze liste nazw (puste)
+            List<PInfo> WyszukaneNazwyProdukow = await _context.Products.AsNoTracking().Where(x => x.Ukryty== false).Select(p => new PInfo{ Name = p.Name.ToLower(), Symbol = p.Symbol.ToString().ToLower(), NazwaWyszukiwana = p.Name.ToLower() + " - [" +p.Symbol+"]" }).ToListAsync(); // tworze liste nazw (puste)
 
             //List<string> WyszukaneSymbolowProdukow = await _context.Products.Where(x => x.Ukryty == false).Select(p => p.Symbol.ToLower()).ToListAsync(); // tworze liste nazw Symbolów wszystkie tylko symbole
 
-            
             //WyszukaneNazwyProdukow.AddRange(WyszukaneSymbolowProdukow);
 
             if (szukanaNazwa != null && szukanaNazwa.Length >= 1)
@@ -446,18 +471,14 @@ namespace partner_aluro.Controllers
                 //WyszukaneNazwyProdukow zawiera wszystkie nazwy wszystkich produków
                 // oraz produkty ktore zawieraja ten symbol
 
-
-
                 List<Product> WyszukaneProduktyLowerName = new();
 
                 foreach (PInfo NazwaProduktu in WyszukaneNazwyProdukow)
                 {
-                    if (NazwaProduktu.Name.Contains(szukanaNazwa) || NazwaProduktu.Symbol.Contains(szukanaNazwa)) // jesli jakas nazwa jest w liscie 
+                    if (NazwaProduktu.Symbol.Contains(szukanaNazwa) || NazwaProduktu.Name.Contains(szukanaNazwa) || NazwaProduktu.NazwaWyszukiwana.Contains(szukanaNazwa) || NazwaProduktu.NazwaWyszukiwana == szukanaNazwa) // jesli jakas nazwa jest w liscie 
                     {
-                        
-                        WyszukaneProduktyLowerName.Add(WszystkieProdukty.Find(x => x.Name.ToLower() == NazwaProduktu.Name ));
+                        WyszukaneProduktyLowerName.Add(WszystkieProdukty.Find( x => (x.Symbol.ToLower() == NazwaProduktu.Symbol )));
                     }
-
                 }
 
                 return WyszukaneProduktyLowerName;

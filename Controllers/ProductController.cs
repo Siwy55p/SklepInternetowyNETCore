@@ -467,6 +467,8 @@ namespace partner_aluro.Controllers
                 product.pathImageUrl250x250 = product.Product_Images.FirstOrDefault().pathImageCompress250x250;
             }
 
+            product.SzukanaNazwa = product.Name + " - ["+ product.Symbol +"]";
+
             _context.Update(product);
             _context.SaveChanges();
 
@@ -521,7 +523,7 @@ namespace partner_aluro.Controllers
                 .Include(p => p.CategoryNavigation)
                 .Where(p => p.CategoryNavigation.Aktywny == true)
                 .ToListAsync();
-            
+
             return View(produkty);
 
         }

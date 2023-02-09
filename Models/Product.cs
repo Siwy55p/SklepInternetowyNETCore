@@ -34,6 +34,8 @@ namespace partner_aluro.Models
         public DateTime? DataDodania { get; set; } = DateTime.Now;
         public string? NazwaPlikuObrazka { get; set; }
 
+        public string SzukanaNazwa { get; set; }
+
         [Required(ErrorMessage = "Cena Produktu jest wymagana")]
         [Column(TypeName = "decimal(18,2)")]
         public decimal CenaProduktuBrutto { get; set; }  // Cena Producktu (wczesniej netto) nazwa CenaProduktu

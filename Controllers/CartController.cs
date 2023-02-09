@@ -317,7 +317,5 @@ namespace partner_aluro.Controllers
             return await _context.Products.FirstOrDefaultAsync(p => p.ProductId == id);
         }
 
-
-
     }
 }

@@ -193,7 +193,7 @@ namespace partner_aluro.Models
 
             if (cartItem != null)
             {
-                if (cartItem.Quantity > 0)
+                if (cartItem.Quantity > 0 && cartItem.Quantity < product.Ilosc)
                 {
                     remainingQuantity = ++cartItem.Quantity;
                 }
