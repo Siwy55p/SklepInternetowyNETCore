@@ -423,6 +423,11 @@ namespace partner_aluro.Controllers
             var pageNumber = page ?? 1; // if no page was specified in the querystring, default to the first page (1)
             var onePageOfProducts = produkty.ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
 
+            if (produkty == null || produkty.Count == 0)
+            {
+                produkty = await _context.Products.Where(x => x.Ukryty == false).Where(x => x.CategoryNavigation.Name == szukanaNazwa || x.SzukanaNazwa == szukanaNazwa).ToListAsync();
+            }
+
             switch (Sort)
             {
                 case 1:
