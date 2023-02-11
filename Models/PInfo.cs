@@ -4,6 +4,8 @@
     {
         public string Name { get; set; }
 
+        public string NameBezZnakow { get; set; }
+
         public string Symbol { get; set; }
 
         public string NazwaWyszukiwana { get; set; }

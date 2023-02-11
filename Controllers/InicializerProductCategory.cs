@@ -49,6 +49,41 @@ namespace partner_aluro.Controllers
             return View(produktyMultipleCategory);
         }
 
+        public async Task<IActionResult> Translate()
+        {
+
+            List<Product> produkty = _context.Products.ToList();
+
+            for (int i = 0; i < produkty.Count(); i++)
+            {
+                var authKey = $"bbc4aaae-78af-4f5e-37dd-34e29f91a480:fx"; // Replace with your key
+                var translator = new Translator(authKey);
+
+                string NameEn = produkty[i].Name.ToString();
+                string NameDe = produkty[i].Name.ToString();
+
+                var translatedText1 = await translator.TranslateTextAsync(
+                  NameEn,
+                  "PL",
+                  "en-US");
+                NameEn = translatedText1.Text;
+
+                var translatedText2 = await translator.TranslateTextAsync(
+                  NameDe,
+                  "PL",
+                  "DE");
+                NameDe = translatedText2.Text;
+
+                produkty[i].NameEn = NameEn;
+                produkty[i].NameDe = NameDe;
+
+                _context.Products.Update(produkty[i]);
+                _context.SaveChanges();
+
+            }
+            return View();
+        }
+
         public IActionResult EAN13Init()
         {
             var listaprozPresta = _context.ProductsPrestashop.ToList();

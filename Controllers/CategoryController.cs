@@ -9,6 +9,9 @@ using partner_aluro.Services;
 using partner_aluro.Services.Interfaces;
 using partner_aluro.wwwroot.Resources;
 using SmartBreadcrumbs.Nodes;
+using System.Globalization;
+using System.Text;
+using System.Text.RegularExpressions;
 using X.PagedList;
 using X.PagedList.Mvc.Core;
 
@@ -461,9 +464,26 @@ namespace partner_aluro.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public async Task<List<Product>>? Szukanie(string szukanaNazwa)   // to jest wynik wyszukiwarki (zwraca produkty ktore zawieraja w nazwie szukana nazwe)
         {
+            string szukanaNazwaBezZnakow;
             List<Product> WszystkieProdukty = await _context.Products.Where(x => x.Ukryty == false).ToListAsync();
 
-            List<PInfo> WyszukaneNazwyProdukow = await _context.Products.AsNoTracking().Where(x => x.Ukryty== false).Select(p => new PInfo{ Name = p.Name.ToLower(), Symbol = p.Symbol.ToString().ToLower(), NazwaWyszukiwana = p.Name.ToLower() + " - [" +p.Symbol+"]" }).ToListAsync(); // tworze liste nazw (puste)
+            List<PInfo> WyszukaneNazwyProdukow = new List<PInfo>();
+
+            if (@CultureInfo.CurrentCulture.Name == "de-DE")
+            {
+                WyszukaneNazwyProdukow = await _context.Products.AsNoTracking().Where(x => x.Ukryty == false).Select(p => new PInfo { Name = p.NameDe.ToLower(), NameBezZnakow = RemoveDiacritics(p.NameDe.ToLower()), Symbol = p.Symbol.ToString().ToLower(), NazwaWyszukiwana = p.NameDe.ToLower() + " - [" + p.Symbol.ToLower() + "]" }).ToListAsync(); // tworze liste nazw (puste)
+            }
+            else if (@CultureInfo.CurrentCulture.Name == "en-US")
+            {
+                WyszukaneNazwyProdukow = await _context.Products.AsNoTracking().Where(x => x.Ukryty == false).Select(p => new PInfo { Name = p.NameEn.ToLower(), NameBezZnakow = RemoveDiacritics(p.NameEn.ToLower()), Symbol = p.Symbol.ToString().ToLower(), NazwaWyszukiwana = p.NameEn.ToLower() + " - [" + p.Symbol.ToLower() + "]" }).ToListAsync(); // tworze liste nazw (puste)
+            }
+            else if (@CultureInfo.CurrentCulture.Name == "pl-PL")
+            {
+                WyszukaneNazwyProdukow = await _context.Products.AsNoTracking().Where(x => x.Ukryty == false).Select(p => new PInfo { Name = p.Name.ToLower(), NameBezZnakow = RemoveDiacritics(p.Name.ToLower()), Symbol = p.Symbol.ToString().ToLower(), NazwaWyszukiwana = p.Name.ToLower() + " - [" + p.Symbol.ToLower() + "]" }).ToListAsync(); // tworze liste nazw (puste)
+            }else
+            {
+                WyszukaneNazwyProdukow = await _context.Products.AsNoTracking().Where(x => x.Ukryty == false).Select(p => new PInfo { Name = p.Name.ToLower(), NameBezZnakow = RemoveDiacritics(p.Name.ToLower()), Symbol = p.Symbol.ToString().ToLower(), NazwaWyszukiwana = p.Name.ToLower() + " - [" + p.Symbol.ToLower() + "]" }).ToListAsync(); // tworze liste nazw (puste)
+            }
 
             //List<string> WyszukaneSymbolowProdukow = await _context.Products.Where(x => x.Ukryty == false).Select(p => p.Symbol.ToLower()).ToListAsync(); // tworze liste nazw Symbolów wszystkie tylko symbole
 
@@ -472,7 +492,7 @@ namespace partner_aluro.Controllers
             if (szukanaNazwa != null && szukanaNazwa.Length >= 1)
             {
                 szukanaNazwa = szukanaNazwa.ToLower();
-
+               // szukanaNazwaBezZnakow = RemoveDiacritics(szukanaNazwa);
                 //WyszukaneNazwyProdukow zawiera wszystkie nazwy wszystkich produków
                 // oraz produkty ktore zawieraja ten symbol
 
@@ -492,6 +512,26 @@ namespace partner_aluro.Controllers
             {
                 return null;
             }
+        }
+
+        static string RemoveDiacritics(string text)
+        {
+            var normalizedString = text.Normalize(NormalizationForm.FormD);
+            var stringBuilder = new StringBuilder(capacity: normalizedString.Length);
+
+            for (int i = 0; i < normalizedString.Length; i++)
+            {
+                char c = normalizedString[i];
+                var unicodeCategory = CharUnicodeInfo.GetUnicodeCategory(c);
+                if (unicodeCategory != UnicodeCategory.NonSpacingMark)
+                {
+                    stringBuilder.Append(c);
+                }
+            }
+
+            return stringBuilder
+                .ToString()
+                .Normalize(NormalizationForm.FormC);
         }
 
         private List<SelectListItem> GetCategories()

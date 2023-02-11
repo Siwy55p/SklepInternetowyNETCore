@@ -51,7 +51,19 @@
             </div>
             <div class="row text-decoration-none link-dark">
                 <a class="text-decoration-none link-dark product_name" asp-controller="Product" asp-action="Details" asp-route-id="@Model.ProductId">
-                    @language.Getkey(@Model.Name) <br>
+                    @if(@CultureInfo.CurrentCulture.Name == "de-DE")
+                    {
+                        @language.Getkey(@Model.NameDe) <br>
+                    }else if (@CultureInfo.CurrentCulture.Name == "en-US")
+                    {
+                        @language.Getkey(@Model.NameEn) <br>
+                    }else if (@CultureInfo.CurrentCulture.Name == "pl-PL")
+                    {
+                        @language.Getkey(@Model.Name) <br>
+                    }else
+                    {
+                        @language.Getkey(@Model.Name) <br>
+                    }
                 </a>
             </div>
         </div>

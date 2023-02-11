@@ -24,6 +24,8 @@ namespace partner_aluro.Models
         [Required(ErrorMessage = "Pole Nazwa musi być wypełnione")]
         [StringLength(100)]
         public string Name { get; set; }
+        public string? NameEn { get; set; }
+        public string? NameDe { get; set; }
 
         [Required(ErrorMessage = "Symbol jest wymagany np: A01532 i musi być unikatowy")]
         [StringLength(13)]
@@ -34,7 +36,7 @@ namespace partner_aluro.Models
         public DateTime? DataDodania { get; set; } = DateTime.Now;
         public string? NazwaPlikuObrazka { get; set; }
 
-        public string SzukanaNazwa { get; set; }
+        public string? SzukanaNazwa { get; set; }
 
         [Required(ErrorMessage = "Cena Produktu jest wymagana")]
         [Column(TypeName = "decimal(18,2)")]
