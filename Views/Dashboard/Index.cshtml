@@ -7,16 +7,18 @@
 <h1>Intranet - twoje zaplecze</h1>
 
 
-<b>04.02.2023</b>
+<b>25.02.2023</b><br />
+-W wyszukiwarce dodanie symbolu produktu w podpowiedziach wyszukiwania.<br />
+-Poprawienie nazwy produktów w różnuch jezykach.<br />
+-Dodanie możliwości usunięcia 'niezrelizowanego koszyka' jeśli termin od jego utworzenia jest większy niż 30dni.<br />
+
+
+<b>04.02.2023</b><br />
 -Poprawiana literowka w email </br>
  foreach (PInfo NazwaProduktu in WyszukaneNazwyProdukow) </br>
                 { </br>
                     if (NazwaProduktu.Name.Contains(szukanaNazwa) || NazwaProduktu.Symbol.Contains(szukanaNazwa)) // jesli jakas nazwa jest w liscie  </br>
-                    { </br>
                         WyszukaneProduktyLowerName.Add(WszystkieProdukty.Find(x => x.Name.ToLower() == NazwaProduktu.Name)); </br>
-                    }</br>
-                }</br>
-                </br>
                 -Czyli z uwagi na fakt ze nie zablokowałem możliwosci powtarzajacych sie nazw produktów, a napisałem że jak nazwa produktu równa się nazwa produktu to dodaj produkt do <br />
                 wyniku wyszukiwania<br /> 
                 ale równiez jest jak widać .Find czyli ten który znajduje sie jako pierwszy.<br />
@@ -26,7 +28,7 @@
                 Zmieniłem po sylbolu<br />
                 z uwagi ze symbole nie moga się powtarzać wtedy wynik wyszukiwania bedzie prawidłowy pomimo powtarzającej się nazwy produktu w asortymencie<br />
                 <br /> 
-                -blokada dodawania sztucznej ilosci w bocznym panelu zamówienia <br />
+                -blokada dodawania ilości ponad stan produktu w bocznym panelu zamówienia <br />
 
 
 

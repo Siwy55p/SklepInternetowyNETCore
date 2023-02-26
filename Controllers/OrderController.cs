@@ -300,19 +300,20 @@ namespace partner_aluro.Controllers
                     "Adres dostawy: <br>" +
                     "" + OrderAdres2.KodPocztowy + " " + OrderAdres2.Miasto + "<br>" +
                     "ul. " + OrderAdres2.Ulica + "<br>" +
-                    "Kontakt do Adresu dostawy: <br>" + OrderAdres2.Telefon + ", e-mail: " + OrderAdres2.Email + ""+
+                    "Kontakt do Adresu dostawy: <br>" + OrderAdres2.Telefon + ", e-mail: " + OrderAdres2.Email + "<br>"+
                     "Wiadomosc do zamówienia: " + order.Komentarz + " " + order.MessageToOrder + "<br>" +
                     "Kontakt: " + user.Email+ " " + user.Adress1rozliczeniowy.Telefon + "<br>" +
                     "Wartość zamówienia: " + order.OrderTotal + " zł<br>" +
                     "Zamówienie ID:#" + order.NrZamowienia + "<br>"+
-                    "<table style=\"border:1px solid black\"><thead><tr><th>Nazwa produktu</th>" +
+                    "<table style=\"border:1px solid black\">" +
+                    "<thead style=\"border:1px solid greey\"><tr><th>Nazwa produktu</th>" +
                     "<th>Symbol</th>" +
                     "<th>Cena jed. pro.</th>" +
                     "<th>Ilość</th>" +
                     "<th>Razem</th>"+
                     "</tr>"+
                     "</thead>"+
-                    "<tbody>";
+                    "<tbody style=\"border:1px solid greey\">";
 
                 string ProductList = "";
                 foreach(var item in order.OrderItems)
@@ -324,12 +325,12 @@ namespace partner_aluro.Controllers
                         "<td>"+@item.Product.Symbol+"</td>" +
                         "<td>"+ @item.Cena.ToString("0.00") + "</td>" +
                         "<td>"+@item.Quantity.ToString("#") + "</td>" +
-                        "<td>"+ (@item.Cena*@item.Quantity).ToString("0.00") + "</td>"+
+                        "<td>"+ (@item.Cena*@item.Quantity).ToString("## ###.00") + "</td>"+
                         "</tr>";
 
                 }
 
-                string endEmail = "</tbody<tfoot><tr><th></th><th></th><th></th><th>Suma:</th><th>"+order.OrderTotal+"</th></tr></tfoot></table>";
+                string endEmail = "</tbody><tfoot><tr><th></th><th></th><th></th><th>Suma:</th><th>"+order.OrderTotal.ToString("## ###.00")+"</th></tr></tfoot></table>";
 
 
                 string emailMessage = startEmail + ProductList + endEmail;

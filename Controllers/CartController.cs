@@ -47,15 +47,12 @@ namespace partner_aluro.Controllers
 
         public async Task<IActionResult> Lista()
         {
-
-
             List<Cart> listaCart = await _context.Carts
                 .Include(x => x.user)
                 .Include(u => u.CartItems)
                 .ThenInclude(p => p.Product)
+                .Where(x => x.user.UserName != "szuminski.p@gmail.com" && x.user.UserName != "piotr@pierrot.pl")
                 .Where(x => x.CartItems.Count >= 1)
-                .Where(u => u.user.UserName != "szuminski.p@gmail.com")
-                .Where(u => u.user.UserName != "piotr@pierrot.pl")
                 .ToListAsync();
 
 
@@ -75,6 +72,29 @@ namespace partner_aluro.Controllers
             return View(cart);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Delete(string CartId)
+        {
+            Cart cart = _context.Carts.Where(x => x.CartaId == CartId)
+                .Include(x => x.user)
+                .ThenInclude(u => u.Adress1rozliczeniowy)
+                .Include(c => c.CartItems)
+                .ThenInclude(p => p.Product)
+                .FirstOrDefault();
+
+
+
+            try
+            {
+                _context.Remove(cart);
+                _context.SaveChanges();
+            }catch(Exception ex)
+            {
+
+            }
+
+            return RedirectToAction("Lista");
+        }
 
         public async Task<IActionResult> Index()
         {

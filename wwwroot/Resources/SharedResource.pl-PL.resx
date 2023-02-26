@@ -58,9 +58,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="test" xml:space="preserve">
-    <value>test</value>
-  </data>
   <data name="Roślina szt. - gałązka białej orchidei_Aluro" xml:space="preserve">
     <value>Roślina szt. - gałązka białej orchidei_Aluro</value>
   </data>
@@ -241,9 +238,6 @@
   <data name="Meble" xml:space="preserve">
     <value>Meble</value>
   </data>
-  <data name="drzewo" xml:space="preserve">
-    <value>drzewo</value>
-  </data>
   <data name="Złóż zamówienie" xml:space="preserve">
     <value>Złóż zamówienie</value>
   </data>
@@ -376,9 +370,6 @@
   <data name="Szyszka FLAR_Aluro XL" xml:space="preserve">
     <value>Szyszka FLAR_Aluro XL</value>
   </data>
-  <data name="test2" xml:space="preserve">
-    <value>test2</value>
-  </data>
   <data name="Wazon kremowy VINCE_Aluro" xml:space="preserve">
     <value>Wazon kremowy VINCE_Aluro</value>
   </data>
@@ -399,9 +390,6 @@
   </data>
   <data name="Wazon OROMEO ręcznie malowany_Aluro XL" xml:space="preserve">
     <value>Wazon OROMEO ręcznie malowany_Aluro XL</value>
-  </data>
-  <data name="droga" xml:space="preserve">
-    <value>droga</value>
   </data>
   <data name="Produkt jest już niedostępny." xml:space="preserve">
     <value>Produkt jest już niedostępny.</value>
@@ -670,9 +658,6 @@
   <data name="Stolik okolicznościowy MALOV_Aluro" xml:space="preserve">
     <value>Stolik okolicznościowy MALOV_Aluro</value>
   </data>
-  <data name="test453" xml:space="preserve">
-    <value>test453</value>
-  </data>
   <data name="Donice i Osłonki" xml:space="preserve">
     <value>Donice i Osłonki</value>
   </data>
@@ -829,26 +814,14 @@
   <data name="Roślina sztuczna - gałązki złote_Aluro" xml:space="preserve">
     <value>Roślina sztuczna - gałązki złote_Aluro</value>
   </data>
-  <data name="test54" xml:space="preserve">
-    <value>test54</value>
-  </data>
   <data name="Konsola AMAX_Aluro" xml:space="preserve">
     <value>Konsola AMAX_Aluro</value>
-  </data>
-  <data name="test56" xml:space="preserve">
-    <value>test56</value>
   </data>
   <data name="Lampion-świecznik LAKIN-loft_Aluro" xml:space="preserve">
     <value>Lampion-świecznik LAKIN-loft_Aluro</value>
   </data>
-  <data name="test76" xml:space="preserve">
-    <value>test76</value>
-  </data>
   <data name="Dodatki do wnętrz" xml:space="preserve">
     <value>Dodatki do wnętrz</value>
-  </data>
-  <data name="test57" xml:space="preserve">
-    <value>test57</value>
   </data>
   <data name="Kategorie" xml:space="preserve">
     <value>Kategorie</value>
@@ -888,5 +861,14 @@
   </data>
   <data name="Lampa wisząca GAURI_Aluro" xml:space="preserve">
     <value>Lampa wisząca GAURI_Aluro</value>
+  </data>
+  <data name="Metoda Płatności" xml:space="preserve">
+    <value>Metoda Płatności</value>
+  </data>
+  <data name="Wymiary wewnętrzne:" xml:space="preserve">
+    <value>Wymiary wewnętrzne:</value>
+  </data>
+  <data name="Wymiary zewnetrzne:" xml:space="preserve">
+    <value>Wymiary zewnetrzne:</value>
   </data>
 </root>

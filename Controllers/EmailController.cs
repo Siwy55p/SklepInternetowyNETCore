@@ -46,8 +46,6 @@ namespace partner_aluro.Controllers
         [HttpPost]
         public IActionResult SaveChangeMessageToRegister(EmailViewModel MessageToRegister)
         {
-
-
             Constants.RegisterNewAccoutMessageEmailSubject = MessageToRegister.Register.Subject;
             Constants.RegisterNewAccoutMessageEmail = MessageToRegister.Register.Body;
             return RedirectToAction("Index");

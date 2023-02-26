@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="test" xml:space="preserve">
-    <value>Test</value>
-  </data>
   <data name="Roślina szt. - gałązka białej orchidei_Aluro" xml:space="preserve">
     <value>Plant pcs. - sprig of white orchid_Aluro</value>
   </data>
@@ -429,14 +426,8 @@
   <data name="Lampion szklany VIVO_Aluro" xml:space="preserve">
     <value>Glass lantern VIVO_Aluro</value>
   </data>
-  <data name="Test01" xml:space="preserve">
-    <value>Test01</value>
-  </data>
   <data name="Lampion na nodze ATEX_Aluro" xml:space="preserve">
     <value>Lantern on a leg ATEX_Aluro</value>
-  </data>
-  <data name="test2" xml:space="preserve">
-    <value>test2</value>
   </data>
   <data name="Wazon kremowy VINCE_Aluro" xml:space="preserve">
     <value>VINCE_Aluro cream vase</value>
@@ -458,9 +449,6 @@
   </data>
   <data name="Wazon OROMEO ręcznie malowany_Aluro XL" xml:space="preserve">
     <value>OROMEO hand-painted vase_Aluro XL</value>
-  </data>
-  <data name="droga" xml:space="preserve">
-    <value>Straße</value>
   </data>
   <data name="Produkt jest już niedostępny." xml:space="preserve">
     <value>The product is no longer available.</value>
@@ -738,9 +726,6 @@
   <data name="Stolik okolicznościowy MALOV_Aluro" xml:space="preserve">
     <value>Occasional table MALOV_Aluro</value>
   </data>
-  <data name="test453" xml:space="preserve">
-    <value>test453</value>
-  </data>
   <data name="Donice i Osłonki" xml:space="preserve">
     <value>Pots and Covers</value>
   </data>
@@ -770,9 +755,6 @@
   </data>
   <data name="Bombka szklana PANORA 3 wzory_Aluro" xml:space="preserve">
     <value>PANORA glass bauble 3 designs_Aluro</value>
-  </data>
-  <data name="drzewo" xml:space="preserve">
-    <value>tree</value>
   </data>
   <data name="Lampion FLOBI wiklina i sznurek - XL_Aluro" xml:space="preserve">
     <value>FLOBI wicker and string lantern - XL_Aluro</value>
@@ -882,38 +864,20 @@
   <data name="Świecznik FLAR_Aluro XL" xml:space="preserve">
     <value>FLAR_Aluro XL Candleholder</value>
   </data>
-  <data name="test22" xml:space="preserve">
-    <value>test22</value>
-  </data>
   <data name="Hasło" xml:space="preserve">
     <value>Password</value>
   </data>
   <data name="Roślina sztuczna - gałązki złote_Aluro" xml:space="preserve">
     <value>Artificial plant - golden branches_Aluro</value>
   </data>
-  <data name="test54" xml:space="preserve">
-    <value>test54</value>
-  </data>
-  <data name="test21" xml:space="preserve">
-    <value>test21</value>
-  </data>
   <data name="Konsola AMAX_Aluro" xml:space="preserve">
     <value>AMAX_Aluro console</value>
-  </data>
-  <data name="test56" xml:space="preserve">
-    <value>test56</value>
   </data>
   <data name="Lampion-świecznik LAKIN-loft_Aluro" xml:space="preserve">
     <value>Lantern-candle holder LAKIN-loft_Aluro</value>
   </data>
-  <data name="test76" xml:space="preserve">
-    <value>test76</value>
-  </data>
   <data name="Wazon metalowy SOLCO złoty_Aluro" xml:space="preserve">
     <value>SOLCO gold metal vase_Aluro</value>
-  </data>
-  <data name="test57" xml:space="preserve">
-    <value>test57</value>
   </data>
   <data name="Kategorie" xml:space="preserve">
     <value>Category</value>
@@ -953,5 +917,11 @@
   </data>
   <data name="Wymiary zewnetrzne:" xml:space="preserve">
     <value>External dimensions:</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Metoda Płatności" xml:space="preserve">
+    <value>Payment method</value>
   </data>
 </root>

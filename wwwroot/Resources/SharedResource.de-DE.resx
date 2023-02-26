@@ -120,9 +120,6 @@
   <data name="Miasto" xml:space="preserve">
     <value>Stadt</value>
   </data>
-  <data name="test" xml:space="preserve">
-    <value>Test</value>
-  </data>
   <data name="Roślina szt. - gałązka białej orchidei_Aluro" xml:space="preserve">
     <value>Pflanze Stk. - Zweig der weißen Orchidee_Aluro</value>
   </data>
@@ -420,14 +417,8 @@
   <data name="Lampion szklany VIVO_Aluro" xml:space="preserve">
     <value>Glaslaterne VIVO_Aluro</value>
   </data>
-  <data name="Test01" xml:space="preserve">
-    <value>Test01</value>
-  </data>
   <data name="Szyszka FLAR_Aluro XL" xml:space="preserve">
     <value>FLAR_Aluro-Kegel XL</value>
-  </data>
-  <data name="test2" xml:space="preserve">
-    <value>test2</value>
   </data>
   <data name="Wazon kremowy VINCE_Aluro" xml:space="preserve">
     <value>VINCE_Aluro cremefarbene Vase</value>
@@ -449,9 +440,6 @@
   </data>
   <data name="Wazon OROMEO ręcznie malowany_Aluro XL" xml:space="preserve">
     <value>OROMEO handbemalte Vase_Aluro XL</value>
-  </data>
-  <data name="droga" xml:space="preserve">
-    <value>Straße</value>
   </data>
   <data name="Produkt jest już niedostępny." xml:space="preserve">
     <value>Das Produkt ist nicht mehr verfügbar.</value>
@@ -630,9 +618,6 @@
   <data name="Szklarenka BERTONI Aluro" xml:space="preserve">
     <value>Gewächshaus BERTONI Aluro</value>
   </data>
-  <data name="test21" xml:space="preserve">
-    <value>test21</value>
-  </data>
   <data name="Szukaj" xml:space="preserve">
     <value>Suche...</value>
   </data>
@@ -726,9 +711,6 @@
   <data name="Stolik okolicznościowy MALOV_Aluro" xml:space="preserve">
     <value>Beistelltisch MALOV_Aluro</value>
   </data>
-  <data name="test453" xml:space="preserve">
-    <value>test453</value>
-  </data>
   <data name="Donice i Osłonki" xml:space="preserve">
     <value>Töpfe und Deckel</value>
   </data>
@@ -743,9 +725,6 @@
   </data>
   <data name="Sofa Charlie Chaplin MAZINE Aluro" xml:space="preserve">
     <value>Charlie Chaplin MAZINE Sofa Aluro</value>
-  </data>
-  <data name="test54" xml:space="preserve">
-    <value>test54</value>
   </data>
   <data name="Osłonka metal.na stojaku ALVRA_Aluro" xml:space="preserve">
     <value>Metallgehäuse auf Ständer ALVRA_Aluro</value>
@@ -876,9 +855,6 @@
   <data name="Świecznik FLAR_Aluro XL" xml:space="preserve">
     <value>FLAR_Aluro XL Kerzenhalter</value>
   </data>
-  <data name="test22" xml:space="preserve">
-    <value>test22</value>
-  </data>
   <data name="Wazon metalowy SOLCO złoty_Aluro" xml:space="preserve">
     <value>Metallvase SOLCO gold_Aluro</value>
   </data>
@@ -894,20 +870,11 @@
   <data name="Konsola AMAX_Aluro" xml:space="preserve">
     <value>AMAX_Aluro-Konsole</value>
   </data>
-  <data name="test56" xml:space="preserve">
-    <value>test56</value>
-  </data>
   <data name="Lampion-świecznik LAKIN-loft_Aluro" xml:space="preserve">
     <value>Laternen-Kerzenhalter LAKIN-loft_Aluro</value>
   </data>
-  <data name="test76" xml:space="preserve">
-    <value>test76</value>
-  </data>
   <data name="Dodatki do wnętrz" xml:space="preserve">
     <value>Innenausstattung</value>
-  </data>
-  <data name="test57" xml:space="preserve">
-    <value>test57</value>
   </data>
   <data name="Kategorie" xml:space="preserve">
     <value>Kategorien</value>
@@ -947,5 +914,14 @@
   </data>
   <data name="Wymiary zewnetrzne:" xml:space="preserve">
     <value>Äußere Abmessungen:</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Metoda Płatności" xml:space="preserve">
+    <value>Bezahlverfahren</value>
+  </data>
+  <data name="Powtórz nowe hasło" xml:space="preserve">
+    <value>Wiederhole das neue Passwort</value>
   </data>
 </root>

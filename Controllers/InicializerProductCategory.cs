@@ -56,6 +56,8 @@ namespace partner_aluro.Controllers
 
             for (int i = 0; i < produkty.Count(); i++)
             {
+
+
                 var authKey = $"bbc4aaae-78af-4f5e-37dd-34e29f91a480:fx"; // Replace with your key
                 var translator = new Translator(authKey);
 
@@ -338,7 +340,7 @@ namespace partner_aluro.Controllers
 
             List<ImageModel> Images = _context.Images.ToList();
 
-            for (int i = 5559; i < Images.Count(); i++)
+            for (int i = 5559; i < Images.Count; i++)
             {
                 ImageModel image = Images[i];
 

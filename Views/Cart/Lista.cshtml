@@ -50,7 +50,7 @@
                         @item.value.CartItems.Count()
                     </td>
                     <td>
-                       <span style="background-color:@color">@item.value.RazemBrutto.ToString("0.00")</span>
+                       <span style="background-color:@color">@item.value.RazemBrutto.ToString("# ###.00")</span>
 
 
                     </td>
@@ -70,6 +70,20 @@
                     </th>
                     <td>
                         <a class="btn btn-success" asp-controller="Cart" asp-action="Details" asp-route-CartID="@item.value.CartaId">Więcej</a>
+
+                        @{
+                            DateTime data1 = item.value.dataPowstania;
+                            DateTime data2 = DateTime.Now;
+
+                            var roznica = data2 - data1;
+                        }
+
+                        @if (item.value.Zrealizowane == false && roznica >= TimeSpan.FromDays(30))
+                        {
+                        <a class="btn btn-success" asp-controller="Cart" asp-action="Delete" asp-route-CartID="@item.value.CartaId">Usuń</a>
+                        }
+                        else
+                        {}
                     </td>
                 </tr>
             }
