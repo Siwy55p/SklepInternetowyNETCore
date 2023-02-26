@@ -12,7 +12,7 @@
 
 @inject LanguageService language
 
-<div class="row justify-content-center align-items-center sticky-top navbar-expand-lg navbar-dark bg-dark">
+<div class="row sticky-top fixed-top justify-content-center align-items-center navbar-expand-lg navbar-dark bg-dark">
     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-10 col-xxl-8 header px-0 mx-0">
 
         <div class="row p-0 m-0 pt-1">
@@ -93,38 +93,36 @@
 
                                 @*PRAWA STRONA START*@
                 <div id="navbarNavDarkDropdown2 text-end px-1 mx-0 " style="right:20px">
-                        <ul class="nav custom-nav menu-end text-end">
-                                    
-
-                                        <li>
+                    <ul class="nav custom-nav menu-end text-end">
+                        <li>
                             <a class="nav-link px-0" asp-controller="Order" asp-action="ListaZamowienZalogowanegoUzytkownika"><i class="bi bi-clipboard-data"></i></a>
-                                        </li>
-                                        <li>
-                                            @await Component.InvokeAsync("CartHeader")
-                                            @*<a class="nav-link" asp-area="" asp-controller="Cart" asp-action="ZlozZamowienie"><i class="fa-solid fa-cart-shopping">@cart.CartItems.Count</i></a>*@
-                                        </li>
-                                        <li class="nav-item dropdown">
+                        </li>
+                        <li>
+                            @await Component.InvokeAsync("CartHeader")
+                            @*<a class="nav-link" asp-area="" asp-controller="Cart" asp-action="ZlozZamowienie"><i class="fa-solid fa-cart-shopping">@cart.CartItems.Count</i></a>*@
+                        </li>
+                        <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle px-0"
-                                               href="#"
-                                               role="button"
-                                               data-bs-toggle="dropdown"
-                                               aria-expanded="false">
-                                            <i class="bi bi-person-fill"></i>
+                                                href="#"
+                                                role="button"
+                                                data-bs-toggle="dropdown"
+                                                aria-expanded="false">
+                                <i class="bi bi-person-fill"></i>
                             </a>
-                                            <ul class="dropdown-menu dropdown-menu-end">
-                                                <li>
-                                                    <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index"
-                                                       title="Manage">@language.Getkey("Moje konto")</a>
-                                                </li>
-                                                <li>
-                                                    <form id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                                                        <button id="logout" type="submit" class="dropdown-item">@language.Getkey("Wyloguj")</button>
-                                                    </form>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                </ul>
-                        </div>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                    <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index"
+                                        title="Manage">@language.Getkey("Moje konto")</a>
+                                </li>
+                                <li>
+                                    <form id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                        <button id="logout" type="submit" class="dropdown-item">@language.Getkey("Wyloguj")</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
 
                 </div>
             </div>

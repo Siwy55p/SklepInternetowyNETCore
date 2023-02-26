@@ -6,8 +6,10 @@
     <title>@ViewData["Title"] - Partner Aluro</title>
     <!-- Core theme CSS (includes Bootstrap)-->
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />*@
+    <link rel="stylesheet" href="~/lib/owlcarousel2/assets/owl.carousel.min.css"  />
+    @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />*@
+    <link rel="stylesheet" href="~/lib/owlcarousel2/assets/owl.theme.default.min.css" />
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" />
 
@@ -24,6 +26,7 @@
     @*flag icon*@
 
     @RenderSection("LinkStyleHead", required: false)
+
 </head>
 <body>
         @{
@@ -59,8 +62,8 @@
     <!-- Footer -->
     <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js" integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+   @* <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>*@
+    <script src="~/lib/owlcarousel2/owl.carousel.min.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 
 @*   <script type="text/javascript">
@@ -92,26 +95,28 @@
     
 
     <script type="text/javascript">
-        $('.owl-one.owl-carousel').owlCarousel({
+        //$('.owl-one.owl-carousel').owlCarousel({
+        $('.owl-carousel').owlCarousel({
             loop: false,
-            margin: 5,
+            margin: 1,
             nav: true,
-            autoWidth: true,
+            //autoWidth: true,
+            responsiveClass: true,
             ////stageOuterClass: 'overflow-visible',
             stageOuterClass: 'owl-stage-outer overflow-visible',
             navText : ['<i class="fa fa-angle-left" aria-hidden="true"></i>','<i class="fa fa-angle-right" aria-hidden="true"></i>'],
             responsive: {
                 0: {
-                    items: 2
-                },
-                361: {
                     items: 3
                 },
-                450: {
+                361: {
                     items: 4
                 },
-                600: {
+                450: {
                     items: 5
+                },
+                600: {
+                    items: 6
                 },
                 768: {
                     items: 6
@@ -120,10 +125,10 @@
                     items: 6
                 },
                 1300: {
-                    items: 7
+                    items: 6
                 },
                 1500: {
-                    items: 8
+                    items: 7
                 }
             }
 
