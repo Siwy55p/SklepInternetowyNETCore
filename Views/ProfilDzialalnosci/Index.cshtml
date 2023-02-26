@@ -4,10 +4,15 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Dashboard.cshtml";
 }
-<p>
-    <a class="btn btn-success" asp-action="Create">Dodaj nowy profil</a>
-</p>
-<table id="ProfilTable" class="display" style="width:100%">
+
+<div class="row sticky-top bg-light border-bottom">
+    <div class="col"><h3>Profile działalności</h3></div>
+    <div class="col">
+    <a class="btn btn-success float-end" asp-action="Create">Dodaj nowy profil</a>
+    </div>
+</div>
+
+<table id="ProfilTable" class="cell-border display" style="width:100%">
     <thead>
         <tr>
             <th>

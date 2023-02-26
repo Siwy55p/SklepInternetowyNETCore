@@ -5,14 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="~/dashboard/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" />
 
     <link rel="stylesheet" href="~/dashboard/css/style.css" rel="stylesheet" />
 
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" />
-    
-    <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.3.1/css/fixedHeader.dataTables.min.css" />
-
+    <link rel="stylesheet" href="~/lib/datatables/css/jquery.datatables.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/lib/datatables.net-fixedheader-dt/fixedheader.datatables.min.css" />
 
     @RenderSection("LinkStyleHead", required: false)
 
@@ -20,63 +17,11 @@
 
 </head>
 <body>
-    <!-- top navigation bar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <div class="container-fluid">
-            <button class="navbar-toggler"
-                    type="button"
-                    data-bs-toggle="offcanvas"
-                    data-bs-target="#sidebar"
-                    aria-controls="offcanvasExample">
-                <span class="navbar-toggler-icon" data-bs-target="#sidebar"></span>
-            </button>
+    <div class="offcanvas offcanvas-start sidebar-nav bg-dark" tabindex="-1" id="sidebar" aria-labelledby="sidebar">
+                <nav class="navbar-dark">
             <a class="navbar-brand me-auto ms-lg-0 ms-3 text-uppercase fw-bold"
                asp-controller="Category" asp-action="Lista1">Aluro</a>
-            <button class="navbar-toggler"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#topNavBar"
-                    aria-controls="topNavBar"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="topNavBar">
-                <form class="d-flex ms-auto my-3 my-lg-0">
-                    <div class="input-group">
-                        <button class="btn btn-primary" type="submit">
-                        </button>
-                    </div>
-                </form>
-                <ul class="navbar-nav">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle ms-2"
-                           href="#"
-                           role="button"
-                           data-bs-toggle="dropdown"
-                           aria-expanded="false">
-                            <i class="bi bi-person-fill"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="@Url.Action("Index","Home")">Strona Aluro</a></li>
-                            <li>
-                                <form id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                                    <button id="logout" type="submit" class="dropdown-item">Wyloguj</button>
-                                </form></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <!-- top navigation bar -->
-    <!-- offcanvas -->
-    <div class="offcanvas offcanvas-start sidebar-nav bg-dark"
-         tabindex="-1"
-         id="sidebar">
-        <div class="offcanvas-body p-0">
-            <nav class="navbar-dark">
-                <ul class="navbar-nav">
+                    <ul class="navbar-nav">
                     <li>
                         <a href="@Url.Action("Index","Home")" class="nav-link px-3">
                             <span>Strona głowna</span> 
@@ -328,11 +273,11 @@
                             <span>EAN13ZPrestashop</span>
                         </a>
                     </li>*@
-                    <li>
+                   @* <li>
                         <a href="@Url.Action("Translate","InicializerProductCategory")" class="nav-link px-3">
                         <span>tłumacz nazwy produktow</span>
                         </a>
-                    </li>
+                    </li>*@
                     @*<li>
                         <a href="@Url.Action("ImageCompres250x250","InicializerProductCategory")" class="nav-link px-3">
                             <span>Utworz skompresowane obrazki</span>
@@ -343,24 +288,25 @@
                             <span>Ustaw skompresowane obrazki frontowe</span>
                         </a>
                     </li>*@
+                    <li>
+                        <form id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                            <button id="logout" type="submit" class="dropdown-item">Wyloguj</button>
+                        </form>
+                    </li>
                 </ul>
             </nav>
-        </div>
     </div>
     <!-- offcanvas -->
-    <main class="mt-5 pt-3">
+    <main>
         <div class="container-fluid">
-@*                    <h4>Panel zarządzania</h4>*@
-                    @RenderBody()
+            <div class="fixed-top" style="z-index:1050">
+                <a class="btn btn-primary" data-bs-toggle="offcanvas" href="#sidebar" role="button" aria-controls="sidebar">
+                    Menu
+                </a>
+            </div>
+            @RenderBody()
         </div>
     </main>
-
-
-@*    <script>
-        $(document).ready(function () {
-            $('#example').DataTable();
-        });
-        </script>*@
 
     <script src="~/dashboard/js/bootstrap.bundle.min.js"></script>
     <script src="~/dashboard/js/jquery-3.5.1.js"></script>

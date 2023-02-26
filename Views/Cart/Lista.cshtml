@@ -5,16 +5,25 @@
 @*@model IEnumerable<string CartId, IEnumerable<ApplicationUser> User>*@
 
 @{
-    ViewData["Title"] = "Zamowienia";
+    ViewData["Title"] = "Koszyki";
     Layout = "~/Views/Shared/_Dashboard.cshtml";
 }
 
+<div class="row sticky-top bg-light border-bottom">
+    <div class="col"><h3>Koszyki</h3></div>
+    <div class="col">
+        @*<a asp-controller="Product" asp-action="Add" class="btn btn-success float-end" px-3">
+            Dodaj nowy produkt
+        </a>*@
+    </div>
+</div>
+
 <div class="table-responsive">
-    <table id="CartTableList" class="display" style="width:100%">
+    <table id="CartTableList" class="cell-border display" style="width:100%">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>CartsId</th>
+                @*<th>Id</th>*@
+                <th>Realizacja</th>
                 <th>Ilość Produktów</th>
                 <th>Wartość</th>
                 <th>Klient</th>
@@ -39,9 +48,9 @@
                 }
                 
                 <tr>
-                    <td>
+                    @*<td>
                         @item.value.CartaId
-                    </td>
+                    </td>*@
                     <td>
                         <span>@wiadomosc </span>
 
@@ -69,18 +78,15 @@
                         @item.value.dataPowstania.ToString("yyyy-MM-dd HH:mm:ss")
                     </th>
                     <td>
-                        <a class="btn btn-success" asp-controller="Cart" asp-action="Details" asp-route-CartID="@item.value.CartaId">Więcej</a>
-
+                        <a asp-controller="Cart" asp-action="Details" asp-route-CartID="@item.value.CartaId">Więcej</a>
                         @{
                             DateTime data1 = item.value.dataPowstania;
                             DateTime data2 = DateTime.Now;
-
                             var roznica = data2 - data1;
                         }
-
                         @if (item.value.Zrealizowane == false && roznica >= TimeSpan.FromDays(30))
                         {
-                        <a class="btn btn-success" asp-controller="Cart" asp-action="Delete" asp-route-CartID="@item.value.CartaId">Usuń</a>
+                            <a asp-controller="Cart" asp-action="Delete" asp-route-CartID="@item.value.CartaId"> Usuń</a>
                         }
                         else
                         {}
@@ -145,7 +151,7 @@
             $('#CartTableList').DataTable(
                 {
                     fixedHeader: {
-                        headerOffset: 56,
+                        headerOffset: 40,
                         header: true,
                         footer: true
                     },
@@ -153,7 +159,7 @@
                         { "width": "50px", "targets": 2 }
                     ],
                     pageLength: 50,
-                    "order": [6, 'desc']
+                    "order": [5, 'desc']
                 });
         });
     </script>

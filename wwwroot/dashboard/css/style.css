@@ -1,19 +1,15 @@
-﻿@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap");
-body,
+﻿body,
 button {
-  font-family: "Inter", sans-serif;
-  font-size: 12px;
+    font-family: "Arial", sans-serif;
+    font-size: 12px;
 }
 :root {
   --offcanvas-width: 200px;
-  --topNavbarHeight: 49px;
+  --topNavbarHeight: 0px;
 }
-
 .form-control {
     font-size: 12px;
 }
-
-
 #lblCartCount {
     font-size: 12px;
     background: #ff0000;
@@ -23,8 +19,6 @@ button {
     margin-left: -6px;
     margin-top: -5px;
 }
-
-
 .sidebar-nav {
     width: var(--offcanvas-width);
 }
@@ -53,8 +47,8 @@ button {
     -webkit-transform: none;
     transform: none;
     visibility: visible !important;
-    height: calc(100% - var(--topNavbarHeight));
-    top: var(--topNavbarHeight);
+/*    height: calc(100% - var(--topNavbarHeight));*/
+    top: 0px;
   }
 }
 

@@ -253,14 +253,12 @@ namespace partner_aluro.Controllers
 
             ViewData["Sort"] = Sort;
 
-
             if (szukanaNazwa == null || szukanaNazwa == "")
             {
                 szukanaNazwa = "";
                 List<Product> produkty = await _context.Products.AsNoTracking().Where(x => x.Ukryty == false).ToListAsync();
                 var pageNumber = page ?? 1; // if no page was specified in the querystring, default to the first page (1)
                 var onePageOfProducts = produkty.ToPagedList(pageNumber, Pages); // will only contain 25 products max because of the pageSize
-
 
                 switch (Sort)
                 {

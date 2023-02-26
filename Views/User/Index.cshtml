@@ -6,38 +6,21 @@
 
 @model ICollection<partner_aluro.Models.ApplicationUser>
 
-<div>
-    <h1 class="display-4">Użytkownicy</h1>
-
+<div class="row sticky-top bg-light border-bottom">
+    <div class="col"><h3>Użytkownicy</h3></div>
+    <div class="col">
+    <a class="btn btn-success float-end" asp-controller="User" asp-action="Add">Dodaj użytkownika</a>
+    </div>
+</div>
 
     @if(@Model != null && @Model.Any())
     { 
-
-        
-
-@*        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Imię</th>
-                    <th scope="col">Nazwisko</th>
-                    <th scope="col">Dostęp</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Edit</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>*@
-        
-        <a class="btn btn-success" asp-controller="User" asp-action="Add">Dodaj użytkownika</a>
-
         <div class="row">
             <div class="col-md-12 mb-3">
                 <div class="card">
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table id="userTable" class="display" style="width: 100%">
+                            <table id="userTable" class="cell-border display" style="width: 100%">
                                 <thead>
                                     <tr>
                                         <th>Data założenia</th>

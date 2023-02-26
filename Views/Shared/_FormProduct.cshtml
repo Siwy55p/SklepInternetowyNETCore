@@ -1,8 +1,5 @@
 ﻿@model partner_aluro.Models.Product
 
-<input asp-for="@Model.ProductId" class="form-control" aria-required="true" readonly/>
-
-
         <div class="form-group row">
             <label asp-for="@Model.Name" class="col-sm-3 col-form-label text-end">Nazwa produktu</label>
                 <div class="col-sm-6">
@@ -170,8 +167,6 @@
         <hr />
         <div class="form-group">
             <label asp-for="@Model.Promocja" class="col-sm-3 col-form-label text-end">Cena promocyjna: </label>
-            <input asp-for="@Model.NazwaPromocyjna" type="text" class="form-control p-0 m-0" placeholder="promocyjna">
-
             Tak @Html.RadioButtonFor(model => model.Promocja, "True", Model.Promocja == true ? new { Checked = "checked" } : null)
             Nie @Html.RadioButtonFor(model => model.Promocja, "False", Model.Promocja == false ? new { Checked = "unchecked" } : null)
             <span asp-validation-for="@Model.Promocja" class="text-danger"></span>

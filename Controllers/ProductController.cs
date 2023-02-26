@@ -9,6 +9,7 @@ using DeepL;
 using System.Resources.NetStandard;
 using System.Collections;
 using System.Globalization;
+using javax.jws;
 
 namespace partner_aluro.Controllers
 {
@@ -29,9 +30,9 @@ namespace partner_aluro.Controllers
 
         private readonly IProductCategoryService _productCategoryService;
 
-       
-        public ProductController(IProductCategoryService productCategoryService, ApplicationDbContext applicationDbContext, 
-            IProductService productService, IUnitOfWorkProduct unitOfWorkProduct, 
+
+        public ProductController(IProductCategoryService productCategoryService, ApplicationDbContext applicationDbContext,
+            IProductService productService, IUnitOfWorkProduct unitOfWorkProduct,
             IWebHostEnvironment webHostEnvironment, IImageService imageService)
         {
             _ProductService = productService;
@@ -43,7 +44,7 @@ namespace partner_aluro.Controllers
             _productCategoryService = productCategoryService;
 
 
-            
+
         }
 
         //public async Task<IActionResult> Index()
@@ -64,7 +65,7 @@ namespace partner_aluro.Controllers
 
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
         [HttpGet]
-        public async Task <IActionResult> Edit(int id)
+        public async Task<IActionResult> Edit(int id)
         {
             ViewData["Category"] = GetCategories();
 
@@ -86,7 +87,7 @@ namespace partner_aluro.Controllers
         //}
 
         [HttpPost]
-        public void UpdateRow(int ImageId, int kolejnosc , int Id, int oldPosition, int newPosition)
+        public void UpdateRow(int ImageId, int kolejnosc, int Id, int oldPosition, int newPosition)
         {
             ImageModel image = _context.Images.Where(x => x.ImageId == ImageId).FirstOrDefault();
 
@@ -138,7 +139,7 @@ namespace partner_aluro.Controllers
                 product.NameDe = NameDe;
             }
 
-            if(product.SzukanaNazwa == null)
+            if (product.SzukanaNazwa == null)
             {
                 product.SzukanaNazwa = product.Name + " - [" + product.Symbol + "]";
             }
@@ -172,8 +173,8 @@ namespace partner_aluro.Controllers
             ////UploadNewFilePicture
 
 
-            if ((product.ImageUrl == null || product.ImageUrl == "") && product.Product_Images != null)  
-                //Jesli nie ma obrazka glownego a jest obrazk [0] jako dodatkowy do wysietlenia , to wybierze ten obrazek i ustaw jako glowny.
+            if ((product.ImageUrl == null || product.ImageUrl == "") && product.Product_Images != null)
+            //Jesli nie ma obrazka glownego a jest obrazk [0] jako dodatkowy do wysietlenia , to wybierze ten obrazek i ustaw jako glowny.
             {
 
                 if (product.Product_Images.Count >= 1)
@@ -234,13 +235,13 @@ namespace partner_aluro.Controllers
             Product product = new Product();
             //product.Cats = _ProductService.GetListCategory();
 
-                var item = _context.Category.Select(x => new SelectListItem()
-                {
-                    Text = x.Name,
-                    Value = x.CategoryId.ToString()
-                }).ToList();
+            var item = _context.Category.Select(x => new SelectListItem()
+            {
+                Text = x.Name,
+                Value = x.CategoryId.ToString()
+            }).ToList();
 
-                product.categories = item;
+            product.categories = item;
 
             return View(product);
         }
@@ -256,12 +257,15 @@ namespace partner_aluro.Controllers
                     CategoryID = KategoriaID
                 };
                 _productCategoryService.AddProductCategoryMultiple(productCategory);
-            }else
+            } else
             {
                 _productCategoryService.DeleteProductCategoryMultiple(ProduktId, KategoriaID);
             }
 
         }
+
+        [HttpPost]
+        [WebMethod]
         public void ChangeCategory(int ProduktId, int KategoriaID)
         {
             Product product = _context.Products.Where(x => x.ProductId == ProduktId).FirstOrDefault();
@@ -270,6 +274,9 @@ namespace partner_aluro.Controllers
             _context.Products.Update(product);
             _context.SaveChanges();
         }
+
+        [HttpPost]
+        [WebMethod]
         public void ChangeIlosc(int ProduktId, int Ilosc)
         {
             Product product = _context.Products.Where(x => x.ProductId == ProduktId).FirstOrDefault();
@@ -280,6 +287,7 @@ namespace partner_aluro.Controllers
         }
 
         [HttpPost]
+        [WebMethod]
         public void TakeProduct(int ProduktId, bool check)
         {
             ExcelController.Initialize();
@@ -308,6 +316,26 @@ namespace partner_aluro.Controllers
                     ExcelController.produkty.Remove(find);
                 }
             }
+        }
+
+        [HttpPost]
+        [WebMethod]
+        public  void ChangeCheckUkryty(int ProduktId)
+        {
+            Product product = _context.Products.Where(x => x.ProductId == ProduktId).FirstOrDefault();
+
+            if(product.Ukryty == true)
+            {
+                product.Ukryty = false;
+                _context.Update(product);
+                _context.SaveChanges();
+            }else if (product.Ukryty == false)
+            {
+                product.Ukryty = true;
+                _context.Update(product);
+                _context.SaveChanges();
+            }
+
         }
 
         [HttpPost]
@@ -501,7 +529,7 @@ namespace partner_aluro.Controllers
                 product.pathImageUrl250x250 = product.Product_Images.FirstOrDefault().pathImageCompress250x250;
             }
 
-            product.SzukanaNazwa = product.Name + " - ["+ product.Symbol +"]";
+            product.SzukanaNazwa = product.Name + " - [" + product.Symbol + "]";
 
             _context.Update(product);
             _context.SaveChanges();
@@ -539,11 +567,8 @@ namespace partner_aluro.Controllers
                 };
                 _productCategoryService.AddProductCategoryMultiple(productCategory);
             }
-
-
             return RedirectToAction(nameof(List));
         }
-
 
         [HttpGet]
         public async Task<IActionResult> List()
@@ -552,13 +577,29 @@ namespace partner_aluro.Controllers
             ExcelController.Initialize();
 
             ViewData["Category"] = GetCategories();
-            List<Product> produkty = await _context.Products
+            List<ProductsList> ProductsList = await _context.Products
                 .AsNoTracking()
                 .Include(p => p.CategoryNavigation)
                 .Where(p => p.CategoryNavigation.Aktywny == true)
+                .Select(p=> new ProductsList{ 
+                    ProductId = p.ProductId, 
+                    Name = p.Name,
+                    pathImageUrl250x250 = p.pathImageUrl250x250, 
+                    Symbol = p.Symbol,
+                    Ukryty = p.Ukryty,
+                    Ilosc = (int)p.Ilosc,
+                    CenaProduktuBrutto = p.CenaProduktuBrutto,
+                    CenaProduktuDetal = p.CenaProduktuDetal,
+                    CategoryNavigation = p.CategoryNavigation,
+                    CategoryId = p.CategoryId,
+                })
+                .OrderBy(p=> p.ProductId)
+                .OrderByDescending(p=> p.ProductId)
                 .ToListAsync();
 
-            return View(produkty);
+            //(p => new PInfo { Name = p.NameDe.ToLower(), NameBezZnako
+
+            return View(ProductsList);
 
         }
 

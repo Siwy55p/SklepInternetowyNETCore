@@ -4,9 +4,9 @@
     ViewData["Title"] = "Detail";
     Layout = "~/Views/Shared/_Dashboard.cshtml";
 }
-<h5>Koszyk ID @Model.CartaId </h5>
+<h5>Koszyk ID: @Model.CartaId , Data: @Model.dataPowstania</h5>
 <div class="card-header">
-    <span><i class="bi bi-table me-2"></i></span>Pozycje koszyka, użytkownik: @Model.user.Email
+    <span><i class="bi bi-table me-2"></i></span>Pozycje koszyka, użytkownika: @Model.user.Email , Imię Nazwisko: @Model.user.Imie @Model.user.Nazwisko , @Model.user.NazwaFirmy , @Model.user.PhoneNumber
 </div>
     @if (Model.CartItems.Count > 0)
     {

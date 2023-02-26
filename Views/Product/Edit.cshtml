@@ -14,26 +14,31 @@
     <script src="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css"></script>
     }
 
-
-
-    <a class="btn btn-primary" asp-controller="Product" asp-action="Details" asp-route-id="@Model.ProductId">Podgląd </a>
-
 <form class="needs-validation" asp-action="Edit" asp-route-id="@Model.ProductId" asp-controller="Product" class="form-horizontal" method="post" enctype="multipart/form-data">
 
-
-    <button type="submit" class="btn btn-success">Zapisz zmiany</button>
+    <div class="row sticky-top bg-light border-bottom">
+        <div class="col">
+            <h3>Produkt</h3>
+            @Html.HiddenFor(h=>Model.ProductId)
+            @Html.ValidationSummary()
+        </div>
+        <div class="col">
+            ID: <input asp-for="@Model.ProductId" readonly />
+        </div>
+        <div class="col">
+            <a class="btn btn-success float-end" asp-controller="Product" asp-action="Details" asp-route-id="@Model.ProductId">Podgląd </a>
+            <button type="submit" class="btn btn-success float-end">Zapisz zmiany</button>
+        </div>
+    </div>
     
     <div class="row g-0">
 
         <div class="col-md-8 border-end">
-                @Html.HiddenFor(h=>Model.ProductId)
-                @Html.ValidationSummary()
             @await Html.PartialAsync("_FormProduct")
-            </hr>
 
-            <button type="submit" class="btn btn-success">Zapisz zmiany</button>
+@*            <button type="submit" class="btn btn-success">Zapisz zmiany</button>
                 <button id="btnBack" runat="server" text="Back" class="btn btn-primary" onclick="JavaScript: window.history.back(1); return false;">Powrót</button>
-            <hr />
+            <hr />*@
 
             @{
                 bool pokaz = true;
@@ -73,10 +78,6 @@
                     </tr>
                 </table>
             }
-
-
-
-
         </div>
         <div class="col-md-4">
                 @await Html.PartialAsync("_FormProductImage")

@@ -871,4 +871,16 @@
   <data name="Wymiary zewnetrzne:" xml:space="preserve">
     <value>Wymiary zewnetrzne:</value>
   </data>
+  <data name="2. Metoda dostawy" xml:space="preserve">
+    <value>2. Metoda dostawy</value>
+  </data>
+  <data name="Nazwa Firmy do adresu dostawy" xml:space="preserve">
+    <value>Nazwa Firmy do adresu dostawy</value>
+  </data>
+  <data name="Powrót" xml:space="preserve">
+    <value>Powrót</value>
+  </data>
+  <data name="Stwórz konto" xml:space="preserve">
+    <value>Stwórz konto</value>
+  </data>
 </root>

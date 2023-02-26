@@ -21,6 +21,10 @@
     {
       "library": "tinymce@6.3.1",
       "destination": "wwwroot/tinymce/"
+    },
+    {
+      "library": "datatables.net-fixedheader-dt@3.3.1",
+      "destination": "wwwroot/datatables.net-fixedheader-dt/"
     }
   ]
 }

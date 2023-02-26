@@ -924,4 +924,16 @@
   <data name="Metoda Płatności" xml:space="preserve">
     <value>Payment method</value>
   </data>
+  <data name="2. Metoda dostawy" xml:space="preserve">
+    <value>Delivery method</value>
+  </data>
+  <data name="Nazwa Firmy do adresu dostawy" xml:space="preserve">
+    <value>Company name for delivery address</value>
+  </data>
+  <data name="Powrót" xml:space="preserve">
+    <value>Return</value>
+  </data>
+  <data name="Stwórz konto" xml:space="preserve">
+    <value>Create an account</value>
+  </data>
 </root>

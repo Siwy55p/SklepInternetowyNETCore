@@ -75,19 +75,29 @@ namespace partner_aluro.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(string CartId)
         {
-            Cart cart = _context.Carts.Where(x => x.CartaId == CartId)
+            Cart cart = _context.Carts.Where(x => x.CartaId == CartId && x.Zrealizowane == false)
                 .Include(x => x.user)
                 .ThenInclude(u => u.Adress1rozliczeniowy)
                 .Include(c => c.CartItems)
                 .ThenInclude(p => p.Product)
                 .FirstOrDefault();
 
+            Cart cartExist = _context.Carts.Where(x => x.CartaId != CartId && x.Zrealizowane == false)
+                .Include(x => x.user)
+                .ThenInclude(u => u.Adress1rozliczeniowy)
+                .Where(x => x.user == cart.user)
+                .Include(c => c.CartItems)
+                .ThenInclude(p => p.Product)
+                .FirstOrDefault();
 
 
             try
             {
-                _context.Remove(cart);
-                _context.SaveChanges();
+                if (cartExist != null)
+                {
+                    _context.Remove(cart);
+                    _context.SaveChanges();
+                }
             }catch(Exception ex)
             {
 

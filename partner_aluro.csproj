@@ -43,6 +43,7 @@
     <PackageReference Include="datatables.net-fixedheader-dt" Version="3.3.1" />
     <PackageReference Include="DeepL.net" Version="1.5.0" />
     <PackageReference Include="FreeSpire.XLS" Version="12.7.0" />
+    <PackageReference Include="IKVM" Version="8.4.5" />
     <PackageReference Include="itext7" Version="7.2.5" />
     <PackageReference Include="iTextSharp" Version="5.5.13.3" />
     <PackageReference Include="jQuery" Version="3.6.3" />

@@ -3,62 +3,59 @@
     Layout = "~/Views/Shared/_Dashboard.cshtml";
 }
 
-
 @model IEnumerable<partner_aluro.Models.Slider>
 
-<div>
-    <h1 class="display-4">Lista sliderow</h1>
-    
-    <a asp-controller="Slider" asp-action="Add" class="btn btn-success" px-3">
-    Dodaj slider
-    </a>
+    <div class="row sticky-top bg-light border-bottom">
+        <div class="col"><h3>Sliders</h3></div>
+        <div class="col">
+            <button asp-controller="Slider" asp-action="Add" class="btn btn-success float-end" px-3">
+                Dodaj slider
+            </button>
+        </div>
+    </div>
 
-        <div class="row">
-            <div class="col-md-12 mb-3">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table id="SliderTable1" style="width: 100%">
-                                <thead>
+    <div class="row">
+        <div class="col-md-12 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                    <table id="SliderTable1" class="cell-border display" style="width: 100%">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Zaz</th>
+                                    <th>Ukryte</th>
+                                    <th>Akcje</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var Slider in Model)
+                                {
                                     <tr>
-                                        <th>Id</th>
-                                        <th>Zaz</th>
-                                        <th>Ukryte</th>
-                                        <th>Akcje</th>
+                                        <td>@Slider.ImageSliderID</td>
+                                        <td><input id="takenBefore" type="checkbox" value="@Slider.ImageSliderID" data-toggle="toggle"></td>
+                                        <td>@Slider.Name</td>
+                                        <td>
+                                            <a asp-controller="Slider" asp-action="Edit" asp-route-id="@Slider.ImageSliderID">Edytuj</a> |
+                                            <a asp-controller="Slider" asp-action="Delete" asp-route-id="@Slider.ImageSliderID">Usuń</a> |
+                                        </td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var Slider in Model)
-                                    {
-                                        <tr>
-                                            <td>@Slider.ImageSliderID</td>
-                                            <td><input id="takenBefore" type="checkbox" value="@Slider.ImageSliderID" data-toggle="toggle"></td>
-                                            <td>@Slider.Name</td>
-                                            <td>
-                                                <a asp-controller="Slider" asp-action="Edit" asp-route-id="@Slider.ImageSliderID">Edytuj</a> |
-                                                <a asp-controller="Slider" asp-action="Delete" asp-route-id="@Slider.ImageSliderID">Usuń</a> |
-                                            </td>
-                                        </tr>
-                                    }
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>Id</th>
-                                        <th>Zaz</th>
-                                        <th>Ukryte</th>
-                                        <th scope="col">Akcje</th>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Zaz</th>
+                                    <th>Ukryte</th>
+                                    <th scope="col">Akcje</th>
+                                </tr>
+                            </tfoot>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
-
-
-
-</div>
+    </div>
 
 @section Scripts{
     <script>

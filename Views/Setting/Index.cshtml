@@ -10,12 +10,14 @@
   
     <div class="row">
 
-        <div class="col">
-            <div>
-                Ustawienia witryny
+        <div class="row sticky-top bg-light border-bottom">
+            <div class="col"><h3>Ustawienia witryny</h3></div>
+            <div class="col">
+                <button type="submit" class="btn btn-success float-end">Zapisz</button>  
+                <button id="btnBack" runat="server" text="Back" class="btn btn-primary" onclick="JavaScript: window.history.back(1); return false;">Powrót</button>
             </div>
-
         </div>
+
         <div class="row">
             <div class="col">
                 <div class="form-group row p-2">
@@ -47,10 +49,6 @@
                     <input asp-for="@Model.SliderHome3" class="form-control" aria-required="true" />
                 </div>
             </div>
-        </div>
-
-        <div class="col-md-6">
-        <button type="submit" class="btn btn-success">Zapisz</button>  <button id="btnBack" runat="server" text="Back" class="btn btn-primary" onclick="JavaScript: window.history.back(1); return false;">Powrót</button>
         </div>
     </div>
 </form>

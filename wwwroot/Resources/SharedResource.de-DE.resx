@@ -924,4 +924,16 @@
   <data name="Powtórz nowe hasło" xml:space="preserve">
     <value>Wiederhole das neue Passwort</value>
   </data>
+  <data name="2. Metoda dostawy" xml:space="preserve">
+    <value>Versandart</value>
+  </data>
+  <data name="Nazwa Firmy do adresu dostawy" xml:space="preserve">
+    <value>Firmenname für Lieferadresse</value>
+  </data>
+  <data name="Powrót" xml:space="preserve">
+    <value>Rückkehr</value>
+  </data>
+  <data name="Stwórz konto" xml:space="preserve">
+    <value>Erstellen Sie ein Konto</value>
+  </data>
 </root>

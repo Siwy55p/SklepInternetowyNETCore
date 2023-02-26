@@ -74,8 +74,6 @@ namespace partner_aluro.Controllers
             var user = _unitOfWork.User.GetUser(id);
             var roles = _unitOfWork.Role.GetRoles();
 
-            
-
             var userRoles = await _signInManager.UserManager.GetRolesAsync(user);
 
             var roleItems = roles.Select(role =>

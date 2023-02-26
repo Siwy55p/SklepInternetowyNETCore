@@ -4,15 +4,20 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Dashboard.cshtml";
 }
-<p>
-    <a class="btn btn-succes" asp-action="Create">Dodaj nowy obrazek</a>
-</p>
+
+<div class="row sticky-top bg-light border-bottom">
+    <div class="col"><h3>Media</h3></div>
+    <div class="col">
+        <a class="btn btn-success float-end" asp-action="Create">Dodaj nowy obrazek</a>
+    </div>
+</div>
+
 <div class="row">
     <div class="col-md-12 mb-3">
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
-                    <table id="ImageTable" style="width: 100%">
+                    <table id="ImageTable" class="cell-border display" style="width: 100%">
                         <thead>
                             <tr>
                                 <th>

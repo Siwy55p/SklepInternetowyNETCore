@@ -4,10 +4,14 @@
     Layout = "~/Views/Shared/_Dashboard.cshtml";
 }
 
-
-<a asp-controller="Newsletter" asp-action="Add" class="btn btn-success" px-3">
-    Dodaj Newsletter
-</a>
+<div class="row sticky-top bg-light border-bottom">
+    <div class="col"><h3>Newsletter</h3></div>
+    <div class="col">
+        <a asp-controller="Newsletter" asp-action="Add" class="btn btn-success float-end" px-3">
+            Dodaj Newsletter
+        </a>
+    </div>
+</div>
 
 <div class="row">
     <div class="col-md-12 mb-3">

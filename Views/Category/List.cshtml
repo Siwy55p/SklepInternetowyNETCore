@@ -3,18 +3,21 @@
     ViewData["Title"] = "Lista kategori";
     Layout = "~/Views/Shared/_Dashboard.cshtml";
 }
-
-<a type="button" class="btn btn-success" asp-controller="Category" asp-action="Add" >Dodaj nową kategorie</a>
-
-
     @if (@Model != null && @Model.Any())
     {
+    <div class="row sticky-top bg-light border-bottom">
+        <div class="col"><h3>Kategorie</h3></div>
+        <div class="col">
+            <a type="button" class="btn btn-success float-end" asp-controller="Category" asp-action="Add">Dodaj nową kategorie</a>
+        </div>
+    </div>
+
         <div class="row">
             <div class="col-md-12 mb-3">
                 <div class="card">
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table id="CategoryTable" class="display" style="width: 100%">
+                        <table id="CategoryTable" class="cell-border display" style="width: 100%">
                                 <thead>
                                     <tr>
                                         <th>Id</th>
