@@ -12,10 +12,11 @@
 
 @inject LanguageService language
 
-<div class="row sticky-top fixed-top justify-content-center align-items-center navbar-expand-lg navbar-dark bg-dark">
+@*<div class="row sticky-top fixed-top justify-content-center align-items-center navbar-expand-lg navbar-dark bg-dark" style="top:0px">*@
+<div class="row sticky-top fixed-top justify-content-center align-items-center navbar-dark bg-dark" style="top:0px">
     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-10 col-xxl-8 header px-0 mx-0">
 
-        <div class="row p-0 m-0 pt-1">
+        <div class="row sticky-top p-0 m-0 pt-1">
                     @*Lewa strona*@
                     @if (User.IsInRole("Administrator") || User.IsInRole("Manager"))
                     {
