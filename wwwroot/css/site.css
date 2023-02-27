@@ -425,7 +425,7 @@ a.kategoria_class_menu {
     align-items: center;
     text-align: center;
     flex-direction: column;
-    background-color: #f8f9fa;
+    background-color: black;
     text-align: center;
 }
     .mainmenu:hover {

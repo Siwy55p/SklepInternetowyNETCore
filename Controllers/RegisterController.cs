@@ -246,20 +246,23 @@ namespace partner_aluro.Controllers
             //list.Add(Kraj1);
             //list.Add(Miasto1);
             //list.Add(KodPocztowy1);
-
-
             return list;
         }
+
         [HttpPost]
         public async Task<List<string>> SprawdzNIPAdminAddUser(string? Vat = null)
         {
-
             CompanyModel _model = new CompanyModel();
 
-            
             _model.Vat = Vat;
-            _model = await RegonService.GetCompanyDataByNipAsync(_model.Vat);
-
+            if (_model.Vat != null)
+            {
+                _model = await RegonService.GetCompanyDataByNipAsync(_model.Vat);
+            }
+            else
+            {
+                _model = await RegonService.GetCompanyDataByNipAsync(Vat);
+            }
 
             var komunikat = "Brak danych";
             var NazwaFirmy = "Nie znaleziono takiej firmy";
@@ -282,7 +285,7 @@ namespace partner_aluro.Controllers
                 komunikat = _model.Errors[0].ErrorMessagePl;
             }
 
-            if (_model != null && _model.Errors.Count < 0)
+            if (_model != null && _model.Errors.Count <= 0 && _model.Name != "")
             {
                 Regon = _model.Regon;
                 Wojewodztwo1 = _model.Wojewodztwo;
