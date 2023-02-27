@@ -13,7 +13,7 @@
 
 
             <div class="form-group">
-                <label for="@Model.User.Imie">Imie test</label>
+                <label for="@Model.User.Imie">Imię</label>
     <input asp-for="@Model.User.Imie" class="form-control" id="Imie" value="@Model.User.Imie"></input>
             </div>
 
@@ -88,11 +88,10 @@
 
                 <h4 class="mb-3">Adres rozliczeniowy</h4>
 
-                <div class="mb-3">
+@*                <div class="mb-3">
                     <label asp-for="@Model.User.Adress1rozliczeniowy.Regon">Regon</label>
-                    <input asp-for="@Model.User.Adress1rozliczeniowy.Regon" id="Regon" class="form-control" placeholder="Nr Regon" value="@Model.User.Adress1rozliczeniowy.Regon" required />
-                    <span asp-validation-for="@Model.User.Adress1rozliczeniowy.Regon" class="text-danger"></span>
-                </div>
+                    <input asp-for="@Model.User.Adress1rozliczeniowy.Regon" id="Regon" class="form-control" placeholder="Nr Regon" value="@Model.User.Adress1rozliczeniowy.Regon" />
+                </div>*@
 
                 <div class="mb-3">
                     <label asp-for="@Model.User.Adress1rozliczeniowy.Wojewodztwo">Wojewodztwo</label>
@@ -115,7 +114,6 @@
                     <div class="col-md-5 mb-3">
                         <label asp-for="@Model.User.Adress1rozliczeniowy.Kraj">Kraj</label>
                         <input asp-for="@Model.User.Adress1rozliczeniowy.Kraj" id="Kraj1"  class="form-control" placeholder="Kraj" value="@Model.User.Adress1rozliczeniowy.Kraj" required />
-                        <span asp-validation-for="@Model.User.Adress1rozliczeniowy.Kraj" class="text-danger"></span>
                     </div>
                     <div class="col-md-4 mb-3">
                         <label asp-for="@Model.User.Adress1rozliczeniowy.Miasto">Miasto</label>

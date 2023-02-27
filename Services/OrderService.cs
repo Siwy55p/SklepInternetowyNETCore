@@ -131,7 +131,6 @@ namespace partner_aluro.Services
                 .Include(a1 => a1.adresRozliczeniowy)
                 .Include(a2 => a2.AdressDostawy)
                 .Include(user => user.User)
-                .Where(u => u.User.UserName != "szuminski.p@gmail.com")
                 .Where(u => u.User.UserName != "piotr@pierrot.pl")
                 .OrderBy(d => d.OrderPlaced)
                 .ToListAsync();

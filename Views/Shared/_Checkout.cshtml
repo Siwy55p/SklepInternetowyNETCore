@@ -16,138 +16,141 @@
 
             @if (Model != null)
             {
-
-                @if (Model.Carts.CartItems.Count > 0)
+                if (Model.Carts.CartItems != null)
                 {
 
-
-                    <div class="row bg-light">
-                        <div class="col border text-center fw-bold" style="max-width: 75px; width:75px"></div>
-                        <div class="col border text-center fw-bold d-none d-sm-none d-md-none d-lg-block text-wrap text-break">@language.Getkey("Nazwa produktu")</div>
-                        <div class="col border text-center fw-bold d-none d-sm-none d-md-none d-lg-block">Symbol</div>
-                        <div class="col border text-center fw-bold d-none d-sm-none d-md-none d-lg-block">@language.Getkey("Cena jednostkowa")</div>
-                        <div class="col border text-center fw-bold">@language.Getkey("Ilość")</div>
-                        <div class="col border text-center fw-bold">@language.Getkey("Razem")</div>
-                        <div class="col border text-center fw-bold" style="max-width: 60px">@language.Getkey("Usuń")</div>
-                    </div>
-
-
-                    @foreach (var item in Model.Carts.CartItems)
+                    @if (Model.Carts.CartItems.Count > 0)
                     {
-                        <div class="row @zmienna" >
 
-                            @{
-                                i++;
-                                if (i % 2 != 0)
-                                {
-                                    zmienna = "bg-light";
+
+                        <div class="row bg-light">
+                            <div class="col border text-center fw-bold" style="max-width: 75px; width:75px"></div>
+                            <div class="col border text-center fw-bold d-none d-sm-none d-md-none d-lg-block text-wrap text-break">@language.Getkey("Nazwa produktu")</div>
+                            <div class="col border text-center fw-bold d-none d-sm-none d-md-none d-lg-block">Symbol</div>
+                            <div class="col border text-center fw-bold d-none d-sm-none d-md-none d-lg-block">@language.Getkey("Cena jednostkowa")</div>
+                            <div class="col border text-center fw-bold">@language.Getkey("Ilość")</div>
+                            <div class="col border text-center fw-bold">@language.Getkey("Razem")</div>
+                            <div class="col border text-center fw-bold" style="max-width: 60px">@language.Getkey("Usuń")</div>
+                        </div>
+
+
+                        @foreach (var item in Model.Carts.CartItems)
+                        {
+                            <div class="row @zmienna" >
+
+                                @{
+                                    i++;
+                                    if (i % 2 != 0)
+                                    {
+                                        zmienna = "bg-light";
+                                    }
+                                    else
+                                    {
+                                        zmienna = "bg-white";
+                                    }
+
+                                    var Cena_brutto = item.Product.CenaProduktuBrutto;
+                                    @if (item.Product.Promocja == true /*&& item.Product.CenaPromocyja != null*/)
+                                    {
+
+                                        Cena_brutto = item.Product.CenaPromocyja * partner_aluro.Core.Constants.Vat;
+
+                                    }
+
+                                    var CenaJednostkowa_netto = item.Product.CenaProduktuBrutto / partner_aluro.Core.Constants.Vat;
+                                    @if (item.Product.Promocja == true /*&& item.Product.CenaPromocyja != null*/)
+                                    {
+
+                                        CenaJednostkowa_netto = item.Product.CenaPromocyja;
+
+                                    }
+
+                                    var CenaJednostkowa_brutto = Cena_brutto;
+
+                                    if (partner_aluro.Core.Constants.Rabat >= 0)
+                                    {
+                                        CenaJednostkowa_netto = (item.Product.CenaProduktuBrutto / partner_aluro.Core.Constants.Vat) * (1 - (partner_aluro.Core.Constants.Rabat / 100));
+                                        CenaJednostkowa_brutto = Cena_brutto * (1 - (partner_aluro.Core.Constants.Rabat / 100));
+                                    }
+                                    else if (item.Product.Promocja == true /*&& item.Product.CenaPromocyja != null*/)
+                                    {
+                                        CenaJednostkowa_netto = (item.Product.CenaPromocyja * (1 - (partner_aluro.Core.Constants.Rabat / 100)));
+                                        CenaJednostkowa_brutto = Cena_brutto * (1 - (partner_aluro.Core.Constants.Rabat / 100));
+
+                                    }
+
+                                    var ProductTotal = CenaJednostkowa_brutto * item.Quantity;
+
                                 }
-                                else
-                                {
-                                    zmienna = "bg-white";
-                                }
 
-                                var Cena_brutto = item.Product.CenaProduktuBrutto;
-                                @if (item.Product.Promocja == true /*&& item.Product.CenaPromocyja != null*/)
-                                {
-
-                                    Cena_brutto = item.Product.CenaPromocyja * partner_aluro.Core.Constants.Vat;
-
-                                }
-
-                                var CenaJednostkowa_netto = item.Product.CenaProduktuBrutto / partner_aluro.Core.Constants.Vat;
-                                @if (item.Product.Promocja == true /*&& item.Product.CenaPromocyja != null*/)
-                                {
-
-                                    CenaJednostkowa_netto = item.Product.CenaPromocyja;
-
-                                }
-
-                                var CenaJednostkowa_brutto = Cena_brutto;
-
-                                if (partner_aluro.Core.Constants.Rabat >= 0)
-                                {
-                                    CenaJednostkowa_netto = (item.Product.CenaProduktuBrutto / partner_aluro.Core.Constants.Vat) * (1 - (partner_aluro.Core.Constants.Rabat / 100));
-                                    CenaJednostkowa_brutto = Cena_brutto * (1 - (partner_aluro.Core.Constants.Rabat / 100));
-                                }
-                                else if (item.Product.Promocja == true /*&& item.Product.CenaPromocyja != null*/)
-                                {
-                                    CenaJednostkowa_netto = (item.Product.CenaPromocyja * (1 - (partner_aluro.Core.Constants.Rabat / 100)));
-                                    CenaJednostkowa_brutto = Cena_brutto * (1 - (partner_aluro.Core.Constants.Rabat / 100));
-
-                                }
-
-                                var ProductTotal = CenaJednostkowa_brutto * item.Quantity;
-
-                            }
-
-                            <div class="col border border-top-0" style="max-width: 75px; width:75px; margin:0px; padding:0px;">
-                                <img src="~/@item.Product.pathImageUrl250x250" style="max-width: 70px; width: 70px; max-height: 70px; object-fit: cover;">
+                                <div class="col border border-top-0" style="max-width: 75px; width:75px; margin:0px; padding:0px;">
+                                    <img src="~/@item.Product.pathImageUrl250x250" style="max-width: 70px; width: 70px; max-height: 70px; object-fit: cover;">
+                                </div>
+                                <div class="col border border-top-0 text-center d-none d-sm-none d-md-none d-lg-block text-wrap text-break" style="width: 10%">
+                                    <a class="link-dark text-black" asp-controller="Product" asp-action="Details" asp-route-id="@item.Product.ProductId">@language.Getkey(@item.Product.Name)</a>
+                                </div>
+                                <div class="col border border-top-0 d-none d-sm-none d-md-none d-lg-block text-center">
+                                    <span class="pozycja">@item.Product.Symbol </span>
+                                </div>
+                                <div class="col border border-top-0 d-none d-sm-none d-md-none d-lg-block text-center" style="display: inline-flex; vertical-align:middle">
+                                    <span class="pozycja">@language.GetCurrently(@CenaJednostkowa_brutto, Constants.myNumberFormatInfo).ToString("C",Constants.myNumberFormatInfo)</span>
+                                </div>
+                                <div class="col border border-top-0 text-center">
+                                    <a asp-controller="Cart" asp-action="ReduceQuantity" asp-route-id="@item.Product.ProductId"><i class="fa-solid fa-minus"></i></a>
+                                    <span class="pozycja">
+                                        @item.Quantity.ToString("0.###########################")
+                                    </span>
+                                    <a asp-controller="Cart" asp-action="IncreaseQuantity" asp-route-id="@item.Product.ProductId" asp-route-Quantity="@item.Quantity"><i class="fa-solid fa-plus"></i></a>
+                                </div>
+                                <div class="col border border-top-0 text-center">
+                                    <span class="pozycja">
+                                        @language.GetCurrently(@ProductTotal, Constants.myNumberFormatInfo).ToString("C",Constants.myNumberFormatInfo)
+                                    </span>
+                                </div>
+                                <div class="col border border-top-0 text-center" style="max-width: 60px">
+                                    <span class="pozycja">
+                                        <a asp-controller="Cart" asp-action="RemoveFromCart" asp-route-id="@item.Product.ProductId" class="text-danger"><i class="fa-solid fa-xmark"></i></a>
+                                    </span>
+                                </div>
                             </div>
-                            <div class="col border border-top-0 text-center d-none d-sm-none d-md-none d-lg-block text-wrap text-break" style="width: 10%">
-                                <a class="link-dark text-black" asp-controller="Product" asp-action="Details" asp-route-id="@item.Product.ProductId">@language.Getkey(@item.Product.Name)</a>
-                            </div>
-                            <div class="col border border-top-0 d-none d-sm-none d-md-none d-lg-block text-center">
-                                <span class="pozycja">@item.Product.Symbol </span>
-                            </div>
-                            <div class="col border border-top-0 d-none d-sm-none d-md-none d-lg-block text-center" style="display: inline-flex; vertical-align:middle">
-                                <span class="pozycja">@language.GetCurrently(@CenaJednostkowa_brutto, Constants.myNumberFormatInfo).ToString("C",Constants.myNumberFormatInfo)</span>
-                            </div>
-                            <div class="col border border-top-0 text-center">
-                                <a asp-controller="Cart" asp-action="ReduceQuantity" asp-route-id="@item.Product.ProductId"><i class="fa-solid fa-minus"></i></a>
-                                <span class="pozycja">
-                                    @item.Quantity.ToString("0.###########################")
-                                </span>
-                                <a asp-controller="Cart" asp-action="IncreaseQuantity" asp-route-id="@item.Product.ProductId" asp-route-Quantity="@item.Quantity"><i class="fa-solid fa-plus"></i></a>
-                            </div>
-                            <div class="col border border-top-0 text-center">
-                                <span class="pozycja">
-                                    @language.GetCurrently(@ProductTotal, Constants.myNumberFormatInfo).ToString("C",Constants.myNumberFormatInfo)
-                                </span>
-                            </div>
-                            <div class="col border border-top-0 text-center" style="max-width: 60px">
-                                <span class="pozycja">
-                                    <a asp-controller="Cart" asp-action="RemoveFromCart" asp-route-id="@item.Product.ProductId" class="text-danger"><i class="fa-solid fa-xmark"></i></a>
-                                </span>
+                        }
+                        <hr class="my-4">
+
+
+                        <div class="row">
+                            <div class="col-8 d-none d-sm-none d-md-none d-lg-block"></div>
+                            <div class="border bg-light text text-end" style="width:150px">@language.Getkey("Wartość (brutto)"):</div>
+                            <div class="border bg-light" style="width:150px">
+                                <strong>@language.GetCurrently(@Model.Carts.GetCartTotalBrutto(), Constants.myNumberFormatInfo).ToString("C",Constants.myNumberFormatInfo)</strong>
                             </div>
                         </div>
+
+
+                        <div class="row">
+                            <div class="col-8 d-none d-sm-none d-md-none d-lg-block"></div>
+                            <div class="border bg-light text text-end" style="width:150px">@language.Getkey("Razem (netto)"):</div>
+                            <div class="border bg-light" style="width:150px">
+                                <strong>@language.GetCurrently(@Model.Carts.GetCartTotalNetto(), Constants.myNumberFormatInfo).ToString("C",Constants.myNumberFormatInfo)</strong>
+                            </div>
+                        </div>
+
+
+                        @*   <form asp-action="Return" asp-controller="Cart" method="POST" >
+                                <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
+                                <button class="btn btn-success float-right mr-5" type="submit" name="returnUrl" value="@ViewBag.returnUrl"><i class="fa-solid fa-angles-right"></i>Powrót</button>
+                            </form>*@
+
+                        @if (ViewData["returnUrl"] != null)
+                        {
+                            <a class="btn btn-primary" href="@ViewData["returnUrl"]">@language.Getkey("Powrót do sklepu")</a>
+                        }
+
+                        <a class="a-cleanup end" asp-controller="Cart" asp-action="ClearCart"><div class="btn btn-success float-right mr-5"><i class="fa-solid fa-trash-can"> </i> @language.Getkey("Wyczyść zamówienie")</div></a>
                     }
-                    <hr class="my-4">
-
-
-                    <div class="row">
-                        <div class="col-8 d-none d-sm-none d-md-none d-lg-block"></div>
-                        <div class="border bg-light text text-end" style="width:150px">@language.Getkey("Wartość (brutto)"):</div>
-                        <div class="border bg-light" style="width:150px">
-                            <strong>@language.GetCurrently(@Model.Carts.GetCartTotalBrutto(), Constants.myNumberFormatInfo).ToString("C",Constants.myNumberFormatInfo)</strong>
-                        </div>
-                    </div>
-
-
-                    <div class="row">
-                        <div class="col-8 d-none d-sm-none d-md-none d-lg-block"></div>
-                        <div class="border bg-light text text-end" style="width:150px">@language.Getkey("Razem (netto)"):</div>
-                        <div class="border bg-light" style="width:150px">
-                            <strong>@language.GetCurrently(@Model.Carts.GetCartTotalNetto(), Constants.myNumberFormatInfo).ToString("C",Constants.myNumberFormatInfo)</strong>
-                        </div>
-                    </div>
-
-
-                    @*   <form asp-action="Return" asp-controller="Cart" method="POST" >
-                            <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
-                            <button class="btn btn-success float-right mr-5" type="submit" name="returnUrl" value="@ViewBag.returnUrl"><i class="fa-solid fa-angles-right"></i>Powrót</button>
-                        </form>*@
-
-                    @if (ViewData["returnUrl"] != null)
+                    else
                     {
-                        <a class="btn btn-primary" href="@ViewData["returnUrl"]">@language.Getkey("Powrót do sklepu")</a>
+                        <h3 class="text-center">@language.Getkey("Koszyk jest pusty")</h3>
                     }
-
-                    <a class="a-cleanup end" asp-controller="Cart" asp-action="ClearCart"><div class="btn btn-success float-right mr-5"><i class="fa-solid fa-trash-can"> </i> @language.Getkey("Wyczyść zamówienie")</div></a>
-                }
-                else
-                {
-                    <h3 class="text-center">@language.Getkey("Koszyk jest pusty")</h3>
                 }
             }
 

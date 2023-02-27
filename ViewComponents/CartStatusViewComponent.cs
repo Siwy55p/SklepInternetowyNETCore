@@ -24,7 +24,8 @@ namespace partner_aluro.ViewComponents
             _cart.CartItems = await _cart.GetAllCartItemsAsync();
 
             model.Cart = _cart;
-
+            model.Cart.GetCartTotalBrutto();
+            model.Cart.GetCartTotalNetto();
 
             return View(model);
         }
