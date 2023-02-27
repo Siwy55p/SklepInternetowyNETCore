@@ -248,8 +248,8 @@ a.kategoria_class_menu {
 /*header menu menu nav bar*/
 /*header */
 .header {
-    height: 47px;
-    min-height: 47px;
+    height: 48px;
+    min-height: 48px;
 }
 /*Koszyj header*/
 .badge {
@@ -369,6 +369,18 @@ a.kategoria_class_menu {
 .row.custom-kategory-menu.sticky-top {
     top: 53px;
     z-index: 1;
+}
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 960px) {
+    .headerM {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: red;
+        color: white;
+        text-align: center;
+    }
 }
 
 .thumbnail img {

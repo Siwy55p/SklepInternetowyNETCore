@@ -4,19 +4,33 @@
 @using partner_aluro.Core;
 @using System.Globalization;
 @using partner_aluro.wwwroot.Resources;
-@*
-@inject SignInManager<ApplicationUser> SignInManager
-@inject UserManager<ApplicationUser> UserManager
-@inject Cart cart*@
-
+@using System.Text.RegularExpressions;
 
 @inject LanguageService language
+@inject Wangkanai.Detection.Services.IDetectionService DetectionService
+
+@{
+
+    var zmiena = "sticky-top fixed-top ";
+    var wysokosc = "height: 48px;";
+
+    @if(DetectionService.Device.Type == Wangkanai.Detection.Models.Device.Mobile)
+    {
+        zmiena = "fixed-bottom py-3 ";
+        wysokosc = "height: 58px;";
+    }
+    else
+    {
+        zmiena = "sticky-top fixed-top ";
+        wysokosc = "height: 48px;";
+    }
+}
 
 @*<div class="row sticky-top fixed-top justify-content-center align-items-center navbar-expand-lg navbar-dark bg-dark" style="top:0px">*@
-<div class="row sticky-top fixed-top justify-content-center align-items-center navbar-dark bg-dark" style="top:0px">
-    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-10 col-xxl-8 header px-0 mx-0">
+<div class="row @zmiena gx-0 g-0 justify-content-center align-items-center navbar-dark bg-dark" style="@wysokosc">
+    <div class="col-sm-12 col-md-12 g-0 col-lg-12 col-xl-10 col-xxl-8 header px-0 mx-0">
 
-        <div class="row sticky-top p-0 m-0 pt-1">
+        <div class="row @zmiena g-0 p-0 m-0 pt-1">
                     @*Lewa strona*@
                     @if (User.IsInRole("Administrator") || User.IsInRole("Manager"))
                     {

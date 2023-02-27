@@ -107,6 +107,7 @@ builder.Services.AddTransient<MySqlConnection>(_ => new MySqlConnection(connecti
 builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>(); //S³uzy do zapisywania sesji np: uzytkownika do sesscion
 
+builder.Services.AddDetection();
 
 ////Accept cookie
 //builder.Services.Configure<CookiePolicyOptions>(options =>
@@ -201,6 +202,8 @@ app.UseRequestLocalization(locOptions.Value);
 //var locOptions = app.Services.GetService<IOptions<RequestLocalizationOptions>>();
 //app.UseRequestLocalization(locOptions.Value);
 //LANGUAGE
+
+app.UseDetection();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
