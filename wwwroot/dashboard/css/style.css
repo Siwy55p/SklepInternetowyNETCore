@@ -47,8 +47,6 @@ button {
     -webkit-transform: none;
     transform: none;
     visibility: visible !important;
-/*    height: calc(100% - var(--topNavbarHeight));*/
-    top: 0px;
   }
 }
 

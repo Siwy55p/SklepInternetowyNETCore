@@ -161,7 +161,11 @@ namespace partner_aluro.Models
             }
             else
             {
-                cartItem.Quantity += quantity;
+                var iloscProduktuNaStanie = _context.Products.Where(x => x.ProductId == product.ProductId).Select(x=>x.Ilosc).FirstOrDefault();
+                if (cartItem.Quantity < iloscProduktuNaStanie)
+                {
+                    cartItem.Quantity += quantity;
+                }
             }
             _context.SaveChanges();
         }
