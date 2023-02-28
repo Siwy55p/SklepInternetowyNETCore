@@ -29,6 +29,14 @@
     {
       "library": "OwlCarousel2@2.3.4",
       "destination": "wwwroot/lib/OwlCarousel2/"
+    },
+    {
+      "library": "datatables.net-buttons@2.3.5",
+      "destination": "wwwroot/lib/datatables.net-buttons/"
+    },
+    {
+      "library": "datatables.net-select@1.6.1",
+      "destination": "wwwroot/lib/datatables.net-select/"
     }
   ]
 }

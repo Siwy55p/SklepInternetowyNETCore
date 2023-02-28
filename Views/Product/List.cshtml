@@ -36,11 +36,11 @@
         <tbody>
             @foreach (var productFormModel in Model)
             {
-                <tr id="@productFormModel.ProductId">
+                <tr onclick="SelectRow(@productFormModel.ProductId)">
                     <td>@productFormModel.ProductId</td>
                     <td><input id="chkP_@productFormModel.ProductId" onchange="ChangeCheck(@productFormModel.ProductId)" type="checkbox" value="@productFormModel.ProductId" data-toggle="toggle"></td>
                     <td>
-                        <img class="lazy" src="~/@productFormModel.pathImageUrl250x250" style="width:70px;height:70px;">
+                        <img src="~/@productFormModel.pathImageUrl250x250" style="width:70px;height:70px;">
                     </td>
                     <td>@productFormModel.Symbol</td>
                     <td><a asp-controller="Product" asp-action="Edit" asp-route-id="@productFormModel.ProductId">@productFormModel.Name</a></td>
@@ -80,7 +80,8 @@
 </div>
 
 @section Scripts{
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+    <script src="~/lib/datatables.net-buttons/js/datatables.buttons.min.js"></script>
+    <script src="~/lib/datatables.net-select/datatables.select.min.js"></script>
     <script src="~/js/product/list.js"></script>
 
     <script>
@@ -119,7 +120,6 @@
             });
         };
         function ChangeCheckUkrytyA(ProduktId) {
-
             $.ajax({
                 type: "POST",
                 url: '@Url.Action("ChangeCheckUkryty", "Product")',
@@ -150,30 +150,27 @@
                 },
             });
         };
-        $('#ProductTableList tbody').on('click', 'tr', function () {
-            $(this).toggleClass('selected');
+        function SelectRow(ProduktId) {
+                $(this).toggleClass('selected');
+                var check = document.getElementById('chkP_' + ProduktId);
 
-            var ProduktId = $(this).attr("id");
-
-            var check = document.getElementById('chkP_' + ProduktId);
-
-            if (check.checked == true) {
-                check.checked = false;
-                check = false;
-            } else {
-                check.checked = true;
-                check = true;
-            }
-            $.ajax({
-                type: "POST",
-                url: '@Url.Action("TakeProduct", "Product")',
-                data: { ProduktId: ProduktId, check: check },
-                success: function (result) {
-                },
-                error: function (abc) {
-                    alert(abc.statusText);
-                },
-            });
-        });
+                if (check.checked == true) {
+                    check.checked = false;
+                    check = false;
+                } else {
+                    check.checked = true;
+                    check = true;
+                }
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("TakeProduct", "Product")',
+                    data: { ProduktId: ProduktId, check: check },
+                    success: function (result) {
+                    },
+                    error: function (abc) {
+                        alert(abc.statusText);
+                    },
+                });
+        };
     </script>
 }
