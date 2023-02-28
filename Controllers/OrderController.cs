@@ -275,8 +275,8 @@ namespace partner_aluro.Controllers
 
                 CartOrder.Orders = order;
 
-                if (CreateOrder(CartOrder.Orders)) // Stworz zamowienie jesli sie udalo to wyslij email
-                {
+                CreateOrder(CartOrder.Orders); // Stworz zamowienie jesli sie udalo to wyslij email
+                
                     //_cart.ClearCart();
 
 
@@ -378,11 +378,7 @@ namespace partner_aluro.Controllers
 
 
                     return View("CheckoutComplete", CartOrder.Orders);
-                }else
-                {
-                    //zamowienie sie nie udalo ilosc w koszyku przekracza stan produktu.
-                    return View();
-                }
+                
             }
             else
             {
@@ -894,8 +890,8 @@ namespace partner_aluro.Controllers
 
             foreach (var item in cartItems)
             {
-                if(item.Product.Ilosc < item.Quantity)
-                { 
+                if(item.Quantity < item.Product.Ilosc)
+                {
 
                 _productService.ZmiejszIloscProductIdAsync(item.Product.ProductId, item.Quantity);
 
