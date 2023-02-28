@@ -946,6 +946,7 @@ namespace partner_aluro.Controllers
         [Authorize(Roles = $"{Constants.Roles.Administrator},{Constants.Roles.Manager},{Constants.Roles.Klient}")]
         public IActionResult ListaZamowienZalogowanegoUzytkownika() // To jest widok listy zamowien w panelu dashoboards
         {
+            @ViewData["StanZamowienia"] = GetStanyZamowienia();
             var UserID = _userManager.GetUserId(HttpContext.User);
 
             List<Order> orders = _orderService.ListOrdersUser(UserID);

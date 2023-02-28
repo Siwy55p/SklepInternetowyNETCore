@@ -44,11 +44,17 @@
                                             
 
                                         <td>
-                                                <select onchange="ChangeStanZamowienia(@order.Id, '@order.StanZamowienia.ToString()')" id="select_@order.Id" asp-for="@order.StanZamowienia" asp-items="(IEnumerable<SelectListItem>)@ViewData["StanZamowienia"]">
-                                                    @*<option>Select one</option>*@
-                                                </select>
-                                              @*  @productFormModel.CategoryNavigation.Name*@
-                                            </td>
+                                        @if (User.IsInRole("Administrator") || User.IsInRole("Manager"))
+                                        {
+                                            <select onchange="ChangeStanZamowienia(@order.Id, '@order.StanZamowienia.ToString()')" id="select_@order.Id" asp-for="@order.StanZamowienia" asp-items="(IEnumerable<SelectListItem>)@ViewData["StanZamowienia"]">
+                                                @*<option>Select one</option>*@
+                                            </select>
+                                            @*  @productFormModel.CategoryNavigation.Name*@
+                                        }else
+                                        {
+                                            @order.StanZamowienia
+                                        }
+                                    </td>
 
 @*
                                         @if (order.StanZamowienia == StanZamowienia.Nowe)
@@ -71,38 +77,36 @@
                                             <td>@order.StanZamowienia</td>
                                         }*@
 
-                                    @{
-                                        var color ="";
-                                    }
+                                        @{
+                                            var color ="";
+                                        }
 
-                                    @if (order.StanZamowienia == StanZamowienia.Wrealizacji)
-                                    {
-                                        color = "#ff8c00";
-                                    }
-                                    else if (order.StanZamowienia == StanZamowienia.Nowe)
-                                    {
-                                        color = "#88ac8b";
-                                    }
-                                    else if (order.StanZamowienia == StanZamowienia.Zrealizowane)
-                                    {
-                                        color = "#6ab170";
-                                    }
-                                    else if (order.StanZamowienia == StanZamowienia.Anulowane)
-                                    {
-                                        color = "#dc143c";
-                                    }
-                                    else if(order.StanZamowienia == StanZamowienia.Wysłane)
-                                    {
-                                        color = "#ca9ef2";
-                                    }
+                                        @if (order.StanZamowienia == StanZamowienia.Wrealizacji)
+                                        {
+                                            color = "#ff8c00";
+                                        }
+                                        else if (order.StanZamowienia == StanZamowienia.Nowe)
+                                        {
+                                            color = "#88ac8b";
+                                        }
+                                        else if (order.StanZamowienia == StanZamowienia.Zrealizowane)
+                                        {
+                                            color = "#6ab170";
+                                        }
+                                        else if (order.StanZamowienia == StanZamowienia.Anulowane)
+                                        {
+                                            color = "#dc143c";
+                                        }
+                                        else if(order.StanZamowienia == StanZamowienia.Wysłane)
+                                        {
+                                            color = "#ca9ef2";
+                                        }
 
                                         @if (User.IsInRole("Administrator") || User.IsInRole("Manager"))
                                         {
                                         <td class="font-weight-bold">
-
-
                                             <a asp-controller="Order" asp-action="Detail" asp-route-id="@order.Id" class="text-dark font-weight-bold" style=" font-weight: bold; background-color: @color">Podgląd</a>
-                                            </td>
+                                        </td>
 
                                         <td>
                                             <form method="post" asp-controller="Order" asp-route-id="@order.Id" asp-action="PDFOrder">
