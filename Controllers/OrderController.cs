@@ -1122,6 +1122,17 @@ namespace partner_aluro.Controllers
 
             OrderItem oi = order.OrderItems.Where(p => p.ProductId == ProduktId).First();
 
+            Product produkt = _context.Products.Where(x=>x.ProductId == ProduktId).First();
+
+            if(Ilosc >= oi.Quantity && order.StanZamowienia != StanZamowienia.Anulowane)
+            {
+                var roznica = Ilosc - oi.Quantity;
+                produkt.Ilosc -= roznica;
+            }else if(Ilosc < oi.Quantity && order.StanZamowienia != StanZamowienia.Anulowane)
+            {
+                var roznica = oi.Quantity - Ilosc;
+                produkt.Ilosc += roznica;
+            }
 
             order.OrderTotal -= oi.Cena;
 

@@ -8,7 +8,7 @@
         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-10 col-xxl-8">
             <div class="card">
                 <div class="row">
-                    <div class="col"><h5>Zamówianie nr:#@Model.NrZamowienia ID: @Model.Id | @Model.User.Imie @Model.User.Nazwisko</h5></div>
+                    <div class="col"><h5>Zamówianie nr:#@Model.NrZamowienia ID: @Model.Id | @Model.User.Imie @Model.User.Nazwisko </h5></div>
                     <div class="col"><h5 class="end-0 text-end">@Model.StanZamowienia</h5></div>
                 </div>
 
@@ -54,7 +54,7 @@
                         </div>
                 </div>
 
-
+                Data: <b>@Model.OrderPlaced</b>
                 @if (Model.OrderItems.Count > 0)
                 {
                     <div class="row" id="zamowienie" name="zamowienie">
