@@ -1,0 +1,150 @@
+﻿@model partner_aluro.Models.Order
+@{
+    ViewData["Title"] = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-10 col-xxl-8">
+            <div class="card">
+                <div class="row">
+                    <div class="col"><h5>Zamówianie nr:#@Model.NrZamowienia ID: @Model.Id | @Model.User.Imie @Model.User.Nazwisko</h5></div>
+                    <div class="col"><h5 class="end-0 text-end">@Model.StanZamowienia</h5></div>
+                </div>
+
+                <div class="row">
+
+                    <ul class="nav nav-tabs">
+                        <li class="col"><a class="nav-link" data-bs-toggle="tab" href="#awysylki">Adres wysyłki</a></li>
+                        <li class="col"><a class="nav-link" data-bs-toggle="tab" href="#arozliczeniowy">Adres rozliczeniowy</a></li>
+                    </ul>
+                </div>
+                <div class="tab-content">
+                        <div class="row">
+                            <div class="col">
+                                @*<p>@Model.User.NazwaFirmy</p>*@
+                                <p>
+                                    @Model.AdressDostawy.Imie @Model.AdressDostawy.Nazwisko<br />
+                                    @if (@Model.AdressDostawy.NazwaFirmy != null && @Model.AdressDostawy.NazwaFirmy != "")
+                                    {
+                                        @Model.AdressDostawy.NazwaFirmy
+
+                                        <br />
+                                    }
+                                    @Model.AdressDostawy.Ulica<br />
+                                    Kod-pocztowy: @Model.AdressDostawy.KodPocztowy<br />
+                                    Miasto: @Model.AdressDostawy.Miasto<br />
+                                    @Model.AdressDostawy.Kraj<br />
+                                    @Model.AdressDostawy.Telefon
+                                </p>
+                            </div>
+                            <div class="col">
+                                <p>
+                                    @Model.User.NazwaFirmy<br />
+                                    @Model.adresRozliczeniowy.Ulica<br />
+                                    Kod-pocztowy: @Model.adresRozliczeniowy.KodPocztowy<br />
+                                    Miasto: @Model.adresRozliczeniowy.Miasto<br />
+                                    @Model.adresRozliczeniowy.Kraj<br />
+                                    Gmina: @Model.adresRozliczeniowy.Gmina<br />
+                                    Powiat: @Model.adresRozliczeniowy.Powiat<br />
+                                    Nr. telefonu: @Model.adresRozliczeniowy.Telefon<br />
+                                    NIP: @Model.adresRozliczeniowy.Vat<br />
+                                    Regon: @Model.adresRozliczeniowy.Regon<br />
+                            </div>
+                        </div>
+                </div>
+
+
+                @if (Model.OrderItems.Count > 0)
+                {
+                    <div class="row" id="zamowienie" name="zamowienie">
+                        <div class="col-md-12 mb-3">
+                            <div class="card">
+                                <div class="card-header">
+                                    <span><i class="bi bi-table me-2"></i></span>Pozycje zamówienia
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table id="example"
+                                           class="table table-striped data-table"
+                                           style="width: 100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>Id</th>
+                                                    <th>Obrazek</th>
+                                                    <th>Nazwa produktu</th>
+                                                    <th>Symbol</th>
+                                                    <th>Cena jednostkowa produktu</th>
+                                                    <th>Ilość</th>
+                                                    <th>Razem</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in Model.OrderItems)
+                                                {
+                                                    <tr>
+                                                        @{
+                                                            var Cena_brutto = item.Product.CenaProduktuBrutto;
+
+                                                            if (/*item.Product.CenaPromocyja != null &&*/ item.Product.Promocja == true)
+                                                            {
+                                                                Cena_brutto = item.Product.CenaPromocyja;
+                                                            }
+
+
+                                                            var CenaJednostkowa_netto = item.Product.CenaProduktuBrutto / partner_aluro.Core.Constants.Vat;
+                                                            if (/*item.Product.CenaPromocyja != null &&*/ item.Product.Promocja == true)
+                                                            {
+                                                                CenaJednostkowa_netto = item.Product.CenaPromocyja;
+                                                            }
+
+
+                                                            var CenaJednostkowa_brutto = Cena_brutto;
+
+
+                                                            if (partner_aluro.Core.Constants.Rabat >= 0)
+                                                            {
+                                                                CenaJednostkowa_netto = ((item.Product.CenaProduktuBrutto / partner_aluro.Core.Constants.Vat) * (1 - (partner_aluro.Core.Constants.Rabat / 100)));
+                                                                CenaJednostkowa_brutto = Cena_brutto * (1 - (partner_aluro.Core.Constants.Rabat / 100));
+                                                            }
+
+                                                            var ProductTotal = CenaJednostkowa_brutto * item.Quantity;
+
+                                                            //decimal cenaJednostkowa = item.Product.CenaProduktuBrutto * (1 - ((decimal)Model.RabatZamowienia / 100));
+                                                            //decimal cenaJednostkowaIlosc = cenaJednostkowa * @item.Quantity;
+                                                        }
+                                                        <td>@item.Product.ProductId</td>
+                                                        <td><img class="img-thumbnail" src="~/@item.Product.pathImageUrl250x250" alt="@item.Product.Name" style="object-fit: cover;width:75px;height:75px;"></td>
+                                                        <td>@item.Product.Name</td>
+                                                        <td>@item.Product.Symbol</td>
+                                                        <td>@CenaJednostkowa_brutto.ToString("C")</td>
+
+                                                        <td>@item.Quantity</td>
+
+                                                        <td>@ProductTotal.ToString("C")</td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th>Suma:</th>
+                                                    <th>@Model.OrderTotal.ToString("C")</th>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="nav-link px-3" asp-area="" asp-controller="Order" asp-action="ListaZamowienZalogowanegoUzytkownika"> Wróc do listy</a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

@@ -1052,6 +1052,23 @@ namespace partner_aluro.Controllers
             return View(order);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> DetailOrder(int id)
+        {
+            if (id == 0)
+            {
+                return RedirectToAction("ListaZamowien");
+            }
+            var orderItems = await _orderService.ListAsync(id);
+            Order order = await _orderService.GetOrder(id);
+
+            order.OrderItems = orderItems;
+
+            ViewData["StanyZamowienia"] = GetStanyZamowienia();
+
+            return View(order);
+        }
+
         [Authorize(Roles = $"{Constants.Roles.Administrator},{Constants.Roles.Manager}")]
         [HttpPost]
         public IActionResult ZapiszNotatke(Order order)

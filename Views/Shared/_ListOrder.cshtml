@@ -23,9 +23,12 @@
                                     @if (User.IsInRole("Administrator") || User.IsInRole("Manager"))
                                     {
                                         <th>Podgląd</th>
-                                        <th>PDF</th>
-                                    }
-                                </tr>
+                                    <th>PDF</th>
+                                }else
+                                {
+                                    <th>Podgląd</th>
+                                }
+                            </tr>
                             </thead>
                             <tbody>
                                 @foreach (var order in Model)
@@ -113,8 +116,13 @@
                                                 <input type="submit" value="PDF"/>
                                             </form>
                                         </td>
-                                        }
-                                    </tr>
+                                    }else
+                                    {
+                                        <td class="font-weight-bold">
+                                            <a asp-controller="Order" asp-action="DetailOrder" asp-route-id="@order.Id" class="text-dark font-weight-bold" style=" font-weight: bold; background-color: @color">Szczegóły</a>
+                                        </td>
+                                    }
+                                </tr>
                                 }
                             </tbody>
                         </table>
