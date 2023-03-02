@@ -12,8 +12,8 @@ using partner_aluro.Data;
 namespace partneraluro.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230122172945_se")]
-    partial class se
+    [Migration("20230302203447_PriceProductCartItem")]
+    partial class PriceProductCartItem
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -265,9 +265,7 @@ namespace partneraluro.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("KodPocztowy")
-                        .IsRequired()
-                        .HasMaxLength(7)
-                        .HasColumnType("nvarchar(7)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Kraj")
                         .IsRequired()
@@ -299,7 +297,8 @@ namespace partneraluro.Migrations
 
                     b.Property<string>("Ulica")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("UserID")
                         .HasColumnType("nvarchar(450)");
@@ -348,6 +347,9 @@ namespace partneraluro.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("NazwaFirmy")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Nazwisko")
                         .HasColumnType("nvarchar(max)");
 
@@ -356,7 +358,8 @@ namespace partneraluro.Migrations
 
                     b.Property<string>("Ulica")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("UserID")
                         .HasColumnType("nvarchar(450)");
@@ -539,6 +542,9 @@ namespace partneraluro.Migrations
 
                     b.Property<int?>("CartsCartID")
                         .HasColumnType("int");
+
+                    b.Property<decimal>("CenaProduktu")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
@@ -823,6 +829,9 @@ namespace partneraluro.Migrations
                     b.Property<int>("AdressDostawyAdres2dostawyId")
                         .HasColumnType("int");
 
+                    b.Property<bool?>("ByloAnulowane")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Komentarz")
                         .HasColumnType("nvarchar(max)");
 
@@ -955,6 +964,12 @@ namespace partneraluro.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<string>("NameDe")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NameEn")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("NazwaPlikuObrazka")
                         .HasColumnType("nvarchar(max)");
 
@@ -980,6 +995,9 @@ namespace partneraluro.Migrations
 
                     b.Property<decimal?>("SzerokoscWewnetrznaProduktu")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("SzukanaNazwa")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Ukryty")
                         .HasColumnType("bit");

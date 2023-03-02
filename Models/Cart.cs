@@ -154,6 +154,8 @@ namespace partner_aluro.Models
                     Product = product,
                     Quantity = quantity,
                     CartIds = CartaId,
+                    CenaProduktuBrutto = product.CenaProduktuBrutto,
+                    CenaProduktuNetto = product.CenaProduktuNetto,
                     Carts = _context.Carts.Where(x => x.CartaId == CartaId).FirstOrDefault()
                 };
 

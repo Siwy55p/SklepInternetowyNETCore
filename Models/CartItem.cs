@@ -11,6 +11,10 @@ namespace partner_aluro.Models
 
         [Column(TypeName = "decimal(18,2)")]
         public decimal Quantity { get; set; }
+
+        public decimal CenaProduktuBrutto { get; set; }
+        public decimal CenaProduktuNetto { get; set; }
+
         public string CartIds { get; set; }
 
         //[ForeignKey("CartId")]

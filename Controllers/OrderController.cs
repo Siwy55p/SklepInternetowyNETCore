@@ -309,7 +309,7 @@ namespace partner_aluro.Controllers
                         "<table style=\"border:1px solid black\">" +
                         "<thead style=\"border:1px solid greey\"><tr><th>Nazwa produktu</th>" +
                         "<th>Symbol</th>" +
-                        "<th>Cena jed. pro.</th>" +
+                        "<th>CenaTotal jed. pro.</th>" +
                         "<th>Ilość</th>" +
                         "<th>Razem</th>" +
                         "</tr>" +
@@ -324,9 +324,9 @@ namespace partner_aluro.Controllers
 
                             "<td>" + @item.Product.Name + "</td>" +
                             "<td>" + @item.Product.Symbol + "</td>" +
-                            "<td>" + @item.Cena.ToString("0.00") + "</td>" +
+                            "<td>" + @item.CenaJednProductuBrutto.ToString("0.00") + "</td>" +
                             "<td>" + @item.Quantity.ToString("#") + "</td>" +
-                            "<td>" + (@item.Cena * @item.Quantity).ToString("## ###.00") + "</td>" +
+                            "<td>" + (@item.CenaTotal).ToString("## ###.00") + "</td>" +
                             "</tr>";
 
                     }
@@ -335,18 +335,18 @@ namespace partner_aluro.Controllers
 
 
                     string emailMessage = startEmail + ProductList + endEmail;
-                    EmailDto emailDzialTechniczny1 = new EmailDto()
-                    {
-                        To = "marcin@aluro.pl",
-                        Subject = "Nowe zamówienie! " + order.Id + ":" + user.Imie + " " + user.Nazwisko + " " + user.NazwaFirmy + "",
-                        Body = emailMessage
-                    };
-                    EmailDto emailDzialTechniczny2 = new EmailDto()
-                    {
-                        To = "mariusz@aluro.pl",
-                        Subject = "Nowe zamówienie! " + order.Id + ":" + user.Imie + " " + user.Nazwisko + " " + user.NazwaFirmy + "",
-                        Body = emailMessage
-                    };
+                    //EmailDto emailDzialTechniczny1 = new EmailDto()
+                    //{
+                    //    To = "marcin@aluro.pl",
+                    //    Subject = "Nowe zamówienie! " + order.Id + ":" + user.Imie + " " + user.Nazwisko + " " + user.NazwaFirmy + "",
+                    //    Body = emailMessage
+                    //};
+                    //EmailDto emailDzialTechniczny2 = new EmailDto()
+                    //{
+                    //    To = "mariusz@aluro.pl",
+                    //    Subject = "Nowe zamówienie! " + order.Id + ":" + user.Imie + " " + user.Nazwisko + " " + user.NazwaFirmy + "",
+                    //    Body = emailMessage
+                    //};
 
                     EmailDto emailDzialTechniczny3 = new EmailDto()
                     {
@@ -354,8 +354,8 @@ namespace partner_aluro.Controllers
                         Subject = "Nowe zamówienie! " + order.Id + ":" + user.Imie + " " + user.Nazwisko + " " + user.NazwaFirmy + "",
                         Body = emailMessage
                     };
-                    _emailService.SendEmailAsync(emailDzialTechniczny1);
-                    _emailService.SendEmailAsync(emailDzialTechniczny2);
+                    //_emailService.SendEmailAsync(emailDzialTechniczny1);
+                    //_emailService.SendEmailAsync(emailDzialTechniczny2);
                     _emailService.SendEmailAsync(emailDzialTechniczny3);
 
 
@@ -704,7 +704,7 @@ namespace partner_aluro.Controllers
                     };
                     table2.AddCell(cell6_tab2);
 
-                    PdfPCell cell7_tab2 = new(new Phrase("Cena (brutto)", regular))
+                    PdfPCell cell7_tab2 = new(new Phrase("CenaTotal (brutto)", regular))
                     {
                         BackgroundColor = BaseColor.LIGHT_GRAY,
                         Border = Rectangle.BOTTOM_BORDER | Rectangle.TOP_BORDER | Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER,
@@ -912,13 +912,15 @@ namespace partner_aluro.Controllers
                     Quantity = item.Quantity,
                     ProductId = item.Product.ProductId,
                     OrderId = order.Id,
-                    //Cena = (int)(item.Product.CenaProduktuDlaUzytkownika * item.Quantity)
-                    Cena = ProductTotal
-                    //Cena = (int)(item.Product.CenaProduktuBrutto * item.Quantity)
+                    CenaJednProductuBrutto = item.Product.CenaProduktuBrutto,
+                    CenaJednProductuNetto = item.Product.CenaProduktuNetto,
+                    //CenaTotal = (int)(item.Product.CenaProduktuDlaUzytkownika * item.Quantity)
+                    CenaTotal = ProductTotal
+                    //CenaTotal = (int)(item.Product.CenaProduktuBrutto * item.Quantity)
                 };
 
                 order.OrderItems.Add(orderItem);
-                order.OrderTotal += orderItem.Cena;
+                order.OrderTotal += orderItem.CenaTotal;
                 }
                 else
                 {
@@ -939,8 +941,12 @@ namespace partner_aluro.Controllers
         public async Task<IActionResult> ListaZamowien() // To jest widok listy zamowien w panelu dashoboards
         {
             @ViewData["StanZamowienia"] = GetStanyZamowienia();
-            List<Order> orders = await _orderService.ListOrdersAll();
-
+            //List<Order> orders = await _orderService.ListOrdersAll();
+            ICollection<Order> orders = _context.Orders
+                .Include(x=>x.User)
+                .ThenInclude(x=>x.Adress1rozliczeniowy)
+                .Include(x=>x.OrderItems)
+                .ToList();
             return View(orders);
         }
         [Authorize(Roles = $"{Constants.Roles.Administrator},{Constants.Roles.Manager},{Constants.Roles.Klient}")]
@@ -1042,10 +1048,20 @@ namespace partner_aluro.Controllers
             {
                 return RedirectToAction("ListaZamowien");
             }
-            var orderItems = await _orderService.ListAsync(id);
-            Order order = await _orderService.GetOrder(id);
+            //var orderItems = await _orderService.ListAsync(id);
+            //Order order = await _orderService.GetOrder(id);
 
-            order.OrderItems = orderItems;
+            //order.OrderItems = orderItems;
+
+
+            Order order = _context.Orders.Where(x => x.Id == id)
+                .Include(x => x.OrderItems)
+                .ThenInclude(x=>x.Product)
+                .Include(x=>x.User)
+                .ThenInclude(x=>x.Adress1rozliczeniowy)
+                .Include(x=>x.AdressDostawy)
+                .Include(x=>x.adresRozliczeniowy)
+                .First();
 
             ViewData["StanyZamowienia"] = GetStanyZamowienia();
 
@@ -1134,11 +1150,11 @@ namespace partner_aluro.Controllers
                 produkt.Ilosc += roznica;
             }
 
-            order.OrderTotal -= oi.Cena;
+            order.OrderTotal -= oi.CenaTotal;
 
             oi.Quantity = Ilosc;
-            oi.Cena = Ilosc * oi.Product.CenaProduktuBrutto;
-            order.OrderTotal += oi.Cena;
+            oi.CenaTotal = Ilosc * oi.CenaJednProductuBrutto;
+            order.OrderTotal += oi.CenaTotal;
 
             _context.Orders.Update(order);
             _context.SaveChanges();

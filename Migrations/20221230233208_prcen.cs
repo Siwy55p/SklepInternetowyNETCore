@@ -17,7 +17,7 @@ namespace partner_aluro.Migrations
                 oldType: "int");
 
             migrationBuilder.AlterColumn<decimal>(
-                name: "Cena",
+                name: "CenaTotal",
                 table: "OrderItems",
                 type: "decimal(18,2)",
                 nullable: false,
@@ -36,7 +36,7 @@ namespace partner_aluro.Migrations
                 oldType: "decimal(18,2)");
 
             migrationBuilder.AlterColumn<int>(
-                name: "Cena",
+                name: "CenaTotal",
                 table: "OrderItems",
                 type: "int",
                 nullable: false,

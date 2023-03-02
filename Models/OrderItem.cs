@@ -10,7 +10,9 @@ namespace partner_aluro.Models
         public decimal Quantity { get; set; }
 
         [Column(TypeName = "decimal(18,2)")]
-        public decimal Cena { get; set; }
+        public decimal CenaTotal { get; set; }
+        public decimal CenaJednProductuBrutto { get; set; }
+        public decimal CenaJednProductuNetto { get; set; }
 
         public int OrderId { get; set; }
         public int ProductId { get; set; }

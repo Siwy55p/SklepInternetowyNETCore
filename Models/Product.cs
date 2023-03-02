@@ -38,9 +38,9 @@ namespace partner_aluro.Models
 
         public string? SzukanaNazwa { get; set; }
 
-        [Required(ErrorMessage = "Cena Produktu jest wymagana")]
+        [Required(ErrorMessage = "CenaTotal Produktu jest wymagana")]
         [Column(TypeName = "decimal(18,2)")]
-        public decimal CenaProduktuBrutto { get; set; }  // Cena Producktu (wczesniej netto) nazwa CenaProduktu
+        public decimal CenaProduktuBrutto { get; set; }  // CenaTotal Producktu (wczesniej netto) nazwa CenaProduktu
         [Column(TypeName = "decimal(18,2)")]
         public decimal CenaProduktuNetto { get; set; }
 
@@ -49,7 +49,7 @@ namespace partner_aluro.Models
         public decimal CenaProduktuDlaUzytkownika { get; set; }
 
         [Column(TypeName = "decimal(18,2)")]
-        public decimal CenaPromocyja { get; set; } //Cena promocyjna
+        public decimal CenaPromocyja { get; set; } //CenaTotal promocyjna
         public bool Promocja { get; set; } = false;
 
         public string? Pakowanie { get; set; }

@@ -1,0 +1,127 @@
+﻿@model partner_aluro.Models.Order
+
+
+@*@if (Model.OrderItems.Count > 0)
+{*@
+<div class="row" id="zamowienie" name="zamowienie">
+    <div class="col-md-12 mb-3">
+        <div class="card">
+            <div class="card-header">
+                <span><i class="bi bi-table me-2"></i></span>Pozycje zamówienia
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="example"
+                           class="table table-striped data-table"
+                           style="width: 100%">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Obrazek</th>
+                                <th>Pozostała ilość</th>
+                                <th>Nazwa produktu</th>
+                                <th>Symbol</th>
+                                <th>Cena jednostkowa produktu</th>
+                                <th>Ilość</th>
+                                <th>Razem</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.OrderItems)
+                            {
+                                <tr>
+                                    @{
+
+                                        var Cena_brutto = item.CenaJednProductuBrutto;
+
+                                        if (/*item.Product.CenaPromocyja != null &&*/ item.Product.Promocja == true)
+                                        {
+                                            Cena_brutto = item.Product.CenaPromocyja;
+                                        }
+
+
+                                        var CenaJednostkowa_netto = item.Product.CenaProduktuBrutto / partner_aluro.Core.Constants.Vat;
+                                        if (/*item.Product.CenaPromocyja != null &&*/ item.Product.Promocja == true)
+                                        {
+                                            CenaJednostkowa_netto = item.Product.CenaPromocyja;
+                                        }
+
+
+                                        var CenaJednostkowa_brutto = Cena_brutto;
+
+
+                                        if (partner_aluro.Core.Constants.Rabat >= 0)
+                                        {
+                                            CenaJednostkowa_netto = ((item.CenaJednProductuBrutto / partner_aluro.Core.Constants.Vat) * (1 - (partner_aluro.Core.Constants.Rabat / 100)));
+                                            CenaJednostkowa_brutto = Cena_brutto * (1 - (partner_aluro.Core.Constants.Rabat / 100));
+                                        }
+
+                                        var ProductTotal = CenaJednostkowa_brutto * item.Quantity;
+
+                                        //decimal cenaJednostkowa = item.Product.CenaProduktuBrutto * (1 - ((decimal)Model.RabatZamowienia / 100));
+                                        //decimal cenaJednostkowaIlosc = cenaJednostkowa * @item.Quantity;
+                                    }
+                                    <td>@item.Product.ProductId</td>
+                                    <td><img class="img-thumbnail" src="~/@item.Product.pathImageUrl250x250" alt="@item.Product.Name" style="object-fit: cover;width:75px;height:75px;"></td>
+                                    <td>@item.Product.Ilosc.ToString("0.###########################")</td>
+                                    <td>@item.Product.Name</td>
+                                    <td>@item.Product.Symbol</td>
+                                    <td>@CenaJednostkowa_brutto.ToString("C")</td>
+
+                                    <td>
+                                        @{
+                                            int ile = Decimal.ToInt32(item.Quantity);
+                                        }
+                                        @if (User.IsInRole("Administrator") || User.IsInRole("Manager"))
+                                        {
+                                    <input onchange="ChangeIlosc(@item.Product.ProductId, @Model.Id)" asp-for="@ile" id="ilosc_@item.Product.ProductId" aria-required="true" style="max-width: 70px" />
+                                        }else
+                                        {
+                                        @ile
+                                        }
+                                    </td>
+
+                                    <td>@ProductTotal.ToString("C")</td>
+                                </tr>
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th>Suma:</th>
+                                <th>@Model.OrderTotal.ToString("C")</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@*}*@
+@section scripts {
+    <script>
+        function ChangeIlosc(ProduktId, OrderID) {
+            var Ilosc = document.getElementById("ilosc_" + ProduktId).value;
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("ChangeIlosc", "Order")',
+                data: { ProduktId: ProduktId, Ilosc: Ilosc, OrderID: OrderID },
+                //data: { ProduktId: ProduktId, Ilosc: Ilosc, OrderID: OrderID },
+                success: function (result) {
+                    $("#zamowienie").load(location.href + " #zamowienie");
+                },
+
+                error: function (abc) {
+                    alert(abc.statusText);
+                },
+            });
+        }
+    </script>
+}

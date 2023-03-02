@@ -390,6 +390,41 @@ namespace partner_aluro.Controllers
 
         }
 
+        public void CenyProdyktowItem()
+        {
+
+            var CartItems = _context.CartItems.Include(x=>x.Product).ToList();
+
+            for (int i = 0; i <= CartItems.Count(); i++)
+            {
+                Product product = _context.Products.Where(x=>x.ProductId == CartItems[i].Product.ProductId).First();
+
+                CartItems[i].CenaProduktuBrutto = product.CenaProduktuBrutto;
+                CartItems[i].CenaProduktuNetto = product.CenaProduktuNetto;
+
+                _context.CartItems.Update(CartItems[i]);
+                _context.SaveChanges();
+
+            }
+        }
+
+        public void CenyProdyktowItem2()
+        {
+
+            var OrderItems = _context.OrderItems.Include(x => x.Product).ToList();
+
+            for (int i = 0; i <= OrderItems.Count(); i++)
+            {
+                Product product = _context.Products.Where(x => x.ProductId == OrderItems[i].Product.ProductId).First();
+
+                OrderItems[i].CenaJednProductuBrutto = product.CenaProduktuBrutto;
+                OrderItems[i].CenaJednProductuNetto = product.CenaProduktuNetto;
+
+                _context.OrderItems.Update(OrderItems[i]);
+                _context.SaveChanges();
+
+            }
+        }
 
         public void ImageFrontSetCompresImage()
         {

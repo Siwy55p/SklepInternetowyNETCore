@@ -288,6 +288,16 @@
                             <span>Ustaw skompresowane obrazki frontowe</span>
                         </a>
                     </li>*@
+@*                    <li>
+                        <a href="@Url.Action("CenyProdyktowItem","InicializerProductCategory")" class="nav-link px-3">
+                        <span>Ustaw ceny produktow dla zamowien</span>
+                    </a>
+                    </li>*@
+                <li>
+                    <a href="@Url.Action("CenyProdyktowItem2","InicializerProductCategory")" class="nav-link px-3">
+                        <span>Ustaw ceny produktow dla zamowien</span>
+                    </a>
+                </li>
                     <li>
                         <form id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                             <button id="logout" type="submit" class="dropdown-item">Wyloguj</button>

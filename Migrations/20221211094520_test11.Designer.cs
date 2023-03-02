@@ -848,7 +848,7 @@ namespace partner_aluro.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("Cena")
+                    b.Property<int>("CenaTotal")
                         .HasColumnType("int");
 
                     b.Property<int>("OrderId")

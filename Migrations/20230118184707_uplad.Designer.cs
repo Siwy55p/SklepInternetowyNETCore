@@ -872,7 +872,7 @@ namespace partneraluro.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<decimal>("Cena")
+                    b.Property<decimal>("CenaTotal")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("OrderId")

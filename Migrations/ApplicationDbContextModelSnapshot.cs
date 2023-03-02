@@ -540,6 +540,12 @@ namespace partneraluro.Migrations
                     b.Property<int?>("CartsCartID")
                         .HasColumnType("int");
 
+                    b.Property<decimal>("CenaProduktuBrutto")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("CenaProduktuNetto")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
@@ -879,7 +885,13 @@ namespace partneraluro.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<decimal>("Cena")
+                    b.Property<decimal>("CenaJednProductuBrutto")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("CenaJednProductuNetto")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("CenaTotal")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("OrderId")
