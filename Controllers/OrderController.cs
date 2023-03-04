@@ -335,28 +335,28 @@ namespace partner_aluro.Controllers
 
 
                     string emailMessage = startEmail + ProductList + endEmail;
-                    //EmailDto emailDzialTechniczny1 = new EmailDto()
-                    //{
-                    //    To = "marcin@aluro.pl",
-                    //    Subject = "Nowe zamówienie! " + order.Id + ":" + user.Imie + " " + user.Nazwisko + " " + user.NazwaFirmy + "",
-                    //    Body = emailMessage
-                    //};
-                    //EmailDto emailDzialTechniczny2 = new EmailDto()
-                    //{
-                    //    To = "mariusz@aluro.pl",
-                    //    Subject = "Nowe zamówienie! " + order.Id + ":" + user.Imie + " " + user.Nazwisko + " " + user.NazwaFirmy + "",
-                    //    Body = emailMessage
-                    //};
+                EmailDto emailDzialTechniczny1 = new EmailDto()
+                {
+                    To = "marcin@aluro.pl",
+                    Subject = "Nowe zamówienie! " + order.Id + ":" + user.Imie + " " + user.Nazwisko + " " + user.NazwaFirmy + "",
+                    Body = emailMessage
+                };
+                EmailDto emailDzialTechniczny2 = new EmailDto()
+                {
+                    To = "mariusz@aluro.pl",
+                    Subject = "Nowe zamówienie! " + order.Id + ":" + user.Imie + " " + user.Nazwisko + " " + user.NazwaFirmy + "",
+                    Body = emailMessage
+                };
 
-                    EmailDto emailDzialTechniczny3 = new EmailDto()
+                EmailDto emailDzialTechniczny3 = new EmailDto()
                     {
                         To = "szuminski.p@gmail.com",
                         Subject = "Nowe zamówienie! " + order.Id + ":" + user.Imie + " " + user.Nazwisko + " " + user.NazwaFirmy + "",
                         Body = emailMessage
-                    };
-                    //_emailService.SendEmailAsync(emailDzialTechniczny1);
-                    //_emailService.SendEmailAsync(emailDzialTechniczny2);
-                    _emailService.SendEmailAsync(emailDzialTechniczny3);
+                };
+                _emailService.SendEmailAsync(emailDzialTechniczny1);
+                _emailService.SendEmailAsync(emailDzialTechniczny2);
+                _emailService.SendEmailAsync(emailDzialTechniczny3);
 
 
                     //var cart = _context.Carts.Where(c => c.CartaId == _cart.CartaId).FirstOrDefault();
@@ -704,7 +704,7 @@ namespace partner_aluro.Controllers
                     };
                     table2.AddCell(cell6_tab2);
 
-                    PdfPCell cell7_tab2 = new(new Phrase("CenaTotal (brutto)", regular))
+                    PdfPCell cell7_tab2 = new(new Phrase("Cena (brutto)", regular))
                     {
                         BackgroundColor = BaseColor.LIGHT_GRAY,
                         Border = Rectangle.BOTTOM_BORDER | Rectangle.TOP_BORDER | Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER,
@@ -942,11 +942,12 @@ namespace partner_aluro.Controllers
         {
             @ViewData["StanZamowienia"] = GetStanyZamowienia();
             //List<Order> orders = await _orderService.ListOrdersAll();
-            ICollection<Order> orders = _context.Orders
+            ICollection<Order> orders = await _context.Orders
                 .Include(x=>x.User)
                 .ThenInclude(x=>x.Adress1rozliczeniowy)
+                .Where(x=>x.User.Email != "szuminski.p@gmail.com" && x.User.Email != "piotr@pierrot.pl")
                 .Include(x=>x.OrderItems)
-                .ToList();
+                .ToListAsync();
             return View(orders);
         }
         [Authorize(Roles = $"{Constants.Roles.Administrator},{Constants.Roles.Manager},{Constants.Roles.Klient}")]

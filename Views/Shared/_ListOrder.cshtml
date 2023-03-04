@@ -2,10 +2,9 @@
 @inject LanguageService language
 
     <div class="row">
-        <div class="col-md-12 mb-3">
-            <div class="card">
-                <div class="card-body">
-                    <div class="table-responsive">
+        <div class="col-md-12">
+
+                <div class="table-responsive">
                     <table id="myTable" class="cell-border display" style="width:100%">
                             <thead>
                                 <tr>
@@ -24,11 +23,11 @@
                                     {
                                         <th>Podgląd</th>
                                     <th>PDF</th>
-                                }else
-                                {
-                                    <th>Podgląd</th>
-                                }
-                            </tr>
+                                    }else
+                                    {
+                                        <th>Podgląd</th>
+                                    }
+                                </tr>
                             </thead>
                             <tbody>
                                 @foreach (var order in Model)
@@ -126,8 +125,7 @@
                                 }
                             </tbody>
                         </table>
-                    </div>
                 </div>
-            </div>
+
         </div>
     </div>
