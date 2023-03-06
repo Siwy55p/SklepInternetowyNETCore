@@ -1070,6 +1070,14 @@ namespace partner_aluro.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> AddOrder()
+        {
+            Order order = new Order();
+
+            return View(order);
+        }
+
+        [HttpGet]
         public async Task<IActionResult> DetailOrder(int id)
         {
             if (id == 0)

@@ -4,12 +4,12 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="~/dashboard/css/bootstrap.min.css" />
 
-    <link rel="stylesheet" href="~/dashboard/css/style.css?v=1.1.0>" rel="stylesheet" />
+    <link href="~/lib/bootstrap/css/bootstrap.min.css?v1.1.0" rel="stylesheet" />
 
-    <link rel="stylesheet" href="~/lib/datatables/css/jquery.datatables.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="~/lib/datatables.net-fixedheader-dt/fixedheader.datatables.min.css" />
+    <link href="~/dashboard/css/style.css?v=1.1.1>" rel="stylesheet" />
+    <link href="~/lib/datatables/css/jquery.datatables.min.css" rel="stylesheet" />
+    <link href="~/lib/datatables.net-fixedheader-dt/fixedheader.datatables.min.css" rel="stylesheet" />
 
     @RenderSection("LinkStyleHead", required: false)
 
@@ -17,10 +17,19 @@
 
 </head>
 <body>
-    <div class="offcanvas offcanvas-start sidebar-nav bg-dark" data-bs-scroll="true" tabindex="-1" id="sidebar" aria-labelledby="sidebar">
-                <nav class="navbar-dark">
-            <a class="navbar-brand me-auto ms-lg-0 ms-3 text-uppercase fw-bold"
-               asp-controller="Category" asp-action="Lista1">Aluro</a>
+
+    <div class="offcanvas offcanvas-start bg-dark show" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title link-light" id="offcanvasExampleLabel">
+
+                <a class="navbar-brand me-auto ms-lg-0 ms-3 text-uppercase fw-bold"
+                   asp-controller="Category" asp-action="Lista1">Aluro</a>
+
+            </h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+
+        <nav class="navbar-dark">
                     <ul class="navbar-nav">
                     <li>
                         <a href="@Url.Action("Index","Home")" class="nav-link px-3">
@@ -73,7 +82,7 @@
                                 </span>
                             </span>
                         </a>
-                       @* <div class="collapse" id="layouts">*@
+
                             <ul class="navbar-nav ps-3">
                                 <li>
                                      <a asp-controller="Product" asp-action="Add" class="nav-link px-3">
@@ -92,7 +101,7 @@
                                     </a>
                                 </li>
                             </ul>
-                        @*</div>*@
+
                     </li>
                     <li>
                         <a class="nav-link px-3 sidebar-link"
@@ -127,34 +136,6 @@
                             </ul>
                         </div>
                     </li>
-                    @*<li class="my-4"><hr class="dropdown-divider bg-light" /></li>
-                    <li>
-                        <div class="text-muted small fw-bold text-uppercase px-3 mb-3">
-                            Addons
-                        </div>
-                    </li>
-                    <li>
-                        <a href="#" class="nav-link px-3">
-                            <span class="me-2"><i class="bi bi-graph-up"></i></span>
-                            <span>Charts</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="nav-link px-3">
-                            <span class="me-2"><i class="bi bi-table"></i></span>
-                            <span>Tables</span>
-                        </a>
-                    </li>*@
-                    @*<li>
-                        <a href="@Url.Action("DeserializeXML","GenerateXML")" class="nav-link px-3">
-                            <span>DeserializeXML</span>
-                        </a>
-                    </li>*@
-                    @*<li>
-                        <a asp-action="DeserializeXMLMaterial" asp-controller="GenerateXML">
-                            <span>DeserializeXMLMaterial</span>
-                        </a>
-                    </li>*@
                     <li>
                         <a href="@Url.Action("Edit","Setting")" class="nav-link px-3">
                             <span>Ustawienia </span>
@@ -166,53 +147,6 @@
                             <span>Ustawienia generowania XML</span>
                         </a>
                     </li>
-                    @*<li>
-                        <a href="@Url.Action("DodajProduktyZPrestashop","ConnectPrestashop")" class="nav-link px-3">
-                            <span>Dodaj produkty z Prestashop do bazy glownej </span>
-                        </a>
-                    </li>*@
-                    @*<li>
-                        <a href="@Url.Action("Pobierz","Download")" class="nav-link px-3">
-                            <span>Pobierz z URL </span>
-                        </a>
-                    </li>*@
-
-
-                  @*  <li>
-                        <a href="@Url.Action("ProductNazwyPrestashop","ConnectPrestashop")" class="nav-link px-3">
-                            <span>Nazwy produktow z Prestashop</span>
-                        </a>
-                    </li>*@
-                    @*<li>
-                        <a href="@Url.Action("ProductQuantityPrestashop","ConnectPrestashop")" class="nav-link px-3">
-                            <span>Ilosci z Prestashop </span>
-                        </a>
-                    </li>*@
-                    @*<li>
-                    <a href="@Url.Action("AddressPrestashop","ConnectPrestashop")" class="nav-link px-3">
-                    <span>Adressy z Prestashop init</span>
-                    </a>
-                    </li>*@
-                    @* <li>
-                    <a href="@Url.Action("ProductPrestashop","ConnectPrestashop")" class="nav-link px-3">
-                    <span>Produkty z Prestashop</span>
-                    </a>
-                    </li>
-                    <li>
-                    <a href="@Url.Action("AddressPrestashop","ConnectPrestashop")" class="nav-link px-3">
-                    <span>Address z Prestashop</span>
-                    </a>
-                    </li>
-                    <li>
-                    <a href="@Url.Action("UsersPrestahop","ConnectPrestashop")" class="nav-link px-3">
-                    <span>Uzytkownicy z Prestashop</span>
-                    </a>
-                    </li>*@
-                    @*<li>
-                    <a href="@Url.Action("CenaPromocyjnaChangeNotNull","InicializerProductCategory")" class="nav-link px-3">
-                            <span>Ceny Nul Promocja</span>
-                        </a>
-                    </li>*@
                     <li>
                         <a href="@Url.Action("Index","MetodyDostawy")" class="nav-link px-3">
                             <span>Metody dostawy</span>
@@ -223,81 +157,16 @@
                             <span>Metody płatności</span>
                         </a>
                     </li>
-                    @*<li>
-                        <a href="@Url.Action("zmianaNazwy","Image")" class="nav-link px-3">
-                            <span>Zmiana Nazwy Obrazki produktow</span>
-                        </a>
-                    </li>*@
-
-                    @*<li>
-                        <a href="@Url.Action("zmianaNazwy2","Image")" class="nav-link px-3">
-                            <span>Zmiana Nazwy Obrazki produktow2</span>
-                        </a>
-                    </li>*@
-                    @*<li>
-                        <a href="@Url.Action("DodajProduktyZPrestashop","ConnectPrestashop")" class="nav-link px-3">
-                        <span>Aktualizuj produkty</span>
-                        </a>
-                    </li>*@
-
-                   @* <li>
-                        <a class="nav-link px-3" asp-area="" asp-controller="Email" asp-action="Index">Konfiguracja Email</a>
-                    </li>*@
                     <li>
                         <a href="@Url.Action("Index","ApiNBPKurs")" class="nav-link px-3">
                             <span>Kurs Valut</span>
                         </a>
                     </li>
-                    @*<li>
-                        <a href="@Url.Action("ImagePathZnakSpecjalny","InicializerProductCategory")" class="nav-link px-3">
-                            <span>Popraw sciezke do image</span>
-                        </a>
-                    </li>*@
-                    @*<li>ImagePathZnakSpecjalny
-                        <a href="@Url.Action("ImageNameRemoveIfDuplicate","InicializerProductCategory")" class="nav-link px-3">
-                            <span>Usun duplikaty z bazy danych</span>
-                        </a>
-                    </li>*@
-                   @* <li>
-                        <a href="@Url.Action("AdresDostawyNullAdress","InicializerProductCategory")" class="nav-link px-3">
-                            <span>Usun adresy null</span>
-                        </a>
-                    </li>*@
                     <li>
                         <a href="@Url.Action("Index","SMS")" class="nav-link px-3">
                             <span>Ustawienia SMS</span>
                         </a>
                     </li>
-                    @*<li>
-                        <a href="@Url.Action("EAN13Init","InicializerProductCategory")" class="nav-link px-3">
-                            <span>EAN13ZPrestashop</span>
-                        </a>
-                    </li>*@
-                   @* <li>
-                        <a href="@Url.Action("Translate","InicializerProductCategory")" class="nav-link px-3">
-                        <span>tłumacz nazwy produktow</span>
-                        </a>
-                    </li>*@
-                    @*<li>
-                        <a href="@Url.Action("ImageCompres250x250","InicializerProductCategory")" class="nav-link px-3">
-                            <span>Utworz skompresowane obrazki</span>
-                        </a>
-                    </li>*@
-                    @*<li>
-                        <a href="@Url.Action("ImageFrontSetCompresImage","InicializerProductCategory")" class="nav-link px-3">
-                            <span>Ustaw skompresowane obrazki frontowe</span>
-                        </a>
-                    </li>*@
-@*                    <li>
-                        <a href="@Url.Action("CenyProdyktowItem","InicializerProductCategory")" class="nav-link px-3">
-                        <span>Ustaw ceny produktow dla zamowien</span>
-                    </a>
-                    </li>*@
-                <li>
-                    <a href="@Url.Action("CenyProdyktowItem2","InicializerProductCategory")" class="nav-link px-3">
-                        <span>Ustaw ceny produktow dla zamowien</span>
-                    </a>
-                </li>
                     <li>
                         <form id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                             <button id="logout" type="submit" class="dropdown-item">Wyloguj</button>
@@ -309,8 +178,9 @@
     <!-- offcanvas -->
     <main>
         <div class="container-fluid">
+
             <div class="position-absolute text-black link-dark" style="height:100%; width:50px; top:50px; left:2px; z-index:50">
-                <a class="text-black text-decoration-none link-dark sticky-top" style="top:25px; font-size:26px; color:black;" id="MyButton" data-bs-toggle="offcanvas" href="#sidebar" role="button" aria-controls="sidebar">
+                <a class="" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
                     >
                 </a>
             </div>
@@ -318,8 +188,10 @@
         </div>
     </main>
 
-    <script src="~/dashboard/js/bootstrap.bundle.min.js"></script>
-    <script src="~/dashboard/js/jquery-3.5.1.js"></script>
+    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/lib/jquery/jquery.min.js"></script>
+
     <script src="~/lib/datatables/js/jquery.datatables.js"></script>
     <script src="~/lib/datatables-fixedheader/datatables.fixedheader.min.js"></script>
 
