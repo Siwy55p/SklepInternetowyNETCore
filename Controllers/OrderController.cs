@@ -11,6 +11,7 @@ using partner_aluro.Core;
 using partner_aluro.Core.Repositories;
 using partner_aluro.Data;
 using partner_aluro.Models;
+using partner_aluro.Services;
 using partner_aluro.Services.Interfaces;
 using partner_aluro.ViewModels;
 using System.ComponentModel.DataAnnotations;
@@ -1073,6 +1074,28 @@ namespace partner_aluro.Controllers
         public async Task<IActionResult> AddOrder()
         {
             Order order = new Order();
+
+            var users = _context.Users.ToList();
+
+            var items = new SelectList(users.Select(x=> new {x.Id, x.Email} ).ToList());
+
+
+            var lista = _context.Users.ToList().Select(ct => new SelectListItem()
+            {
+                Value = ct.Id.ToString(),
+                Text = ct.UserName
+            }).ToList();
+
+
+            //lstCategories = _ProductService.GetListCategory().Select(ct => new SelectListItem()
+            //{
+            //    Value = ct.CategoryId.ToString(),
+            //    Text = ct.Name
+            //}).ToList();
+
+            var selectList = new SelectList(items, items.ToList().ToString(), "Text");
+
+            ViewData["UserList"] = lista;
 
             return View(order);
         }

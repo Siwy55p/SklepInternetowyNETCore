@@ -21,8 +21,12 @@
     <div class="container pt-4">
         <div class="row">
 
+        @{
+            int i = 0;
+        }
+
             <div class="select2-container">
-            <select class="select2 col-12 px-4" id="my-select">
+            <select class="select2 col-12 px-4" id="my-select" asp-items="(IEnumerable<SelectListItem>)@ViewData["UserList"]">
                     <option value="option-1">Option 1</option>
                     <option value="option-2">Option 2</option>
                     <option value="option-3">Option 3</option>

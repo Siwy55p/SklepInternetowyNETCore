@@ -36,9 +36,7 @@ button {
   body {
     overflow: auto !important;
   }
-  main {
-    margin-left: var(--offcanvas-width);
-  }
+  main{margin-left: var(--offcanvas-width);}
   /* this is to remove the backdrop */
   .offcanvas-backdrop::before {
     display: none;
