@@ -2,17 +2,12 @@
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.EntityFrameworkCore;
 using partner_aluro.Data;
-using partner_aluro.Migrations;
 using partner_aluro.Models;
 using partner_aluro.Services.Interfaces;
-using System.Drawing;
 using System.Globalization;
-using System.Net;
 using System.Text;
 using System.Text.Encodings.Web;
-using System.Text.RegularExpressions;
 
 namespace partner_aluro.Controllers
 {
@@ -287,9 +282,6 @@ namespace partner_aluro.Controllers
 
             if (_model != null && _model.Errors.Count <= 0 && _model.Name != "")
             {
-                Regon = _model.Regon;
-                Wojewodztwo1 = _model.Wojewodztwo;
-
                 NazwaFirmy = _model.Name;
                 Regon = _model.Regon;
                 Wojewodztwo1 = _model.Wojewodztwo;
@@ -313,9 +305,6 @@ namespace partner_aluro.Controllers
 
                 string KodPocztowyZagraniczny = new String(kod_pocztowyS.Where(Char.IsDigit).ToArray());
                 var MiastoS = new String(kod_pocztowyS.Where(Char.IsLetter).ToArray());
-
-                Regon = companyEuropa.VatNumber;
-                Wojewodztwo1 = companyEuropa.CountryCode;
 
                 NazwaFirmy = companyEuropa.Name;
                 Regon = companyEuropa.VatNumber;

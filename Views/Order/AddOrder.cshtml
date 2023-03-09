@@ -1,4 +1,4 @@
-﻿@model partner_aluro.Models.Order
+﻿@model partner_aluro.ViewModels.AddOrderViewModel
 @{
     ViewData["Title"] = "Zamówienia";
     Layout = "~/Views/Shared/_Dashboard.cshtml";
@@ -20,133 +20,148 @@
 
     <div class="container pt-4">
         <div class="row">
-
-        @{
-            int i = 0;
-        }
-
+        <form asp-controller="Order" asp-action="WybierzUzytkownika" method="post">
             <div class="select2-container">
-            <select class="select2 col-12 px-4" id="my-select" asp-items="(IEnumerable<SelectListItem>)@ViewData["UserList"]">
-                    <option value="option-1">Option 1</option>
-                    <option value="option-2">Option 2</option>
-                    <option value="option-3">Option 3</option>
-                    <option value="option-4">Option 4</option>
-                    <option value="option-5">Option 5</option>
+                @*<select asp-for="@Model.ListaUzytkownik" class="select2 col-12 px-4" id="my-select" asp-items="(IEnumerable<SelectListItem>)@ViewData["UserList"]">*@
+                <select asp-for="@Model.SelectUser" class="select2 col-12 px-4" id="my-select" asp-items="@Model.ListaUzytkownik">
+                    <option value="option-1">Wybierz użytkownika</option>
                 </select>
             </div>
+            <button type="submit">Następny krok</button>
+        </form>
 
 
+            @if(@Model.order.User!= null)
+            {
 
-            <div class="col-12">
-                <div class="row mx-4">
-                    <div class="col-12">
-                        <label class="order-form-label">Name</label>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-outline">
-                            <input type="text" id="form1" class="form-control order-form-input" />
-                            <label class="form-label" for="form1">First</label>
+                <div class="col-12">
+                    <div class="row mx-4">
+                        <div class="col-12">
+                            <label class="order-form-label">Name</label>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-outline">
+                                <input type="text" asp-for="@Model.order.User.Imie" id="@Model.order.User.Imie" class="form-control order-form-input" />
+                                <label class="form-label" for="@Model.order.User.Imie">Imię</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 mt-2 mt-sm-0">
+                            <div class="form-outline">
+                            <input type="text" asp-for="@Model.order.User.Nazwisko" id="@Model.order.User.Nazwisko" class="form-control order-form-input" />
+                                <label class="form-label" for="@Model.order.User.Nazwisko">Nazwisko</label>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-sm-6 mt-2 mt-sm-0">
-                        <div class="form-outline">
-                            <input type="text" id="form2" class="form-control order-form-input" />
-                            <label class="form-label" for="form2">Last</label>
-                        </div>
+                    <div>
+                        @*dodaj adres*@
+                    </div>
+                    <div>
+                       @* <form asp-controller="Order" asp-action="DodajProdukt" method="post">
+                            Dodaj produkt
+                            <div class="select2-container">
+                            <select asp-for="@Model.SelectUser" class="select2 col-12 px-4" id="my-select" asp-items="@Model.ListaUzytkownik">
+                                <option value="option-1">Wybierz użytkownika</option>
+                            </select>
+                            </div>
+                        <button type="submit">Dodaj</button>
+
+                        </form>*@
                     </div>
                 </div>
 
-                <div class="row mt-3 mx-4">
-                    <div class="col-12">
-                        <label class="order-form-label">Type of thing you want to order</label>
-                    </div>
-                    <div class="col-12">
-                        <div class="form-outline">
-                            <input type="text" id="form3" class="form-control order-form-input" />
+@*
+                    <div class="row mt-3 mx-4">
+                        <div class="col-12">
+                            <label class="order-form-label">Type of thing you want to order</label>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-outline">
+                                <input type="text" id="form3" class="form-control order-form-input" />
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="row mt-3 mx-4">
-                    <div class="col-12">
-                        <label class="order-form-label">Another type of thing you want to order</label>
-                    </div>
-                    <div class="col-12">
-                        <div class="form-outline">
-                            <input type="text" id="form4" class="form-control order-form-input" />
+                    <div class="row mt-3 mx-4">
+                        <div class="col-12">
+                            <label class="order-form-label">Another type of thing you want to order</label>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-outline">
+                                <input type="text" id="form4" class="form-control order-form-input" />
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="row mt-3 mx-4">
-                    <div class="col-12">
-                        <label class="order-form-label" for="date-picker-example">Date</label>
-                    </div>
-                    <div class="col-12">
-                        <div class="form-outline datepicker" data-mdb-toggle-button="false">
-                            <input type="text" class="form-control order-form-input" id="datepicker1" data-mdb-toggle="datepicker" />
-                            <label for="datepicker1" class="form-label">Select a date</label>
+                    <div class="row mt-3 mx-4">
+                        <div class="col-12">
+                            <label class="order-form-label" for="date-picker-example">Date</label>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-outline datepicker" data-mdb-toggle-button="false">
+                                <input type="text" class="form-control order-form-input" id="datepicker1" data-mdb-toggle="datepicker" />
+                                <label for="datepicker1" class="form-label">Select a date</label>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="row mt-3 mx-4">
-                    <div class="col-12">
-                        <label class="order-form-label">Adress</label>
-                    </div>
-                    <div class="col-12">
-                        <div class="form-outline">
-                            <input type="text" id="form5" class="form-control order-form-input" />
-                            <label class="form-label" for="form5">Street Address</label>
+                    <div class="row mt-3 mx-4">
+                        <div class="col-12">
+                            <label class="order-form-label">Adress</label>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-outline">
+                                <input type="text" id="form5" class="form-control order-form-input" />
+                                <label class="form-label" for="form5">Street Address</label>
+                            </div>
+                        </div>
+                        <div class="col-12 mt-2">
+                            <div class="form-outline">
+                                <input type="text" id="form6" class="form-control order-form-input" />
+                                <label class="form-label" for="form6">Street Address Line 2</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 mt-2 pe-sm-2">
+                            <div class="form-outline">
+                                <input type="text" id="form7" class="form-control order-form-input" />
+                                <label class="form-label" for="form7">City</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 mt-2 ps-sm-0">
+                            <div class="form-outline">
+                                <input type="text" id="form8" class="form-control order-form-input" />
+                                <label class="form-label" for="form8">Region</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 mt-2 pe-sm-2">
+                            <div class="form-outline">
+                                <input type="text" id="form9" class="form-control order-form-input" />
+                                <label class="form-label" for="form9">Postal / Zip Code</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 mt-2 ps-sm-0">
+                            <div class="form-outline">
+                                <input type="text" id="form10" class="form-control order-form-input" />
+                                <label class="form-label" for="form10">Country</label>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-12 mt-2">
-                        <div class="form-outline">
-                            <input type="text" id="form6" class="form-control order-form-input" />
-                            <label class="form-label" for="form6">Street Address Line 2</label>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 mt-2 pe-sm-2">
-                        <div class="form-outline">
-                            <input type="text" id="form7" class="form-control order-form-input" />
-                            <label class="form-label" for="form7">City</label>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 mt-2 ps-sm-0">
-                        <div class="form-outline">
-                            <input type="text" id="form8" class="form-control order-form-input" />
-                            <label class="form-label" for="form8">Region</label>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 mt-2 pe-sm-2">
-                        <div class="form-outline">
-                            <input type="text" id="form9" class="form-control order-form-input" />
-                            <label class="form-label" for="form9">Postal / Zip Code</label>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 mt-2 ps-sm-0">
-                        <div class="form-outline">
-                            <input type="text" id="form10" class="form-control order-form-input" />
-                            <label class="form-label" for="form10">Country</label>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="row mt-3 mx-4">
-                    <div class="col-12">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                            <label class="form-check-label" for="flexCheckDefault">I know what I need to know</label>
+                    <div class="row mt-3 mx-4">
+                        <div class="col-12">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                <label class="form-check-label" for="flexCheckDefault">I know what I need to know</label>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="row mt-3">
-                    <div class="col-12">
-                        <button type="button" id="btnSubmit" class="btn btn-primary d-block mx-auto btn-submit">Submit</button>
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <button type="button" id="btnSubmit" class="btn btn-primary d-block mx-auto btn-submit">Submit</button>
+                        </div>
                     </div>
-                </div>
-            </div>
+                </div>*@
+            }
         </div>
     </div>
 

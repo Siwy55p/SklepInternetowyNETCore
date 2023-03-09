@@ -14,6 +14,7 @@ using System.Text;
 using System.Text.Encodings.Web;
 using partner_aluro.Data;
 using static DeepL.Model.Usage;
+using Microsoft.EntityFrameworkCore;
 
 namespace partner_aluro.Controllers
 {
@@ -61,7 +62,11 @@ namespace partner_aluro.Controllers
 
         public IActionResult Index()
         {
-            ICollection<ApplicationUser> users = _unitOfWork.User.GetUsers();
+            //ICollection<ApplicationUser> users = _unitOfWork.User.GetUsers();
+
+            var users = _context.Users.Include(x => x.Adress1rozliczeniowy)
+                .Include(x => x.Adress2dostawy)
+                .ToList();
 
             return View(users);
         }

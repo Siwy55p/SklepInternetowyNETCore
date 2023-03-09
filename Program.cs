@@ -73,6 +73,13 @@ builder.Services.AddBreadcrumbs(Assembly.GetExecutingAssembly(), options =>
     options.ActiveLiClasses = "breadcrumb-item active";
 });
 
+builder.Services.AddHttpClient("BaseLinkerApi", c =>
+{
+    c.BaseAddress = new Uri("https://api.baselinker.com/connector.php/v1/");
+    c.DefaultRequestHeaders.Add("Accept", "application/json");
+    // Add any other default headers or settings here
+});
+
 builder.Services.AddDbContext<ApplicationDbContext>(builder =>
 {
 

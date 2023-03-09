@@ -39,7 +39,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="BaseLinker" Version="0.3.2" />
+    <PackageReference Include="BaseLinker.Extensions.DependencyInjection" Version="0.2.4" />
     <PackageReference Include="ClosedXML" Version="0.100.3" />
+    <PackageReference Include="CsvHelper" Version="30.0.1" />
     <PackageReference Include="datatables.net-fixedheader-dt" Version="3.3.1" />
     <PackageReference Include="DeepL.net" Version="1.5.0" />
     <PackageReference Include="FreeSpire.XLS" Version="12.7.0" />

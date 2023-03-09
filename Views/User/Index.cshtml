@@ -72,7 +72,18 @@
                                                     <input type="checkbox" disabled />
                                                 }
                                             </td>
-                                            <td>@user.Adress1rozliczeniowy.Vat</td>
+
+                                            <td>
+                                                @if (@user!=null  )
+                                                {
+                                                    @user.Adress1rozliczeniowy.Vat
+                                                }else
+                                                {
+                                                    <span>brak Vat</span>
+                                                }
+                                                
+                                            
+                                            </td>
                                             <td>
                                                 <a asp-controller="User" asp-action="Edit" asp-route-id="@user.Id">Edytuj</a> |  <a asp-controller="User" asp-action="ResetPasswordUser" asp-route-id="@user.Id" asp-route-email="@user.Email">Resetuj hasło</a> |
                                                 <a asp-controller="User" asp-action="Delete" asp-route-id="@user.Id">Usuń</a>

@@ -1071,33 +1071,54 @@ namespace partner_aluro.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> AddOrder()
+        public async Task<IActionResult> AddOrder(AddOrderViewModel order)
         {
-            Order order = new Order();
+            var lista = GetUsers();
 
-            var users = _context.Users.ToList();
-
-            var items = new SelectList(users.Select(x=> new {x.Id, x.Email} ).ToList());
-
-
-            var lista = _context.Users.ToList().Select(ct => new SelectListItem()
+            if (order.ListaUzytkownik == null)
             {
-                Value = ct.Id.ToString(),
-                Text = ct.UserName
-            }).ToList();
+                order.ListaUzytkownik = new List<SelectListItem>(lista);
+            }
 
+            if (order.order == null)
+            {
+                order.order = new Order();
+            }
 
-            //lstCategories = _ProductService.GetListCategory().Select(ct => new SelectListItem()
-            //{
-            //    Value = ct.CategoryId.ToString(),
-            //    Text = ct.Name
-            //}).ToList();
-
-            var selectList = new SelectList(items, items.ToList().ToString(), "Text");
+            if(order.SelectUser != null)
+            {
+                order.order.User = _context.Users.Where(x => x.Email == order.SelectUser)
+                    .Include(x=>x.Adress1rozliczeniowy)
+                    .Include(x=>x.Adress2dostawy)
+                    .First();
+            }
 
             ViewData["UserList"] = lista;
 
             return View(order);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> WybierzUzytkownika(AddOrderViewModel order)
+        {
+
+            ViewData["UserList"] = GetUsers();
+            return RedirectToAction("AddOrder",order);
+            return View(order);
+        }
+
+        public List<SelectListItem> GetUsers()
+        {
+            var users = _context.Users.ToList();
+            var items = new SelectList(users.Select(x => new { x.UserName, x.Email }).ToList());
+
+            var lista = _context.Users.ToList().Select(ct => new SelectListItem()
+            {
+                Value = ct.UserName.ToString(),
+                Text = ct.UserName
+            }).ToList();
+
+            return lista;
         }
 
         [HttpGet]
