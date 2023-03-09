@@ -134,9 +134,19 @@ namespace partner_aluro.Controllers
                     _context.SaveChanges();
                 }
 
+                var existCart1 = _context.Carts.Where(x => x.UserId == id).ToList();
+                if(existCart1.Any())
+                { 
+                    var existCart = _context.Carts.Where(x => x.UserId == id).OrderBy(x => x.Id).Last();
+                    if (existCart != null)
+                    {
+                        _context.Carts.Remove(existCart);
+                        _context.SaveChanges();
+                    }
+                }
 
 
-                IdentityResult result = await _signInManager.UserManager.DeleteAsync(user);
+                    IdentityResult result = await _signInManager.UserManager.DeleteAsync(user);
                 if (result.Succeeded)
                     return RedirectToAction("Index");
                 else
