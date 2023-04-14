@@ -57,6 +57,12 @@ namespace partner_aluro.Controllers
             {
                 return View(category);
             }
+
+            if (category.ParentId == null) //dodane 14.04.2023 bez ParentId nie widać w menu
+            {
+                category.ParentId = 0;
+            }
+
             if(category.ParentId > 0)
             {
                 category.ChildId = 2;

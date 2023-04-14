@@ -2,12 +2,18 @@
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
+using Padi.Vies;
 using partner_aluro.Data;
 using partner_aluro.Models;
 using partner_aluro.Services.Interfaces;
 using System.Globalization;
+using System.Net;
 using System.Text;
 using System.Text.Encodings.Web;
+using System.Xml;
+using System.Net.Http;
+using System.Xml;
+using System.Net.Http.Headers;
 
 namespace partner_aluro.Controllers
 {
@@ -150,7 +156,7 @@ namespace partner_aluro.Controllers
             var Powiat1 = "";
             var Ulica1 = "";
             var nazwa_firmy = "Nie znaleziono takiej firmy";
-            var Kraj1 = "Polska";
+            var Kraj1 = "PL";
             var adres = "";
             var Miasto1 = "";
             var KodPocztowy1 = "";
@@ -195,7 +201,7 @@ namespace partner_aluro.Controllers
                 list1.Add(KodPocztowy1);
 
                 return list1;
-            }else
+            }else if(companyEuropa == null)
             { 
                 CompanyModel _model = new CompanyModel();
 
@@ -223,6 +229,16 @@ namespace partner_aluro.Controllers
                     KodPocztowy1 = _model.KodPocztowy;
                 }
             }
+            
+            
+            if(nazwa_firmy == "Nie znaleziono takiej firmy")
+            {
+                var listaGetVat = await GetVatInfo3Async(Vat);
+                return listaGetVat;
+
+            }
+
+
             List<string> list = new List<string>();
 
             list.Add(komunikat);
@@ -243,6 +259,108 @@ namespace partner_aluro.Controllers
             //list.Add(KodPocztowy1);
             return list;
         }
+
+        public async Task<string> GetCompanyInfo(string vatNumber)
+        {
+            string apiUrl = "http://ec.europa.eu/taxation_customs/vies/services/checkVatService";
+
+            // create HTTP client and request content
+            using (var httpClient = new HttpClient())
+            using (var content = new StringContent($"<?xml version=\"1.0\" encoding=\"UTF-8\"?><SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:ns1=\"urn:ec.europa.eu:taxud:vies:services:checkVat:types\"><SOAP-ENV:Body><ns1:checkVat><ns1:countryCode>{vatNumber.Substring(0, 2)}</ns1:countryCode><ns1:vatNumber>{vatNumber.Substring(2)}</ns1:vatNumber></ns1:checkVat></SOAP-ENV:Body></SOAP-ENV:Envelope>", Encoding.UTF8, "text/xml"))
+            {
+                // set request headers
+                content.Headers.ContentType = new MediaTypeHeaderValue("text/xml;charset=UTF-8");
+                content.Headers.Add("SOAPAction", "urn:ec.europa.eu:taxud:vies:services:checkVat/checkVat");
+
+                // send request
+                var response = await httpClient.PostAsync(apiUrl, content);
+
+                // parse XML response
+                var responseContent = await response.Content.ReadAsStringAsync();
+                var xmlDoc = new XmlDocument();
+                xmlDoc.LoadXml(responseContent);
+                var nsManager = new XmlNamespaceManager(xmlDoc.NameTable);
+                nsManager.AddNamespace("ns", "urn:ec.europa.eu:taxud:vies:services:checkVat:types");
+                var valid = bool.Parse(xmlDoc.SelectSingleNode("//ns:valid", nsManager).InnerText);
+                var companyName = xmlDoc.SelectSingleNode("//ns:name", nsManager).InnerText;
+                var companyAddress = xmlDoc.SelectSingleNode("//ns:address", nsManager).InnerText;
+
+                // return company info as string
+                return $"{(valid ? "Valid VAT number" : "Invalid VAT number")}\nCompany Name: {companyName}\nCompany Address: {companyAddress}";
+            }
+        }
+
+        public async Task<List<string>> GetVatInfo3Async(string vatNumber)
+        {
+            /*
+             * https://vatlayer.com/dashboard?logged_in=1 
+             */
+            var accessKey1 = "384438237950f46ed363afd151757d85";
+            var accessKey = "38dfee3f31277dcf10adcabddb33e249";
+
+            var url = $"http://apilayer.net/api/validate?access_key={accessKey}&vat_number={vatNumber}";
+
+                List<string> list = new List<string>();
+
+                using (var httpClient = new HttpClient())
+                {
+                    var response = await httpClient.GetAsync(url);
+                    var content = await response.Content.ReadAsStringAsync();
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        dynamic result = Newtonsoft.Json.JsonConvert.DeserializeObject(content);
+
+                        if (result!=null && result.success==true)
+                        {
+                            string name = result.company_name;
+                            string adres = result.company_address;
+                            string vat = result.vat_number;
+
+                            string SplitAdres = adres;
+
+                            string[] AdresSplit = SplitAdres.Split(",");
+                            string KodPocztowyMiasto = AdresSplit[0].ToString();
+
+                            string[]KodPocztowyiMiasto = KodPocztowyMiasto.Split(" ");
+                            string KodPocztowy = KodPocztowyiMiasto[0].ToString();
+
+                            string Miasto = "";
+                            for (int i = 1; i < KodPocztowyiMiasto.Length; i++)
+                            {
+                                Miasto += KodPocztowyiMiasto[i].ToString() + " ";
+                            }
+
+                            string UlicaNrDomu = AdresSplit[1].ToString();
+                            string krajE = AdresSplit[2].ToString();
+
+                        list.Add("Aktywne");
+                        list.Add(name);
+                        list.Add(UlicaNrDomu);
+                        list.Add(Miasto);
+                        list.Add(KodPocztowy);
+                        list.Add(krajE);
+
+                        return list;
+
+                        }else
+                        {
+                            list.Add("Usługa nie dostępna, proszę spróbować później.");
+                            list.Add("Chwili obecnej nie możemy poprawnie sprawdzić VAT");
+                            return list;
+                        }
+
+                    }
+                    else
+                    {
+                        list.Add("Usługa nie dostępna, proszę spróbować później.");
+                        list.Add("Przekroczono limit");
+                        return list;
+
+                    }
+                }
+        }
+
 
         [HttpPost]
         public async Task<List<string>> SprawdzNIPAdminAddUser(string? Vat = null)

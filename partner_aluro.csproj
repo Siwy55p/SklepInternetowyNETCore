@@ -84,6 +84,7 @@
     <PackageReference Include="System.ServiceModel.NetTcp" Version="4.10.0" />
     <PackageReference Include="System.ServiceModel.Security" Version="4.10.0" />
     <PackageReference Include="TinyMCE" Version="6.3.1" />
+    <PackageReference Include="vies-dotnet-api" Version="2.0.0" />
     <PackageReference Include="Wangkanai.Detection" Version="5.3.0" />
     <PackageReference Include="WcfCoreMtomEncoder" Version="0.1.16" />
     <PackageReference Include="X.PagedList.Mvc.Core" Version="8.4.3" />
@@ -95,6 +96,7 @@
 
   <ItemGroup>
     <Folder Include="Migrations\" />
+    <Folder Include="Nowy folder\" />
     <Folder Include="wwwroot\lib\Nowy folder\" />
     <Folder Include="wwwroot\modules\nvn_export_products\download\" />
     <Folder Include="wwwroot\MyLogs\" />

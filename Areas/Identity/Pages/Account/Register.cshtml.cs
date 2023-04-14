@@ -327,6 +327,83 @@ namespace partner_aluro.Areas.Identity.Pages.Account
                 }
 
 
+                if (companyEuropa == null && (_model != null && _model.Errors.Count() < 1))
+                { 
+                    var accessKey1 = "384438237950f46ed363afd151757d85";
+                    var accessKey = "38dfee3f31277dcf10adcabddb33e249";
+                    var url = $"http://apilayer.net/api/validate?access_key={accessKey}&vat_number={Input.NIP}";
+
+
+                    using (var httpClient = new HttpClient())
+                    {
+                        var response = await httpClient.GetAsync(url);
+                        var content = await response.Content.ReadAsStringAsync();
+
+                        if (response.IsSuccessStatusCode)
+                        {
+                            dynamic resultQ = Newtonsoft.Json.JsonConvert.DeserializeObject(content);
+
+                            if (resultQ != null && resultQ.success == true)
+                            {
+                                string name = resultQ.company_name;
+                                string adres = resultQ.company_address;
+                                string vat = resultQ.vat_number;
+
+                                string SplitAdres = adres;
+
+                                string[] AdresSplit = SplitAdres.Split(",");
+                                string KodPocztowyMiasto = AdresSplit[0].ToString();
+
+                                string[] KodPocztowyiMiasto = KodPocztowyMiasto.Split(" ");
+                                string KodPocztowy = KodPocztowyiMiasto[0].ToString();
+
+                                string Miasto = "";
+                                for (int i = 1; i < KodPocztowyiMiasto.Length; i++)
+                                {
+                                    Miasto += KodPocztowyiMiasto[i].ToString() + " ";
+                                }
+
+                                string UlicaNrDomu = AdresSplit[1].ToString();
+                                string krajE = AdresSplit[2].ToString();
+
+                                adres1.NrNieruchomosci = "";
+                                adres1.NrLokalu = "";
+                                adres1.Vat = Input.NIP;
+                                adres1.Miasto = Miasto;
+                                adres1.Ulica = UlicaNrDomu;
+                                adres1.KodPocztowy = KodPocztowy;
+                                adres1.Wojewodztwo = krajE;
+                                adres1.Kraj = krajE;
+                                adres1.Powiat = krajE;
+                                adres1.Gmina = krajE;
+                                adres1.StatusNip = Input.NIP;
+                                adres1.Regon = Input.NIP;
+                                adres1.Telefon = Input.Telefon1;
+                                adres1.Adres1UserID = user.Id;
+
+                                //Regon = companyEuropa.VatNumber;
+                                //nazwa_firmy = companyEuropa.Name;
+                                //adres = ulicaS;
+                                //Kraj1 = companyEuropa.CountryCode + " " + krajE;
+                                //Miasto1 = MiastoS.ToString();
+                                //KodPocztowy1 = KodPocztowyZagraniczny;
+
+                                adres2.Imie = Input.Imie;
+                                adres2.Nazwisko = Input.Nazwisko;
+                                adres2.Email = Input.Email;
+                                adres2.Miasto = Miasto;
+                                adres2.Ulica = UlicaNrDomu;
+                                adres2.KodPocztowy = KodPocztowy;
+                                adres2.Telefon = Input.Telefon1;
+                                adres2.Kraj = krajE;
+                                adres2.Adres2UserID = user.Id;
+                            }
+                        }
+                    }
+                }
+
+
+
                 user.Adress1rozliczeniowy = adres1;
                 user.Adress2dostawy = adres2;
 

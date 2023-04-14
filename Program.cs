@@ -304,9 +304,6 @@ void AddScoped()
 
     builder.Services.AddScoped<IProfildzialalnosciService, ProfildzialalnosciService>();
 
-
-    builder.Services.AddScoped<IProfildzialalnosciService, ProfildzialalnosciService>();
-
     builder.Services.AddScoped<IEmailService, EmailService>();
 
     builder.Services.AddScoped<IMetodyDostawy, MetodyDostawyService>();
