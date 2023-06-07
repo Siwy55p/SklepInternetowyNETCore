@@ -46,52 +46,124 @@
 
                     wiadomosc = "Koszyk zrealizowany";
                 }
-                
+
+                if (@item.value != null)
+                {
+
                 <tr>
-                    @*<td>
+                        @*<td>
                         @item.value.CartaId
                     </td>*@
-                    <td>
-                        <span>@wiadomosc </span>
+                        <td>
+                            <span>@wiadomosc </span>
 
-                    </td>
-                    <td>
-                        @item.value.CartItems.Count()
-                    </td>
-                    <td>
-                       <span style="background-color:@color">@item.value.RazemBrutto.ToString("# ###.00")</span>
+                        </td>
+                        <td>
+                            @item.value.CartItems.Count()
+                        </td>
+                        <td>
+                            <span style="background-color:@color">@item.value.RazemBrutto.ToString("# ###.00")</span>
 
 
-                    </td>
-                    <td>
-                        @item.value.user.Imie @item.value.user.Nazwisko
+                        </td>
+                        <td>
+                            @if( @item.value.user != null)
+                            {
+                            @item.value.user.Imie @item.value.user.Nazwisko
+                            }else
+                            {
+                                <b>Brak user</b>
+                            }
 
-                    </td>
-                    <td>
-                        @item.value.user.NazwaFirmy
+                        </td>
+                        <td>
+                            @if (@item.value.user != null)
+                            {
+                                @item.value.user.NazwaFirmy
+                            }
+                            else
+                            {
+                                <b>Brak firmy</b>
+                            }
 
-                    </td>
-                    @*<td>
+                        </td>
+                        @*<td>
                         @item.value.Zrealizowane
                     </td>*@
-                    <th>
-                        @item.value.dataPowstania.ToString("yyyy-MM-dd HH:mm:ss")
-                    </th>
-                    <td>
-                        <a asp-controller="Cart" asp-action="Details" asp-route-CartID="@item.value.CartaId">Więcej</a>
-                        @{
-                            DateTime data1 = item.value.dataPowstania;
-                            DateTime data2 = DateTime.Now;
-                            var roznica = data2 - data1;
-                        }
-                        @if (item.value.Zrealizowane == false && roznica >= TimeSpan.FromDays(30))
-                        {
-                            <a asp-controller="Cart" asp-action="Delete" asp-route-CartID="@item.value.CartaId"> Usuń</a>
-                        }
-                        else
-                        {}
-                    </td>
-                </tr>
+                        <th>
+                            @item.value.dataPowstania.ToString("yyyy-MM-dd HH:mm:ss")
+                        </th>
+                        <td>
+                            <a asp-controller="Cart" asp-action="Details" asp-route-CartID="@item.value.CartaId">Więcej</a>
+                            @if (item.value.Zrealizowane == false)
+                            {
+                               // <a asp-controller="Cart" asp-action="ZlozZamowienie" asp-route-CartID="@item.value.CartaId" asp-route-UserName="@item.value.user.UserName">Złóż</a>
+                            }
+                            @{
+                                DateTime data1 = item.value.dataPowstania;
+                                DateTime data2 = DateTime.Now;
+                                var roznica = data2 - data1;
+                            }
+                            @if (item.value.Zrealizowane == false && roznica >= TimeSpan.FromDays(30))
+                            {
+                                <a asp-controller="Cart" asp-action="Delete" asp-route-CartID="@item.value.CartaId"> Usuń</a>
+                            }
+                            else
+                            { }
+                        </td>
+                    </tr>
+                }else
+                {
+                    <tr>
+                        @*<td>
+                @item.value.CartaId
+                </td>*@
+                        <td>
+                            <span>@wiadomosc </span>
+
+                        </td>
+                        <td>
+                            @item.value.CartItems.Count()
+                        </td>
+                        <td>
+                            <span style="background-color:@color">@item.value.RazemBrutto.ToString("# ###.00")</span>
+
+
+                        </td>
+                        <td>
+                            BrakImienia, BrakNazwiska
+
+                        </td>
+                        <td>
+                            Brak Nazwy Firmy
+
+                        </td>
+                        @*<td>
+                @item.value.Zrealizowane
+                </td>*@
+                        <th>
+                            if(@item.value.dataPowstania!= null)
+                            {
+                                @item.value.dataPowstania.ToString("yyyy-MM-dd HH:mm:ss")
+                            }
+                        </th>
+                        <td>
+                            <a asp-controller="Cart" asp-action="Details" asp-route-CartID="@item.value.CartaId">Więcej</a>
+                            @{
+                                DateTime data1 = item.value.dataPowstania;
+                                DateTime data2 = DateTime.Now;
+                                var roznica = data2 - data1;
+                            }
+                            @if (item.value.Zrealizowane == false && roznica >= TimeSpan.FromDays(30))
+                            {
+                                <a asp-controller="Cart" asp-action="Delete" asp-route-CartID="@item.value.CartaId"> Usuń</a>
+                            }
+                            else
+                            { }
+                        </td>
+                    </tr>
+                }
+
             }
 
            @* @foreach (var item in Model.group)

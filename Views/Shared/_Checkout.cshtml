@@ -156,16 +156,39 @@
 
             @if (Model != null)
             {
-                    @*Powrót do sklepu*@
+                @*Powrót do sklepu*@
                     <form asp-action="Checkout" asp-controller="Order" method="POST" class="needs-validation" novalidate>
-                    @*@Html.ValidationSummary()*@
+                        @*@Html.ValidationSummary()*@
+
+
+                    @if (Model.Orders.CartId != null)
+                    {
+                        <input type="hidden" asp-for="@Model.Orders.CartId" value="@Model.Orders.CartId" />
+                    }
+
+                    @if (Model.Orders.FlagaRelizacjaZaKlienta != null)
+                    {
+                        <input type="hidden" asp-for="@Model.Orders.FlagaRelizacjaZaKlienta" value="@Model.Orders.FlagaRelizacjaZaKlienta" />
+                    }
+
+                    @Html.HiddenFor(h=>Model.Orders.User.Id)
+
+
+                        @await Html.PartialAsync("_AdressForm")
+
+                        <button class="btn btn-success btn-lg btn-block" type="submit">@language.Getkey("Złóż zamówienie")</button>
+                    </form>
+
+
+                  @*  <form asp-action="Checkout" asp-controller="Order" method="POST" class="needs-validation" novalidate>
+
 
                         @Html.HiddenFor(h=>Model.Orders.User.Id)
 
                         @await Html.PartialAsync("_AdressForm")
 
                         <button class="btn btn-success btn-lg btn-block" type="submit">@language.Getkey("Złóż zamówienie")</button>
-                    </form>
+                    </form>*@
             }
 
         </div>

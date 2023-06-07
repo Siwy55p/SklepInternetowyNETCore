@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using partner_aluro.Data;
 
@@ -11,9 +12,11 @@ using partner_aluro.Data;
 namespace partneraluro.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230607145034_AddFlagUserOrder")]
+    partial class AddFlagUserOrder
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -831,9 +834,6 @@ namespace partneraluro.Migrations
 
                     b.Property<bool?>("ByloAnulowane")
                         .HasColumnType("bit");
-
-                    b.Property<string>("CartId")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("FlagaRelizacjaZaKlienta")
                         .HasColumnType("bit");

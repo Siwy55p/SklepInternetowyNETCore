@@ -228,6 +228,36 @@ namespace partner_aluro.Models
             _context.SaveChanges();
         }
 
+        public async Task<List<CartItem>> GetAllCartItemsUserAsync(string CartIds)
+        {
+            List<CartItem> cartItem = new List<CartItem>();
+            cartItem = await _context.CartItems.Where(ci => ci.CartIds == CartIds)
+                    .Include(ci => ci.Product)
+                    .ToListAsync();
+
+            foreach (var item in cartItem)
+            {
+                Product StanProduktu = _context.Products.Where(x => x.ProductId == item.Product.ProductId).FirstOrDefault();
+                if (item.Quantity >= StanProduktu.Ilosc)
+                {
+                    item.Quantity = StanProduktu.Ilosc;
+                    _context.Update(item);
+                    _context.SaveChanges();
+                }
+                else
+                {
+                    //nic nie rob
+                }
+
+            }
+
+            return cartItem;
+
+            //return (List<CartItem>)(CartItems ??= await _context.CartItems.Where(ci => ci.CartIds == CartaId)
+            //        .Include(ci => ci.Product)
+            //        .ToListAsync());
+        }
+
         public async Task<List<CartItem>> GetAllCartItemsAsync()
         {
             List<CartItem> cartItem = new List<CartItem>();

@@ -9,7 +9,9 @@ using partner_aluro.Models;
 using partner_aluro.Services;
 using partner_aluro.Services.Interfaces;
 using partner_aluro.ViewModels;
+using sun.misc;
 using System.Security.Claims;
+using static com.sun.tools.@internal.xjc.reader.xmlschema.bindinfo.BIConversion;
 
 namespace partner_aluro.Controllers
 {
@@ -51,9 +53,44 @@ namespace partner_aluro.Controllers
                 .Include(x => x.user)
                 .Include(u => u.CartItems)
                 .ThenInclude(p => p.Product)
-                .Where(x => x.user.UserName != "szuminski.p@gmail.com" && x.user.UserName != "piotr@pierrot.pl")
+                .Where(x => x.user.UserName != "szuminski.p@gmail.com" && x.user.UserName != "piotr@pierrot.pl" && x.user.UserName != "test@wp.pl")
                 .Where(x => x.CartItems.Count >= 1)
                 .ToListAsync();
+
+            //List<Cart> listaCart = await _context.Carts
+            //    .Include(x => x.user)
+            //    .Include(u => u.CartItems)
+            //    .ThenInclude(p => p.Product)
+            //    .Where(x => x.user.UserName != "szuminski.p@gmail.com" && x.user.UserName != "piotr@pierrot.pl")
+            //    .Where(x => x.user != null)
+            //    .Where(x => x.CartItems.Count >= 1)
+            //    .ToListAsync();
+
+
+
+            return View(listaCart);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ListaLastBay()
+        {
+            List<Cart> listaCart = await _context.Carts
+            .Include(x => x.user)
+            .Include(u => u.CartItems)
+            .ThenInclude(p => p.Product)
+            .GroupBy(x=>x.user.Email)
+            .Select(g => g.FirstOrDefault())
+            .ToListAsync();
+
+            //List<Cart> listaCart = await _context.Carts
+            //    .Include(x => x.user)
+            //    .Include(u => u.CartItems)
+            //    .ThenInclude(p => p.Product)
+            //    .Where(x => x.user.UserName != "szuminski.p@gmail.com" && x.user.UserName != "piotr@pierrot.pl")
+            //    .Where(x => x.user != null)
+            //    .Where(x => x.CartItems.Count >= 1)
+            //    .ToListAsync();
+
 
 
             return View(listaCart);
@@ -123,9 +160,34 @@ namespace partner_aluro.Controllers
 
             //return View(vm);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Zloz(string CartID, string UserName)
+        {
+            var products = await _cart.GetAllCartItemsUserAsync(CartID);
+
+
+            ApplicationUser applicationUser = await _userManager.FindByNameAsync(UserName);
+
+
+            CartOrderViewModel vm = new()
+            {
+                Carts = _cart,
+                Orders = new Order()
+                {
+                    User = applicationUser,
+                    MetodaPlatnosci = "Przelew"
+                },
+            };
+
+
+            return View(vm);
+        }
+
+
         static string powrot = "";
         [HttpGet]
-        public async Task<IActionResult> ZlozZamowienie()
+        public async Task<IActionResult> ZlozZamowienie(string CartID = null, string UserName = null)
         {
 
             if (ViewData["returnUrl"] != null)
@@ -159,26 +221,47 @@ namespace partner_aluro.Controllers
             ViewData["MetodyPlatnosci"] = _context.MetodyPlatnosci.ToList();
             ViewData["MetodyDostawy"] = _context.MetodyDostawy.ToList();
 
-            var products = await _cart.GetAllCartItemsAsync();
-            //_cart.CartItems = products;
+            bool RelizacjaZaKlienta = false;
+
+            List<CartItem> products;
+            if (CartID != null)
+            {
+                products = await _cart.GetAllCartItemsUserAsync(CartID);
+                RelizacjaZaKlienta = true;
+                
+            }
+            else
+            {
+                products = await _cart.GetAllCartItemsAsync();
+            }
+            _cart.CartItems = products;
 
             //foreach (var product in products)
             //{
             //    product.Product.CenaProduktuDlaUzytkownika = product.Product.CenaProduktuBrutto * (1 - (Core.Constants.Rabat / 100));
             //}
-
-
-            ApplicationUser applicationUser = await _userManager.GetUserAsync(User);
+            ApplicationUser applicationUser;
+            if (UserName != null)
+            {
+                applicationUser = await _userManager.FindByNameAsync(UserName);
+            }
+            else
+            {
+                applicationUser = await _userManager.GetUserAsync(User);
+            }
 
             CartOrderViewModel vm = new()
             {
                 Carts = _cart,
-                Orders = new Order() { 
+                Orders = new Order() {
                     User = applicationUser,
-                    MetodaPlatnosci = "Przelew"
+                    MetodaPlatnosci = "Przelew",
+                    FlagaRelizacjaZaKlienta = RelizacjaZaKlienta
                 },
             };
 
+            if (CartID != null)
+                vm.Orders.CartId = CartID;
 
             vm.Orders.User.Adress1rozliczeniowy = _context.Adress1rozliczeniowy.FirstOrDefault(x => x.UserID == vm.Orders.User.Id);
             vm.Orders.User.Adress2dostawy = _context.Adress2dostawy.FirstOrDefault(x => x.UserID == vm.Orders.User.Id);

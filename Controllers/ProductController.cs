@@ -5,7 +5,7 @@ using partner_aluro.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using partner_aluro.Data;
 using Microsoft.EntityFrameworkCore;
-using DeepL;
+//using DeepL;
 using System.Resources.NetStandard;
 using System.Collections;
 using System.Globalization;
@@ -98,6 +98,7 @@ namespace partner_aluro.Controllers
 
         }
 
+        bool translate = false;
 
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
         [HttpPost]
@@ -115,28 +116,28 @@ namespace partner_aluro.Controllers
                 return NotFound();
             }
 
-            if (product.NameEn == null || product.NameDe == null)
+            if (product.NameEn == null || product.NameDe == null && translate==true)
             {
-                var authKey = $"bbc4aaae-78af-4f5e-37dd-34e29f91a480:fx"; // Replace with your key
-                var translator = new Translator(authKey);
+                //var authKey = $"bbc4aaae-78af-4f5e-37dd-34e29f91a480:fx"; // Replace with your key
+                //var translator = new Translator(authKey);
 
-                string NameEn = product.Name.ToString();
-                string NameDe = product.Name.ToString();
+                //string NameEn = product.Name.ToString();
+                //string NameDe = product.Name.ToString();
 
-                var translatedText1 = await translator.TranslateTextAsync(
-                  NameEn,
-                  "PL",
-                  "en-US");
-                NameEn = translatedText1.Text;
+                //var translatedText1 = await translator.TranslateTextAsync(
+                //  NameEn,
+                //  "PL",
+                //  "en-US");
+                //NameEn = translatedText1.Text;
 
-                var translatedText2 = await translator.TranslateTextAsync(
-                  NameDe,
-                  "PL",
-                  "DE");
-                NameDe = translatedText2.Text;
+                //var translatedText2 = await translator.TranslateTextAsync(
+                //  NameDe,
+                //  "PL",
+                //  "DE");
+                //NameDe = translatedText2.Text;
 
-                product.NameEn = NameEn;
-                product.NameDe = NameDe;
+                //product.NameEn = NameEn;
+                //product.NameDe = NameDe;
             }
 
             if (product.SzukanaNazwa == null)
@@ -420,27 +421,29 @@ namespace partner_aluro.Controllers
 
             //string NameEn = "Angielska Nazwa";
 
-            var authKey = $"bbc4aaae-78af-4f5e-37dd-34e29f91a480:fx"; // Replace with your key
-            var translator = new Translator(authKey);
+            if (translate == true)
+            {
+                //var authKey = $"bbc4aaae-78af-4f5e-37dd-34e29f91a480:fx"; // Replace with your key
+                //var translator = new Translator(authKey);
 
-            string NameEn = product.Name.ToString();
-            string NameDe = product.Name.ToString();
+                //string NameEn = product.Name.ToString();
+                //string NameDe = product.Name.ToString();
 
-            var translatedText1 = await translator.TranslateTextAsync(
-              NameEn,
-              "PL",
-              "en-US");
-            NameEn = translatedText1.Text;
+                //var translatedText1 = await translator.TranslateTextAsync(
+                //  NameEn,
+                //  "PL",
+                //  "en-US");
+                //NameEn = translatedText1.Text;
 
-            var translatedText2 = await translator.TranslateTextAsync(
-              NameDe,
-              "PL",
-              "DE");
-            NameDe = translatedText2.Text;
+                //var translatedText2 = await translator.TranslateTextAsync(
+                //  NameDe,
+                //  "PL",
+                //  "DE");
+                //NameDe = translatedText2.Text;
 
-            product.NameEn = NameEn;
-            product.NameDe = NameDe;
-
+                //product.NameEn = NameEn;
+                //product.NameDe = NameDe;
+            }
 
             ////Dodanie do pliku resx tlumaczenia nazwy produktu
             //string webRootPath = _webHostEnvironment.ContentRootPath;
@@ -580,7 +583,7 @@ namespace partner_aluro.Controllers
             List<ProductsList> ProductsList = await _context.Products
                 .AsNoTracking()
                 .Include(p => p.CategoryNavigation)
-                .Where(p => p.CategoryNavigation.Aktywny == true)
+                //.Where(p => p.CategoryNavigation.Aktywny == true)
                 .Select(p=> new ProductsList{ 
                     ProductId = p.ProductId, 
                     Name = p.Name,

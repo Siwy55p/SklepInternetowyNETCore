@@ -101,8 +101,24 @@ namespace partner_aluro.Controllers
             ViewData["MetodyPlatnosci"] = _context.MetodyPlatnosci.ToList();
             ViewData["MetodyDostawy"] = _context.MetodyDostawy.ToList();
 
-            var cartItems = await _cart.GetAllCartItemsAsync();
-            _cart.CartItems = cartItems;
+            List<CartItem> products;
+            if (CartOrder.Orders.FlagaRelizacjaZaKlienta == true)
+            {
+                if (CartOrder.Orders.CartId != null)
+                {
+                    products = await _cart.GetAllCartItemsUserAsync(CartOrder.Orders.CartId);
+                }
+                else
+                {
+                    products = await _cart.GetAllCartItemsAsync();
+                }
+            }
+            else
+            {
+                products = await _cart.GetAllCartItemsAsync();
+            }
+
+            _cart.CartItems = products;
             ModelState.Remove("Orders.UserID");
             ModelState.Remove("Orders.group");
 
@@ -269,12 +285,18 @@ namespace partner_aluro.Controllers
                     adresRozliczeniowy = OrderAdres1,
                     AdressDostawy = OrderAdres2,
                     MetodaDostawy = CartOrder.Orders.MetodaDostawy,
-                    MetodaPlatnosci = CartOrder.Orders.MetodaPlatnosci
-
+                    MetodaPlatnosci = CartOrder.Orders.MetodaPlatnosci,
+                    FlagaRelizacjaZaKlienta = CartOrder.Orders.FlagaRelizacjaZaKlienta,
+                    User = user,
                 };
                 order.NrZamowienia = GenerateID();
 
                 CartOrder.Orders = order;
+
+                if (CartOrder.Orders.FlagaRelizacjaZaKlienta)
+                {
+                    _cart.UserId = user.Id;
+                }
 
                 CreateOrder(CartOrder.Orders); // Stworz zamowienie jesli sie udalo to wyslij email
                 
@@ -288,10 +310,9 @@ namespace partner_aluro.Controllers
                         Body = $"<h1> Dziękujemy za złożenie zamówienia.</h1>Potwierdzenie zamówienia <br/>Twoje zamówienie zostało przyjęte.<br/>Po skompletowaniu Twojego zamówienia otrzymasz email z kosztem dostawy i łączną sumą do zapłaty.<br/>W razie pytań lub wątpliwości, prosimy o kontakt z naszą obsługą klienta.<br/>" +
                         "Sposób dostawy: <b>" + order.MetodaDostawy + "</b>, metoda płatności: <b>" + order.MetodaPlatnosci + "</b>"
                     };
-                    _emailService.SendEmailAsync(email);
+                    //_emailService.SendEmailAsync(email);
 
-
-                    string startEmail = $"Nowe zamówienie na platformie Aluro Nr: #" + order.NrZamowienia + "<br>" +
+                string startEmail = $"Nowe zamówienie na platformie Aluro Nr: #" + order.NrZamowienia + "<br>" +
                         "Zamówienie Nr: <b>" + order.NrZamowienia + "</b>, Metoda płatności: <b>" + order.MetodaPlatnosci + "</b> , Metoda dostawy: <b>" + order.MetodaDostawy + "</b><br>" +
                         "Data złożenia zamówienia: <b>" + order.OrderPlaced + "</b><br>" +
                         "Nazwa firmy: <b>" + user.NazwaFirmy + "</b><br>" +
@@ -318,19 +339,19 @@ namespace partner_aluro.Controllers
                         "<tbody style=\"border:1px solid greey\">";
 
                     string ProductList = "";
-                    foreach (var item in order.OrderItems)
-                    {
+                    //foreach (var item in order.OrderItems)
+                    //{
 
-                        ProductList += "<tr>" +
+                    //    ProductList += "<tr>" +
 
-                            "<td>" + @item.Product.Name + "</td>" +
-                            "<td>" + @item.Product.Symbol + "</td>" +
-                            "<td>" + @item.CenaJednProductuBrutto.ToString("0.00") + "</td>" +
-                            "<td>" + @item.Quantity.ToString("#") + "</td>" +
-                            "<td>" + (@item.CenaTotal).ToString("## ###.00") + "</td>" +
-                            "</tr>";
+                    //        "<td>" + @item.Product.Name + "</td>" +
+                    //        "<td>" + @item.Product.Symbol + "</td>" +
+                    //        "<td>" + @item.CenaJednProductuBrutto.ToString("0.00") + "</td>" +
+                    //        "<td>" + @item.Quantity.ToString("#") + "</td>" +
+                    //        "<td>" + (@item.CenaTotal).ToString("## ###.00") + "</td>" +
+                    //        "</tr>";
 
-                    }
+                    //}
 
                     string endEmail = "</tbody><tfoot><tr><th></th><th></th><th></th><th>Suma:</th><th>" + order.OrderTotal.ToString("## ###.00") + "</th></tr></tfoot></table>";
 
@@ -339,40 +360,55 @@ namespace partner_aluro.Controllers
                 EmailDto emailDzialTechniczny1 = new EmailDto()
                 {
                     To = "marcin@aluro.pl",
-                    Subject = "Nowe zamówienie! " + order.Id + ":" + user.Imie + " " + user.Nazwisko + " " + user.NazwaFirmy + "",
+                    Subject = "Nowe zamówienie! " + order.Id + " Nr:" + order.NrZamowienia +  " ;" + user.Imie + " " + user.Nazwisko + " " + user.NazwaFirmy + "",
                     Body = emailMessage
                 };
                 EmailDto emailDzialTechniczny2 = new EmailDto()
                 {
                     To = "mariusz@aluro.pl",
-                    Subject = "Nowe zamówienie! " + order.Id + ":" + user.Imie + " " + user.Nazwisko + " " + user.NazwaFirmy + "",
+                    Subject = "Nowe zamówienie! " + order.Id + " Nr:" + order.NrZamowienia + " ;" + user.Imie + " " + user.Nazwisko + " " + user.NazwaFirmy + "",
                     Body = emailMessage
                 };
-
                 EmailDto emailDzialTechniczny3 = new EmailDto()
-                    {
-                        To = "szuminski.p@gmail.com",
-                        Subject = "Nowe zamówienie! " + order.Id + ":" + user.Imie + " " + user.Nazwisko + " " + user.NazwaFirmy + "",
-                        Body = emailMessage
+                {
+                    To = "szuminski.p@gmail.com",
+                    Subject = "Nowe zamówienie! " + order.Id + " Nr:" + order.NrZamowienia + " ;" + user.Imie + " " + user.Nazwisko + " " + user.NazwaFirmy + "",
+                    Body = emailMessage
                 };
                 _emailService.SendEmailAsync(emailDzialTechniczny1);
                 _emailService.SendEmailAsync(emailDzialTechniczny2);
                 _emailService.SendEmailAsync(emailDzialTechniczny3);
 
 
-                    //var cart = _context.Carts.Where(c => c.CartaId == _cart.CartaId).FirstOrDefault();
-                    //var cart = _context.Carts.Where(x => x.UserId == user.Id).FirstOrDefault();
-                    //var cart = _context.Carts
-                    //.Where(x => x.UserId == user.Id)
-                    //.Where(x => x.CartaId == _cart.CartaId)
-                    //.FirstOrDefault();
+                //var cart = _context.Carts.Where(c => c.CartaId == _cart.CartaId).FirstOrDefault();
+                //var cart = _context.Carts.Where(x => x.UserId == user.Id).FirstOrDefault();
+                //var cart = _context.Carts
+                //.Where(x => x.UserId == user.Id)
+                //.Where(x => x.CartaId == _cart.CartaId)
+                //.FirstOrDefault();
 
-                    //if (cart != null)
-                    //{
+                //if (cart != null)
+                //{
+
+                if (CartOrder.Orders.FlagaRelizacjaZaKlienta)
+                {
+                    var cart = _context.Carts
+                        .Where(x => x.UserId == user.Id)
+                        .OrderBy(x => x.CartID)
+                        .LastOrDefault();
+
+
+                    cart.Zrealizowane = true;
+                    _context.Carts.Update(cart);
+                }
+                else
+                {
                     _cart.Zrealizowane = true;
+                    _context.Carts.Update(_cart);
+                }
                     //_cart.ClearCart();
 
-                    _context.Carts.Update(_cart);
+                    //_context.Carts.Update(_cart);
                     _context.SaveChanges();
                     //}
 
@@ -887,6 +923,16 @@ namespace partner_aluro.Controllers
 
             order.ByloAnulowane = false;
 
+
+            if (order.FlagaRelizacjaZaKlienta == true)
+            {
+                order.UserID = order.User.Id;
+            }
+            else
+            {
+                order.UserID = _userManager.GetUserId(HttpContext.User);
+            }
+
             var cartItems = _cart.CartItems;
 
             foreach (var item in cartItems)
@@ -928,7 +974,7 @@ namespace partner_aluro.Controllers
                     return false;
                 }
             }
-            order.UserID = _userManager.GetUserId(HttpContext.User);
+
 
             order.RabatZamowienia = Core.Constants.Rabat;
             order.StanZamowienia = StanZamowienia.Nowe;
@@ -946,7 +992,7 @@ namespace partner_aluro.Controllers
             ICollection<Order> orders = await _context.Orders
                 .Include(x=>x.User)
                 .ThenInclude(x=>x.Adress1rozliczeniowy)
-                .Where(x=>x.User.Email != "szuminski.p@gmail.com" && x.User.Email != "piotr@pierrot.pl")
+                //.Where(x=>x.User.Email != "szuminski.p@gmail.com" && x.User.Email != "piotr@pierrot.pl")
                 .Include(x=>x.OrderItems)
                 .ToListAsync();
             return View(orders);

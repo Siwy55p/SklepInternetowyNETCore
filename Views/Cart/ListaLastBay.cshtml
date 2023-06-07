@@ -1,0 +1,84 @@
+﻿@*@model List<partner_aluro.Models.CartItem>*@
+@*@model IEnumerable<IGrouping<string, CartItem>>*@
+@model IEnumerable<partner_aluro.Models.Cart>
+
+@*@model IEnumerable<string CartId, IEnumerable<ApplicationUser> User>*@
+
+@{
+    ViewData["Title"] = "Koszyki";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+<div class="row sticky-top bg-light border-bottom">
+    <div class="col"><h3>Koszyki</h3></div>
+    <div class="col">
+        @*<a asp-controller="Product" asp-action="Add" class="btn btn-success float-end" px-3">
+        Dodaj nowy produkt
+        </a>*@
+    </div>
+</div>
+
+<div class="table-responsive">
+    <table id="CartTableList" class="cell-border display" style="width:100%">
+        <thead>
+            <tr>
+                <th>Klient</th>
+                <th>Firma</th>
+                <th>Data ostatniego koszyka (zrealizowane/niezrelizowanego)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Select((value, i) => new { i, value }))
+            {
+                if (@item.value != null)
+                {
+                    <tr>
+                        <td>
+                            @item.value.user.Imie @item.value.user.Nazwisko
+                        </td>
+                        <td>
+                            @item.value.user.NazwaFirmy
+                        </td>
+                        <th>
+                            @item.value.dataPowstania.ToString("yyyy-MM-dd HH:mm:ss")
+                        </th>
+                    </tr>
+                }
+                else
+                {
+                    <tr>
+                        <td>
+                            BrakImienia, BrakNazwiska
+                        </td>
+                        <td>
+                            Brak Nazwy Firmy
+                        </td>
+                        <th>
+                        </th>
+                    </tr>
+                }
+
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('#CartTableList').DataTable(
+                {
+                    fixedHeader: {
+                        headerOffset: 40,
+                        header: true,
+                        footer: true
+                    },
+                    "columnDefs": [
+                        { "width": "50px", "targets": 2 }
+                    ],
+                    pageLength: 100,
+                    "order": [5, 'desc']
+                });
+        });
+    </script>
+}

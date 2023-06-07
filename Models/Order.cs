@@ -35,6 +35,8 @@ namespace partner_aluro.Models
 
         public string? Komentarz { get; set; }
 
+        public bool FlagaRelizacjaZaKlienta {get; set;}
+
         public string? MetodaDostawy { get; set; }
         public string? MetodaPlatnosci { get; set; }
 
@@ -45,7 +47,7 @@ namespace partner_aluro.Models
 
         public Adress2dostawy AdressDostawy { get; set; }
 
-
+        public string? CartId { get; set; }
 
     }
 

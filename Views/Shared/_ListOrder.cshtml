@@ -9,7 +9,8 @@
                             <thead>
                                 <tr>
                                     <th>Id</th>
-                                    <th>Wartość zamówienia</th>
+                                    <td>Nr zam.</td>
+                                    <th>War. zam.</th>
                                     <th>Data zamówienia</th>
                                     <th>Metoda płatności</th>
                                     <th>Metoda dostawy</th>
@@ -34,6 +35,7 @@
                                 {
                                     <tr>
                                         <td>@order.Id</td>
+                                        <td>@order.NrZamowienia</td>
                                         <td>@order.OrderTotal.ToString("C")</td>
                                         <td>@order.OrderPlaced</td>
                                         <td>@order.MetodaPlatnosci</td>
