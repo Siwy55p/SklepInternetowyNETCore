@@ -15,6 +15,7 @@ public class ApplicationUser : IdentityUser
     public string? NazwaFirmy { get; set; }
     public DateTime DataZałożenia { get; set; }
     public bool? Aktywny { get; set; }
+    public bool? Usuniety { get; set; }
     public bool? Nowy { get; set; }
     public int? Adress1rozliczeniowyId { get; set; }
     public int? Adress2dostawyId { get; set; }

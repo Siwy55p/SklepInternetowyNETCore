@@ -51,9 +51,10 @@ namespace partner_aluro.Controllers
         {
             List<Cart> listaCart = await _context.Carts
                 .Include(x => x.user)
+                .Where(x=>x.user.Usuniety != true)
                 .Include(u => u.CartItems)
                 .ThenInclude(p => p.Product)
-                .Where(x => x.user.UserName != "szuminski.p@gmail.com" && x.user.UserName != "piotr@pierrot.pl" && x.user.UserName != "test@wp.pl")
+                .Where(x => x.user.UserName != "szuminski.p@gmail.com" && x.user.UserName != "piotr@pierrot.pl")
                 .Where(x => x.CartItems.Count >= 1)
                 .ToListAsync();
 

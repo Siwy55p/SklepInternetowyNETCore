@@ -147,6 +147,7 @@ namespace partner_aluro.Controllers
             {
                 ModelState.AddModelError("", "Koszyk jest pusty, proszę dodać pierwszy produkt.");
             }
+
             var user = _unitOfWork.User.GetUser(CartOrder.Orders.User.Id);
             if (user == null)
             {
@@ -298,8 +299,10 @@ namespace partner_aluro.Controllers
                     _cart.UserId = user.Id;
                 }
 
-                CreateOrder(CartOrder.Orders); // Stworz zamowienie jesli sie udalo to wyslij email
-                
+                if (CreateOrder(CartOrder.Orders))
+                {
+                    // Stworz zamowienie jesli sie udalo to wyslij email
+
                     //_cart.ClearCart();
 
 
@@ -312,31 +315,31 @@ namespace partner_aluro.Controllers
                     };
                     //_emailService.SendEmailAsync(email);
 
-                string startEmail = $"Nowe zamówienie na platformie Aluro Nr: #" + order.NrZamowienia + "<br>" +
-                        "Zamówienie Nr: <b>" + order.NrZamowienia + "</b>, Metoda płatności: <b>" + order.MetodaPlatnosci + "</b> , Metoda dostawy: <b>" + order.MetodaDostawy + "</b><br>" +
-                        "Data złożenia zamówienia: <b>" + order.OrderPlaced + "</b><br>" +
-                        "Nazwa firmy: <b>" + user.NazwaFirmy + "</b><br>" +
-                        "Imie Nazwisko: <b>" + user.Imie + " " + user.Nazwisko + "</b><br>" +
-                        "Adres rozliczeniowy: <br>" +
-                        "" + OrderAdres1.KodPocztowy + " " + OrderAdres1.Miasto + " <br>" +
-                        "ul. " + OrderAdres1.Ulica + "<br>" +
-                        "Adres dostawy: <br>" +
-                        "" + OrderAdres2.KodPocztowy + " " + OrderAdres2.Miasto + "<br>" +
-                        "ul. " + OrderAdres2.Ulica + "<br>" +
-                        "Kontakt do Adresu dostawy: <br>" + OrderAdres2.Telefon + ", e-mail: " + OrderAdres2.Email + "<br>" +
-                        "Wiadomosc do zamówienia: " + order.Komentarz + " " + order.MessageToOrder + "<br>" +
-                        "Kontakt: " + user.Email + " " + user.Adress1rozliczeniowy.Telefon + "<br>" +
-                        "Wartość zamówienia: " + order.OrderTotal + " zł<br>" +
-                        "Zamówienie ID:#" + order.NrZamowienia + "<br>" +
-                        "<table style=\"border:1px solid black\">" +
-                        "<thead style=\"border:1px solid greey\"><tr><th>Nazwa produktu</th>" +
-                        "<th>Symbol</th>" +
-                        "<th>CenaTotal jed. pro.</th>" +
-                        "<th>Ilość</th>" +
-                        "<th>Razem</th>" +
-                        "</tr>" +
-                        "</thead>" +
-                        "<tbody style=\"border:1px solid greey\">";
+                    string startEmail = $"Nowe zamówienie na platformie Aluro Nr: #" + order.NrZamowienia + "<br>" +
+                            "Zamówienie Nr: <b>" + order.NrZamowienia + "</b>, Metoda płatności: <b>" + order.MetodaPlatnosci + "</b> , Metoda dostawy: <b>" + order.MetodaDostawy + "</b><br>" +
+                            "Data złożenia zamówienia: <b>" + order.OrderPlaced + "</b><br>" +
+                            "Nazwa firmy: <b>" + user.NazwaFirmy + "</b><br>" +
+                            "Imie Nazwisko: <b>" + user.Imie + " " + user.Nazwisko + "</b><br>" +
+                            "Adres rozliczeniowy: <br>" +
+                            "" + OrderAdres1.KodPocztowy + " " + OrderAdres1.Miasto + " <br>" +
+                            "ul. " + OrderAdres1.Ulica + "<br>" +
+                            "Adres dostawy: <br>" +
+                            "" + OrderAdres2.KodPocztowy + " " + OrderAdres2.Miasto + "<br>" +
+                            "ul. " + OrderAdres2.Ulica + "<br>" +
+                            "Kontakt do Adresu dostawy: <br>" + OrderAdres2.Telefon + ", e-mail: " + OrderAdres2.Email + "<br>" +
+                            "Wiadomosc do zamówienia: " + order.Komentarz + " " + order.MessageToOrder + "<br>" +
+                            "Kontakt: " + user.Email + " " + user.Adress1rozliczeniowy.Telefon + "<br>" +
+                            "Wartość zamówienia: " + order.OrderTotal + " zł<br>" +
+                            "Zamówienie ID:#" + order.NrZamowienia + "<br>" +
+                            "<table style=\"border:1px solid black\">" +
+                            "<thead style=\"border:1px solid greey\"><tr><th>Nazwa produktu</th>" +
+                            "<th>Symbol</th>" +
+                            "<th>CenaTotal jed. pro.</th>" +
+                            "<th>Ilość</th>" +
+                            "<th>Razem</th>" +
+                            "</tr>" +
+                            "</thead>" +
+                            "<tbody style=\"border:1px solid greey\">";
 
                     string ProductList = "";
                     //foreach (var item in order.OrderItems)
@@ -357,28 +360,32 @@ namespace partner_aluro.Controllers
 
 
                     string emailMessage = startEmail + ProductList + endEmail;
-                EmailDto emailDzialTechniczny1 = new EmailDto()
+                    EmailDto emailDzialTechniczny1 = new EmailDto()
+                    {
+                        To = "marcin@aluro.pl",
+                        Subject = "Nowe zamówienie! " + order.Id + " Nr:" + order.NrZamowienia + " ;" + user.Imie + " " + user.Nazwisko + " " + user.NazwaFirmy + "",
+                        Body = emailMessage
+                    };
+                    EmailDto emailDzialTechniczny2 = new EmailDto()
+                    {
+                        To = "mariusz@aluro.pl",
+                        Subject = "Nowe zamówienie! " + order.Id + " Nr:" + order.NrZamowienia + " ;" + user.Imie + " " + user.Nazwisko + " " + user.NazwaFirmy + "",
+                        Body = emailMessage
+                    };
+                    EmailDto emailDzialTechniczny3 = new EmailDto()
+                    {
+                        To = "szuminski.p@gmail.com",
+                        Subject = "Nowe zamówienie! " + order.Id + " Nr:" + order.NrZamowienia + " ;" + user.Imie + " " + user.Nazwisko + " " + user.NazwaFirmy + "",
+                        Body = emailMessage
+                    };
+                    //_emailService.SendEmailAsync(emailDzialTechniczny1);
+                    //_emailService.SendEmailAsync(emailDzialTechniczny2);
+                    //_emailService.SendEmailAsync(emailDzialTechniczny3);
+                }
+                else
                 {
-                    To = "marcin@aluro.pl",
-                    Subject = "Nowe zamówienie! " + order.Id + " Nr:" + order.NrZamowienia +  " ;" + user.Imie + " " + user.Nazwisko + " " + user.NazwaFirmy + "",
-                    Body = emailMessage
-                };
-                EmailDto emailDzialTechniczny2 = new EmailDto()
-                {
-                    To = "mariusz@aluro.pl",
-                    Subject = "Nowe zamówienie! " + order.Id + " Nr:" + order.NrZamowienia + " ;" + user.Imie + " " + user.Nazwisko + " " + user.NazwaFirmy + "",
-                    Body = emailMessage
-                };
-                EmailDto emailDzialTechniczny3 = new EmailDto()
-                {
-                    To = "szuminski.p@gmail.com",
-                    Subject = "Nowe zamówienie! " + order.Id + " Nr:" + order.NrZamowienia + " ;" + user.Imie + " " + user.Nazwisko + " " + user.NazwaFirmy + "",
-                    Body = emailMessage
-                };
-                _emailService.SendEmailAsync(emailDzialTechniczny1);
-                _emailService.SendEmailAsync(emailDzialTechniczny2);
-                _emailService.SendEmailAsync(emailDzialTechniczny3);
-
+                    //nic nie rob nie wysylaj email
+                }
 
                 //var cart = _context.Carts.Where(c => c.CartaId == _cart.CartaId).FirstOrDefault();
                 //var cart = _context.Carts.Where(x => x.UserId == user.Id).FirstOrDefault();
@@ -923,7 +930,6 @@ namespace partner_aluro.Controllers
 
             order.ByloAnulowane = false;
 
-
             if (order.FlagaRelizacjaZaKlienta == true)
             {
                 order.UserID = order.User.Id;
@@ -937,7 +943,7 @@ namespace partner_aluro.Controllers
 
             foreach (var item in cartItems)
             {
-                if(item.Quantity < item.Product.Ilosc)
+                if(item.Quantity <= item.Product.Ilosc)
                 {
 
                 _productService.ZmiejszIloscProductIdAsync(item.Product.ProductId, item.Quantity);

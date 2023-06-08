@@ -6,7 +6,11 @@
 }
 <h5>Koszyk ID: @Model.CartaId , Data: @Model.dataPowstania</h5>
 <div class="card-header">
-    <span><i class="bi bi-table me-2"></i></span>Pozycje koszyka, użytkownika: @Model.user.Email , Imię Nazwisko: @Model.user.Imie @Model.user.Nazwisko , @Model.user.NazwaFirmy , @Model.user.PhoneNumber
+    @if (@Model.user!=null)
+    {
+        <span><i class="bi bi-table me-2"></i></span>
+        <span>Pozycje koszyka, użytkownika: @Model.user.Email , Imię Nazwisko: @Model.user.Imie @Model.user.Nazwisko , @Model.user.NazwaFirmy , @Model.user.PhoneNumber</span>
+    }
 </div>
     @if (Model.CartItems.Count > 0)
     {

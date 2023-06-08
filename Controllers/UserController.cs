@@ -66,6 +66,7 @@ namespace partner_aluro.Controllers
 
             var users = _context.Users.Include(x => x.Adress1rozliczeniowy)
                 .Include(x => x.Adress2dostawy)
+                .Where(x=>x.Usuniety != true)
                 .ToList();
 
             return View(users);
@@ -134,23 +135,22 @@ namespace partner_aluro.Controllers
                     _context.SaveChanges();
                 }
 
-                var existCart1 = _context.Carts.Where(x => x.UserId == id).ToList();
-                if(existCart1.Any())
-                { 
-                    var existCart = _context.Carts.Where(x => x.UserId == id).OrderBy(x => x.Id).Last();
-                    if (existCart != null)
-                    {
-                        _context.Carts.Remove(existCart);
-                        _context.SaveChanges();
-                    }
-                }
+                //var existCart1 = _context.Carts.Where(x => x.UserId == id).ToList();
+                //if(existCart1.Any())
+                //{ 
+                //    var existCart = _context.Carts.Where(x => x.UserId == id).OrderBy(x => x.Id).Last();
+                //    if (existCart != null)
+                //    {
+                //        _context.Carts.Remove(existCart);
+                //        _context.SaveChanges();
+                //    }
+                //}
 
-
-                    IdentityResult result = await _signInManager.UserManager.DeleteAsync(user);
-                if (result.Succeeded)
-                    return RedirectToAction("Index");
-                else
-                    Errors(result);
+                user.Aktywny = false;
+                user.Usuniety = true;
+                _context.Users.Update(user);
+                _context.SaveChanges();
+                return View("Index");
             }
             else
                 ModelState.AddModelError("", "User Not Found");

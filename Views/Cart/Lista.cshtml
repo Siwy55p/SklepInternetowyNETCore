@@ -95,9 +95,9 @@
                         </th>
                         <td>
                             <a asp-controller="Cart" asp-action="Details" asp-route-CartID="@item.value.CartaId">Więcej</a>
-                            @if (item.value.Zrealizowane == false)
+                            @if (item.value.Zrealizowane == false && item.value.user!=null)
                             {
-                               // <a asp-controller="Cart" asp-action="ZlozZamowienie" asp-route-CartID="@item.value.CartaId" asp-route-UserName="@item.value.user.UserName">Złóż</a>
+                                <a asp-controller="Cart" asp-action="ZlozZamowienie" asp-route-CartID="@item.value.CartaId" asp-route-UserName="@item.value.user.UserName">Złóż</a>
                             }
                             @{
                                 DateTime data1 = item.value.dataPowstania;
