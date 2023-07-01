@@ -36,6 +36,11 @@
         <tbody>
             @foreach (var item in Model.Select((value,i)=>new { i, value }))
             {
+                if (item.value.user == null || item.value.user.Usuniety == true)
+                {
+                    continue;
+                }
+
                 string color = "#ffb9b9";
 
                 string wiadomosc = "Koszyk niezrelizowany";
@@ -69,7 +74,7 @@
                         <td>
                             @if( @item.value.user != null)
                             {
-                            @item.value.user.Imie @item.value.user.Nazwisko
+                                <span>@item.value.user.Imie  @item.value.user.Nazwisko</span>
                             }else
                             {
                                 <b>Brak user</b>

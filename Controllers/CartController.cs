@@ -229,7 +229,8 @@ namespace partner_aluro.Controllers
             {
                 products = await _cart.GetAllCartItemsUserAsync(CartID);
                 RelizacjaZaKlienta = true;
-                
+                //_cart.CartID = _context.Carts.Where(x=>x.CartaId == CartID).FirstOrDefault().CartID;
+                _cart.CartaId = CartID;
             }
             else
             {
@@ -245,11 +246,16 @@ namespace partner_aluro.Controllers
             if (UserName != null)
             {
                 applicationUser = await _userManager.FindByNameAsync(UserName);
+
+                _cart.RazemBrutto =  _cart.GetCartTotalBrutto();
+                _cart.RazemNetto =  _cart.GetCartTotalNetto();
+
             }
             else
             {
                 applicationUser = await _userManager.GetUserAsync(User);
             }
+
 
             CartOrderViewModel vm = new()
             {

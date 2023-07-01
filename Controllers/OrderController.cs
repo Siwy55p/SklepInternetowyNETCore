@@ -313,7 +313,7 @@ namespace partner_aluro.Controllers
                         Body = $"<h1> Dziękujemy za złożenie zamówienia.</h1>Potwierdzenie zamówienia <br/>Twoje zamówienie zostało przyjęte.<br/>Po skompletowaniu Twojego zamówienia otrzymasz email z kosztem dostawy i łączną sumą do zapłaty.<br/>W razie pytań lub wątpliwości, prosimy o kontakt z naszą obsługą klienta.<br/>" +
                         "Sposób dostawy: <b>" + order.MetodaDostawy + "</b>, metoda płatności: <b>" + order.MetodaPlatnosci + "</b>"
                     };
-                    //_emailService.SendEmailAsync(email);
+                    _emailService.SendEmailAsync(email);
 
                     string startEmail = $"Nowe zamówienie na platformie Aluro Nr: #" + order.NrZamowienia + "<br>" +
                             "Zamówienie Nr: <b>" + order.NrZamowienia + "</b>, Metoda płatności: <b>" + order.MetodaPlatnosci + "</b> , Metoda dostawy: <b>" + order.MetodaDostawy + "</b><br>" +
@@ -378,9 +378,9 @@ namespace partner_aluro.Controllers
                         Subject = "Nowe zamówienie! " + order.Id + " Nr:" + order.NrZamowienia + " ;" + user.Imie + " " + user.Nazwisko + " " + user.NazwaFirmy + "",
                         Body = emailMessage
                     };
-                    //_emailService.SendEmailAsync(emailDzialTechniczny1);
-                    //_emailService.SendEmailAsync(emailDzialTechniczny2);
-                    //_emailService.SendEmailAsync(emailDzialTechniczny3);
+                    _emailService.SendEmailAsync(emailDzialTechniczny1);
+                    _emailService.SendEmailAsync(emailDzialTechniczny2);
+                    _emailService.SendEmailAsync(emailDzialTechniczny3);
                 }
                 else
                 {
@@ -401,7 +401,7 @@ namespace partner_aluro.Controllers
                 {
                     var cart = _context.Carts
                         .Where(x => x.UserId == user.Id)
-                        .OrderBy(x => x.CartID)
+                        .OrderBy(x => x.CartaId == CartOrder.Orders.CartId)
                         .LastOrDefault();
 
 

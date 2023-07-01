@@ -97,6 +97,7 @@
   <ItemGroup>
     <Folder Include="Migrations\" />
     <Folder Include="Nowy folder\" />
+    <Folder Include="wwwroot\img\Nowy folder\" />
     <Folder Include="wwwroot\lib\Nowy folder\" />
     <Folder Include="wwwroot\modules\nvn_export_products\download\" />
     <Folder Include="wwwroot\MyLogs\" />
@@ -115,6 +116,15 @@
     <Content Update="Views\Shared\Components\UserStatus\Default.cshtml">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\img\flag\flag_icon_de.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\img\flag\flag_icon_pl.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\img\flag\flag_icon_us.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Update="wwwroot\js\tinymce\icons\default\icons.min.js">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>

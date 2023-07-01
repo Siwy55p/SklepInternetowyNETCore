@@ -300,6 +300,7 @@ namespace partner_aluro.Models
                     .ToListAsync();
         }
 
+
         public decimal GetCartTotalBrutto()
         {
             decimal CartTotal1 = _context.CartItems
