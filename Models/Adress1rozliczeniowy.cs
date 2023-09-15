@@ -15,8 +15,7 @@ namespace partner_aluro.Models
         [Required(ErrorMessage = "Pole Miasto jest wymagane")]
         public string Miasto { get; set; }
 
-        [Required(ErrorMessage = "Pole Kraj jest wymagane")]
-        public string Kraj { get; set; }
+        public string? Kraj { get; set; }
 
         [Required(ErrorMessage = "Pole Ulica jest wymagane")]
         [StringLength(255, MinimumLength = 4)]
