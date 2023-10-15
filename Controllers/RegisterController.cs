@@ -168,7 +168,8 @@ namespace partner_aluro.Controllers
             //document.getElementById("miasto").value = result[3];
             //document.getElementById("kod_pocztowy").value = result[4];
 
-
+            //nie sprawdzaj po vat
+            
             EuropeanVatInformation companyEuropa = EuropeanVatInformation.Get(Vat);
 
             if (companyEuropa != null)

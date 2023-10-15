@@ -217,19 +217,22 @@ namespace partner_aluro.Areas.Identity.Pages.Account
             ViewData["Profile"] = GetProfiles();
 
             _model.Vat = Input.NIP;
-            _model = await RegonService.GetCompanyDataByNipAsync(_model.Vat);
+
+
+
+            //_model = await RegonService.GetCompanyDataByNipAsync(_model.Vat);
 
 
             //if (_model.Errors.Count > 0)
             //{
             //    komunikat = _model.Errors[0].ErrorMessagePl;
             //    return Page();
-            //}
+            ////}
 
-            Input.NazwaFirmy = _model.Name;
-            Input.Miasto = _model.Miejscowosc;
-            Input.Ulica = _model.Ulica;
-            Input.KodPocztowy1 = _model.KodPocztowy;
+            //Input.NazwaFirmy = _model.Name;
+            //Input.Miasto = _model.Miejscowosc;
+            //Input.Ulica = _model.Ulica;
+            //Input.KodPocztowy1 = _model.KodPocztowy;
 
             ModelState.Remove("Input.KodPocztowy1");
             ModelState.Remove("Input.Miasto");
@@ -245,179 +248,207 @@ namespace partner_aluro.Areas.Identity.Pages.Account
                 user.Nazwisko = Input.Nazwisko;
 
                 Adress1rozliczeniowy adres1 = new Adress1rozliczeniowy();
-                if (_model != null && _model.Errors.Count() < 1)
-                {
-                    adres1.NrNieruchomosci = _model.NrNieruchomosci;
-                    adres1.NrLokalu = _model.NrLokalu;
-                    adres1.Vat = _model.Vat;
-                    adres1.Miasto = _model.Miejscowosc;
-                    adres1.Ulica = _model.Ulica;
-                    adres1.KodPocztowy = _model.KodPocztowy;
-                    adres1.Wojewodztwo = _model.Wojewodztwo;
-                    adres1.Kraj = "Polska";
-                    adres1.Powiat = _model.Powiat;
-                    adres1.Gmina = _model.Gmina;
-                    adres1.StatusNip = _model.StatusNip;
-                    adres1.Regon = _model.Regon;
-                    adres1.Telefon = Input.Telefon1;
-                    adres1.Adres1UserID = user.Id;
-                }
+
+                //if (_model != null && _model.Errors.Count() < 1)
+                //{
+                //    adres1.NrNieruchomosci = _model.NrNieruchomosci;
+                //    adres1.NrLokalu = _model.NrLokalu;
+                //    adres1.Vat = _model.Vat;
+                //    adres1.Miasto = _model.Miejscowosc;
+                //    adres1.Ulica = _model.Ulica;
+                //    adres1.KodPocztowy = _model.KodPocztowy;
+                //    adres1.Wojewodztwo = _model.Wojewodztwo;
+                //    adres1.Kraj = "Polska";
+                //    adres1.Powiat = _model.Powiat;
+                //    adres1.Gmina = _model.Gmina;
+                //    adres1.StatusNip = _model.StatusNip;
+                //    adres1.Regon = _model.Regon;
+                //    adres1.Telefon = Input.Telefon1;
+                //    adres1.Adres1UserID = user.Id;
+                //}
 
 
                 Adress2dostawy adres2 = new Adress2dostawy();
-                if (_model != null && _model.Errors.Count() < 1)
-                {
-                    adres2.Imie = Input.Imie;
-                    adres2.Nazwisko = Input.Nazwisko;
-                    adres2.Email = Input.Email;
-                    adres2.Miasto = _model.Miejscowosc;
-                    adres2.Ulica = _model.Ulica;
-                    adres2.KodPocztowy = _model.KodPocztowy;
-                    adres2.Telefon = Input.Telefon1;
-                    adres2.Kraj = "Polska";
-                    adres2.Adres2UserID = user.Id;
-                }
+                //if (_model != null && _model.Errors.Count() < 1)
+                //{
+                //    adres2.Imie = Input.Imie;
+                //    adres2.Nazwisko = Input.Nazwisko;
+                //    adres2.Email = Input.Email;
+                //    adres2.Miasto = _model.Miejscowosc;
+                //    adres2.Ulica = _model.Ulica;
+                //    adres2.KodPocztowy = _model.KodPocztowy;
+                //    adres2.Telefon = Input.Telefon1;
+                //    adres2.Kraj = "Polska";
+                //    adres2.Adres2UserID = user.Id;
+                //}
 
 
-                EuropeanVatInformation companyEuropa = EuropeanVatInformation.Get(Input.NIP);
+                //EuropeanVatInformation companyEuropa = EuropeanVatInformation.Get(Input.NIP);
 
-                if (companyEuropa != null)
-                {
-                    string SplitAdres = companyEuropa.Address;
+                //if (companyEuropa != null)
+                //{
+                //    string SplitAdres = companyEuropa.Address;
 
-                    string[] AdresSplit = SplitAdres.Split("\n");
-                    string ulicaS = AdresSplit[0].ToString();
-                    string kod_pocztowyS = AdresSplit[1].ToString();
-                    string krajE = AdresSplit[2].ToString();
+                //    string[] AdresSplit = SplitAdres.Split("\n");
+                //    string ulicaS = AdresSplit[0].ToString();
+                //    string kod_pocztowyS = AdresSplit[1].ToString();
+                //    string krajE = AdresSplit[2].ToString();
 
-                    string KodPocztowyZagraniczny = new String(kod_pocztowyS.Where(Char.IsDigit).ToArray());
-                    var MiastoS = new String(kod_pocztowyS.Where(Char.IsLetter).ToArray());
+                //    string KodPocztowyZagraniczny = new String(kod_pocztowyS.Where(Char.IsDigit).ToArray());
+                //    var MiastoS = new String(kod_pocztowyS.Where(Char.IsLetter).ToArray());
 
-                    adres1.NrNieruchomosci = "";
-                    adres1.NrLokalu = "";
-                    adres1.Vat = Input.NIP;
-                    adres1.Miasto = MiastoS;
-                    adres1.Ulica = ulicaS;
-                    adres1.KodPocztowy = KodPocztowyZagraniczny;
-                    adres1.Wojewodztwo = companyEuropa.CountryCode;
-                    adres1.Kraj = krajE;
-                    adres1.Powiat = companyEuropa.CountryCode;
-                    adres1.Gmina = companyEuropa.CountryCode;
-                    adres1.StatusNip = Input.NIP;
-                    adres1.Regon = Input.NIP;
-                    adres1.Telefon = Input.Telefon1;
-                    adres1.Adres1UserID = user.Id;
+                //    adres1.NrNieruchomosci = "";
+                //    adres1.NrLokalu = "";
+                //    adres1.Vat = Input.NIP;
+                //    adres1.Miasto = MiastoS;
+                //    adres1.Ulica = ulicaS;
+                //    adres1.KodPocztowy = KodPocztowyZagraniczny;
+                //    adres1.Wojewodztwo = companyEuropa.CountryCode;
+                //    adres1.Kraj = krajE;
+                //    adres1.Powiat = companyEuropa.CountryCode;
+                //    adres1.Gmina = companyEuropa.CountryCode;
+                //    adres1.StatusNip = Input.NIP;
+                //    adres1.Regon = Input.NIP;
+                //    adres1.Telefon = Input.Telefon1;
+                //    adres1.Adres1UserID = user.Id;
 
-                    //Regon = companyEuropa.VatNumber;
-                    //nazwa_firmy = companyEuropa.Name;
-                    //adres = ulicaS;
-                    //Kraj1 = companyEuropa.CountryCode + " " + krajE;
-                    //Miasto1 = MiastoS.ToString();
-                    //KodPocztowy1 = KodPocztowyZagraniczny;
+                //    //Regon = companyEuropa.VatNumber;
+                //    //nazwa_firmy = companyEuropa.Name;
+                //    //adres = ulicaS;
+                //    //Kraj1 = companyEuropa.CountryCode + " " + krajE;
+                //    //Miasto1 = MiastoS.ToString();
+                //    //KodPocztowy1 = KodPocztowyZagraniczny;
 
-                    adres2.Imie = Input.Imie;
-                    adres2.Nazwisko = Input.Nazwisko;
-                    adres2.Email = Input.Email;
-                    adres2.Miasto = MiastoS;
-                    adres2.Ulica = ulicaS;
-                    adres2.KodPocztowy = KodPocztowyZagraniczny;
-                    adres2.Telefon = Input.Telefon1;
-                    adres2.Kraj = krajE;
-                    adres2.Adres2UserID = user.Id;
-                }
-
-
-                if (companyEuropa == null && (_model != null && _model.Errors.Count() < 1))
-                { 
-                    var accessKey1 = "384438237950f46ed363afd151757d85";
-                    var accessKey = "38dfee3f31277dcf10adcabddb33e249";
-                    var url = $"http://apilayer.net/api/validate?access_key={accessKey}&vat_number={Input.NIP}";
+                //    adres2.Imie = Input.Imie;
+                //    adres2.Nazwisko = Input.Nazwisko;
+                //    adres2.Email = Input.Email;
+                //    adres2.Miasto = MiastoS;
+                //    adres2.Ulica = ulicaS;
+                //    adres2.KodPocztowy = KodPocztowyZagraniczny;
+                //    adres2.Telefon = Input.Telefon1;
+                //    adres2.Kraj = krajE;
+                //    adres2.Adres2UserID = user.Id;
+                //}
 
 
-                    using (var httpClient = new HttpClient())
-                    {
-                        var response = await httpClient.GetAsync(url);
-                        var content = await response.Content.ReadAsStringAsync();
-
-                        if (response.IsSuccessStatusCode)
-                        {
-                            dynamic resultQ = Newtonsoft.Json.JsonConvert.DeserializeObject(content);
-
-                            if (resultQ != null && resultQ.success == true)
-                            {
-                                string name = resultQ.company_name;
-                                string adres = resultQ.company_address;
-                                string vat = resultQ.vat_number;
-
-                                string SplitAdres = adres;
-
-                                string[] AdresSplit = SplitAdres.Split(",");
-                                string KodPocztowyMiasto = AdresSplit[0].ToString();
-
-                                string[] KodPocztowyiMiasto = KodPocztowyMiasto.Split(" ");
-                                string KodPocztowy = KodPocztowyiMiasto[0].ToString();
-
-                                string Miasto = "";
-                                for (int i = 1; i < KodPocztowyiMiasto.Length; i++)
-                                {
-                                    Miasto += KodPocztowyiMiasto[i].ToString() + " ";
-                                }
-
-                                string UlicaNrDomu = AdresSplit[1].ToString();
-                                string krajE = AdresSplit[2].ToString();
-
-                                adres1.NrNieruchomosci = "";
-                                adres1.NrLokalu = "";
-                                adres1.Vat = Input.NIP;
-                                adres1.Miasto = Miasto;
-                                adres1.Ulica = UlicaNrDomu;
-                                adres1.KodPocztowy = KodPocztowy;
-                                adres1.Wojewodztwo = krajE;
-                                adres1.Kraj = krajE;
-                                adres1.Powiat = krajE;
-                                adres1.Gmina = krajE;
-                                adres1.StatusNip = Input.NIP;
-                                adres1.Regon = Input.NIP;
-                                adres1.Telefon = Input.Telefon1;
-                                adres1.Adres1UserID = user.Id;
-
-                                //Regon = companyEuropa.VatNumber;
-                                //nazwa_firmy = companyEuropa.Name;
-                                //adres = ulicaS;
-                                //Kraj1 = companyEuropa.CountryCode + " " + krajE;
-                                //Miasto1 = MiastoS.ToString();
-                                //KodPocztowy1 = KodPocztowyZagraniczny;
-
-                                adres2.Imie = Input.Imie;
-                                adres2.Nazwisko = Input.Nazwisko;
-                                adres2.Email = Input.Email;
-                                adres2.Miasto = Miasto;
-                                adres2.Ulica = UlicaNrDomu;
-                                adres2.KodPocztowy = KodPocztowy;
-                                adres2.Telefon = Input.Telefon1;
-                                adres2.Kraj = krajE;
-                                adres2.Adres2UserID = user.Id;
-                            }
-                        }
-                    }
-                }
+                //if (companyEuropa == null && (_model != null && _model.Errors.Count() < 1))
+                //{ 
+                //    var accessKey1 = "384438237950f46ed363afd151757d85";
+                //    var accessKey = "38dfee3f31277dcf10adcabddb33e249";
+                //    var url = $"http://apilayer.net/api/validate?access_key={accessKey}&vat_number={Input.NIP}";
 
 
+                //    //using (var httpClient = new HttpClient())
+                //    //{
+                //    //    var response = await httpClient.GetAsync(url);
+                //    //    var content = await response.Content.ReadAsStringAsync();
+
+                //    //    if (response.IsSuccessStatusCode)
+                //    //    {
+                //    //        dynamic resultQ = Newtonsoft.Json.JsonConvert.DeserializeObject(content);
+
+                //    //        if (resultQ != null && resultQ.success == true)
+                //    //        {
+                //    //            string name = resultQ.company_name;
+                //    //            string adres = resultQ.company_address;
+                //    //            string vat = resultQ.vat_number;
+
+                //    //            string SplitAdres = adres;
+
+                //    //            string[] AdresSplit = SplitAdres.Split(",");
+                //    //            string KodPocztowyMiasto = AdresSplit[0].ToString();
+
+                //    //            string[] KodPocztowyiMiasto = KodPocztowyMiasto.Split(" ");
+                //    //            string KodPocztowy = KodPocztowyiMiasto[0].ToString();
+
+                //    //            string Miasto = "";
+                //    //            for (int i = 1; i < KodPocztowyiMiasto.Length; i++)
+                //    //            {
+                //    //                Miasto += KodPocztowyiMiasto[i].ToString() + " ";
+                //    //            }
+
+                //    //            string UlicaNrDomu = AdresSplit[1].ToString();
+                //    //            string krajE = AdresSplit[2].ToString();
+
+                //    //            adres1.NrNieruchomosci = "";
+                //    //            adres1.NrLokalu = "";
+                //    //            adres1.Vat = Input.NIP;
+                //    //            adres1.Miasto = Miasto;
+                //    //            adres1.Ulica = UlicaNrDomu;
+                //    //            adres1.KodPocztowy = KodPocztowy;
+                //    //            adres1.Wojewodztwo = krajE;
+                //    //            adres1.Kraj = krajE;
+                //    //            adres1.Powiat = krajE;
+                //    //            adres1.Gmina = krajE;
+                //    //            adres1.StatusNip = Input.NIP;
+                //    //            adres1.Regon = Input.NIP;
+                //    //            adres1.Telefon = Input.Telefon1;
+                //    //            adres1.Adres1UserID = user.Id;
+
+                //    //            //Regon = companyEuropa.VatNumber;
+                //    //            //nazwa_firmy = companyEuropa.Name;
+                //    //            //adres = ulicaS;
+                //    //            //Kraj1 = companyEuropa.CountryCode + " " + krajE;
+                //    //            //Miasto1 = MiastoS.ToString();
+                //    //            //KodPocztowy1 = KodPocztowyZagraniczny;
+
+                //    //            adres2.Imie = Input.Imie;
+                //    //            adres2.Nazwisko = Input.Nazwisko;
+                //    //            adres2.Email = Input.Email;
+                //    //            adres2.Miasto = Miasto;
+                //    //            adres2.Ulica = UlicaNrDomu;
+                //    //            adres2.KodPocztowy = KodPocztowy;
+                //    //            adres2.Telefon = Input.Telefon1;
+                //    //            adres2.Kraj = krajE;
+                //    //            adres2.Adres2UserID = user.Id;
+                //    //        }
+                //    //    }
+                //    //}
+                //}
+
+                adres1.NrNieruchomosci = "";
+                adres1.NrLokalu = "";
+                adres1.Vat = Input.NIP;
+                adres1.Miasto = Input.Miasto;
+                adres1.Ulica = Input.Ulica;
+                adres1.KodPocztowy = Input.KodPocztowy1;
+                adres1.Wojewodztwo = Input.Kraj;
+                adres1.Kraj = Input.Kraj;
+                adres1.Powiat = Input.Kraj;
+                adres1.Gmina = Input.Kraj;
+                adres1.StatusNip = Input.NIP;
+                adres1.Regon = Input.NIP;
+                adres1.Telefon = Input.Telefon1;
+                adres1.Adres1UserID = user.Id;
+
+                adres2.Imie = Input.Imie;
+                adres2.Nazwisko = Input.Nazwisko;
+                adres2.Email = Input.Email;
+                adres2.Miasto = Input.Miasto;
+                adres2.Ulica = Input.Ulica;
+                adres2.KodPocztowy = Input.KodPocztowy1;
+                adres2.Telefon = Input.Telefon1;
+                adres2.Kraj = Input.Kraj;
+                adres2.Adres2UserID = user.Id;
 
                 user.Adress1rozliczeniowy = adres1;
                 user.Adress2dostawy = adres2;
 
-                Input.NazwaFirmy = _model.Name;
-                if (_model != null && _model.Errors.Count() < 1)
-                {
-                    user.NazwaFirmy = _model.Name;
-                    Input.Kraj = "Polska";
-                }
-                if (companyEuropa != null)
-                {
-                    user.NazwaFirmy = companyEuropa.Name;
-                    Input.Kraj = companyEuropa.CountryCode;
-                }
+                //Input.NazwaFirmy = _model.Name;
+                //Input.NazwaFirmy = Input.NazwaFirmy;
+                user.NazwaFirmy = Input.NazwaFirmy;
+
+                //brak sprawdzania w gus
+                //if (_model != null && _model.Errors.Count() < 1)
+                //{
+                //    user.NazwaFirmy = _model.Name;
+                //    Input.Kraj = "Polska";
+                //}
+                //if (companyEuropa != null)
+                //{
+                //    user.NazwaFirmy = companyEuropa.Name;
+                //    Input.Kraj = companyEuropa.CountryCode;
+                //}
 
                 //Input.Miasto = _model.Miejscowosc;
                 //Input.Ulica = _model.Ulica;
