@@ -33,7 +33,7 @@ namespace partner_aluro.Models
         public string? KodPocztowy { get; set; }
 
 
-        [StringLength(9)]
+        [StringLength(14)]
         public string Telefon { get; set; }
 
         [Display(Name = "Nr Nip/VAT")]
