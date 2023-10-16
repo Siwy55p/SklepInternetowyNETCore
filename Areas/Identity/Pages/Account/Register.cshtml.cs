@@ -133,12 +133,12 @@ namespace partner_aluro.Areas.Identity.Pages.Account
 
 
 
-            [Phone]
+            //[Phone]
             [Required(ErrorMessage = "Telefon do kontaktu jest wymagany.")]
             [Display(Name = "Telefon:")]
-            [DataType(DataType.PhoneNumber)]
+            //[DataType(DataType.PhoneNumber)]
             //[StringLength(10, ErrorMessage = "{0} Numer musi mieć zawierać liczby pomiędzy {2}, a {1} znaków.", MinimumLength = 6)]
-            [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{3,4})$", ErrorMessage = "Nie prawidłowy nr telefonu (komórkowy)")]
+            //[RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{3,4})$", ErrorMessage = "Nie prawidłowy nr telefonu (komórkowy)")]
             public string Telefon1 { get; set; }
 
 
