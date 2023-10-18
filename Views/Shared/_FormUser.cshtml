@@ -7,7 +7,8 @@
         
         <div class="mb-3">
             <label asp-for="@Model.User.Adress1rozliczeniowy.Vat">NIP</label>
-            <input asp-for="@Model.User.Adress1rozliczeniowy.Vat" class="form-control" id="floatingInputVAT" placeholder="Nr NIP" value="@Model.User.Adress1rozliczeniowy.Vat" required />
+    @*<input asp-for="@Model.User.Adress1rozliczeniowy.Vat" class="form-control" id="floatingInputVAT" placeholder="Nr NIP" value="@Model.User.Adress1rozliczeniowy.Vat" required />*@
+    <input asp-for="@Model.User.Adress1rozliczeniowy.Vat" class="form-control" placeholder="Nr NIP" value="@Model.User.Adress1rozliczeniowy.Vat" required />
             <span asp-validation-for="@Model.User.Adress1rozliczeniowy.Vat" class="text-danger"></span>
         </div>
 
