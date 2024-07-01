@@ -31,6 +31,42 @@ namespace partner_aluro.Services
             _context.Products.Update(product);
             _context.SaveChanges();
 
+
+
+            int ilosc_zdjec = product.Product_Images.Count;
+
+            var usubn_path = product.pathImageUrl250x250;
+
+
+            int wystapienie_znaku_ostatnie = usubn_path.LastIndexOf("/"); //11
+            int dlugosc = usubn_path.Length; //20
+            int ilosc_znakow = dlugosc - wystapienie_znaku_ostatnie;
+
+            var path = usubn_path.Remove(wystapienie_znaku_ostatnie+1, ilosc_znakow);
+
+            //znajdz zdjecia produktu i je usun 
+
+
+            //znajdz produkt i go usun z bazy danych
+
+            System.IO.DirectoryInfo di = new DirectoryInfo(path);
+
+            foreach (FileInfo file in di.GetFiles())
+            {
+                file.Delete();
+            }
+            foreach (DirectoryInfo dir in di.GetDirectories())
+            {
+                dir.Delete(true);
+            }
+
+            //_context.Products.Attach(product);
+            //_context.Products.Remove(product);
+            //_context.SaveChanges();
+
+
+            //dlaczego nie placisz?
+
             return id;
         }
 
