@@ -55,7 +55,10 @@
                     <td><input id="chkUkryty_@productFormModel.ProductId" onchange="ChangeCheckUkrytyA(@productFormModel.ProductId)" type="checkbox" data-toggle="toggle" checked="@productFormModel.Ukryty"></td>
                     <td>
                         <a asp-controller="Product" asp-action="Edit" asp-route-id="@productFormModel.ProductId">Edytuj</a> |
-                        <a asp-controller="Product" asp-action="Delete" asp-route-id="@productFormModel.ProductId">Usuń</a> |
+
+                            <a asp-controller="Product" asp-action="Delete" asp-route-id="@productFormModel.ProductId">Usuń</a>
+
+                        @*<a asp-controller="Product" asp-action="Delete" asp-route-id="@productFormModel.ProductId">Usuń</a> |*@
                         <a asp-controller="Product" asp-action="Details" asp-route-id="@productFormModel.ProductId">Podgląd</a>
                     </td>
                 </tr>

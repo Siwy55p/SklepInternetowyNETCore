@@ -153,7 +153,7 @@ namespace partner_aluro.Controllers
 
             image.GetOffset(ClosedXML.Excel.Drawings.XLMarkerPosition.TopLeft);
 
-            ws.Cell("E1").Value = "Tel. kom.: (+48 61) 694 160 741 \r\ne-mail: marcin@aluro.pl \r\n www.aluro.pl";
+            ws.Cell("E1").Value = "Tel. kom.: (+48) 725 800 709 \r\ne-mail: kontakt@aluro.pl \r\n www.aluro.pl";
 
             ws.Range("E1:G1").Row(1).Merge();
 

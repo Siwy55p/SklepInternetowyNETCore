@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using partner_aluro.Data;
 using partner_aluro.Models;
 using partner_aluro.Services.Interfaces;
@@ -9,8 +10,13 @@ namespace partner_aluro.Services
     {
         private readonly ApplicationDbContext _context;
 
-        public ProductService(ApplicationDbContext context)
+
+        public readonly IWebHostEnvironment _webHostEnvironment;
+
+        public ProductService(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment)
         {
+
+            _webHostEnvironment = webHostEnvironment;
             _context = context;
         }
 
@@ -31,29 +37,34 @@ namespace partner_aluro.Services
             _context.Products.Update(product);
             _context.SaveChanges();
 
-            var usubn_path = product.pathImageUrl250x250;
-
-
-            int wystapienie_znaku_ostatnie = usubn_path.LastIndexOf("/")+1; //11
-            int dlugosc = usubn_path.Length; //20
-            int ilosc_znakow = dlugosc - wystapienie_znaku_ostatnie;
-
-            var path = usubn_path.Remove(wystapienie_znaku_ostatnie, ilosc_znakow);
-
-            //znajdz zdjecia produktu i je usun 
-
-
-            //znajdz produkt i go usun z bazy danych
-
-            System.IO.DirectoryInfo di = new DirectoryInfo(path);
-
-            foreach (FileInfo file in di.GetFiles())
+            if (product.pathImageUrl250x250 != null)
             {
-                file.Delete();
-            }
-            foreach (DirectoryInfo dir in di.GetDirectories())
-            {
-                dir.Delete(true);
+                var usubn_path = product.pathImageUrl250x250;
+
+
+                int wystapienie_znaku_ostatnie = usubn_path.LastIndexOf("/") + 1; //11
+                int dlugosc = usubn_path.Length; //20
+                int ilosc_znakow = dlugosc - wystapienie_znaku_ostatnie;
+
+                var path = usubn_path.Remove(wystapienie_znaku_ostatnie, ilosc_znakow);
+
+                //znajdz zdjecia produktu i je usun 
+
+                string wwwRootPath = _webHostEnvironment.WebRootPath;
+                string patha = Path.Combine(wwwRootPath, path);
+
+                //znajdz produkt i go usun z bazy danych
+
+                System.IO.DirectoryInfo di = new DirectoryInfo(patha);
+
+                foreach (FileInfo file in di.GetFiles())
+                {
+                    file.Delete();
+                }
+                foreach (DirectoryInfo dir in di.GetDirectories())
+                {
+                    dir.Delete(true);
+                }
             }
 
             _context.Products.Attach(product);

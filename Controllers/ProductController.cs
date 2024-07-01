@@ -616,7 +616,7 @@ namespace partner_aluro.Controllers
         }
 
         [HttpGet]
-        public IActionResult Delete(int id)
+        public IActionResult DeleteProduct(int id)
         {
             Product product = _context.Products.Find(id);
 
@@ -629,6 +629,20 @@ namespace partner_aluro.Controllers
 
             _ProductService.DeleteProductId(id);
             return RedirectToAction("List");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id) //View
+        {
+            ViewData["Category"] = GetCategories();
+
+            ViewData["returnUrl"] = Request.Headers["Referer"].ToString();
+
+
+            //ViewBag.Category = GetCategories();
+            Product produkt = await _ProductService.GetProductId(id);
+            produkt.Kategorie = _context.ProductCategory.Where(x => x.ProductID == id).ToList();
+            return View(produkt);
         }
 
 
