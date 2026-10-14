@@ -10,6 +10,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Nowy folder\**" />
+    <Content Remove="Nowy folder\**" />
+    <EmbeddedResource Remove="Nowy folder\**" />
+    <None Remove="Nowy folder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="Services\WarehauseNewService.cs" />
   </ItemGroup>
 
@@ -96,7 +103,6 @@
 
   <ItemGroup>
     <Folder Include="Migrations\" />
-    <Folder Include="Nowy folder\" />
     <Folder Include="wwwroot\img\Nowy folder\" />
     <Folder Include="wwwroot\lib\Nowy folder\" />
     <Folder Include="wwwroot\modules\nvn_export_products\download\" />
